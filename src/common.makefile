@@ -19,9 +19,9 @@ OPTIMIZE = y
 endif
 
 ifdef OPTIMIZE
-NUAUDIOLIB = -lnualstl_n -ln_gmus -ln_gaudio_sc
+NUAUDIOLIB = -lnualstl_n -ln_mus -ln_audio_sc
 else
-NUAUDIOLIB = -lnualstl_n_d -ln_gmus_d -ln_gaudio_sc
+NUAUDIOLIB = -lnualstl_n_d -ln_mus_d -ln_audio_sc
 endif
 
 LCDEFS = -DN_AUDIO -DF3DEX_GBI_2 -D__N64__
@@ -39,9 +39,9 @@ LCDEFS += -DED64
 endif
 
 ifdef OPTIMIZE
-CORELIBS = -lnusys -lnustd -lgultra 
+CORELIBS = -lnusys -lnustd -lultra 
 else
-CORELIBS = -lnusys_d -lnustd_d -lgultra_d 
+CORELIBS = -lnusys_d -lnustd_d -lultra_d 
 endif
 
 ifdef OPTIMIZE

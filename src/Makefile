@@ -1,41 +1,42 @@
-# makefile for nintendo sdk toolchain
+# makefile for modern toolchain
 
-include $(ROOT)/usr/include/make/PRdefs
+# currently doesn't seem to produce working build
+# to use this, first source ~/code/n64cc/env.sh
+# then use make
+# ROOT="${SDK_BASE_DIR}/ultra"
+# N64KITDIR="${SDK_BASE_DIR}/nintendo/n64kit"
 
-N64KITDIR    = c:/nintendo/n64kit
-NUSYSINCDIR  = $(N64KITDIR)/nusys/include
-NUSYSLIBDIR  = $(N64KITDIR)/nusys/lib
-NUSTDINCDIR = $(N64KITDIR)/nustd/include
-NUSTDLIBDIR = $(N64KITDIR)/nustd/lib
+# set up modern toolchain (gcc, etc)
+include ./modern.makefile
 
-LIB = $(ROOT)/usr/lib
-LPR = $(LIB)/PR
-INC = $(ROOT)/usr/include
-CC  = gcc
-LD  = ld
-MAKEROM = mild
+LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
+LCOPTS =	-G 0 -std=gnu90 -nostdinc -Wno-comment -Werror-implicit-function-declaration 
 
+# load the lists of source files and flag-driven defines & libs
 include ./common.makefile
 
-LCINCS =	-I. -nostdinc -I- -I$(NUSTDINCDIR) -I$(NUSYSINCDIR) -I$(ROOT)/usr/include/PR
-LCOPTS =	-G 0
+CFLAGS = $(LCDEFS) $(LCINCS) $(LCOPTS) $(OPTIMIZER) 
 
 # the order of $(NUAUDIOLIB) and -lgultra_d (CORELIBS) matter :|
-LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) $(CORELIBS) -L$(GCCDIR)/mipse/lib -lkmc 
-
+LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) $(CORELIBS) -L$(GCCLIBDIR) -lgcc
 
 default:        $(TARGETS)
 
-include $(COMMONRULES)
+.c.o: 
+# to print resolved include paths, add -M flag
+	$(CC) $(CFLAGS) $<
 
-$(CODESEGMENT):	$(CODEOBJECTS) Makefile $(HFILES)
+clean: 
+	rm -f *.o
+
+clobber:
+	rm -f *.o *.n64 *.out
+
+$(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES)
 # use -M to print memory map from ld
-		$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
+	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 
-$(TARGETS):	$(OBJECTS)
-# use -m to print memory map from mild
-		$(MAKEROM) spec -I$(NUSYSINCDIR) -r $(TARGETS) -e $(APP) -E
-		makemask $(TARGETS) 
+$(TARGETS):	$(OBJECTS) spec $(CODESEGMENT)
+	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 16 -e $(APP)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  spec # -d  -m 
+	makemask $(TARGETS)
 
-showinc:
-		gcc  -M $(CFLAGS) main.c
