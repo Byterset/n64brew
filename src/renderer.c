@@ -14,7 +14,7 @@
 #include <malloc.h>
 #endif
 
-#include "ed64io_usb.h"
+#include "ed64/ed64io_usb.h"
 #include "frustum.h"
 #include "game.h"
 #include "gameobject.h"

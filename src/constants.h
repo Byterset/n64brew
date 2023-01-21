@@ -8,7 +8,7 @@
 #define DEFAULT_FOVY 15.0f
 #define DEFAULT_NEARPLANE 100
 #define DEFAULT_FARPLANE 4000
-#define HIGH_RESOLUTION 0
+#define HIGH_RESOLUTION 1
 #define HIGH_RESOLUTION_HALF_Y 1
 
 #define CONSOLE 1
@@ -45,7 +45,7 @@
 // dumb
 #ifdef __N64__
 #ifdef __cplusplus  // only for clang linter
-#include "ed64io_usb.h"
+#include "ed64/ed64io_usb.h"
 #endif
 #else
 #include <stdio.h>
@@ -111,7 +111,7 @@
 
 #ifdef __N64__
 #ifdef ED64
-#include "ed64io.h"
+#include "ed64/ed64io.h"
 #define debugPrintf ed64Printf
 #else
 #define debugPrintf(args...)

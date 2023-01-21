@@ -1,3 +1,7 @@
+local debug_info = debug.getinfo(1, "S")
+local dir = debug_info.source:match("^@(.+/)")
+package.path = package.path .. ";./" .. dir .. "?.lua"
+print("package.path is "..package.path.."")
 bitmap = require("wavefront64deps.bitmap")
 obj_loader = require("wavefront64deps.obj_loader")
 require("wavefront64deps.BinDecHex")
@@ -13,11 +17,11 @@ WAVEFRONT 64
 ============
 Usage:
 	OBJECT TO C
-	"lua main.lua obj <path_to_obj>"
+	"lua main.lua obj <path_to_obj> <output_path>"
 	e.g. `lua main.lua obj Celebi.obj`
 
 	SPRITE TO C
-	"lua main.lua spr <path_to_bmp>"
+	"lua main.lua spr <path_to_bmp> <output_path>"
 	e.g. `lua main.lua spr Celebi.bmp`
 
 Outputs to a C header file of the same name.
@@ -46,9 +50,10 @@ end
 function w64_main()
 	print("WAVEFRONT64")
 	filename = ""
+	output_filename = ""
 	local final_file_output = {}
-	if(arg[1] == nil or arg[2] == nil) then err(helptext) end
-
+	if(arg[1] == nil or arg[2] == nil or arg[3] == nil) then err(helptext) end
+	print(""..arg[3].."")
 	if(arg[1]:lower()=="obj") then
 		-- OBJECT PARSING
 		-- Main functional pipeline
@@ -92,6 +97,7 @@ function w64_main()
 		)
 
 		filename = arg[2]
+		output_filename = arg[3]
 	elseif(arg[1]:lower()=="spr") then
 		-- SPRITE ONLY PARSING
 		-- functional pipeline
@@ -100,13 +106,14 @@ function w64_main()
 		local metastring, datastring 	= w64_outputTexture(0,objname,previewtable,bmptable)
 		final_file_output = {metastring, datastring}
 		filename = arg[2]
+		output_filename = arg[3]
 	else
 		err("Improper operation type: "..arg[1].."!")
 	end
 
-
-	local output_filename = string.gsub(filename, "%.%w+$", ".h")
-
+	
+	-- local output_filename = string.gsub(filename, "%.%w+$", ".h")
+	print("output filename is "..output_filename.."")
 	-- write file
 	file = io.open(output_filename,"w")
 	io.output(file)
@@ -140,7 +147,6 @@ function w64_initTexturedObject(argument)
 	local obj_Name = string.match(obj_Path, "([^.\\/]+).obj$")
 	local mtl_Path = string.gsub(obj_Path, ".obj$", ".mtl")
 	local base_Path = string.gsub(obj_Path, obj_Name..".obj$", "")
-
 	local mtl_file = readFile(mtl_Path)
 	if(mtl_file == nil) then err("ERROR: No MTL file found for "..mtl_Path) else print("MTL file "..mtl_Path.." found.") end
 

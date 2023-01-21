@@ -3,23 +3,23 @@
 #include "models.h"
 
 #include "constants.h"
-#include "ed64io_usb.h"
+#include "ed64/ed64io_usb.h"
 #include "modeltype.h"
 
 // models
-#include "book.h"
-#include "bush.h"
-#include "characterrig.h"
-#include "gooserig.h"
-#include "ground.h"
-#include "lilypad.h"
-#include "planter.h"
-#include "reed.h"
-#include "rocks.h"
-#include "testingCube.h"
-#include "wall.h"
-#include "water.h"
-#include "watergrass.h"
+#include "../build/assets/models/objects/book.h"
+#include "../build/assets/models/plants/bush.h"
+#include "../build/assets/models/characters/characterrig.h"
+#include "../build/assets/models/characters/gooserig.h"
+#include "../build/assets/models/environment/ground.h"
+#include "../build/assets/models/plants/lilypad.h"
+#include "../build/assets/models/buildings/planter.h"
+#include "../build/assets/models/plants/reed.h"
+#include "../build/assets/models/environment/rocks.h"
+#include "../build/assets/models/testingCube.h"
+#include "../build/assets/models/buildings/wall.h"
+#include "../build/assets/models/environment/water.h"
+#include "../build/assets/models/plants/watergrass.h"
 
 // map the mesh type enum (used by animation frames) to the mesh displaylists
 Gfx* GooseMeshList[8] = {

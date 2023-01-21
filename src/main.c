@@ -8,7 +8,7 @@
 
 #include <PR/os_convert.h>
 #ifdef ED64
-#include "ed64io.h"
+#include "ed64/ed64io.h"
 #endif
 #include "graphic.h"
 #include "mem_heap.h"

@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/n64/nusys",
+                "/usr/include/n64",
+                "/usr/include/n64/PR"
+            ],
+            "defines": [],
+            "compilerPath": "/opt/crashsdk/bin/mips-n64-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
