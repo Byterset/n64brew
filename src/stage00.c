@@ -43,7 +43,7 @@
 #include "character_anim.h"
 #include "goose_anim.h"
 
-#include "ed64io.h"
+#include "ed64/ed64io.h"
 
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0

@@ -5,11 +5,14 @@ import sys
 import math
 
 """
-usage: python ultratex.py mysprite.png
+usage: python ultratex.py mysprite.png output.h
 """
 
 
 in_file = sys.argv[1]
+out_file = sys.argv[2]
+
+
 basename, file_ext = os.path.splitext(os.path.basename(in_file))
 
 img = Image.open(in_file)
@@ -82,7 +85,7 @@ unsigned short Sprite_%s[] %s = {
     aligner,
     ",\n  ".join(output),
 )
-
-outfile = open(basename + ".h", "w")
+print(out_file)
+outfile = open(out_file, "w")
 outfile.write(out)
 outfile.close()

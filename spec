@@ -58,28 +58,28 @@ beginseg
   name  "models"
   flags OBJECT
   after "code"
-  include "build/models.o"
+  include "build/src/models.o"
 endseg
 
 beginseg
   name  "sprites"
   flags OBJECT
   after "models"
-  include "build/sprite_data.o"
+  include "build/src/sprite_data.o"
 endseg
 
 beginseg
   name  "collision"
   flags OBJECT
   after "sprites"
-  include "build/garden_map_collision.o"
+  include "build/src/garden_map_collision.o"
 endseg
 
 beginseg
   name  "memheap"
   flags OBJECT
   after "collision"
-  include "build/mem_heap.o"
+  include "build/src/mem_heap.o"
 endseg
 
 
@@ -116,7 +116,7 @@ beginseg
   flags OBJECT
 
   address 0x80400000
-  include "build/trace.o"
+  include "build/src/trace.o"
 endseg
 
 beginwave
