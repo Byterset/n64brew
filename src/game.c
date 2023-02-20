@@ -26,7 +26,7 @@
 #include "modeltype.h"
 #include "player.h"
 #include "trace.h"
-#include "vec3d.h"
+#include "math/vec3d.h"
 
 #include "constants.h"
 

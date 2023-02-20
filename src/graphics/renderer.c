@@ -14,11 +14,11 @@
 #include <malloc.h>
 #endif
 
-#include "ed64/ed64io_usb.h"
-#include "frustum.h"
-#include "game.h"
-#include "gameobject.h"
-#include "vec3d.h"
+#include "../ed64/ed64io_usb.h"
+#include "../math/frustum.h"
+#include "../game.h"
+#include "../gameobject.h"
+#include "../math/vec3d.h"
 
 #define RENDERER_FRUSTUM_CULLING 1
 

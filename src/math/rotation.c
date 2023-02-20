@@ -3,7 +3,7 @@
 #endif
 #include <math.h>
 
-#include "constants.h"
+#include "../constants.h"
 #include "rotation.h"
 #include "vec3d.h"
 

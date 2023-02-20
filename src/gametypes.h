@@ -2,11 +2,11 @@
 #ifndef _GAMETYPES_H_
 #define _GAMETYPES_H_
 
-#include "animation.h"
+#include "animation/animation.h"
 #include "characterstate.h"
 #include "gameobject.h"
 #include "pathfinding.h"
-#include "physics.h"
+#include "physics/physics.h"
 
 typedef enum ItemHolderType {
   PlayerItemHolder,

@@ -1,7 +1,7 @@
 
 #ifndef GOOSE_ANIM_H
 #define GOOSE_ANIM_H 1
-#include "animation.h"
+#include "animation/animation.h"
 #include "gooseanimtypes.h"
 
 

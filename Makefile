@@ -3,6 +3,8 @@
 # set up modern toolchain (gcc, etc)
 include ./modern.makefile
 
+EMULATOR=/mnt/c/Users/kevin/Documents/Emulation/N64/Mupen64plus/mupen64plus/simple64-gui.exe
+
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
 LCOPTS =	-G 0 -std=gnu90 -nostdinc -Wno-comment -Werror-implicit-function-declaration 
 
@@ -21,7 +23,7 @@ endif
 # OPTIMIZE = y 
 ifdef RELEASE
 ED64 =
-OPTIMIZE = y 
+OPTIMIZE =
 endif
 
 ifdef OPTIMIZE
@@ -64,11 +66,13 @@ TARGETS =	$(BUILDDIR)/goose64.n64
 
 SPECFILE = spec
 
-HFILES =	src/main.h src/graphic.h build/assets/models/testingCube.h src/vec3d.h src/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation.h src/physics.h src/rotation.h src/collision.h src/garden_map_collision.h src/pathfinding.h src/trace.h src/frustum.h src/garden_map_graph.h
+HFILES =	src/main.h src/graphics/graphic.h build/assets/models/testingCube.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h src/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
 
+LEVEL_BLEND_FILES = $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.obj)
 MODEL_OBJS = $(wildcard assets/models/**/*.obj) $(wildcard assets/models/*.obj)
 SPRITE_IMGS = $(wildcard assets/sprites/*.png) $(wildcard assets/sprites/**/*.png) $(wildcard assets/sprites/*.bmp) $(wildcard assets/sprites/**/*.bmp) 
 
+LEVEL_MAP_HEADERS = $(LEVEL_BLEND_FILES:assets/levels/%.blend=$(BUILDDIR)/assets/levels/%.h)
 MODEL_HEADERS = $(MODEL_OBJS:assets/models/%.obj=$(BUILDDIR)/assets/models/%.h)
 SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,$(patsubst assets/sprites/%.bmp,$(BUILDDIR)/assets/sprites/%.h,$(SPRITE_IMGS)))
 
@@ -99,7 +103,6 @@ LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) 
 
 
 default: $(TARGETS)
-
 
 # $(MODEL_OBJS):
 # 	# empty rule for object files
@@ -138,4 +141,5 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 $(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT)
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 16 -e $(APP)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true 
 	makemask $(TARGETS)
+	$(EMULATOR) $(TARGETS)
 

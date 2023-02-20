@@ -5,8 +5,8 @@
 #include "game.h"
 #include "modeltype.h"
 #include "player.h"
-#include "vec2d.h"
-#include "vec3d.h"
+#include "math/vec2d.h"
+#include "math/vec3d.h"
 
 #include "gameutils.h"
 

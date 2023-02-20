@@ -1,8 +1,8 @@
 #include "gameutils.h"
 #include <math.h>
 #include "game.h"
-#include "vec2d.h"
-#include "vec3d.h"
+#include "math/vec2d.h"
+#include "math/vec3d.h"
 
 float GameUtils_lerpDegrees(float start, float end, float amount) {
   float shortestAngle;

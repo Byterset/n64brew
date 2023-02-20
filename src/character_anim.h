@@ -1,7 +1,7 @@
 
 #ifndef CHARACTER_ANIM_H
 #define CHARACTER_ANIM_H 1
-#include "animation.h"
+#include "animation/animation.h"
 #include "characteranimtypes.h"
 
 

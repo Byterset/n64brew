@@ -2,7 +2,7 @@
 #ifndef _COLLISION_H_
 #define _COLLISION_H_
 
-#include "vec3d.h"
+#include "../math/vec3d.h"
 
 typedef struct Triangle {
   Vec3d a;

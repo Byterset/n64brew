@@ -5,7 +5,7 @@
 #include "gameobject.h"
 #include "gametypes.h"
 #include "input.h"
-#include "physics.h"
+#include "physics/physics.h"
 
 void Game_init(GameObject* worldObjects,
                int worldObjectsCount,

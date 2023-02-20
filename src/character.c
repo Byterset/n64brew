@@ -5,8 +5,8 @@
 #include "item.h"
 #include "modeltype.h"
 #include "trace.h"
-#include "vec2d.h"
-#include "vec3d.h"
+#include "math/vec2d.h"
+#include "math/vec3d.h"
 
 #include "gameutils.h"
 

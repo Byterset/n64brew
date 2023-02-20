@@ -2,11 +2,11 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "modeltype.h"
-#include "n64compat.h"
-#include "rotation.h"
-#include "sprite.h"
-#include "vec3d.h"
+#include "../modeltype.h"
+#include "../n64compat.h"
+#include "../math/rotation.h"
+#include "../sprite.h"
+#include "../math/vec3d.h"
 
 // max num bones per character
 // on n64 we allocate this many transform matrices per character

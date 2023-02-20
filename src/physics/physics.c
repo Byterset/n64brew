@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 #include "collision.h"
-#include "constants.h"
+#include "../constants.h"
 #include "physics.h"
-#include "trace.h"
+#include "../trace.h"
 
 #define PHYS_DEBUG 0
 #define PHYS_MIN_MOVEMENT 0.5

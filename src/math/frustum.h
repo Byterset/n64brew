@@ -2,7 +2,7 @@
 #ifndef FRUSTUM_H
 #define FRUSTUM_H
 
-#include "collision.h"
+#include "../physics/collision.h"
 #include "vec3d.h"
 
 typedef struct Plane {

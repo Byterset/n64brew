@@ -3,8 +3,8 @@
 #define PHYSICS_H
 
 #include "collision.h"
-#include "constants.h"
-#include "vec3d.h"
+#include "../constants.h"
+#include "../math/vec3d.h"
 
 #define PHYS_MAX_STEPS 4
 

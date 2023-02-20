@@ -8,8 +8,8 @@
 
 #include "constants.h"
 #include "gameobject.h"
-#include "rotation.h"
-#include "vec3d.h"
+#include "math/rotation.h"
+#include "math/vec3d.h"
 
 GameObject* GameObject_alloc() {
   GameObject* obj = (GameObject*)malloc(sizeof(GameObject));

@@ -2,12 +2,12 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "animation.h"
+#include "animation/animation.h"
 #include "modeltype.h"
 #include "n64compat.h"
-#include "physics.h"
-#include "rotation.h"
-#include "vec3d.h"
+#include "physics/physics.h"
+#include "math/rotation.h"
+#include "math/vec3d.h"
 
 typedef struct GameObject {
   int id;

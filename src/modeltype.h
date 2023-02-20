@@ -2,7 +2,7 @@
 #ifndef MODELTYPE_H
 #define MODELTYPE_H
 
-#include "vec3d.h"
+#include "math/vec3d.h"
 
 // when updating this, also update ModelTypeStrings[] and modelTypesProperties[]
 // and add new meshes to getModelDisplayList() in stage00.c and add a

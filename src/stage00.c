@@ -14,23 +14,23 @@
 #include <math.h>
 
 // game
-#include "animation.h"
+#include "animation/animation.h"
 #include "constants.h"
-#include "frustum.h"
+#include "math/frustum.h"
 #include "game.h"
 #include "gameobject.h"
-#include "graphic.h"
+#include "graphics/graphic.h"
 #include "input.h"
 #include "main.h"
 #include "modeltype.h"
 #include "pathfinding.h"
-#include "physics.h"
-#include "renderer.h"
+#include "physics/physics.h"
+#include "graphics/renderer.h"
 #include "sound.h"
 #include "sprite.h"
 #include "trace.h"
-#include "vec2d.h"
-#include "vec3d.h"
+#include "math/vec2d.h"
+#include "math/vec3d.h"
 
 #include "models.h"
 #include "segments.h"
@@ -48,9 +48,9 @@
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0
 #define CONSOLE_SHOW_TRACING 0
-#define CONSOLE_SHOW_CULLING 0
+#define CONSOLE_SHOW_CULLING 1
 #define CONSOLE_SHOW_CAMERA 0
-#define CONSOLE_SHOW_SOUND 1
+#define CONSOLE_SHOW_SOUND 0
 #define CONSOLE_SHOW_RCP_TASKS 0
 #define LOG_TRACES 0
 #define CONTROLLER_DEAD_ZONE 0.1
@@ -786,6 +786,7 @@ void drawWorldObjects(Dynamic* dynamicp) {
   int modelMeshIdx;
   int modelMeshParts;
   Gfx* modelDisplayList;
+  Triangle* worldCollisionTris;
   AnimationFrame animFrame;
   AnimationInterpolation animInterp;
   AnimationRange* curAnimRange;
@@ -800,6 +801,7 @@ void drawWorldObjects(Dynamic* dynamicp) {
   float profStartFrustum;
 
   game = Game_get();
+  worldCollisionTris = game->physicsState.worldData->worldMeshTris;
   worldObjectsVisibility = (int*)malloc(game->worldObjectsCount * sizeof(int));
   invariant(worldObjectsVisibility);
 

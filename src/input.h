@@ -2,7 +2,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "vec2d.h"
+#include "math/vec2d.h"
 
 typedef struct Input {
   Vec2d direction;

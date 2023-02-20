@@ -8,8 +8,8 @@
 
 #include <nusys.h>
 // keep nusys at the top
-#include "constants.h"
-#include "ed64/ed64io_usb.h"
+#include "../constants.h"
+#include "../ed64/ed64io_usb.h"
 #include "graphic.h"
 
 #define DEBUG_VI_MODE 0

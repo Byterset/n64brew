@@ -2,11 +2,11 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "constants.h"
+#include "../constants.h"
 
 #include "collision.h"
-#include "trace.h"
-#include "vec3d.h"
+#include "../trace.h"
+#include "../math/vec3d.h"
 
 #ifndef __N64__
 #include "float.h"
