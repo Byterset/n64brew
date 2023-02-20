@@ -10,7 +10,7 @@
 #ifdef ED64
 #include "ed64/ed64io.h"
 #endif
-#include "graphic.h"
+#include "graphics/graphic.h"
 #include "mem_heap.h"
 #include "trace.h"
 

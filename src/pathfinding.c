@@ -2,7 +2,7 @@
 
 #include "constants.h"
 #include "pathfinding.h"
-#include "vec3d.h"
+#include "math/vec3d.h"
 
 #ifdef __N64__
 #include "mathdef.h"

@@ -7,7 +7,7 @@
 
 #ifndef _GRAPHIC_H_
 #define _GRAPHIC_H_
-#include "constants.h"
+#include "../constants.h"
 
 #define SCREEN_WD_MAX 640
 #define XSCALE_MAX 0x400

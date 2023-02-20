@@ -2,8 +2,8 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "frustum.h"
-#include "gameobject.h"
+#include "../math/frustum.h"
+#include "../gameobject.h"
 
 // when painter's alg enabled we change render order and disable z buffer for
 // some objects that don't need it

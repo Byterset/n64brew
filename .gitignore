@@ -101,3 +101,5 @@ disassembly.txt
 # makefile variable overrides
 localdefs.makefile
 *.dasm
+
+.vscode/

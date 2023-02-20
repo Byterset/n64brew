@@ -1,7 +1,7 @@
 
 #ifndef GARDEN_MAP_COLLISION_H
 #define GARDEN_MAP_COLLISION_H 1
-#include "collision.h"
+#include "physics/collision.h"
 #include "constants.h"
 
 extern Triangle garden_map_collision_collision_mesh[];

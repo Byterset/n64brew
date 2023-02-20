@@ -4,8 +4,8 @@
 #endif
 
 #include "animation.h"
-#include "constants.h"
-#include "rotation.h"
+#include "../constants.h"
+#include "../rotation.h"
 
 void AnimationState_init(AnimationState* self) {
   self->state = 0;
