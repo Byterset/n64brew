@@ -5,7 +5,7 @@
 
 #include "animation.h"
 #include "../constants.h"
-#include "../rotation.h"
+#include "../math/rotation.h"
 
 void AnimationState_init(AnimationState* self) {
   self->state = 0;
