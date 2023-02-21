@@ -3,6 +3,7 @@
 # set up modern toolchain (gcc, etc)
 include ./modern.makefile
 
+BLENDER='/mnt/c/Program Files/Blender Foundation/Blender 3.4/blender.exe'
 EMULATOR=/mnt/c/Users/kevin/Documents/Emulation/N64/Mupen64plus/mupen64plus/simple64-gui.exe
 
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
@@ -23,7 +24,7 @@ endif
 # OPTIMIZE = y 
 ifdef RELEASE
 ED64 =
-OPTIMIZE =
+OPTIMIZE = y
 endif
 
 ifdef OPTIMIZE
@@ -66,21 +67,25 @@ TARGETS =	$(BUILDDIR)/goose64.n64
 
 SPECFILE = spec
 
-HFILES =	src/main.h src/graphics/graphic.h build/assets/models/testingCube.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h src/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
+HFILES =	src/main.h src/graphics/graphic.h build/assets/models/testingCube.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
 
-LEVEL_BLEND_FILES = $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.obj)
+LEVELS = garden
+LEVEL_BLEND_FILES = $(LEVELS:%=assets/levels/%.blend)
+LEVEL_MAP_HEADERS = $(LEVELS:%=assets/levels/%_map.h)
+LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%=assets/levels/%_map_collision.h)
+LEVEL_MAP_COLLISION_C_FILES = $(LEVEL_MAP_COLLISION_HEADERS:%.h=%.c)
+LEVELS_DATA = $(LEVEL_MAP_HEADERS) $(LEVEL_MAP_COLLISION_C_FILES) $(LEVEL_MAP_COLLISION_HEADERS)
+
 MODEL_OBJS = $(wildcard assets/models/**/*.obj) $(wildcard assets/models/*.obj)
 SPRITE_IMGS = $(wildcard assets/sprites/*.png) $(wildcard assets/sprites/**/*.png) $(wildcard assets/sprites/*.bmp) $(wildcard assets/sprites/**/*.bmp) 
 
-LEVEL_MAP_HEADERS = $(LEVEL_BLEND_FILES:assets/levels/%.blend=$(BUILDDIR)/assets/levels/%.h)
 MODEL_HEADERS = $(MODEL_OBJS:assets/models/%.obj=$(BUILDDIR)/assets/models/%.h)
 SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,$(patsubst assets/sprites/%.bmp,$(BUILDDIR)/assets/sprites/%.h,$(SPRITE_IMGS)))
 
-LEVELS = 
 
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
 
-CODEFILES   = 	src/main.c src/stage00.c src/graphic.c src/gfxinit.c src/vec3d.c src/vec2d.c src/gameobject.c src/game.c src/modeltype.c src/renderer.c src/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation.c src/physics.c src/rotation.c src/collision.c  src/pathfinding.c src/frustum.c  src/garden_map_graph.c src/sprite.c
+CODEFILES   = 	src/main.c src/stage00.c src/graphics/graphic.c src/graphics/gfxinit.c src/math/vec3d.c src/math/vec2d.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c src/physics/collision.c  src/pathfinding.c src/math/frustum.c  src/garden_map_graph.c src/sprite.c
 
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
@@ -88,8 +93,9 @@ endif
 
 CODEOBJECTS =	$(CODEFILES:src/%.c=$(BUILDDIR)/src/%.o)  $(NUSYSLIBDIR)/nusys.o
 
-DATAFILES   = src/mem_heap.c src/trace.c src/garden_map_collision.c src/models.c src/sprite_data.c
-DATAOBJECTS =	$(DATAFILES:src/%.c=$(BUILDDIR)/src/%.o)
+DATA_SRC_FILES   = src/mem_heap.c src/trace.c src/models.c src/sprite_data.c
+DATA_ASSETS = assets/levels/garden_map_collision.c
+DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
 
 CODESEGMENT =	$(BUILDDIR)/codesegment.o
 
@@ -110,6 +116,17 @@ default: $(TARGETS)
 $(BUILDDIR)/src/%.o: src/%.c | $(BUILDDIR) $(HFILES)
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
+
+$(BUILDDIR)/assets/%.o: assets/%.c | $(BUILDDIR) $(HFILES)
+# to print resolved include paths, add -M flag
+	$(CC) $(CFLAGS) -o $@ $<
+
+assets/levels/%_map.h: assets/levels/%.blend 
+	$(BLENDER) -b $< -P tools/export_positions.py
+
+assets/levels/%_map_collision.h assets/levels/%_map_collision.c: assets/levels/%.blend 
+	$(BLENDER) -b $< -P tools/export_collision_mesh.py
+
 
 $(BUILDDIR)/assets/models/%.h: assets/models/%.obj | $(BUILDDIR)
 	lua tools/wavefront64/wavefront64.lua obj $< $@
@@ -134,7 +151,7 @@ clobber:
 	rm -f src/*.o *.o *.n64 *.out
 	rm -r -f $(BUILDDIR)
 
-$(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEADERS)
+$(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEADERS) $(LEVELS_DATA)
 # use -M to print memory map from ld
 	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 

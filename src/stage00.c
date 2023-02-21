@@ -36,8 +36,8 @@
 #include "segments.h"
 
 // map
-#include "garden_map.h"
-#include "garden_map_collision.h"
+#include "../assets/levels/garden_map.h"
+#include "../assets/levels/garden_map_collision.h"
 #include "garden_map_graph.h"
 // anim data
 #include "character_anim.h"

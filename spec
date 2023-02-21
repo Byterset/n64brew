@@ -72,7 +72,7 @@ beginseg
   name  "collision"
   flags OBJECT
   after "sprites"
-  include "build/src/garden_map_collision.o"
+  include "build/assets/levels/garden_map_collision.o"
 endseg
 
 beginseg
