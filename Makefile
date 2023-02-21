@@ -69,10 +69,9 @@ SPECFILE = spec
 
 HFILES =	src/main.h src/graphics/graphic.h build/assets/models/testingCube.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
 
-LEVELS = garden
-LEVEL_BLEND_FILES = $(LEVELS:%=assets/levels/%.blend)
-LEVEL_MAP_HEADERS = $(LEVELS:%=assets/levels/%_map.h)
-LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%=assets/levels/%_map_collision.h)
+LEVELS = $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
+LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
+LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
 LEVEL_MAP_COLLISION_C_FILES = $(LEVEL_MAP_COLLISION_HEADERS:%.h=%.c)
 LEVELS_DATA = $(LEVEL_MAP_HEADERS) $(LEVEL_MAP_COLLISION_C_FILES) $(LEVEL_MAP_COLLISION_HEADERS)
 
