@@ -10,6 +10,8 @@ if blend_dir not in sys.path:
     sys.path.append(blend_dir)
 print("adding blend_dir", blend_dir)
 
+sys.path.append('../../tools')
+sys.path.append('tools')
 import spatial_hash
 import importlib
 
@@ -29,8 +31,15 @@ before exporting:
 # we scale the models up by this much to avoid n64 fixed point precision issues
 N64_SCALE_FACTOR = 30
 
-filename_base = "garden_map"
-filename = filename_base + "_collision"
+
+# Get the filepath of the current blend file
+filepath = bpy.data.filepath
+# Extract the filename from the filepath
+filename_without_ext, ext = os.path.splitext(filepath)
+print("file name without extension", filename_without_ext)
+final_write_filename = filename_without_ext + "_map_collision"
+file_displayName = bpy.path.display_name_from_filepath(filepath)
+filename = file_displayName + "_map_collision"
 
 # name without numerical suffix like .001
 def get_unsuffixed_name(name):
@@ -47,6 +56,11 @@ include_guard = filename.upper() + "_H"
 # world_objects = list(bpy.data.collections["worldobjects"].all_objects)
 # collision_objects = [obj for obj in world_objects if not is_dynamic_object(obj.name)]
 collision_objects = list(bpy.data.collections["collision"].all_objects)
+
+# Iterate over the objects and remove hidden objects
+for obj in collision_objects[:]:
+    if obj.hide_get():
+        collision_objects.remove(obj)
 
 triangles = []
 for index, obj in enumerate(collision_objects):
@@ -79,8 +93,8 @@ spatial_hash_data = spatial_hash.create_spatial_hash(triangles, 4 * N64_SCALE_FA
 out = """
 #ifndef %s
 #define %s 1
-#include "constants.h"
-#include "collision.h"
+#include "../../src/constants.h"
+#include "../../src/physics/collision.h"
 
 """ % (
     include_guard,
@@ -116,7 +130,7 @@ out += """
     include_guard
 )
 
-outfile = open(filename + ".h", "w")
+outfile = open(final_write_filename + ".h", "w")
 outfile.write(out)
 outfile.close()
 
@@ -196,12 +210,12 @@ SpatialHash %s_collision_mesh_hash = {
     filename,
 )
 
-out_c_file = open(filename + ".c", "w")
+out_c_file = open(final_write_filename + ".c", "w")
 out_c_file.write(out_c)
 out_c_file.close()
 
 print("successfully exported", filename)
 
 
-with open(filename + ".json", "w") as outfile:
+with open(final_write_filename + ".json", "w") as outfile:
     json.dump(triangles, outfile)

@@ -70,7 +70,7 @@ include_guard = filename.upper() + "_H"
 out = """
 #ifndef %s
 #define %s 1
-#include "animation.h"
+#include "animation/animation.h"
 #include "%sanimtypes.h"
 
 """ % (

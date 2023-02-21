@@ -1,6 +1,7 @@
 import bpy
 import re
 import math
+import os
 import mathutils
 from collections import defaultdict
 
@@ -9,7 +10,15 @@ from collections import defaultdict
 exports a level to a header file ready to be included in the game code
 """
 
-filename = "garden_map"
+
+# Get the filepath of the current blend file
+filepath = bpy.data.filepath
+# Extract the filename from the filepath
+filename_without_ext, ext = os.path.splitext(filepath)
+print("file name without extension", filename_without_ext)
+final_write_filename = filename_without_ext + "_map"
+file_displayName = bpy.path.display_name_from_filepath(filepath)
+filename = file_displayName +"_map"
 
 # we scale the models up by this much to avoid n64 fixed point precision issues
 N64_SCALE_FACTOR = 30
@@ -17,11 +26,16 @@ N64_SCALE_FACTOR = 30
 include_guard = filename.upper() + "_H"
 world_objects = list(bpy.data.collections["worldobjects"].all_objects)
 
+# Iterate over the objects and remove hidden objects
+for obj in world_objects[:]:
+    if obj.hide_get():
+        world_objects.remove(obj)
+
 out = """
 #ifndef %s
 #define %s 1
-#include "constants.h"
-#include "gameobject.h"
+#include "../../src/constants.h"
+#include "../../src/gameobject.h"
 
 """ % (
     include_guard,
@@ -112,7 +126,7 @@ GameObject %s_data[] = {
 """ % (
     filename
 )
-
+print("Loop Through Objects and writing Object Data")
 for index, obj in enumerate(world_objects):
     pos = obj.location
     rot = obj.rotation_euler
@@ -133,6 +147,7 @@ out += """
 };
 """
 
+print("\nWrite Object Count", len(world_objects))
 out += """
 #define %s_COUNT %d
 """ % (
@@ -146,6 +161,7 @@ out += """
     include_guard
 )
 
-outfile = open(filename + ".h", "w")
+print("write File", final_write_filename)
+outfile = open(final_write_filename + ".h", "w")
 outfile.write(out)
 outfile.close()
