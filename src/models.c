@@ -7,19 +7,19 @@
 #include "modeltype.h"
 
 // models
-#include "../build/assets/models/objects/book.h"
-#include "../build/assets/models/plants/bush.h"
-#include "../build/assets/models/characters/characterrig.h"
-#include "../build/assets/models/characters/gooserig.h"
-#include "../build/assets/models/environment/ground.h"
-#include "../build/assets/models/plants/lilypad.h"
-#include "../build/assets/models/buildings/planter.h"
-#include "../build/assets/models/plants/reed.h"
-#include "../build/assets/models/environment/rocks.h"
-#include "../build/assets/models/testingCube.h"
-#include "../build/assets/models/buildings/wall.h"
-#include "../build/assets/models/environment/water.h"
-#include "../build/assets/models/plants/watergrass.h"
+#include "../build/assets/models/objects/book/book.h"
+#include "../build/assets/models/plants/bush/bush.h"
+#include "../build/assets/models/characters/gardener/characterrig.h"
+#include "../build/assets/models/characters/goose/gooserig.h"
+#include "../build/assets/models/environment/garden_ground/ground.h"
+#include "../build/assets/models/plants/lilypad/lilypad.h"
+#include "../build/assets/models/buildings/planter/planter.h"
+#include "../build/assets/models/plants/reed/reed.h"
+#include "../build/assets/models/environment/rocks/rocks.h"
+#include "../build/assets/models/test/testingCube.h"
+#include "../build/assets/models/buildings/wall_small/wall.h"
+#include "../build/assets/models/environment/garden_water/water.h"
+#include "../build/assets/models/plants/watergrass/watergrass.h"
 
 // map the mesh type enum (used by animation frames) to the mesh displaylists
 Gfx* GooseMeshList[8] = {

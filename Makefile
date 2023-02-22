@@ -67,15 +67,15 @@ TARGETS =	$(BUILDDIR)/goose64.n64
 
 SPECFILE = spec
 
-HFILES =	src/main.h src/graphics/graphic.h build/assets/models/testingCube.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
+HFILES =	src/main.h src/graphics/graphic.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
 
-LEVELS = $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
+LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
 LEVEL_MAP_COLLISION_C_FILES = $(LEVEL_MAP_COLLISION_HEADERS:%.h=%.c)
 LEVELS_DATA = $(LEVEL_MAP_HEADERS) $(LEVEL_MAP_COLLISION_C_FILES) $(LEVEL_MAP_COLLISION_HEADERS)
 
-MODEL_OBJS = $(wildcard assets/models/**/*.obj) $(wildcard assets/models/*.obj)
+MODEL_OBJS = $(wildcard assets/models/**/**/*.obj) $(wildcard assets/models/**/*.obj) $(wildcard assets/models/*.obj)
 SPRITE_IMGS = $(wildcard assets/sprites/*.png) $(wildcard assets/sprites/**/*.png) $(wildcard assets/sprites/*.bmp) $(wildcard assets/sprites/**/*.bmp) 
 
 MODEL_HEADERS = $(MODEL_OBJS:assets/models/%.obj=$(BUILDDIR)/assets/models/%.h)
@@ -93,8 +93,8 @@ endif
 CODEOBJECTS =	$(CODEFILES:src/%.c=$(BUILDDIR)/src/%.o)  $(NUSYSLIBDIR)/nusys.o
 
 DATA_SRC_FILES   = src/mem_heap.c src/trace.c src/models.c src/sprite_data.c
-DATA_ASSETS = assets/levels/garden_map_collision.c
-DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
+DATA_SRC_ASSETS = assets/levels/garden_map_collision.c
+DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
 
 CODESEGMENT =	$(BUILDDIR)/codesegment.o
 
@@ -157,5 +157,5 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 $(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT)
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 16 -e $(APP)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true 
 	makemask $(TARGETS)
-	$(EMULATOR) $(TARGETS)
+#	$(EMULATOR) $(TARGETS)
 

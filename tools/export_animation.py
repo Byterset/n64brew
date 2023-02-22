@@ -24,8 +24,9 @@ the
 # we scale the models up by this much to avoid n64 fixed point precision issues
 N64_SCALE_FACTOR = 30
 
-modelname = "character"  # should be one of goose, character
+modelname = "goose"  # should be one of goose, character
 filename = modelname + "_anim"
+filename_animtypes = modelname + "animtypes"
 
 # this needs to match the members and ordering of the anim type enum in
 #  ${modelname}animtypes.h
@@ -66,17 +67,18 @@ def blender_bone_name_to_bone_type(blender_bone_name):
 scene = bpy.context.scene
 
 include_guard = filename.upper() + "_H"
+include_guard_animtypes = modelname.upper() + "ANIMTYPES_H"
 
 out = """
 #ifndef %s
 #define %s 1
 #include "animation/animation.h"
-#include "%sanimtypes.h"
+#include "%s.h"
 
 """ % (
     include_guard,
     include_guard,
-    modelname,
+    filename_animtypes
 )
 
 frames_markers = dict()
@@ -92,6 +94,9 @@ print("bones_child_objects", bones_child_objects)
 
 frame_current = scene.frame_current
 
+scene.frame_set(0)
+
+
 # TODO: remove this? don't think we're using bone origins anymore
 out += """
 Vec3d %s_bone_origins[] = {
@@ -99,7 +104,7 @@ Vec3d %s_bone_origins[] = {
     filename
 )
 
-scene.frame_set(0)
+
 for bone_name in bone_types:
     obj = bones_child_objects[bone_name]
     mat = obj.matrix_world
@@ -115,6 +120,7 @@ for bone_name in bone_types:
 out += """
 };
 """
+
 
 out += """
 AnimationFrame %s_data[] = {
@@ -197,6 +203,67 @@ out += """
 )
 
 outfile = open(filename + ".h", "w")
+outfile.write(out)
+outfile.close()
+
+
+#------------------------
+#----AnimTypes Header----
+#------------------------
+
+out = """
+#ifndef %s
+#define %s 1
+
+
+""" % (
+    include_guard_animtypes,
+    include_guard_animtypes
+)
+
+modelname_capitalized = modelname[0].upper() + modelname[1:]
+# Add MeshType Enum
+out += """
+typedef enum %sMeshType {
+""" % (
+    modelname_capitalized
+)
+
+for bone_name in bone_types:
+    meshtype = modelname + bone_name, modelname + bone_name
+    out += "    %s_%smesh,\n" % (meshtype)
+
+    print(modelname, "meshtype", meshtype)
+out += "    MAX_%s_MESH_TYPE\n" % (modelname.upper())
+out += """
+} %sMeshType;
+""" % (
+    modelname_capitalized
+)
+
+# Add AnimationType Enum
+out += """
+typedef enum %sAnimType {
+""" % (
+    modelname_capitalized
+)
+
+for anim_name in anim_types:
+    animtype = modelname + "_" + anim_name
+    out += "    %s_anim,\n" % (animtype)
+
+    print(modelname, "animtype", animtype)
+
+out += "    MAX_%s_ANIM_TYPE\n" % (modelname.upper())
+out += """
+} %sAnimType;
+""" % (
+    modelname_capitalized
+)
+out += "#endif //%s\n\n" % (include_guard_animtypes)
+
+
+outfile = open(filename_animtypes + ".h", "w")
 outfile.write(out)
 outfile.close()
 

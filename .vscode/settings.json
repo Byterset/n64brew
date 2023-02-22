@@ -7,6 +7,13 @@
         "testspr.h": "c",
         "garden_map_graph.h": "c",
         "constants.h": "c",
-        "character_anim.h": "c"
+        "character_anim.h": "c",
+        "physics.h": "c",
+        "rotation.h": "c",
+        "vec3d.h": "c",
+        "gameobject.h": "c",
+        "vec2d.h": "c",
+        "gameutils.h": "c",
+        "graphic.h": "c"
     }
 }
