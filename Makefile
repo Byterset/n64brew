@@ -61,9 +61,11 @@ endif
 
 BUILDDIR = build
 
-APP =		$(BUILDDIR)/goose64.out
+ROMHEADER = romheader
 
-TARGETS =	$(BUILDDIR)/goose64.n64
+APP =		$(BUILDDIR)/game.out
+
+TARGETS =	$(BUILDDIR)/game.z64
 
 SPECFILE = spec
 
@@ -155,7 +157,6 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 
 $(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT)
-	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 16 -e $(APP)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true 
+	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 0 -e $(APP) -h $(ROMHEADER)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true
 	makemask $(TARGETS)
 #	$(EMULATOR) $(TARGETS)
-

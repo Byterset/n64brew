@@ -15,7 +15,7 @@ INC = $(ROOT)/usr/include
 LIB = $(ROOT)/usr/lib
 EXEGCC_INC = $(ROOT)/GCC/MIPSE/INCLUDE
 
-MAKEROM = spicy
+MAKEROM = tools/spicy
 
 N64_CC ?= mips-n64-gcc
 N64_CFLAGS ?= -c -D_MIPS_SZLONG=32 -D_MIPS_SZINT=32 -D_LANGUAGE_C -D_ULTRA64 -D__EXTENSIONS__ -mabi=32  -march=vr4300 -mtune=vr4300 -mfix4300 
