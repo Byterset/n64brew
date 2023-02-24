@@ -1,46 +1,46 @@
-# goose64
+# n64brew
 
-this is a demake of untitled goose game for the nintendo 64
+This ist based off of https://github.com/jsdf/goose64. This aims to transform the work done by jsdf into a general purpose 3d engine for the n64.
 
-![screenshot of the goose in the lake in the game running on the mupen64plus emulator](screenshot.png)
+## what has been done so far
 
-## get it
+- build process was mostly automized and need for manual export of meshes, collision or levels has been removed
+- opengl build was removed
+- makefile was redone
+- various python scripts and tools have been adapted
+- completely overhauled the structure of the project to scale better
 
-download the [most recent N64 ROM build here](src/goose64.n64)
+## todos
 
-run it with your favorite emulator or flashcart
+- optimize collision solver (current solution is a bit wonky)
+- change audio player to support wav (this will probably be done by migrating to the existing solution by the amazing https://github.com/lambertjamesd/)
+- change skeletal animation to work for generalized meshes
+- switch from obj to fbx
+
 
 ## build for emulator/console
 
 ### install the n64 sdk
 
-windows instructions: https://n64squid.com/homebrew/n64-sdk/
+I am using the modern n64 homebrew sdk (crashsdk) and have based the build process around that.
 
-macOS/linux instructions: https://www.retroreversing.com/n64-sdk-setup
-
-on linux you'll need to use wine to run the n64 compiler, on macOS you'll need to use crossover (a commercial version of wine)
-
-install the n64 sdk into the root of the C: drive (or wine C: drive) so you have eg.
-```
-C:\ultra
-C:\nintendo
-```
-etc.
+macOS/linux instructions: https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html
 
 
 ### building the game
 
-all commands should be run in the `src` directory of this repo
+all commands should be run in the `root` directory of this repo
 
-to build the rom, in the wine/crossover command prompt (e.g. cmd.exe) run:
+make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.
 
-```
-compile.bat
-```
+this repo contains a custom build of trhodeos' (https://github.com/trhodeos) `spicy` (https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy) which is an open source replacement for nintendo's `mild` to create ROMs. The only difference with this included `tools/spicy` binary is that this version allows for custom rom headers so you can set the region, name etc of your rom.
 
-this produces the rom file `goose64.n64` which you can then run with your favorite emulator or flashcart
+run `make` to build 
 
-to subsequently rebuild after making any changes to the code you'll first need to delete any .o object files (we're using an ancient version of make which doesn't do that for you). on linux you can use `./build.sh` to do this. an example for macOS/crossover can be found in `crossover_build.sh`. 
+run `make clean` or `make clobber` to clean up the build directory and any build-byproducts
+
+this produces the rom file `game.z64` which you can then run with your favorite emulator or flashcart
+
 
 environment variables which affect the build:
 
@@ -49,34 +49,12 @@ environment variables which affect the build:
 
 you can also create a file called `localdefs.makefile` containing any variables to override in the build, and it will be automatically included by the makefile.
 
-## build for macOS native executable
-
-this repo also includes an opengl based version of the game, which runs on macOS
-
-install dependencies:
-```
-# eg. using homebrew on macOS
-brew install glm
-```
-
-then open the goose64glut project with xcode, build and run
 
 
-## regenerate n64 header files from the OBJ models
-if you update .obj model files:
+## dependencies
+- lua (mesh export)
+- python (animation export, collision export, level export)
 
-first make sure you have lua installed
-
-```
-# eg. using homebrew on macOS
-brew install lua
-```
-
-then, to rebuild model header files
-
-```
-./rebuild_models.sh
-```
 
 ## regenerate n64 header files for sprites
 if you update any texture files:
@@ -90,7 +68,7 @@ pip install pillow
 then, to rebuild sprites
 
 ```bash
-./sprites.sh 
+./tools/sh/sprites.sh 
 ```
 
 ## export map object data
@@ -98,4 +76,5 @@ then, to rebuild sprites
 - open blender (or use `./blender.sh` to see console output)
 - in the blender text editor editor, open and run export_positions.py then open and run export_collision_mesh.py
 - see header files are created
+- this script is run automatically when running `make`. So after updating a .blend file the headers should be rebuilt automatically. (given the .blend file for the level is in `./assets/levels/*`)
 
