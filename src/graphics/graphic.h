@@ -14,6 +14,7 @@
 
 #define SCREEN_WD_HI 640
 #define SCREEN_HT_HI 480
+#define SCREEN_HT_HI_PAL 576
 
 // 2bpp = 16 bit color
 #define SCREEN_BPP 2
@@ -23,9 +24,11 @@
 
 #if HIGH_RESOLUTION_HALF_Y
 #define SCREEN_HT 240
+#define SCREEN_HT_PAL 288
 #define ANTIALIASING 1
 #else
 #define SCREEN_HT 480
+#define SCREEN_HT_PAL 576
 #define ANTIALIASING 0
 #endif
 
@@ -43,6 +46,7 @@
 #else  // low resolution, 320x240
 #define SCREEN_WD 320
 #define SCREEN_HT 240
+#define SCREEN_HT_PAL 288
 #define ANTIALIASING 1
 #define FRAME_BUFFERS 3
 // in lowest usable ram, uses 150kb

@@ -12,6 +12,7 @@ EXTERN_SEGMENT(wbank);
 EXTERN_SEGMENT(pbank);
 EXTERN_SEGMENT(sfx);
 EXTERN_SEGMENT(song);
+EXTERN_SEGMENT(newaudio);
 
 #define WBANK_START _wbankSegmentRomStart
 #define PBANK_START _pbankSegmentRomStart
@@ -20,5 +21,8 @@ EXTERN_SEGMENT(song);
 #define SFX_END _sfxSegmentRomEnd
 #define SONG_START _songSegmentRomStart
 #define SONG_END _songSegmentRomEnd
+#define NEWAUDIO_START _newaudioSegmentRomStart
+#define NEWAUDIO_END _newaudioSegmentRomEnd
+
 
 #endif /* SEGMENTS_H */
