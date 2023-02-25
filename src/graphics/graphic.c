@@ -165,6 +165,7 @@ static Gfx rdpstateinit_dl[] = {
 // Initializes the graphic thread and manager, and z buffer and color frame
 // buffer
 void gfxInit(void) {
+  nuGfxInit();
   Gfx gfxList[0x100];
   Gfx* gfxList_ptr;
   OSIntMask im;
@@ -174,9 +175,37 @@ void gfxInit(void) {
   /* Activate the graphic thread  */
   nuGfxThreadStart();
 
-  viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1
+
+  switch (osTvType) {
+    case OS_TV_PAL:
+      viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_PAL_HAF1
+                                                         : OS_VI_PAL_HPF1)
+                                         : OS_VI_PAL_LAN1];
+      //viMode = &osViModeFpalLpn1;
+    break;
+    case OS_TV_NTSC:
+      viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1
                                                          : OS_VI_NTSC_HPF1)
                                          : OS_VI_NTSC_LAN1];
+      //viMode = &osViModeNtscLpn1;
+    break;
+    case OS_TV_MPAL:
+      viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_MPAL_HAF1
+                                                         : OS_VI_MPAL_HPF1)
+                                         : OS_VI_MPAL_LAN1];
+      //viMode = &osViModeMpalLpn1;
+    break;
+    default:
+      viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1
+                                                         : OS_VI_NTSC_HPF1)
+                                         : OS_VI_MPAL_LAN1];
+    break;
+  }
+
+  // if(osTvType)
+  // viMode = osViModeTable[HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1
+  //                                                        : OS_VI_NTSC_HPF1)
+  //                                        : OS_VI_NTSC_LAN1];
 #if HIGH_RESOLUTION_HALF_Y
   viMode = osViModeTable[OS_VI_NTSC_LAN1];
   /* Change width, xScale, and origin */
