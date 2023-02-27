@@ -174,36 +174,6 @@ void *malloc(unsigned int size)
     return 0;
 }
 
-void free(void* target)
-{
-    if ((void*)target < gHeapStart || (void*)target >= gHeapEnd)
-    {
-        return;
-    }
-
-    struct HeapUsedSegment* segment = (struct HeapUsedSegment*)target - 1;  
-
-    struct HeapSegment* prev = getPrevBlock((struct HeapSegment*)segment, MALLOC_FREE_BLOCK);
-    struct HeapSegment* next = getNextBlock((struct HeapSegment*)segment, MALLOC_FREE_BLOCK);
-
-    void* segmentEnd = segment->segmentEnd;
-
-    if (prev)
-    {
-        segment = (struct HeapUsedSegment*)prev;
-        removeHeapSegment(prev);
-    }
-
-    if (next)
-    {
-        segmentEnd = next->segmentEnd;
-        removeHeapSegment(next);
-    }
-
-    heapInitBlock((struct HeapSegment*)segment, segmentEnd, MALLOC_FREE_BLOCK);
-    insertHeapSegment(0, (struct HeapSegment*)segment);
-}
-
 void *realloc(void* target, unsigned int size)
 {
     if (!target)
@@ -270,7 +240,35 @@ void *realloc(void* target, unsigned int size)
     return result;
 }
 
+void free(void* target)
+{
+    if ((void*)target < gHeapStart || (void*)target >= gHeapEnd)
+    {
+        return;
+    }
 
+    struct HeapUsedSegment* segment = (struct HeapUsedSegment*)target - 1;  
+
+    struct HeapSegment* prev = getPrevBlock((struct HeapSegment*)segment, MALLOC_FREE_BLOCK);
+    struct HeapSegment* next = getNextBlock((struct HeapSegment*)segment, MALLOC_FREE_BLOCK);
+
+    void* segmentEnd = segment->segmentEnd;
+
+    if (prev)
+    {
+        segment = (struct HeapUsedSegment*)prev;
+        removeHeapSegment(prev);
+    }
+
+    if (next)
+    {
+        segmentEnd = next->segmentEnd;
+        removeHeapSegment(next);
+    }
+
+    heapInitBlock((struct HeapSegment*)segment, segmentEnd, MALLOC_FREE_BLOCK);
+    insertHeapSegment(0, (struct HeapSegment*)segment);
+}
 
 int calculateHeapSize() {
     return (char*)gHeapEnd - (char*)gHeapStart;

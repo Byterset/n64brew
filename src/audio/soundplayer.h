@@ -33,7 +33,7 @@ void soundPlayerUpdatePitch(ALSndId soundId, float pitch);
 int soundPlayerIsPlaying(ALSndId soundId);
 short soundPlayerSoundClipId(ALSndId soundId);
 
-void soundListenerUpdate(struct Vector3* position, struct Quaternion* rotation, int listenerIndex);
+void soundListenerUpdate(struct Vector3* position, struct Quatern* rotation, int listenerIndex);
 void soundListenerSetCount(int count);
 void soundPlayerStopAll();
 

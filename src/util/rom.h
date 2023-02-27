@@ -3,7 +3,7 @@
 
 #include "memory.h"
 
-
+void romInit();
 void romCopy(const char *src, const char *dest, const int len);
 
 #define LOAD_SEGMENT(segmentName, dest)                                 \

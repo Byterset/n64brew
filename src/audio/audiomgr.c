@@ -1,10 +1,8 @@
 
 #include <assert.h>
 #include "audio.h"
-// #include "defs.h"
+#include "../defs.h"
 #include "../util/memory.h"
-#include "../constants.h"
-#include <PR/ucode.h>
 
 extern OSPiHandle	*gPiHandle;
 
@@ -245,7 +243,7 @@ static u32 __amHandleFrameMsg(AudioInfo *info, AudioInfo *lastInfo)
     t->list.t.ucode_boot = (u64 *)rspbootTextStart;
     t->list.t.ucode_boot_size =
         ((int) rspbootTextEnd - (int) rspbootTextStart);
-    t->list.t.flags = 0; 
+    t->list.t.flags = 0;
     t->list.t.ucode = (u64 *) aspMainTextStart;
     t->list.t.ucode_data = (u64 *) aspMainDataStart;
     t->list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
@@ -277,7 +275,7 @@ static void __amHandleDoneMsg(AudioInfo *info)
     samplesLeft = osAiGetLength()>>2;
     if (samplesLeft == 0 && !firstTime) 
     {
-        debugPrintfSync("audio: ai out of samples\n");   
+        PRINTF("audio: ai out of samples\n");    
         firstTime = 0;
     }
 }
@@ -398,7 +396,7 @@ static void __clearAudioDMA(void)
     for (i=0; i<nextDMA; i++)
     {
         if (osRecvMesg(&audDMAMessageQ,(OSMesg *)&iomsg,OS_MESG_NOBLOCK) == -1)
-            debugPrintfSync("Dma not done\n");
+            PRINTF("Dma not done\n");
     }
 
     

@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <nusys.h>
 // #include <stdlib.h>
-
+#include "../build/src/audio/clips.h"
 #include <nualstl_n.h>
 
 #include <malloc.h>
@@ -31,6 +31,8 @@
 #include "trace.h"
 #include "math/vec2d.h"
 #include "math/vec3d.h"
+#include "audio/audio.h"
+#include "audio/soundplayer.h"
 
 #include "models.h"
 #include "segments.h"
@@ -48,9 +50,9 @@
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0
 #define CONSOLE_SHOW_TRACING 0
-#define CONSOLE_SHOW_CULLING 1
+#define CONSOLE_SHOW_CULLING 0
 #define CONSOLE_SHOW_CAMERA 0
-#define CONSOLE_SHOW_SOUND 0
+#define CONSOLE_SHOW_SOUND 1
 #define CONSOLE_SHOW_RCP_TASKS 0
 #define LOG_TRACES 0
 #define CONTROLLER_DEAD_ZONE 0.1
@@ -164,17 +166,17 @@ void initStage00() {
           _collisionSegmentRomEnd - _collisionSegmentRomStart);
 
   /* Read and register the sample bank. */
-  nuAuStlPtrBankInit(PBANK_END - PBANK_START);
-  nuAuStlPtrBankSet((u8*)PBANK_START, PBANK_END - PBANK_START,
-                    (u8*)WBANK_START);
+  // nuAuStlPtrBankInit(PBANK_END - PBANK_START);
+  // nuAuStlPtrBankSet((u8*)PBANK_START, PBANK_END - PBANK_START,
+  //                   (u8*)WBANK_START);
 
   /* Read and register the sound effects. */
-  nuAuStlSndPlayerDataSet((u8*)SFX_START, SFX_END - SFX_START);
+  // nuAuStlSndPlayerDataSet((u8*)SFX_START, SFX_END - SFX_START);
 
-  nuAuStlSeqPlayerDataSet(0, (u8*)SONG_START, SONG_END - SONG_START);
+  // nuAuStlSeqPlayerDataSet(0, (u8*)SONG_START, SONG_END - SONG_START);
 
-  debugPrintfSync("audio heap used=%d, free=%d\n", nuAuStlHeapGetUsed(),
-                  nuAuStlHeapGetFree());
+  // debugPrintfSync("audio heap used=%d, free=%d\n", nuAuStlHeapGetUsed(),
+  //                 nuAuStlHeapGetFree());
 
   physWorldData = (PhysWorldData){garden_map_collision_collision_mesh,
                                   GARDEN_MAP_COLLISION_LENGTH,
@@ -624,11 +626,13 @@ void updateGame00(void) {
 
     if (contdata[0].trigger & L_CBUTTONS) {
       // TODO: trigger this sound from inside the player state machine
-      sndNumber = RAND(honkSoundRange) + Honk1Sound;
+      sndNumber = SOUNDS_JAH_SPOOKS;
+      //soundPlayerPlay(SOUNDS_HONK_SOUND, 1.0f, 5.0f, NULL);
+      debugPrintf("Play Honk Sound\n");
       // this cuts out any previous honk
       // TODO: prevent overlapping honks?
       if (sndHandle != 0) {
-        nuAuStlSndPlayerSndStop(sndHandle, 0);
+         nuAuStlSndPlayerSndStop(sndHandle, 0);
       }
       // sndPitch = 10.5;  // hand tuned... the sample tuning is fucked
       sndPitch = 0;
@@ -639,14 +643,14 @@ void updateGame00(void) {
     if (contdata[0].trigger & R_CBUTTONS) {
       if (seqPlaying) {
         debugPrintf("stop playing seq\n");
-        nuAuStlSeqPlayerStop(/*frames until stop*/ 0);
+        // nuAuStlSeqPlayerStop(/*frames until stop*/ 0);
         seqPlaying = FALSE;
         seqHandle = 0;
       } else {
         debugPrintf("start playing seq\n");
-        seqHandle = nuAuStlSeqPlayerPlay(/*seq player num*/ NU_AU_SEQ_PLAYER0);
-        nuAuStlSeqPlayerSetMasterVol(/*max*/ 0x7fff);
-        MusHandleSetVolume(seqHandle, /* 200% */ 0x100);
+        // seqHandle = nuAuStlSeqPlayerPlay(/*seq player num*/ NU_AU_SEQ_PLAYER0);
+        // nuAuStlSeqPlayerSetMasterVol(/*max*/ 0x7fff);
+        // MusHandleSetVolume(seqHandle, /* 200% */ 0x100);
         seqPlaying = TRUE;
       }
     }
@@ -1117,7 +1121,7 @@ void soundCheck(void) {
   if ((contdata[0].trigger & L_JPAD) || (contdata[0].trigger & R_JPAD) ||
       contdata[0].trigger & U_JPAD || contdata[0].trigger & D_JPAD) {
     if (sndNumber)
-      nuAuStlSndPlayerSndStop(sndHandle, 0);
+      // nuAuStlSndPlayerSndStop(sndHandle, 0);
 
     if (contdata[0].trigger & L_JPAD) {
       sndNumber--;
@@ -1137,8 +1141,8 @@ void soundCheck(void) {
         sndPitch = 12.0;
     }
 
-    sndHandle = nuAuStlSndPlayerPlay(sndNumber - 1);
-    nuAuStlSndPlayerSetSndPitch(sndHandle, sndPitch);
+    // sndHandle = nuAuStlSndPlayerPlay(sndNumber - 1);
+    // nuAuStlSndPlayerSetSndPitch(sndHandle, sndPitch);
   }
 }
 

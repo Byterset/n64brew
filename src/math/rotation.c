@@ -7,6 +7,7 @@
 #include "rotation.h"
 #include "vec3d.h"
 
+
 static Vec3d _zero = {0, 0, 0};
 static Vec3d _one = {1, 1, 1};
 

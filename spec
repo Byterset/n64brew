@@ -52,7 +52,7 @@ beginseg
 	include "$(ROOT)/usr/lib/PR/gspS2DEX2.fifo.o"
 
   include "$(ROOT)/usr/lib/PR/n_aspMain.o"
-  // include "$(ROOT)/usr/lib/PR/aspMain.o"
+  include "$(ROOT)/usr/lib/PR/aspMain.o"
 endseg
 
 beginseg
@@ -83,25 +83,19 @@ beginseg
   include "build/src/mem_heap.o"
 endseg
 
-// beginseg
-//   name  "audheap"
-//   flags OBJECT
-//   after "memheap"
-//   include "build/src/aud_heap.o"
-// endseg
 
-/* sample data - pointer bank */
+/* sounds */
 beginseg
   name "sounds"
   flags RAW
-  include "new_sound/sounds.sounds"
+  include "build/assets/sound/sounds.sounds"
 endseg
 
-/* sample data - pointer bank */
+/* sounds table */
 beginseg
   name "soundsTbl"
   flags RAW
-  include "new_sound/sounds.sounds.tbl"
+  include "build/assets/sound/sounds.sounds.tbl"
 endseg
 
 /* sample data - pointer bank */
@@ -147,7 +141,6 @@ beginwave
   include "sprites"
   include "collision" 
   include "memheap"
-  // include "audheap"
   include "sounds"
   include "soundsTbl"
   include "pbank"

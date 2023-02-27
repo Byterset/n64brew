@@ -1,17 +1,19 @@
+
 #include "audio.h"
-#include "../aud_heap.h"
-// #include "defs.h"
+#include "../util/rom.h"
+
+#include "../defs.h"
 
 /**** audio globals ****/
 u8* gAudioHeapBuffer;
 ALHeap             gAudioHeap;
 
-void initAudio(int framerate, OSPri threadPriority) 
+void initAudio(int framerate) 
 {
     ALSynConfig   c;
     amConfig      amc;
     
-    alHeapInit(&gAudioHeap, gAudioHeapBuffer, AUD_HEAP_SIZE);    
+    alHeapInit(&gAudioHeap, gAudioHeapBuffer, AUDIO_HEAP_SIZE);    
 
     /*
      * Create the Audio Manager
@@ -25,8 +27,8 @@ void initAudio(int framerate, OSPri threadPriority)
     c.heap       = &gAudioHeap;
     
     amc.outputRate = 44100;
-    amc.framesPerField = 1;
+    amc.framesPerField = NUM_FIELDS;
     amc.maxACMDSize = MAX_RSP_CMDS;
  
-    amCreateAudioMgr(&c, threadPriority, &amc, framerate);
+    amCreateAudioMgr(&c, AUDIO_PRIORITY, &amc, framerate);
 }

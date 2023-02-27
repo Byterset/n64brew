@@ -7,7 +7,7 @@
 
 extern NUContData contdata[1]; /* Read data of the controller  */
 extern u8 contPattern;         /* The pattern of the connected controller  */
-
+extern s32 gAudioHeapSize;      /* The size of the Audio Heap*/
 #if CONSOLE || NU_PERF_BAR
 #define GFX_TASKS_PER_MAKEDL 2
 #else

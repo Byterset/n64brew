@@ -1,12 +1,14 @@
 #include <ultra64.h>
-#include <nusys.h>
+#include <sched.h>
+#include "defs.h"
 
 // this must come after nusys.h
 #include "main.h"
-#include "malloc.h"
-
+// #include "malloc.h"
+#include "util/memory.h"
+#include "util/rom.h"
 #include <nualstl_n.h>
-
+#include "util/time.h"
 #include <PR/os_convert.h>
 #ifdef ED64
 #include "ed64/ed64io.h"
@@ -15,8 +17,9 @@
 #include "mem_heap.h"
 // #include "aud_heap.h"
 #include "trace.h"
-// #include "audio/audio.h"
-// #include "audio/soundplayer.h"
+#include "audio/audio.h"
+#include "audio/soundplayer.h"
+#include "../build/src/audio/clips.h"
 
 // #define DEBUGSTARTUP
 
@@ -28,139 +31,272 @@
 
 /* The global variable  */
 NUContData contdata[1]; /* Read data of 1 controller  */
-u8 contPattern;         /* The pattern connected to the controller  */
+u8 contPattern;			/* The pattern connected to the controller  */
+
+OSPiHandle *gPiHandle;
+static OSMesg PiMessages[DMA_QUEUE_SIZE];
+static OSMesgQueue PiMessageQ;
 
 extern char mem_heap[MEM_HEAP_SIZE];
+
 // extern char aud_heap[AUD_HEAP_SIZE];
 
-// OSSched scheduler;
-// u64            scheduleStack[OS_SC_STACKSIZE/8];
-// OSPiHandle *gPiHandle;
-// OSMesgQueue	*schedulerCommandQueue;
+u64 mainStack[STACKSIZEBYTES / sizeof(u64)];
+
+OSThread initThread;
+u64 initThreadStack[STACKSIZEBYTES / sizeof(u64)];
+
+OSThread gameThread;
+u64 gameThreadStack[STACKSIZEBYTES / sizeof(u64)];
+
+OSMesgQueue gfxFrameMsgQ;
+static OSMesg gfxFrameMsgBuf[MAX_FRAME_BUFFER_MESGS];
+static OSScClient gfxClient;
+
+OSSched scheduler;
+u64 scheduleStack[OS_SC_STACKSIZE / 8];
+OSMesgQueue *schedulerCommandQueue;
+
+void initProc(void *arg);
+void gameProc(void *arg);
 
 EXTERN_SEGMENT_WITH_BSS(memheap);
-// EXTERN_SEGMENT_WITH_BSS(audheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
 
-int systemHeapMemoryInit(void) {
-  int initHeapResult;
-  nuPiReadRom((u32)_memheapSegmentRomStart, _memheapSegmentStart,
-              (u32)_memheapSegmentRomEnd - (u32)_memheapSegmentRomStart);
+void systemHeapMemoryInit(void *heapend)
+{
+	int initHeapResult;
+	romCopy(_memheapSegmentRomStart, _memheapSegmentStart, (u32)_memheapSegmentRomEnd - (u32)_memheapSegmentRomStart);
+	heapInit(_memheapSegmentBssStart, _memheapSegmentBssEnd);
 
-  bzero(_memheapSegmentBssStart,
-        _memheapSegmentBssEnd - _memheapSegmentBssStart);
+	if (osGetMemSize() == 0x00800000)
+	{
+		debugPrintfSync("have expansion pack\n");
+		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
+		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
 
-  /* Reserve system heap memory */
-  initHeapResult = InitHeap(mem_heap, MEM_HEAP_SIZE);
-
-  if (initHeapResult == -1) {
-    die("failed to init heap\n");
-  } else {
-    debugPrintfSync("init heap success, allocated=%d\n", MEM_HEAP_SIZE);
-  }
-
-  if (osGetMemSize() == 0x00800000) {
-    debugPrintfSync("have expansion pack\n");
-    nuPiReadRom((u32)_traceSegmentRomStart, _traceSegmentStart,
-                (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
-    bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
-
-    debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
-  } else {
-    die("expansion pack missing\n");
-  }
-  return 0;
+		debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
+	}
+	else
+	{
+		die("expansion pack missing\n");
+	}
 }
 
-
 // int audioHeapMemoryInit(void) {
+//   // nuAuStlInit();
 
-//   int initHeapResult;
+//   // int initHeapResult;
 //     /* init audio heap as zeroed memory */
-//   gAudioHeapBuffer = (u8*)_audheapSegmentRomStart;
-//   nuPiReadRom((u32)_audheapSegmentRomStart, _audheapSegmentStart,
-//               (u32)_audheapSegmentRomEnd - (u32)_audheapSegmentRomStart);
+//   // nuPiReadRom((u32)_audheapSegmentRomStart, _audheapSegmentStart,
+//   //             (u32)_audheapSegmentRomEnd - (u32)_audheapSegmentRomStart);
 
-//   u16* memoryEnd = (u16)_audheapSegmentRomEnd;
+//   u16* memoryEnd = (u16*)0x8038F800; //mem adress where the framebuffer starts
 
 //   /* init audio heap as zeroed memory */
-//   gAudioHeapBuffer = (u8*)memoryEnd - AUD_HEAP_SIZE;
-//   /* Reserve audio heap memory */
-//   initHeapResult = InitHeap(aud_heap, AUD_HEAP_SIZE);
+//   gAudioHeapBuffer = (u8*)memoryEnd - 327680;
+//   /* Reserve system heap memory */
+//   bzero(gAudioHeapBuffer, 327680);
+//   initAudio(60, NU_SC_AUDIO_PRI);
 
-//   bzero(gAudioHeapBuffer, AUD_HEAP_SIZE);
-
-//   if (initHeapResult == -1) {
-//     die("failed to init heap\n");
-//   } else {
-//     debugPrintfSync("init heap success, allocated=%d\n", AUD_HEAP_SIZE);
-//   }
-//   return 0;
+//   // if (initHeapResult == -1) {
+//   //   die("failed to init heap\n");
+//   // } else {
+//   //   debugPrintfSync("init heap success, allocated=%d\n", AUD_HEAP_SIZE);
+//   // }
+//   // return 0;
 // }
 
-
-
-extern void* __printfunc;
+extern void *__printfunc;
 /*------------------------
-        Main
+		Main
 --------------------------*/
-void mainproc(void) {
+void mainproc(void *arg)
+{
 #ifdef ED64
-  // start everdrive communication
-  evd_init();
+	// start everdrive communication
+	evd_init();
 
-  // register libultra error handler
-  // ed64RegisterOSErrorHandler();
+	// register libultra error handler
+	// ed64RegisterOSErrorHandler();
 
-  // start thread which will catch and log errors
-  ed64StartFaultHandlerThread(NU_GFX_TASKMGR_THREAD_PRI);
+	// start thread which will catch and log errors
+	ed64StartFaultHandlerThread(NU_GFX_TASKMGR_THREAD_PRI);
 
-  // overwrite osSyncPrintf impl
-  __printfunc = (void*)ed64PrintFuncImpl;
+	// overwrite osSyncPrintf impl
+	__printfunc = (void *)ed64PrintFuncImpl;
 #endif
+	osInitialize();
+	gPiHandle = osCartRomInit();
 
-  DBGPRINT("hello\n");
+	osCreateThread(
+		&initThread,
+		1,
+		initProc,
+		arg,
+		(void *)(initThreadStack + (STACKSIZEBYTES / sizeof(u64))),
+		(OSPri)INIT_PRIORITY);
 
-  DBGPRINT("systemHeapMemoryInit\n");
-  systemHeapMemoryInit();
+	osStartThread(&initThread);
 
-  /* The initialization of the controller manager  */
-  contPattern = nuContInit();
+	// DBGPRINT("hello\n");
 
-  /* The initialization of audio */
-  DBGPRINT("nuAuStlInit\n");
+	// DBGPRINT("systemHeapMemoryInit\n");
+	// systemHeapMemoryInit();
 
+	// /* The initialization of the controller manager  */
+	// contPattern = nuContInit();
 
-  //audioHeapMemoryInit();
-  nuAuStlInit();
+	// /* The initialization of audio */
+	// DBGPRINT("nuAuStlInit\n");
 
-  /* The initialization of graphic  */
-  // nuGfxInit();
-  DBGPRINT("gfxInit\n");
-  gfxInit();
+	// // audioHeapMemoryInit();
+	// gAudioHeapSize = nuAuStlInit();
+	// // initAudio(60, NU_AU_MGR_THREAD_PRI, NU_AU_HEAP_ADDR);
+	// // soundPlayerInit();
 
-  // osCreateScheduler(
-  //   &scheduler,
-  //   (void *)(scheduleStack + OS_SC_STACKSIZE/8),
-  //   71,
-  //   1,
-  //   1
-  // );
-  // schedulerCommandQueue = osScGetCmdQ(&scheduler);
-  // initAudio(60, NU_AU_MGR_THREAD_PRI);
-  // soundPlayerInit();
-  /* The initialization for stage00()  */
-  DBGPRINT("initStage00\n");
-  initStage00();
-  /* Register call-back  */
-  DBGPRINT("nuGfxFuncSet\n");
-  nuGfxFuncSet((NUGfxFunc)stage00);
+	// /* The initialization of graphic  */
+	// // nuGfxInit();
+	// DBGPRINT("gfxInit\n");
+	// gfxInit();
 
-  /* The screen display is ON */
-  DBGPRINT("nuGfxDisplayOn\n");
-  nuGfxDisplayOn();
-  while (1)
-    ;
+	// /* The initialization for stage00()  */
+	// DBGPRINT("initStage00\n");
+	// initStage00();
+	// /* Register call-back  */
+	// DBGPRINT("nuGfxFuncSet\n");
+	// nuGfxFuncSet((NUGfxFunc)stage00);
+	// /* The screen display is ON */
+	// DBGPRINT("nuGfxDisplayOn\n");
+	// nuGfxDisplayOn();
+	// while (1)
+	//   ;
+}
+
+void initProc(void *arg)
+{
+	osCreatePiManager(
+		(OSPri)OS_PRIORITY_PIMGR,
+		&PiMessageQ,
+		PiMessages,
+		DMA_QUEUE_SIZE);
+
+	osCreateThread(
+		&gameThread,
+		6,
+		gameProc,
+		0,
+		gameThreadStack + (STACKSIZEBYTES / sizeof(u64)),
+		(OSPri)GAME_PRIORITY);
+
+	osStartThread(&gameThread);
+
+	osSetThreadPri(NULL, 0);
+	for (;;)
+		;
+}
+
+extern OSMesgQueue dmaMessageQ;
+
+extern char _memheapSegmentRomStart[];
+
+void gameProc(void *arg)
+{
+	u8 schedulerMode = OS_VI_NTSC_HPF1;
+	int framerate = 60;
+
+	switch (osTvType)
+	{
+	case 0: // PAL
+		schedulerMode = HIGH_RESOLUTION ? OS_VI_PAL_HPF1 : OS_VI_PAL_LPF1;
+		framerate = 50;
+		break;
+	case 1: // NTSC
+		schedulerMode = HIGH_RESOLUTION ? OS_VI_NTSC_HPF1 : OS_VI_NTSC_LPF1;
+		break;
+	case 2: // MPAL
+		schedulerMode = HIGH_RESOLUTION ? OS_VI_MPAL_HPF1 : OS_VI_MPAL_LPF1;
+		framerate = 50;
+		break;
+	}
+
+	osCreateScheduler(
+		&scheduler,
+		(void *)(scheduleStack + OS_SC_STACKSIZE / 8),
+		SCHEDULER_PRIORITY,
+		schedulerMode,
+		1);
+
+	schedulerCommandQueue = osScGetCmdQ(&scheduler);
+
+	osCreateMesgQueue(&gfxFrameMsgQ, gfxFrameMsgBuf, MAX_FRAME_BUFFER_MESGS);
+	osScAddClient(&scheduler, &gfxClient, &gfxFrameMsgQ);
+
+	osViSetSpecialFeatures(OS_VI_GAMMA_OFF |
+						   OS_VI_GAMMA_DITHER_OFF |
+						   OS_VI_DIVOT_OFF |
+						   OS_VI_DITHER_FILTER_OFF);
+
+	u32 pendingGFX = 0;
+	u32 drawBufferIndex = 0;
+	int frameControl = 0;
+
+	u16 *memoryEnd = graphicsLayoutScreenBuffers((u16 *)PHYS_TO_K0(osMemSize));
+
+	gAudioHeapBuffer = (u8 *)memoryEnd - AUDIO_HEAP_SIZE;
+	zeroMemory(gAudioHeapBuffer, AUDIO_HEAP_SIZE);
+	memoryEnd = (u16 *)gAudioHeapBuffer;
+	heapInit(_memheapSegmentStart, memoryEnd);
+	//systemHeapMemoryInit(memoryEnd);
+	romInit();
+
+	initAudio(framerate);
+	soundPlayerInit();
+	soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 0.5f, NULL);
+	while (1)
+	{
+		OSScMsg *msg = NULL;
+		osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&msg, OS_MESG_BLOCK);
+		switch (msg->type)
+		{
+		case (OS_SC_RETRACE_MSG):
+			// control the framerate
+			frameControl = (frameControl + 1) % (FRAME_SKIP + 1);
+			if (frameControl != 0)
+			{
+				break;
+			}
+			static int renderSkip = 1;
+
+			if (pendingGFX < 2 && !renderSkip)
+			{
+				//graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], (GraphicsCallback)sceneRender, &gScene);
+				drawBufferIndex = drawBufferIndex ^ 1;
+				++pendingGFX;
+			}
+			else if (renderSkip)
+			{
+				--renderSkip;
+			}
+			soundPlayerUpdate();
+
+			timeUpdateDelta();
+			break;
+		case (OS_SC_DONE_MSG):
+			--pendingGFX;
+			break;
+		case (OS_SC_PRE_NMI_MSG):
+			pendingGFX += 2;
+			break;
+		case SIMPLE_CONTROLLER_MSG:
+			// controllersUpdate();
+			break;
+		}
+	}
+
+	// int materialChunkSize = _material_dataSegmentRomEnd - _material_dataSegmentRomStart;
+
+	// memoryEnd -= materialChunkSize / sizeof(u16);
 }
 
 /*-----------------------------------------------------------------------------
@@ -170,30 +306,36 @@ void mainproc(void) {
   function is the total of RCP tasks that are currently processing and
   waiting for the process.
 -----------------------------------------------------------------------------*/
-void stage00(int pendingGfx) {
-  float skippedGfxTime, profStartUpdate, profStartFrame, profEndFrame;
-  profStartFrame = CUR_TIME_MS();
-  /* Provide the display process if n or less RCP tasks are processing or
-        waiting for the process.  */
-  if (nuScRetraceCounter % FRAME_SKIP == 0) {
-    if (pendingGfx < GFX_TASKS_PER_MAKEDL * 2) {
-      makeDL00();
-      Trace_addEvent(MainMakeDisplayListTraceEvent, profStartFrame,
-                     CUR_TIME_MS());
-    } else {
-      skippedGfxTime = CUR_TIME_MS();
-      Trace_addEvent(SkippedGfxTaskTraceEvent, skippedGfxTime,
-                     skippedGfxTime + 16.0f);
-      // debugPrintfSync("dropped frame %d\n", nuScRetraceCounter / FRAME_SKIP);
-    }
-  }
+void stage00(int pendingGfx)
+{
+	float skippedGfxTime, profStartUpdate, profStartFrame, profEndFrame;
+	profStartFrame = CUR_TIME_MS();
+	/* Provide the display process if n or less RCP tasks are processing or
+		  waiting for the process.  */
+	if (nuScRetraceCounter % FRAME_SKIP == 0)
+	{
+		if (pendingGfx < GFX_TASKS_PER_MAKEDL * 2)
+		{
+			makeDL00();
+			Trace_addEvent(MainMakeDisplayListTraceEvent, profStartFrame,
+						   CUR_TIME_MS());
+		}
+		else
+		{
+			skippedGfxTime = CUR_TIME_MS();
+			Trace_addEvent(SkippedGfxTaskTraceEvent, skippedGfxTime,
+						   skippedGfxTime + 16.0f);
+			// debugPrintfSync("dropped frame %d\n", nuScRetraceCounter / FRAME_SKIP);
+		}
+	}
 
-  profStartUpdate = CUR_TIME_MS();
-  /* The process of game progress  */
-  updateGame00();
-  profEndFrame = CUR_TIME_MS();
-  Trace_addEvent(MainCPUTraceEvent, profStartFrame, profEndFrame);
-  Trace_addEvent(MainUpdateTraceEvent, profStartUpdate, profEndFrame);
-  profilingAccumulated[MainCPUTraceEvent] += profEndFrame - profStartFrame;
-  profilingCounts[MainCPUTraceEvent]++;
+	profStartUpdate = CUR_TIME_MS();
+	/* The process of game progress  */
+	updateGame00();
+	// soundPlayerUpdate();
+	profEndFrame = CUR_TIME_MS();
+	Trace_addEvent(MainCPUTraceEvent, profStartFrame, profEndFrame);
+	Trace_addEvent(MainUpdateTraceEvent, profStartUpdate, profEndFrame);
+	profilingAccumulated[MainCPUTraceEvent] += profEndFrame - profStartFrame;
+	profilingCounts[MainCPUTraceEvent]++;
 }
