@@ -8,7 +8,8 @@
                 "${workspaceFolder}/src",
                 "/usr/include/n64/nusys",
                 "/usr/include/n64",
-                "/usr/include/n64/PR"
+                "/usr/include/n64/PR",
+                "${workspaceFolder}/src"
             ],
             "defines": [],
             "compilerPath": "/opt/crashsdk/bin/mips-n64-gcc",

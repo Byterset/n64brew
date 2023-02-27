@@ -165,7 +165,6 @@ static Gfx rdpstateinit_dl[] = {
 // Initializes the graphic thread and manager, and z buffer and color frame
 // buffer
 void gfxInit(void) {
-  nuGfxInit();
   Gfx gfxList[0x100];
   Gfx* gfxList_ptr;
   OSIntMask im;
