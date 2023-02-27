@@ -103,3 +103,4 @@ localdefs.makefile
 *.dasm
 
 .vscode/
+.vscode/*
