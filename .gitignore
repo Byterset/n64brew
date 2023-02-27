@@ -104,3 +104,4 @@ localdefs.makefile
 
 .vscode/
 .vscode/*
+**/.vscode/
