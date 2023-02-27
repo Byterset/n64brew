@@ -3,7 +3,7 @@
 # set up modern toolchain (gcc, etc)
 include ./modern.makefile
 
-BLENDER='/mnt/c/Program Files/Blender Foundation/Blender 3.4/blender.exe'
+BLENDER=/mnt/c/Program Files/Blender Foundation/Blender 3.4/blender.exe
 EMULATOR=/mnt/c/Users/kevin/Documents/Emulation/N64/Mupen64plus/mupen64plus/simple64-gui.exe
 
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
@@ -48,7 +48,7 @@ LCDEFS += -DED64
 endif
 
 ifdef OPTIMIZE
-CORELIBS = -lnusys -lnustd -lultra 
+CORELIBS = -lnusys -lnustd -lultra
 else
 CORELIBS = -lnusys_d -lnustd_d -lultra_d 
 endif
@@ -69,8 +69,9 @@ TARGETS =	$(BUILDDIR)/game.z64
 
 SPECFILE = spec
 
-HFILES =	src/main.h src/graphics/graphic.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h
-
+HFILES =	src/main.h src/graphics/graphic.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h src/segments.h
+HFILES += src/math/vector2.h src/math/vector3.h src/math/vector4.h src/math/vector2s16.h src/util/memory.h src/util/rom.h 
+# HFILES += src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -87,7 +88,8 @@ SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
 
 CODEFILES   = 	src/main.c src/stage00.c src/graphics/graphic.c src/graphics/gfxinit.c src/math/vec3d.c src/math/vec2d.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c src/physics/collision.c  src/pathfinding.c src/math/frustum.c  src/garden_map_graph.c src/sprite.c
-
+CODEFILES +=  src/math/mathf.c src/math/quaternion.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/memory.c src/util/rom.c 
+# CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
 endif
@@ -95,6 +97,7 @@ endif
 CODEOBJECTS =	$(CODEFILES:src/%.c=$(BUILDDIR)/src/%.o)  $(NUSYSLIBDIR)/nusys.o
 
 DATA_SRC_FILES   = src/mem_heap.c src/trace.c src/models.c src/sprite_data.c
+# DATA_SRC_FILES += src/aud_heap.c
 DATA_SRC_ASSETS = assets/levels/garden_map_collision.c
 DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
 

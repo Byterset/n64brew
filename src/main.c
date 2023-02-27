@@ -1,3 +1,4 @@
+#include <ultra64.h>
 #include <nusys.h>
 
 // this must come after nusys.h
@@ -12,7 +13,10 @@
 #endif
 #include "graphics/graphic.h"
 #include "mem_heap.h"
+// #include "aud_heap.h"
 #include "trace.h"
+// #include "audio/audio.h"
+// #include "audio/soundplayer.h"
 
 // #define DEBUGSTARTUP
 
@@ -27,8 +31,15 @@ NUContData contdata[1]; /* Read data of 1 controller  */
 u8 contPattern;         /* The pattern connected to the controller  */
 
 extern char mem_heap[MEM_HEAP_SIZE];
+// extern char aud_heap[AUD_HEAP_SIZE];
+
+// OSSched scheduler;
+// u64            scheduleStack[OS_SC_STACKSIZE/8];
+// OSPiHandle *gPiHandle;
+// OSMesgQueue	*schedulerCommandQueue;
 
 EXTERN_SEGMENT_WITH_BSS(memheap);
+// EXTERN_SEGMENT_WITH_BSS(audheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
 
 int systemHeapMemoryInit(void) {
@@ -61,6 +72,34 @@ int systemHeapMemoryInit(void) {
   return 0;
 }
 
+
+// int audioHeapMemoryInit(void) {
+
+//   int initHeapResult;
+//     /* init audio heap as zeroed memory */
+//   gAudioHeapBuffer = (u8*)_audheapSegmentRomStart;
+//   nuPiReadRom((u32)_audheapSegmentRomStart, _audheapSegmentStart,
+//               (u32)_audheapSegmentRomEnd - (u32)_audheapSegmentRomStart);
+
+//   u16* memoryEnd = (u16)_audheapSegmentRomEnd;
+
+//   /* init audio heap as zeroed memory */
+//   gAudioHeapBuffer = (u8*)memoryEnd - AUD_HEAP_SIZE;
+//   /* Reserve audio heap memory */
+//   initHeapResult = InitHeap(aud_heap, AUD_HEAP_SIZE);
+
+//   bzero(gAudioHeapBuffer, AUD_HEAP_SIZE);
+
+//   if (initHeapResult == -1) {
+//     die("failed to init heap\n");
+//   } else {
+//     debugPrintfSync("init heap success, allocated=%d\n", AUD_HEAP_SIZE);
+//   }
+//   return 0;
+// }
+
+
+
 extern void* __printfunc;
 /*------------------------
         Main
@@ -90,22 +129,29 @@ void mainproc(void) {
 
   /* The initialization of audio */
   DBGPRINT("nuAuStlInit\n");
+
+
+  //audioHeapMemoryInit();
   nuAuStlInit();
-  // nuAuStlInit() also does:
-  // nuAuStlSeqPlayerInit(
-  //   NU_AU_SEQ_PLAYER0,
-  //   NU_AU_SONG_SIZE /*16kb*/
-  // );
 
   /* The initialization of graphic  */
   // nuGfxInit();
   DBGPRINT("gfxInit\n");
   gfxInit();
 
+  // osCreateScheduler(
+  //   &scheduler,
+  //   (void *)(scheduleStack + OS_SC_STACKSIZE/8),
+  //   71,
+  //   1,
+  //   1
+  // );
+  // schedulerCommandQueue = osScGetCmdQ(&scheduler);
+  // initAudio(60, NU_AU_MGR_THREAD_PRI);
+  // soundPlayerInit();
   /* The initialization for stage00()  */
   DBGPRINT("initStage00\n");
   initStage00();
-
   /* Register call-back  */
   DBGPRINT("nuGfxFuncSet\n");
   nuGfxFuncSet((NUGfxFunc)stage00);
@@ -113,7 +159,6 @@ void mainproc(void) {
   /* The screen display is ON */
   DBGPRINT("nuGfxDisplayOn\n");
   nuGfxDisplayOn();
-
   while (1)
     ;
 }
