@@ -2,8 +2,8 @@
 #include "soundplayer.h"
 #include "soundarray.h"
 #include "../util/rom.h"
+#include "../util/time.h"
 #include "../math/mathf.h"
-#include "../constants.h"
 
 struct SoundArray* gSoundClipArray;
 ALSndPlayer gSoundPlayer;
@@ -86,7 +86,6 @@ void soundPlayerDetermine3DSound(struct Vector3* at, float* volumeIn, float* vol
 }
 
 void soundPlayerInit() {
-    //load list of available sound clips from rom
     gSoundClipArray = alHeapAlloc(&gAudioHeap, 1, _soundsSegmentRomEnd - _soundsSegmentRomStart);
     romCopy(_soundsSegmentRomStart, (char*)gSoundClipArray, _soundsSegmentRomEnd - _soundsSegmentRomStart);
     soundArrayInit(gSoundClipArray, _soundsTblSegmentRomStart);
@@ -200,7 +199,7 @@ void soundPlayerUpdate() {
             --sound->newSoundTicks;
         }
 
-        sound->estimatedTimeLeft -= CUR_TIME_MS();
+        sound->estimatedTimeLeft -= FIXED_DELTA_TIME;
 
         alSndpSetSound(&gSoundPlayer, sound->soundId);
 

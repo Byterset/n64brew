@@ -5,9 +5,9 @@
 #include "vector3.h"
 #include "vector2.h"
 
-struct Quaternion {
+typedef struct Quaternion {
     float x, y, z, w;
-};
+} Quaternion;
 
 void quatIdent(struct Quaternion* q);
 void quatAxisAngle(struct Vector3* axis, float angle, struct Quaternion* out);

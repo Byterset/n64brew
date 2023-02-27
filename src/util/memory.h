@@ -40,9 +40,9 @@ struct HeapSegmentFooter
 void heapInit(void* heapStart, void* heapEnd);
 void heapReset();
 void *cacheFreePointer(void* target);
-// void *malloc(unsigned int size);
-// void *realloc(void* target, unsigned int size);
-// void free(void* target);
+void *malloc(unsigned int size);
+void *realloc(void* target, unsigned int size);
+void free(void* target);
 int calculateBytesFree();
 int calculateHeapSize();
 int calculateLargestFreeChunk();

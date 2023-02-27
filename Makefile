@@ -3,7 +3,7 @@
 # set up modern toolchain (gcc, etc)
 include ./modern.makefile
 
-BLENDER=/mnt/c/Program Files/Blender Foundation/Blender 3.4/blender.exe
+BLENDER= blender
 EMULATOR=/mnt/c/Users/kevin/Documents/Emulation/N64/Mupen64plus/mupen64plus/simple64-gui.exe
 
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
@@ -70,8 +70,9 @@ TARGETS =	$(BUILDDIR)/game.z64
 SPECFILE = spec
 
 HFILES =	src/main.h src/graphics/graphic.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h src/segments.h
-HFILES += src/math/vector2.h src/math/vector3.h src/math/vector4.h src/math/vector2s16.h src/util/memory.h src/util/rom.h 
-# HFILES += src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
+HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h 
+HFILES += src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
+HFILES += src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -87,9 +88,10 @@ SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,
 
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
 
-CODEFILES   = 	src/main.c src/stage00.c src/graphics/graphic.c src/graphics/gfxinit.c src/math/vec3d.c src/math/vec2d.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c src/physics/collision.c  src/pathfinding.c src/math/frustum.c  src/garden_map_graph.c src/sprite.c
-CODEFILES +=  src/math/mathf.c src/math/quaternion.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/memory.c src/util/rom.c 
-# CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
+CODEFILES = 	src/main.c src/stage00.c src/graphics/graphic.c src/graphics/gfxinit.c src/math/vec3d.c src/math/vec2d.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c src/physics/collision.c  src/pathfinding.c src/math/frustum.c  src/garden_map_graph.c src/sprite.c
+CODEFILES +=	src/math/mathf.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/rom.c src/math/quaternion.c
+CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
+CODEFILES += src/util/memory.c src/util/time.c src/graphics/color.c src/graphics/renderstate.c 
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
 endif
@@ -125,6 +127,19 @@ $(BUILDDIR)/assets/%.o: assets/%.c | $(BUILDDIR) $(HFILES)
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
+SOUND_CLIPS = $(shell find new_sound/ -type f -name '*.wav') #$(shell find assets/sounds -type f -name '*.aif') $(shell find assets/sounds_ins -type f -name '*.ins')
+SFZ2N64 = tools/sfz2n64
+build/assets/sound/sounds.sounds build/assets/sound/sounds.sounds.tbl: $(SOUND_CLIPS)
+	@mkdir -p $(@D)
+	$(SFZ2N64) --compress -o $@ $^
+
+# build/asm/sound_data.o: build/assets/sound/sounds.sounds build/assets/sound/sounds.sounds.tbl
+
+build/src/audio/clips.h: tools/generate_sound_ids.js $(SOUND_CLIPS)
+	@mkdir -p $(@D)
+	node tools/generate_sound_ids.js -o $@ -p SOUNDS_ $(SOUND_CLIPS)
+
+build/src/stage00.o: build/src/audio/clips.h
 assets/levels/%_map.h: assets/levels/%.blend 
 	$(BLENDER) -b $< -P tools/export_positions.py
 
@@ -159,7 +174,7 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 # use -M to print memory map from ld
 	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 
-$(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT)
+$(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT) build/assets/sound/sounds.sounds
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 0 -e $(APP) -h $(ROMHEADER)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true
 	makemask $(TARGETS)
 #	$(EMULATOR) $(TARGETS)
