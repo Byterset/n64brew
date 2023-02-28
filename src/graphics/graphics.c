@@ -62,7 +62,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 
     renderStateInit(renderState, targetTask->framebuffer, zbuffer);
     gSPSegment(renderState->dl++, 0, 0);
-    // gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
+    //gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
     // gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
 
     gSPDisplayList(renderState->dl++, setup_rspstate);
@@ -98,7 +98,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
         callback(data, renderState, targetTask);
     }
 
-    // gDPPipeSync(renderState->dl++);
+    gDPPipeSync(renderState->dl++);
     gDPFullSync(renderState->dl++);
     gSPEndDisplayList(renderState->dl++);
 
@@ -153,5 +153,5 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 #endif // WITH_GFX_VALIDATOR
 
     osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
-    soundPlayerPlay(SOUNDS_HONK_5, 5.0f, 0.7f, NULL);
+    // soundPlayerPlay(SOUNDS_HONK_5, 5.0f, 0.7f, NULL);
 }
