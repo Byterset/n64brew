@@ -105,6 +105,11 @@ DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:as
 
 CODESEGMENT =	$(BUILDDIR)/codesegment.o
 
+MUSIC_CLIPS = $(shell find assets/music/ -type f -name '*.wav')
+SOUND_CLIPS = $(shell find assets/sounds/ -type f -name '*.wav') #$(shell find assets/sounds -type f -name '*.aif') $(shell find assets/sounds_ins -type f -name '*.ins')
+
+ALL_SOUND_WAV = $(MUSIC_CLIPS) $(SOUND_CLIPS)
+
 
 OBJECTS =	$(CODESEGMENT) $(MODELSSEGMENT) $(DATAOBJECTS)
 
@@ -119,7 +124,7 @@ default: $(TARGETS)
 # $(MODEL_OBJS):
 # 	# empty rule for object files
 
-$(BUILDDIR)/src/%.o: src/%.c | $(BUILDDIR) $(HFILES)
+$(BUILDDIR)/src/%.o: src/%.c | $(BUILDDIR) $(HFILES) build/src/audio/clips.h
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -127,17 +132,16 @@ $(BUILDDIR)/assets/%.o: assets/%.c | $(BUILDDIR) $(HFILES)
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
-SOUND_CLIPS = $(shell find new_sound/ -type f -name '*.wav') #$(shell find assets/sounds -type f -name '*.aif') $(shell find assets/sounds_ins -type f -name '*.ins')
+
+
 SFZ2N64 = tools/sfz2n64
-build/assets/sound/sounds.sounds build/assets/sound/sounds.sounds.tbl: $(SOUND_CLIPS)
+build/assets/sounds/sounds.sounds build/assets/sounds/sounds.sounds.tbl: $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
 	$(SFZ2N64) --compress -o $@ $^
 
-# build/asm/sound_data.o: build/assets/sound/sounds.sounds build/assets/sound/sounds.sounds.tbl
-
-build/src/audio/clips.h: tools/generate_sound_ids.js $(SOUND_CLIPS)
+build/src/audio/clips.h: tools/generate_sound_ids.js $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
-	node tools/generate_sound_ids.js -o $@ -p SOUNDS_ $(SOUND_CLIPS)
+	node tools/generate_sound_ids.js -o $@ -p SOUNDS_ $(ALL_SOUND_WAV)
 
 build/src/stage00.o: build/src/audio/clips.h
 assets/levels/%_map.h: assets/levels/%.blend 
@@ -174,7 +178,7 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 # use -M to print memory map from ld
 	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 
-$(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT) build/assets/sound/sounds.sounds
+$(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT) build/assets/sounds/sounds.sounds
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 0 -e $(APP) -h $(ROMHEADER)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true
 	makemask $(TARGETS)
 #	$(EMULATOR) $(TARGETS)

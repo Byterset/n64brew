@@ -7,7 +7,7 @@
 // #include "malloc.h"
 #include "util/memory.h"
 #include "util/rom.h"
-#include <nualstl_n.h>
+// #include <nualstl_n.h>
 #include "util/time.h"
 #include <PR/os_convert.h>
 #ifdef ED64
@@ -15,7 +15,6 @@
 #endif
 #include "graphics/graphic.h"
 #include "mem_heap.h"
-// #include "aud_heap.h"
 #include "trace.h"
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
@@ -83,36 +82,16 @@ void systemHeapMemoryInit(void *heapend)
 	}
 }
 
-// int audioHeapMemoryInit(void) {
-//   // nuAuStlInit();
-
-//   // int initHeapResult;
-//     /* init audio heap as zeroed memory */
-//   // nuPiReadRom((u32)_audheapSegmentRomStart, _audheapSegmentStart,
-//   //             (u32)_audheapSegmentRomEnd - (u32)_audheapSegmentRomStart);
-
-//   u16* memoryEnd = (u16*)0x8038F800; //mem adress where the framebuffer starts
-
-//   /* init audio heap as zeroed memory */
-//   gAudioHeapBuffer = (u8*)memoryEnd - 327680;
-//   /* Reserve system heap memory */
-//   bzero(gAudioHeapBuffer, 327680);
-//   initAudio(60, NU_SC_AUDIO_PRI);
-
-//   // if (initHeapResult == -1) {
-//   //   die("failed to init heap\n");
-//   // } else {
-//   //   debugPrintfSync("init heap success, allocated=%d\n", AUD_HEAP_SIZE);
-//   // }
-//   // return 0;
-// }
-
 extern void *__printfunc;
+
 /*------------------------
 		Main
+Initialize the OS and start the idle thread
 --------------------------*/
 void mainproc(void *arg)
 {
+	osInitialize();
+	gPiHandle = osCartRomInit();
 #ifdef ED64
 	// start everdrive communication
 	evd_init();
@@ -126,9 +105,8 @@ void mainproc(void *arg)
 	// overwrite osSyncPrintf impl
 	__printfunc = (void *)ed64PrintFuncImpl;
 #endif
-	osInitialize();
-	gPiHandle = osCartRomInit();
 
+	//create the initial thread running the initProc. This will set up the memory and other game relevant threads
 	osCreateThread(
 		&initThread,
 		1,
@@ -136,51 +114,45 @@ void mainproc(void *arg)
 		arg,
 		(void *)(initThreadStack + (STACKSIZEBYTES / sizeof(u64))),
 		(OSPri)INIT_PRIORITY);
-
 	osStartThread(&initThread);
 
-	// DBGPRINT("hello\n");
+	// TODO: re-implement this in the appropriate place without using nusys
 
-	// DBGPRINT("systemHeapMemoryInit\n");
-	// systemHeapMemoryInit();
-
-	// /* The initialization of the controller manager  */
-	// contPattern = nuContInit();
-
-	// /* The initialization of audio */
-	// DBGPRINT("nuAuStlInit\n");
-
-	// // audioHeapMemoryInit();
-	// gAudioHeapSize = nuAuStlInit();
-	// // initAudio(60, NU_AU_MGR_THREAD_PRI, NU_AU_HEAP_ADDR);
-	// // soundPlayerInit();
-
-	// /* The initialization of graphic  */
-	// // nuGfxInit();
 	// DBGPRINT("gfxInit\n");
 	// gfxInit();
 
 	// /* The initialization for stage00()  */
 	// DBGPRINT("initStage00\n");
 	// initStage00();
+
+
 	// /* Register call-back  */
 	// DBGPRINT("nuGfxFuncSet\n");
 	// nuGfxFuncSet((NUGfxFunc)stage00);
+
+
 	// /* The screen display is ON */
 	// DBGPRINT("nuGfxDisplayOn\n");
 	// nuGfxDisplayOn();
-	// while (1)
-	//   ;
+
 }
 
+/*------------------------
+		Main
+Initialize the OS and start the idle thread
+--------------------------*/
 void initProc(void *arg)
 {
+	//Create Parallel Interface Manager
+	//http://n64devkit.square7.ch/n64man/os/osCreatePiManager.htm
 	osCreatePiManager(
 		(OSPri)OS_PRIORITY_PIMGR,
 		&PiMessageQ,
 		PiMessages,
 		DMA_QUEUE_SIZE);
 
+	//create and start game thread. This is the main thread that will handle graphics and gameplay
+	//at the start of the gameProc memory will be allocated and a seperate audio thread will be started
 	osCreateThread(
 		&gameThread,
 		6,
@@ -188,9 +160,10 @@ void initProc(void *arg)
 		0,
 		gameThreadStack + (STACKSIZEBYTES / sizeof(u64)),
 		(OSPri)GAME_PRIORITY);
-
 	osStartThread(&gameThread);
 
+	//set the priority of the init/idle thread to the lowest value so it only runs an empty loop
+	//if there is nothing else to do
 	osSetThreadPri(NULL, 0);
 	for (;;)
 		;
@@ -247,12 +220,12 @@ void gameProc(void *arg)
 	zeroMemory(gAudioHeapBuffer, AUDIO_HEAP_SIZE);
 	memoryEnd = (u16 *)gAudioHeapBuffer;
 	heapInit(_memheapSegmentStart, memoryEnd);
-	//systemHeapMemoryInit(memoryEnd);
 	romInit();
 
 	initAudio(framerate);
 	soundPlayerInit();
-	soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 0.5f, NULL);
+	soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 1.0f, NULL);
+	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 	while (1)
 	{
 		OSScMsg *msg = NULL;
@@ -299,6 +272,8 @@ void gameProc(void *arg)
 	// memoryEnd -= materialChunkSize / sizeof(u16);
 }
 
+
+//TODO: rewrite this in non-nusys way
 /*-----------------------------------------------------------------------------
   The call-back function
 

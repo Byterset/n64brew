@@ -26,7 +26,8 @@ void initAudio(int framerate)
     c.outputRate = 0;                  /* audio mgr will fill this in */
     c.heap       = &gAudioHeap;
     
-    amc.outputRate = 44100;
+    // amc.outputRate = 44100;
+    amc.outputRate = 22050;
     amc.framesPerField = NUM_FIELDS;
     amc.maxACMDSize = MAX_RSP_CMDS;
  

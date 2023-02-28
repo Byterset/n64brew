@@ -11,7 +11,6 @@
 #endif
 #include "graphics/graphic.h"
 #include "mem_heap.h"
-// #include "aud_heap.h"
 #include "trace.h"
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
@@ -31,8 +30,8 @@ u8 contPattern;         /* The pattern connected to the controller  */
 
 extern char mem_heap[MEM_HEAP_SIZE];
 s32 gAudioHeapSize;
-// extern char aud_heap[AUD_HEAP_SIZE];
 
+extern void* __printfunc;
 
 EXTERN_SEGMENT_WITH_BSS(memheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
@@ -92,9 +91,6 @@ int systemHeapMemoryInit(void) {
 //   // return 0;
 // }
 
-
-
-extern void* __printfunc;
 /*------------------------
         Main
 --------------------------*/

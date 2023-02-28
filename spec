@@ -88,43 +88,16 @@ endseg
 beginseg
   name "sounds"
   flags RAW
-  include "build/assets/sound/sounds.sounds"
+  include "build/assets/sounds/sounds.sounds"
 endseg
 
 /* sounds table */
 beginseg
   name "soundsTbl"
   flags RAW
-  include "build/assets/sound/sounds.sounds.tbl"
+  include "build/assets/sounds/sounds.sounds.tbl"
 endseg
 
-/* sample data - pointer bank */
-beginseg
-  name "pbank"
-  flags RAW
-  include "assets/sounds/b1n12ft.ptr"
-endseg
-
-/* sample data - wave bank */
-beginseg
-  name "wbank"
-  flags RAW
-  include "assets/sounds/b1n12ft.wbk"
-endseg
- 
-/* sfx data */
-beginseg
-  name "sfx"
-  flags RAW
-  include "assets/sounds/b1n12ft.bfx"
-endseg
- 
-/* song data */
-beginseg
-  name "song"
-  flags RAW
-  include "assets/sounds/b1n12ft.bin"
-endseg
 
 beginseg
   name  "trace"
@@ -143,9 +116,5 @@ beginwave
   include "memheap"
   include "sounds"
   include "soundsTbl"
-  include "pbank"
-  include "wbank"
-  include "sfx"
-  include "song"
   include "trace"
 endwave
