@@ -25,22 +25,9 @@
 #define degToRad(angleInDegrees) ((angleInDegrees)*CONST_PI / 180.0)
 #define radToDeg(angleInRadians) ((angleInRadians)*180.0 / CONST_PI)
 
-// TODO: switch based on region
-#if HIGH_RESOLUTION
-#if HIGH_RESOLUTION_HALF_Y
-#define VSYNC_FPS 30
-#define FRAME_SKIP 2
-#else
-
-#define VSYNC_FPS 30
-#define FRAME_SKIP 2
-// #define VSYNC_FPS 15
-// #define FRAME_SKIP 4
-#endif
-#else  // low resolution
 #define VSYNC_FPS 60
 #define FRAME_SKIP 1
-#endif
+
 
 // dumb
 #ifdef __N64__
@@ -69,8 +56,6 @@
 #include "compat.h"
 #define CUR_TIME_MS() getElapsedTimeMS()
 #endif
-
-#define MEM_HEAP_BYTES 524288
 
 #ifndef TRUE
 #define TRUE 1

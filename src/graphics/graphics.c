@@ -3,9 +3,10 @@
 #include "../util/memory.h"
 
 #include "../controls/controller.h"
-
+#include "../audio/soundplayer.h"
+#include "../../build/src/audio/clips.h"
 struct GraphicsTask gGraphicsTasks[2];
-
+Dynamic gfx_dynamic[2];
 extern OSMesgQueue gfxFrameMsgQ;
 extern OSMesgQueue *schedulerCommandQueue;
 
@@ -55,14 +56,14 @@ u16 *graphicsLayoutScreenBuffers(u16 *memoryEnd)
 
 #define CLEAR_COLOR GPACK_RGBA5551(0x32, 0x5D, 0x79, 1)
 
-void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void *data)
+void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void* data)
 {
     struct RenderState *renderState = &targetTask->renderState;
 
     renderStateInit(renderState, targetTask->framebuffer, zbuffer);
     gSPSegment(renderState->dl++, 0, 0);
-    gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
-    gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
+    // gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
+    // gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
 
     gSPDisplayList(renderState->dl++, setup_rspstate);
     if (firsttime)
@@ -72,6 +73,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
     }
     gSPDisplayList(renderState->dl++, setup_rdpstate);
 
+    //clear the zbuffer
     gDPSetDepthImage(renderState->dl++, osVirtualToPhysical(zbuffer));
     gDPPipeSync(renderState->dl++);
     gDPSetCycleType(renderState->dl++, G_CYC_FILL);
@@ -96,7 +98,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
         callback(data, renderState, targetTask);
     }
 
-    gDPPipeSync(renderState->dl++);
+    // gDPPipeSync(renderState->dl++);
     gDPFullSync(renderState->dl++);
     gSPEndDisplayList(renderState->dl++);
 
@@ -151,4 +153,5 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 #endif // WITH_GFX_VALIDATOR
 
     osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
+    soundPlayerPlay(SOUNDS_HONK_5, 5.0f, 0.7f, NULL);
 }

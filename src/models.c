@@ -1,4 +1,4 @@
-#include <nusys.h>
+#include <ultra64.h>
 
 #include "models.h"
 

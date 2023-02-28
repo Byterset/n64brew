@@ -75,9 +75,9 @@ void Character_toString(Character* self, char* buffer) {
 #endif
 
 void Character_printStateTransition(Character* self, CharacterState nextState) {
-  debugPrintf("%s: %s -> %s\n", ModelTypeStrings[self->obj->modelType],
-              CharacterStateStrings[self->state],
-              CharacterStateStrings[nextState]);
+  // debugPrintf("%s: %s -> %s\n", ModelTypeStrings[self->obj->modelType],
+  //             CharacterStateStrings[self->state],
+  //             CharacterStateStrings[nextState]);
 }
 
 void Character_init(Character* self,
@@ -350,10 +350,10 @@ void Character_goToTarget(Character* self,
       self->pathProgress = 0;
       self->pathSegmentProgress = 0;
     } else {
-      debugPrintf("character: pathfinding failed\n");
+      // debugPrintf("character: pathfinding failed\n");
     }
 
-    Trace_addEvent(PathfindingTraceEvent, profStartPathfinding, CUR_TIME_MS());
+    // Trace_addEvent(PathfindingTraceEvent, profStartPathfinding, CUR_TIME_MS());
   }
 
   if (!self->pathfindingResult) {
@@ -709,8 +709,8 @@ void Character_updateSeekingItemState(Character* self, Game* game) {
 
     if (!Character_canSeeItem(self, self->targetItem, game)) {
 #ifndef DEBUG_CHARACTER
-      debugPrintf(
-          "can't see the item anymore, looking in last seen location\n");
+      // debugPrintf(
+      //     "can't see the item anymore, looking in last seen location\n");
 #endif
       Character_transitionToState(self, SeekingLastSeenState);
       return;
@@ -728,7 +728,7 @@ void Character_updateSeekingItemState(Character* self, Game* game) {
              : CHARACTER_NEAR_OBJ_PICKUP_DIST)) {
       if (Character_isSomeoneElseIsHoldingItem(self)) {
 #ifndef DEBUG_CHARACTER
-        debugPrintf("stealing item back\n");
+        // debugPrintf("stealing item back\n");
 #endif
       }
       Item_take(self->targetItem, &self->itemHolder);
@@ -756,7 +756,7 @@ void Character_updateSeekingTargetState(Character* self, Game* game) {
                                    CHARACTER_NEAR_TARGET_DIST)) {
     // maybe we should check line of sight too
 #ifndef DEBUG_CHARACTER
-    debugPrintf("close enough to target, giving up\n");
+    // debugPrintf("close enough to target, giving up\n");
 #endif
 
     self->targetType = NoneCharacterTarget;
@@ -765,7 +765,7 @@ void Character_updateSeekingTargetState(Character* self, Game* game) {
   } else if (self->targetType == HonkCharacterTarget) {
     if (Character_canSeePlayer(self, game)) {
 #ifndef DEBUG_CHARACTER
-      debugPrintf("can see player that honked, giving up\n");
+      // debugPrintf("can see player that honked, giving up\n");
 #endif
       self->targetType = NoneCharacterTarget;
       Character_transitionToState(self, IdleState);
