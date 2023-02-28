@@ -203,11 +203,13 @@ void gameProc(void *arg)
 	initStage00();
 	double lastHonkTime = 0;
 	/* MAIN GAME LOOP */
-	// soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
+
 	while (1)
 	{
+		////THIS WORKS IF GAME UPDATE IS OFF
 		// double currTime = CUR_TIME_MS();
-		// if(currTime - lastHonkTime > 1000){
+		// if (currTime - lastHonkTime > 2000)
+		// {
 		// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 		// 	lastHonkTime = currTime;
 		// }
@@ -240,7 +242,7 @@ void gameProc(void *arg)
 			controllersTriggerRead();
 
 			soundPlayerUpdate();
-			updateGame00();
+			// updateGame00();
 			
 			timeUpdateDelta();
 
@@ -255,14 +257,9 @@ void gameProc(void *arg)
 			controllersUpdate();
 			break;
 		default:
-			// double currTime = CUR_TIME_MS();
-			// if (currTime - lastHonkTime > 1000)
-			// {
-			// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 0.2f, NULL);
-			// 	lastHonkTime = currTime;
-			// }
+
 			
-			// break;
+			break;
 		}
 		
 	}
