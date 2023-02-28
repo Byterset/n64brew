@@ -1,19 +1,18 @@
 #include <ultra64.h>
 #include <sched.h>
 #include "defs.h"
-
-// this must come after nusys.h
 #include "main.h"
-// #include "malloc.h"
+
 #include "util/memory.h"
 #include "util/rom.h"
-// #include <nualstl_n.h>
 #include "util/time.h"
-#include <PR/os_convert.h>
+
+#include "graphics/graphics.h"
+#include "game.h"
 #ifdef ED64
 #include "ed64/ed64io.h"
 #endif
-#include "graphics/graphic.h"
+// #include "graphics/graphic.h"
 #include "mem_heap.h"
 #include "trace.h"
 #include "audio/audio.h"
@@ -62,25 +61,26 @@ void gameProc(void *arg);
 EXTERN_SEGMENT_WITH_BSS(memheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
 
-void systemHeapMemoryInit(void *heapend)
-{
-	int initHeapResult;
-	romCopy(_memheapSegmentRomStart, _memheapSegmentStart, (u32)_memheapSegmentRomEnd - (u32)_memheapSegmentRomStart);
-	heapInit(_memheapSegmentBssStart, _memheapSegmentBssEnd);
 
-	if (osGetMemSize() == 0x00800000)
-	{
-		debugPrintfSync("have expansion pack\n");
-		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
-		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
+// void systemHeapMemoryInit(void *heapend)
+// {
+// 	int initHeapResult;
+// 	romCopy(_memheapSegmentRomStart, _memheapSegmentStart, (u32)_memheapSegmentRomEnd - (u32)_memheapSegmentRomStart);
+// 	heapInit(_memheapSegmentBssStart, _memheapSegmentBssEnd);
 
-		debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
-	}
-	else
-	{
-		die("expansion pack missing\n");
-	}
-}
+// 	if (osGetMemSize() == 0x00800000)
+// 	{
+// 		debugPrintfSync("have expansion pack\n");
+// 		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
+// 		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
+
+// 		debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
+// 	}
+// 	else
+// 	{
+// 		die("expansion pack missing\n");
+// 	}
+// }
 
 extern void *__printfunc;
 
@@ -106,7 +106,7 @@ void mainproc(void *arg)
 	__printfunc = (void *)ed64PrintFuncImpl;
 #endif
 
-	//create the initial thread running the initProc. This will set up the memory and other game relevant threads
+	// create the initial thread running the initProc. This will set up the memory and other game relevant threads
 	osCreateThread(
 		&initThread,
 		1,
@@ -125,16 +125,13 @@ void mainproc(void *arg)
 	// DBGPRINT("initStage00\n");
 	// initStage00();
 
-
 	// /* Register call-back  */
 	// DBGPRINT("nuGfxFuncSet\n");
 	// nuGfxFuncSet((NUGfxFunc)stage00);
 
-
 	// /* The screen display is ON */
 	// DBGPRINT("nuGfxDisplayOn\n");
 	// nuGfxDisplayOn();
-
 }
 
 /*------------------------
@@ -143,16 +140,16 @@ Initialize the OS and start the idle thread
 --------------------------*/
 void initProc(void *arg)
 {
-	//Create Parallel Interface Manager
-	//http://n64devkit.square7.ch/n64man/os/osCreatePiManager.htm
+	// Create Parallel Interface Manager
+	// http://n64devkit.square7.ch/n64man/os/osCreatePiManager.htm
 	osCreatePiManager(
 		(OSPri)OS_PRIORITY_PIMGR,
 		&PiMessageQ,
 		PiMessages,
 		DMA_QUEUE_SIZE);
 
-	//create and start game thread. This is the main thread that will handle graphics and gameplay
-	//at the start of the gameProc memory will be allocated and a seperate audio thread will be started
+	// create and start game thread. This is the main thread that will handle graphics and gameplay
+	// at the start of the gameProc memory will be allocated and a seperate audio thread will be started
 	osCreateThread(
 		&gameThread,
 		6,
@@ -162,8 +159,8 @@ void initProc(void *arg)
 		(OSPri)GAME_PRIORITY);
 	osStartThread(&gameThread);
 
-	//set the priority of the init/idle thread to the lowest value so it only runs an empty loop
-	//if there is nothing else to do
+	// set the priority of the init/idle thread to the lowest value so it only runs an empty loop
+	// if there is nothing else to do
 	osSetThreadPri(NULL, 0);
 	for (;;)
 		;
@@ -172,6 +169,10 @@ void initProc(void *arg)
 extern OSMesgQueue dmaMessageQ;
 
 extern char _memheapSegmentRomStart[];
+void stage00Render(struct Game *game, struct RenderState *renderState, struct GraphicsTask *task){
+	makeDL00(renderState);
+}
+
 
 void gameProc(void *arg)
 {
@@ -225,7 +226,9 @@ void gameProc(void *arg)
 	initAudio(framerate);
 	soundPlayerInit();
 	soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 1.0f, NULL);
-	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
+	initStage00();
+
+	/* MAIN GAME LOOP */
 	while (1)
 	{
 		OSScMsg *msg = NULL;
@@ -243,7 +246,7 @@ void gameProc(void *arg)
 
 			if (pendingGFX < 2 && !renderSkip)
 			{
-				//graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], (GraphicsCallback)sceneRender, &gScene);
+				graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], stage00Render, Game_get());
 				drawBufferIndex = drawBufferIndex ^ 1;
 				++pendingGFX;
 			}
@@ -252,7 +255,7 @@ void gameProc(void *arg)
 				--renderSkip;
 			}
 			soundPlayerUpdate();
-
+			updateGame00();
 			timeUpdateDelta();
 			break;
 		case (OS_SC_DONE_MSG):
@@ -272,8 +275,12 @@ void gameProc(void *arg)
 	// memoryEnd -= materialChunkSize / sizeof(u16);
 }
 
+// void stage00Render(struct Scene* scene, struct RenderState* renderState, struct GraphicsTask* task) {
 
-//TODO: rewrite this in non-nusys way
+// }
+
+
+// TODO: rewrite this in non-nusys way
 /*-----------------------------------------------------------------------------
   The call-back function
 
@@ -283,34 +290,34 @@ void gameProc(void *arg)
 -----------------------------------------------------------------------------*/
 void stage00(int pendingGfx)
 {
-	float skippedGfxTime, profStartUpdate, profStartFrame, profEndFrame;
-	profStartFrame = CUR_TIME_MS();
-	/* Provide the display process if n or less RCP tasks are processing or
-		  waiting for the process.  */
-	if (nuScRetraceCounter % FRAME_SKIP == 0)
-	{
-		if (pendingGfx < GFX_TASKS_PER_MAKEDL * 2)
-		{
-			makeDL00();
-			Trace_addEvent(MainMakeDisplayListTraceEvent, profStartFrame,
-						   CUR_TIME_MS());
-		}
-		else
-		{
-			skippedGfxTime = CUR_TIME_MS();
-			Trace_addEvent(SkippedGfxTaskTraceEvent, skippedGfxTime,
-						   skippedGfxTime + 16.0f);
-			// debugPrintfSync("dropped frame %d\n", nuScRetraceCounter / FRAME_SKIP);
-		}
-	}
+	// float skippedGfxTime, profStartUpdate, profStartFrame, profEndFrame;
+	// profStartFrame = CUR_TIME_MS();
+	// /* Provide the display process if n or less RCP tasks are processing or
+	// 	  waiting for the process.  */
+	// if (nuScRetraceCounter % FRAME_SKIP == 0)
+	// {
+	// 	if (pendingGfx < 2 * 2)
+	// 	{
+	// 		makeDL00();
+	// 		Trace_addEvent(MainMakeDisplayListTraceEvent, profStartFrame,
+	// 					   CUR_TIME_MS());
+	// 	}
+	// 	else
+	// 	{
+	// 		skippedGfxTime = CUR_TIME_MS();
+	// 		Trace_addEvent(SkippedGfxTaskTraceEvent, skippedGfxTime,
+	// 					   skippedGfxTime + 16.0f);
+	// 		// debugPrintfSync("dropped frame %d\n", nuScRetraceCounter / FRAME_SKIP);
+	// 	}
+	// }
 
-	profStartUpdate = CUR_TIME_MS();
-	/* The process of game progress  */
-	updateGame00();
-	// soundPlayerUpdate();
-	profEndFrame = CUR_TIME_MS();
-	Trace_addEvent(MainCPUTraceEvent, profStartFrame, profEndFrame);
-	Trace_addEvent(MainUpdateTraceEvent, profStartUpdate, profEndFrame);
-	profilingAccumulated[MainCPUTraceEvent] += profEndFrame - profStartFrame;
-	profilingCounts[MainCPUTraceEvent]++;
+	// profStartUpdate = CUR_TIME_MS();
+	// /* The process of game progress  */
+	// updateGame00();
+	// // soundPlayerUpdate();
+	// profEndFrame = CUR_TIME_MS();
+	// Trace_addEvent(MainCPUTraceEvent, profStartFrame, profEndFrame);
+	// Trace_addEvent(MainUpdateTraceEvent, profStartUpdate, profEndFrame);
+	// profilingAccumulated[MainCPUTraceEvent] += profEndFrame - profStartFrame;
+	// profilingCounts[MainCPUTraceEvent]++;
 }
