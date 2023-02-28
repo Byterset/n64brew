@@ -58,7 +58,8 @@ void controllersInit(void)
 
 void controllersUpdate(void)
 {
-    for (unsigned i = 0; i < MAX_PLAYERS; ++i) {
+    unsigned i;
+    for (i = 0; i < MAX_PLAYERS; ++i) {
         gControllerLastDirection[i] = controllerGetDirection(i);
         gControllerLastButton[i] = gControllerData[i].button;
     }
@@ -71,7 +72,7 @@ void controllersUpdate(void)
         zeroMemory(gControllerData, sizeof(gControllerData));
     }
 
-    for (unsigned i = 0; i < MAX_PLAYERS; ++i) {
+    for (i = 0; i < MAX_PLAYERS; ++i) {
         if (gControllerStatus[i].errno & CONT_NO_RESPONSE_ERROR) {
             zeroMemory(&gControllerData[i], sizeof(OSContPad));
         }

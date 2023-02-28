@@ -2,7 +2,7 @@
 #include <sched.h>
 #include "defs.h"
 #include "main.h"
-
+#include "controls/controller.h"
 #include "util/memory.h"
 #include "util/rom.h"
 #include "util/time.h"
@@ -12,7 +12,6 @@
 #ifdef ED64
 #include "ed64/ed64io.h"
 #endif
-// #include "graphics/graphic.h"
 #include "mem_heap.h"
 #include "trace.h"
 #include "audio/audio.h"
@@ -28,8 +27,8 @@
 #endif
 
 /* The global variable  */
-NUContData contdata[1]; /* Read data of 1 controller  */
-u8 contPattern;			/* The pattern connected to the controller  */
+// NUContData contdata[1]; /* Read data of 1 controller  */
+u8 contPattern; /* The pattern connected to the controller  */
 
 OSPiHandle *gPiHandle;
 static OSMesg PiMessages[DMA_QUEUE_SIZE];
@@ -61,26 +60,22 @@ void gameProc(void *arg);
 EXTERN_SEGMENT_WITH_BSS(memheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
 
+void traceInit(void)
+{
 
-// void systemHeapMemoryInit(void *heapend)
-// {
-// 	int initHeapResult;
-// 	romCopy(_memheapSegmentRomStart, _memheapSegmentStart, (u32)_memheapSegmentRomEnd - (u32)_memheapSegmentRomStart);
-// 	heapInit(_memheapSegmentBssStart, _memheapSegmentBssEnd);
+	if (osGetMemSize() == 0x00800000)
+	{
+		// debugPrintfSync("have expansion pack\n");
+		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
+		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
 
-// 	if (osGetMemSize() == 0x00800000)
-// 	{
-// 		debugPrintfSync("have expansion pack\n");
-// 		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
-// 		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
-
-// 		debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
-// 	}
-// 	else
-// 	{
-// 		die("expansion pack missing\n");
-// 	}
-// }
+		// debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
+	}
+	else
+	{
+		die("expansion pack missing\n");
+	}
+}
 
 extern void *__printfunc;
 
@@ -115,23 +110,6 @@ void mainproc(void *arg)
 		(void *)(initThreadStack + (STACKSIZEBYTES / sizeof(u64))),
 		(OSPri)INIT_PRIORITY);
 	osStartThread(&initThread);
-
-	// TODO: re-implement this in the appropriate place without using nusys
-
-	// DBGPRINT("gfxInit\n");
-	// gfxInit();
-
-	// /* The initialization for stage00()  */
-	// DBGPRINT("initStage00\n");
-	// initStage00();
-
-	// /* Register call-back  */
-	// DBGPRINT("nuGfxFuncSet\n");
-	// nuGfxFuncSet((NUGfxFunc)stage00);
-
-	// /* The screen display is ON */
-	// DBGPRINT("nuGfxDisplayOn\n");
-	// nuGfxDisplayOn();
 }
 
 /*------------------------
@@ -169,10 +147,6 @@ void initProc(void *arg)
 extern OSMesgQueue dmaMessageQ;
 
 extern char _memheapSegmentRomStart[];
-void stage00Render(struct Game *game, struct RenderState *renderState, struct GraphicsTask *task){
-	makeDL00(renderState);
-}
-
 
 void gameProc(void *arg)
 {
@@ -223,14 +197,20 @@ void gameProc(void *arg)
 	heapInit(_memheapSegmentStart, memoryEnd);
 	romInit();
 
+	controllersInit();
 	initAudio(framerate);
 	soundPlayerInit();
-	soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 1.0f, NULL);
 	initStage00();
-
+	double lastHonkTime = 0;
 	/* MAIN GAME LOOP */
+	// soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 	while (1)
 	{
+		// double currTime = CUR_TIME_MS();
+		// if(currTime - lastHonkTime > 1000){
+		// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
+		// 	lastHonkTime = currTime;
+		// }
 		OSScMsg *msg = NULL;
 		osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&msg, OS_MESG_BLOCK);
 		switch (msg->type)
@@ -246,7 +226,9 @@ void gameProc(void *arg)
 
 			if (pendingGFX < 2 && !renderSkip)
 			{
-				graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], stage00Render, Game_get());
+				
+				graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], (GraphicsCallback)stage00Render, &drawBufferIndex);
+				//graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], NULL, NULL);
 				drawBufferIndex = drawBufferIndex ^ 1;
 				++pendingGFX;
 			}
@@ -254,9 +236,14 @@ void gameProc(void *arg)
 			{
 				--renderSkip;
 			}
+
+			controllersTriggerRead();
+
 			soundPlayerUpdate();
 			updateGame00();
+			
 			timeUpdateDelta();
+
 			break;
 		case (OS_SC_DONE_MSG):
 			--pendingGFX;
@@ -265,59 +252,22 @@ void gameProc(void *arg)
 			pendingGFX += 2;
 			break;
 		case SIMPLE_CONTROLLER_MSG:
-			// controllersUpdate();
+			controllersUpdate();
 			break;
+		default:
+			// double currTime = CUR_TIME_MS();
+			// if (currTime - lastHonkTime > 1000)
+			// {
+			// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 0.2f, NULL);
+			// 	lastHonkTime = currTime;
+			// }
+			
+			// break;
 		}
+		
 	}
 
 	// int materialChunkSize = _material_dataSegmentRomEnd - _material_dataSegmentRomStart;
 
 	// memoryEnd -= materialChunkSize / sizeof(u16);
-}
-
-// void stage00Render(struct Scene* scene, struct RenderState* renderState, struct GraphicsTask* task) {
-
-// }
-
-
-// TODO: rewrite this in non-nusys way
-/*-----------------------------------------------------------------------------
-  The call-back function
-
-  pendingGfx which is passed from Nusystem as the argument of the call-back
-  function is the total of RCP tasks that are currently processing and
-  waiting for the process.
------------------------------------------------------------------------------*/
-void stage00(int pendingGfx)
-{
-	// float skippedGfxTime, profStartUpdate, profStartFrame, profEndFrame;
-	// profStartFrame = CUR_TIME_MS();
-	// /* Provide the display process if n or less RCP tasks are processing or
-	// 	  waiting for the process.  */
-	// if (nuScRetraceCounter % FRAME_SKIP == 0)
-	// {
-	// 	if (pendingGfx < 2 * 2)
-	// 	{
-	// 		makeDL00();
-	// 		Trace_addEvent(MainMakeDisplayListTraceEvent, profStartFrame,
-	// 					   CUR_TIME_MS());
-	// 	}
-	// 	else
-	// 	{
-	// 		skippedGfxTime = CUR_TIME_MS();
-	// 		Trace_addEvent(SkippedGfxTaskTraceEvent, skippedGfxTime,
-	// 					   skippedGfxTime + 16.0f);
-	// 		// debugPrintfSync("dropped frame %d\n", nuScRetraceCounter / FRAME_SKIP);
-	// 	}
-	// }
-
-	// profStartUpdate = CUR_TIME_MS();
-	// /* The process of game progress  */
-	// updateGame00();
-	// // soundPlayerUpdate();
-	// profEndFrame = CUR_TIME_MS();
-	// Trace_addEvent(MainCPUTraceEvent, profStartFrame, profEndFrame);
-	// Trace_addEvent(MainUpdateTraceEvent, profStartUpdate, profEndFrame);
-	// profilingAccumulated[MainCPUTraceEvent] += profEndFrame - profStartFrame;
-	// profilingCounts[MainCPUTraceEvent]++;
 }
