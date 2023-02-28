@@ -21,34 +21,13 @@ Gfx* glistp;
 u32 gfx_gtask_no = 0;
 OSViMode viMode;
 
-struct GraphicsTask gGraphicsTasks[2];
 
 extern OSMesgQueue  gfxFrameMsgQ;
 extern OSMesgQueue	*schedulerCommandQueue;
 
 #define RDP_OUTPUT_SIZE 0x4000
 
-u64* rdpOutput;
-u64 __attribute__((aligned(16))) dram_stack[SP_DRAM_STACK_SIZE64 + 1];
-u64 __attribute__((aligned(16))) gfxYieldBuf2[OS_YIELD_DATA_SIZE/sizeof(u64)];
-u32 firsttime = 1;
 
-u16 __attribute__((aligned(64))) zbuffer[SCREEN_HT * SCREEN_WD];
-
-
-u16* graphicsLayoutScreenBuffers(u16* memoryEnd) {
-    gGraphicsTasks[0].framebuffer = memoryEnd - SCREEN_WD * SCREEN_HT;
-    gGraphicsTasks[0].taskIndex = 0;
-    gGraphicsTasks[0].msg.type = OS_SC_DONE_MSG;
-
-    gGraphicsTasks[1].framebuffer = gGraphicsTasks[0].framebuffer - SCREEN_WD * SCREEN_HT;
-    gGraphicsTasks[1].taskIndex = 1;
-    gGraphicsTasks[1].msg.type = OS_SC_DONE_MSG;
-
-    rdpOutput = (u64*)(gGraphicsTasks[1].framebuffer - RDP_OUTPUT_SIZE  / sizeof(u16));
-    zeroMemory(rdpOutput, RDP_OUTPUT_SIZE);
-    return (u16*)rdpOutput;
-}
 
 /*----------------------------------------------------------------------------
   gfxRCPIinit
@@ -115,9 +94,9 @@ static u16* FrameBuf[FRAME_BUFFERS] = {(u16*)CFB0_ADDR, (u16*)CFB1_ADDR,
 static Gfx rdpstateinit_dl[] = {
 
     /* set all of the attribute registers to zero */
-    gsDPSetEnvColor(0, 0, 0, 0),
+    gsDPSetEnvColor(255, 0, 0, 255),
     gsDPSetPrimColor(0, 0, 0, 0, 0, 0),
-    gsDPSetBlendColor(0, 0, 0, 0),
+    gsDPSetBlendColor(255, 0, 0, 255),
     gsDPSetFogColor(0, 0, 0, 0),
     gsDPSetFillColor(0),
     gsDPSetPrimDepth(0, 0),

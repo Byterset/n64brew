@@ -121,20 +121,4 @@ extern Gfx setup_rspstate[];
 
 
 
-/*----------------------------new graphic system*-------------------------------------*/
-struct GraphicsTask {
-    struct RenderState renderState;
-    OSScTask task;
-    OSScMsg msg;
-    u16 *framebuffer;
-    u16 taskIndex;
-};
-#define GET_GFX_TYPE(gfx)       (_SHIFTR((gfx)->words.w0, 24, 8))
-extern struct GraphicsTask gGraphicsTasks[2];
-typedef void (*GraphicsCallback)(void* data, struct RenderState* renderState, struct GraphicsTask* task);
-
-u16* graphicsLayoutScreenBuffers(u16* memoryEnd);
-void graphicsCreateTask(struct GraphicsTask* targetTask, GraphicsCallback callback, void* data);
-
-
 #endif /* _GRAPHIC_H_ */

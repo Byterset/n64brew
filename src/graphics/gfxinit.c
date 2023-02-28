@@ -27,22 +27,4 @@ Lights1 default_sun_light = gdSPDefLights1(120,
                                            80,
                                            0);
 
-// The display list for the initialization of graphic tasks
-// The initialization of RDP (per frame)
-Gfx setup_rdpstate[] = {
-    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsDPSetScissor(G_SC_NON_INTERLACE, 0, 0, SCREEN_WD, SCREEN_HT),
-    gsDPSetColorDither(G_CD_BAYER),
-    gsSPEndDisplayList(),
-};
 
-// The initialization of RSP (per frame)
-Gfx setup_rspstate[] = {
-    gsSPViewport(&vp),
-    gsSPClearGeometryMode(0xFFFFFFFF),
-    gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK),
-    gsSPSetLights1(default_sun_light),
-    gsSPTexture(0, 0, 0, 0, G_OFF),
-    gsSPEndDisplayList(),
-};

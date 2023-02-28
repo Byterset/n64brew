@@ -10,9 +10,9 @@
 #include "../build/src/audio/clips.h"
 #include <nualstl_n.h>
 
-#include <malloc.h>
+// #include <malloc.h>
 #include <math.h>
-
+#include "util/rom.h"
 // game
 #include "animation/animation.h"
 #include "constants.h"
@@ -156,14 +156,17 @@ void initStage00() {
   int i;
 
   // load in the models segment into higher memory
-  Rom2Ram(_modelsSegmentRomStart, _modelsSegmentStart,
-          _modelsSegmentRomEnd - _modelsSegmentRomStart);
+  romCopy(_modelsSegmentRomStart, _modelsSegmentStart, (_modelsSegmentRomEnd - _modelsSegmentRomStart));
+  // Rom2Ram(_modelsSegmentRomStart, _modelsSegmentStart,
+  //         _modelsSegmentRomEnd - _modelsSegmentRomStart);
   // load in the sprites segment into higher memory
-  Rom2Ram(_spritesSegmentRomStart, _spritesSegmentStart,
-          _spritesSegmentRomEnd - _spritesSegmentRomStart);
+  romCopy(_spritesSegmentRomStart, _spritesSegmentStart, (_spritesSegmentRomEnd - _spritesSegmentRomStart));
+  // Rom2Ram(_spritesSegmentRomStart, _spritesSegmentStart,
+  //         _spritesSegmentRomEnd - _spritesSegmentRomStart);
   // load in the collision segment into higher memory
-  Rom2Ram(_collisionSegmentRomStart, _collisionSegmentStart,
-          _collisionSegmentRomEnd - _collisionSegmentRomStart);
+  romCopy(_collisionSegmentRomStart, _collisionSegmentStart, (_collisionSegmentRomEnd - _collisionSegmentRomStart));
+  // Rom2Ram(_collisionSegmentRomStart, _collisionSegmentStart,
+  //         _collisionSegmentRomEnd - _collisionSegmentRomStart);
 
   /* Read and register the sample bank. */
   // nuAuStlPtrBankInit(PBANK_END - PBANK_START);
@@ -287,7 +290,7 @@ void traceRCP() {
 #endif
 
 /* Make the display list and activate the task */
-void makeDL00() {
+void makeDL00(struct RenderState *renderState) {
   Game* game;
   Dynamic* dynamicp;
   int consoleOffset;

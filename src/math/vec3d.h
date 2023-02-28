@@ -8,7 +8,6 @@ typedef struct Vec3d {
   float z;
 } Vec3d;
 
-Vec3d* Vec3d_alloc(float x, float y, float z);
 void Vec3d_set(Vec3d* self, float x, float y, float z);
 Vec3d* Vec3d_init(Vec3d* self, float x, float y, float z);
 Vec3d* Vec3d_origin(Vec3d* self);
