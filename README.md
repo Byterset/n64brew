@@ -9,13 +9,13 @@ This ist based off of https://github.com/jsdf/goose64. This aims to transform th
 - makefile was redone
 - various python scripts and tools have been adapted
 - completely overhauled the structure of the project to scale better
+- changed audio player to support wav, aiff & ins (done by migrating to the existing solution by the amazing https://github.com/lambertjamesd/)
 
 ## todos
 
-- optimize collision solver (current solution is a bit wonky)
-- change audio player to support wav (this will probably be done by migrating to the existing solution by the amazing https://github.com/lambertjamesd/)
+- optimize collision solver (right now there is some funky behaviour with the collision solver)
 - change skeletal animation to work for generalized meshes
-- switch from obj to fbx
+- switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)
 
 
 ## build for emulator/console
