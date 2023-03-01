@@ -206,13 +206,7 @@ void gameProc(void *arg)
 
 	while (1)
 	{
-		////THIS WORKS IF GAME UPDATE IS OFF
-		// double currTime = CUR_TIME_MS();
-		// if (currTime - lastHonkTime > 2000)
-		// {
-		// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
-		// 	lastHonkTime = currTime;
-		// }
+
 		OSScMsg *msg = NULL;
 		osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&msg, OS_MESG_BLOCK);
 		switch (msg->type)
@@ -242,7 +236,14 @@ void gameProc(void *arg)
 			controllersTriggerRead();
 
 			soundPlayerUpdate();
-			// updateGame00();
+			////THIS WORKS IF GAME UPDATE IS OFF
+			// double currTime = CUR_TIME_MS();
+			// if (currTime - lastHonkTime > 2000)
+			// {
+			// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
+			// 	lastHonkTime = currTime;
+			// }
+			updateGame00();
 			
 			timeUpdateDelta();
 
