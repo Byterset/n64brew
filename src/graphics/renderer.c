@@ -10,10 +10,8 @@
 #include <assert.h>
 
 #include <stdlib.h>
-#ifdef __N64__
-#include <malloc.h>
-#endif
 
+#include "../util/memory.h"
 #include "../ed64/ed64io_usb.h"
 #include "../math/frustum.h"
 #include "../game.h"

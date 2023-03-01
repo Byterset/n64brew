@@ -4,7 +4,6 @@
 #include "game.h"
 #include "gameutils.h"
 #include "gooseanimtypes.h"
-#include "input.h"
 #include "item.h"
 #include "player.h"
 

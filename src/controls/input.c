@@ -1,6 +1,5 @@
 #include "input.h"
-#include "constants.h"
-#include "math/vec2d.h"
+#include "../constants.h"
 
 void Input_init(Input* self) {
   Vec2d_origin(&self->direction);

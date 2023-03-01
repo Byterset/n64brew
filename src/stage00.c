@@ -8,7 +8,6 @@
 
 #include "../build/src/audio/clips.h"
 
-// #include <malloc.h>
 #include <math.h>
 #include "util/rom.h"
 #include "util/memory.h"
@@ -19,13 +18,13 @@
 #include "math/frustum.h"
 #include "game.h"
 #include "gameobject.h"
-#include "input.h"
+#include "controls/input.h"
 #include "main.h"
 #include "modeltype.h"
 #include "pathfinding.h"
 #include "physics/physics.h"
+#include "graphics/graphics.h"
 #include "graphics/renderer.h"
-#include "sound.h"
 #include "sprite.h"
 #include "trace.h"
 #include "math/vec2d.h"
@@ -51,7 +50,7 @@
 #define CONSOLE_SHOW_TRACING 0
 #define CONSOLE_SHOW_CULLING 0
 #define CONSOLE_SHOW_CAMERA 0
-#define CONSOLE_SHOW_SOUND 1
+#define CONSOLE_SHOW_SOUND 0
 #define CONSOLE_SHOW_RCP_TASKS 0
 #define LOG_TRACES 0
 #define CONTROLLER_DEAD_ZONE 0.1
@@ -142,7 +141,6 @@ Lights0 amb_light = gdSPDefLights0(200, 200, 200 /*  ambient light */);
 
 static float sndPitch = 10.5;  // i don't fucking know :((
 static int sndNumber = 0;
-static int honkSoundRange = Honk5Sound - Honk1Sound;
 static int seqPlaying = FALSE;
 s16 seqId = -1;
 
