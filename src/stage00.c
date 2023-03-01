@@ -144,6 +144,7 @@ static float sndPitch = 10.5;  // i don't fucking know :((
 static int sndNumber = 0;
 static int honkSoundRange = Honk5Sound - Honk1Sound;
 static int seqPlaying = FALSE;
+s16 seqId = -1;
 
 /* The initialization of stage 0 */
 void initStage00() {
@@ -504,124 +505,131 @@ void logTraceChunk() {
 void updateGame00(void) {
   int i;
   Game* game;
-
-  totalUpdates++;
-// #ifdef NU_DEBUG
-//   traceRCP();  // record rcp perf from prev frame
-// #endif
   
   game = Game_get();
 
-  Vec2d_origin(&input.direction);
-
+  // Vec2d_origin(&input.direction);
+  Input_init(&input);
   /* Data reading of controller 1 */
   OSContPad* controller_input = controllersGetControllerData(0);
-  if (controllerGetButtonDown(0, START_BUTTON)) {
+  if (controllerGetButtonUp(0, START_BUTTON)) {
+    controller_input->button;
     renderModeSetting++;
     if (renderModeSetting >= MAX_RENDER_MODE) {
       renderModeSetting = 0;
     }
   }
 
+  if (controllerGetButton(0, A_BUTTON))
+  {
+    input.run = TRUE;
+  }
+  if (controllerGetButtonDown(0, B_BUTTON))
+  {
+    input.pickup = TRUE;
+  }
+  if (controllerGetButton(0, Z_TRIG))
+  {
+    input.zoomIn = TRUE;
+  }
+  if (controllerGetButton(0, L_TRIG))
+  {
+    input.zoomIn = TRUE;
+  }
+  if (controllerGetButton(0, R_TRIG))
+  {
+    input.zoomOut = TRUE;
+  }
 
-  // if (game->freeView) {
-  //   checkDebugControls(game);
-  // } else {
-    // normal controls
-    if (controllerGetButtonDown(0, A_BUTTON)) {
-      input.run = TRUE;
-    }
-    if (controllerGetButtonDown(0, B_BUTTON)) {
-      input.pickup = TRUE;
-    }
-    if (controllerGetButtonDown(0, Z_TRIG)) {
-      input.zoomIn = TRUE;
-    }
-    if (controllerGetButtonDown(0, L_TRIG)) {
-      input.zoomIn = TRUE;
-    }
-    if (controllerGetButtonDown(0, R_TRIG)) {
-      input.zoomOut = TRUE;
-    }
+  if (controllerGetButtonDown(0, L_CBUTTONS))
+  {
+    
+    soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
+  }
 
-    if (controllerGetButtonDown(0, L_CBUTTONS)) {
-      soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
-
-    }
-
-    if (controllerGetButtonDown(0, R_CBUTTONS)) {
-      if (seqPlaying) {
-        // debugPrintf("stop playing seq\n");
-        soundPlayerStop(SOUNDS_JAH_SPOOKS);
-        // nuAuStlSeqPlayerStop(/*frames until stop*/ 0);
-        seqPlaying = FALSE;
-
-      } else {
-        // debugPrintf("start playing seq\n");
-        soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 1.0f, NULL);
-        // seqHandle = nuAuStlSeqPlayerPlay(/*seq player num*/ NU_AU_SEQ_PLAYER0);
-        // nuAuStlSeqPlayerSetMasterVol(/*max*/ 0x7fff);
-        // MusHandleSetVolume(seqHandle, /* 200% */ 0x100);
-        seqPlaying = TRUE;
+  if (controllerGetButtonUp(0, R_CBUTTONS))
+  {
+    if (seqPlaying)
+    {
+      // debugPrintf("stop playing seq\n");
+      if(seqId != -1){
+        soundPlayerStop(seqId);
+        seqId = -1;
+        
       }
+      seqPlaying = FALSE;
     }
+    else
+    {
+      // debugPrintf("start playing seq\n");
+      seqId = soundPlayerPlay(SOUNDS_JAH_SPOOKS, 1.0f, 1.0f, NULL);
+      seqPlaying = TRUE;
+    }
+  }
 
-  //   if (contdata[0].trigger & U_CBUTTONS) {
-  //     if (!loggingTrace) {
-  //       if (!Trace_isTracing()) {
-  //         startRecordingTrace();
-  //       } else {
-  //         finishRecordingTrace();
-  //       }
-  //     }
-  //   }
-    // if (contdata[0].button & U_CBUTTONS) {
-    //   farPlane += 100.0;
-    // }
+//   //   if (contdata[0].trigger & U_CBUTTONS) {
+//   //     if (!loggingTrace) {
+//   //       if (!Trace_isTracing()) {
+//   //         startRecordingTrace();
+//   //       } else {
+//   //         finishRecordingTrace();
+//   //       }
+//   //     }
+//   //   }
+//     // if (contdata[0].button & U_CBUTTONS) {
+//     //   farPlane += 100.0;
+//     // }
 
-    // if (contdata[0].button & D_CBUTTONS) {
-    //   farPlane -= 100.0;
-    // }
+//     // if (contdata[0].button & D_CBUTTONS) {
+//     //   farPlane -= 100.0;
+//     // }
   
-    input.direction.x = 1.0f;
-    input.direction.y = -1;
-  //   if (fabsf(input.direction.x) < CONTROLLER_DEAD_ZONE)
-  //     input.direction.x = 0;
-  //   if (fabsf(input.direction.y) < CONTROLLER_DEAD_ZONE)
-  //     input.direction.y = 0;
+    input.direction.x = -controller_input->stick_x / 61.0F;
+    input.direction.y = controller_input->stick_y / 61.0F;
+    if (fabsf(input.direction.x) < CONTROLLER_DEAD_ZONE)
+      input.direction.x = 0;
+    if (fabsf(input.direction.y) < CONTROLLER_DEAD_ZONE)
+      input.direction.y = 0;
     if (Vec2d_length(&input.direction) > 1.0F) {
       Vec2d_normalise(&input.direction);
     }
   // }
 
-  // if (Trace_getEventsCount() == TRACE_EVENT_BUFFER_SIZE) {
-  //   finishRecordingTrace();
-  // }
+//   // if (Trace_getEventsCount() == TRACE_EVENT_BUFFER_SIZE) {
+//   //   finishRecordingTrace();
+//   // }
 
-  if (usbEnabled) {
-#if LOG_TRACES
-    if (loggingTrace) {
-      logTraceChunk();
-    }
-#endif
-  }
+//   if (usbEnabled) {
+// #if LOG_TRACES
+//     if (loggingTrace) {
+//       logTraceChunk();
+//     }
+// #endif
+//   }
+  
   Game_update(&input);
 
-  // if (totalUpdates % 60 == 0) {
-  //   debugPrintfSync("retrace=%d\n", nuScRetraceCounter);
-  // }
+//   // if (totalUpdates % 60 == 0) {
+//   //   debugPrintfSync("retrace=%d\n", nuScRetraceCounter);
+//   // }
 
-  if (usbEnabled) {
-#if LOG_TRACES
-    if (loggingTrace) {
-      logTraceChunk();
-    }
-#endif
-#ifdef ED64
-    usbResult = ed64AsyncLoggerFlush();
-#endif
-  }
+//   if (usbEnabled) {
+// #if LOG_TRACES
+//     if (loggingTrace) {
+//       logTraceChunk();
+//     }
+// #endif
+// #ifdef ED64
+//     usbResult = ed64AsyncLoggerFlush();
+// #endif
+//   }
 
+
+
+
+
+
+//-----------------Trace-------------------
   // if (totalUpdates % 60 == 0) {
   //   // calc averages for last 60 updates
   //   profAvgCharacters = game->profTimeCharacters / 60;

@@ -264,7 +264,7 @@ void Game_updatePhysics(Game* game) {
   PhysState_step(&game->physicsState, game->physicsBodies,
                  game->physicsBodiesCount, (float)game->tick / 60.0f * 1000.0f);
 
-  // ...and copy its position back again
+  // // ...and copy its position back again
   for (i = 0, body = game->physicsBodies; i < game->physicsBodiesCount;
        ++i, body++) {
     obj = Game_getObjectByID(body->id);
@@ -302,7 +302,7 @@ void Game_update(Input* input) {
   //   profEndPhysics = CUR_TIME_MS();
   //   Trace_addEvent(PhysUpdateTraceEvent, profStartPhysics, profEndPhysics);
 
-    Game_updateCamera(game, input);
+  Game_updateCamera(game, input);
 
   //   // update windowed (eg. 60 frame) aggregations
   //   game->profTimePhysics += profEndPhysics - profStartPhysics;

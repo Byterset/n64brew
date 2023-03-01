@@ -82,16 +82,16 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
     gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 
     /* TEST fill the framebuffer with red*/
-    // gDPPipeSync(renderState->dl++);
-    // gDPSetCycleType(renderState->dl++, G_CYC_FILL);
-    // gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
-    // gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(255,0,0,1)<<16 | GPACK_RGBA5551(255,0,0,1));
-    // gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD-1, SCREEN_HT-1);
+    gDPPipeSync(renderState->dl++);
+    gDPSetCycleType(renderState->dl++, G_CYC_FILL);
+    gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
+    gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(0,0,0,1)<<16 | GPACK_RGBA5551(0,0,0,1));
+    gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD-1, SCREEN_HT-1);
 
     // clear the framebuffer
-    gDPPipeSync(renderState->dl++);
-    gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
-    gDPSetCycleType(renderState->dl++, G_CYC_1CYCLE);
+    // gDPPipeSync(renderState->dl++);
+    // gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
+    // gDPSetCycleType(renderState->dl++, G_CYC_1CYCLE);
 
     if (callback)
     {
@@ -153,5 +153,4 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 #endif // WITH_GFX_VALIDATOR
 
     osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
-    // soundPlayerPlay(SOUNDS_HONK_5, 5.0f, 0.7f, NULL);
 }
