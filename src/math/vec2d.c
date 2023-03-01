@@ -6,10 +6,10 @@
 #include <stdlib.h>
 
 #include "vec2d.h"
+#include "../util/memory.h"
 
 #ifdef __N64__
 #include <PR/gu.h>
-#include <malloc.h>
 #endif
 
 #define VEC2D_M_PI 3.14159265358979323846

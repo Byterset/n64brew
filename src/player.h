@@ -4,7 +4,7 @@
 
 #include "gameobject.h"
 #include "gametypes.h"
-#include "input.h"
+#include "controls/input.h"
 
 void Player_init(Player* self, GameObject* obj);
 void Player_update(Player* self, Input* input, Game* game);

@@ -3,11 +3,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "../util/memory.h"
 
 #ifdef __N64__
 #include <gu.h>
-#include <malloc.h>
 #endif
 
 

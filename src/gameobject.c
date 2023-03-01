@@ -2,10 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#ifdef __N64__
-#include <malloc.h>
-#endif
-
+#include "util/memory.h"
 #include "constants.h"
 #include "gameobject.h"
 #include "math/rotation.h"
