@@ -56,7 +56,7 @@ float Player_move(Player* self, Input* input, Game* game) {
 
   goose = self->goose;
 
-  movementSpeedRatio = (input->run ? 1.0 : GOOSE_WALK_SPEED_RATIO);
+  movementSpeedRatio = (input->run ? 1.3 : GOOSE_WALK_SPEED_RATIO);
 
   Vec3d_init(&inputDirection, input->direction.x, 0.0F, input->direction.y);
   movementMagnitude = Vec3d_mag(&inputDirection);

@@ -52,6 +52,7 @@ beginseg
 	include "$(ROOT)/usr/lib/PR/gspS2DEX2.fifo.o"
 
   include "$(ROOT)/usr/lib/PR/n_aspMain.o"
+  include "$(ROOT)/usr/lib/PR/aspMain.o"
 endseg
 
 beginseg
@@ -83,33 +84,20 @@ beginseg
 endseg
 
 
-/* sample data - pointer bank */
+/* sounds */
 beginseg
-  name "pbank"
+  name "sounds"
   flags RAW
-  include "assets/sounds/b1n12ft.ptr"
+  include "build/assets/sounds/sounds.sounds"
 endseg
 
-/* sample data - wave bank */
+/* sounds table */
 beginseg
-  name "wbank"
+  name "soundsTbl"
   flags RAW
-  include "assets/sounds/b1n12ft.wbk"
+  include "build/assets/sounds/sounds.sounds.tbl"
 endseg
- 
-/* sfx data */
-beginseg
-  name "sfx"
-  flags RAW
-  include "assets/sounds/b1n12ft.bfx"
-endseg
- 
-/* song data */
-beginseg
-  name "song"
-  flags RAW
-  include "assets/sounds/b1n12ft.bin"
-endseg
+
 
 beginseg
   name  "trace"
@@ -126,9 +114,7 @@ beginwave
   include "sprites"
   include "collision" 
   include "memheap"
-  include "pbank"
-  include "wbank"
-  include "sfx"
-  include "song"
+  include "sounds"
+  include "soundsTbl"
   include "trace"
 endwave

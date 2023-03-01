@@ -247,8 +247,8 @@ void PhysBehavior_collisionResponse(PhysWorldData* world,
       PhysBehavior_bodyBodyCollisionResponse(body, bodies, numBodies);
     }
   }
-  Trace_addEvent(PhysObjCollisionTraceEvent, profStartObjCollision,
-                 CUR_TIME_MS());
+  // Trace_addEvent(PhysObjCollisionTraceEvent, profStartObjCollision,
+  //                CUR_TIME_MS());
 
   // run multiple iterations, because the response to a collision can create
   // another collision
@@ -262,22 +262,22 @@ void PhysBehavior_collisionResponse(PhysWorldData* world,
             PhysBehavior_collisionResponseStep(body, world, bodies, numBodies);
       }
     }
-    Trace_addEvent(PhysWorldCollisionTraceEvent, profStartWorldCollision,
-                   CUR_TIME_MS());
+    // Trace_addEvent(PhysWorldCollisionTraceEvent, profStartWorldCollision,
+    //                CUR_TIME_MS());
     if (!hasAnyCollision) {
       break;
     }
   }
-#ifndef PHYS_DEBUG
-  if (i > 0) {
-    debugPrintf("collision response took %d iters\n", i);
-  }
-  if (hasAnyCollision) {
-    debugPrintf(
-        "hit PHYS_MAX_COLLISION_ITERATIONS and ended collision response with "
-        "collisions remaining\n");
-  }
-#endif
+// #ifndef PHYS_DEBUG
+//   if (i > 0) {
+//     debugPrintf("collision response took %d iters\n", i);
+//   }
+//   if (hasAnyCollision) {
+//     debugPrintf(
+//         "hit PHYS_MAX_COLLISION_ITERATIONS and ended collision response with "
+//         "collisions remaining\n");
+//   }
+// #endif
 }
 
 void PhysBody_setEnabled(PhysBody* body, int enabled) {
@@ -472,15 +472,16 @@ void PhysState_step(PhysState* physics,
     if (physics->accumulatedTime < 1.0) {
       physics->accumulatedTime = physics->accumulatedTime + delta;
     } else {
-#ifndef PHYS_DEBUG
-      debugPrintf(
-          "Physics: accumulated too much time, not accumulating any more\n");
-#endif
+// #ifndef PHYS_DEBUG
+//       debugPrintf(
+//           "Physics: accumulated too much time, not accumulating any more\n");
+// #endif
     };
     /* Integrate until the accumulatedTime is empty or until the */
     /* maximum amount of iterations per step is reached. */
     i = 0;
     timestep = PHYS_TIMESTEP * physics->timeScale;
+
     while (physics->accumulatedTime >= timestep && i < PHYS_MAX_STEPS) {
       /* Integrate bodies by fixed timestep. */
       PhysBody_integrateBodies(bodies, numBodies, timestep, drag, physics);
@@ -492,9 +493,9 @@ void PhysState_step(PhysState* physics,
       // step is probably wrong, as forces are reset after each step
       break;
     }
-#ifndef PHYS_DEBUG
-    debugPrintf("Physics: ran %d timesteps\n", i + 1);
-#endif
+// #ifndef PHYS_DEBUG
+//     debugPrintf("Physics: ran %d timesteps\n", i + 1);
+// #endif
   }
 }
 

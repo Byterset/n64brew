@@ -27,7 +27,7 @@
 #include "player.h"
 #include "trace.h"
 #include "math/vec3d.h"
-
+#include "controls/controller.h"
 #include "constants.h"
 
 #define GENERATE_DEBUG_BODIES 0
@@ -264,7 +264,7 @@ void Game_updatePhysics(Game* game) {
   PhysState_step(&game->physicsState, game->physicsBodies,
                  game->physicsBodiesCount, (float)game->tick / 60.0f * 1000.0f);
 
-  // ...and copy its position back again
+  // // ...and copy its position back again
   for (i = 0, body = game->physicsBodies; i < game->physicsBodiesCount;
        ++i, body++) {
     obj = Game_getObjectByID(body->id);
@@ -288,25 +288,25 @@ void Game_update(Input* input) {
   if (!game->paused) {
     game->tick++;
 
-    profStartCharacters = CUR_TIME_MS();
+  //   profStartCharacters = CUR_TIME_MS();
     for (i = 0; i < game->charactersCount; ++i) {
       Character_update(&game->characters[i], game);
     }
-    profEndCharacters = CUR_TIME_MS();
-    Trace_addEvent(CharactersUpdateTraceEvent, profStartCharacters,
-                   profEndCharacters);
+  //   profEndCharacters = CUR_TIME_MS();
+  //   Trace_addEvent(CharactersUpdateTraceEvent, profStartCharacters,
+  //                  profEndCharacters);
     Player_update(&game->player, input, game);
 
-    profStartPhysics = CUR_TIME_MS();
+  //   profStartPhysics = CUR_TIME_MS();
     Game_updatePhysics(game);
-    profEndPhysics = CUR_TIME_MS();
-    Trace_addEvent(PhysUpdateTraceEvent, profStartPhysics, profEndPhysics);
+  //   profEndPhysics = CUR_TIME_MS();
+  //   Trace_addEvent(PhysUpdateTraceEvent, profStartPhysics, profEndPhysics);
 
-    Game_updateCamera(game, input);
+  Game_updateCamera(game, input);
 
-    // update windowed (eg. 60 frame) aggregations
-    game->profTimePhysics += profEndPhysics - profStartPhysics;
-    game->profTimeCharacters += profEndCharacters - profStartCharacters;
+  //   // update windowed (eg. 60 frame) aggregations
+  //   game->profTimePhysics += profEndPhysics - profStartPhysics;
+  //   game->profTimeCharacters += profEndCharacters - profStartCharacters;
   }
 
   // reset inputs

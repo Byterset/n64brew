@@ -12,7 +12,10 @@ EXTERN_SEGMENT(wbank);
 EXTERN_SEGMENT(pbank);
 EXTERN_SEGMENT(sfx);
 EXTERN_SEGMENT(song);
-EXTERN_SEGMENT(newaudio);
+//segment for new audio player test
+EXTERN_SEGMENT(sounds);
+EXTERN_SEGMENT(soundsTbl);
+// EXTERN_SEGMENT(newaudio);
 
 #define WBANK_START _wbankSegmentRomStart
 #define PBANK_START _pbankSegmentRomStart
@@ -21,8 +24,12 @@ EXTERN_SEGMENT(newaudio);
 #define SFX_END _sfxSegmentRomEnd
 #define SONG_START _songSegmentRomStart
 #define SONG_END _songSegmentRomEnd
-#define NEWAUDIO_START _newaudioSegmentRomStart
-#define NEWAUDIO_END _newaudioSegmentRomEnd
+#define SOUNDS_START _soundsSegmentRomStart
+#define SOUNDS_END _soundsSegmentRomEnd
+#define SOUNDSTBL_START _soundsTblSegmentRomStart
+#define SOUNDSTBL_END _soundsTblSegmentRomEnd
+// #define NEWAUDIO_START _newaudioSegmentRomStart
+// #define NEWAUDIO_END _newaudioSegmentRomEnd
 
 
 #endif /* SEGMENTS_H */

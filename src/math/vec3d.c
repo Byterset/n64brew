@@ -10,13 +10,6 @@
 #include <malloc.h>
 #endif
 
-Vec3d* Vec3d_alloc(float x, float y, float z) {
-  Vec3d* created = (Vec3d*)malloc(sizeof(Vec3d));
-  created->x = x;
-  created->y = y;
-  created->z = z;
-  return created;
-}
 
 void Vec3d_set(Vec3d* self, float x, float y, float z) {
   self->x = x;

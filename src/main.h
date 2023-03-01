@@ -2,22 +2,18 @@
 #define MAIN_H
 
 #ifdef _LANGUAGE_C
-
+#include <ultra64.h>
 #include "constants.h"
+#include "graphics/renderstate.h"
+#include "graphics/graphics.h"
 
-extern NUContData contdata[1]; /* Read data of the controller  */
+// extern NUContData contdata[1]; /* Read data of the controller  */
 extern u8 contPattern;         /* The pattern of the connected controller  */
-
-#if CONSOLE || NU_PERF_BAR
-#define GFX_TASKS_PER_MAKEDL 2
-#else
-#define GFX_TASKS_PER_MAKEDL 1
-#endif
 
 #endif /* _LANGUAGE_C */
 #endif /* MAIN_H */
 
-void stage00(int);
 void initStage00(void);
-void makeDL00(void);
+void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTask *task);
+// void makeDL00(struct RenderState *renderState);
 void updateGame00(void);

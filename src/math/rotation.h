@@ -3,17 +3,11 @@
 #define ROTATION_H
 
 #include "vec3d.h"
+#include "quaternion.h"
 
 typedef struct Matrix4 {
   float elements[16];
 } Matrix4;
-
-typedef struct Quaternion {
-  float x;
-  float y;
-  float z;
-  float w;
-} Quaternion;
 
 typedef struct Euler {
   float x;

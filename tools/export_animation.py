@@ -99,7 +99,7 @@ scene.frame_set(0)
 
 # TODO: remove this? don't think we're using bone origins anymore
 out += """
-Vec3d %s_bone_origins[] = {
+Vector3 %s_bone_origins[] = {
 """ % (
     filename
 )
