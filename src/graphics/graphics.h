@@ -7,13 +7,22 @@
 #include "renderstate.h"
 #include "../defs.h"
 
-#if HIGH_RES
+#if HIGH_RESOLUTION
 #define SCREEN_WD 640
 #define SCREEN_HT 480
 #else
 #define SCREEN_WD 320
 #define SCREEN_HT 240
 #endif
+
+#if HIGH_RESOLUTION_HALF_Y
+#define SCREEN_HT 240
+#else
+#define SCREEN_HT 480
+#endif
+
+#define SCREEN_WD_MAX 640
+#define XSCALE_MAX 0x400
 
 // render mode to write to z buffer but not depth compare when rendering
 #define RM_AA_ZUPD_OPA_SURF(clk)                                        \

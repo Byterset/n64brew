@@ -8,9 +8,13 @@
 #define DEFAULT_FOVY 15.0f
 #define DEFAULT_NEARPLANE 100
 #define DEFAULT_FARPLANE 4000
+// enable high resolution rendering, essentially double x and y resolution
 #define HIGH_RESOLUTION 0
-#define HIGH_RESOLUTION_HALF_Y 1
-#define ANTIALIASING 1
+// if enabled will limit y resolution, this gets mitigated by adjusting aspect ratio
+#define HIGH_RESOLUTION_HALF_Y 0
+// without antialiasing gaps between floor tiles become apparent
+// TODO: think of a way to mask this issue or do not partition the ground
+#define ANTIALIASING 1 
 
 #define CONSOLE 1
 #define NU_PERF_BAR 0
@@ -20,14 +24,31 @@
 #undef NU_PERF_BAR
 #endif
 
+// default water height.
+// TODO: make water level-specific or better create water-body system to place bodies of water anywhere in the scene
 #define WATER_HEIGHT -70.0
 
+// who doesn't like pie?
 #define CONST_PI 3.14159265358979323846
 #define degToRad(angleInDegrees) ((angleInDegrees)*CONST_PI / 180.0)
 #define radToDeg(angleInRadians) ((angleInRadians)*180.0 / CONST_PI)
 
+//basically if the high resolution mode is active, render less frames
+// TODO: switch based on region (VSYNC_FPS should be 25 and 50 for PAL systems)
+#if HIGH_RESOLUTION
+#if HIGH_RESOLUTION_HALF_Y
+#define VSYNC_FPS 30
+#define FRAME_SKIP 2
+#else
+#define VSYNC_FPS 30
+#define FRAME_SKIP 2
+// #define VSYNC_FPS 15
+// #define FRAME_SKIP 4
+#endif
+#else  // low resolution
 #define VSYNC_FPS 60
 #define FRAME_SKIP 1
+#endif
 
 // dumb
 #ifdef __N64__
