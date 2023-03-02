@@ -9,6 +9,7 @@
 #define DEFAULT_NEARPLANE 100
 #define DEFAULT_FARPLANE 4000
 // enable high resolution rendering, essentially double x and y resolution
+// looks really crisp but there is a tradeoff where the FRAME_SKIP is set to 2 and the framerate practically halves
 #define HIGH_RESOLUTION 0
 // if enabled will limit y resolution, this gets mitigated by adjusting aspect ratio
 #define HIGH_RESOLUTION_HALF_Y 0
