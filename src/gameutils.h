@@ -8,12 +8,12 @@
 float GameUtils_lerpDegrees(float start, float end, float amount);
 float GameUtils_fclamp(float x, float lower, float upper);
 float GameUtils_rotateTowardsClamped(float from,
-                                     float to,
-                                     float maxSpeed  // must be positive
+									 float to,
+									 float maxSpeed // must be positive
 );
 
-void GameUtils_directionFromTopDownAngle(float angle, Vec3d* result);
+void GameUtils_directionFromTopDownAngle(float angle, Vec3d *result);
 
-int GameUtils_inWater(GameObject* obj);
+int GameUtils_inWater(GameObject *obj);
 
 #endif /* !GAMEUTILS_H */

@@ -9,19 +9,20 @@
 #include "math/rotation.h"
 #include "math/vec3d.h"
 
-typedef struct GameObject {
-  int id;
-  Vec3d position;
-  EulerDegrees rotation;
-  ModelType modelType;
-  int subtype;
-  AnimationState* animState;
-  PhysBody* physBody;
-  int visible;
-  int solid;
+typedef struct GameObject
+{
+	int id;
+	Vec3d position;
+	EulerDegrees rotation;
+	ModelType modelType;
+	int subtype;
+	AnimationState *animState;
+	PhysBody *physBody;
+	int visible;
+	int solid;
 } GameObject;
 
-GameObject* GameObject_alloc();
-GameObject* GameObject_init(GameObject* self, int id, Vec3d* initPos);
+GameObject *GameObject_alloc();
+GameObject *GameObject_init(GameObject *self, int id, Vec3d *initPos);
 
 #endif /* !GAMEOBJECT_H */

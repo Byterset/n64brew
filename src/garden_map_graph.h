@@ -9,7 +9,7 @@
 extern Graph garden_map_graph;
 extern PathfindingState garden_map_graph_pathfinding_state;
 extern NodeState
-    garden_map_graph_pathfinding_node_states[GARDEN_MAP_GRAPH_SIZE];
+	garden_map_graph_pathfinding_node_states[GARDEN_MAP_GRAPH_SIZE];
 extern int garden_map_graph_pathfinding_result[GARDEN_MAP_GRAPH_SIZE];
 
 #endif /* !GARDEN_MAP_GRAPH_H */

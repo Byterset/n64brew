@@ -29,10 +29,9 @@
 #define VSYNC_FPS 60
 #define FRAME_SKIP 1
 
-
 // dumb
 #ifdef __N64__
-#ifdef __cplusplus  // only for clang linter
+#ifdef __cplusplus // only for clang linter
 #include "ed64/ed64io_usb.h"
 #endif
 #else
@@ -76,7 +75,7 @@
 #endif
 #ifndef CLAMP
 #define CLAMP(x, low, high) \
-  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
+	(((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
 #endif
 #define INTFLOOR(x) (int)x
 #define INTCEIL(x) ((int)x) + 1
@@ -118,43 +117,45 @@
 #endif
 
 #ifdef __N64__
-#define die(msg)                                                      \
-  debugPrintfSync("died: \"%s\" in %s at %s:%d\n", msg, __FUNCTION__, \
-                  __FILE__, __LINE__);                                \
-  while (TRUE) {                                                      \
-  }
+#define die(msg)                                                        \
+	debugPrintfSync("died: \"%s\" in %s at %s:%d\n", msg, __FUNCTION__, \
+					__FILE__, __LINE__);                                \
+	while (TRUE)                                                        \
+	{                                                                   \
+	}
 
 #else
 
-#define die(msg)                                                       \
-  printf("died: \"%s\" in %s at %s:%d\n", msg, __FUNCTION__, __FILE__, \
-         __LINE__);                                                    \
-  assert(FALSE);
+#define die(msg)                                                         \
+	printf("died: \"%s\" in %s at %s:%d\n", msg, __FUNCTION__, __FILE__, \
+		   __LINE__);                                                    \
+	assert(FALSE);
 #endif
 
 #define beacon() debugPrintfSync("at %d in %s\n", __LINE__, __FUNCTION__);
 
 #ifdef __N64__
-#define invariant(expression)                                          \
-  if (!(expression)) {                                                 \
-    debugPrintfSync("assertion failed in %s at %s:%d\n", __FUNCTION__, \
-                    __FILE__, __LINE__);                               \
-    {                                                                  \
-      u64 intentionallyCrash;                                          \
-      intentionallyCrash = *(u64*)1;                                   \
-    }                                                                  \
-  }
+#define invariant(expression)                                              \
+	if (!(expression))                                                     \
+	{                                                                      \
+		debugPrintfSync("assertion failed in %s at %s:%d\n", __FUNCTION__, \
+						__FILE__, __LINE__);                               \
+		{                                                                  \
+			u64 intentionallyCrash;                                        \
+			intentionallyCrash = *(u64 *)1;                                \
+		}                                                                  \
+	}
 #else
 #define invariant(expression) assert(expression)
 #endif
 
-#define EXTERN_SEGMENT(name)                                  \
-  extern char _##name##SegmentStart[], _##name##SegmentEnd[], \
-      _##name##SegmentRomStart[], _##name##SegmentRomEnd[]
+#define EXTERN_SEGMENT(name)                                    \
+	extern char _##name##SegmentStart[], _##name##SegmentEnd[], \
+		_##name##SegmentRomStart[], _##name##SegmentRomEnd[]
 
-#define EXTERN_SEGMENT_WITH_BSS(name)                         \
-  extern char _##name##SegmentStart[], _##name##SegmentEnd[], \
-      _##name##SegmentRomStart[], _##name##SegmentRomEnd[],   \
-      _##name##SegmentBssStart[], _##name##SegmentBssEnd[]
+#define EXTERN_SEGMENT_WITH_BSS(name)                           \
+	extern char _##name##SegmentStart[], _##name##SegmentEnd[], \
+		_##name##SegmentRomStart[], _##name##SegmentRomEnd[],   \
+		_##name##SegmentBssStart[], _##name##SegmentBssEnd[]
 
 #endif /* CONSTANTS_H */

@@ -7,18 +7,18 @@ void controllersInit(void);
 void controllersUpdate(void);
 void controllersTriggerRead(void);
 
-enum ControllerDirection {
-    ControllerDirectionUp = (1 << 0),
-    ControllerDirectionRight = (1 << 1),
-    ControllerDirectionDown = (1 << 2),
-    ControllerDirectionLeft = (1 << 3),
+enum ControllerDirection
+{
+	ControllerDirectionUp = (1 << 0),
+	ControllerDirectionRight = (1 << 1),
+	ControllerDirectionDown = (1 << 2),
+	ControllerDirectionLeft = (1 << 3),
 };
 
-void controllersListen();
 void controllersClearState();
 int controllerHasPendingMessage();
 int controllerIsConnected(int index);
-OSContPad* controllersGetControllerData(int index);
+OSContPad *controllersGetControllerData(int index);
 u16 controllerGetLastButton(int index);
 u16 controllerGetButton(int index, u16 button);
 u16 controllerGetButtonDown(int index, u16 button);

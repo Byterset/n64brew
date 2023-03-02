@@ -6,14 +6,14 @@
 #include "gametypes.h"
 #include "controls/input.h"
 
-void Player_init(Player* self, GameObject* obj);
-void Player_update(Player* self, Input* input, Game* game);
+void Player_init(Player *self, GameObject *obj);
+void Player_update(Player *self, Input *input, Game *game);
 
-void Player_haveItemTaken(Player* self, Item* item);
+void Player_haveItemTaken(Player *self, Item *item);
 
 #ifndef __N64__
-void Player_print(Player* self);
-void Player_toString(Player* self, char* buffer);
+void Player_print(Player *self);
+void Player_toString(Player *self, char *buffer);
 #endif
 
 #endif /* !PLAYER_H */

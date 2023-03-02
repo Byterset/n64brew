@@ -539,6 +539,10 @@ void updateGame00(void)
 		soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 	}
 
+	if(!soundPlayerIsPlaying(seqId))
+	{
+		seqPlaying = FALSE;
+	}
 	if (controllerGetButtonDown(0, R_CBUTTONS))
 	{
 		if (seqPlaying)

@@ -224,11 +224,11 @@ void gameProc(void *arg)
 			if (pendingGFX < 2 && !renderSkip)
 			{
 				/*Do all the rendering and creation of the DisplayLists here!*/
-				//TODO: decide which level to load
-				//TODO: generalize render pipeline for multiple levels, move the render code away from stage00
-				//TODO: render UI (Intro, Main Menu etc)
+				// TODO: decide which level to load
+				// TODO: generalize render pipeline for multiple levels, move the render code away from stage00
+				// TODO: render UI (Intro, Main Menu etc)
 				graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], (GraphicsCallback)stage00Render, &drawBufferIndex);
-				//graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], NULL, NULL);
+				// graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], NULL, NULL);
 				drawBufferIndex = drawBufferIndex ^ 1;
 				++pendingGFX;
 			}
@@ -236,10 +236,14 @@ void gameProc(void *arg)
 			{
 				--renderSkip;
 			}
-			// controllersClearState();
-			
+
+			//read controller Input
 			controllersTriggerRead();
+
+			//update the soundplayer logic and the active sounds (actual playing is handled in seperate thread!)
 			soundPlayerUpdate();
+
+			//Update Input, Positions, Gamelogic and Physics
 			updateGame00();
 			timeUpdateDelta();
 
@@ -255,10 +259,8 @@ void gameProc(void *arg)
 			break;
 		default:
 
-			
 			break;
 		}
-		
 	}
 
 	// int materialChunkSize = _material_dataSegmentRomEnd - _material_dataSegmentRomStart;
