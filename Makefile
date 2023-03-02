@@ -61,7 +61,7 @@ endif
 
 BUILDDIR = build
 
-ROMHEADER = romheader
+ROMHEADER = romheader_pal
 
 APP =		$(BUILDDIR)/game.out
 

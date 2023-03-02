@@ -222,7 +222,10 @@ void gameProc(void *arg)
 
 			if (pendingGFX < 2 && !renderSkip)
 			{
-				
+				/*Do all the rendering and creation of the DisplayLists here!*/
+				//TODO: decide which level to load
+				//TODO: generalize render pipeline for multiple levels, move the render code away from stage00
+				//TODO: render UI (Intro, Main Menu etc)
 				graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], (GraphicsCallback)stage00Render, &drawBufferIndex);
 				//graphicsCreateTask(&gGraphicsTasks[drawBufferIndex], NULL, NULL);
 				drawBufferIndex = drawBufferIndex ^ 1;
@@ -232,19 +235,11 @@ void gameProc(void *arg)
 			{
 				--renderSkip;
 			}
-
-			controllersTriggerRead();
-
-			soundPlayerUpdate();
-			////THIS WORKS IF GAME UPDATE IS OFF
-			// double currTime = CUR_TIME_MS();
-			// if (currTime - lastHonkTime > 2000)
-			// {
-			// 	soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
-			// 	lastHonkTime = currTime;
-			// }
-			updateGame00();
+			// controllersClearState();
 			
+			controllersTriggerRead();
+			soundPlayerUpdate();
+			updateGame00();
 			timeUpdateDelta();
 
 			break;
