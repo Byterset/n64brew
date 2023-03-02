@@ -39,6 +39,19 @@ struct GraphicsTask
 	u16 taskIndex;
 };
 
+typedef enum RenderMode
+{
+	ToonFlatShadingRenderMode,
+	TextureAndLightingRenderMode,
+	TextureNoLightingRenderMode,
+	NoTextureNoLightingRenderMode,
+	LightingNoTextureRenderMode,
+	WireframeRenderMode,
+	MAX_RENDER_MODE
+} RenderMode;
+
+extern RenderMode gRenderMode;
+
 typedef float ViewportF[4];
 
 /*

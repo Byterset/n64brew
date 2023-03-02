@@ -56,17 +56,6 @@
 #define CONTROLLER_DEAD_ZONE 0.1
 #define DRAW_SPRITES 0
 
-typedef enum RenderMode
-{
-	ToonFlatShadingRenderMode,
-	TextureAndLightingRenderMode,
-	TextureNoLightingRenderMode,
-	NoTextureNoLightingRenderMode,
-	LightingNoTextureRenderMode,
-	WireframeRenderMode,
-	MAX_RENDER_MODE
-} RenderMode;
-
 static Vec3d viewPos;
 static Vec3d viewRot;
 static Input input;
@@ -107,7 +96,7 @@ static int logTraceStartOffset = 0;
 static int loggingTrace = FALSE;
 
 static int twoCycleMode;
-static RenderMode renderModeSetting;
+// static RenderMode renderModeSetting;
 PhysWorldData physWorldData;
 
 void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState);
@@ -179,7 +168,7 @@ void initStage00()
 	loggingTrace = FALSE;
 
 	twoCycleMode = FALSE;
-	renderModeSetting = ToonFlatShadingRenderMode;
+	gRenderMode = ToonFlatShadingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
 	Vec3d_init(&viewPos, 0.0F, 0.0F, -400.0F);
@@ -327,7 +316,7 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	   switch display buffers */
 	// nuGfxTaskStart(&gfx_glist[gfx_gtask_no][0],
 	//                (s32)(glistp - gfx_glist[gfx_gtask_no]) * sizeof(Gfx),
-	//                renderModeSetting == WireframeRenderMode ? NU_GFX_UCODE_L3DEX2
+	//                gRenderMode == WireframeRenderMode ? NU_GFX_UCODE_L3DEX2
 	//                                                         : NU_GFX_UCODE_F3DEX,
 
 	//   profEndDraw = CUR_TIME_MS();
@@ -505,10 +494,10 @@ void updateGame00(void)
 	if (controllerGetButtonUp(0, START_BUTTON))
 	{
 		controller_input->button;
-		renderModeSetting++;
-		if (renderModeSetting >= MAX_RENDER_MODE)
+		gRenderMode++;
+		if (gRenderMode >= MAX_RENDER_MODE)
 		{
-			renderModeSetting = 0;
+			gRenderMode = 0;
 		}
 	}
 
@@ -773,7 +762,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		gDPSetTextureFilter(renderState->dl++, G_TF_BILERP);
 		gDPSetTexturePersp(renderState->dl++, G_TP_PERSP);
 
-		switch (renderModeSetting)
+		switch (gRenderMode)
 		{
 		case TextureAndLightingRenderMode:
 		case LightingNoTextureRenderMode:
@@ -837,7 +826,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 			}
 		}
 
-		switch (renderModeSetting)
+		switch (gRenderMode)
 		{
 		case ToonFlatShadingRenderMode:
 			gSPSetGeometryMode(renderState->dl++, G_CULL_BACK);
