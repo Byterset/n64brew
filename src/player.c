@@ -6,11 +6,11 @@
 #include "gooseanimtypes.h"
 #include "item.h"
 #include "player.h"
-
+#include "util/time.h"
 #include "constants.h"
 
 // max speed, slightly slower than character speed
-#define GOOSE_SPEED 3.9F
+#define GOOSE_SPEED 3.0F
 #define GOOSE_WALK_SPEED_RATIO 0.5
 #define GOOSE_FORCE 5000.0F
 #define GOOSE_MAX_TURN_SPEED 15.0f
@@ -86,7 +86,7 @@ float Player_move(Player *self, Input *input, Game *game)
 
 	// movement
 	Vec3d_mulScalar(&playerMovement,
-					movementMagnitude * GOOSE_SPEED * movementSpeedRatio);
+					movementMagnitude * GOOSE_SPEED * movementSpeedRatio * (60 * gDeltaTimeSec));
 
 	Vec3d_add(&goose->position, &playerMovement);
 	resultantMovementSpeed = Vec3d_mag(&playerMovement);

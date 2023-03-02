@@ -7,14 +7,14 @@
 #include "trace.h"
 #include "math/vec2d.h"
 #include "math/vec3d.h"
-
+#include "util/time.h"
 #include "gameutils.h"
 
 #include "constants.h"
 
 #include "characteranimtypes.h"
 
-#define CHARACTER_SPEED 4.1F
+#define CHARACTER_SPEED 3.7F
 
 #define CHARACTER_ENABLED 1
 #define CHARACTER_FOLLOW_PLAYER 0
@@ -276,7 +276,7 @@ void Character_moveTowards(Character *self,
 
 	self->speedScaleForArrival = 1.0f;
 	self->speedMultiplier = speedMultiplier; // for debugging
-	derivedSpeed = CHARACTER_SPEED * speedMultiplier * self->speedScaleForHeading;
+	derivedSpeed = CHARACTER_SPEED * speedMultiplier * self->speedScaleForHeading * 60.0f * gDeltaTimeSec;
 	if (shouldStopAtLocation && distToTarget < CHARACTER_ARRIVAL_DIST)
 	{
 		framesToDesiredArrival = CHARACTER_ARRIVAL_DURATION * VSYNC_FPS;
@@ -317,7 +317,7 @@ void Character_goToTarget(Character *self,
 {
 	int from;
 	int to;
-	float profStartPathfinding;
+	// float profStartPathfinding;
 	Graph *pathfindingGraph;
 	PathfindingState *pathfindingState;
 	Vec3d *nextNodePos;
@@ -356,7 +356,7 @@ void Character_goToTarget(Character *self,
 	// find a path if we need one
 	if (!self->pathfindingResult)
 	{
-		profStartPathfinding = CUR_TIME_MS();
+		// profStartPathfinding = CUR_TIME_MS();
 
 		from = Path_quantizePosition(pathfindingGraph, &self->obj->position);
 

@@ -257,11 +257,11 @@ void PhysBehavior_collisionResponse(PhysWorldData *world,
 {
 	int i, k, hasAnyCollision;
 	PhysBody *body;
-	float profStartObjCollision;
-	float profStartWorldCollision;
+	// float profStartObjCollision;
+	// float profStartWorldCollision;
 	// int floorHeight = 0.0;
 
-	profStartObjCollision = CUR_TIME_MS();
+	// profStartObjCollision = CUR_TIME_MS();
 	for (k = 0, body = bodies; k < numBodies; k++, body++)
 	{
 		if (body->enabled)
@@ -279,7 +279,7 @@ void PhysBehavior_collisionResponse(PhysWorldData *world,
 	for (i = 0; i < PHYS_MAX_COLLISION_ITERATIONS; ++i)
 	{
 		hasAnyCollision = FALSE;
-		profStartWorldCollision = CUR_TIME_MS();
+		// profStartWorldCollision = CUR_TIME_MS();
 		for (k = 0, body = bodies; k < numBodies; k++, body++)
 		{
 			if (body->enabled)

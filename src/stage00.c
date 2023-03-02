@@ -83,7 +83,7 @@ float profAvgCharacters;
 float profAvgPhysics;
 float profAvgDraw;
 float profAvgPath;
-float lastFrameTime;
+// float lastFrameTime;
 float profilingAverages[MAX_TRACE_EVENT_TYPE];
 
 static int objectsCulled;
@@ -184,7 +184,7 @@ void initStage00()
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
 
-	lastFrameTime = CUR_TIME_MS();
+	// lastFrameTime = CUR_TIME_MS();
 
 	// for (i = 0; i < MAX_TRACE_EVENT_TYPE; ++i) {
 	//   profilingAverages[i] = 0;
@@ -263,17 +263,17 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	Dynamic *dynamicp;
 	Game *game;
 	// int consoleOffset;
-	float curTime;
+	// float curTime;
 	int i;
-	float profStartDraw, profEndDraw, profStartDebugDraw;
+	// float profStartDraw, profEndDraw, profStartDebugDraw;
 
 	game = Game_get();
 	// // consoleOffset = 20;
 
-	curTime = CUR_TIME_MS();
+	// curTime = CUR_TIME_MS();
 	frameCounterCurFrames++;
 
-	profStartDraw = curTime;
+	// profStartDraw = curTime;
 
 	// if (curTime - frameCounterLastTime >= 1000.0) {
 	//   frameCounterLastFrames = frameCounterCurFrames;
