@@ -63,7 +63,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
     renderStateInit(renderState, targetTask->framebuffer, zbuffer);
     gSPSegment(renderState->dl++, 0, 0);
     //gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
-    // gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
+    //gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
 
     gSPDisplayList(renderState->dl++, setup_rspstate);
     if (firsttime)
@@ -81,18 +81,14 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
     gDPSetFillColor(renderState->dl++, (GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0)));
     gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 
-    /* TEST fill the framebuffer with red*/
+    // clear the framebuffer
     gDPPipeSync(renderState->dl++);
-    gDPSetCycleType(renderState->dl++, G_CYC_FILL);
     gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
     gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(0,0,0,1)<<16 | GPACK_RGBA5551(0,0,0,1));
     gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD-1, SCREEN_HT-1);
 
-    // clear the framebuffer
-    // gDPPipeSync(renderState->dl++);
-    // gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
-    // gDPSetCycleType(renderState->dl++, G_CYC_1CYCLE);
-
+    //execute the render graphics callback
+    //this is where the displaylists for the level, models, ui etc get added depending on the callback
     if (callback)
     {
         callback(data, renderState, targetTask);
@@ -116,6 +112,11 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
     task->ucode_boot_size = (u32)rspbootTextEnd - (u32)rspbootTextStart;
     task->ucode = (u64 *)gspF3DEX2_fifoTextStart;
     task->ucode_data = (u64 *)gspF3DEX2_fifoDataStart;
+    // task->ucode = (u64 *)gspF3DEX2_xbusTextStart;
+    // task->ucode_data = (u64 *)gspF3DEX2_xbusDataStart;
+    /* to render wireframe use microcode below*/
+    // task->ucode = (u64 *)gspL3DEX2_fifoTextStart;
+    // task->ucode_data = (u64 *)gspL3DEX2_fifoDataStart;
     task->output_buff = (u64 *)rdpOutput;
     task->output_buff_size = (u64 *)rdpOutput + RDP_OUTPUT_SIZE / sizeof(u64);
     task->ucode_data_size = SP_UCODE_DATA_SIZE;

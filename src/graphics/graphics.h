@@ -11,11 +11,9 @@
 #if HIGH_RES
 #define SCREEN_WD   640
 #define SCREEN_HT   480
-#define ANTIALIASING 1
 #else
 #define SCREEN_WD   320
 #define SCREEN_HT   240
-#define ANTIALIASING 0
 #endif
 
 // render mode to write to z buffer but not depth compare when rendering
