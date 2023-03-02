@@ -69,7 +69,7 @@ typedef struct ItemStruct {
 // this is here because of mutual dependency between game methods and objects
 // with update methods which take Game arg
 typedef struct Game {
-  unsigned int tick;  // this will overflow if you run the game for 829 days :)
+  unsigned int tick;  // gets incremented every frame, with 60fps this will overflow if you run the game for 829 days straight
   int paused;
   Vec3d viewPos;
   Vec3d viewRot;

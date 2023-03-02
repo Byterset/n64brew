@@ -539,7 +539,7 @@ void updateGame00(void)
 		soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 	}
 
-	if (controllerGetButtonUp(0, R_CBUTTONS))
+	if (controllerGetButtonDown(0, R_CBUTTONS))
 	{
 		if (seqPlaying)
 		{
@@ -558,23 +558,6 @@ void updateGame00(void)
 			seqPlaying = TRUE;
 		}
 	}
-
-	//   //   if (contdata[0].trigger & U_CBUTTONS) {
-	//   //     if (!loggingTrace) {
-	//   //       if (!Trace_isTracing()) {
-	//   //         startRecordingTrace();
-	//   //       } else {
-	//   //         finishRecordingTrace();
-	//   //       }
-	//   //     }
-	//   //   }
-	//     // if (contdata[0].button & U_CBUTTONS) {
-	//     //   farPlane += 100.0;
-	//     // }
-
-	//     // if (contdata[0].button & D_CBUTTONS) {
-	//     //   farPlane -= 100.0;
-	//     // }
 
 	input.direction.x = -controller_input->stick_x / 61.0F;
 	input.direction.y = controller_input->stick_y / 61.0F;
@@ -751,8 +734,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 								garden_map_bounds);
 	// Trace_addEvent(DrawSortTraceEvent, profStartSort, CUR_TIME_MS());
 
-	// boolean of whether an object intersects another (for z buffer
-	// optimization)
+	// boolean of whether an object intersects another (for z buffer optimization)
 	intersectingObjects = (int *)malloc((visibleObjectsCount) * sizeof(int));
 	invariant(intersectingObjects);
 	Renderer_calcIntersecting(intersectingObjects, visibleObjectsCount,
@@ -762,7 +744,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	gDPSetCycleType(renderState->dl++, twoCycleMode ? G_CYC_2CYCLE : G_CYC_1CYCLE);
 
 	// z-buffered, antialiased triangles
-	//
 #if !RENDERER_PAINTERS_ALGORITHM
 	gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
 	gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
