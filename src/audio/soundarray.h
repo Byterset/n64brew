@@ -4,11 +4,12 @@
 
 #include <ultra64.h>
 
-struct SoundArray {
-    u32 soundCount;
-    ALSound* sounds[];
+struct SoundArray
+{
+	u32 soundCount;
+	ALSound *sounds[];
 };
 
-void soundArrayInit(struct SoundArray* soundArray, void* tbl);
+void soundArrayInit(struct SoundArray *soundArray, void *tbl);
 
 #endif

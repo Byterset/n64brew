@@ -25,7 +25,7 @@ void *gMaterialSegment;
 
 void graphicsOutputMessageToDebugger(char *message, unsigned len)
 {
-    gdbSendMessage(GDBDataTypeText, message, len);
+	gdbSendMessage(GDBDataTypeText, message, len);
 }
 
 #endif
@@ -41,117 +41,117 @@ u16 __attribute__((aligned(64))) zbuffer[SCREEN_HT * SCREEN_WD];
 
 u16 *graphicsLayoutScreenBuffers(u16 *memoryEnd)
 {
-    gGraphicsTasks[0].framebuffer = memoryEnd - SCREEN_WD * SCREEN_HT;
-    gGraphicsTasks[0].taskIndex = 0;
-    gGraphicsTasks[0].msg.type = OS_SC_DONE_MSG;
+	gGraphicsTasks[0].framebuffer = memoryEnd - SCREEN_WD * SCREEN_HT;
+	gGraphicsTasks[0].taskIndex = 0;
+	gGraphicsTasks[0].msg.type = OS_SC_DONE_MSG;
 
-    gGraphicsTasks[1].framebuffer = gGraphicsTasks[0].framebuffer - SCREEN_WD * SCREEN_HT;
-    gGraphicsTasks[1].taskIndex = 1;
-    gGraphicsTasks[1].msg.type = OS_SC_DONE_MSG;
+	gGraphicsTasks[1].framebuffer = gGraphicsTasks[0].framebuffer - SCREEN_WD * SCREEN_HT;
+	gGraphicsTasks[1].taskIndex = 1;
+	gGraphicsTasks[1].msg.type = OS_SC_DONE_MSG;
 
-    rdpOutput = (u64 *)(gGraphicsTasks[1].framebuffer - RDP_OUTPUT_SIZE / sizeof(u16));
-    zeroMemory(rdpOutput, RDP_OUTPUT_SIZE);
-    return (u16 *)rdpOutput;
+	rdpOutput = (u64 *)(gGraphicsTasks[1].framebuffer - RDP_OUTPUT_SIZE / sizeof(u16));
+	zeroMemory(rdpOutput, RDP_OUTPUT_SIZE);
+	return (u16 *)rdpOutput;
 }
 
 #define CLEAR_COLOR GPACK_RGBA5551(0x32, 0x5D, 0x79, 1)
 
-void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void* data)
+void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void *data)
 {
-    struct RenderState *renderState = &targetTask->renderState;
+	struct RenderState *renderState = &targetTask->renderState;
 
-    renderStateInit(renderState, targetTask->framebuffer, zbuffer);
-    gSPSegment(renderState->dl++, 0, 0);
-    //gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
-    //gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
+	renderStateInit(renderState, targetTask->framebuffer, zbuffer);
+	gSPSegment(renderState->dl++, 0, 0);
+	// gSPSegment(renderState->dl++, LEVEL_SEGMENT, gLevelSegment);
+	// gSPSegment(renderState->dl++, MATERIAL_SEGMENT, gMaterialSegment);
 
-    gSPDisplayList(renderState->dl++, setup_rspstate);
-    if (firsttime)
-    {
-        gSPDisplayList(renderState->dl++, rdpstateinit_dl);
-        firsttime = 0;
-    }
-    gSPDisplayList(renderState->dl++, setup_rdpstate);
+	gSPDisplayList(renderState->dl++, setup_rspstate);
+	if (firsttime)
+	{
+		gSPDisplayList(renderState->dl++, rdpstateinit_dl);
+		firsttime = 0;
+	}
+	gSPDisplayList(renderState->dl++, setup_rdpstate);
 
-    //clear the zbuffer
-    gDPSetDepthImage(renderState->dl++, osVirtualToPhysical(zbuffer));
-    gDPPipeSync(renderState->dl++);
-    gDPSetCycleType(renderState->dl++, G_CYC_FILL);
-    gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(zbuffer));
-    gDPSetFillColor(renderState->dl++, (GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0)));
-    gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+	// clear the zbuffer
+	gDPSetDepthImage(renderState->dl++, osVirtualToPhysical(zbuffer));
+	gDPPipeSync(renderState->dl++);
+	gDPSetCycleType(renderState->dl++, G_CYC_FILL);
+	gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(zbuffer));
+	gDPSetFillColor(renderState->dl++, (GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0)));
+	gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 
-    // clear the framebuffer
-    gDPPipeSync(renderState->dl++);
-    gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
-    gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(0,0,0,1)<<16 | GPACK_RGBA5551(0,0,0,1));
-    gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD-1, SCREEN_HT-1);
+	// clear the framebuffer
+	gDPPipeSync(renderState->dl++);
+	gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
+	gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
+	gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 
-    //execute the render graphics callback
-    //this is where the displaylists for the level, models, ui etc get added depending on the callback
-    if (callback)
-    {
-        callback(data, renderState, targetTask);
-    }
+	// execute the render graphics callback
+	// this is where the displaylists for the level, models, ui etc get added depending on the callback
+	if (callback)
+	{
+		callback(data, renderState, targetTask);
+	}
 
-    gDPPipeSync(renderState->dl++);
-    gDPFullSync(renderState->dl++);
-    gSPEndDisplayList(renderState->dl++);
+	gDPPipeSync(renderState->dl++);
+	gDPFullSync(renderState->dl++);
+	gSPEndDisplayList(renderState->dl++);
 
-    renderStateFlushCache(renderState);
+	renderStateFlushCache(renderState);
 
-    OSScTask *scTask = &targetTask->task;
+	OSScTask *scTask = &targetTask->task;
 
-    OSTask_t *task = &scTask->list.t;
+	OSTask_t *task = &scTask->list.t;
 
-    task->data_ptr = (u64 *)renderState->glist;
-    task->data_size = (s32)renderState->dl - (s32)renderState->glist;
-    task->type = M_GFXTASK;
-    task->flags = OS_TASK_LOADABLE;
-    task->ucode_boot = (u64 *)rspbootTextStart;
-    task->ucode_boot_size = (u32)rspbootTextEnd - (u32)rspbootTextStart;
-    task->ucode = (u64 *)gspF3DEX2_fifoTextStart;
-    task->ucode_data = (u64 *)gspF3DEX2_fifoDataStart;
-    // task->ucode = (u64 *)gspF3DEX2_xbusTextStart;
-    // task->ucode_data = (u64 *)gspF3DEX2_xbusDataStart;
-    /* to render wireframe use microcode below*/
-    // task->ucode = (u64 *)gspL3DEX2_fifoTextStart;
-    // task->ucode_data = (u64 *)gspL3DEX2_fifoDataStart;
-    task->output_buff = (u64 *)rdpOutput;
-    task->output_buff_size = (u64 *)rdpOutput + RDP_OUTPUT_SIZE / sizeof(u64);
-    task->ucode_data_size = SP_UCODE_DATA_SIZE;
-    task->dram_stack = (u64 *)dram_stack;
-    task->dram_stack_size = SP_DRAM_STACK_SIZE8;
-    task->yield_data_ptr = (u64 *)gfxYieldBuf2;
-    task->yield_data_size = OS_YIELD_DATA_SIZE;
+	task->data_ptr = (u64 *)renderState->glist;
+	task->data_size = (s32)renderState->dl - (s32)renderState->glist;
+	task->type = M_GFXTASK;
+	task->flags = OS_TASK_LOADABLE;
+	task->ucode_boot = (u64 *)rspbootTextStart;
+	task->ucode_boot_size = (u32)rspbootTextEnd - (u32)rspbootTextStart;
+	task->ucode = (u64 *)gspF3DEX2_fifoTextStart;
+	task->ucode_data = (u64 *)gspF3DEX2_fifoDataStart;
+	// task->ucode = (u64 *)gspF3DEX2_xbusTextStart;
+	// task->ucode_data = (u64 *)gspF3DEX2_xbusDataStart;
+	/* to render wireframe use microcode below*/
+	// task->ucode = (u64 *)gspL3DEX2_fifoTextStart;
+	// task->ucode_data = (u64 *)gspL3DEX2_fifoDataStart;
+	task->output_buff = (u64 *)rdpOutput;
+	task->output_buff_size = (u64 *)rdpOutput + RDP_OUTPUT_SIZE / sizeof(u64);
+	task->ucode_data_size = SP_UCODE_DATA_SIZE;
+	task->dram_stack = (u64 *)dram_stack;
+	task->dram_stack_size = SP_DRAM_STACK_SIZE8;
+	task->yield_data_ptr = (u64 *)gfxYieldBuf2;
+	task->yield_data_size = OS_YIELD_DATA_SIZE;
 
-    scTask->flags =
-        OS_SC_NEEDS_RSP |
-        OS_SC_NEEDS_RDP |
-        OS_SC_LAST_TASK |
-        OS_SC_SWAPBUFFER;
-    scTask->framebuffer = targetTask->framebuffer;
-    scTask->msg = &targetTask->msg;
-    scTask->msgQ = &gfxFrameMsgQ;
-    scTask->next = 0;
-    scTask->state = 0;
+	scTask->flags =
+		OS_SC_NEEDS_RSP |
+		OS_SC_NEEDS_RDP |
+		OS_SC_LAST_TASK |
+		OS_SC_SWAPBUFFER;
+	scTask->framebuffer = targetTask->framebuffer;
+	scTask->msg = &targetTask->msg;
+	scTask->msgQ = &gfxFrameMsgQ;
+	scTask->next = 0;
+	scTask->state = 0;
 
 #if WITH_GFX_VALIDATOR
 #if WITH_DEBUGGER || FORCE_VALIDATOR
-    struct GFXValidationResult validationResult;
-    zeroMemory(&validationResult, sizeof(struct GFXValidationResult));
+	struct GFXValidationResult validationResult;
+	zeroMemory(&validationResult, sizeof(struct GFXValidationResult));
 
-    if (gfxValidate(&scTask->list, MAX_DL_LENGTH, &validationResult) != GFXValidatorErrorNone)
-    {
+	if (gfxValidate(&scTask->list, MAX_DL_LENGTH, &validationResult) != GFXValidatorErrorNone)
+	{
 
 #if WITH_DEBUGGER
-        gfxGenerateReadableMessage(&validationResult, graphicsOutputMessageToDebugger);
-        gdbBreak();
+		gfxGenerateReadableMessage(&validationResult, graphicsOutputMessageToDebugger);
+		gdbBreak();
 #endif
-    }
+	}
 
 #endif // WITH_DEBUGGER
 #endif // WITH_GFX_VALIDATOR
 
-    osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
+	osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
 }

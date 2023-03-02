@@ -5,35 +5,37 @@
 
 #define TRACE_EVENT_BUFFER_SIZE 10000
 
-typedef enum TraceEventType {
-  FrameTraceEvent,
-  SkippedGfxTaskTraceEvent,
-  MainCPUTraceEvent,
-  MainMakeDisplayListTraceEvent,
-  MainUpdateTraceEvent,
-  RSPTaskTraceEvent,
-  RDPTaskTraceEvent,
-  CharactersUpdateTraceEvent,
-  PathfindingTraceEvent,
-  DrawTraceEvent,
-  DrawSortTraceEvent,
-  DrawIterTraceEvent,
-  DrawFrustumCullTraceEvent,
-  PhysUpdateTraceEvent,
-  PhysWorldCollisionTraceEvent,
-  PhysObjCollisionTraceEvent,
-  CollisionGetTrianglesTraceEvent,
-  CollisionTestMeshSphereTraceEvent,
-  DebugDrawTraceEvent,
-  DrawAnimTraceEvent,
-  AnimLerpTraceEvent,
-  MAX_TRACE_EVENT_TYPE,
+typedef enum TraceEventType
+{
+	FrameTraceEvent,
+	SkippedGfxTaskTraceEvent,
+	MainCPUTraceEvent,
+	MainMakeDisplayListTraceEvent,
+	MainUpdateTraceEvent,
+	RSPTaskTraceEvent,
+	RDPTaskTraceEvent,
+	CharactersUpdateTraceEvent,
+	PathfindingTraceEvent,
+	DrawTraceEvent,
+	DrawSortTraceEvent,
+	DrawIterTraceEvent,
+	DrawFrustumCullTraceEvent,
+	PhysUpdateTraceEvent,
+	PhysWorldCollisionTraceEvent,
+	PhysObjCollisionTraceEvent,
+	CollisionGetTrianglesTraceEvent,
+	CollisionTestMeshSphereTraceEvent,
+	DebugDrawTraceEvent,
+	DrawAnimTraceEvent,
+	AnimLerpTraceEvent,
+	MAX_TRACE_EVENT_TYPE,
 } TraceEventType;
 
-typedef struct TraceEvent {
-  short type;
-  float start;
-  float end;
+typedef struct TraceEvent
+{
+	short type;
+	float start;
+	float end;
 } TraceEvent;
 
 extern TraceEvent traceEvents[TRACE_EVENT_BUFFER_SIZE];

@@ -60,15 +60,15 @@ typedef struct PhysBody {
 void PhysState_init(PhysState* self, PhysWorldData* worldData);
 
 void PhysState_step(PhysState* physics,
-                    PhysBody* bodies,
-                    int numBodies,
-                    float now);
+					PhysBody* bodies,
+					int numBodies,
+					float now);
 
 void PhysBody_init(PhysBody* self,
-                   float mass,
-                   float radius,
-                   Vec3d* position,
-                   int id);
+				   float mass,
+				   float radius,
+				   Vec3d* position,
+				   int id);
 
 void PhysBody_applyForce(PhysBody* body, Vec3d* force);
 void PhysBody_translateWithoutForce(PhysBody* body, Vec3d* translation);

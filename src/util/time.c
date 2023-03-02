@@ -3,7 +3,7 @@
 
 float gTimePassed = 0.0f;
 
-void timeUpdateDelta() {
-    gTimePassed += FIXED_DELTA_TIME;
-
+void timeUpdateDelta()
+{
+	gTimePassed += FIXED_DELTA_TIME;
 }

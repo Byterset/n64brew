@@ -22,10 +22,10 @@ float soundClipLength(int soundClipId, float speed);
 
 void soundPlayerInit();
 void soundPlayerUpdate();
-ALSndId soundPlayerPlay(int soundClipId, float volume, float pitch, struct Vector3* at);
+ALSndId soundPlayerPlay(int soundClipId, float volume, float pitch, struct Vector3 *at);
 void soundPlayerStop(ALSndId soundId);
 
-void soundPlayerUpdatePosition(ALSndId soundId, struct Vector3* at);
+void soundPlayerUpdatePosition(ALSndId soundId, struct Vector3 *at);
 
 void soundPlayerUpdateVolume(ALSndId soundId, float volume);
 void soundPlayerUpdatePitch(ALSndId soundId, float pitch);
@@ -33,7 +33,7 @@ void soundPlayerUpdatePitch(ALSndId soundId, float pitch);
 int soundPlayerIsPlaying(ALSndId soundId);
 short soundPlayerSoundClipId(ALSndId soundId);
 
-void soundListenerUpdate(struct Vector3* position, struct Quaternion* rotation, int listenerIndex);
+void soundListenerUpdate(struct Vector3 *position, struct Quaternion *rotation, int listenerIndex);
 void soundListenerSetCount(int count);
 void soundPlayerStopAll();
 
