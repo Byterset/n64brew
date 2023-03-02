@@ -150,23 +150,40 @@ extern char _memheapSegmentRomStart[];
 
 void gameProc(void *arg)
 {
+	OSViMode viMode;
+	OSIntMask im;
 	u8 schedulerMode = OS_VI_NTSC_HPF1;
+	u32 xScale;
+	xScale = (u32)((SCREEN_WD * XSCALE_MAX) / SCREEN_WD_MAX);
 	int framerate = 60;
 
 	switch (osTvType)
 	{
 	case 0: // PAL
-		schedulerMode = HIGH_RESOLUTION ? OS_VI_PAL_HPF1 : OS_VI_PAL_LPF1;
+		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_PAL_HAF1 : OS_VI_PAL_HPF1) : (ANTIALIASING ? OS_VI_PAL_LAF1 : OS_VI_PAL_LPF1);
 		framerate = 50;
 		break;
 	case 1: // NTSC
-		schedulerMode = HIGH_RESOLUTION ? OS_VI_NTSC_HPF1 : OS_VI_NTSC_LPF1;
+		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1 : OS_VI_NTSC_HPF1) : (ANTIALIASING ? OS_VI_NTSC_LAF1 : OS_VI_NTSC_LPF1);
 		break;
 	case 2: // MPAL
-		schedulerMode = HIGH_RESOLUTION ? OS_VI_MPAL_HPF1 : OS_VI_MPAL_LPF1;
+		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_MPAL_HAF1 : OS_VI_MPAL_HPF1) : (ANTIALIASING ? OS_VI_MPAL_LAF1 : OS_VI_MPAL_LPF1);
 		framerate = 50;
 		break;
 	}
+
+	viMode = osViModeTable[schedulerMode];
+
+#if HIGH_RESOLUTION_HALF_Y
+	viMode = osViModeTable[OS_VI_NTSC_LAN1];
+	/* Change width, xScale, and origin */
+	im = osSetIntMask(OS_IM_VI);
+	viMode.comRegs.width = SCREEN_WD;
+	viMode.comRegs.xScale = xScale;
+	viMode.fldRegs[0].origin = SCREEN_WD * 2;
+	viMode.fldRegs[1].origin = SCREEN_WD * 2;
+	(void)osSetIntMask(im);
+#endif
 
 	osCreateScheduler(
 		&scheduler,
@@ -174,6 +191,13 @@ void gameProc(void *arg)
 		SCHEDULER_PRIORITY,
 		schedulerMode,
 		1);
+
+	/* Set VI */
+	osViSetMode(&viMode);
+	// when osViSetMode was called these flags were reset to their default values
+	osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON | OS_VI_GAMMA_OFF |
+						   OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON);
+
 
 	schedulerCommandQueue = osScGetCmdQ(&scheduler);
 
@@ -183,7 +207,7 @@ void gameProc(void *arg)
 	osViSetSpecialFeatures(OS_VI_GAMMA_OFF |
 						   OS_VI_GAMMA_DITHER_OFF |
 						   OS_VI_DIVOT_OFF |
-						   OS_VI_DITHER_FILTER_OFF);
+						   OS_VI_DITHER_FILTER_ON);
 
 	u32 pendingGFX = 0;
 	u32 drawBufferIndex = 0;
