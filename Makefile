@@ -4,7 +4,6 @@
 include ./modern.makefile
 
 BLENDER= blender
-EMULATOR=/mnt/c/Users/kevin/Documents/Emulation/N64/Mupen64plus/mupen64plus/simple64-gui.exe
 
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
 LCOPTS =	-G 0 -std=gnu90 -nostdinc -Wno-comment -Werror-implicit-function-declaration 
@@ -183,4 +182,3 @@ $(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEAD
 $(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT) build/assets/sounds/sounds.sounds
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 0 -e $(APP) -h $(ROMHEADER)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true
 	makemask $(TARGETS)
-#	$(EMULATOR) $(TARGETS)

@@ -10,9 +10,12 @@ This ist based off of https://github.com/jsdf/goose64. This aims to transform th
 - various python scripts and tools have been adapted
 - completely overhauled the structure of the project to scale better
 - changed audio player to support wav, aiff & ins (done by migrating to the existing solution by the amazing https://github.com/lambertjamesd/)
+- added modified version of https://github.com/trhodeos/spicy to tools to support custom rom headers (romheaders for PAL & NTSC included in the root)
 
 ## todos
 
+- improve model handling, right now I feel it is too much manual work to define the model properties
+- support more collider shapes
 - optimize collision solver (right now there is some funky behaviour with the collision solver)
 - change skeletal animation to work for generalized meshes
 - switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)
