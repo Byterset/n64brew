@@ -77,6 +77,7 @@ void traceInit(void)
 	}
 }
 
+
 extern void *__printfunc;
 
 /*------------------------
@@ -157,17 +158,24 @@ void gameProc(void *arg)
 	xScale = (u32)((SCREEN_WD * XSCALE_MAX) / SCREEN_WD_MAX);
 	int framerate = 60;
 
+	//not sure if all this is the best way to set that but it works
 	switch (osTvType)
 	{
 	case 0: // PAL
-		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_PAL_HAF1 : OS_VI_PAL_HPF1) : (ANTIALIASING ? OS_VI_PAL_LAF1 : OS_VI_PAL_LPF1);
+		schedulerMode = HIGH_RESOLUTION ? 
+						(ANTIALIASING ? OS_VI_PAL_HAF1 : OS_VI_PAL_HPF1) : OS_VI_PAL_LPF1;
+		schedulerMode = (HIGH_RESOLUTION && HIGH_RESOLUTION_HALF_Y) ? OS_VI_PAL_LPF1: schedulerMode;
 		framerate = 50;
 		break;
 	case 1: // NTSC
-		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_NTSC_HAF1 : OS_VI_NTSC_HPF1) : (ANTIALIASING ? OS_VI_NTSC_LAF1 : OS_VI_NTSC_LPF1);
+		schedulerMode = HIGH_RESOLUTION ? 
+						(ANTIALIASING ? OS_VI_NTSC_HAF1 : OS_VI_NTSC_HPF1) : OS_VI_NTSC_LPF1;
+		schedulerMode = (HIGH_RESOLUTION && HIGH_RESOLUTION_HALF_Y) ? OS_VI_NTSC_LPF1: schedulerMode;
 		break;
 	case 2: // MPAL
-		schedulerMode = HIGH_RESOLUTION ? (ANTIALIASING ? OS_VI_MPAL_HAF1 : OS_VI_MPAL_HPF1) : (ANTIALIASING ? OS_VI_MPAL_LAF1 : OS_VI_MPAL_LPF1);
+		schedulerMode = HIGH_RESOLUTION ? 
+						(ANTIALIASING ? OS_VI_MPAL_HAF1 : OS_VI_MPAL_HPF1) : OS_VI_MPAL_LPF1;
+		schedulerMode = (HIGH_RESOLUTION && HIGH_RESOLUTION_HALF_Y) ? OS_VI_MPAL_LPF1: schedulerMode;
 		framerate = 50;
 		break;
 	}

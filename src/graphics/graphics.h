@@ -17,12 +17,16 @@
 
 #if HIGH_RESOLUTION_HALF_Y
 #define SCREEN_HT 240
-#else
-#define SCREEN_HT 480
 #endif
 
 #define SCREEN_WD_MAX 640
 #define XSCALE_MAX 0x400
+
+#define SCREEN_WD_HI 640
+#define SCREEN_HT_HI 480
+
+#define RES_SCALE_X(x) ((float)x / (float)SCREEN_WD_HI * (float)SCREEN_WD)
+#define RES_SCALE_Y(y) ((float)y / (float)SCREEN_HT_HI * (float)SCREEN_HT)
 
 // render mode to write to z buffer but not depth compare when rendering
 #define RM_AA_ZUPD_OPA_SURF(clk)                                        \

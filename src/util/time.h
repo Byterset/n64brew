@@ -2,11 +2,10 @@
 #define _TIME_H
 
 #include <ultra64.h>
-
+#include "../constants.h"
 extern float gTimePassed;
 extern OSTime gLastTime;
 
-// #define FRAME_SKIP 1
 #define FIXED_DELTA_TIME ((1.0f + FRAME_SKIP) / 60.0f)
 
 void timeUpdateDelta();
