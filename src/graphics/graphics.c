@@ -10,6 +10,8 @@ Dynamic gfx_dynamic[2];
 extern OSMesgQueue gfxFrameMsgQ;
 extern OSMesgQueue *schedulerCommandQueue;
 
+extern RenderMode gRenderMode = ToonFlatShadingRenderMode;
+
 void *gLevelSegment;
 void *gMaterialSegment;
 
@@ -110,13 +112,23 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 	task->flags = OS_TASK_LOADABLE;
 	task->ucode_boot = (u64 *)rspbootTextStart;
 	task->ucode_boot_size = (u32)rspbootTextEnd - (u32)rspbootTextStart;
-	task->ucode = (u64 *)gspF3DEX2_fifoTextStart;
-	task->ucode_data = (u64 *)gspF3DEX2_fifoDataStart;
+	if (gRenderMode == WireframeRenderMode)
+	{
+		/* use L3DEX2 microcode to render wireframe*/
+		task->ucode = (u64 *)gspL3DEX2_fifoTextStart;
+		task->ucode_data = (u64 *)gspL3DEX2_fifoDataStart;
+	}
+	else
+	{
+		/* use default F3DEX2 Microcode*/
+		task->ucode = (u64 *)gspF3DEX2_fifoTextStart;
+		task->ucode_data = (u64 *)gspF3DEX2_fifoDataStart;
+	}
+
 	// task->ucode = (u64 *)gspF3DEX2_xbusTextStart;
 	// task->ucode_data = (u64 *)gspF3DEX2_xbusDataStart;
-	/* to render wireframe use microcode below*/
-	// task->ucode = (u64 *)gspL3DEX2_fifoTextStart;
-	// task->ucode_data = (u64 *)gspL3DEX2_fifoDataStart;
+	
+
 	task->output_buff = (u64 *)rdpOutput;
 	task->output_buff_size = (u64 *)rdpOutput + RDP_OUTPUT_SIZE / sizeof(u64);
 	task->ucode_data_size = SP_UCODE_DATA_SIZE;
