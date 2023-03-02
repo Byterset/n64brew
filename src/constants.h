@@ -10,7 +10,7 @@
 #define DEFAULT_FARPLANE 4000
 // enable high resolution rendering, essentially double x and y resolution
 // looks really crisp but there is a tradeoff where the FRAME_SKIP is set to 2 and the framerate practically halves
-#define HIGH_RESOLUTION 0
+#define HIGH_RESOLUTION 1
 // if enabled will limit y resolution, this gets mitigated by adjusting aspect ratio
 #define HIGH_RESOLUTION_HALF_Y 0
 // without antialiasing gaps between floor tiles become apparent
@@ -67,16 +67,6 @@
 #endif
 #else
 #define RAND(x) (rand() % (x)) /* random number between 0 to x */
-#endif
-
-#ifdef __N64__
-// this include needs to be here or this macro will break sometimes
-#include <PR/os.h>
-#include "n64compat.h"
-#define CUR_TIME_MS() OS_CYCLES_TO_USEC(osGetTime()) / 1000.0
-#else
-#include "compat.h"
-#define CUR_TIME_MS() getElapsedTimeMS()
 #endif
 
 #ifndef TRUE
