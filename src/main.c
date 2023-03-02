@@ -198,6 +198,7 @@ void gameProc(void *arg)
 	romInit();
 
 	controllersInit();
+	controllersClearState();
 	initAudio(framerate);
 	soundPlayerInit();
 	initStage00();

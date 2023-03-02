@@ -322,26 +322,24 @@ int Renderer_cullVisibility(GameObject* worldObjects,
   int visibilityCulled = 0;
   for (i = 0; i < worldObjectsCount; i++) {
     obj = worldObjects + i;
-    if (obj->modelType == NoneModel || !obj->visible
-#if FAKE_GROUND
-        || obj->modelType == GroundModel
-#endif
-
-    ) {
+    //cull all objects that have no model or are set to invisible
+    if (obj->modelType == NoneModel || !obj->visible) {
       worldObjectsVisibility[i] = FALSE;
       visibilityCulled++;
       continue;
     }
-
+//cull all objects that are not in the camera frustum
 #if RENDERER_FRUSTUM_CULLING
     {
       FrustumTestResult frustumTestResult;
+
+      //transform the local bounding box of the object into world space
       AABB* localAABB = localAABBs + i;
       AABB worldAABB = *localAABB;
-
       Vec3d_add(&worldAABB.min, &obj->position);
       Vec3d_add(&worldAABB.max, &obj->position);
 
+      //check if the box is inside the given frustum
       frustumTestResult = Frustum_boxInFrustum(frustum, &worldAABB);
       // printf("%d: %s", i, FrustumTestResultStrings[frustumTestResult]);
       if (frustumTestResult == OutsideFrustum) {
@@ -352,7 +350,7 @@ int Renderer_cullVisibility(GameObject* worldObjects,
       }
     }
 #endif
-
+    //if none of the above is the case, the object is visible
     worldObjectsVisibility[i] = TRUE;
   }
 

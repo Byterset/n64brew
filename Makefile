@@ -70,7 +70,7 @@ TARGETS =	$(BUILDDIR)/game.z64
 SPECFILE = spec
 
 HFILES =	src/main.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/controls/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h src/segments.h
-HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h 
+HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h src/constants.h
 HFILES += src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
 HFILES += src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
 HFILES += src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h
