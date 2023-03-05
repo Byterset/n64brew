@@ -714,13 +714,13 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
 		&frustum, garden_map_bounds);
 	char str[15];
-	sprintf(str, "# of obj culled %d", frustumCulled);
-	console_add_msg(str);
+	// sprintf(str, "# of obj culled %d", frustumCulled);
+	// console_add_msg(str);
 
-	//of the objects that are in the frustum, exclude those that are fully occluded
-	occlusionCulled = Renderer_occlusionCull(
-		game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
-		modelViewMtxF, projectionMtxF, viewport, &frustum, garden_map_bounds);
+	// //of the objects that are in the frustum, exclude those that are fully occluded
+	// occlusionCulled = Renderer_occlusionCull(
+	// 	game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
+	// 	modelViewMtxF, projectionMtxF, viewport, &frustum, garden_map_bounds);
 
 	// only alloc space for num visible objects
 	visibleObjectsCount = game->worldObjectsCount - frustumCulled;
@@ -980,7 +980,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		float height = 64;
 		Vec3d center;
 		Vec3d projected;
-
+		
 		for (i = 0; i < visibleObjectsCount; i++)
 		{
 			obj = visibleObjDistance[i].obj;
@@ -1028,7 +1028,6 @@ void drawSprite(unsigned short *sprData,
 {
 	int x = atX + (centered ? -(width / 2) : 0);
 	int y = atY + (centered ? -(height / 2) : 0);
-
 	gDPLoadTextureBlock(renderState->dl++, sprData, G_IM_FMT_RGBA, G_IM_SIZ_16b, sprWidth,
 						sprHeight, 0, G_TX_WRAP | G_TX_NOMIRROR,
 						G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_NOLOD, G_TX_NOLOD);

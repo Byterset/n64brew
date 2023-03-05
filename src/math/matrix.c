@@ -92,5 +92,5 @@ void mulMtxFMtxF(MtxF matrix_a, MtxF matrix_b, MtxF *out)
             res[i][j] = sum;
         }
     }
-    out = res;
+    out = &res;
 }

@@ -39,16 +39,16 @@
 #if HIGH_RESOLUTION
 #if HIGH_RESOLUTION_HALF_Y
 #define VSYNC_FPS 30
-#define FRAME_SKIP 2
+#define FRAME_SKIP 1
 #else
 #define VSYNC_FPS 30
-#define FRAME_SKIP 2
+#define FRAME_SKIP 1
 // #define VSYNC_FPS 15
 // #define FRAME_SKIP 4
 #endif
 #else  // low resolution
 #define VSYNC_FPS 60
-#define FRAME_SKIP 1
+#define FRAME_SKIP 0
 #endif
 
 // dumb

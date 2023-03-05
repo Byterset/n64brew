@@ -21,6 +21,8 @@ Vec2d *Vec2d_clone(Vec2d *v);
 Vec2d *Vec2d_copyFrom(Vec2d *self, Vec2d *other);
 Vec2d *Vec2d_add(Vec2d *self, Vec2d *other);
 Vec2d *Vec2d_sub(Vec2d *self, Vec2d *other);
+Vec2d *Vec2d_min(Vec2d *self, Vec2d *other);
+Vec2d *Vec2d_max(Vec2d *self, Vec2d *other);
 Vec2d *Vec2d_normalise(Vec2d *self);
 
 Vec2d *Vec2d_addScalar(Vec2d *self, float scalar);
