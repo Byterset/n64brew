@@ -102,6 +102,13 @@ Vec3d *Vec3d_sub(Vec3d *self, Vec3d *other)
 	return self;
 }
 
+Vec3d *Vec3d_div(Vec3d *self, Vec3d *other){
+	self->x /= other->x;
+	self->y /= other->y;
+	self->z /= other->z;
+	return self;
+}
+
 Vec3d *Vec3d_mulScalar(Vec3d *self, float scalar)
 {
 	self->x *= scalar;
@@ -137,6 +144,14 @@ Vec3d *Vec3d_lerp(Vec3d *self, Vec3d *v, float alpha)
 	self->z += (v->z - self->z) * alpha;
 
 	return self;
+}
+
+Vec3d Vec3d_fromVec4d(struct Vector4 *v){
+	Vec3d res;
+	res.x = v->x;
+	res.y = v->y;
+	res.z = v->z;
+	return res;
 }
 
 #ifndef __N64__

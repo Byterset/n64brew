@@ -2,6 +2,8 @@
 #ifndef VEC2D_H
 #define VEC2D_H
 
+#include "vec3d.h"
+
 typedef struct Vec2d
 {
 	float x;
@@ -30,6 +32,7 @@ Vec2d *Vec2d_divideScalar(Vec2d *self, float scalar);
 float Vec2d_distanceTo(Vec2d *self, Vec2d *other);
 Vec2d *Vec2d_directionTo(Vec2d *self, Vec2d *other, Vec2d *result);
 Vec2d *Vec2d_lerp(Vec2d *self, Vec2d *v0, Vec2d *v1, float t);
+Vec2d Vec2d_fromVec3d(Vec3d *v);
 float Vec2d_angle(Vec2d *self);
 void Vec2d_fromAngle(Vec2d *self, float angle);
 int Vec2d_equals(Vec2d *self, Vec2d *other);

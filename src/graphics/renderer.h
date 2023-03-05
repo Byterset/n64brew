@@ -3,7 +3,9 @@
 #define RENDERER_H
 
 #include "../math/frustum.h"
+#include "../math/matrix.h"
 #include "../gameobject.h"
+#include "graphics.h"
 
 // when painter's alg enabled we change render order and disable z buffer for
 // some objects that don't need it
@@ -32,9 +34,18 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 Vec3d *viewPos,
 								 AABB *localAABBs);
 
-int Renderer_cullVisibility(GameObject *worldObjects,
+int Renderer_frustumCull(GameObject *worldObjects,
 							int worldObjectsCount,
 							int *worldObjectsVisibility,
+							Frustum *frustum,
+							AABB *localAABBs);
+
+int Renderer_occlusionCull(GameObject *worldObjects,
+							int worldObjectsCount,
+							int *worldObjectsVisibility,
+							MtxF modelViewMatrix,
+							MtxF projMatrix,
+							ViewportF viewport,
 							Frustum *frustum,
 							AABB *localAABBs);
 
@@ -48,6 +59,8 @@ void Renderer_getSeparatingPlane(Vec3d *a, Vec3d *b, Plane *separatingPlane);
 int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 									   RendererSortDistance *b,
 									   Vec3d *viewPos);
+
+int Renderer_screenProject(Vec3d *obj,  MtxF modelMatrix,  MtxF projMatrix,  ViewportF viewport,  Vec3d *win);
 
 void Renderer_closestPointOnAABB(AABB *b,
 								 /* sourcePoint*/ Vec3d *p,

@@ -14,9 +14,12 @@
 #include "../util/memory.h"
 #include "../ed64/ed64io_usb.h"
 #include "../math/frustum.h"
+#include "../math/vec3d.h"
+#include "../math/vector3.h"
+#include "../math/vector4.h"
 #include "../game.h"
 #include "../gameobject.h"
-#include "../math/vec3d.h"
+
 
 #define RENDERER_FRUSTUM_CULLING 1
 
@@ -366,7 +369,7 @@ void Renderer_calcIntersecting(
 #endif
 }
 
-int Renderer_cullVisibility(GameObject *worldObjects,
+int Renderer_frustumCull(GameObject *worldObjects,
 							int worldObjectsCount,
 							int *worldObjectsVisibility,
 							Frustum *frustum,
@@ -415,6 +418,118 @@ int Renderer_cullVisibility(GameObject *worldObjects,
 	return visibilityCulled;
 }
 
+int Renderer_occlusionCull(GameObject *worldObjects,
+						   int worldObjectsCount,
+						   int *worldObjectsVisibility,
+						   MtxF modelViewMatrix,
+						   MtxF projMatrix,
+						   ViewportF viewport,
+						   Frustum *frustum,
+						   AABB *localAABBs)
+{
+	GameObject *obj;
+	MtxF mvp_matrix;
+	mulMtxFMtxF(projMatrix, modelViewMatrix, *mvp_matrix);
+	int i;
+	int visibilityCulled = 0;
+	for (i = 0; i < worldObjectsCount; i++)
+	{
+		// if this object is already culled by the frustum check, continue with the next
+		if (worldObjectsVisibility[i] == FALSE)
+		{
+			continue;
+		}
+		obj = worldObjects + i;
+
+		AABB *localAABB = localAABBs + i;
+		Vec3d aabb_min = localAABB->min;
+		Vec3d aabb_max = localAABB->max;
+		struct Vector4 corners[8] = {
+            {aabb_min.x, aabb_min.y, aabb_min.z, 1},
+            {aabb_min.x, aabb_min.y, aabb_max.z, 1},
+            {aabb_min.x, aabb_max.y, aabb_min.z, 1},
+            {aabb_min.x, aabb_max.y, aabb_max.z, 1},
+            {aabb_max.x, aabb_min.y, aabb_min.z, 1},
+            {aabb_max.x, aabb_min.y, aabb_max.z, 1},
+            {aabb_max.x, aabb_max.y, aabb_min.z, 1},
+            {aabb_max.x, aabb_max.y, aabb_max.z, 1}
+		};
+
+		Mtx objTransform;
+		// set the transform in world space for the gameobject to render
+		guPosition(&objTransform,
+				   obj->rotation.x,									   // rot x
+				   obj->rotation.y,							   // rot y
+				   obj->rotation.z,								   // rot z
+				   modelTypesProperties[obj->modelType].scale, // scale
+				   obj->position.x,							   // pos x
+				   obj->position.y,							   // pos y
+				   obj->position.z							   // pos z
+		);
+		int i;
+		float corner[4];
+		float translated[4];
+		float clip_coord[4];
+		MtxF objTransformF;
+		guMtxL2F(objTransformF, &objTransform);
+		Vec2d screen_corners[8];
+		for(i = 0; i < 8; i++){
+			corner[0] = corners[i].x;
+			corner[1] = corners[i].y;
+			corner[2] = corners[i].z;
+			corner[3] = corners[i].w;
+			mulMtxFVecF(objTransformF, corner, translated);
+			mulMtxFVecF(mvp_matrix, translated, clip_coord);
+			Vec3d_fromVec4d(clip_coord);
+			Vec3d_divScalar(clip_coord, clip_coord[3]);
+			// screen_corners[j] = Vec2d_add(Vec2d_mulScalar(),)
+		}
+
+
+		// AABB worldAABB = *localAABB;
+		// Vec3d_add(&worldAABB.min, &obj->position);
+		// Vec3d_add(&worldAABB.max, &obj->position);
+	}
+	return 0;
+}
+
+int Renderer_screenProject(Vec3d *obj,
+				  MtxF modelMatrix,
+				  MtxF projMatrix,
+				  ViewportF viewport,
+				  Vec3d *win)
+{
+	float in[4];
+	float out[4];
+
+	in[0] = obj->x;
+	in[1] = obj->y;
+	in[2] = obj->z;
+	in[3] = 1.0;
+	mulMtxFVecF(modelMatrix, in, out);
+	mulMtxFVecF(projMatrix, out, in);
+
+	if (in[3] == 0.0)
+		return FALSE;
+	in[0] /= in[3];
+	in[1] /= in[3];
+	in[2] /= in[3];
+	/* Map x, y and z to range 0-1 */
+	in[0] = in[0] * 0.5 + 0.5;
+	in[1] = in[1] * 0.5 + 0.5;
+	in[2] = in[2] * 0.5 + 0.5;
+
+	/* Map x,y to viewport */
+	in[0] = in[0] * viewport[2] + viewport[0];
+	in[1] = in[1] * viewport[3] + viewport[1];
+
+	win->x = in[0];
+	win->y = in[1];
+	win->z = in[2];
+	return TRUE;
+}
+
+
 void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 int worldObjectsCount,
 								 int *worldObjectsVisibility,
@@ -424,7 +539,7 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 AABB *localAABBs)
 {
 	int i;
-	RendererSortDistance *sortDist;
+	RendererSortDistance *sortDist; //obj, distance, worldAABB
 
 	int visibleObjectIndex = 0;
 	for (i = 0; i < worldObjectsCount; ++i)

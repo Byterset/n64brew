@@ -5,6 +5,7 @@
 #include "../controls/controller.h"
 #include "../audio/soundplayer.h"
 #include "../../build/src/audio/clips.h"
+// #include "../font/font_ext.h"
 struct GraphicsTask gGraphicsTasks[2];
 Dynamic gfx_dynamic[2];
 extern OSMesgQueue gfxFrameMsgQ;
@@ -95,8 +96,27 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 	{
 		callback(data, renderState, targetTask);
 	}
-
 	gDPPipeSync(renderState->dl++);
+
+	/*
+	 * Draw Text
+	 */
+	gDPSetScissor(renderState->dl++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD, SCREEN_HT);
+
+	font_init(&renderState->dl);
+	font_set_transparent(1);
+
+	font_set_scale(1.0, 1.0);
+	font_set_win(200, 1);
+
+	console_print_all(renderState);
+
+	font_finish(&renderState->dl);
+
+	/*
+	 *
+	 */
+
 	gDPFullSync(renderState->dl++);
 	gSPEndDisplayList(renderState->dl++);
 
