@@ -9,6 +9,7 @@
 #include "../build/src/audio/clips.h"
 
 #include <math.h>
+#include <string.h>
 #include "util/rom.h"
 #include "util/memory.h"
 // game
@@ -16,6 +17,9 @@
 #include "animation/animation.h"
 #include "constants.h"
 #include "math/frustum.h"
+#include "math/vec2d.h"
+#include "math/vec3d.h"
+#include "math/matrix.h"
 #include "game.h"
 #include "gameobject.h"
 #include "controls/input.h"
@@ -27,8 +31,7 @@
 #include "graphics/renderer.h"
 #include "sprite.h"
 #include "trace.h"
-#include "math/vec2d.h"
-#include "math/vec3d.h"
+
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
 
@@ -45,6 +48,8 @@
 
 #include "ed64/ed64io.h"
 
+#include "util/debug_console.h"
+
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0
 #define CONSOLE_SHOW_TRACING 0
@@ -54,7 +59,7 @@
 #define CONSOLE_SHOW_RCP_TASKS 0
 #define LOG_TRACES 0
 #define CONTROLLER_DEAD_ZONE 0.1
-#define DRAW_SPRITES 0
+#define DRAW_SPRITES 1
 
 static Vec3d viewPos;
 static Vec3d viewRot;
@@ -86,8 +91,6 @@ float profAvgPath;
 // float lastFrameTime;
 float profilingAverages[MAX_TRACE_EVENT_TYPE];
 
-static int objectsCulled;
-
 static int usbEnabled;
 static int usbResult;
 static UsbLoggerState usbLoggerState;
@@ -100,11 +103,6 @@ static int twoCycleMode;
 PhysWorldData physWorldData;
 
 void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState);
-int screenProject(Vec3d *obj,
-				  MtxF modelMatrix,
-				  MtxF projMatrix,
-				  ViewportF viewport,
-				  Vec3d *win);
 void drawSprite(unsigned short *sprData,
 				int sprWidth,
 				int sprHeight,
@@ -168,7 +166,7 @@ void initStage00()
 	loggingTrace = FALSE;
 
 	twoCycleMode = FALSE;
-	gRenderMode = ToonFlatShadingRenderMode;
+	gRenderMode = TextureNoLightingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
 	Vec3d_init(&viewPos, 0.0F, 0.0F, -400.0F);
@@ -696,26 +694,38 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	int *worldObjectsVisibility;
 	int *intersectingObjects;
 	int visibleObjectsCount;
-	int visibilityCulled = 0;
-	float profStartSort, profStartIter, profStartAnim;
-	// float profStartAnimLerp;
-	float profStartFrustum;
+	int frustumCulled = 0;
+	int occlusionCulled = 0;
+	ViewportF viewport = {0, 0, SCREEN_WD, SCREEN_HT};
+	MtxF modelViewMtxF;
+	MtxF projectionMtxF;
 
+	//get the camera view matrix as well as the projection matrix
+	guMtxL2F(modelViewMtxF, &dynamicp->camera);
+	guMtxL2F(projectionMtxF, &dynamicp->projection);
+
+	//get the current gamestate
 	game = Game_get();
+
 	worldCollisionTris = game->physicsState.worldData->worldMeshTris;
 	worldObjectsVisibility = (int *)malloc(game->worldObjectsCount * sizeof(int));
 	invariant(worldObjectsVisibility);
 
-	// profStartFrustum = CUR_TIME_MS();
-	visibilityCulled = Renderer_cullVisibility(
+	//cull objects that are outside of the view frustum
+	frustumCulled = Renderer_frustumCull(
 		game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
 		&frustum, garden_map_bounds);
-	objectsCulled = visibilityCulled;
+	char str[15];
+	sprintf(str, "# of obj culled %d", frustumCulled);
+	console_add_msg(str);
 
-	// Trace_addEvent(DrawFrustumCullTraceEvent, profStartFrustum, CUR_TIME_MS());
+	//of the objects that are in the frustum, exclude those that are fully occluded
+	occlusionCulled = Renderer_occlusionCull(
+		game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
+		modelViewMtxF, projectionMtxF, viewport, &frustum, garden_map_bounds);
 
 	// only alloc space for num visible objects
-	visibleObjectsCount = game->worldObjectsCount - visibilityCulled;
+	visibleObjectsCount = game->worldObjectsCount - frustumCulled;
 	visibleObjDistance = (RendererSortDistance *)malloc(
 		(visibleObjectsCount) * sizeof(RendererSortDistance));
 	invariant(visibleObjDistance);
@@ -725,7 +735,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 								worldObjectsVisibility, visibleObjectsCount,
 								visibleObjDistance, &game->viewPos,
 								garden_map_bounds);
-	// Trace_addEvent(DrawSortTraceEvent, profStartSort, CUR_TIME_MS());
 
 	// boolean of whether an object intersects another (for z buffer optimization)
 	intersectingObjects = (int *)malloc((visibleObjectsCount) * sizeof(int));
@@ -856,9 +865,9 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 		// set the transform in world space for the gameobject to render
 		guPosition(&dynamicp->objTransforms[i],
-				   0.0F,									   // rot x
+				   obj->rotation.x,									   // rot x
 				   obj->rotation.y,							   // rot y
-				   0.0F,									   // rot z
+				   obj->rotation.z,								   // rot z
 				   modelTypesProperties[obj->modelType].scale, // scale
 				   obj->position.x,							   // pos x
 				   obj->position.y,							   // pos y
@@ -871,7 +880,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		if (Renderer_isAnimatedGameObject(obj))
 		{
 			// case for multi-part objects using rigid body animation
-			//       profStartAnim = CUR_TIME_MS();
 
 			modelMeshParts = getAnimationNumModelMeshParts(obj->modelType);
 			curAnimRange = getCurrentAnimationRange(obj);
@@ -879,7 +887,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 			for (modelMeshIdx = 0; modelMeshIdx < modelMeshParts; ++modelMeshIdx)
 			{
-				//         // profStartAnimLerp = CUR_TIME_MS();
 				//         // lerping takes about 0.2ms per bone
 				if (shouldLerpAnimation(obj->modelType))
 				{
@@ -903,8 +910,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 						&animFrame			 // the resultant interpolated animation frame
 					);
 				}
-				//         // Trace_addEvent(AnimLerpTraceEvent, profStartAnimLerp,
-				//         // CUR_TIME_MS());
 
 				// push matrix with the blender to n64 coord rotation, then mulitply
 				// it by the model's rotation and offset
@@ -957,7 +962,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 				gSPPopMatrix(renderState->dl++, G_MTX_MODELVIEW);
 			}
-			//       Trace_addEvent(DrawAnimTraceEvent, profStartAnim, CUR_TIME_MS());
 		}
 		else
 		{
@@ -973,17 +977,12 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	}
 
 #if DRAW_SPRITES
-	{
-		ViewportF viewport = {0, 0, SCREEN_WD, SCREEN_HT};
+	{		
 		float width = 64;
 		float height = 64;
 		Vec3d center;
 		Vec3d projected;
-		MtxF modelViewMtxF;
-		MtxF projectionMtxF;
 
-		guMtxL2F(modelViewMtxF, &dynamicp->camera);
-		guMtxL2F(projectionMtxF, &dynamicp->projection);
 		for (i = 0; i < visibleObjectsCount; i++)
 		{
 			obj = visibleObjDistance[i].obj;
@@ -993,7 +992,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 			{
 				continue;
 			}
-			screenProject(&center, modelViewMtxF, projectionMtxF, viewport,
+			Renderer_screenProject(&center, modelViewMtxF, projectionMtxF, viewport,
 						  &projected);
 
 			// render sprites
@@ -1014,24 +1013,9 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	}
 #endif
 
-	// if (nuScRetraceCounter % 60 == 0) {
-	//   debugPrintf("[");
-	//   for (i = 0; i < visibleObjectsCount; i++) {
-	//     {
-	//       RendererSortDistance* dist = (visibleObjDistance + i);
-	//       debugPrintf("%d: %s(%f),\n", i,
-	//       ModelTypeStrings[dist->obj->modelType],
-	//                   dist->distance);
-	//     }
-	//   }
-	//   debugPrintf("]\n");
-	// }
-
 	stackMallocFree(intersectingObjects);
 	stackMallocFree(visibleObjDistance);
 	stackMallocFree(worldObjectsVisibility);
-
-	// Trace_addEvent(DrawIterTraceEvent, profStartIter, CUR_TIME_MS());
 }
 
 void drawSprite(unsigned short *sprData,
@@ -1075,52 +1059,4 @@ void drawSprite(unsigned short *sprData,
 	gDPPipeSync(renderState->dl++);
 }
 
-void mulMtxFVecF(MtxF matrix, float *in /*[4]*/, float *out /*[4]*/)
-{
-	int i;
-
-	for (i = 0; i < 4; i++)
-	{
-		out[i] = in[0] * matrix[0][i] + //  0, 1, 2, 3
-				 in[1] * matrix[1][i] + //  4, 5, 6, 7,
-				 in[2] * matrix[2][i] + //  8, 9,10, 9,
-				 in[3] * matrix[3][i];	// 12,13,14,15,
-	}
-}
-
 // like gluProject()
-int screenProject(Vec3d *obj,
-				  MtxF modelMatrix,
-				  MtxF projMatrix,
-				  ViewportF viewport,
-				  Vec3d *win)
-{
-	float in[4];
-	float out[4];
-
-	in[0] = obj->x;
-	in[1] = obj->y;
-	in[2] = obj->z;
-	in[3] = 1.0;
-	mulMtxFVecF(modelMatrix, in, out);
-	mulMtxFVecF(projMatrix, out, in);
-
-	if (in[3] == 0.0)
-		return FALSE;
-	in[0] /= in[3];
-	in[1] /= in[3];
-	in[2] /= in[3];
-	/* Map x, y and z to range 0-1 */
-	in[0] = in[0] * 0.5 + 0.5;
-	in[1] = in[1] * 0.5 + 0.5;
-	in[2] = in[2] * 0.5 + 0.5;
-
-	/* Map x,y to viewport */
-	in[0] = in[0] * viewport[2] + viewport[0];
-	in[1] = in[1] * viewport[3] + viewport[1];
-
-	win->x = in[0];
-	win->y = in[1];
-	win->z = in[2];
-	return TRUE;
-}

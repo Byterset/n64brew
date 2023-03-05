@@ -2,6 +2,8 @@
 #ifndef VEC3D_H
 #define VEC3D_H
 
+#include "vector4.h"
+
 typedef struct Vec3d
 {
 	float x;
@@ -19,6 +21,7 @@ Vec3d *Vec3d_directionTo(Vec3d *self, Vec3d *other, Vec3d *result);
 
 Vec3d *Vec3d_add(Vec3d *self, Vec3d *other);
 Vec3d *Vec3d_sub(Vec3d *self, Vec3d *other);
+Vec3d *Vec3d_div(Vec3d *self, Vec3d *other);
 
 Vec3d *Vec3d_mulScalar(Vec3d *self, float scalar);
 Vec3d *Vec3d_divScalar(Vec3d *self, float scalar);
@@ -26,10 +29,13 @@ Vec3d *Vec3d_divScalar(Vec3d *self, float scalar);
 Vec3d *Vec3d_normalise(Vec3d *self);
 Vec3d *Vec3d_lerp(Vec3d *self, Vec3d *v, float alpha);
 
+Vec3d Vec3d_fromVec4d(struct Vector4 *v);
+
 float Vec3d_magSq(Vec3d *self);
 float Vec3d_mag(Vec3d *self);
 float Vec3d_dot(Vec3d *self, Vec3d *other);
 void Vec3d_cross(Vec3d *self, Vec3d *other, Vec3d *result);
+
 
 #ifndef __N64__
 char *Vec3d_toString(Vec3d *self, char *buffer);

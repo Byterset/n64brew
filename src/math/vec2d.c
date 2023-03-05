@@ -180,4 +180,11 @@ void Vec2d_print(Vec2d *self)
 {
 	printf("{x:%f, y:%f}", self->x, self->y);
 }
+
+Vec2d Vec2d_fromVec3d(Vec3d *v){
+	Vec2d res;
+	res.x = v->x;
+	res.y = v->y;
+	return res;
+}
 #endif

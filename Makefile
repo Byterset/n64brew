@@ -72,7 +72,7 @@ HFILES =	src/main.h src/math/vec3d.h src/math/vec2d.h src/gameobject.h src/game.
 HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h src/constants.h
 HFILES += src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
 HFILES += src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
-HFILES += src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h
+HFILES += src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h src/math/matrix.h src/font/font.h src/font/font_ext.h src/font/letters_img.h src/util/debug_console.h
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -92,7 +92,7 @@ CODEFILES =  src/main.c src/stage00.c src/math/vec3d.c src/math/vec2d.c src/game
 CODEFILES += src/math/mathf.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/rom.c src/math/quaternion.c
 CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
 CODEFILES += src/util/memory.c src/util/time.c src/graphics/color.c src/graphics/renderstate.c 
-CODEFILES += src/graphics/graphics.c src/graphics/initgfx.c src/controls/controller.c
+CODEFILES += src/graphics/graphics.c src/graphics/initgfx.c src/controls/controller.c src/math/matrix.c src/font/font.c src/util/debug_console.c
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
 endif
