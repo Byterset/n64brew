@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "vec2d.h"
+#include "mathf.h"
 #include "../util/memory.h"
 
 #ifdef __N64__
@@ -65,6 +66,20 @@ Vec2d *Vec2d_sub(Vec2d *self, Vec2d *other)
 {
 	self->x -= other->x;
 	self->y -= other->y;
+	return self;
+}
+
+Vec2d *Vec2d_min(Vec2d *self, Vec2d *other)
+{
+	self->x = minf(self->x, other->x);
+	self->y = minf(self->y, other->y);
+	return self;
+}
+
+Vec2d *Vec2d_max(Vec2d *self, Vec2d *other)
+{
+	self->x = maxf(self->x, other->x);
+	self->y = maxf(self->y, other->y);
 	return self;
 }
 

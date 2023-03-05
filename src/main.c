@@ -6,6 +6,7 @@
 #include "util/memory.h"
 #include "util/rom.h"
 #include "util/time.h"
+#include "font/font_ext.h"
 
 #include "graphics/graphics.h"
 #include "game.h"
@@ -277,6 +278,7 @@ void gameProc(void *arg)
 
 			//Update Input, Positions, Gamelogic and Physics
 			updateGame00();
+			
 			timeUpdateDelta();
 
 			break;

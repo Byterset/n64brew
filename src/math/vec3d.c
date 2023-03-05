@@ -119,10 +119,17 @@ Vec3d *Vec3d_mulScalar(Vec3d *self, float scalar)
 
 Vec3d *Vec3d_divScalar(Vec3d *self, float scalar)
 {
-	self->x /= scalar;
-	self->y /= scalar;
-	self->z /= scalar;
-	return self;
+    if (scalar != 0.0f) {
+        self->x /= scalar;
+        self->y /= scalar;
+        self->z /= scalar;
+    } else {
+        // Handle division by zero
+        self->x = -1;
+        self->y = -1;
+        self->z = -1;
+    }
+    return self;
 }
 
 float Vec3d_dot(Vec3d *self, Vec3d *other)

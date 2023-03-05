@@ -1,7 +1,7 @@
 #include "graphics.h"
 #include "initgfx.h"
 #include "../util/memory.h"
-
+#include "../util/time.h"
 #include "../controls/controller.h"
 #include "../audio/soundplayer.h"
 #include "../../build/src/audio/clips.h"
@@ -108,7 +108,9 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 
 	font_set_scale(1.0, 1.0);
 	font_set_win(200, 1);
-
+	char *fps[7];
+	sprintf(fps, "fps:%d", (int)(1000.0f/gDeltaTimeMS));
+	SHOWFONT(&renderState->dl, fps, SCREEN_WD-60, 10);
 	console_print_all(renderState);
 
 	font_finish(&renderState->dl);

@@ -15,6 +15,7 @@
 #include "../ed64/ed64io_usb.h"
 #include "../math/frustum.h"
 #include "../math/vec3d.h"
+#include "../math/vec2d.h"
 #include "../math/vector3.h"
 #include "../math/vector4.h"
 #include "../game.h"
@@ -429,7 +430,21 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 {
 	GameObject *obj;
 	MtxF mvp_matrix;
-	mulMtxFMtxF(projMatrix, modelViewMatrix, *mvp_matrix);
+
+	int a;
+    int b;
+    int c;
+    MtxF res;
+    for (a = 0; a < 4; a++) {
+        for (b = 0; b < 4; b++) {
+            float sum = 0.0f;
+            for (c = 0; c < 4; c++) {
+                sum += modelViewMatrix[a][c] * projMatrix[c][b];
+            }
+            mvp_matrix[a][b] = sum;
+        }
+    }
+	// mulMtxFMtxF(&projMatrix, &modelViewMatrix, &mvp_matrix);
 	int i;
 	int visibilityCulled = 0;
 	for (i = 0; i < worldObjectsCount; i++)
@@ -466,29 +481,69 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 				   obj->position.y,							   // pos y
 				   obj->position.z							   // pos z
 		);
-		int i;
+		int j;
 		float corner[4];
 		float translated[4];
 		float clip_coord[4];
 		MtxF objTransformF;
 		guMtxL2F(objTransformF, &objTransform);
 		Vec2d screen_corners[8];
-		for(i = 0; i < 8; i++){
+		Vec2d win_size = {(float)SCREEN_WD, (float)SCREEN_HT};
+		for(j = 0; j < 8; j++){
 			corner[0] = corners[i].x;
 			corner[1] = corners[i].y;
 			corner[2] = corners[i].z;
 			corner[3] = corners[i].w;
-			mulMtxFVecF(objTransformF, corner, translated);
-			mulMtxFVecF(mvp_matrix, translated, clip_coord);
-			Vec3d_fromVec4d(clip_coord);
-			Vec3d_divScalar(clip_coord, clip_coord[3]);
-			// screen_corners[j] = Vec2d_add(Vec2d_mulScalar(),)
+			mulMtxFVecF(objTransformF, &corner, &translated);
+			mulMtxFVecF(mvp_matrix, &translated, &clip_coord);
+			Vec3d clip3d = {clip_coord[0], clip_coord[1], clip_coord[2]};
+
+			Vec3d_divScalar(&clip3d, clip_coord[3]);
+
+			
+			// sprintf(translated_str, "clip3d_w: %f", clip_coord[3]);
+			
+			Vec2d ndc_2d = {clip3d.x, clip3d.y};
+			Vec2d screen_corner = ndc_2d;
+			Vec2d_mulScalar(&screen_corner, 0.5f);
+			Vec2d_add(&screen_corner, &win_size);
+			screen_corners[j] = screen_corner;
+
 		}
+		corner[0] = obj->position.x;
+		corner[1] = obj->position.y;
+		corner[2] = obj->position.z;
+		corner[3] = 1.0f;
+		mulMtxFVecF(objTransformF, &corners[0], &translated);
+		mulMtxFVecF(mvp_matrix, &translated, &clip_coord);
+		// char *translated_str[20];
+		// sprintf(translated_str, "screenCn: (%f,%f,%f)", clip_coord[0], clip_coord[1], clip_coord[2] );
+		// console_add_msg(translated_str);
 
+		Vec2d screen_aabb_min = screen_corners[0];
+        Vec2d screen_aabb_max = screen_corners[0];
+		// char *translated_str[20];
+		// sprintf(translated_str, "corner: (%f,%f)", screen_aabb_min.x, screen_aabb_min.y);
+		// console_add_msg(translated_str);
+		int k;
+        for (k = 1; k < 8; k++) {
+			Vec2d current = screen_corners[k];
 
-		// AABB worldAABB = *localAABB;
-		// Vec3d_add(&worldAABB.min, &obj->position);
-		// Vec3d_add(&worldAABB.max, &obj->position);
+			// char *translated_str[20];
+			// sprintf(translated_str, "screenCn: (%f,%f)", screen_corners[k].x, screen_corners[k].y);
+			// console_add_msg(translated_str);
+
+			screen_aabb_min.x = screen_aabb_min.x < screen_corners[k].x ? screen_aabb_min.x : screen_corners[k].x;
+			// screen_aabb_min.y = screen_aabb_min.y < screen_corners[k].y ? screen_aabb_min.y : screen_corners[k].y;
+
+			// screen_aabb_max.x = screen_aabb_max.x > screen_corners[k].x ? screen_aabb_max.x : screen_corners[k].x;
+			// screen_aabb_max.y = screen_aabb_max.y > screen_corners[k].y ? screen_aabb_max.y : screen_corners[k].y;
+			// Vec2d_min(&screen_aabb_min, &current);
+            // Vec2d_max(&screen_aabb_max, &current);
+        }
+
+		// sprintf(screen_bb, "ScreenBB: min(%d,%d), max(%d,%d)", screen_aabb_min.x, screen_aabb_min.y, screen_aabb_max.x, screen_aabb_max.y);
+		// console_add_msg(screen_bb);
 	}
 	return 0;
 }
