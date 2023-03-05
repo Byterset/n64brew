@@ -125,7 +125,7 @@ default: $(TARGETS)
 # $(MODEL_OBJS):
 # 	# empty rule for object files
 
-$(BUILDDIR)/src/%.o: src/%.c | $(BUILDDIR) $(HFILES) build/src/audio/clips.h
+$(BUILDDIR)/src/%.o: src/%.c $(HFILES) | $(BUILDDIR) build/src/audio/clips.h
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 

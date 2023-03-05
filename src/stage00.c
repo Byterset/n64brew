@@ -9,7 +9,6 @@
 #include "../build/src/audio/clips.h"
 
 #include <math.h>
-#include <string.h>
 #include "util/rom.h"
 #include "util/memory.h"
 // game
@@ -136,7 +135,6 @@ s16 seqId = -1;
 void initStage00()
 {
 	Game *game;
-	int i;
 
 	// load in the models segment into higher memory
 	romCopy(_modelsSegmentRomStart, _modelsSegmentStart, (_modelsSegmentRomEnd - _modelsSegmentRomStart));
@@ -262,7 +260,7 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	Game *game;
 	// int consoleOffset;
 	// float curTime;
-	int i;
+	// int i;
 	// float profStartDraw, profEndDraw, profStartDebugDraw;
 
 	game = Game_get();
@@ -436,8 +434,8 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 
 void logTraceChunk()
 {
-	int i;
-	int printedFirstItem;
+	// int i;
+	// int printedFirstItem;
 	// #if ED64
 
 	//   printedFirstItem = FALSE;
@@ -479,10 +477,10 @@ void logTraceChunk()
 /* The game progressing process for stage 0 */
 void updateGame00(void)
 {
-	int i;
-	Game *game;
+	// int i;
+	// Game *game;
 
-	game = Game_get();
+	// game = Game_get();
 
 	// Vec2d_origin(&input.direction);
 	Input_init(&input);
