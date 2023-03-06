@@ -217,12 +217,13 @@ void quatLook(struct Vector3 *lookDir, struct Vector3 *up, struct Quaternion *ou
 {
 	// calculate orthonormal basis
 	struct Vector3 zDir;
-	vector3Normalize(lookDir, &zDir);
+	vector3Copy(&zDir, lookDir);
+	vector3NormalizeSelf(&zDir);
 	vector3Negate(&zDir, &zDir);
 
 	struct Vector3 yDir;
 	vector3AddScaled(up, &zDir, -vector3Dot(&zDir, up), &yDir);
-	vector3Normalize(&yDir, &yDir);
+	vector3NormalizeSelf(&yDir);
 
 	struct Vector3 xDir;
 	vector3Cross(&yDir, &zDir, &xDir);

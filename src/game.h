@@ -16,13 +16,13 @@ GameObject *Game_findObjectByType(ModelType modelType);
 GameObject *Game_findObjectNByType(ModelType modelType, int n);
 
 int Game_countObjectsInCategory(ModelTypeCategory category);
-GameObject *Game_getIntersectingObject(Vec3d *raySource, Vec3d *rayDirection);
+GameObject *Game_getIntersectingObject(struct Vector3 *raySource, struct Vector3 *rayDirection);
 
 float Game_getObjRadius(GameObject *obj);
 
-int Game_rayIntersectsSphere(Vec3d *origin,
-							 Vec3d *rayDirection,
-							 Vec3d *objCenter,
+int Game_rayIntersectsSphere(struct Vector3 *origin,
+							 struct Vector3 *rayDirection,
+							 struct Vector3 *objCenter,
 							 float objRadius);
 
 int Game_canSeeOtherObject(GameObject *viewer,
@@ -31,7 +31,7 @@ int Game_canSeeOtherObject(GameObject *viewer,
 						   GameObject *occuludingObjects,
 						   int occuludingObjectsCount);
 
-void Game_getObjCenter(GameObject *obj, Vec3d *result);
+void Game_getObjCenter(GameObject *obj, struct Vector3 *result);
 float Game_getObjRadius(GameObject *obj);
 
 void Game_update(Input *input);
@@ -44,8 +44,8 @@ void Game_update(Input *input);
 typedef struct RaycastTraceEvent
 {
 	int result;
-	Vec3d origin;
-	Vec3d direction;
+	struct Vector3 origin;
+	struct Vector3 direction;
 	GameObject *hit;
 } RaycastTraceEvent;
 void Game_traceRaycast(RaycastTraceEvent event);

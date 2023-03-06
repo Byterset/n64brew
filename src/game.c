@@ -24,7 +24,7 @@
 #include "modeltype.h"
 #include "player.h"
 #include "trace.h"
-#include "math/vec3d.h"
+#include "math/vector3.h"
 #include "controls/controller.h"
 #include "constants.h"
 
@@ -34,7 +34,7 @@ static Game game;
 
 void Game_initGameObjectPhysBody(PhysBody *body, GameObject *obj)
 {
-	Vec3d objCenter;
+	struct Vector3 objCenter;
 	Game_getObjCenter(obj, &objCenter);
 	PhysBody_init(body, modelTypesProperties[obj->modelType].mass,
 				  modelTypesProperties[obj->modelType].radius, &objCenter,
@@ -67,8 +67,8 @@ void Game_init(GameObject *worldObjects,
 	}
 
 	// camera
-	Vec3d_init(&game.viewPos, 0.0F, 0.0F, -400.0F);
-	Vec3d_init(&game.viewRot, 0.0F, 0.0F, 0.0F);
+	vector3Init(&game.viewPos, 0.0F, 0.0F, -400.0F);
+	vector3Init(&game.viewRot, 0.0F, 0.0F, 0.0F);
 	game.viewZoom = 2.0f;
 	game.freeView = 0;
 
@@ -79,7 +79,7 @@ void Game_init(GameObject *worldObjects,
 	PhysState_init(&game.physicsState, physWorldData);
 
 	// setup camera
-	Vec3d_copyFrom(&game.viewTarget, &game.player.goose->position);
+	vector3Copy(&game.viewTarget, &game.player.goose->position);
 
 	// TODO: move these to be statically allocated per map?
 	itemsCount = Game_countObjectsInCategory(ItemModelType);
@@ -119,7 +119,7 @@ void Game_init(GameObject *worldObjects,
 #if GENERATE_DEBUG_BODIES
 	for (i = 0; i < NUM_PHYS_BODIES; ++i)
 	{
-		Vec3d_init(&pos, RAND(200), RAND(10) + 10, RAND(200));
+		vector3Init(&pos, RAND(200), RAND(10) + 10, RAND(200));
 		PhysBody_init(&physicsBodies[i],
 					  /* mass */ 10.0,
 					  /* radius */ 20.0, &pos, i);
@@ -241,7 +241,7 @@ GameObject *Game_findObjectNByType(ModelType modelType, int n)
 void Game_updateCamera(Game *game, Input *input)
 {
 	float cameraDist;
-	Vec3d cameraOffset;
+	struct Vector3 cameraOffset;
 	float desiredZoom, desiredZoomDist;
 
 	// spring to desired zoom level
@@ -251,28 +251,28 @@ void Game_updateCamera(Game *game, Input *input)
 	desiredZoomDist = game->viewZoom - desiredZoom;
 	game->viewZoom -= desiredZoomDist * 0.1;
 
-	// Vec3d_set(&cameraOffset, 0.0F, 0.65F, -0.8F);  // grid aligned aerial
-	// Vec3d_set(&cameraOffset, -0.8F, 0.9F, -0.8F);  // 45 to grid aerial
-	// Vec3d_set(&cameraOffset, 0.0F, 0, -0.8F); // side view
-	Vec3d_set(&cameraOffset, -0.4F, 0.5F, -0.6F); // goose game
+	// vector3Set(&cameraOffset, 0.0F, 0.65F, -0.8F);  // grid aligned aerial
+	// vector3Set(&cameraOffset, -0.8F, 0.9F, -0.8F);  // 45 to grid aerial
+	// vector3Set(&cameraOffset, 0.0F, 0, -0.8F); // side view
+	vector3Set(&cameraOffset, -0.4F, 0.5F, -0.6F); // goose game
 
-	Vec3d_normalise(&cameraOffset);
+	vector3NormalizeSelf(&cameraOffset);
 
 	// cameraDist = 1000.0f / game->viewZoom;  // 45deg fov
 	cameraDist = 2500.0f / game->viewZoom; // 15deg fov
-	Vec3d_mulScalar(&cameraOffset, cameraDist);
+	vector3ScaleSelf(&cameraOffset, cameraDist);
 
-	Vec3d_copyFrom(&game->viewPos, &game->player.goose->position);
-	Vec3d_add(&game->viewPos, &cameraOffset);
+	vector3Copy(&game->viewPos, &game->player.goose->position);
+	vector3AddToSelf(&game->viewPos, &cameraOffset);
 
 	// look at goose
-	Vec3d_copyFrom(&game->viewTarget, &game->player.goose->position);
+	vector3Copy(&game->viewTarget, &game->player.goose->position);
 }
 
 void Game_updatePhysics(Game *game)
 {
 	int i;
-	Vec3d positionDelta, physUpdatedPosition;
+	struct Vector3 positionDelta, physUpdatedPosition;
 	PhysBody *body;
 	GameObject *obj;
 	// for now we need to copy the object's pos to the
@@ -283,7 +283,7 @@ void Game_updatePhysics(Game *game)
 		obj = Game_getObjectByID(body->id);
 
 		Game_getObjCenter(obj, &positionDelta);
-		Vec3d_sub(&positionDelta, &body->position);
+		vector3SubFromSelf(&positionDelta, &body->position);
 		PhysBody_translateWithoutForce(body, &positionDelta);
 	}
 
@@ -298,10 +298,9 @@ void Game_updatePhysics(Game *game)
 		obj = Game_getObjectByID(body->id);
 		obj->position = body->position;
 
-		Vec3d_copyFrom(&physUpdatedPosition, &body->position);
-		Vec3d_sub(&physUpdatedPosition,
-				  &modelTypesProperties[obj->modelType].centroidOffset);
-		Vec3d_copyFrom(&obj->position, &physUpdatedPosition);
+		vector3Copy(&physUpdatedPosition, &body->position);
+		vector3SubFromSelf(&physUpdatedPosition, &modelTypesProperties[obj->modelType].centroidOffset);
+		vector3Copy(&obj->position, &physUpdatedPosition);
 	}
 }
 
@@ -361,19 +360,19 @@ void Game_traceRaycast(RaycastTraceEvent event)
 #endif
 #endif
 
-float Game_rayIntersectsSphereDist(Vec3d *origin,
-								   Vec3d *rayDirection,
-								   Vec3d *objCenter,
+float Game_rayIntersectsSphereDist(struct Vector3 *origin,
+								   struct Vector3 *rayDirection,
+								   struct Vector3 *objCenter,
 								   float objRadius)
 {
-	Vec3d l;
+	struct Vector3 l;
 	float tca, d2, radius2, thc, t0, t1;
 	// l = objCenter - origin;
-	Vec3d_copyFrom(&l, objCenter);
-	Vec3d_sub(&l, origin);
+	vector3Copy(&l, objCenter);
+	vector3SubFromSelf(&l, origin);
 
-	tca = Vec3d_dot(&l, rayDirection);
-	d2 = Vec3d_dot(&l, &l) - tca * tca;
+	tca = vector3Dot(&l, rayDirection);
+	d2 = vector3Dot(&l, &l) - tca * tca;
 	radius2 = objRadius * objRadius;
 
 	if (d2 > radius2)
@@ -403,9 +402,9 @@ float Game_rayIntersectsSphereDist(Vec3d *origin,
 	return t0;
 }
 
-int Game_rayIntersectsSphere(Vec3d *origin,
-							 Vec3d *rayDirection,
-							 Vec3d *objCenter,
+int Game_rayIntersectsSphere(struct Vector3 *origin,
+							 struct Vector3 *rayDirection,
+							 struct Vector3 *objCenter,
 							 float objRadius)
 {
 	float dist =
@@ -417,10 +416,10 @@ int Game_rayIntersectsSphere(Vec3d *origin,
 	return TRUE;
 }
 
-void Game_getObjCenter(GameObject *obj, Vec3d *result)
+void Game_getObjCenter(GameObject *obj, struct Vector3 *result)
 {
-	Vec3d_copyFrom(result, &obj->position);
-	Vec3d_add(result, &modelTypesProperties[obj->modelType].centroidOffset);
+	vector3Copy(result, &obj->position);
+	vector3AddToSelf(result, &modelTypesProperties[obj->modelType].centroidOffset);
 }
 
 float Game_getObjRadius(GameObject *obj)
@@ -428,14 +427,13 @@ float Game_getObjRadius(GameObject *obj)
 	return modelTypesProperties[obj->modelType].radius;
 }
 
-float Game_distanceToGameObject(Vec3d *from, GameObject *to)
+float Game_distanceToGameObject(struct Vector3 *from, GameObject *to)
 {
-	Vec3d toObjCenter;
+	struct Vector3 toObjCenter;
 
 	Game_getObjCenter(to, &toObjCenter);
 
-	return Vec3d_distanceTo(from, &toObjCenter) -
-		   modelTypesProperties[to->modelType].radius;
+	return vector3Dist(from, &toObjCenter) - modelTypesProperties[to->modelType].radius;
 }
 
 /*
@@ -445,13 +443,13 @@ check if intersection distance is less than previously found intersection (if
 any).
 Crappy code for debug use only
  */
-GameObject *Game_getIntersectingObject(Vec3d *raySource, Vec3d *rayDirection)
+GameObject *Game_getIntersectingObject(struct Vector3 *raySource, struct Vector3 *rayDirection)
 {
 	int i, hit;
 	float closestObjHitDist, intersectDist;
 	GameObject *obj;
 	GameObject *closestObjHit;
-	Vec3d objCenter;
+	struct Vector3 objCenter;
 
 	closestObjHitDist = FLT_MAX;
 	closestObjHit = NULL;
@@ -499,7 +497,7 @@ int Game_canSeeOtherObject(GameObject *viewer,
 						   GameObject *occuludingObjects,
 						   int occuludingObjectsCount)
 {
-	Vec3d eye, rayDirection, objCenter;
+	struct Vector3 eye, rayDirection, objCenter;
 	int i, canSee;
 	float targetDistance, objDistance;
 	GameObject *obj;
@@ -507,7 +505,7 @@ int Game_canSeeOtherObject(GameObject *viewer,
 	canSee = TRUE;
 	eye = viewer->position;
 	eye.y += viewerEyeOffset; // eye offset
-	Vec3d_directionTo(&eye, &target->position, &rayDirection);
+	vector3DirectionTo(&eye, &target->position, &rayDirection);
 
 	targetDistance = Game_distanceToGameObject(&eye, target);
 
@@ -541,8 +539,8 @@ int Game_canSeeOtherObject(GameObject *viewer,
 #ifdef __cplusplus
 
 	Game_traceRaycast({/*int result;*/ canSee,
-					   /*Vec3d origin;*/ eye,
-					   /*Vec3d direction;*/ rayDirection,
+					   /*struct Vector3 origin;*/ eye,
+					   /*struct Vector3 direction;*/ rayDirection,
 					   /*GameObject* hit;*/ canSee ? NULL : obj});
 #endif
 	return canSee;

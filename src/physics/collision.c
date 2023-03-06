@@ -6,48 +6,48 @@
 
 #include "collision.h"
 #include "../trace.h"
-#include "../math/vec3d.h"
+#include "../math/vector3.h"
 
 #ifndef __N64__
 #include "float.h"
 // otherwise this stuff is in constants.h
 #endif
 
-void Triangle_getCentroid(Triangle *triangle, Vec3d *result)
+void Triangle_getCentroid(Triangle *triangle, struct Vector3 *result)
 {
 	*result = triangle->a;
-	Vec3d_add(result, &triangle->b);
-	Vec3d_add(result, &triangle->c);
-	Vec3d_divScalar(result, 3.0);
+	vector3AddToSelf(result, &triangle->b);
+	vector3AddToSelf(result, &triangle->c);
+	vector3DivScalar(result, 3.0);
 }
 
-void Triangle_getNormal(Triangle *triangle, Vec3d *result)
+void Triangle_getNormal(Triangle *triangle, struct Vector3 *result)
 {
-	Vec3d edgeAB, edgeAC;
+	struct Vector3 edgeAB, edgeAC;
 	edgeAB = triangle->b;
-	Vec3d_sub(&edgeAB, &triangle->a);
+	vector3SubFromSelf(&edgeAB, &triangle->a);
 	edgeAC = triangle->c;
-	Vec3d_sub(&edgeAC, &triangle->a);
+	vector3SubFromSelf(&edgeAC, &triangle->a);
 
-	Vec3d_cross(&edgeAB, &edgeAC, result);
-	Vec3d_normalise(result);
+	vector3Cross(&edgeAB, &edgeAC, result);
+	vector3NormalizeSelf(result);
 }
 
 // if result > 0: point is in front of triangle
 // if result = 0: point is coplanar with triangle
 // if result < 0: point is behind triangle
-float Triangle_comparePoint(Triangle *triangle, Vec3d *point)
+float Triangle_comparePoint(Triangle *triangle, struct Vector3 *point)
 {
-	Vec3d normal, toPoint;
+	struct Vector3 normal, toPoint;
 
 	// normal . (point - triangleVert)
 	Triangle_getNormal(triangle, &normal);
 	toPoint = *point;
-	Vec3d_sub(&toPoint, &triangle->a);
-	return Vec3d_dot(&normal, &toPoint);
+	vector3SubFromSelf(&toPoint, &triangle->a);
+	return vector3Dot(&normal, &toPoint);
 }
 
-void AABB_fromSphere(Vec3d *sphereCenter, float sphereRadius, AABB *result)
+void AABB_fromSphere(struct Vector3 *sphereCenter, float sphereRadius, AABB *result)
 {
 	result->min = *sphereCenter;
 	result->min.x -= sphereRadius;
@@ -79,7 +79,7 @@ void AABB_fromTriangle(Triangle *triangle, AABB *result)
 	result->max.z = MAX(result->max.z, triangle->c.z);
 }
 
-void AABB_expandByPoint(AABB *self, Vec3d *point)
+void AABB_expandByPoint(AABB *self, struct Vector3 *point)
 {
 	self->min.x = MIN(self->min.x, point->x);
 	self->min.y = MIN(self->min.y, point->y);
@@ -103,37 +103,37 @@ int Collision_intersectAABBAABB(AABB *a, AABB *b)
 }
 
 // not tested
-int Collision_intersectRayTriangle(Vec3d *pt,
-								   Vec3d *dir,
+int Collision_intersectRayTriangle(struct Vector3 *pt,
+								   struct Vector3 *dir,
 								   Triangle *tri,
-								   Vec3d *out)
+								   struct Vector3 *out)
 {
-	Vec3d edge1, edge2, tvec, pvec, qvec;
+	struct Vector3 edge1, edge2, tvec, pvec, qvec;
 	float det, u, v, t;
 
 	edge1 = tri->b;
 
-	Vec3d_sub(&edge1, &tri->a);
+	vector3SubFromSelf(&edge1, &tri->a);
 	edge2 = tri->c;
-	Vec3d_sub(&edge2, &tri->a);
+	vector3SubFromSelf(&edge2, &tri->a);
 
-	Vec3d_cross(dir, &edge2, &pvec);
-	det = Vec3d_dot(&edge1, &pvec);
+	vector3Cross(dir, &edge2, &pvec);
+	det = vector3Dot(&edge1, &pvec);
 
 	if (det < FLT_EPSILON)
 		return FALSE;
 
 	tvec = *pt;
-	Vec3d_sub(&tvec, &tri->a);
-	u = Vec3d_dot(&tvec, &pvec);
+	vector3SubFromSelf(&tvec, &tri->a);
+	u = vector3Dot(&tvec, &pvec);
 	if (u < 0 || u > det)
 		return FALSE;
-	Vec3d_cross(&tvec, &edge1, &qvec);
-	v = Vec3d_dot(dir, &qvec);
+	vector3Cross(&tvec, &edge1, &qvec);
+	v = vector3Dot(dir, &qvec);
 	if (v < 0 || u + v > det)
 		return FALSE;
 
-	t = Vec3d_dot(&edge2, &qvec) / det;
+	t = vector3Dot(&edge2, &qvec) / det;
 	out->x = pt->x + t * dir->x;
 	out->y = pt->y + t * dir->y;
 	out->z = pt->z + t * dir->z;
@@ -143,30 +143,30 @@ int Collision_intersectRayTriangle(Vec3d *pt,
 
 // http://realtimecollisiondetection.net/blog/?p=103
 int Collision_sphereTriangleIsSeparated(Triangle *triangle,
-										Vec3d *P,
+										struct Vector3 *P,
 										double r)
 {
 	double rr, d, e, aa, ab, ac, bb, bc, cc, d1, e1, d2, e2, d3, e3;
 	int sep1, sep2, sep3, sep4, sep5, sep6, sep7;
-	Vec3d A, B, C;
-	Vec3d V, BSubA, CSubA;
-	Vec3d AB, BC, CA;
-	Vec3d Q1, ABd1;
-	Vec3d QC;
-	Vec3d Q2, BCd2;
-	Vec3d QA;
-	Vec3d Q3, CAd3;
-	Vec3d QB;
+	struct Vector3 A, B, C;
+	struct Vector3 V, BSubA, CSubA;
+	struct Vector3 AB, BC, CA;
+	struct Vector3 Q1, ABd1;
+	struct Vector3 QC;
+	struct Vector3 Q2, BCd2;
+	struct Vector3 QA;
+	struct Vector3 Q3, CAd3;
+	struct Vector3 QB;
 	// Translate problem so sphere is centered at origin
 	// A = A - P
 	A = triangle->a;
-	Vec3d_sub(&A, P);
+	vector3SubFromSelf(&A, P);
 	// B = B - P
 	B = triangle->b;
-	Vec3d_sub(&B, P);
+	vector3SubFromSelf(&B, P);
 	// C = C - P
 	C = triangle->c;
-	Vec3d_sub(&C, P);
+	vector3SubFromSelf(&C, P);
 
 	rr = r * r;
 
@@ -175,13 +175,13 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 		// Compute a vector normal to triangle plane (V), normalize it
 		// V = (B - A).cross(C - A)
 		BSubA = B;
-		Vec3d_sub(&BSubA, &A);
+		vector3SubFromSelf(&BSubA, &A);
 		CSubA = C;
-		Vec3d_sub(&CSubA, &A);
-		Vec3d_cross(&BSubA, &CSubA, &V);
+		vector3SubFromSelf(&CSubA, &A);
+		vector3Cross(&BSubA, &CSubA, &V);
 		// Compute distance d of sphere center to triangle plane
-		d = Vec3d_dot(&A, &V);
-		e = Vec3d_dot(&V, &V);
+		d = vector3Dot(&A, &V);
+		e = vector3Dot(&V, &V);
 		// d > r
 		sep1 = d * d > rr * e;
 
@@ -193,9 +193,9 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 		// for triangle vertex A
 
 		// Compute distance between sphere center and vertex A
-		aa = Vec3d_dot(&A, &A);
-		ab = Vec3d_dot(&A, &B);
-		ac = Vec3d_dot(&A, &C);
+		aa = vector3Dot(&A, &A);
+		ab = vector3Dot(&A, &B);
+		ac = vector3Dot(&A, &C);
 
 		sep2 =
 			// The plane through A with normal A ("A - P") separates sphere if:
@@ -210,8 +210,8 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	}
 	{
 		// for triangle vertex B
-		bb = Vec3d_dot(&B, &B);
-		bc = Vec3d_dot(&B, &C);
+		bb = vector3Dot(&B, &B);
+		bc = vector3Dot(&B, &C);
 		sep3 = (bb > rr) & (ab > bb) & (bc > bb);
 
 		if (sep3)
@@ -219,7 +219,7 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	}
 	{
 		// for triangle vertex C
-		cc = Vec3d_dot(&C, &C);
+		cc = vector3Dot(&C, &C);
 		sep4 = (cc > rr) & (ac > cc) & (bc > cc);
 
 		if (sep4)
@@ -230,24 +230,24 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	{
 		// AB = B - A
 		AB = B;
-		Vec3d_sub(&AB, &A);
+		vector3SubFromSelf(&AB, &A);
 
 		d1 = ab - aa;
-		e1 = Vec3d_dot(&AB, &AB);
+		e1 = vector3Dot(&AB, &AB);
 
 		// Q1 = A * e1 - AB * d1
 		Q1 = A;
-		Vec3d_mulScalar(&Q1, e1);
+		vector3ScaleSelf(&Q1, e1);
 		ABd1 = AB;
-		Vec3d_mulScalar(&ABd1, d1);
-		Vec3d_sub(&Q1, &ABd1);
+		vector3ScaleSelf(&ABd1, d1);
+		vector3SubFromSelf(&Q1, &ABd1);
 
 		// QC = C * e1 - Q1
 		QC = C;
-		Vec3d_mulScalar(&QC, e1);
-		Vec3d_sub(&QC, &Q1);
+		vector3ScaleSelf(&QC, e1);
+		vector3SubFromSelf(&QC, &Q1);
 
-		sep5 = (Vec3d_dot(&Q1, &Q1) > rr * e1 * e1) & (Vec3d_dot(&Q1, &QC) > 0);
+		sep5 = (vector3Dot(&Q1, &Q1) > rr * e1 * e1) & (vector3Dot(&Q1, &QC) > 0);
 
 		if (sep5)
 			return TRUE;
@@ -255,24 +255,24 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	{
 		// BC = C - B
 		BC = C;
-		Vec3d_sub(&BC, &B);
+		vector3SubFromSelf(&BC, &B);
 
 		d2 = bc - bb;
-		e2 = Vec3d_dot(&BC, &BC);
+		e2 = vector3Dot(&BC, &BC);
 
 		// Q2 = B * e2 - BC * d2
 		Q2 = B;
-		Vec3d_mulScalar(&Q2, e2);
+		vector3ScaleSelf(&Q2, e2);
 		BCd2 = BC;
-		Vec3d_mulScalar(&BCd2, d2);
-		Vec3d_sub(&Q2, &BCd2);
+		vector3ScaleSelf(&BCd2, d2);
+		vector3SubFromSelf(&Q2, &BCd2);
 
 		// QA = A * e2 - Q2
 		QA = A;
-		Vec3d_mulScalar(&QA, e2);
-		Vec3d_sub(&QA, &Q2);
+		vector3ScaleSelf(&QA, e2);
+		vector3SubFromSelf(&QA, &Q2);
 
-		sep6 = (Vec3d_dot(&Q2, &Q2) > rr * e2 * e2) & (Vec3d_dot(&Q2, &QA) > 0);
+		sep6 = (vector3Dot(&Q2, &Q2) > rr * e2 * e2) & (vector3Dot(&Q2, &QA) > 0);
 
 		if (sep6)
 			return TRUE;
@@ -280,24 +280,24 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	{
 		// CA = A - C
 		CA = A;
-		Vec3d_sub(&CA, &C);
+		vector3SubFromSelf(&CA, &C);
 
 		d3 = ac - cc;
-		e3 = Vec3d_dot(&CA, &CA);
+		e3 = vector3Dot(&CA, &CA);
 
 		// Q3 = C * e3 - CA * d3
 		Q3 = C;
-		Vec3d_mulScalar(&Q3, e3);
+		vector3ScaleSelf(&Q3, e3);
 		CAd3 = CA;
-		Vec3d_mulScalar(&CAd3, d3);
-		Vec3d_sub(&Q3, &CAd3);
+		vector3ScaleSelf(&CAd3, d3);
+		vector3SubFromSelf(&Q3, &CAd3);
 
 		// QB = B * e3 - Q3
 		QB = B;
-		Vec3d_mulScalar(&QB, e3);
-		Vec3d_sub(&QB, &Q3);
+		vector3ScaleSelf(&QB, e3);
+		vector3SubFromSelf(&QB, &Q3);
 
-		sep7 = (Vec3d_dot(&Q3, &Q3) > rr * e3 * e3) & (Vec3d_dot(&Q3, &QB) > 0);
+		sep7 = (vector3Dot(&Q3, &Q3) > rr * e3 * e3) & (vector3Dot(&Q3, &QB) > 0);
 
 		if (sep7)
 			return TRUE;
@@ -305,30 +305,30 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	return FALSE;
 }
 
-void Collision_distancePointTriangleExact(Vec3d *point,
+void Collision_distancePointTriangleExact(struct Vector3 *point,
 										  Triangle *triangle,
-										  Vec3d *closest)
+										  struct Vector3 *closest)
 {
-	Vec3d diff, edge0, edge1, t0edge0, t1edge1;
+	struct Vector3 diff, edge0, edge1, t0edge0, t1edge1;
 	double a00, a01, a11, b0, b1, zero, one, det, t0, t1;
 	double invDet;
 	double tmp0, tmp1, numer, denom;
 	// diff = point - triangle->a
 	diff = *point;
-	Vec3d_sub(&diff, &triangle->a);
+	vector3SubFromSelf(&diff, &triangle->a);
 	// edge0 = triangle->b - triangle->a
 	edge0 = triangle->b;
-	Vec3d_sub(&edge0, &triangle->a);
+	vector3SubFromSelf(&edge0, &triangle->a);
 
 	// edge1 = triangle->c - triangle->a
 	edge1 = triangle->c;
-	Vec3d_sub(&edge1, &triangle->a);
+	vector3SubFromSelf(&edge1, &triangle->a);
 
-	a00 = Vec3d_dot(&edge0, &edge0);
-	a01 = Vec3d_dot(&edge0, &edge1);
-	a11 = Vec3d_dot(&edge1, &edge1);
-	b0 = -Vec3d_dot(&diff, &edge0);
-	b1 = -Vec3d_dot(&diff, &edge1);
+	a00 = vector3Dot(&edge0, &edge0);
+	a01 = vector3Dot(&edge0, &edge1);
+	a11 = vector3Dot(&edge1, &edge1);
+	b0 = -vector3Dot(&diff, &edge0);
+	b1 = -vector3Dot(&diff, &edge1);
 	zero = (double)0;
 	one = (double)1;
 	det = a00 * a11 - a01 * a01;
@@ -511,12 +511,12 @@ void Collision_distancePointTriangleExact(Vec3d *point,
 
 	// closest = triangle->a + t0 * edge0 + t1 * edge1;
 	t0edge0 = edge0;
-	Vec3d_mulScalar(&t0edge0, t0);
+	vector3ScaleSelf(&t0edge0, t0);
 	t1edge1 = edge1;
-	Vec3d_mulScalar(&t1edge1, t1);
+	vector3ScaleSelf(&t1edge1, t1);
 	*closest = triangle->a;
-	Vec3d_add(closest, &t0edge0);
-	Vec3d_add(closest, &t1edge1);
+	vector3AddToSelf(closest, &t0edge0);
+	vector3AddToSelf(closest, &t1edge1);
 
 	if (closest->x != closest->x)
 	{
@@ -524,7 +524,7 @@ void Collision_distancePointTriangleExact(Vec3d *point,
 		debugPrintf("got NAN\n");
 		// Collision_distancePointTriangleExact(point, triangle, closest);
 #endif
-		Vec3d_origin(closest);
+		vector3Init(closest, 0.0f, 0.0f, 0.0f);
 	}
 
 	// other things we could calculate:
@@ -532,7 +532,7 @@ void Collision_distancePointTriangleExact(Vec3d *point,
 	// parameter[1] = t0;
 	// parameter[2] = t1;
 	// diff = point - closest;
-	// sqrDistance = Vec3d_dot(diff, diff);
+	// sqrDistance = vector3Dot(diff, diff);
 }
 
 #ifndef __N64__
@@ -549,7 +549,7 @@ std::map<int, SphereTriangleCollision> testCollisionResults;
 #define COLLISION_SPATIAL_HASH_MAX_RESULTS 100
 #define COLLISION_SPATIAL_HASH_PRUNING_ENABLED 1
 
-float Collision_sqDistancePointAABB(Vec3d *p, AABB *b)
+float Collision_sqDistancePointAABB(struct Vector3 *p, AABB *b)
 {
 	float v, dist;
 	float sqDist = 0.0f;
@@ -593,7 +593,7 @@ float Collision_sqDistancePointAABB(Vec3d *p, AABB *b)
 }
 
 // Returns true if sphere intersects AABB, false otherwise
-int Collision_testSphereAABBCollision(Vec3d *sphereCenter,
+int Collision_testSphereAABBCollision(struct Vector3 *sphereCenter,
 									  float sphereRadius,
 									  AABB *aabb)
 {
@@ -607,14 +607,14 @@ int Collision_testSphereAABBCollision(Vec3d *sphereCenter,
 
 int Collision_testMeshSphereCollision(Triangle *triangles,
 									  int trianglesLength,
-									  Vec3d *objCenter,
+									  struct Vector3 *objCenter,
 									  float objRadius,
 									  SpatialHash *spatialHash,
 									  SphereTriangleCollision *result)
 {
 	int i, k;
 	Triangle *tri;
-	Vec3d closestPointOnTriangle;
+	struct Vector3 closestPointOnTriangle;
 
 	float closestHitDistSq;
 	float hitDistSq;
@@ -672,7 +672,7 @@ int Collision_testMeshSphereCollision(Triangle *triangles,
 			Collision_distancePointTriangleExact(objCenter, tri,
 												 &closestPointOnTriangle);
 
-			hitDistSq = Vec3d_distanceToSq(objCenter, &closestPointOnTriangle);
+			hitDistSq = vector3DistSqrd(objCenter, &closestPointOnTriangle);
 			if (hitDistSq > objRadiusSq)
 			{
 				// not really a collision, separating axis test fucked up
@@ -721,12 +721,12 @@ int Collision_testMeshSphereCollision(Triangle *triangles,
 
 // Test if segment specified by points p0 and p1 intersects AABB b
 // from Real Time Collision Detection ch5.3
-int Collision_testSegmentAABBCollision(Vec3d *p0, Vec3d *p1, AABB *b)
+int Collision_testSegmentAABBCollision(struct Vector3 *p0, struct Vector3 *p1, AABB *b)
 {
-	Vec3d c;
-	Vec3d e;
-	Vec3d m;
-	Vec3d d;
+	struct Vector3 c;
+	struct Vector3 e;
+	struct Vector3 m;
+	struct Vector3 d;
 	float adx;
 	float ady;
 	float adz;
@@ -734,28 +734,28 @@ int Collision_testSegmentAABBCollision(Vec3d *p0, Vec3d *p1, AABB *b)
 	// Box center-point
 	// c = (b->min + b->max) * 0.5f;
 	c = b->min;
-	Vec3d_add(&c, &b->max);
-	Vec3d_mulScalar(&c, 0.5f);
+	vector3AddToSelf(&c, &b->max);
+	vector3ScaleSelf(&c, 0.5f);
 
 	// Box halflength extents
 	// e = b->max - c;
 	e = b->max;
-	Vec3d_sub(&e, &c);
+	vector3SubFromSelf(&e, &c);
 
 	// Segment midpoint
 	// (p0 + p1) * 0.5f;
 	m = *p0;
-	Vec3d_add(&m, p1);
-	Vec3d_mulScalar(&m, 0.5f);
+	vector3AddToSelf(&m, p1);
+	vector3ScaleSelf(&m, 0.5f);
 
 	// Segment halflength vector
 	// d = p1 - m;
 	d = *p1;
-	Vec3d_sub(&d, &m);
+	vector3SubFromSelf(&d, &m);
 
 	// Translate box and segment to origin
 	// m = m - c;
-	Vec3d_sub(&m, &c);
+	vector3SubFromSelf(&m, &c);
 
 	// Try world coordinate axes as separating axes
 	adx = fabsf(d.x);
@@ -968,8 +968,8 @@ void SpatialHash_getTrianglesVisitBucket(int cellX,
 	}
 }
 
-int SpatialHash_getTrianglesForRaycast(Vec3d *rayStart,
-									   Vec3d *rayEnd,
+int SpatialHash_getTrianglesForRaycast(struct Vector3 *rayStart,
+									   struct Vector3 *rayEnd,
 									   SpatialHash *spatialHash,
 									   int *results,
 									   int maxResults)
@@ -997,7 +997,7 @@ int SpatialHash_getTrianglesForRaycast(Vec3d *rayStart,
 	return traversalState.resultsFound;
 }
 
-int SpatialHash_getTriangles(Vec3d *position,
+int SpatialHash_getTriangles(struct Vector3 *position,
 							 float radius,
 							 SpatialHash *spatialHash,
 							 int *results,

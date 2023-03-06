@@ -14,8 +14,7 @@
 #include "../util/memory.h"
 #include "../ed64/ed64io_usb.h"
 #include "../math/frustum.h"
-#include "../math/vec3d.h"
-#include "../math/vec2d.h"
+#include "../math/vector2.h"
 #include "../math/vector3.h"
 #include "../math/vector4.h"
 #include "../game.h"
@@ -96,7 +95,7 @@ int Renderer_isAnimatedGameObject(GameObject *obj)
 	}
 }
 
-float Renderer_gameobjectSortDist(GameObject *obj, Vec3d *viewPos)
+float Renderer_gameobjectSortDist(GameObject *obj, struct Vector3 *viewPos)
 {
 	if (Renderer_isBackgroundGameObject(obj))
 	{
@@ -104,12 +103,12 @@ float Renderer_gameobjectSortDist(GameObject *obj, Vec3d *viewPos)
 		return 10000.0F - obj->id; // add object id to achieve stable sorting
 	}
 
-	return Vec3d_distanceTo(&obj->position, viewPos);
+	return vector3Dist(&obj->position, viewPos);
 }
 
 void Renderer_closestPointOnAABB(AABB *b,
-								 /* sourcePoint*/ Vec3d *p,
-								 /* result */ Vec3d *q)
+								 /* sourcePoint*/ struct Vector3 *p,
+								 /* result */ struct Vector3 *q)
 {
 	float v;
 	v = p->x;
@@ -132,14 +131,14 @@ void Renderer_closestPointOnAABB(AABB *b,
 	q->z = v;
 }
 
-void Renderer_getSeparatingPlane(Vec3d *a, Vec3d *b, Plane *separatingPlane)
+void Renderer_getSeparatingPlane(struct Vector3 *a, struct Vector3 *b, Plane *separatingPlane)
 {
-	Vec3d halfwayPoint, aToBDirection;
+	struct Vector3 halfwayPoint, aToBDirection;
 	halfwayPoint = *a;
-	Vec3d_add(&halfwayPoint, b);
-	Vec3d_divScalar(&halfwayPoint, 2);
+	vector3AddToSelf(&halfwayPoint, b);
+	vector3DivScalar(&halfwayPoint, 2);
 
-	Vec3d_directionTo(a, b, &aToBDirection);
+	vector3DirectionTo(a, b, &aToBDirection);
 	aToBDirection.y = 0; // only separate on x,z
 	if (fabsf(aToBDirection.x) > fabsf(aToBDirection.z))
 	{
@@ -156,10 +155,10 @@ void Renderer_getSeparatingPlane(Vec3d *a, Vec3d *b, Plane *separatingPlane)
 // currently this somehow causes the game to crash when touching a BushModel ??
 int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 									   RendererSortDistance *b,
-									   Vec3d *viewPos)
+									   struct Vector3 *viewPos)
 {
 	Plane separatingPlane;
-	Vec3d aCenter, bCenter, aClosestPoint, bClosestPoint, aReallyClosestPoint,
+	struct Vector3 aCenter, bCenter, aClosestPoint, bClosestPoint, aReallyClosestPoint,
 		bReallyClosestPoint;
 	float planeToADist, planeToBDist, planeToViewDist;
 	invariant(a->obj != NULL);
@@ -232,38 +231,6 @@ int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 	}
 }
 
-// global variable because qsort's API sucks lol
-Vec3d sortWorldComparatorFn_viewPos;
-int sortIterations = 0;
-int Renderer_sortWorldComparatorFnPaintersSeparatingPlane(const void *a,
-														  const void *b)
-{
-	RendererSortDistance *sortA = (RendererSortDistance *)a;
-	RendererSortDistance *sortB = (RendererSortDistance *)b;
-#ifdef DEBUG
-	sortIterations++;
-	invariant(sortIterations < 1000);
-#endif
-	// sort far to near for painters algorithm
-	if (Renderer_isBackgroundGameObject(sortA->obj) ||
-		Renderer_isBackgroundGameObject(sortB->obj))
-	{
-		return sortB->distance - sortA->distance;
-	}
-
-	return -Renderer_isCloserBySeparatingPlane(sortA, sortB,
-											   &sortWorldComparatorFn_viewPos);
-}
-
-int Renderer_sortWorldComparatorFnPaintersSimple(const void *a, const void *b)
-{
-	RendererSortDistance *sortA = (RendererSortDistance *)a;
-	RendererSortDistance *sortB = (RendererSortDistance *)b;
-
-	// sort far to near for painters algorithm
-	return sortB->distance - sortA->distance;
-}
-
 int Renderer_sortWorldComparatorFnZBuffer(const void *a, const void *b)
 {
 	RendererSortDistance *sortA = (RendererSortDistance *)a;
@@ -277,8 +244,8 @@ AABB Renderer_getWorldAABB(AABB *localAABBs, GameObject *obj)
 	AABB *localAABB = localAABBs + obj->id;
 	AABB worldAABB = *localAABB;
 
-	Vec3d_add(&worldAABB.min, &obj->position);
-	Vec3d_add(&worldAABB.max, &obj->position);
+	vector3AddToSelf(&worldAABB.min, &obj->position);
+	vector3AddToSelf(&worldAABB.max, &obj->position);
 	return worldAABB;
 }
 
@@ -397,8 +364,8 @@ int Renderer_frustumCull(GameObject *worldObjects,
 			// transform the local bounding box of the object into world space
 			AABB *localAABB = localAABBs + i;
 			AABB worldAABB = *localAABB;
-			Vec3d_add(&worldAABB.min, &obj->position);
-			Vec3d_add(&worldAABB.max, &obj->position);
+			vector3AddToSelf(&worldAABB.min, &obj->position);
+			vector3AddToSelf(&worldAABB.max, &obj->position);
 
 			// check if the box is inside the given frustum
 			frustumTestResult = Frustum_boxInFrustum(frustum, &worldAABB);
@@ -457,8 +424,8 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 		obj = worldObjects + i;
 
 		AABB *localAABB = localAABBs + i;
-		Vec3d aabb_min = localAABB->min;
-		Vec3d aabb_max = localAABB->max;
+		struct Vector3 aabb_min = localAABB->min;
+		struct Vector3 aabb_max = localAABB->max;
 		struct Vector4 corners[8] = {
             {aabb_min.x, aabb_min.y, aabb_min.z, 1},
             {aabb_min.x, aabb_min.y, aabb_max.z, 1},
@@ -487,8 +454,8 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 		float clip_coord[4];
 		MtxF objTransformF;
 		guMtxL2F(objTransformF, &objTransform);
-		Vec2d screen_corners[8];
-		Vec2d win_size = {(float)SCREEN_WD, (float)SCREEN_HT};
+		struct Vector2 screen_corners[8];
+		struct Vector2 win_size = {(float)SCREEN_WD, (float)SCREEN_HT};
 		for(j = 0; j < 8; j++){
 			corner[0] = corners[i].x;
 			corner[1] = corners[i].y;
@@ -496,17 +463,19 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 			corner[3] = corners[i].w;
 			mulMtxFVecF(objTransformF, &corner, &translated);
 			mulMtxFVecF(mvp_matrix, &translated, &clip_coord);
-			Vec3d clip3d = {clip_coord[0], clip_coord[1], clip_coord[2]};
 
-			Vec3d_divScalar(&clip3d, clip_coord[3]);
+			struct Vector3 clip3d;
+			vector3Set(&clip3d, clip_coord[0], clip_coord[1], clip_coord[2]);
+
+			vector3DivScalar(&clip3d, clip_coord[3]);
 
 			
 			// sprintf(translated_str, "clip3d_w: %f", clip_coord[3]);
 			
-			Vec2d ndc_2d = {clip3d.x, clip3d.y};
-			Vec2d screen_corner = ndc_2d;
-			Vec2d_mulScalar(&screen_corner, 0.5f);
-			Vec2d_add(&screen_corner, &win_size);
+			struct Vector2 ndc_2d = {clip3d.x, clip3d.y};
+			struct Vector2 screen_corner = ndc_2d;
+			vector2Scale(&screen_corner, 0.5f, &screen_corner);
+			vector2Add(&screen_corner, &win_size, &screen_corner);
 			screen_corners[j] = screen_corner;
 
 		}
@@ -520,26 +489,23 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 		// sprintf(translated_str, "screenCn: (%f,%f,%f)", clip_coord[0], clip_coord[1], clip_coord[2] );
 		// console_add_msg(translated_str);
 
-		Vec2d screen_aabb_min = screen_corners[0];
-        Vec2d screen_aabb_max = screen_corners[0];
+		struct Vector2 screen_aabb_min = screen_corners[0];
+        struct Vector2 screen_aabb_max = screen_corners[0];
 		// char *translated_str[20];
 		// sprintf(translated_str, "corner: (%f,%f)", screen_aabb_min.x, screen_aabb_min.y);
 		// console_add_msg(translated_str);
 		int k;
         for (k = 1; k < 8; k++) {
-			Vec2d current = screen_corners[k];
+			struct Vector2 current = screen_corners[k];
 
 			// char *translated_str[20];
 			// sprintf(translated_str, "screenCn: (%f,%f)", screen_corners[k].x, screen_corners[k].y);
 			// console_add_msg(translated_str);
 
-			screen_aabb_min.x = screen_aabb_min.x < screen_corners[k].x ? screen_aabb_min.x : screen_corners[k].x;
+			// screen_aabb_min.x = screen_aabb_min.x < screen_corners[k].x ? screen_aabb_min.x : screen_corners[k].x;
 			// screen_aabb_min.y = screen_aabb_min.y < screen_corners[k].y ? screen_aabb_min.y : screen_corners[k].y;
-
 			// screen_aabb_max.x = screen_aabb_max.x > screen_corners[k].x ? screen_aabb_max.x : screen_corners[k].x;
 			// screen_aabb_max.y = screen_aabb_max.y > screen_corners[k].y ? screen_aabb_max.y : screen_corners[k].y;
-			// Vec2d_min(&screen_aabb_min, &current);
-            // Vec2d_max(&screen_aabb_max, &current);
         }
 
 		// sprintf(screen_bb, "ScreenBB: min(%d,%d), max(%d,%d)", screen_aabb_min.x, screen_aabb_min.y, screen_aabb_max.x, screen_aabb_max.y);
@@ -548,11 +514,11 @@ int Renderer_occlusionCull(GameObject *worldObjects,
 	return 0;
 }
 
-int Renderer_screenProject(Vec3d *obj,
+int Renderer_screenProject(struct Vector3 *obj,
 				  MtxF modelMatrix,
 				  MtxF projMatrix,
 				  ViewportF viewport,
-				  Vec3d *win)
+				  struct Vector3 *win)
 {
 	float in[4];
 	float out[4];
@@ -590,7 +556,7 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 int *worldObjectsVisibility,
 								 int visibleObjectsCount,
 								 RendererSortDistance *result,
-								 Vec3d *viewPos,
+								 struct Vector3 *viewPos,
 								 AABB *localAABBs)
 {
 	int i;
@@ -607,30 +573,11 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 			sortDist = result + visibleObjectIndex;
 			sortDist->obj = worldObjects + i;
 			sortDist->distance = Renderer_gameobjectSortDist(sortDist->obj, viewPos);
-
-#if RENDERER_PAINTERS_ALGORITHM
-			sortDist->worldAABB = Renderer_getWorldAABB(localAABBs, sortDist->obj);
-#endif
-
 			visibleObjectIndex++;
 		}
 	}
 
 	invariant(visibleObjectIndex == visibleObjectsCount);
-
-	// used for painters algo
-	sortWorldComparatorFn_viewPos = *viewPos;
-#if RENDERER_PAINTERS_ALGORITHM
-#if 1
-	sortIterations = 0;
-	qsort(result, visibleObjectsCount, sizeof(RendererSortDistance),
-		  Renderer_sortWorldComparatorFnPaintersSeparatingPlane);
-#else
-	qsort(result, visibleObjectsCount, sizeof(RendererSortDistance),
-		  Renderer_sortWorldComparatorFnPaintersSimple);
-#endif
-#else
 	qsort(result, visibleObjectsCount, sizeof(RendererSortDistance),
 		  Renderer_sortWorldComparatorFnZBuffer);
-#endif
 }

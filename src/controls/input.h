@@ -2,11 +2,11 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "../math/vec2d.h"
+#include "../math/vector2.h"
 
 typedef struct Input
 {
-	Vec2d direction;
+	struct Vector2 direction;
 	int run;
 	int pickup;
 	int zoomIn;

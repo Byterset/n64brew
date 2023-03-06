@@ -1,4 +1,5 @@
 
+#include <math.h>
 #include "vector2.h"
 #include "mathf.h"
 
@@ -6,6 +7,13 @@ struct Vector2 gRight2 = {1.0f, 0.0f};
 struct Vector2 gUp2 = {0.0f, 1.0f};
 struct Vector2 gZeroVec2 = {0.0f, 0.0f};
 struct Vector2 gOneVec2 = {1.0f, 1.0f};
+
+#define VEC2D_M_PI 3.14159265358979323846
+
+void vector2Init(struct Vector2 *a, float x, float y){
+	a->x = x;
+	a->y = y;
+}
 
 void vector2ComplexMul(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out)
 {
@@ -95,12 +103,22 @@ float vector2MagSqr(struct Vector2 *a)
 	return a->x * a->x + a->y * a->y;
 }
 
+float vector2Mag(struct Vector2 *a)
+{
+	return sqrtf(vector2MagSqr(a));
+}
+
 float vector2DistSqr(struct Vector2 *a, struct Vector2 *b)
 {
 	float dx = a->x - b->x;
 	float dy = a->y - b->y;
 
 	return dx * dx + dy * dy;
+}
+
+float vector2Dist(struct Vector2 *a, struct Vector2 *b)
+{
+	return sqrtf(vector2DistSqr(a, b));
 }
 
 int vector2Normalize(struct Vector2 *a, struct Vector2 *out)
@@ -148,4 +166,16 @@ void vector2Lerp(struct Vector2 *a, struct Vector2 *b, float lerp, struct Vector
 {
 	out->x = (b->x - a->x) * lerp + a->x;
 	out->y = (b->y - a->y) * lerp + a->y;
+}
+
+float vector2Angle(struct Vector2 *a){
+	float angle;
+	angle = atan2f(a->y, a->x);
+
+	if (angle < 0.0F)
+	{
+		angle += 2.0F * VEC2D_M_PI;
+	}
+
+	return angle;
 }

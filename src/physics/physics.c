@@ -28,7 +28,7 @@ void PhysState_init(PhysState *self, PhysWorldData *worldData)
 void PhysBody_init(PhysBody *self,
 				   float mass,
 				   float radius,
-				   Vec3d *position,
+				   struct Vector3 *position,
 				   int id)
 {
 	self->id = id;
@@ -40,24 +40,25 @@ void PhysBody_init(PhysBody *self,
 	self->enabled = TRUE;
 	self->position = *position;
 	self->prevPosition = *position;
-	Vec3d_origin(&self->velocity);
-	Vec3d_origin(&self->nonIntegralVelocity);
-	Vec3d_origin(&self->acceleration);
-	Vec3d_origin(&self->nonIntegralAcceleration);
-	Vec3d_origin(&self->prevAcceleration);
+
+	vector3Init(&self->velocity, 0.0f, 0.0f, 0.0f);
+	vector3Init(&self->nonIntegralVelocity, 0.0f, 0.0f, 0.0f);
+	vector3Init(&self->acceleration, 0.0f, 0.0f, 0.0f);
+	vector3Init(&self->nonIntegralAcceleration, 0.0f, 0.0f, 0.0f);
+	vector3Init(&self->prevAcceleration, 0.0f, 0.0f, 0.0f);
 }
 
 void PhysBehavior_floorBounce(PhysBody *body, float floorHeight)
 {
 	float opposite;
-	Vec3d response;
+	struct Vector3 response;
 
 	opposite = (-1.0) * body->mass;
 	if (body->position.y - body->radius < floorHeight)
 	{
 		body->position.y = floorHeight + body->radius;
-		Vec3d_init(&response, 0.0, body->nonIntegralVelocity.y * opposite, 0.0);
-		Vec3d_add(&body->acceleration, &response);
+		vector3Init(&response, 0.0, body->nonIntegralVelocity.y * opposite, 0.0);
+		vector3AddToSelf(&body->acceleration, &response);
 	}
 }
 
@@ -71,9 +72,9 @@ void PhysBehavior_floorClamp(PhysBody *body, float floorHeight)
 
 void PhysBehavior_waterBuoyancy(PhysBody *body,
 								float waterHeight,
-								Vec3d *gravity)
+								struct Vector3 *gravity)
 {
-	Vec3d response;
+	struct Vector3 response;
 	// float maxDepth = -58.0;
 
 	if (body->position.y < waterHeight)
@@ -82,7 +83,7 @@ void PhysBehavior_waterBuoyancy(PhysBody *body,
 		//     (body->position.y - waterHeight) / (maxDepth - waterHeight), -2.0,
 		//     0.0);
 		body->position.y = waterHeight;
-		Vec3d_init(&response, 0.0,
+		vector3Init(&response, 0.0,
 				   -gravity->y, // gravity->y * buoyancyRatio
 				   0.0);
 		PhysBody_applyForce(body, &response);
@@ -95,7 +96,7 @@ int PhysBehavior_worldCollisionResponseStep(PhysBody *body,
 	int hasCollision;
 	float distanceToIntersect, responseDistance, bodyInFrontOfTriangle;
 	SphereTriangleCollision collision;
-	Vec3d response, beforePos;
+	struct Vector3 response, beforePos;
 
 	hasCollision = Collision_testMeshSphereCollision(
 		world->worldMeshTris, world->worldMeshTrisLength, &body->position,
@@ -137,14 +138,12 @@ int PhysBehavior_worldCollisionResponseStep(PhysBody *body,
 
 	beforePos = body->position;
 #if PHYSICS_USE_VERLET_INTEGRATION
-	Vec3d_mulScalar(&response, responseDistance);
+	vector3ScaleSelf(&response, responseDistance);
 	PhysBody_translateWithoutForce(body, &response);
 #else
-	Vec3d_mulScalar(&response, responseDistance);
+	vector3ScaleSelf(&response, responseDistance);
 	PhysBody_translateWithoutForce(body, &response);
-	Vec3d_origin(&body->nonIntegralVelocity);
-	// Vec3d_mulScalar(&response, responseDistance * body->mass);
-	// PhysBody_applyForce(body, &response);
+	vector3Init(&body->nonIntegralVelocity, 0.0f, 0.0f, 0.0f);
 #endif
 
 #if PHYS_DEBUG_PRINT_COLLISIONS
@@ -157,40 +156,40 @@ int PhysBehavior_worldCollisionResponseStep(PhysBody *body,
 		printf("groundskeeper collided with world\n");
 	}
 #ifdef __cplusplus
-	printf(
-		"PhysBody id=%d hasCollision tri=%d distanceToIntersect=%f beforePos=%s "
-		"afterPos=%s "
-		"posInTriangle=%s response=%s "
-		"responseDistance=%f bodyInFrontOfTriangle=%f",
-		body->id, collision.index, distanceToIntersect,
-		Vec3d_toStdString(&beforePos).c_str(),
-		Vec3d_toStdString(&body->position).c_str(),
-		Vec3d_toStdString(&collision.posInTriangle).c_str(),
-		Vec3d_toStdString(&response).c_str(), responseDistance,
-		bodyInFrontOfTriangle
+	// printf(
+	// 	"PhysBody id=%d hasCollision tri=%d distanceToIntersect=%f beforePos=%s "
+	// 	"afterPos=%s "
+	// 	"posInTriangle=%s response=%s "
+	// 	"responseDistance=%f bodyInFrontOfTriangle=%f",
+	// 	body->id, collision.index, distanceToIntersect,
+	// 	Vec3d_toStdString(&beforePos).c_str(),
+	// 	Vec3d_toStdString(&body->position).c_str(),
+	// 	Vec3d_toStdString(&collision.posInTriangle).c_str(),
+	// 	Vec3d_toStdString(&response).c_str(), responseDistance,
+	// 	bodyInFrontOfTriangle
 
-	);
+	// );
 #endif
 #endif
 
 	return TRUE;
 }
 
-void PhysBehavior_collisionSeparationOffset(Vec3d *result,
-											Vec3d *pos,
+void PhysBehavior_collisionSeparationOffset(struct Vector3 *result,
+											struct Vector3 *pos,
 											float overlap,
 											float separationForce)
 {
-	Vec3d_copyFrom(result, pos);
-	Vec3d_normalise(result);
-	Vec3d_mulScalar(result, overlap * separationForce);
+	vector3Copy(result, pos);
+	vector3NormalizeSelf(result);
+	vector3ScaleSelf(result, overlap * separationForce);
 }
 
 int PhysBehavior_bodyBodyCollisionResponse(PhysBody *body,
 										   PhysBody *pool,
 										   int numInPool)
 {
-	Vec3d delta, direction, collisionSeparationOffset;
+	struct Vector3 delta, direction, collisionSeparationOffset;
 	int i, hasCollision;
 	float distanceSquared, radii, distance, overlap, mt, bodySeparationForce,
 		otherBodySeparationForce;
@@ -198,18 +197,18 @@ int PhysBehavior_bodyBodyCollisionResponse(PhysBody *body,
 
 	hasCollision = FALSE;
 
-	Vec3d_origin(&delta);
-	Vec3d_origin(&direction);
+	vector3Init(&delta, 0.0f, 0.0f, 0.0f);
+	vector3Init(&direction, 0.0f, 0.0f, 0.0f);
 
 	for (i = 0, otherBody = pool; i < numInPool; i++, otherBody++)
 	{
 		if (body != otherBody && otherBody->enabled)
 		{
-			Vec3d_copyFrom(&delta, &otherBody->position);
-			Vec3d_sub(&delta, &body->position);
-			distanceSquared = Vec3d_magSq(&delta);
-			Vec3d_copyFrom(&direction, &delta);
-			Vec3d_normalise(&direction);
+			vector3Copy(&delta, &otherBody->position);
+			vector3SubFromSelf(&delta, &body->position);
+			distanceSquared = vector3MagSqrd(&delta);
+			vector3Copy(&direction, &delta);
+			vector3NormalizeSelf(&direction);
 			radii = body->radius + otherBody->radius;
 			if (distanceSquared <= radii * radii)
 			{ // collision
@@ -226,12 +225,12 @@ int PhysBehavior_bodyBodyCollisionResponse(PhysBody *body,
 				/* Move particles so they no longer overlap.*/
 				PhysBehavior_collisionSeparationOffset(
 					&collisionSeparationOffset, &delta, overlap, -bodySeparationForce);
-				Vec3d_add(&body->position, &collisionSeparationOffset);
+				vector3AddToSelf(&body->position, &collisionSeparationOffset);
 
 				PhysBehavior_collisionSeparationOffset(&collisionSeparationOffset,
 													   &delta, overlap,
 													   otherBodySeparationForce);
-				Vec3d_add(&otherBody->position, &collisionSeparationOffset);
+				vector3AddToSelf(&otherBody->position, &collisionSeparationOffset);
 			}
 		}
 	}
@@ -314,7 +313,7 @@ void PhysBody_setEnabled(PhysBody *body, int enabled)
 	{
 		body->enabled = TRUE;
 		// prevent velocity from movement while disabled
-		Vec3d_copyFrom(&body->prevPosition, &body->position);
+		vector3Copy(&body->prevPosition, &body->position);
 	}
 	else
 	{
@@ -322,21 +321,21 @@ void PhysBody_setEnabled(PhysBody *body, int enabled)
 	}
 }
 
-void PhysBehavior_constantForce(PhysBody *body, Vec3d force)
+void PhysBehavior_constantForce(PhysBody *body, struct Vector3 force)
 {
-	Vec3d_add(&body->acceleration, &force);
+	vector3AddToSelf(&body->acceleration, &force);
 }
 
-void PhysBody_applyForce(PhysBody *body, Vec3d *force)
+void PhysBody_applyForce(PhysBody *body, struct Vector3 *force)
 {
-	Vec3d_add(&body->acceleration, force);
+	vector3AddToSelf(&body->acceleration, force);
 }
 
 // move but don't affect velocity
-void PhysBody_translateWithoutForce(PhysBody *body, Vec3d *translation)
+void PhysBody_translateWithoutForce(PhysBody *body, struct Vector3 *translation)
 {
-	Vec3d_add(&body->position, translation);
-	Vec3d_add(&body->prevPosition, translation);
+	vector3AddToSelf(&body->position, translation);
+	vector3AddToSelf(&body->prevPosition, translation);
 }
 
 void PhysBody_update(PhysBody *self,
@@ -346,8 +345,8 @@ void PhysBody_update(PhysBody *self,
 					 int numInPool,
 					 PhysState *physics)
 {
-	Vec3d gravity;
-	Vec3d_init(&gravity, 0, physics->worldData->gravity * self->mass, 0);
+	struct Vector3 gravity;
+	vector3Init(&gravity, 0, physics->worldData->gravity * self->mass, 0);
 	// do behaviours
 	PhysBehavior_constantForce(self, gravity); // apply gravity
 
@@ -357,50 +356,50 @@ void PhysBody_update(PhysBody *self,
 void PhysBody_dampenSmallMovements(PhysBody *body)
 {
 	// dampen small movements
-	if (Vec3d_distanceTo(&body->position, &body->prevPosition) <
+	if (vector3Dist(&body->position, &body->prevPosition) <
 		PHYS_MIN_MOVEMENT)
 	{
 		body->position = body->prevPosition;
-		Vec3d_origin(&body->velocity);
-		Vec3d_origin(&body->nonIntegralVelocity);
-		Vec3d_origin(&body->acceleration);
-		Vec3d_origin(&body->prevAcceleration);
+		vector3Init(&body->velocity, 0.0f, 0.0f, 0.0f);
+		vector3Init(&body->nonIntegralVelocity, 0.0f, 0.0f, 0.0f);
+		vector3Init(&body->acceleration, 0.0f, 0.0f, 0.0f);
+		vector3Init(&body->prevAcceleration, 0.0f, 0.0f, 0.0f);
 	}
 }
 
 void PhysBody_integrateMotionVerlet(PhysBody *body, float dt, float drag)
 {
-	Vec3d newPosition;
-	Vec3d_origin(&newPosition);
+	struct Vector3 newPosition;
+	vector3Init(&newPosition, 0.0f, 0.0f, 0.0f);
 	/* Scale force to mass. */
-	Vec3d_mulScalar(&body->acceleration, body->massInverse);
+	vector3ScaleSelf(&body->acceleration, body->massInverse);
 	/* Derive velocity. */
-	Vec3d_copyFrom(&body->velocity, &body->position);
-	Vec3d_sub(&body->velocity, &body->prevPosition);
+	vector3Copy(&body->velocity, &body->position);
+	vector3SubFromSelf(&body->velocity, &body->prevPosition);
 	/* Apply friction. */
-	Vec3d_mulScalar(&body->velocity, drag);
+	vector3ScaleSelf(&body->velocity, drag);
 	/* Apply acceleration force to new position. */
 	/* Get integral acceleration, apply to velocity, then apply updated
 	   velocity to position */
-	Vec3d_copyFrom(&newPosition, &body->position);
-	Vec3d_mulScalar(&body->acceleration, dt);
-	Vec3d_add(&body->velocity, &body->acceleration);
-	Vec3d_add(&newPosition, &body->velocity);
+	vector3Copy(&newPosition, &body->position);
+	vector3ScaleSelf(&body->acceleration, dt);
+	vector3AddToSelf(&body->velocity, &body->acceleration);
+	vector3AddToSelf(&newPosition, &body->velocity);
 
 	/* Store old position, update position to new position. */
-	Vec3d_copyFrom(&body->prevPosition, &body->position);
-	Vec3d_copyFrom(&body->position, &newPosition);
+	vector3Copy(&body->prevPosition, &body->position);
+	vector3Copy(&body->position, &newPosition);
 
 #if PHYSICS_MOTION_DAMPENING
 	PhysBody_dampenSmallMovements(&body);
 #endif
 
 	/* Reset acceleration force. */
-	Vec3d_copyFrom(&body->prevAcceleration, &body->acceleration);
-	Vec3d_origin(&body->acceleration);
+	vector3Copy(&body->prevAcceleration, &body->acceleration);
+	vector3Init(&body->acceleration, 0.0f, 0.0f, 0.0f);
 	/* store velocity for use in acc calculations by user code */
-	Vec3d_copyFrom(&body->nonIntegralVelocity, &body->velocity);
-	Vec3d_mulScalar(&body->nonIntegralVelocity, 1.0 / dt);
+	vector3Copy(&body->nonIntegralVelocity, &body->velocity);
+	vector3ScaleSelf(&body->nonIntegralVelocity, 1.0 / dt);
 }
 void PhysBody_integrateMotionSemiImplicitEuler(PhysBody *body,
 											   float dt,
@@ -412,27 +411,27 @@ void PhysBody_integrateMotionSemiImplicitEuler(PhysBody *body,
 	// velocityForDT = velocity * dt
 	// position = position + velocityForDT
 
-	Vec3d newPosition;
+	struct Vector3 newPosition;
 	/* Scale force by mass to calculate actual acceleration */
 	// acceleration = ( force / mass )
-	Vec3d_mulScalar(&body->acceleration, body->massInverse);
+	vector3ScaleSelf(&body->acceleration, body->massInverse);
 	body->nonIntegralAcceleration = body->acceleration; // for debugging
 	// accelerationForDT = acceleration * dt
-	Vec3d_mulScalar(&body->acceleration, dt);
+	vector3ScaleSelf(&body->acceleration, dt);
 
 	// velocity = velocity + accelerationForDT
-	Vec3d_add(&body->nonIntegralVelocity, &body->acceleration);
+	vector3AddToSelf(&body->nonIntegralVelocity, &body->acceleration);
 
 	// velocityForDT = velocity * dt
 	body->velocity = body->nonIntegralVelocity;
-	Vec3d_mulScalar(&body->velocity, dt);
+	vector3ScaleSelf(&body->velocity, dt);
 
 	/* Apply friction. */
-	Vec3d_mulScalar(&body->velocity, drag);
+	vector3ScaleSelf(&body->velocity, drag);
 
 	// position = position + velocityForDT;
 	newPosition = body->position;
-	Vec3d_add(&newPosition, &body->velocity);
+	vector3AddToSelf(&newPosition, &body->velocity);
 
 	/* Store old position, update position to new position. */
 	body->prevPosition = body->position;
@@ -444,7 +443,7 @@ void PhysBody_integrateMotionSemiImplicitEuler(PhysBody *body,
 
 	/* Reset acceleration force. */
 	body->prevAcceleration = body->acceleration;
-	Vec3d_origin(&body->acceleration);
+	vector3Init(&body->acceleration, 0.0f, 0.0f, 0.0f);
 }
 
 void PhysBody_integrateBodies(PhysBody *bodies,
@@ -558,8 +557,8 @@ void PhysBody_toString(PhysBody *self, char *buffer)
 {
 	char pos[60];
 	char vel[60];
-	Vec3d_toString(&self->position, pos);
-	Vec3d_toString(&self->nonIntegralVelocity, vel);
+	vector3toString(&self->position, pos);
+	vector3toString(&self->nonIntegralVelocity, vel);
 	sprintf(buffer, "PhysBody id=%d pos=%s vel=%s", self->id, pos, vel);
 }
 #endif

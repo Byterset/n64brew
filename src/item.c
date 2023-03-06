@@ -5,8 +5,7 @@
 #include "game.h"
 #include "modeltype.h"
 #include "player.h"
-#include "math/vec2d.h"
-#include "math/vec3d.h"
+#include "math/vector3.h"
 
 #include "gameutils.h"
 
@@ -129,7 +128,7 @@ void ItemHolder_init(ItemHolder *self,
 void Item_print(Item *self)
 {
 	printf("Item type=%s pos=", ModelTypeStrings[self->obj->modelType]);
-	Vec3d_print(&self->obj->position);
+	// Vec3d_print(&self->obj->position);
 }
 
 #endif

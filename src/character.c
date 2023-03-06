@@ -5,8 +5,8 @@
 #include "item.h"
 #include "modeltype.h"
 #include "trace.h"
-#include "math/vec2d.h"
-#include "math/vec3d.h"
+#include "math/vector2.h"
+#include "math/vector3.h"
 #include "util/time.h"
 #include "gameutils.h"
 
@@ -45,7 +45,7 @@
 #define CHARACTER_TARGET_PATH_PARAM 0
 #define DEBUG_CHARACTER_PATH_SMOOTHING 0
 
-static Vec3d characterItemOffset = {0.0F, 60.0F, 0.0F};
+static struct Vector3 characterItemOffset = {0.0F, 60.0F, 0.0F};
 
 #ifndef __N64__
 #include <stdio.h>
@@ -66,8 +66,8 @@ void Character_toString(Character *self, char *buffer)
 	angleToPlayer =
 			Character_topDownAngleMagToObj(self, Game_get()->player.goose);
 
-	Vec3d_toString(&self->obj->position, pos);
-	Vec3d_toString((Vec3d *)&self->obj->rotation, rot);
+	vector3toString(&self->obj->position, pos);
+	vector3toString((struct Vector3 *)&self->obj->rotation, rot);
 	sprintf(buffer, "Character state=%s target=%s pos=%s rot=%s angleToPlayer=%f",
 					CharacterStateStrings[self->state],
 					self->targetItem ? ModelTypeStrings[self->targetItem->obj->modelType]
@@ -101,7 +101,7 @@ void Character_init(Character *self,
 	self->animState.attachment.rotation.x = 90;
 	self->animState.attachment.rotation.z = 90;
 
-	Vec3d_origin(&self->targetLocation);
+	vector3Init(&self->targetLocation, 0.0f, 0.0f, 0.0f);
 	self->targetType = NoneCharacterTarget;
 
 	self->targetItem = NULL;
@@ -125,16 +125,16 @@ float Character_angleDeltaMag(float a1, float a2)
 	return fabsf(180.0F - fabsf(fabsf(fmodf(a1 - a2, 360.0f)) - 180.0F));
 }
 
-float Character_topDownAngleDeltaToPos(Character *self, Vec3d *position)
+float Character_topDownAngleDeltaToPos(Character *self, struct Vector3 *position)
 {
-	Vec3d toPos;
-	Vec2d toPos2d;
+	struct Vector3 toPos;
+	struct Vector2 toPos2d;
 	float angleToPos;
 
-	Vec3d_directionTo(&self->obj->position, position, &toPos);
+	vector3DirectionTo(&self->obj->position, position, &toPos);
 	toPos2d.x = toPos.x;
 	toPos2d.y = -toPos.z;
-	angleToPos = radToDeg(Vec2d_angle(&toPos2d));
+	angleToPos = radToDeg(vector2Angle(&toPos2d));
 
 	return Character_angleDeltaMag(self->obj->rotation.y, angleToPos);
 }
@@ -147,12 +147,12 @@ float Character_topDownAngleMagToObj(Character *self, GameObject *obj)
 	return fabsf(fmodf(angleFromHeadingToPos, 360.0f));
 }
 
-int Character_posIsInViewArc(Character *self, Vec3d *position)
+int Character_posIsInViewArc(Character *self, struct Vector3 *position)
 {
 	float angleFromHeadingToPos;
 
 	// within range
-	if (Vec3d_distanceTo(position, &self->obj->position) >
+	if (vector3Dist(position, &self->obj->position) >
 			CHARACTER_SIGHT_RANGE)
 	{
 		return FALSE;
@@ -173,7 +173,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 	GameObject visibilityCheckObjects[MAX_WORLD_OBJECTS];
 	int visibilityCheckObjectsCount = 0;
 	int i;
-	Vec3d vecToObject;
+	struct Vector3 vecToObject;
 	GameObject *obj;
 
 	if (!Character_posIsInViewArc(self, &item->obj->position))
@@ -197,8 +197,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 		default:
 			break;
 		}
-
-		Vec3d_directionTo(&self->obj->position, &obj->position, &vecToObject);
+		vector3DirectionTo(&self->obj->position, &obj->position, &vecToObject);
 
 		visibilityCheckObjects[visibilityCheckObjectsCount] = *obj;
 		visibilityCheckObjectsCount++;
@@ -225,23 +224,23 @@ int Character_canSeePlayer(Character *self, Game *game)
 			game->worldObjectsCount);
 }
 
-float Character_getDistanceTopDown(Vec3d *from, Vec3d *to)
+float Character_getDistanceTopDown(struct Vector3 *from, struct Vector3 *to)
 {
-	Vec2d from2d, to2d;
-	Vec2d_init(&from2d, from->x, -from->z);
-	Vec2d_init(&to2d, to->x, -to->z);
-	return Vec2d_distanceTo(&from2d, &to2d);
+	struct Vector2 from2d = {from->x, -from->z};
+	struct Vector2 to2d = {to->x, -to->z};
+
+	return vector2Dist(&from2d, &to2d);
 }
 
 void Character_moveTowards(Character *self,
-													 Vec3d *target,
+													 struct Vector3 *target,
 													 float speedMultiplier,
 													 int shouldStopAtLocation)
 {
-	Vec3d targetDirection;
-	Vec2d targetDirection2d;
-	Vec3d headingDirection;
-	Vec3d movement;
+	struct Vector3 targetDirection;
+	struct Vector2 targetDirection2d;
+	struct Vector3 headingDirection;
+	struct Vector3 movement;
 	float targetAngle;
 	float derivedSpeed;
 	float framesToDesiredArrival;
@@ -250,15 +249,14 @@ void Character_moveTowards(Character *self,
 	float distToTarget =
 			Character_getDistanceTopDown(&self->obj->position, target);
 
-	Vec3d_directionTo(&self->obj->position, target, &targetDirection);
+	vector3DirectionTo(&self->obj->position, target, &targetDirection);
 
-	targetDirection.y =
-			0;                             // remove vertical component to stop character trying to fly
-	Vec3d_normalise(&targetDirection); // renormalize with y=0
+	targetDirection.y = 0;  // remove vertical component to stop character trying to fly
+	vector3NormalizeSelf(&targetDirection); // renormalize with y=0
 
 	// rotate towards target, but with a speed limit
-	Vec2d_init(&targetDirection2d, targetDirection.x, targetDirection.z);
-	targetAngle = 360.0 - radToDeg(Vec2d_angle(&targetDirection2d));
+	vector2Init(&targetDirection2d, targetDirection.x, targetDirection.z);
+	targetAngle = 360.0 - radToDeg(vector2Angle(&targetDirection2d));
 
 	self->turningSpeedScaleForHeading =
 			(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5)));
@@ -286,10 +284,9 @@ void Character_moveTowards(Character *self,
 				(MIN(derivedSpeed, speedForDesiredArrival)) / derivedSpeed;
 		derivedSpeed = MIN(derivedSpeed, speedForDesiredArrival);
 	}
-
-	Vec3d_copyFrom(&movement, &headingDirection);
-	Vec3d_mulScalar(&movement, derivedSpeed);
-	Vec3d_add(&self->obj->position, &movement);
+	vector3Copy(&movement, &headingDirection);
+	vector3ScaleSelf(&movement, derivedSpeed);
+	vector3AddToSelf(&self->obj->position, &movement);
 }
 
 void Character_setVisibleItemAttachment(Character *self, ModelType modelType)
@@ -311,7 +308,7 @@ Node *Character_getPathNode(Character *self, Game *game, int pathNodeIndex)
 
 void Character_goToTarget(Character *self,
 													Game *game,
-													Vec3d *target,
+													struct Vector3 *target,
 													float speedMultiplier,
 													int shouldStopAtTarget)
 {
@@ -320,13 +317,13 @@ void Character_goToTarget(Character *self,
 	// float profStartPathfinding;
 	Graph *pathfindingGraph;
 	PathfindingState *pathfindingState;
-	Vec3d *nextNodePos;
+	struct Vector3 *nextNodePos;
 #if CHARACTER_TARGET_PATH_PARAM
-	Vec3d *pathSegmentP0;
-	Vec3d *pathSegmentP1;
+	struct Vector3 *pathSegmentP0;
+	struct Vector3 *pathSegmentP1;
 #endif
-	Vec3d movementTarget;
-	Vec3d objCenter;
+	struct Vector3 movementTarget;
+	struct Vector3 objCenter;
 	float objRadius;
 
 	int spatialHashResults[100];
@@ -488,9 +485,9 @@ void Character_goToTarget(Character *self,
 		self->pathSegmentProgress = Path_getClosestPointParameter(
 				pathSegmentP0, pathSegmentP1, &self->obj->position);
 		// get position along line to next point
-		Vec3d_lerp(&movementTarget, pathSegmentP1,
+		vector3Lerp(&movementTarget, pathSegmentP1,
 							 // lead target point a little bit
-							 MIN(1.0f, self->pathSegmentProgress + 0.1));
+							 MIN(1.0f, self->pathSegmentProgress + 0.1), &movementTarget);
 		movementTarget = *pathSegmentP0;
 #else
 
@@ -539,19 +536,19 @@ void Character_goToTarget(Character *self,
 
 void Character_update(Character *self, Game *game)
 {
-	Vec3d startPos;
+	struct Vector3 startPos;
 	float startRot;
 	float animationMovementSpeed;
 	int isTurning;
 	int isWalking;
 
-	Vec3d_copyFrom(&startPos, &self->obj->position);
+	vector3Copy(&startPos, &self->obj->position);
 	startRot = self->obj->rotation.y;
 	if (self->itemHolder.heldItem)
 	{
 		// bring item with you
 		self->itemHolder.heldItem->obj->position = self->obj->position;
-		Vec3d_add(&self->itemHolder.heldItem->obj->position, &characterItemOffset);
+		vector3AddToSelf(&self->itemHolder.heldItem->obj->position, &characterItemOffset);
 	}
 
 	// update held item visual attachment
@@ -576,7 +573,7 @@ void Character_update(Character *self, Game *game)
 
 	isTurning = fabsf(self->obj->rotation.y - startRot) > 0.001;
 	animationMovementSpeed =
-			Vec3d_distanceTo(&startPos, &self->obj->position) / 100.0f;
+			vector3Dist(&startPos, &self->obj->position) / 100.0f;
 	isWalking = animationMovementSpeed > 0.0001;
 	if (!isWalking && isTurning)
 	{
@@ -686,7 +683,7 @@ void Character_updateConfusionState(Character *self, Game *game)
 }
 
 int Character_isCloseToAndFacing(Character *self,
-																 Vec3d *target,
+																 struct Vector3 *target,
 																 float targetDist)
 {
 	return !(
@@ -764,14 +761,12 @@ void Character_updateSeekingItemState(Character *self, Game *game)
 	if (self->itemHolder.heldItem)
 	{
 		// are we near enough to drop item?
-		if (Vec3d_distanceTo(&self->obj->position,
-												 &self->targetItem->initialLocation) <
+		if (vector3Dist(&self->obj->position, &self->targetItem->initialLocation) <
 				CHARACTER_NEAR_OBJ_DROP_DIST)
 		{
 			// close enough to return item
 
-			Vec3d_copyFrom(&self->itemHolder.heldItem->obj->position,
-										 &self->targetItem->initialLocation);
+			vector3Copy(&self->itemHolder.heldItem->obj->position, &self->targetItem->initialLocation);
 
 			Item_drop(self->itemHolder.heldItem);
 			self->targetItem = NULL;
@@ -879,12 +874,11 @@ void Character_updateSeekingTargetState(Character *self, Game *game)
 }
 void Character_updateFleeingState(Character *self, Game *game)
 {
-	Vec3d movement;
-	Vec3d_directionTo(&game->player.goose->position, &self->obj->position,
-										&movement);
-	Vec3d_add(&self->obj->position, &movement);
+	struct Vector3 movement;
+	vector3DirectionTo(&game->player.goose->position, &self->obj->position,	&movement);
+	vector3AddToSelf(&self->obj->position, &movement);
 
-	if (Vec3d_distanceTo(&game->player.goose->position, &self->obj->position) <
+	if (vector3Dist(&game->player.goose->position, &self->obj->position) <
 			CHARACTER_FLEE_DIST)
 	{
 		Character_transitionToState(self, IdleState);

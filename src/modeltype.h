@@ -2,7 +2,7 @@
 #ifndef MODELTYPE_H
 #define MODELTYPE_H
 
-#include "math/vec3d.h"
+#include "math/vector3.h"
 
 // when updating this, also update ModelTypeStrings[] and modelTypesProperties[]
 // and add new meshes to getModelDisplayList() in stage00.c and add a
@@ -43,7 +43,7 @@ typedef struct ModelProperties
 {
 	float mass;
 	float radius;
-	Vec3d centroidOffset;
+	struct Vector3 centroidOffset;
 	float scale;
 	ModelTypeCategory category;
 } ModelProperties;

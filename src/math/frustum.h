@@ -3,12 +3,12 @@
 #define FRUSTUM_H
 
 #include "../physics/collision.h"
-#include "vec3d.h"
+#include "vector3.h"
 
 typedef struct Plane
 {
-	Vec3d normal; // Plane normal. Points x on the plane satisfy Dot(n,x) = -d
-	Vec3d point;
+	struct Vector3 normal; // Plane normal. Points x on the plane satisfy Dot(n,x) = -d
+	struct Vector3 point;
 	float d; // d = -dot(n,p) for a given point p on the plane
 } Plane;
 
@@ -37,17 +37,17 @@ extern char *FrustumPlanesStrings[NUM_FRUSTUM_PLANES];
 typedef struct Frustum
 {
 	Plane planes[NUM_FRUSTUM_PLANES];
-	Vec3d ntl, ntr, nbl, nbr, ftl, ftr, fbl, fbr;
+	struct Vector3 ntl, ntr, nbl, nbr, ftl, ftr, fbl, fbr;
 	float nearD, farD, aspect, fovy, tang;
 	float nw, nh, fw, fh;
 } Frustum;
 
-float Plane_distance(Plane *self, Vec3d *p);
+float Plane_distance(Plane *self, struct Vector3 *p);
 
-void Plane_setNormalAndPoint(Plane *self, Vec3d *normal, Vec3d *point);
+void Plane_setNormalAndPoint(Plane *self, struct Vector3 *normal, struct Vector3 *point);
 
-float Plane_distPointToPlane(Plane *p, Vec3d *q);
-void Plane_pointClosestPoint(Plane *p, Vec3d *q, Vec3d *result);
+float Plane_distPointToPlane(Plane *p, struct Vector3 *q);
+void Plane_pointClosestPoint(Plane *p, struct Vector3 *q, struct Vector3 *result);
 
 void Frustum_setCamInternals(Frustum *self,
 							 float fovy,
@@ -55,7 +55,7 @@ void Frustum_setCamInternals(Frustum *self,
 							 float nearD,
 							 float farD);
 
-void Frustum_setCamDef(Frustum *self, Vec3d *p, Vec3d *l, Vec3d *u);
+void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, struct Vector3 *u);
 FrustumTestResult Frustum_boxInFrustum(Frustum *frustum, AABB *aabb);
 FrustumTestResult Frustum_boxInFrustumNaive(Frustum *frustum, AABB *aabb);
 
@@ -66,7 +66,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestPN(Frustum *frustum,
 												AABB *aabb,
 												int planeIdx);
 
-void Frustum_getAABBVertexP(AABB *self, Vec3d *normal, Vec3d *result);
-void Frustum_getAABBVertexN(AABB *self, Vec3d *normal, Vec3d *result);
+void Frustum_getAABBVertexP(AABB *self, struct Vector3 *normal, struct Vector3 *result);
+void Frustum_getAABBVertexN(AABB *self, struct Vector3 *normal, struct Vector3 *result);
 
 #endif /* !FRUSTUM_H_ */

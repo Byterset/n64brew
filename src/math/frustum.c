@@ -19,54 +19,54 @@ char *FrustumPlanesStrings[NUM_FRUSTUM_PLANES] = {
 	"RightFrustumPlane",  //
 };
 
-void Plane_setNormalAndPoint(Plane *self, Vec3d *normal, Vec3d *point)
+void Plane_setNormalAndPoint(Plane *self, struct Vector3 *normal, struct Vector3 *point)
 {
 	self->normal = *normal;
-	Vec3d_normalise(&self->normal);
+	vector3NormalizeSelf(&self->normal);
 	self->point = *point;
 
-	self->d = -(Vec3d_dot(&self->normal, &self->point));
+	self->d = -(vector3Dot(&self->normal, &self->point));
 }
 
-void Plane_set3Points(Plane *self, Vec3d *v1, Vec3d *v2, Vec3d *v3)
+void Plane_set3Points(Plane *self, struct Vector3 *v1, struct Vector3 *v2, struct Vector3 *v3)
 {
-	Vec3d aux1, aux2;
+	struct Vector3 aux1, aux2;
 
 	aux1 = *v1;
-	Vec3d_sub(&aux1, v2);
+	vector3SubFromSelf(&aux1, v2);
 	aux2 = *v3;
-	Vec3d_sub(&aux2, v2);
+	vector3SubFromSelf(&aux2, v2);
 
-	Vec3d_cross(&aux2, &aux1, &self->normal);
+	vector3Cross(&aux2, &aux1, &self->normal);
 
-	Vec3d_normalise(&self->normal);
+	vector3NormalizeSelf(&self->normal);
 	self->point = *v2;
-	self->d = -(Vec3d_dot(&self->normal, &self->point));
+	self->d = -(vector3Dot(&self->normal, &self->point));
 }
 
-float Plane_distance(Plane *self, Vec3d *p)
+float Plane_distance(Plane *self, struct Vector3 *p)
 {
-	return (self->d + Vec3d_dot(&self->normal, p));
+	return (self->d + vector3Dot(&self->normal, p));
 }
 
-void Plane_pointClosestPoint(Plane *p, Vec3d *q, Vec3d *result)
+void Plane_pointClosestPoint(Plane *p, struct Vector3 *q, struct Vector3 *result)
 {
 	// float t = Dot(p.n, q) - p.d;
 	// return q - t * p.n;
 
-	Vec3d tmp;
-	float t = Vec3d_dot(&p->normal, q) + p->d;
+	struct Vector3 tmp;
+	float t = vector3Dot(&p->normal, q) + p->d;
 
 	*result = *q;
 	tmp = p->normal;
-	Vec3d_mulScalar(&tmp, t);
-	Vec3d_sub(result, &tmp);
+	vector3ScaleSelf(&tmp, t);
+	vector3SubFromSelf(result, &tmp);
 }
 
-float Plane_distPointToPlane(Plane *p, Vec3d *q)
+float Plane_distPointToPlane(Plane *p, struct Vector3 *q)
 {
 	// return Dot(q, p.n) - p.d; if plane equation normalized (||p.n||==1)
-	return (Vec3d_dot(&p->normal, q) + p->d) / Vec3d_dot(&p->normal, &p->normal);
+	return (vector3Dot(&p->normal, q) + p->d) / vector3Dot(&p->normal, &p->normal);
 }
 
 // based on
@@ -98,96 +98,96 @@ void Frustum_setCamInternals(Frustum *self,
 // guLookAt/gluLookAt function: the position of the camera (p), a point to where
 // the camera is pointing (l) and the up vector (u). Each time the camera
 // position or orientation changes, this function should be called as well.
-void Frustum_setCamDef(Frustum *self, Vec3d *p, Vec3d *l, Vec3d *u)
+void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, struct Vector3 *u)
 {
-	Vec3d nc, fc, X, Y, Z;
+	struct Vector3 nc, fc, X, Y, Z;
 	// compute the Z axis of camera
 	// this axis points in the opposite direction from
 	// the looking direction
 	// Z = p - l;
 	Z = *p;
-	Vec3d_sub(&Z, l);
-	Vec3d_normalise(&Z);
+	vector3SubFromSelf(&Z, l);
+	vector3NormalizeSelf(&Z);
 
 	// X axis of camera with given "up" vector and Z axis
 	// X = u * Z;
-	Vec3d_cross(u, &Z, &X);
-	Vec3d_normalise(&X);
+	vector3Cross(u, &Z, &X);
+	vector3NormalizeSelf(&X);
 
 	// the real "up" vector is the cross product of Z and X
 	// Y = Z * X;
-	Vec3d_cross(&Z, &X, &Y);
+	vector3Cross(&Z, &X, &Y);
 
 	// compute the centers of the near and far planes
 	{
 		// nc = p - Z * nearD;
-		Vec3d ZNearD;
+		struct Vector3 ZNearD;
 		ZNearD = Z;
-		Vec3d_mulScalar(&ZNearD, self->nearD);
+		vector3ScaleSelf(&ZNearD, self->nearD);
 		nc = *p;
-		Vec3d_sub(&nc, &ZNearD);
+		vector3SubFromSelf(&nc, &ZNearD);
 	}
 
 	{
 		// fc = p - Z * farD;
-		Vec3d ZFarD;
+		struct Vector3 ZFarD;
 		ZFarD = Z;
-		Vec3d_mulScalar(&ZFarD, self->farD);
+		vector3ScaleSelf(&ZFarD, self->farD);
 		fc = *p;
-		Vec3d_sub(&fc, &ZFarD);
+		vector3SubFromSelf(&fc, &ZFarD);
 	}
 
 	{
-		Vec3d Ynh, Xnw, Yfh, Xfw;
+		struct Vector3 Ynh, Xnw, Yfh, Xfw;
 
 		Ynh = Y;
-		Vec3d_mulScalar(&Ynh, self->nh);
+		vector3ScaleSelf(&Ynh, self->nh);
 		Xnw = X;
-		Vec3d_mulScalar(&Xnw, self->nw);
+		vector3ScaleSelf(&Xnw, self->nw);
 		Yfh = Y;
-		Vec3d_mulScalar(&Yfh, self->fh);
+		vector3ScaleSelf(&Yfh, self->fh);
 		Xfw = X;
-		Vec3d_mulScalar(&Xfw, self->fw);
+		vector3ScaleSelf(&Xfw, self->fw);
 
 		// ntl = nc + Ynh - Xnw;
 		self->ntl = nc;
-		Vec3d_add(&self->ntl, &Ynh);
-		Vec3d_sub(&self->ntl, &Xnw);
+		vector3AddToSelf(&self->ntl, &Ynh);
+		vector3SubFromSelf(&self->ntl, &Xnw);
 
 		// ntr = nc + Ynh + Xnw;
 		self->ntr = nc;
-		Vec3d_add(&self->ntr, &Ynh);
-		Vec3d_add(&self->ntr, &Xnw);
+		vector3AddToSelf(&self->ntr, &Ynh);
+		vector3AddToSelf(&self->ntr, &Xnw);
 
 		// nbl = nc - Ynh - Xnw;
 		self->nbl = nc;
-		Vec3d_sub(&self->nbl, &Ynh);
-		Vec3d_sub(&self->nbl, &Xnw);
+		vector3SubFromSelf(&self->nbl, &Ynh);
+		vector3SubFromSelf(&self->nbl, &Xnw);
 
 		// nbr = nc - Ynh + Xnw;
 		self->nbr = nc;
-		Vec3d_sub(&self->nbr, &Ynh);
-		Vec3d_add(&self->nbr, &Xnw);
+		vector3SubFromSelf(&self->nbr, &Ynh);
+		vector3AddToSelf(&self->nbr, &Xnw);
 
 		// ftl = fc + Yfh - Xfw;
 		self->ftl = fc;
-		Vec3d_add(&self->ftl, &Yfh);
-		Vec3d_sub(&self->ftl, &Xfw);
+		vector3AddToSelf(&self->ftl, &Yfh);
+		vector3SubFromSelf(&self->ftl, &Xfw);
 
 		// ftr = fc + Yfh + Xfw;
 		self->ftr = fc;
-		Vec3d_add(&self->ftr, &Yfh);
-		Vec3d_add(&self->ftr, &Xfw);
+		vector3AddToSelf(&self->ftr, &Yfh);
+		vector3AddToSelf(&self->ftr, &Xfw);
 
 		// fbl = fc - Yfh - Xfw;
 		self->fbl = fc;
-		Vec3d_sub(&self->fbl, &Yfh);
-		Vec3d_sub(&self->fbl, &Xfw);
+		vector3SubFromSelf(&self->fbl, &Yfh);
+		vector3SubFromSelf(&self->fbl, &Xfw);
 
 		// fbr = fc - Yfh + Xfw;
 		self->fbr = fc;
-		Vec3d_sub(&self->fbr, &Yfh);
-		Vec3d_add(&self->fbr, &Xfw);
+		vector3SubFromSelf(&self->fbr, &Yfh);
+		vector3AddToSelf(&self->fbr, &Xfw);
 	}
 
 	Plane_set3Points(&self->planes[TopFrustumPlane], &self->ntr, &self->ntl,
@@ -204,125 +204,126 @@ void Frustum_setCamDef(Frustum *self, Vec3d *p, Vec3d *l, Vec3d *u)
 					 &self->fbl);
 }
 
-void Frustum_setCamDef2(Frustum *self, Vec3d *p, Vec3d *l, Vec3d *u)
+void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, struct Vector3 *u)
 {
-	Vec3d aux, normal;
+	struct Vector3 aux, normal;
 
-	Vec3d nc, fc, X, Y, Z;
+	struct Vector3 nc, fc, X, Y, Z;
 	// compute the Z axis of camera
 	// this axis points in the opposite direction from
 	// the looking direction
 	// Z = p - l;
 	Z = *p;
-	Vec3d_sub(&Z, l);
-	Vec3d_normalise(&Z);
+	vector3SubFromSelf(&Z, l);
+	vector3NormalizeSelf(&Z);
 
 	// X axis of camera with given "up" vector and Z axis
 	// X = u * Z;
-	Vec3d_cross(u, &Z, &X);
-	Vec3d_normalise(&X);
+	vector3Cross(u, &Z, &X);
+	vector3NormalizeSelf(&X);
 
 	// the real "up" vector is the cross product of Z and X
 	// Y = Z * X;
-	Vec3d_cross(&Z, &X, &Y);
+	vector3Cross(&Z, &X, &Y);
 
 	// compute the centers of the near and far planes
 	{
 		// nc = p - Z * nearD;
-		Vec3d tempZ;
+		struct Vector3 tempZ;
 		tempZ = Z;
-		Vec3d_mulScalar(&tempZ, self->nearD);
+		vector3ScaleSelf(&tempZ, self->nearD);
 		nc = *p;
-		Vec3d_sub(&nc, &tempZ);
+		vector3SubFromSelf(&nc, &tempZ);
 	}
 
 	{
 		// fc = p - Z * farD;
-		Vec3d tempZ;
+		struct Vector3 tempZ;
 		tempZ = Z;
-		Vec3d_mulScalar(&tempZ, self->farD);
+		vector3ScaleSelf(&tempZ, self->farD);
 		fc = *p;
-		Vec3d_sub(&fc, &tempZ);
+		vector3SubFromSelf(&fc, &tempZ);
 	}
 
 	// near
 	{
-		Vec3d negZ;
-		negZ = Z;
-		Vec3d_mulScalar(&negZ, -1.0);
+		struct Vector3 negZ;
+		vector3Copy(&Z, &negZ);
+		// negZ = Z;
+		vector3ScaleSelf(&negZ, -1.0);
 		Plane_setNormalAndPoint(&self->planes[NearFrustumPlane], &negZ, &nc);
 	}
 	// far
 	Plane_setNormalAndPoint(&self->planes[FarFrustumPlane], &Z, &fc);
 
 	{
-		Vec3d Ynh;
+		struct Vector3 Ynh;
 		Ynh = Y;
-		Vec3d_mulScalar(&Ynh, self->nh);
+		vector3ScaleSelf(&Ynh, self->nh);
 		// top
 		{
 			// aux = (nc + Y * nh) - p;
-			Vec3d nsAddYnh;
+			struct Vector3 nsAddYnh;
 			nsAddYnh = nc;
-			Vec3d_add(&nsAddYnh, &Ynh);
+			vector3AddToSelf(&nsAddYnh, &Ynh);
 			aux = nsAddYnh;
-			Vec3d_sub(&aux, p);
-			Vec3d_normalise(&aux);
+			vector3SubFromSelf(&aux, p);
+			vector3NormalizeSelf(&aux);
 			// normal = aux * X;
-			Vec3d_cross(&aux, &X, &normal);
+			vector3Cross(&aux, &X, &normal);
 			Plane_setNormalAndPoint(&self->planes[TopFrustumPlane], &normal,
 									&nsAddYnh);
 		}
 		// bottom
 		{
 			// aux = (nc - Y * nh) - p;
-			Vec3d ncSubYnh;
+			struct Vector3 ncSubYnh;
 			ncSubYnh = nc;
-			Vec3d_sub(&ncSubYnh, &Ynh);
+			vector3SubFromSelf(&ncSubYnh, &Ynh);
 			aux = ncSubYnh;
-			Vec3d_sub(&aux, p);
-			Vec3d_normalise(&aux);
+			vector3SubFromSelf(&aux, p);
+			vector3NormalizeSelf(&aux);
 			// normal = X * aux;
-			Vec3d_cross(&aux, &X, &normal);
+			vector3Cross(&aux, &X, &normal);
 			Plane_setNormalAndPoint(&self->planes[BottomFrustumPlane], &normal,
 									&ncSubYnh);
 		}
 	}
 	{
-		Vec3d Xnw;
+		struct Vector3 Xnw;
 		Xnw = X;
-		Vec3d_mulScalar(&Xnw, self->nw);
+		vector3ScaleSelf(&Xnw, self->nw);
 		// left
 		{
 			// aux = (nc - X * nw) - p;
-			Vec3d ncSubXnw;
+			struct Vector3 ncSubXnw;
 			ncSubXnw = nc;
-			Vec3d_sub(&ncSubXnw, &Xnw);
+			vector3SubFromSelf(&ncSubXnw, &Xnw);
 
 			aux = ncSubXnw;
-			Vec3d_sub(&aux, p);
-			Vec3d_normalise(&aux);
-			Vec3d_cross(&aux, &Y, &normal);
+			vector3SubFromSelf(&aux, p);
+			vector3NormalizeSelf(&aux);
+			vector3Cross(&aux, &Y, &normal);
 			Plane_setNormalAndPoint(&self->planes[LeftFrustumPlane], &normal,
 									&ncSubXnw);
 		}
 		// right
 		{
 			// aux = (nc + X * nw) - p;
-			Vec3d ncAddXnw;
+			struct Vector3 ncAddXnw;
 			ncAddXnw = nc;
-			Vec3d_add(&ncAddXnw, &Xnw);
+			vector3AddToSelf(&ncAddXnw, &Xnw);
 			aux = ncAddXnw;
-			Vec3d_sub(&aux, p);
-			Vec3d_normalise(&aux);
-			Vec3d_cross(&aux, &Y, &normal);
+			vector3SubFromSelf(&aux, p);
+			vector3NormalizeSelf(&aux);
+			vector3Cross(&aux, &Y, &normal);
 			Plane_setNormalAndPoint(&self->planes[RightFrustumPlane], &normal,
 									&ncAddXnw);
 		}
 	}
 }
 
-void Frustum_getAABBVertexP(AABB *self, Vec3d *normal, Vec3d *result)
+void Frustum_getAABBVertexP(AABB *self, struct Vector3 *normal, struct Vector3 *result)
 {
 	*result = self->min;
 
@@ -336,7 +337,7 @@ void Frustum_getAABBVertexP(AABB *self, Vec3d *normal, Vec3d *result)
 		result->z = self->max.z;
 }
 
-void Frustum_getAABBVertexN(AABB *self, Vec3d *normal, Vec3d *result)
+void Frustum_getAABBVertexN(AABB *self, struct Vector3 *normal, struct Vector3 *result)
 {
 	*result = self->max;
 
@@ -353,7 +354,7 @@ void Frustum_getAABBVertexN(AABB *self, Vec3d *normal, Vec3d *result)
 // FrustumTestResult Frustum_boxInFrustum(Frustum* frustum, AABB* aabb) {
 //   int i;
 //   float r, s;
-//   Vec3d center, positiveExtents;
+//   struct Vector3 center, positiveExtents;
 //   Plane* plane;
 //   FrustumTestResult result;
 //   result = InsideFrustum;
@@ -362,19 +363,19 @@ void Frustum_getAABBVertexN(AABB *self, Vec3d *normal, Vec3d *result)
 //     plane = &frustum->planes[i];
 //     // Compute AABB center
 //     center = aabb->max;
-//     Vec3d_add(&center, &aabb->min);
-//     Vec3d_mulScalar(&center, 0.5f);
+//     vector3AddToSelf(&center, &aabb->min);
+//     vector3ScaleSelf(&center, 0.5f);
 
 //     // Compute positive extents
 //     positiveExtents = aabb->max;
-//     Vec3d_sub(&positiveExtents, &center);
+//     vector3SubFromSelf(&positiveExtents, &center);
 
 //     // Compute the projection interval radius of b onto L(t) = aabb->c + t *
 //     p.n r = positiveExtents.x * fabsf(plane->normal.x) +
 //         positiveExtents.y * fabsf(plane->normal.y) +
 //         positiveExtents.z * fabsf(plane->normal.z);
 //     // Compute distance of box center from plane
-//     s = Vec3d_dot(&plane->normal, &center) - plane->d;
+//     s = vector3Dot(&plane->normal, &center) - plane->d;
 //     // Intersection occurs when distance s falls within [-r,+r] interval
 //     // fabsf(s) <= r;
 
@@ -395,7 +396,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestRTCD(Frustum *frustum,
 												  int planeIdx)
 {
 	float r, s;
-	Vec3d center, positiveExtents;
+	struct Vector3 center, positiveExtents;
 	Plane *plane;
 	FrustumTestResult result = InsideFrustum;
 	// for each plane do ...
@@ -403,13 +404,13 @@ FrustumTestResult Frustum_boxFrustumPlaneTestRTCD(Frustum *frustum,
 	// Compute AABB center
 	// center = (min + max) * 0.5
 	center = aabb->min;
-	Vec3d_add(&center, &aabb->max);
-	Vec3d_mulScalar(&center, 0.5f);
+	vector3AddToSelf(&center, &aabb->max);
+	vector3ScaleSelf(&center, 0.5f);
 
 	// Compute positive extents
 	// extents = max - center
 	positiveExtents = aabb->max;
-	Vec3d_sub(&positiveExtents, &center);
+	vector3SubFromSelf(&positiveExtents, &center);
 
 	// Compute the projection interval radius of b onto L(t) = center + t *
 	// plane.normal
@@ -417,7 +418,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestRTCD(Frustum *frustum,
 		positiveExtents.y * fabsf(plane->normal.y) +
 		positiveExtents.z * fabsf(plane->normal.z);
 	// Compute distance of box center from plane
-	s = Vec3d_dot(&plane->normal, &center) - plane->d;
+	s = vector3Dot(&plane->normal, &center) - plane->d;
 	// Intersection occurs when distance s falls within [-r,+r] interval
 	// fabsf(s) <= r;
 
@@ -441,7 +442,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestPN(Frustum *frustum,
 												AABB *aabb,
 												int planeIdx)
 {
-	Vec3d vertexP, vertexN;
+	struct Vector3 vertexP, vertexN;
 	FrustumTestResult result = InsideFrustum;
 	Frustum_getAABBVertexP(aabb, &frustum->planes[planeIdx].normal, &vertexP);
 	Frustum_getAABBVertexN(aabb, &frustum->planes[planeIdx].normal, &vertexN);
@@ -480,33 +481,33 @@ FrustumTestResult Frustum_boxInFrustum(Frustum *frustum, AABB *aabb)
 	return result;
 }
 
-void Frustum_getAABBVertex(AABB *aabb, int vertex, Vec3d *result)
+void Frustum_getAABBVertex(AABB *aabb, int vertex, struct Vector3 *result)
 {
 	switch (vertex)
 	{
 	case 0:
-		*result = (Vec3d){aabb->min.x, aabb->min.y, aabb->min.z};
+		*result = (struct Vector3){aabb->min.x, aabb->min.y, aabb->min.z};
 		return;
 	case 1:
-		*result = (Vec3d){aabb->max.x, aabb->min.y, aabb->min.z};
+		*result = (struct Vector3){aabb->max.x, aabb->min.y, aabb->min.z};
 		return;
 	case 2:
-		*result = (Vec3d){aabb->min.x, aabb->max.y, aabb->min.z};
+		*result = (struct Vector3){aabb->min.x, aabb->max.y, aabb->min.z};
 		return;
 	case 3:
-		*result = (Vec3d){aabb->min.x, aabb->min.y, aabb->max.z};
+		*result = (struct Vector3){aabb->min.x, aabb->min.y, aabb->max.z};
 		return;
 	case 4:
-		*result = (Vec3d){aabb->max.x, aabb->max.y, aabb->max.z};
+		*result = (struct Vector3){aabb->max.x, aabb->max.y, aabb->max.z};
 		return;
 	case 5:
-		*result = (Vec3d){aabb->min.x, aabb->max.y, aabb->max.z};
+		*result = (struct Vector3){aabb->min.x, aabb->max.y, aabb->max.z};
 		return;
 	case 6:
-		*result = (Vec3d){aabb->max.x, aabb->min.y, aabb->max.z};
+		*result = (struct Vector3){aabb->max.x, aabb->min.y, aabb->max.z};
 		return;
 	case 7:
-		*result = (Vec3d){aabb->max.x, aabb->max.y, aabb->min.z};
+		*result = (struct Vector3){aabb->max.x, aabb->max.y, aabb->min.z};
 		return;
 	}
 }
@@ -517,7 +518,7 @@ FrustumTestResult Frustum_boxInFrustumNaive(Frustum *frustum, AABB *aabb)
 	int out;
 	int in;
 	FrustumTestResult result = InsideFrustum;
-	Vec3d vertex;
+	struct Vector3 vertex;
 
 	// for each plane do ...
 	for (i = 0; i < NUM_FRUSTUM_PLANES; i++)

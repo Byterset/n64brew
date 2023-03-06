@@ -6,7 +6,7 @@
 #include "../n64compat.h"
 #include "../math/rotation.h"
 #include "../sprite.h"
-#include "../math/vec3d.h"
+#include "../math/vector3.h"
 
 // max num bones per character
 // on n64 we allocate this many transform matrices per character
@@ -18,7 +18,7 @@ typedef struct AnimationFrame
 {
 	int frame;
 	int object;
-	Vec3d position;
+	struct Vector3 position;
 	EulerDegrees rotation;
 
 } AnimationFrame;
@@ -33,7 +33,7 @@ typedef struct AnimationBoneAttachment
 {
 	int boneIndex;
 	ModelType modelType;
-	Vec3d offset;
+	struct Vector3 offset;
 	EulerDegrees rotation;
 } AnimationBoneAttachment;
 
@@ -42,7 +42,7 @@ typedef struct AnimationBoneSpriteAttachment
 	int boneIndex;
 	SpriteType spriteType;
 	int startTick;
-	Vec3d offset;
+	struct Vector3 offset;
 } AnimationBoneSpriteAttachment;
 
 typedef struct AnimationState

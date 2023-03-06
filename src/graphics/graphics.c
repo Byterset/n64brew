@@ -59,6 +59,9 @@ u16 *graphicsLayoutScreenBuffers(u16 *memoryEnd)
 
 #define CLEAR_COLOR GPACK_RGBA5551(0x32, 0x5D, 0x79, 1)
 
+int fpsSlowdown = 0;
+int fps = 0;
+
 void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void *data)
 {
 	struct RenderState *renderState = &targetTask->renderState;
@@ -108,9 +111,17 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 
 	font_set_scale(1.0, 1.0);
 	font_set_win(200, 1);
-	char *fps[7];
-	sprintf(fps, "fps:%d", (int)(1000.0f/gDeltaTimeMS));
-	SHOWFONT(&renderState->dl, fps, SCREEN_WD-60, 10);
+	if(fpsSlowdown < 10){
+		fpsSlowdown++;
+	}
+	else{
+		fpsSlowdown = 0;
+		fps = (int)(1000.0f/gDeltaTimeMS);
+	}
+
+	char *fps_str[7];
+	sprintf(fps_str, "fps:%d", fps);
+	SHOWFONT(&renderState->dl, fps_str, SCREEN_WD-60, 10);
 	console_print_all(renderState);
 
 	font_finish(&renderState->dl);

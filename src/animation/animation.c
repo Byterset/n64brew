@@ -19,7 +19,7 @@ void AnimationBoneAttachment_init(AnimationBoneAttachment *self)
 {
 	self->boneIndex = 0;
 	self->modelType = NoneModel;
-	Vec3d_origin(&self->offset);
+	vector3Init(&self->offset, 0.0f, 0.0f, 0.0f);
 	EulerDegrees_origin(&self->rotation);
 }
 
@@ -27,7 +27,7 @@ void AnimationBoneSpriteAttachment_init(AnimationBoneSpriteAttachment *self)
 {
 	self->boneIndex = 0;
 	self->spriteType = NoneSprite;
-	Vec3d_origin(&self->offset);
+	vector3Init(&self->offset, 0.0f, 0.0f, 0.0f);
 	self->startTick = 0;
 }
 
@@ -104,8 +104,7 @@ void AnimationFrame_lerp(
 
 	// start with data from A
 	*result = *a;
-
-	Vec3d_lerp(&result->position, &b->position, interp->t);
+	vector3Lerp(&result->position, &b->position, interp->t, &result->position);
 
 	Euler_fromEulerDegrees(&radiansA, &a->rotation);
 	Euler_fromEulerDegrees(&radiansB, &b->rotation);

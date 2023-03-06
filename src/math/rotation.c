@@ -5,15 +5,15 @@
 
 #include "../constants.h"
 #include "rotation.h"
-#include "vec3d.h"
+#include "vector3.h"
 
-static Vec3d _zero = {0, 0, 0};
-static Vec3d _one = {1, 1, 1};
+static struct Vector3 _zero = {0, 0, 0};
+static struct Vector3 _one = {1, 1, 1};
 
 void Matrix4_compose(Matrix4 *matrix,
-					 Vec3d *position,
+					 struct Vector3 *position,
 					 Quaternion *quaternion,
-					 Vec3d *scale)
+					 struct Vector3 *scale)
 {
 	float x, y, z, w, x2, y2, z2, xx, xy, xz, yy, yz, zz, wx, wy, wz, sx, sy, sz;
 

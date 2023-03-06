@@ -16,8 +16,8 @@
 #include "animation/animation.h"
 #include "constants.h"
 #include "math/frustum.h"
-#include "math/vec2d.h"
-#include "math/vec3d.h"
+#include "math/vector2.h"
+#include "math/vector3.h"
 #include "math/matrix.h"
 #include "game.h"
 #include "gameobject.h"
@@ -60,8 +60,8 @@
 #define CONTROLLER_DEAD_ZONE 0.1
 #define DRAW_SPRITES 1
 
-static Vec3d viewPos;
-static Vec3d viewRot;
+static struct Vector3 viewPos;
+static struct Vector3 viewRot;
 static Input input;
 
 static u16 perspNorm;
@@ -74,7 +74,7 @@ static float aspect = (f32)SCREEN_WD / (f32)(SCREEN_HT * 2);
 static float aspect = (f32)SCREEN_WD / (f32)SCREEN_HT;
 #endif
 static float fovy = DEFAULT_FOVY;
-static Vec3d upVector = {0.0f, 1.0f, 0.0f};
+static struct Vector3 upVector = {0.0f, 1.0f, 0.0f};
 
 /* frame counter */
 float frameCounterLastTime;
@@ -167,8 +167,8 @@ void initStage00()
 	gRenderMode = TextureNoLightingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
-	Vec3d_init(&viewPos, 0.0F, 0.0F, -400.0F);
-	Vec3d_init(&viewRot, 0.0F, 0.0F, 0.0F);
+	vector3Init(&viewPos, 0.0F, 0.0F, -400.0F);
+	vector3Init(&viewRot, 0.0F, 0.0F, 0.0F);
 	Input_init(&input);
 
 	Game_init(garden_map_data, GARDEN_MAP_COUNT, &physWorldData);
@@ -196,22 +196,10 @@ void initStage00()
 	// debugPrintfSync("getModelDisplayList at %p\n", getModelDisplayList);
 #endif
 
-	// debugPrintf("good morning\n");
+	
 }
 
-// void debugPrintVec3d(int x, int y, char* label, Vec3d* vec) {
-//   char conbuf[100];
-//   nuDebConTextPos(0, x, y);
-//   sprintf(conbuf, "%s {%5.0f,%5.0f,%5.0f}", label, vec->x, vec->y, vec->z);
-//   nuDebConCPuts(0, conbuf);
-// }
 
-// void debugPrintFloat(int x, int y, char* format, float value) {
-//   char conbuf[100];
-//   nuDebConTextPos(0, x, y);
-//   sprintf(conbuf, format, value);
-//   nuDebConCPuts(0, conbuf);
-// }
 
 #ifdef NU_DEBUG
 void traceRCP()
@@ -308,181 +296,12 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 
 	drawWorldObjects(dynamicp, renderState);
 
-	/* Activate the task and (maybe)
-	   switch display buffers */
-	// nuGfxTaskStart(&gfx_glist[gfx_gtask_no][0],
-	//                (s32)(glistp - gfx_glist[gfx_gtask_no]) * sizeof(Gfx),
-	//                gRenderMode == WireframeRenderMode ? NU_GFX_UCODE_L3DEX2
-	//                                                         : NU_GFX_UCODE_F3DEX,
-
-	//   profEndDraw = CUR_TIME_MS();
-	//   Trace_addEvent(DrawTraceEvent, profStartDraw, profEndDraw);
-	//   game->profTimeDraw += profEndDraw - profStartDraw;
-
-	//   profStartDebugDraw = CUR_TIME_MS();
-
-	// #if NU_PERF_BAR
-	//   nuDebTaskPerfBar1(1, 200, NU_SC_SWAPBUFFER);
-	// #endif
-
-	// // debug text overlay
-	// #if CONSOLE
-
-	// #if NU_PERF_BAR
-	// #error "can't enable NU_PERF_BAR and CONSOLE at the same time"
-	// #endif
-
-	//   if (contPattern & 0x1) {
-	//     nuDebConClear(0);
-	// #if CONSOLE_SHOW_CAMERA
-	//     consoleOffset = 16;
-	// #else
-	//     consoleOffset = 21;
-	// #endif
-
-	//     debugPrintFloat(4, consoleOffset++, "frame=%3.2fms",
-	//                     1000.0 / frameCounterLastFrames);
-
-	//     if (game->freeView) {
-	//       debugPrintVec3d(4, consoleOffset++, "viewPos", &viewPos);
-	//     } else {
-	// #if CONSOLE_SHOW_PROFILING
-	//       // debugPrintFloat(4, consoleOffset++, "char=%3.2fms", profAvgCharacters);
-	//       // debugPrintFloat(4, consoleOffset++, "phys=%3.2fms", profAvgPhysics);
-	//       // debugPrintFloat(4, consoleOffset++, "draw=%3.2fms", profAvgDraw);
-	//       // debugPrintFloat(0, consoleOffset++, "path=%3.2fms", profAvgPath);
-	//       debugPrintFloat(4, consoleOffset++, "cpu=%3.2fms",
-	//                       profilingAverages[MainCPUTraceEvent]);
-	//       debugPrintFloat(4, consoleOffset++, "rdp=%3.2fms",
-	//                       profilingAverages[RDPTaskTraceEvent]);
-	// #endif
-	// #if CONSOLE_SHOW_TRACING
-	//       nuDebConTextPos(0, 4, consoleOffset++);
-	//       sprintf(conbuf, "trace rec=%d,log=%d,evs=%d,lgd=%d", Trace_isTracing(),
-	//               loggingTrace, Trace_getEventsCount(), logTraceStartOffset);
-	//       nuDebConCPuts(0, conbuf);
-	// #endif
-	// #if CONSOLE_SHOW_RCP_TASKS
-	// #ifdef NU_DEBUG
-	//       {
-	//         int tskIdx;
-	//         for (tskIdx = 0; tskIdx < nuDebTaskPerfPtr->gfxTaskCnt; tskIdx++) {
-	//           nuDebConTextPos(0, 4, consoleOffset++);
-	//           sprintf(conbuf, "[t%d:  rsp=%.2f,rdp=%.2f] ", tskIdx,
-	//                   (nuDebTaskPerfPtr->gfxTaskTime[tskIdx].rspEnd -
-	//                    nuDebTaskPerfPtr->gfxTaskTime[tskIdx].rspStart) /
-	//                       1000.0,
-	//                   (nuDebTaskPerfPtr->gfxTaskTime[tskIdx].rdpEnd -
-	//                    nuDebTaskPerfPtr->gfxTaskTime[tskIdx].rspStart) /
-	//                       1000.0);
-	//           nuDebConCPuts(0, conbuf);
-	//         }
-	//       }
-	// #endif
-	// #endif
-	// #if CONSOLE_SHOW_CULLING
-	//       nuDebConTextPos(0, 4, consoleOffset++);
-	//       sprintf(conbuf, "culled=%d", objectsCulled);
-	//       nuDebConCPuts(0, conbuf);
-	// #endif
-	// #if CONSOLE_SHOW_CAMERA
-	//       debugPrintVec3d(4, consoleOffset++, "viewPos", &game->viewPos);
-	//       debugPrintVec3d(4, consoleOffset++, "viewTarget", &game->viewTarget);
-	//       debugPrintFloat(4, consoleOffset++, "viewZoom=%1.1f", game->viewZoom);
-	//       debugPrintFloat(4, consoleOffset++, "fovy=%3.1f", fovy);
-	//       debugPrintFloat(4, consoleOffset++, "nearPlane=%.2f", nearPlane);
-	//       debugPrintFloat(4, consoleOffset++, "farPlane=%.2f", farPlane);
-	// #endif
-
-	// #if CONSOLE_ED64LOG_DEBUG
-	// #ifdef ED64
-	//       usbLoggerGetState(&usbLoggerState);
-	//       nuDebConTextPos(0, 4, consoleOffset++);
-	//       sprintf(conbuf, "usb=%d,res=%d,st=%d,id=%d,mqsz=%d", usbEnabled,
-	//               usbResult, usbLoggerState.fifoWriteState, usbLoggerState.msgID,
-	//               usbLoggerState.msgQSize);
-	//       nuDebConCPuts(0, conbuf);
-	//       nuDebConTextPos(0, 4, consoleOffset++);
-	//       sprintf(conbuf, "off=%4d,flu=%d,ovf=%d,don=%d,err=%d",
-	//               usbLoggerState.usbLoggerOffset, usbLoggerState.usbLoggerFlushing,
-	//               usbLoggerState.usbLoggerOverflow, usbLoggerState.countDone,
-	//               usbLoggerState.writeError);
-	//       nuDebConCPuts(0, conbuf);
-	// #endif
-	// #endif
-
-	// #if CONSOLE_SHOW_SOUND
-	//       debugPrintFloat(4, consoleOffset++, "snd=%.0f", sndNumber);
-	//       debugPrintFloat(4, consoleOffset++, "pitch=%f", sndPitch);
-	// #endif
-	//     }
-	//     nuDebConTextPos(0, 4, consoleOffset++);
-	//     sprintf(conbuf, "retrace=%lu", nuScRetraceCounter);
-	//     nuDebConCPuts(0, conbuf);
-	//     debugPrintVec3d(4, consoleOffset++, "pos", &game->player.goose->position);
-	//   } else {
-	//     nuDebConTextPos(0, 9, 24);
-	//     nuDebConCPuts(0, "Controller1 not connected");
-	//   }
-
-	//   /* Display characters on the frame buffer */
-	//   nuDebConDisp(NU_SC_SWAPBUFFER);
-	// #endif  // #if CONSOLE
-
-	//   Trace_addEvent(DebugDrawTraceEvent, profStartDebugDraw, CUR_TIME_MS());
 }
 
-void logTraceChunk()
-{
-	// int i;
-	// int printedFirstItem;
-	// #if ED64
-
-	//   printedFirstItem = FALSE;
-	//   if (usbLoggerBufferRemaining() < 120) {
-	//     return;
-	//   }
-	//   debugPrintf("TRACE=[");
-	//   for (i = logTraceStartOffset; i < Trace_getEventsCount(); i++) {
-	//     // check we have room for more data
-	//     if (usbLoggerBufferRemaining() < 40) {
-	//       break;
-	//     }
-	//     debugPrintf("%s[%.2f,%.2f,%d]", printedFirstItem ? "," : "",
-	//                 traceEvents[i].start, traceEvents[i].end, traceEvents[i].type);
-	//     printedFirstItem = TRUE;
-	//     logTraceStartOffset = i;
-	//   }
-	//   debugPrintf("]\n");
-
-	//   if (logTraceStartOffset == Trace_getEventsCount() - 1) {
-	//     // finished
-	//     loggingTrace = FALSE;
-	//     logTraceStartOffset = 0;
-	//     Trace_clear();
-	//   }
-	// #endif
-}
-
-// void startRecordingTrace() {
-//   Trace_clear();
-//   Trace_start();
-// }
-
-// void finishRecordingTrace() {
-//   Trace_stop();
-//   loggingTrace = TRUE;
-// }
 
 /* The game progressing process for stage 0 */
 void updateGame00(void)
 {
-	// int i;
-	// Game *game;
-
-	// game = Game_get();
-
-	// Vec2d_origin(&input.direction);
 	Input_init(&input);
 	/* Data reading of controller 1 */
 	OSContPad *controller_input = controllersGetControllerData(0);
@@ -554,62 +373,13 @@ void updateGame00(void)
 		input.direction.x = 0;
 	if (fabsf(input.direction.y) < CONTROLLER_DEAD_ZONE)
 		input.direction.y = 0;
-	if (Vec2d_length(&input.direction) > 1.0F)
+	if (vector2Mag(&input.direction) > 1.0F)
 	{
-		Vec2d_normalise(&input.direction);
+		vector2Normalize(&input.direction, &input.direction);
 	}
-	// }
-
-	//   // if (Trace_getEventsCount() == TRACE_EVENT_BUFFER_SIZE) {
-	//   //   finishRecordingTrace();
-	//   // }
-
-	//   if (usbEnabled) {
-	// #if LOG_TRACES
-	//     if (loggingTrace) {
-	//       logTraceChunk();
-	//     }
-	// #endif
-	//   }
 
 	Game_update(&input);
 
-	//   // if (totalUpdates % 60 == 0) {
-	//   //   debugPrintfSync("retrace=%d\n", nuScRetraceCounter);
-	//   // }
-
-	//   if (usbEnabled) {
-	// #if LOG_TRACES
-	//     if (loggingTrace) {
-	//       logTraceChunk();
-	//     }
-	// #endif
-	// #ifdef ED64
-	//     usbResult = ed64AsyncLoggerFlush();
-	// #endif
-	//   }
-
-	//-----------------Trace-------------------
-	// if (totalUpdates % 60 == 0) {
-	//   // calc averages for last 60 updates
-	//   profAvgCharacters = game->profTimeCharacters / 60;
-	//   game->profTimeCharacters = 0.0f;
-	//   profAvgPhysics = game->profTimePhysics / 60;
-	//   game->profTimePhysics = 0.0f;
-	//   profAvgDraw = game->profTimeDraw / 60;
-	//   game->profTimeDraw = 0.0f;
-	//   profAvgPath = game->profTimePath / 60;
-	//   game->profTimePath = 0.0f;
-
-	//   for (i = 0; i < MAX_TRACE_EVENT_TYPE; ++i) {
-	//     profilingAverages[i] =
-	//         profilingCounts[i] == 0
-	//             ? 0
-	//             : profilingAccumulated[i] / (float)profilingCounts[i];
-	//     profilingAccumulated[i] = 0;
-	//     profilingCounts[i] = 0;
-	//   }
-	// }
 }
 
 typedef enum LightingType
@@ -744,10 +514,9 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	gDPSetCycleType(renderState->dl++, twoCycleMode ? G_CYC_2CYCLE : G_CYC_1CYCLE);
 
 	// z-buffered, antialiased triangles
-#if !RENDERER_PAINTERS_ALGORITHM
 	gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
 	gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
-#endif
+
 
 	gSPSetLights0(renderState->dl++, amb_light);
 
@@ -789,49 +558,16 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		gSPClearGeometryMode(renderState->dl++, 0xFFFFFFFF);
 		invariant(i < visibleObjectsCount);
 		invariant(obj != NULL);
-		if (!RENDERER_PAINTERS_ALGORITHM || // always z buffer
-			intersectingObjects[i] ||
-			// animated game objects have concave shapes, need z buffering
-			Renderer_isAnimatedGameObject(obj))
+
+		if (ANTIALIASING)
 		{
-			if (!RENDERER_PAINTERS_ALGORITHM || // always z buffer
-				Renderer_isZBufferedGameObject(obj))
-			{
-				if (ANTIALIASING)
-				{
-					gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-				}
-				else
-				{
-					gDPSetRenderMode(renderState->dl++, G_RM_ZB_OPA_SURF, G_RM_ZB_OPA_SURF2);
-				}
-				gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
-			}
-			else /*if (Renderer_isZWriteGameObject(obj))*/
-			{
-				if (ANTIALIASING)
-				{
-					gDPSetRenderMode(renderState->dl++, G_RM_AA_ZUPD_OPA_SURF,
-									 G_RM_AA_ZUPD_OPA_SURF2);
-				}
-				else
-				{
-					gDPSetRenderMode(renderState->dl++, G_RM_ZUPD_OPA_SURF, G_RM_ZUPD_OPA_SURF2);
-				}
-				gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
-			}
+			gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
 		}
 		else
 		{
-			if (ANTIALIASING)
-			{
-				gDPSetRenderMode(renderState->dl++, G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2);
-			}
-			else
-			{
-				gDPSetRenderMode(renderState->dl++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-			}
+			gDPSetRenderMode(renderState->dl++, G_RM_ZB_OPA_SURF, G_RM_ZB_OPA_SURF2);
 		}
+		gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
 
 		switch (gRenderMode)
 		{
@@ -978,8 +714,8 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	{		
 		float width = 64;
 		float height = 64;
-		Vec3d center;
-		Vec3d projected;
+		struct Vector3 center;
+		struct Vector3 projected;
 		
 		for (i = 0; i < visibleObjectsCount; i++)
 		{

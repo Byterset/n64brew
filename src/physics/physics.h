@@ -4,7 +4,7 @@
 
 #include "collision.h"
 #include "../constants.h"
-#include "../math/vec3d.h"
+#include "../math/vector3.h"
 
 #define PHYS_MAX_STEPS 4
 
@@ -41,20 +41,20 @@ typedef struct PhysBody {
   // in verlet, this is used to derive the velocity (pos - prevPos) so changing
   // pos explicitly without changing prevPos will result in acceleration when
   // velocity is derived
-  Vec3d prevPosition;
-  Vec3d position;
+  struct Vector3 prevPosition;
+  struct Vector3 position;
   // in verlet this is derived.
   // after integration, it represents the velocity for dt
-  Vec3d velocity;
+  struct Vector3 velocity;
   // after integration, this represents the velocity for 1 second
-  Vec3d nonIntegralVelocity;
+  struct Vector3 nonIntegralVelocity;
   // this is really force (eg. in newtons) until after integration, when it
   // becomes acceleration
-  Vec3d acceleration;
+  struct Vector3 acceleration;
   // after integration, this represents the acceleration for 1 second
-  Vec3d nonIntegralAcceleration;
+  struct Vector3 nonIntegralAcceleration;
   // this is the resultant acceleration from the 2x previous timestep
-  Vec3d prevAcceleration;
+  struct Vector3 prevAcceleration;
 } PhysBody;
 
 void PhysState_init(PhysState* self, PhysWorldData* worldData);
@@ -67,11 +67,11 @@ void PhysState_step(PhysState* physics,
 void PhysBody_init(PhysBody* self,
 				   float mass,
 				   float radius,
-				   Vec3d* position,
+				   struct Vector3* position,
 				   int id);
 
-void PhysBody_applyForce(PhysBody* body, Vec3d* force);
-void PhysBody_translateWithoutForce(PhysBody* body, Vec3d* translation);
+void PhysBody_applyForce(PhysBody* body, struct Vector3* force);
+void PhysBody_translateWithoutForce(PhysBody* body, struct Vector3* translation);
 void PhysBody_setEnabled(PhysBody* body, int enabled);
 
 #ifndef __N64__

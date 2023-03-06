@@ -1,8 +1,8 @@
 #include "gameutils.h"
 #include <math.h>
 #include "game.h"
-#include "math/vec2d.h"
-#include "math/vec3d.h"
+#include "math/vector2.h"
+#include "math/vector3.h"
 
 float GameUtils_lerpDegrees(float start, float end, float amount)
 {
@@ -28,11 +28,11 @@ float GameUtils_rotateTowardsClamped(float from,
 		   fmodf(GameUtils_fclamp(shortestAngle, -maxSpeed, maxSpeed), 360.0F);
 }
 
-void GameUtils_directionFromTopDownAngle(float angle, Vec3d *result)
+void GameUtils_directionFromTopDownAngle(float angle, struct Vector3 *result)
 {
-	Vec2d direction2d;
+	struct Vector2 direction2d;
 
-	Vec2d_fromAngle(&direction2d, angle);
+	vector2ComplexFromAngle(angle, &direction2d);
 
 	result->x = direction2d.x;
 	result->y = 0;
@@ -41,7 +41,7 @@ void GameUtils_directionFromTopDownAngle(float angle, Vec3d *result)
 
 int GameUtils_inWater(GameObject *obj)
 {
-	Vec3d center;
+	struct Vector3 center;
 	Game_getObjCenter(obj, &center);
 
 	if (center.y < WATER_HEIGHT)

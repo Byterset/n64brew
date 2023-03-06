@@ -1,7 +1,7 @@
 
 #include "vector3.h"
 #include "mathf.h"
-
+#include <math.h>
 #include <ultra64.h>
 
 struct Vector3 gRight = {1.0f, 0.0f, 0.0f};
@@ -9,6 +9,24 @@ struct Vector3 gUp = {0.0f, 1.0f, 0.0f};
 struct Vector3 gForward = {0.0f, 0.0f, 1.0f};
 struct Vector3 gZeroVec = {0.0f, 0.0f, 0.0f};
 struct Vector3 gOneVec = {1.0f, 1.0f, 1.0f};
+
+void vector3Init(struct Vector3 *self, float x, float y, float z){
+	self->x = x;
+	self->y = y;
+	self->z = z;
+}
+
+void vector3Set(struct Vector3 *self, float x, float y, float z){
+	self->x = x;
+	self->y = y;
+	self->z = z;
+}
+
+void vector3Copy(struct Vector3 *self, struct Vector3 *other){
+	self->x = other->x;
+	self->y = other->y;
+	self->z = other->z;
+}
 
 void vector3Abs(struct Vector3 *in, struct Vector3 *out)
 {
@@ -31,11 +49,39 @@ void vector3Scale(struct Vector3 *in, struct Vector3 *out, float scale)
 	out->z = in->z * scale;
 }
 
+void vector3ScaleSelf(struct Vector3 *self, float scale)
+{
+	self->x *= scale;
+	self->y *= scale;
+	self->z *= scale;
+}
+
+void vector3DivScalar(struct Vector3 *self, float scalar){
+
+    if (scalar != 0.0f) {
+        self->x /= scalar;
+        self->y /= scalar;
+        self->z /= scalar;
+    } else {
+        // Handle division by zero
+        self->x = -1;
+        self->y = -1;
+        self->z = -1;
+    }
+}
+
 void vector3Add(struct Vector3 *a, struct Vector3 *b, struct Vector3 *out)
 {
 	out->x = a->x + b->x;
 	out->y = a->y + b->y;
 	out->z = a->z + b->z;
+}
+
+void vector3AddToSelf(struct Vector3 *self, struct Vector3 *other)
+{
+	self->x += other->x;
+	self->y += other->y;
+	self->z += other->z;
 }
 
 void vector3AddScaled(struct Vector3 *a, struct Vector3 *normal, float scale, struct Vector3 *out)
@@ -50,6 +96,13 @@ void vector3Sub(struct Vector3 *a, struct Vector3 *b, struct Vector3 *out)
 	out->x = a->x - b->x;
 	out->y = a->y - b->y;
 	out->z = a->z - b->z;
+}
+
+void vector3SubFromSelf(struct Vector3 *self, struct Vector3 *other)
+{
+	self->x -= other->x;
+	self->y -= other->y;
+	self->z -= other->z;
 }
 
 void vector3Multiply(struct Vector3 *a, struct Vector3 *b, struct Vector3 *out)
@@ -76,12 +129,29 @@ void vector3Normalize(struct Vector3 *in, struct Vector3 *out)
 	}
 }
 
+void vector3NormalizeSelf(struct Vector3 *self)
+{
+	float magnitude;
+	if (self->x == 0.0F && self->y == 0.0F && self->z == 0.0F)
+	{
+		return;
+	}
+	magnitude = sqrtf(self->x * self->x + self->y * self->y + self->z * self->z);
+	self->x /= magnitude;
+	self->y /= magnitude;
+	self->z /= magnitude;
+}
+
 void vector3Lerp(struct Vector3 *a, struct Vector3 *b, float t, struct Vector3 *out)
 {
-	float tFlip = 1.0f - t;
-	out->x = a->x * tFlip + b->x * t;
-	out->y = a->y * tFlip + b->y * t;
-	out->z = a->z * tFlip + b->z * t;
+	// float tFlip = 1.0f - t;
+	// out->x = a->x * tFlip + b->x * t;
+	// out->y = a->y * tFlip + b->y * t;
+	// out->z = a->z * tFlip + b->z * t;
+
+	out->x += (b->x - a->x) * t;
+	out->y += (b->y - a->y) * t;
+	out->z += (b->z - a->z) * t;
 }
 
 float vector3Dot(struct Vector3 *a, struct Vector3 *b)
@@ -94,6 +164,11 @@ float vector3MagSqrd(struct Vector3 *a)
 	return a->x * a->x + a->y * a->y + a->z * a->z;
 }
 
+float vector3Mag(struct Vector3 *a)
+{
+	return sqrtf(a->x * a->x + a->y * a->y + a->z * a->z);
+}
+
 float vector3DistSqrd(struct Vector3 *a, struct Vector3 *b)
 {
 	float x = a->x - b->x;
@@ -101,6 +176,14 @@ float vector3DistSqrd(struct Vector3 *a, struct Vector3 *b)
 	float z = a->z - b->z;
 
 	return x * x + y * y + z * z;
+}
+
+float vector3Dist(struct Vector3 *a, struct Vector3 *b){
+	float x = a->x - b->x;
+	float y = a->y - b->y;
+	float z = a->z - b->z;
+
+	return sqrtf(x * x + y * y + z * z);
 }
 
 void vector3Cross(struct Vector3 *a, struct Vector3 *b, struct Vector3 *out)
@@ -163,6 +246,12 @@ void vector3TripleProduct(struct Vector3 *a, struct Vector3 *b, struct Vector3 *
 	vector3AddScaled(output, a, -vector3Dot(b, c), output);
 }
 
+void vector3DirectionTo(struct Vector3 *self, struct Vector3 *other, struct Vector3 *result){
+	vector3Copy(result, other);
+	vector3SubFromSelf(result, self);
+	vector3NormalizeSelf(result);
+}
+
 void vector3Max(struct Vector3 *a, struct Vector3 *b, struct Vector3 *out)
 {
 	out->x = MAX(a->x, b->x);
@@ -192,4 +281,10 @@ void vector3ToVector3u8(struct Vector3 *input, struct Vector3u8 *output)
 float vector3EvalBarycentric1D(struct Vector3 *baryCoords, float a, float b, float c)
 {
 	return baryCoords->x * a + baryCoords->y * b + baryCoords->z * c;
+}
+
+char *vector3toString(struct Vector3 *self, char *buffer)
+{
+	sprintf(buffer, "{x:%.3f, y:%.3f, z:%.3f}", self->x, self->y, self->z);
+	return buffer;
 }

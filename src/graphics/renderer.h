@@ -7,10 +7,6 @@
 #include "../gameobject.h"
 #include "graphics.h"
 
-// when painter's alg enabled we change render order and disable z buffer for
-// some objects that don't need it
-#define RENDERER_PAINTERS_ALGORITHM 0
-
 typedef struct RendererSortDistance
 {
 	GameObject *obj;
@@ -31,7 +27,7 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 int *worldObjectsVisibility,
 								 int visibleObjectsCount,
 								 RendererSortDistance *result,
-								 Vec3d *viewPos,
+								 struct Vector3 *viewPos,
 								 AABB *localAABBs);
 
 int Renderer_frustumCull(GameObject *worldObjects,
@@ -54,17 +50,17 @@ void Renderer_calcIntersecting(int *objectsIntersecting,
 							   RendererSortDistance *sortedObjects,
 							   AABB *localAABBs);
 
-void Renderer_getSeparatingPlane(Vec3d *a, Vec3d *b, Plane *separatingPlane);
+void Renderer_getSeparatingPlane(struct Vector3 *a, struct Vector3 *b, Plane *separatingPlane);
 
 int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 									   RendererSortDistance *b,
-									   Vec3d *viewPos);
+									   struct Vector3 *viewPos);
 
-int Renderer_screenProject(Vec3d *obj,  MtxF modelMatrix,  MtxF projMatrix,  ViewportF viewport,  Vec3d *win);
+int Renderer_screenProject(struct Vector3 *obj,  MtxF modelMatrix,  MtxF projMatrix,  ViewportF viewport,  struct Vector3 *win);
 
 void Renderer_closestPointOnAABB(AABB *b,
-								 /* sourcePoint*/ Vec3d *p,
-								 /* result */ Vec3d *q);
+								 /* sourcePoint*/ struct Vector3 *p,
+								 /* result */ struct Vector3 *q);
 
 AABB Renderer_getWorldAABB(AABB *localAABBs, GameObject *obj);
 #endif /* !RENDERER_H_ */

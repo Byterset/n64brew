@@ -2,7 +2,7 @@
 
 #include "constants.h"
 #include "pathfinding.h"
-#include "math/vec3d.h"
+#include "math/vector3.h"
 
 #ifdef __N64__
 #include "mathdef.h"
@@ -14,7 +14,7 @@ float Path_distance(Node *a, Node *b)
 {
 	invariant(a != NULL);
 	invariant(b != NULL);
-	return Vec3d_distanceTo(&a->position, &b->position);
+	return vector3Dist(&a->position, &b->position);
 }
 
 float Path_heuristic(Node *a, Node *b)
@@ -101,7 +101,7 @@ NodeState *Path_getNodeState(PathfindingState *state, int nodeID)
 	return state->nodeStates + nodeID; // offset into edges
 }
 
-int Path_quantizePosition(Graph *graph, Vec3d *position)
+int Path_quantizePosition(Graph *graph, struct Vector3 *position)
 {
 	int closestNode = 0;
 	float closestNodeDist = FLT_MAX;
@@ -113,7 +113,7 @@ int Path_quantizePosition(Graph *graph, Vec3d *position)
 	for (i = 0; i < graph->size; ++i)
 	{
 		currentNodeDist =
-			Vec3d_distanceTo(position, &Path_getNodeByID(graph, i)->position);
+			vector3Dist(position, &Path_getNodeByID(graph, i)->position);
 		if (currentNodeDist < closestNodeDist)
 		{
 			closestNode = i;
@@ -141,24 +141,24 @@ void Path_reverse(PathfindingState *state)
 }
 
 // based on https://www.geometrictools.com/GTE/Mathematics/DistPointSegment.h
-float Path_getClosestPointParameter(Vec3d *segmentPoint0,
-									Vec3d *segmentPoint1,
-									Vec3d *point)
+float Path_getClosestPointParameter(struct Vector3 *segmentPoint0,
+									struct Vector3 *segmentPoint1,
+									struct Vector3 *point)
 {
 	float resultSegmentParameter;
 	float sqrLength;
 	float t;
-	Vec3d diff;
-	Vec3d direction;
+	struct Vector3 diff;
+	struct Vector3 direction;
 
 	// The direction vector is not unit length.  The normalization is
 	// deferred until it is needed.
 	direction = *segmentPoint1;
-	Vec3d_sub(&direction, segmentPoint0);
+	vector3SubFromSelf(&direction, segmentPoint0);
 	diff = *point;
-	Vec3d_sub(&diff, segmentPoint1);
+	vector3SubFromSelf(&diff, segmentPoint1);
 
-	t = Vec3d_dot(&direction, &diff);
+	t = vector3Dot(&direction, &diff);
 	if (t >= (float)0)
 	{
 		resultSegmentParameter = 1;
@@ -167,8 +167,8 @@ float Path_getClosestPointParameter(Vec3d *segmentPoint0,
 	else
 	{
 		diff = *point;
-		Vec3d_sub(&diff, segmentPoint0);
-		t = Vec3d_dot(&direction, &diff);
+		vector3SubFromSelf(&diff, segmentPoint0);
+		t = vector3Dot(&direction, &diff);
 		if (t <= (float)0)
 		{
 			resultSegmentParameter = (float)0;
@@ -176,7 +176,7 @@ float Path_getClosestPointParameter(Vec3d *segmentPoint0,
 		}
 		else
 		{
-			sqrLength = Vec3d_dot(&direction, &direction);
+			sqrLength = vector3Dot(&direction, &direction);
 			if (sqrLength > (float)0)
 			{
 				t /= sqrLength;

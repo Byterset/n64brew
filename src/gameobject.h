@@ -7,12 +7,12 @@
 // #include "n64compat.h"
 #include "physics/physics.h"
 #include "math/rotation.h"
-#include "math/vec3d.h"
+#include "math/vector3.h"
 
 typedef struct GameObject
 {
 	int id;
-	Vec3d position;
+	struct Vector3 position;
 	EulerDegrees rotation;
 	ModelType modelType;
 	int subtype;
@@ -23,6 +23,6 @@ typedef struct GameObject
 } GameObject;
 
 GameObject *GameObject_alloc();
-GameObject *GameObject_init(GameObject *self, int id, Vec3d *initPos);
+GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos);
 
 #endif /* !GAMEOBJECT_H */

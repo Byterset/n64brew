@@ -3,7 +3,7 @@
 
 void Input_init(Input *self)
 {
-	Vec2d_origin(&self->direction);
+	vector2Init(&self->direction, 0.0f, 0.0f);
 	self->run = FALSE;
 	self->pickup = FALSE;
 	self->zoomIn = FALSE;
