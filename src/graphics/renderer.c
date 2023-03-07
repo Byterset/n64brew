@@ -261,80 +261,14 @@ void Renderer_calcIntersecting(
 	RendererSortDistance *sortedObjects,
 	AABB *localAABBs)
 {
-#if RENDERER_PAINTERS_ALGORITHM
-	int i, k;
-	int zWriteObjectsCount, zBufferedObjectsCount;
-	GameObjectAABB *zWriteObjects;
-	GameObjectAABB *zBufferedObjects;
-	GameObject *obj;
-	GameObjectAABB *zWriteAABB;
-	GameObjectAABB *zBufferedAABB;
-	GameObjectAABB *otherZBufferedAABB;
 
-	zWriteObjectsCount = 0;
-	zBufferedObjectsCount = 0;
-	zWriteObjects =
-		(GameObjectAABB *)malloc((objectsCount) * sizeof(GameObjectAABB));
-	zBufferedObjects =
-		(GameObjectAABB *)malloc((objectsCount) * sizeof(GameObjectAABB));
-	invariant(zWriteObjects);
-	invariant(zBufferedObjects);
-
-	for (i = 0; i < objectsCount; ++i)
-	{
-		obj = (sortedObjects + i)->obj;
-		objectsIntersecting[i] = FALSE;
-		if (Renderer_isZWriteGameObject(obj))
-		{
-			zWriteObjects[zWriteObjectsCount] =
-				(GameObjectAABB){i, Renderer_getWorldAABB(localAABBs, obj)};
-			zWriteObjectsCount++;
-		}
-		else if (Renderer_isZBufferedGameObject(obj))
-		{
-			zBufferedObjects[zBufferedObjectsCount] =
-				(GameObjectAABB){i, Renderer_getWorldAABB(localAABBs, obj)};
-			zBufferedObjectsCount++;
-		}
-	}
-	for (i = 0; i < zBufferedObjectsCount; ++i)
-	{
-		zBufferedAABB = &zBufferedObjects[i];
-
-		for (k = 0; k < zWriteObjectsCount; ++k)
-		{
-			zWriteAABB = &zWriteObjects[k];
-			if (Collision_intersectAABBAABB(&zBufferedAABB->aabb,
-											&zWriteAABB->aabb))
-			{
-				objectsIntersecting[zBufferedAABB->index] = TRUE;
-				objectsIntersecting[zWriteAABB->index] = TRUE;
-			}
-		}
-		for (k = 0; k < zBufferedObjectsCount; ++k)
-		{
-			if (i == k)
-				continue;
-			otherZBufferedAABB = &zBufferedObjects[k];
-			if (Collision_intersectAABBAABB(&zBufferedAABB->aabb,
-											&otherZBufferedAABB->aabb))
-			{
-				objectsIntersecting[zBufferedAABB->index] = TRUE;
-				objectsIntersecting[otherZBufferedAABB->index] = TRUE;
-			}
-		}
-	}
-
-	free(zWriteObjects);
-	free(zBufferedObjects);
-#else
 	int i;
 	// no-op impl which just marks all objects as potentially intersecting
 	for (i = 0; i < objectsCount; ++i)
 	{
 		objectsIntersecting[i] = TRUE;
 	}
-#endif
+
 }
 
 int Renderer_frustumCull(GameObject *worldObjects,
@@ -384,134 +318,6 @@ int Renderer_frustumCull(GameObject *worldObjects,
 	}
 
 	return visibilityCulled;
-}
-
-int Renderer_occlusionCull(GameObject *worldObjects,
-						   int worldObjectsCount,
-						   int *worldObjectsVisibility,
-						   MtxF modelViewMatrix,
-						   MtxF projMatrix,
-						   ViewportF viewport,
-						   Frustum *frustum,
-						   AABB *localAABBs)
-{
-	GameObject *obj;
-	MtxF mvp_matrix;
-
-	int a;
-    int b;
-    int c;
-    MtxF res;
-    for (a = 0; a < 4; a++) {
-        for (b = 0; b < 4; b++) {
-            float sum = 0.0f;
-            for (c = 0; c < 4; c++) {
-                sum += modelViewMatrix[a][c] * projMatrix[c][b];
-            }
-            mvp_matrix[a][b] = sum;
-        }
-    }
-	// mulMtxFMtxF(&projMatrix, &modelViewMatrix, &mvp_matrix);
-	int i;
-	int visibilityCulled = 0;
-	for (i = 0; i < worldObjectsCount; i++)
-	{
-		// if this object is already culled by the frustum check, continue with the next
-		if (worldObjectsVisibility[i] == FALSE)
-		{
-			continue;
-		}
-		obj = worldObjects + i;
-
-		AABB *localAABB = localAABBs + i;
-		struct Vector3 aabb_min = localAABB->min;
-		struct Vector3 aabb_max = localAABB->max;
-		struct Vector4 corners[8] = {
-            {aabb_min.x, aabb_min.y, aabb_min.z, 1},
-            {aabb_min.x, aabb_min.y, aabb_max.z, 1},
-            {aabb_min.x, aabb_max.y, aabb_min.z, 1},
-            {aabb_min.x, aabb_max.y, aabb_max.z, 1},
-            {aabb_max.x, aabb_min.y, aabb_min.z, 1},
-            {aabb_max.x, aabb_min.y, aabb_max.z, 1},
-            {aabb_max.x, aabb_max.y, aabb_min.z, 1},
-            {aabb_max.x, aabb_max.y, aabb_max.z, 1}
-		};
-
-		Mtx objTransform;
-		// set the transform in world space for the gameobject to render
-		guPosition(&objTransform,
-				   obj->rotation.x,									   // rot x
-				   obj->rotation.y,							   // rot y
-				   obj->rotation.z,								   // rot z
-				   modelTypesProperties[obj->modelType].scale, // scale
-				   obj->position.x,							   // pos x
-				   obj->position.y,							   // pos y
-				   obj->position.z							   // pos z
-		);
-		int j;
-		float corner[4];
-		float translated[4];
-		float clip_coord[4];
-		MtxF objTransformF;
-		guMtxL2F(objTransformF, &objTransform);
-		struct Vector2 screen_corners[8];
-		struct Vector2 win_size = {(float)SCREEN_WD, (float)SCREEN_HT};
-		for(j = 0; j < 8; j++){
-			corner[0] = corners[i].x;
-			corner[1] = corners[i].y;
-			corner[2] = corners[i].z;
-			corner[3] = corners[i].w;
-			mulMtxFVecF(objTransformF, &corner, &translated);
-			mulMtxFVecF(mvp_matrix, &translated, &clip_coord);
-
-			struct Vector3 clip3d;
-			vector3Set(&clip3d, clip_coord[0], clip_coord[1], clip_coord[2]);
-
-			vector3DivScalar(&clip3d, clip_coord[3]);
-
-			
-			// sprintf(translated_str, "clip3d_w: %f", clip_coord[3]);
-			
-			struct Vector2 ndc_2d = {clip3d.x, clip3d.y};
-			struct Vector2 screen_corner = ndc_2d;
-			vector2Scale(&screen_corner, 0.5f, &screen_corner);
-			vector2Add(&screen_corner, &win_size, &screen_corner);
-			screen_corners[j] = screen_corner;
-
-		}
-		corner[0] = obj->position.x;
-		corner[1] = obj->position.y;
-		corner[2] = obj->position.z;
-		corner[3] = 1.0f;
-		mulMtxFVecF(objTransformF, &corners[0], &translated);
-		mulMtxFVecF(mvp_matrix, &translated, &clip_coord);
-		// char *translated_str[20];
-		// sprintf(translated_str, "screenCn: (%f,%f,%f)", clip_coord[0], clip_coord[1], clip_coord[2] );
-		// console_add_msg(translated_str);
-
-		struct Vector2 screen_aabb_min = screen_corners[0];
-        struct Vector2 screen_aabb_max = screen_corners[0];
-		// char *translated_str[20];
-		// sprintf(translated_str, "corner: (%f,%f)", screen_aabb_min.x, screen_aabb_min.y);
-		// console_add_msg(translated_str);
-		int k;
-        for (k = 1; k < 8; k++) {
-			struct Vector2 current = screen_corners[k];
-
-			// char *translated_str[20];
-			// sprintf(translated_str, "screenCn: (%f,%f)", screen_corners[k].x, screen_corners[k].y);
-			// console_add_msg(translated_str);
-
-			// screen_aabb_min.x = screen_aabb_min.x < screen_corners[k].x ? screen_aabb_min.x : screen_corners[k].x;
-			// screen_aabb_min.y = screen_aabb_min.y < screen_corners[k].y ? screen_aabb_min.y : screen_corners[k].y;
-			// screen_aabb_max.x = screen_aabb_max.x > screen_corners[k].x ? screen_aabb_max.x : screen_corners[k].x;
-			// screen_aabb_max.y = screen_aabb_max.y > screen_corners[k].y ? screen_aabb_max.y : screen_corners[k].y;
-        }
-
-		// sprintf(screen_bb, "ScreenBB: min(%d,%d), max(%d,%d)", screen_aabb_min.x, screen_aabb_min.y, screen_aabb_max.x, screen_aabb_max.y);
-		// console_add_msg(screen_bb);
-	}
-	return 0;
 }
 
 int Renderer_screenProject(struct Vector3 *obj,

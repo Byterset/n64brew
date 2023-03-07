@@ -36,15 +36,6 @@ int Renderer_frustumCull(GameObject *worldObjects,
 							Frustum *frustum,
 							AABB *localAABBs);
 
-int Renderer_occlusionCull(GameObject *worldObjects,
-							int worldObjectsCount,
-							int *worldObjectsVisibility,
-							MtxF modelViewMatrix,
-							MtxF projMatrix,
-							ViewportF viewport,
-							Frustum *frustum,
-							AABB *localAABBs);
-
 void Renderer_calcIntersecting(int *objectsIntersecting,
 							   int objectsCount,
 							   RendererSortDistance *sortedObjects,

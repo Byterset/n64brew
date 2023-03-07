@@ -59,6 +59,7 @@
 #define LOG_TRACES 0
 #define CONTROLLER_DEAD_ZONE 0.1
 #define DRAW_SPRITES 1
+#define DRAW_OBJECTS 1
 
 static struct Vector3 viewPos;
 static struct Vector3 viewRot;
@@ -449,7 +450,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 {
 	Game *game;
 	GameObject *obj;
-	int i, useZBuffering;
+	int i;
 	int modelMeshIdx;
 	int modelMeshParts;
 	Gfx *modelDisplayList;
@@ -463,7 +464,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	int *intersectingObjects;
 	int visibleObjectsCount;
 	int frustumCulled = 0;
-	int occlusionCulled = 0;
 	ViewportF viewport = {0, 0, SCREEN_WD, SCREEN_HT};
 	MtxF modelViewMtxF;
 	MtxF projectionMtxF;
@@ -477,26 +477,20 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 	worldCollisionTris = game->physicsState.worldData->worldMeshTris;
 	worldObjectsVisibility = (int *)malloc(game->worldObjectsCount * sizeof(int));
-	invariant(worldObjectsVisibility);
+	invariant(worldObjectsVisibility); 
 
 	//cull objects that are outside of the view frustum
 	frustumCulled = Renderer_frustumCull(
 		game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
 		&frustum, garden_map_bounds);
 	char str[15];
-	// sprintf(str, "# of obj culled %d", frustumCulled);
-	// console_add_msg(str);
-
-	// //of the objects that are in the frustum, exclude those that are fully occluded
-	// occlusionCulled = Renderer_occlusionCull(
-	// 	game->worldObjects, game->worldObjectsCount, worldObjectsVisibility,
-	// 	modelViewMtxF, projectionMtxF, viewport, &frustum, garden_map_bounds);
 
 	// only alloc space for num visible objects
 	visibleObjectsCount = game->worldObjectsCount - frustumCulled;
 	visibleObjDistance = (RendererSortDistance *)malloc(
 		(visibleObjectsCount) * sizeof(RendererSortDistance));
 	invariant(visibleObjDistance);
+
 
 	// profStartSort = CUR_TIME_MS();
 	Renderer_sortVisibleObjects(game->worldObjects, game->worldObjectsCount,
@@ -509,7 +503,8 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	invariant(intersectingObjects);
 	Renderer_calcIntersecting(intersectingObjects, visibleObjectsCount,
 							  visibleObjDistance, garden_map_bounds);
-
+#if DRAW_OBJECTS
+{
 	gSPClearGeometryMode(renderState->dl++, 0xFFFFFFFF);
 	gDPSetCycleType(renderState->dl++, twoCycleMode ? G_CYC_2CYCLE : G_CYC_1CYCLE);
 
@@ -709,6 +704,8 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 		gDPPipeSync(renderState->dl++);
 	}
+}
+#endif
 
 #if DRAW_SPRITES
 	{		
@@ -716,6 +713,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		float height = 64;
 		struct Vector3 center;
 		struct Vector3 projected;
+		
 		
 		for (i = 0; i < visibleObjectsCount; i++)
 		{
@@ -747,9 +745,9 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	}
 #endif
 
-	stackMallocFree(intersectingObjects);
-	stackMallocFree(visibleObjDistance);
-	stackMallocFree(worldObjectsVisibility);
+	free(intersectingObjects);
+	free(visibleObjDistance);
+	free(worldObjectsVisibility);
 }
 
 void drawSprite(unsigned short *sprData,
@@ -764,6 +762,7 @@ void drawSprite(unsigned short *sprData,
 {
 	int x = atX + (centered ? -(width / 2) : 0);
 	int y = atY + (centered ? -(height / 2) : 0);
+	gDPSetPrimColor(renderState->dl++, 0, 0, 255, 255, 255, 255);
 	gDPLoadTextureBlock(renderState->dl++, sprData, G_IM_FMT_RGBA, G_IM_SIZ_16b, sprWidth,
 						sprHeight, 0, G_TX_WRAP | G_TX_NOMIRROR,
 						G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_NOLOD, G_TX_NOLOD);
