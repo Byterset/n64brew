@@ -61,7 +61,7 @@ u16 *graphicsLayoutScreenBuffers(u16 *memoryEnd)
 
 int fpsSlowdown = 0;
 int fps = 0;
-// int heapCheckCounter = 200;
+int heapCheckCounter = 200;
 
 
 void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void *data)
@@ -94,7 +94,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 	gDPSetColorImage(renderState->dl++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, osVirtualToPhysical(targetTask->framebuffer));
 	gDPSetFillColor(renderState->dl++, GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1));
 	gDPFillRectangle(renderState->dl++, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
-	// gDPSetScissor(renderState->dl++, G_SC_ODD_INTERLACE, 0, 50, SCREEN_WD, SCREEN_HT - 50);
+	//gDPSetScissor(renderState->dl++, G_SC_NON_INTERLACE, 0, 2, SCREEN_WD, SCREEN_HT - 2);
 
 	// execute the render graphics callback
 	// this is where the displaylists for the level, models, ui etc get added depending on the callback
@@ -111,7 +111,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 	font_init(&renderState->dl);
 	font_set_transparent(1);
 
-	font_set_scale(1.0, 1.0);
+	font_set_scale(0.75, 0.75);
 	font_set_win(200, 1);
 	if(fpsSlowdown < 10){
 		fpsSlowdown++;
@@ -120,15 +120,15 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 		fpsSlowdown = 0;
 		fps = (int)(1000.0f/gDeltaTimeMS);
 	}
-	// if(heapCheckCounter < 200){
-	// 	heapCheckCounter++;
-	// }
-	// else{
-	// 	heapCheckCounter = 0;
-	// 	char *heapfree[20];
-	// 	sprintf(heapfree, "free heap:%d", calculateBytesFree());
-	// 	console_add_msg(heapfree);
-	// }
+	if(heapCheckCounter < 200){
+		heapCheckCounter++;
+	}
+	else{
+		heapCheckCounter = 0;
+		char *heapfree[20];
+		sprintf(heapfree, "free heap:%d", calculateBytesFree());
+		console_add_msg(heapfree);
+	}
 
 	char *fps_str[7];
 	sprintf(fps_str, "fps:%d", fps);
