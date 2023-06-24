@@ -37,8 +37,6 @@ static OSMesgQueue PiMessageQ;
 
 extern char mem_heap[MEM_HEAP_SIZE];
 
-// extern char aud_heap[AUD_HEAP_SIZE];
-
 u64 mainStack[STACKSIZEBYTES / sizeof(u64)];
 
 OSThread initThread;
