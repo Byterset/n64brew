@@ -1,16 +1,17 @@
-/*
-   stage00.c
-
-  the main game file
-*/
+/***************************************************************
+                           stage00.c
+                               
+Handles the first level of the game.
+***************************************************************/
 
 #include <assert.h>
-
+#include <ultra64.h> 
 #include "../build/src/audio/clips.h"
 
 #include <math.h>
 #include "util/rom.h"
 #include "util/memory.h"
+
 // game
 #include "controls/controller.h"
 #include "animation/animation.h"
@@ -45,9 +46,17 @@
 #include "character_anim.h"
 #include "goose_anim.h"
 
+//sausage64 anim & catherine test model
+#include "sausage64/sausage64.h"
+#include "catherineMdl.h"
+
 #include "ed64/ed64io.h"
 
 #include "util/debug_console.h"
+
+/*********************************
+              Macros
+*********************************/
 
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0
@@ -61,14 +70,38 @@
 #define DRAW_SPRITES 1
 #define DRAW_OBJECTS 1
 
+
+/*********************************
+        Function Prototypes
+*********************************/
+void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState);
+void drawSprite(unsigned short *sprData,
+				int sprWidth,
+				int sprHeight,
+				int x,
+				int y,
+				int width,
+				int height,
+				int centered,
+				struct RenderState *renderState);
+/* catherine prototypes */
+// void catherine_predraw(u16 part);
+void catherine_animcallback(u16 anim);
+void matrix_inverse(float mat[4][4], float dest[4][4]);
+
+
+/*********************************
+             Globals
+*********************************/
+
+//camera
 static struct Vector3 viewPos;
 static struct Vector3 viewRot;
-static Input input;
-
 static u16 perspNorm;
 static u32 nearPlane; /* Near Plane */
 static u32 farPlane;  /* Far Plane */
 static Frustum frustum;
+
 #if HIGH_RESOLUTION && HIGH_RESOLUTION_HALF_Y
 static float aspect = (f32)SCREEN_WD / (f32)(SCREEN_HT * 2);
 #else
@@ -76,6 +109,9 @@ static float aspect = (f32)SCREEN_WD / (f32)SCREEN_HT;
 #endif
 static float fovy = DEFAULT_FOVY;
 static struct Vector3 upVector = {0.0f, 1.0f, 0.0f};
+
+/* player input */
+static Input input;
 
 /* frame counter */
 float frameCounterLastTime;
@@ -88,7 +124,6 @@ float profAvgCharacters;
 float profAvgPhysics;
 float profAvgDraw;
 float profAvgPath;
-// float lastFrameTime;
 float profilingAverages[MAX_TRACE_EVENT_TYPE];
 
 static int usbEnabled;
@@ -102,19 +137,8 @@ static int twoCycleMode;
 // static RenderMode renderModeSetting;
 PhysWorldData physWorldData;
 
-void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState);
-void drawSprite(unsigned short *sprData,
-				int sprWidth,
-				int sprHeight,
-				int x,
-				int y,
-				int width,
-				int height,
-				int centered,
-				struct RenderState *renderState);
 
-#define OBJ_START_VAL 1000
-
+/* lights */
 Lights1 sun_light = gdSPDefLights1(120,
 								   120,
 								   120, /* weak ambient light */
@@ -127,10 +151,22 @@ Lights1 sun_light = gdSPDefLights1(120,
 
 Lights0 amb_light = gdSPDefLights0(200, 200, 200 /*  ambient light */);
 
+
+/* audio */
 static float sndPitch = 10.5; // i don't fucking know :((
 static int sndNumber = 0;
 static int seqPlaying = FALSE;
 s16 seqId = -1;
+
+/* catherine */
+Mtx catherineMtx[MESHCOUNT_Catherine];
+s64ModelHelper catherine;
+float catherine_animspeed;
+// Face animation
+static u16 faceindex;
+static u32 facetick;
+static OSTime facetime;
+static FaceAnim* faceanim;
 
 /* The initialization of stage 0 */
 void initStage00()
@@ -181,13 +217,23 @@ void initStage00()
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
 
-	// lastFrameTime = CUR_TIME_MS();
+    // Initialize Catherine
+    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx);
+    sausage64_set_anim(&catherine, ANIMATION_Catherine_Walk); 
+    // sausage64_set_predrawfunc(&catherine, catherine_predraw);
+    sausage64_set_animcallback(&catherine, catherine_animcallback);
+	// Set catherine's animation speed based on region
+    #if TV_TYPE == PAL
+        catherine_animspeed = 0.66;
+    #else
+        catherine_animspeed = 0.5;
+    #endif
+	// Initialize the face animation
+    facetick = 60;
+    faceindex = 0;
+    facetime = osGetTime() + OS_USEC_TO_CYCLES(22222);
+    faceanim = &catherine_faces[0];
 
-	// for (i = 0; i < MAX_TRACE_EVENT_TYPE; ++i) {
-	//   profilingAverages[i] = 0;
-	//   profilingAccumulated[i] = 0;
-	//   profilingCounts[i] = 0;
-	// }
 
 #ifdef ED64
 	// start a thread to watch the totalUpdates value
@@ -197,7 +243,6 @@ void initStage00()
 	// debugPrintfSync("getModelDisplayList at %p\n", getModelDisplayList);
 #endif
 
-	
 }
 
 
@@ -296,6 +341,8 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	}
 
 	drawWorldObjects(dynamicp, renderState);
+	// Draw catherine
+    sausage64_drawmodel(&renderState->glist, &catherine);
 
 }
 
@@ -304,6 +351,8 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 void updateGame00(void)
 {
 	Input_init(&input);
+	// Advance Catherine's animation
+    sausage64_advance_anim(&catherine, catherine_animspeed);
 	/* Data reading of controller 1 */
 	OSContPad *controller_input = controllersGetControllerData(0);
 
@@ -789,6 +838,46 @@ void drawSprite(unsigned short *sprData,
 		((float)sprHeight / (float)height) * (1 << 10));
 
 	gDPPipeSync(renderState->dl++);
+}
+
+/*********************************
+     Model callback functions
+*********************************/
+
+/*==============================
+    catherine_predraw
+    Called before Catherine is drawn
+    @param The model segment being drawn
+==============================*/
+
+// void catherine_predraw(u16 part)
+// {
+//     // Handle face drawing
+//     switch (part)
+//     {
+//         case MESH_Catherine_Head:
+//             gDPLoadTextureBlock(glistp++, faceanim->faces[faceindex], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+//             break;
+//     }
+// }
+
+
+/*==============================
+    catherine_animcallback
+    Called before an animation finishes
+    @param The animation that is finishing
+==============================*/
+
+void catherine_animcallback(u16 anim)
+{
+    // Go to idle animation when we finished attacking
+    switch(anim)
+    {
+        case ANIMATION_Catherine_Attack1:
+        case ANIMATION_Catherine_ThrowKnife:
+            sausage64_set_anim(&catherine, ANIMATION_Catherine_Idle);
+            break;
+    }
 }
 
 // like gluProject()

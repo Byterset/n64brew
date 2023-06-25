@@ -76,7 +76,7 @@ HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/
 HFILES += 	src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
 HFILES += 	src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
 HFILES += 	src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h src/math/matrix.h src/font/font.h src/font/font_ext.h src/font/letters_img.h src/util/debug_console.h
-
+HFILES +=	src/catherineMdl.h src/catherineTex.h src/sausage64/sausage64.h
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -98,6 +98,7 @@ CODEFILES += src/math/mathf.c src/math/vector2.c src/math/vector3.c src/math/vec
 CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
 CODEFILES += src/util/memory.c src/util/time.c src/graphics/color.c src/graphics/renderstate.c 
 CODEFILES += src/graphics/graphics.c src/graphics/initgfx.c src/controls/controller.c src/math/matrix.c src/font/font.c src/util/debug_console.c
+CODEFILES += src/sausage64/sausage64.c
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
 endif
@@ -137,8 +138,6 @@ $(BUILDDIR)/assets/%.o: assets/%.c | $(BUILDDIR) $(HFILES)
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
-
-
 build/assets/sounds/sounds.sounds build/assets/sounds/sounds.sounds.tbl: $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
 	$(SFZ2N64) --compress -o $@ $^
@@ -147,7 +146,6 @@ build/src/audio/clips.h: tools/generate_sound_ids.js $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
 	node tools/generate_sound_ids.js -o $@ -p SOUNDS_ $(ALL_SOUND_WAV)
 
-build/src/stage00.o: build/src/audio/clips.h
 assets/levels/%_map.h: assets/levels/%.blend 
 	$(BLENDER) -b $< -P tools/export_positions.py
 
@@ -157,6 +155,9 @@ assets/levels/%_map_collision.h assets/levels/%_map_collision.c: assets/levels/%
 
 $(BUILDDIR)/assets/models/%.h: assets/models/%.obj | $(BUILDDIR)
 	lua tools/wavefront64/wavefront64.lua obj $< $@
+
+$(BUILDDIR)/assets/sausage64Models/%.h: | $(BUILDDIR)
+# empty rule
 
 $(BUILDDIR)/assets/sprites/%.h: assets/sprites/%.png | $(BUILDDIR)
 	python3 tools/ultratex.py $< $@
