@@ -49,6 +49,29 @@
 
 #include "util/debug_console.h"
 
+
+#include "sausage64/sausage64.h"
+#include "catherineTex.h"
+#include "catherineMdl.h"
+
+/*********************************
+        Function Prototypes
+*********************************/
+
+void catherine_predraw(u16 part);
+void catherine_animcallback(u16 anim);
+
+void matrix_inverse(float mat[4][4], float dest[4][4]);
+
+// Catherine
+Mtx catherineMtx[MESHCOUNT_Catherine];
+s64ModelHelper catherine;
+float catherine_animspeed;
+
+
+
+//-----------------------------------------------
+
 #define CONSOLE_ED64LOG_DEBUG 0
 #define CONSOLE_SHOW_PROFILING 0
 #define CONSOLE_SHOW_TRACING 0
@@ -181,6 +204,17 @@ void initStage00()
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
 
+	// Initialize Catherine
+    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx);
+	sausage64_set_anim(&catherine, ANIMATION_Catherine_Walk); 
+
+    // Set catherine's animation speed based on region
+    #if TV_TYPE == PAL
+        catherine_animspeed = 0.66;
+    #else
+        catherine_animspeed = 0.5;
+    #endif
+
 	// lastFrameTime = CUR_TIME_MS();
 
 	// for (i = 0; i < MAX_TRACE_EVENT_TYPE; ++i) {
@@ -296,13 +330,19 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	}
 
 	drawWorldObjects(dynamicp, renderState);
-
+	// case for simple gameobjects with no moving sub-parts
+	Gfx *modelDisplayList;
+	// gSPDisplayList(renderState->dl++, modelDisplayList);
+	sausage64_drawmodel(&renderState->dl, &catherine);
 }
 
 
 /* The game progressing process for stage 0 */
 void updateGame00(void)
 {
+	// Advance Catherine's animation
+    sausage64_advance_anim(&catherine, catherine_animspeed);
+
 	Input_init(&input);
 	/* Data reading of controller 1 */
 	OSContPad *controller_input = controllersGetControllerData(0);
@@ -744,7 +784,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		}
 	}
 #endif
-
 	free(intersectingObjects);
 	free(visibleObjDistance);
 	free(worldObjectsVisibility);

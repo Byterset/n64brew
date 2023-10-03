@@ -26,6 +26,11 @@ typedef struct ItemHolder
 	struct ItemStruct *heldItem;
 } ItemHolder;
 
+typedef struct Catherine
+{
+	GameObject *catherine;
+} Catherine;
+
 typedef struct Player
 {
 	ItemHolder itemHolder;
