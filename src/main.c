@@ -13,8 +13,8 @@
 #ifdef ED64
 #include "ed64/ed64io.h"
 #endif
-#include "mem_heap.h"
-#include "trace.h"
+#include "util/mem_heap.h"
+#include "util/trace.h"
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
 #include "../build/src/audio/clips.h"

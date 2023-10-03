@@ -2,8 +2,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "gameobject.h"
-#include "gametypes.h"
+#include "../../gameobject.h"
+#include "../../gametypes.h"
 
 void Character_init(Character *self,
 					GameObject *obj,

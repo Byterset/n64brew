@@ -1,8 +1,8 @@
 #ifndef GARDEN_MAP_GRAPH_H
 #define GARDEN_MAP_GRAPH_H 1
 
-#include "constants.h"
-#include "pathfinding.h"
+#include "../../constants.h"
+#include "../pathfinding.h"
 
 #define GARDEN_MAP_GRAPH_SIZE 29
 

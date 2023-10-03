@@ -4,7 +4,6 @@
 
 #include "animation/animation.h"
 #include "modeltype.h"
-// #include "n64compat.h"
 #include "physics/physics.h"
 #include "math/rotation.h"
 #include "math/vector3.h"

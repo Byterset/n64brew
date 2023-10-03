@@ -79,7 +79,7 @@ beginseg
   name  "memheap"
   flags OBJECT
   after "collision"
-  include "build/src/mem_heap.o"
+  include "build/src/util/mem_heap.o"
 endseg
 
 
@@ -103,7 +103,7 @@ beginseg
   flags OBJECT
 
   address 0x80400000
-  include "build/src/trace.o"
+  include "build/src/util/trace.o"
 endseg
 
 beginwave

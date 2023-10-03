@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <math.h>
 
-#include "character.h"
+#include "src/actors/gardener/character.h"
 #include "game.h"
 #include "modeltype.h"
 #include "player.h"

@@ -5,7 +5,7 @@
 #include "collision.h"
 #include "../constants.h"
 #include "physics.h"
-#include "../trace.h"
+#include "../util/trace.h"
 
 #define PHYS_DEBUG 0
 #define PHYS_MIN_MOVEMENT 0.5

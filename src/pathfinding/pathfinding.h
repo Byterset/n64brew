@@ -1,5 +1,5 @@
-#include "constants.h"
-#include "math/vector3.h"
+#include "../constants.h"
+#include "../math/vector3.h"
 
 #ifndef _PATHFINDING_H_
 #define _PATHFINDING_H_

@@ -1,16 +1,16 @@
 #include <math.h>
 
 #include "character.h"
-#include "game.h"
-#include "item.h"
-#include "modeltype.h"
-#include "trace.h"
-#include "math/vector2.h"
-#include "math/vector3.h"
-#include "util/time.h"
-#include "gameutils.h"
+#include "../../game.h"
+#include "../../item.h"
+#include "../../modeltype.h"
+#include "../../util/trace.h"
+#include "../../math/vector2.h"
+#include "../../math/vector3.h"
+#include "../../util/time.h"
+#include "../../gameutils.h"
 
-#include "constants.h"
+#include "../../constants.h"
 
 #include "characteranimtypes.h"
 

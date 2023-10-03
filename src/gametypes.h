@@ -3,9 +3,9 @@
 #define _GAMETYPES_H_
 
 #include "animation/animation.h"
-#include "characterstate.h"
+#include "actors/gardener/characterstate.h"
 #include "gameobject.h"
-#include "pathfinding.h"
+#include "pathfinding/pathfinding.h"
 #include "physics/physics.h"
 
 typedef enum ItemHolderType

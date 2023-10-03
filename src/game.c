@@ -15,7 +15,7 @@
 
 #include "util/memory.h"
 // game
-#include "character.h"
+#include "actors/gardener/character.h"
 #include "constants.h"
 #include "game.h"
 #include "gameobject.h"
@@ -23,7 +23,7 @@
 #include "item.h"
 #include "modeltype.h"
 #include "player.h"
-#include "trace.h"
+#include "util/trace.h"
 #include "math/vector3.h"
 #include "controls/controller.h"
 #include "constants.h"

@@ -1,7 +1,7 @@
 #ifndef _TRACE_H_
 #define _TRACE_H_
 
-#include "constants.h"
+#include "../constants.h"
 
 #define TRACE_EVENT_BUFFER_SIZE 10000
 

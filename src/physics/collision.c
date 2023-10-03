@@ -5,7 +5,7 @@
 #include "../constants.h"
 
 #include "collision.h"
-#include "../trace.h"
+#include "../util/trace.h"
 #include "../math/vector3.h"
 
 #ifndef __N64__

@@ -24,12 +24,12 @@
 #include "controls/input.h"
 #include "main.h"
 #include "modeltype.h"
-#include "pathfinding.h"
+#include "pathfinding/pathfinding.h"
 #include "physics/physics.h"
 #include "graphics/graphics.h"
 #include "graphics/renderer.h"
 #include "sprite.h"
-#include "trace.h"
+#include "util/trace.h"
 
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
@@ -40,9 +40,9 @@
 // map
 #include "../assets/levels/garden_map.h"
 #include "../assets/levels/garden_map_collision.h"
-#include "garden_map_graph.h"
+#include "pathfinding/garden/garden_map_graph.h"
 // anim data
-#include "character_anim.h"
+#include "actors/gardener/character_anim.h"
 #include "goose_anim.h"
 
 #include "ed64/ed64io.h"
@@ -51,8 +51,8 @@
 
 
 #include "sausage64/sausage64.h"
-#include "catherineTex.h"
-#include "catherineMdl.h"
+#include "actors/catherine/catherineTex.h"
+#include "actors/catherine/catherineMdl.h"
 
 /*********************************
         Function Prototypes

@@ -1,8 +1,8 @@
 #include <assert.h>
 
-#include "constants.h"
+#include "../constants.h"
 #include "pathfinding.h"
-#include "math/vector3.h"
+#include "../math/vector3.h"
 
 #ifdef __N64__
 #include "mathdef.h"

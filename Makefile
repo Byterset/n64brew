@@ -71,12 +71,12 @@ TARGETS =	$(BUILDDIR)/game.z64
 
 SPECFILE = spec
 
-HFILES =	src/main.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/controls/input.h src/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding.h src/trace.h src/math/frustum.h src/garden_map_graph.h src/segments.h
+HFILES =	src/main.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/controls/input.h src/actors/gardener/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h assets/levels/garden_map_collision.h src/pathfinding/pathfinding.h src/util/trace.h src/math/frustum.h src/pathfinding/garden/garden_map_graph.h src/segments.h
 HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h src/constants.h
 HFILES += 	src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
 HFILES += 	src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
 HFILES += 	src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h src/math/matrix.h src/font/font.h src/font/font_ext.h src/font/letters_img.h src/util/debug_console.h
-HFILES +=	src/catherineMdl.h src/catherineTex.h src/sausage64/sausage64.h
+HFILES +=	src/sausage64/sausage64.h
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -93,7 +93,9 @@ SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
 
 # Code Files
-CODEFILES =  src/main.c src/stage00.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/controls/input.c src/character.c src/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c src/physics/collision.c  src/pathfinding.c src/math/frustum.c  src/garden_map_graph.c src/sprite.c
+CODEFILES =  src/main.c src/stage00.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/controls/input.c src/actors/gardener/character.c 
+CODEFILES += src/actors/gardener/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c 
+CODEFILES += src/physics/collision.c  src/pathfinding/pathfinding.c src/math/frustum.c  src/pathfinding/garden/garden_map_graph.c src/sprite.c
 CODEFILES += src/math/mathf.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/rom.c src/math/quaternion.c
 CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
 CODEFILES += src/util/memory.c src/util/time.c src/graphics/color.c src/graphics/renderstate.c 
@@ -105,7 +107,7 @@ endif
 
 CODEOBJECTS =	$(CODEFILES:src/%.c=$(BUILDDIR)/src/%.o)  $(NUSYSLIBDIR)/nusys.o
 
-DATA_SRC_FILES   = src/mem_heap.c src/trace.c src/models.c src/sprite_data.c
+DATA_SRC_FILES   = src/util/mem_heap.c src/util/trace.c src/models.c src/sprite_data.c
 DATA_SRC_ASSETS = assets/levels/garden_map_collision.c
 DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
 
