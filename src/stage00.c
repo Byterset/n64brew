@@ -49,13 +49,15 @@
 
 #include "util/debug_console.h"
 
-
+// include animation lib single file
 #include "sausage64/sausage64.h"
+
+// include sample data for model data (anim/verts/textures)
 #include "actors/catherine/catherineTex.h"
 #include "actors/catherine/catherineMdl.h"
 
 /*********************************
-        Function Prototypes
+        Function Prototypes for 
 *********************************/
 
 void catherine_predraw(u16 part);
@@ -203,10 +205,12 @@ void initStage00()
 
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
-
+	struct Vector3 catherine_pos = {0.0F, 0.0F, 0.0F};
+	struct Vector3 catherine_scale = {1.0F, 1.0F, 1.0F};
+	Quaternion catherine_rot = {0.0F, 0.0F, 0.0F, 1.0F};
 	// Initialize Catherine
-    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx);
-	sausage64_set_anim(&catherine, ANIMATION_Catherine_Walk); 
+    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx, &catherine_pos, &catherine_scale, &catherine_rot);
+	sausage64_set_anim(&catherine, ANIMATION_Catherine_Walk);
 
     // Set catherine's animation speed based on region
     #if TV_TYPE == PAL
@@ -331,8 +335,9 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 
 	drawWorldObjects(dynamicp, renderState);
 	// case for simple gameobjects with no moving sub-parts
-	Gfx *modelDisplayList;
+	// Gfx *modelDisplayList;
 	// gSPDisplayList(renderState->dl++, modelDisplayList);
+
 	sausage64_drawmodel(&renderState->dl, &catherine);
 }
 
@@ -653,6 +658,11 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 			modelMeshParts = getAnimationNumModelMeshParts(obj->modelType);
 			curAnimRange = getCurrentAnimationRange(obj);
 			AnimationInterpolation_calc(&animInterp, obj->animState, curAnimRange);
+			// if(obj->modelType == CharacterModelType){
+			// 	char *pos[20];
+            //     sprintf(pos, "pos:%f,%f,%f", obj->position.x, obj->position.y, obj->position.z);
+            //     console_add_msg(pos);
+			// }
 
 			for (modelMeshIdx = 0; modelMeshIdx < modelMeshParts; ++modelMeshIdx)
 			{

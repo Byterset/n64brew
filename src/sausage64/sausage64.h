@@ -1,6 +1,10 @@
 #ifndef SAUSAGE64_H
 #define SAUSAGE64_H
 
+    #include "../math/vector3.h"
+    #include "../math/quaternion.h"
+    #include "../math/rotation.h"
+
     // UNCOMMENT THE #DEFINE IF USING LIBDRAGON
     //#define LIBDRAGON
 
@@ -143,6 +147,9 @@
         void (*postdraw)(u16);
         void (*animcallback)(u16);
         s64ModelData* mdldata;
+        struct Vector3* position;
+        struct Vector3* scale;
+        Quaternion* rotation;
     } s64ModelHelper;
     
     
@@ -162,9 +169,9 @@
     ==============================*/
     
     #ifndef LIBDRAGON
-        extern void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices);
+        extern void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, struct Vector3* position, struct Vector3* scale, struct Quaternion* rotation);
     #else
-        extern void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, GLuint* glbuffers);
+        extern void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, GLuint* glbuffers, struct Vector3* position, struct Vector3* scale, struct Quaternion* rotation);
     #endif
     
     
@@ -216,8 +223,18 @@
     ==============================*/
     
     extern void sausage64_set_postdrawfunc(s64ModelHelper* mdl, void (*postdraw)(u16));
-    
-    
+
+    /*==============================
+        sausage64_set_transform
+        Set the position and rotation of a model
+        @param The model helper pointer
+        @param The position vector
+        @param The rotation quaternion
+        @param The scale vector
+==============================*/
+    extern void sausage64_set_transform(s64ModelHelper *mdl, struct Vector3 *position, struct Quaternion *rotation, struct Vector3 *scale);
+
+
     /*==============================
         sausage64_advance_anim
         Advances the animation tick by the given amount

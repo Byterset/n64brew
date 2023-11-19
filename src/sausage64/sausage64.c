@@ -253,14 +253,17 @@ static inline s64Quat s64quat_fromeuler(float yaw, float pitch, float roll)
     ==============================*/
 
 #ifndef LIBDRAGON
-void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices)
+void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, struct Vector3* position, struct Vector3* scale, struct Quaternion* rotation)
 #else
-void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, GLuint* glbuffers)
+void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, GLuint* glbuffers, struct Vector3* position, struct Vector3* scale, struct Quaternion* rotation)
 #endif
 {
     mdl->interpolate = TRUE;
     mdl->loop = TRUE;
     mdl->curkeyframe = 0;
+    mdl->position = position;
+    mdl->scale = scale;
+    mdl->rotation = rotation;
 
     // Set the the first animation if it exists, otherwise set the animation to NULL
     if (mdldata->animcount > 0)
@@ -615,6 +618,7 @@ void sausage64_set_anim(s64ModelHelper* mdl, u16 anim)
     {
         float helper1[4][4];
         float helper2[4][4];
+        float test[4][4];
         s64Quat q = {cfdata->rot[0], cfdata->rot[1], cfdata->rot[2], cfdata->rot[3]};
     
         // Calculate the transformations on the CPU
@@ -633,6 +637,15 @@ void sausage64_set_anim(s64ModelHelper* mdl, u16 anim)
                 s64lerp(cfdata->pos[1], nfdata->pos[1], l),
                 s64lerp(cfdata->pos[2], nfdata->pos[2], l)
             );
+            //Reposition Catherine to the starting position of the player (temporary)
+            //TODO: Big Todo!! include pos, rot, scale from s64ModelHelper in these calculations
+            //only calculate the translation matrix of worldtransform once in the drawmodel function
+            //then pass it to the drawpart function!
+            guTranslateF(test,
+                         -1500,
+                         125,
+                         -1550);
+            guMtxCatF(helper1, test, helper1);
             guScaleF(helper2, 
                 s64lerp(cfdata->scale[0], nfdata->scale[0], l), 
                 s64lerp(cfdata->scale[1], nfdata->scale[1], l), 
@@ -681,6 +694,7 @@ void sausage64_set_anim(s64ModelHelper* mdl, u16 anim)
             helper2[3][3] = 1;
             guMtxCatF(helper2, helper1, helper1);
         }
+
         guMtxF2L(helper1, matrix);
     
         // Draw the body part
