@@ -1,0 +1,467 @@
+\hypertarget{audiomgr_8c}{}\doxysection{src/audio/audiomgr.c File Reference}
+\label{audiomgr_8c}\index{src/audio/audiomgr.c@{src/audio/audiomgr.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}audio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/memory.\+h\char`\"{}}\newline
+Include dependency graph for audiomgr.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{audiomgr_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{audiomgr_8c_unionAudioMsg}{Audio\+Msg}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioInfo__s}{Audio\+Info\+\_\+s}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAMAudioMgr}{AMAudio\+Mgr}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAMDMABuffer}{AMDMABuffer}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAMDMAState}{AMDMAState}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioMsg_8gen}{Audio\+Msg.\+gen}}
+\item 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioMsg_8done}{Audio\+Msg.\+done}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{audiomgr_8c_structAudioInfo__s}{Audio\+Info\+\_\+s}} \mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{audiomgr_8c_a2764abb8a69d7b5485f0fcc1ff6a02f2}{\+\_\+\+\_\+am\+Main}} (void $\ast$arg)
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}} \mbox{\hyperlink{audiomgr_8c_add3034e0472daa9e454e1b378e0542fb}{\+\_\+\+\_\+am\+DMA}} (\mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}} addr, \mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}} len, void $\ast$state)
+\item 
+static ALDMAproc \mbox{\hyperlink{audiomgr_8c_a415270be86fd4f76fdcae9fd90c71a81}{\+\_\+\+\_\+am\+Dma\+New}} (\mbox{\hyperlink{audiomgr_8c_structAMDMAState}{AMDMAState}} $\ast$$\ast$state)
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_a12563784b13472347fbe687d147d049e}{\+\_\+\+\_\+am\+Handle\+Frame\+Msg}} (\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$, \mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$)
+\item 
+static void \mbox{\hyperlink{audiomgr_8c_a632468e0e073eca696c8c5db82ceca0a}{\+\_\+\+\_\+am\+Handle\+Done\+Msg}} (\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$)
+\item 
+static void \mbox{\hyperlink{audiomgr_8c_a5a36e7a92c45b3054bf5234c43e1e5a6}{\+\_\+\+\_\+clear\+Audio\+DMA}} (void)
+\item 
+void \mbox{\hyperlink{audiomgr_8c_a5a2949fd83d45ce3be172f437f86f813}{am\+Create\+Audio\+Mgr}} (ALSyn\+Config $\ast$c, OSPri pri, \mbox{\hyperlink{audio_8h_structamConfig}{am\+Config}} $\ast$amc, int framerate)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+OSPi\+Handle $\ast$ \mbox{\hyperlink{audiomgr_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}{g\+Pi\+Handle}}
+\item 
+OSSched \mbox{\hyperlink{audiomgr_8c_a08c9e1b31ed12c22598862e110f46cf4}{scheduler}}
+\item 
+OSMesg\+Queue $\ast$ \mbox{\hyperlink{audiomgr_8c_ada08e58214d8a44bede7a838d72014fe}{scheduler\+Command\+Queue}}
+\item 
+\mbox{\hyperlink{audiomgr_8c_structAMAudioMgr}{AMAudio\+Mgr}} \mbox{\hyperlink{audiomgr_8c_a4adfd13191d164130cc3a6e1116317b5}{\+\_\+\+\_\+am}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{audiomgr_8c_a5d7eab23655c5f57d8a157cb74ae794a}{audio\+Stack}} \mbox{[}\mbox{\hyperlink{audio_8h_a0403b973e2b93a9859a7fac343b8ceb1}{AUDIO\+\_\+\+STACKSIZE}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}
+\item 
+\mbox{\hyperlink{audiomgr_8c_structAMDMAState}{AMDMAState}} \mbox{\hyperlink{audiomgr_8c_a79a67d1592e6d07daaf7c910917b7f6d}{dma\+State}}
+\item 
+\mbox{\hyperlink{audiomgr_8c_structAMDMABuffer}{AMDMABuffer}} \mbox{\hyperlink{audiomgr_8c_a13d968cf95de3cf5e0c1a9d362b7a128}{dma\+Buffs}} \mbox{[}\mbox{\hyperlink{audio_8h_a45c62b666cc4a2bda2aea3598c536ae2}{NUM\+\_\+\+DMA\+\_\+\+BUFFERS}}\mbox{]}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_abfdd004cf2886a820244bfb10052dc2b}{aud\+Frame\+Ct}} = 0
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_aeca683650cdd5c960b74ecde67c694de}{next\+DMA}} = 0
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_acdab1cfa170cd2bae8b7591cae7c9327}{cur\+Acmd\+List}} = 0
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_a3176066bb11e46948a23f0913662b231}{min\+Frame\+Size}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_a63e80d30618d012e53239920a4374da2}{frame\+Size}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_ab41516c6b5df459ac701e6c656b51866}{max\+Frame\+Size}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{audiomgr_8c_a45ad09e88795048be779b7c1e8b4b1e4}{max\+RSPCmds}}
+\item 
+OSIo\+Mesg \mbox{\hyperlink{audiomgr_8c_a01526e0f17046184f52f1ccb3e53c725}{aud\+DMAIOMesg\+Buf}} \mbox{[}\mbox{\hyperlink{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}{NUM\+\_\+\+DMA\+\_\+\+MESSAGES}}\mbox{]}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{audiomgr_8c_a7f0875dace60b4f4a72b928be5232418}{aud\+DMAMessageQ}}
+\item 
+OSMesg \mbox{\hyperlink{audiomgr_8c_a508964944b6334c6bac8e40d8d65281e}{aud\+DMAMessage\+Buf}} \mbox{[}\mbox{\hyperlink{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}{NUM\+\_\+\+DMA\+\_\+\+MESSAGES}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{AudioMsg@{AudioMsg}}\label{unionAudioMsg}
+\Hypertarget{audiomgr_8c_unionAudioMsg}
+\doxysubsubsection{union Audio\+Msg}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a012daad469a879f699987a96cae39a7c}\label{audiomgr_8c_a012daad469a879f699987a96cae39a7c}} 
+OSScMsg&
+app&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_aeaac0c1110ae76e72408200b0a1ff65c}\label{audiomgr_8c_aeaac0c1110ae76e72408200b0a1ff65c}} 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioMsg_8done}{AudioMsg}}&
+done&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a794a26f260c42c655f582195ecb41945}\label{audiomgr_8c_a794a26f260c42c655f582195ecb41945}} 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioMsg_8gen}{AudioMsg}}&
+gen&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AudioInfo\_s@{AudioInfo\_s}}\label{structAudioInfo__s}
+\Hypertarget{audiomgr_8c_structAudioInfo__s}
+\doxysubsubsection{struct Audio\+Info\+\_\+s}
+
+
+Collaboration diagram for Audio\+Info\+\_\+s\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{structAudioInfo__s__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a4177ec536e3457649cb7b80dedc0e485}\label{audiomgr_8c_a4177ec536e3457649cb7b80dedc0e485}} 
+short $\ast$&
+data&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a50bb9c7b3c43e69366e5521fe33446e0}\label{audiomgr_8c_a50bb9c7b3c43e69366e5521fe33446e0}} 
+short&
+frameSamples&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a161754f824a31dc78c3402ed22ee17ef}\label{audiomgr_8c_a161754f824a31dc78c3402ed22ee17ef}} 
+\mbox{\hyperlink{audiomgr_8c_unionAudioMsg}{AudioMsg}}&
+msg&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_aa88c1dccb0a58be813681dd534a8d35d}\label{audiomgr_8c_aa88c1dccb0a58be813681dd534a8d35d}} 
+OSScTask&
+task&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AMAudioMgr@{AMAudioMgr}}\label{structAMAudioMgr}
+\Hypertarget{audiomgr_8c_structAMAudioMgr}
+\doxysubsubsection{struct AMAudio\+Mgr}
+
+
+Collaboration diagram for AMAudio\+Mgr\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{structAMAudioMgr__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a747ebc2b622111abeb119831dbbcf159}\label{audiomgr_8c_a747ebc2b622111abeb119831dbbcf159}} 
+Acmd $\ast$&
+ACMDList\mbox{[}\mbox{\hyperlink{audio_8h_a12c17c4cfae1f94b2f3e6b8ad2f6117c}{NUM\_ACMD\_LISTS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a5322048518cd134b67ba3c90b1542ad5}\label{audiomgr_8c_a5322048518cd134b67ba3c90b1542ad5}} 
+OSMesg&
+audioFrameMsgBuf\mbox{[}\mbox{\hyperlink{audio_8h_a79c42f1d15f41cd79807385fb914905d}{MAX\_AUDIO\_MESGS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_af2e1168cd161e83849499296d1c0baf9}\label{audiomgr_8c_af2e1168cd161e83849499296d1c0baf9}} 
+OSMesgQueue&
+audioFrameMsgQ&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_ac696b6dd4ede16d2b29e63b4eb5684ba}\label{audiomgr_8c_ac696b6dd4ede16d2b29e63b4eb5684ba}} 
+\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{AudioInfo}} $\ast$&
+audioInfo\mbox{[}\mbox{\hyperlink{audio_8h_ab3e90e29afa8217ded0ec448f1bea176}{NUM\_OUTPUT\_BUFFERS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_abaa2643905331b282f125f5e07d0fc0b}\label{audiomgr_8c_abaa2643905331b282f125f5e07d0fc0b}} 
+OSMesg&
+audioReplyMsgBuf\mbox{[}\mbox{\hyperlink{audio_8h_a79c42f1d15f41cd79807385fb914905d}{MAX\_AUDIO\_MESGS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_afea03233d8cd3bb0be51b9cfe266e4f6}\label{audiomgr_8c_afea03233d8cd3bb0be51b9cfe266e4f6}} 
+OSMesgQueue&
+audioReplyMsgQ&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a33b0efab45c19dc50ba99e3dc2ecdadf}\label{audiomgr_8c_a33b0efab45c19dc50ba99e3dc2ecdadf}} 
+ALGlobals&
+g&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a0f591b785af5117eb6755119228061e9}\label{audiomgr_8c_a0f591b785af5117eb6755119228061e9}} 
+OSThread&
+thread&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AMDMABuffer@{AMDMABuffer}}\label{structAMDMABuffer}
+\Hypertarget{audiomgr_8c_structAMDMABuffer}
+\doxysubsubsection{struct AMDMABuffer}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a955b6b03fb9af7997d329089b731742c}\label{audiomgr_8c_a955b6b03fb9af7997d329089b731742c}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+lastFrame&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_aac74841327dad8c71a63045993ae4741}\label{audiomgr_8c_aac74841327dad8c71a63045993ae4741}} 
+ALLink&
+node&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_abcef37885f8ce7c5e4a3374a9444a4f3}\label{audiomgr_8c_abcef37885f8ce7c5e4a3374a9444a4f3}} 
+char $\ast$&
+ptr&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_ad1550d201870fcb7353f59c12ca18d08}\label{audiomgr_8c_ad1550d201870fcb7353f59c12ca18d08}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+startAddr&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AMDMAState@{AMDMAState}}\label{structAMDMAState}
+\Hypertarget{audiomgr_8c_structAMDMAState}
+\doxysubsubsection{struct AMDMAState}
+
+
+Collaboration diagram for AMDMAState\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{structAMDMAState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a8f5a60e53c83bb56d77ff253c203b3b1}\label{audiomgr_8c_a8f5a60e53c83bb56d77ff253c203b3b1}} 
+\mbox{\hyperlink{audiomgr_8c_structAMDMABuffer}{AMDMABuffer}} $\ast$&
+firstFree&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a2ca67eb9f2d8dc856033db3188a4ff1b}\label{audiomgr_8c_a2ca67eb9f2d8dc856033db3188a4ff1b}} 
+\mbox{\hyperlink{audiomgr_8c_structAMDMABuffer}{AMDMABuffer}} $\ast$&
+firstUsed&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a8bce6c29947df495a0377839e3d0f6f3}\label{audiomgr_8c_a8bce6c29947df495a0377839e3d0f6f3}} 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}&
+initialized&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AudioMsg.gen@{AudioMsg.gen}}\label{structAudioMsg_8gen}
+\Hypertarget{audiomgr_8c_structAudioMsg_8gen}
+\doxysubsubsection{struct Audio\+Msg.\+gen}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_a599dcce2998a6b40b1e38e8c6006cb0a}\label{audiomgr_8c_a599dcce2998a6b40b1e38e8c6006cb0a}} 
+short&
+type&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AudioMsg.done@{AudioMsg.done}}\label{structAudioMsg_8done}
+\Hypertarget{audiomgr_8c_structAudioMsg_8done}
+\doxysubsubsection{struct Audio\+Msg.\+done}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audiomgr_8c_acaf9b6b99962bf5c2264824231d7a40c}\label{audiomgr_8c_acaf9b6b99962bf5c2264824231d7a40c}} 
+struct \mbox{\hyperlink{audiomgr_8c_structAudioInfo__s}{AudioInfo\_s}} $\ast$&
+info&
+\\
+\hline
+
+\mbox{\Hypertarget{audiomgr_8c_a599dcce2998a6b40b1e38e8c6006cb0a}\label{audiomgr_8c_a599dcce2998a6b40b1e38e8c6006cb0a}} 
+short&
+type&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}\label{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}} 
+\index{audiomgr.c@{audiomgr.c}!AudioInfo@{AudioInfo}}
+\index{AudioInfo@{AudioInfo}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{AudioInfo}{AudioInfo}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{audiomgr_8c_structAudioInfo__s}{Audio\+Info\+\_\+s}} \mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{audiomgr_8c_add3034e0472daa9e454e1b378e0542fb}\label{audiomgr_8c_add3034e0472daa9e454e1b378e0542fb}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_amDMA@{\_\_amDMA}}
+\index{\_\_amDMA@{\_\_amDMA}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_amDMA()}{\_\_amDMA()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}} \+\_\+\+\_\+am\+DMA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}}}]{addr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_af0938d8dd13b4f7a595e78aacafd3323}{s32}}}]{len,  }\item[{void $\ast$}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a415270be86fd4f76fdcae9fd90c71a81}\label{audiomgr_8c_a415270be86fd4f76fdcae9fd90c71a81}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_amDmaNew@{\_\_amDmaNew}}
+\index{\_\_amDmaNew@{\_\_amDmaNew}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_amDmaNew()}{\_\_amDmaNew()}}
+{\footnotesize\ttfamily ALDMAproc \+\_\+\+\_\+am\+Dma\+New (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{audiomgr_8c_structAMDMAState}{AMDMAState}} $\ast$$\ast$}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a632468e0e073eca696c8c5db82ceca0a}\label{audiomgr_8c_a632468e0e073eca696c8c5db82ceca0a}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_amHandleDoneMsg@{\_\_amHandleDoneMsg}}
+\index{\_\_amHandleDoneMsg@{\_\_amHandleDoneMsg}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_amHandleDoneMsg()}{\_\_amHandleDoneMsg()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+am\+Handle\+Done\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a12563784b13472347fbe687d147d049e}\label{audiomgr_8c_a12563784b13472347fbe687d147d049e}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_amHandleFrameMsg@{\_\_amHandleFrameMsg}}
+\index{\_\_amHandleFrameMsg@{\_\_amHandleFrameMsg}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_amHandleFrameMsg()}{\_\_amHandleFrameMsg()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \+\_\+\+\_\+am\+Handle\+Frame\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$}]{info,  }\item[{\mbox{\hyperlink{audiomgr_8c_ad9f90d62121828ee64044c6be8019585}{Audio\+Info}} $\ast$}]{last\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a2764abb8a69d7b5485f0fcc1ff6a02f2}\label{audiomgr_8c_a2764abb8a69d7b5485f0fcc1ff6a02f2}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_amMain@{\_\_amMain}}
+\index{\_\_amMain@{\_\_amMain}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_amMain()}{\_\_amMain()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+am\+Main (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a5a36e7a92c45b3054bf5234c43e1e5a6}\label{audiomgr_8c_a5a36e7a92c45b3054bf5234c43e1e5a6}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_clearAudioDMA@{\_\_clearAudioDMA}}
+\index{\_\_clearAudioDMA@{\_\_clearAudioDMA}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_clearAudioDMA()}{\_\_clearAudioDMA()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+clear\+Audio\+DMA (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a5a2949fd83d45ce3be172f437f86f813}\label{audiomgr_8c_a5a2949fd83d45ce3be172f437f86f813}} 
+\index{audiomgr.c@{audiomgr.c}!amCreateAudioMgr@{amCreateAudioMgr}}
+\index{amCreateAudioMgr@{amCreateAudioMgr}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{amCreateAudioMgr()}{amCreateAudioMgr()}}
+{\footnotesize\ttfamily void am\+Create\+Audio\+Mgr (\begin{DoxyParamCaption}\item[{ALSyn\+Config $\ast$}]{c,  }\item[{OSPri}]{pri,  }\item[{\mbox{\hyperlink{audio_8h_structamConfig}{am\+Config}} $\ast$}]{amc,  }\item[{int}]{framerate }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{audiomgr_8c_a4adfd13191d164130cc3a6e1116317b5}\label{audiomgr_8c_a4adfd13191d164130cc3a6e1116317b5}} 
+\index{audiomgr.c@{audiomgr.c}!\_\_am@{\_\_am}}
+\index{\_\_am@{\_\_am}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{\_\_am}{\_\_am}}
+{\footnotesize\ttfamily \mbox{\hyperlink{audiomgr_8c_structAMAudioMgr}{AMAudio\+Mgr}} \+\_\+\+\_\+am}
+
+\mbox{\Hypertarget{audiomgr_8c_a01526e0f17046184f52f1ccb3e53c725}\label{audiomgr_8c_a01526e0f17046184f52f1ccb3e53c725}} 
+\index{audiomgr.c@{audiomgr.c}!audDMAIOMesgBuf@{audDMAIOMesgBuf}}
+\index{audDMAIOMesgBuf@{audDMAIOMesgBuf}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{audDMAIOMesgBuf}{audDMAIOMesgBuf}}
+{\footnotesize\ttfamily OSIo\+Mesg aud\+DMAIOMesg\+Buf\mbox{[}\mbox{\hyperlink{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}{NUM\+\_\+\+DMA\+\_\+\+MESSAGES}}\mbox{]}}
+
+Queues and storage for use with audio DMA\textquotesingle{}s \mbox{\Hypertarget{audiomgr_8c_a508964944b6334c6bac8e40d8d65281e}\label{audiomgr_8c_a508964944b6334c6bac8e40d8d65281e}} 
+\index{audiomgr.c@{audiomgr.c}!audDMAMessageBuf@{audDMAMessageBuf}}
+\index{audDMAMessageBuf@{audDMAMessageBuf}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{audDMAMessageBuf}{audDMAMessageBuf}}
+{\footnotesize\ttfamily OSMesg aud\+DMAMessage\+Buf\mbox{[}\mbox{\hyperlink{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}{NUM\+\_\+\+DMA\+\_\+\+MESSAGES}}\mbox{]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a7f0875dace60b4f4a72b928be5232418}\label{audiomgr_8c_a7f0875dace60b4f4a72b928be5232418}} 
+\index{audiomgr.c@{audiomgr.c}!audDMAMessageQ@{audDMAMessageQ}}
+\index{audDMAMessageQ@{audDMAMessageQ}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{audDMAMessageQ}{audDMAMessageQ}}
+{\footnotesize\ttfamily OSMesg\+Queue aud\+DMAMessageQ}
+
+\mbox{\Hypertarget{audiomgr_8c_abfdd004cf2886a820244bfb10052dc2b}\label{audiomgr_8c_abfdd004cf2886a820244bfb10052dc2b}} 
+\index{audiomgr.c@{audiomgr.c}!audFrameCt@{audFrameCt}}
+\index{audFrameCt@{audFrameCt}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{audFrameCt}{audFrameCt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} aud\+Frame\+Ct = 0}
+
+\mbox{\Hypertarget{audiomgr_8c_a5d7eab23655c5f57d8a157cb74ae794a}\label{audiomgr_8c_a5d7eab23655c5f57d8a157cb74ae794a}} 
+\index{audiomgr.c@{audiomgr.c}!audioStack@{audioStack}}
+\index{audioStack@{audioStack}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{audioStack}{audioStack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} audio\+Stack\mbox{[}\mbox{\hyperlink{audio_8h_a0403b973e2b93a9859a7fac343b8ceb1}{AUDIO\+\_\+\+STACKSIZE}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{audiomgr_8c_acdab1cfa170cd2bae8b7591cae7c9327}\label{audiomgr_8c_acdab1cfa170cd2bae8b7591cae7c9327}} 
+\index{audiomgr.c@{audiomgr.c}!curAcmdList@{curAcmdList}}
+\index{curAcmdList@{curAcmdList}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{curAcmdList}{curAcmdList}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} cur\+Acmd\+List = 0}
+
+\mbox{\Hypertarget{audiomgr_8c_a13d968cf95de3cf5e0c1a9d362b7a128}\label{audiomgr_8c_a13d968cf95de3cf5e0c1a9d362b7a128}} 
+\index{audiomgr.c@{audiomgr.c}!dmaBuffs@{dmaBuffs}}
+\index{dmaBuffs@{dmaBuffs}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{dmaBuffs}{dmaBuffs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{audiomgr_8c_structAMDMABuffer}{AMDMABuffer}} dma\+Buffs\mbox{[}\mbox{\hyperlink{audio_8h_a45c62b666cc4a2bda2aea3598c536ae2}{NUM\+\_\+\+DMA\+\_\+\+BUFFERS}}\mbox{]}}
+
+\mbox{\Hypertarget{audiomgr_8c_a79a67d1592e6d07daaf7c910917b7f6d}\label{audiomgr_8c_a79a67d1592e6d07daaf7c910917b7f6d}} 
+\index{audiomgr.c@{audiomgr.c}!dmaState@{dmaState}}
+\index{dmaState@{dmaState}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{dmaState}{dmaState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{audiomgr_8c_structAMDMAState}{AMDMAState}} dma\+State}
+
+\mbox{\Hypertarget{audiomgr_8c_a63e80d30618d012e53239920a4374da2}\label{audiomgr_8c_a63e80d30618d012e53239920a4374da2}} 
+\index{audiomgr.c@{audiomgr.c}!frameSize@{frameSize}}
+\index{frameSize@{frameSize}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{frameSize}{frameSize}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} frame\+Size}
+
+\mbox{\Hypertarget{audiomgr_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}\label{audiomgr_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}} 
+\index{audiomgr.c@{audiomgr.c}!gPiHandle@{gPiHandle}}
+\index{gPiHandle@{gPiHandle}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{gPiHandle}{gPiHandle}}
+{\footnotesize\ttfamily OSPi\+Handle$\ast$ g\+Pi\+Handle\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{audiomgr_8c_ab41516c6b5df459ac701e6c656b51866}\label{audiomgr_8c_ab41516c6b5df459ac701e6c656b51866}} 
+\index{audiomgr.c@{audiomgr.c}!maxFrameSize@{maxFrameSize}}
+\index{maxFrameSize@{maxFrameSize}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{maxFrameSize}{maxFrameSize}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} max\+Frame\+Size}
+
+\mbox{\Hypertarget{audiomgr_8c_a45ad09e88795048be779b7c1e8b4b1e4}\label{audiomgr_8c_a45ad09e88795048be779b7c1e8b4b1e4}} 
+\index{audiomgr.c@{audiomgr.c}!maxRSPCmds@{maxRSPCmds}}
+\index{maxRSPCmds@{maxRSPCmds}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{maxRSPCmds}{maxRSPCmds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} max\+RSPCmds}
+
+\mbox{\Hypertarget{audiomgr_8c_a3176066bb11e46948a23f0913662b231}\label{audiomgr_8c_a3176066bb11e46948a23f0913662b231}} 
+\index{audiomgr.c@{audiomgr.c}!minFrameSize@{minFrameSize}}
+\index{minFrameSize@{minFrameSize}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{minFrameSize}{minFrameSize}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} min\+Frame\+Size}
+
+\mbox{\Hypertarget{audiomgr_8c_aeca683650cdd5c960b74ecde67c694de}\label{audiomgr_8c_aeca683650cdd5c960b74ecde67c694de}} 
+\index{audiomgr.c@{audiomgr.c}!nextDMA@{nextDMA}}
+\index{nextDMA@{nextDMA}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{nextDMA}{nextDMA}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} next\+DMA = 0}
+
+\mbox{\Hypertarget{audiomgr_8c_a08c9e1b31ed12c22598862e110f46cf4}\label{audiomgr_8c_a08c9e1b31ed12c22598862e110f46cf4}} 
+\index{audiomgr.c@{audiomgr.c}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{scheduler}{scheduler}}
+{\footnotesize\ttfamily OSSched scheduler\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{audiomgr_8c_ada08e58214d8a44bede7a838d72014fe}\label{audiomgr_8c_ada08e58214d8a44bede7a838d72014fe}} 
+\index{audiomgr.c@{audiomgr.c}!schedulerCommandQueue@{schedulerCommandQueue}}
+\index{schedulerCommandQueue@{schedulerCommandQueue}!audiomgr.c@{audiomgr.c}}
+\doxysubsubsection{\texorpdfstring{schedulerCommandQueue}{schedulerCommandQueue}}
+{\footnotesize\ttfamily OSMesg\+Queue$\ast$ scheduler\+Command\+Queue\hspace{0.3cm}{\ttfamily [extern]}}
+

@@ -1,0 +1,252 @@
+\hypertarget{main_8c}{}\doxysection{src/main.c File Reference}
+\label{main_8c}\index{src/main.c@{src/main.c}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include $<$sched.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controls/controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/rom.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}font/font\+\_\+ext.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graphics/graphics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/mem\+\_\+heap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/trace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audio/audio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audio/soundplayer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/src/audio/clips.\+h\char`\"{}}\newline
+Include dependency graph for main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a09b023eab29cd2b4e99613f527242efb}{DBGPRINT}}(args...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_af4a7644bdaf5efb1584dd157754a51ba}{init\+Proc}} (void $\ast$arg)
+\item 
+void \mbox{\hyperlink{main_8c_a7d9a597e626563cd0bc0464983e75dd0}{game\+Proc}} (void $\ast$arg)
+\item 
+\mbox{\hyperlink{main_8c_a9b06390581ee7457e807e3f5371b989a}{EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS}} (memheap)
+\item 
+\mbox{\hyperlink{main_8c_ad18b99b72fc2173586f86551e357ffe4}{EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS}} (trace)
+\item 
+void \mbox{\hyperlink{main_8c_a21d04f2971e96d4a5468faacedd3d6e8}{trace\+Init}} (void)
+\item 
+void \mbox{\hyperlink{main_8c_ab9391901cce32a7ecf12c0b019f51ad5}{mainproc}} (void $\ast$arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{main_8c_ae16091c3ebb41cd84e03e91b0c81618f}{cont\+Pattern}}
+\item 
+OSPi\+Handle $\ast$ \mbox{\hyperlink{main_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}{g\+Pi\+Handle}}
+\item 
+static OSMesg \mbox{\hyperlink{main_8c_ae16b44f201a62a6dd5071f416b63671c}{Pi\+Messages}} \mbox{[}\mbox{\hyperlink{defs_8h_a10e1679d6cbffd931cff4a59e742ce51}{DMA\+\_\+\+QUEUE\+\_\+\+SIZE}}\mbox{]}
+\item 
+static OSMesg\+Queue \mbox{\hyperlink{main_8c_aca3c3ce78c9d52026d5330776da4f904}{Pi\+MessageQ}}
+\item 
+char \mbox{\hyperlink{main_8c_a5e349ddd41c1429ebc746c6f1d5d9b24}{mem\+\_\+heap}} \mbox{[}\mbox{\hyperlink{mem__heap_8h_adefef76e33ce56e5e5d42b4c25ca98b5}{MEM\+\_\+\+HEAP\+\_\+\+SIZE}}\mbox{]}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{main_8c_aaadb154683e62ce2604a31c0e535de91}{main\+Stack}} \mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}
+\item 
+OSThread \mbox{\hyperlink{main_8c_aeb84d1c0031cb9277bfd69606f823ccb}{init\+Thread}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{main_8c_a0f23acc5d28b2230d624f14e87d9038a}{init\+Thread\+Stack}} \mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}
+\item 
+OSThread \mbox{\hyperlink{main_8c_aa24b6e7c4d8266ab9cef447013eeccf6}{game\+Thread}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{main_8c_a52a660ffc1fa62618eec75d72d644ffa}{game\+Thread\+Stack}} \mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{main_8c_a085c257eebf80f748ab04aab3ecd8eea}{gfx\+Frame\+MsgQ}}
+\item 
+static OSMesg \mbox{\hyperlink{main_8c_a6e5ca18aad44a53e8684d733872d3084}{gfx\+Frame\+Msg\+Buf}} \mbox{[}\mbox{\hyperlink{defs_8h_af944fd436838da05c620fb3677ced179}{MAX\+\_\+\+FRAME\+\_\+\+BUFFER\+\_\+\+MESGS}}\mbox{]}
+\item 
+static OSSc\+Client \mbox{\hyperlink{main_8c_ac8e2482c094220578f440acfbab72fad}{gfx\+Client}}
+\item 
+OSSched \mbox{\hyperlink{main_8c_a08c9e1b31ed12c22598862e110f46cf4}{scheduler}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{main_8c_a7e7035ddf80c660200d48ed3d9fdb7cb}{schedule\+Stack}} \mbox{[}OS\+\_\+\+SC\+\_\+\+STACKSIZE/8\mbox{]}
+\item 
+OSMesg\+Queue $\ast$ \mbox{\hyperlink{main_8c_ada08e58214d8a44bede7a838d72014fe}{scheduler\+Command\+Queue}}
+\item 
+void $\ast$ \mbox{\hyperlink{main_8c_aea2d2a5d3682f51b3aba720bf94b8f93}{\+\_\+\+\_\+printfunc}}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{main_8c_a2ec2ce001f8f12172d783666012ae40c}{dma\+MessageQ}}
+\item 
+char \mbox{\hyperlink{main_8c_a8b63921f98fc3ddfb4b4bcea7fc9d413}{\+\_\+memheap\+Segment\+Rom\+Start}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8c_a09b023eab29cd2b4e99613f527242efb}\label{main_8c_a09b023eab29cd2b4e99613f527242efb}} 
+\index{main.c@{main.c}!DBGPRINT@{DBGPRINT}}
+\index{DBGPRINT@{DBGPRINT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DBGPRINT}{DBGPRINT}}
+{\footnotesize\ttfamily \#define DBGPRINT(\begin{DoxyParamCaption}\item[{}]{args... }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_a9b06390581ee7457e807e3f5371b989a}\label{main_8c_a9b06390581ee7457e807e3f5371b989a}} 
+\index{main.c@{main.c}!EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}}
+\index{EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{EXTERN\_SEGMENT\_WITH\_BSS()}{EXTERN\_SEGMENT\_WITH\_BSS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS (\begin{DoxyParamCaption}\item[{memheap}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_ad18b99b72fc2173586f86551e357ffe4}\label{main_8c_ad18b99b72fc2173586f86551e357ffe4}} 
+\index{main.c@{main.c}!EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}}
+\index{EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{EXTERN\_SEGMENT\_WITH\_BSS()}{EXTERN\_SEGMENT\_WITH\_BSS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS (\begin{DoxyParamCaption}\item[{trace}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_a7d9a597e626563cd0bc0464983e75dd0}\label{main_8c_a7d9a597e626563cd0bc0464983e75dd0}} 
+\index{main.c@{main.c}!gameProc@{gameProc}}
+\index{gameProc@{gameProc}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gameProc()}{gameProc()}}
+{\footnotesize\ttfamily void game\+Proc (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_af4a7644bdaf5efb1584dd157754a51ba}\label{main_8c_af4a7644bdaf5efb1584dd157754a51ba}} 
+\index{main.c@{main.c}!initProc@{initProc}}
+\index{initProc@{initProc}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{initProc()}{initProc()}}
+{\footnotesize\ttfamily void init\+Proc (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_ab9391901cce32a7ecf12c0b019f51ad5}\label{main_8c_ab9391901cce32a7ecf12c0b019f51ad5}} 
+\index{main.c@{main.c}!mainproc@{mainproc}}
+\index{mainproc@{mainproc}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{mainproc()}{mainproc()}}
+{\footnotesize\ttfamily void mainproc (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_a21d04f2971e96d4a5468faacedd3d6e8}\label{main_8c_a21d04f2971e96d4a5468faacedd3d6e8}} 
+\index{main.c@{main.c}!traceInit@{traceInit}}
+\index{traceInit@{traceInit}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{traceInit()}{traceInit()}}
+{\footnotesize\ttfamily void trace\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8c_aea2d2a5d3682f51b3aba720bf94b8f93}\label{main_8c_aea2d2a5d3682f51b3aba720bf94b8f93}} 
+\index{main.c@{main.c}!\_\_printfunc@{\_\_printfunc}}
+\index{\_\_printfunc@{\_\_printfunc}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{\_\_printfunc}{\_\_printfunc}}
+{\footnotesize\ttfamily void$\ast$ \+\_\+\+\_\+printfunc\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8c_a8b63921f98fc3ddfb4b4bcea7fc9d413}\label{main_8c_a8b63921f98fc3ddfb4b4bcea7fc9d413}} 
+\index{main.c@{main.c}!\_memheapSegmentRomStart@{\_memheapSegmentRomStart}}
+\index{\_memheapSegmentRomStart@{\_memheapSegmentRomStart}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{\_memheapSegmentRomStart}{\_memheapSegmentRomStart}}
+{\footnotesize\ttfamily char \+\_\+memheap\+Segment\+Rom\+Start\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8c_ae16091c3ebb41cd84e03e91b0c81618f}\label{main_8c_ae16091c3ebb41cd84e03e91b0c81618f}} 
+\index{main.c@{main.c}!contPattern@{contPattern}}
+\index{contPattern@{contPattern}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{contPattern}{contPattern}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} cont\+Pattern}
+
+\mbox{\Hypertarget{main_8c_a2ec2ce001f8f12172d783666012ae40c}\label{main_8c_a2ec2ce001f8f12172d783666012ae40c}} 
+\index{main.c@{main.c}!dmaMessageQ@{dmaMessageQ}}
+\index{dmaMessageQ@{dmaMessageQ}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{dmaMessageQ}{dmaMessageQ}}
+{\footnotesize\ttfamily OSMesg\+Queue dma\+MessageQ\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8c_aa24b6e7c4d8266ab9cef447013eeccf6}\label{main_8c_aa24b6e7c4d8266ab9cef447013eeccf6}} 
+\index{main.c@{main.c}!gameThread@{gameThread}}
+\index{gameThread@{gameThread}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gameThread}{gameThread}}
+{\footnotesize\ttfamily OSThread game\+Thread}
+
+\mbox{\Hypertarget{main_8c_a52a660ffc1fa62618eec75d72d644ffa}\label{main_8c_a52a660ffc1fa62618eec75d72d644ffa}} 
+\index{main.c@{main.c}!gameThreadStack@{gameThreadStack}}
+\index{gameThreadStack@{gameThreadStack}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gameThreadStack}{gameThreadStack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} game\+Thread\+Stack\mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}}
+
+\mbox{\Hypertarget{main_8c_ac8e2482c094220578f440acfbab72fad}\label{main_8c_ac8e2482c094220578f440acfbab72fad}} 
+\index{main.c@{main.c}!gfxClient@{gfxClient}}
+\index{gfxClient@{gfxClient}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gfxClient}{gfxClient}}
+{\footnotesize\ttfamily OSSc\+Client gfx\+Client\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a6e5ca18aad44a53e8684d733872d3084}\label{main_8c_a6e5ca18aad44a53e8684d733872d3084}} 
+\index{main.c@{main.c}!gfxFrameMsgBuf@{gfxFrameMsgBuf}}
+\index{gfxFrameMsgBuf@{gfxFrameMsgBuf}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gfxFrameMsgBuf}{gfxFrameMsgBuf}}
+{\footnotesize\ttfamily OSMesg gfx\+Frame\+Msg\+Buf\mbox{[}\mbox{\hyperlink{defs_8h_af944fd436838da05c620fb3677ced179}{MAX\+\_\+\+FRAME\+\_\+\+BUFFER\+\_\+\+MESGS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a085c257eebf80f748ab04aab3ecd8eea}\label{main_8c_a085c257eebf80f748ab04aab3ecd8eea}} 
+\index{main.c@{main.c}!gfxFrameMsgQ@{gfxFrameMsgQ}}
+\index{gfxFrameMsgQ@{gfxFrameMsgQ}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gfxFrameMsgQ}{gfxFrameMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue gfx\+Frame\+MsgQ}
+
+\mbox{\Hypertarget{main_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}\label{main_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}} 
+\index{main.c@{main.c}!gPiHandle@{gPiHandle}}
+\index{gPiHandle@{gPiHandle}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{gPiHandle}{gPiHandle}}
+{\footnotesize\ttfamily OSPi\+Handle$\ast$ g\+Pi\+Handle}
+
+\mbox{\Hypertarget{main_8c_aeb84d1c0031cb9277bfd69606f823ccb}\label{main_8c_aeb84d1c0031cb9277bfd69606f823ccb}} 
+\index{main.c@{main.c}!initThread@{initThread}}
+\index{initThread@{initThread}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{initThread}{initThread}}
+{\footnotesize\ttfamily OSThread init\+Thread}
+
+\mbox{\Hypertarget{main_8c_a0f23acc5d28b2230d624f14e87d9038a}\label{main_8c_a0f23acc5d28b2230d624f14e87d9038a}} 
+\index{main.c@{main.c}!initThreadStack@{initThreadStack}}
+\index{initThreadStack@{initThreadStack}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{initThreadStack}{initThreadStack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} init\+Thread\+Stack\mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}}
+
+\mbox{\Hypertarget{main_8c_aaadb154683e62ce2604a31c0e535de91}\label{main_8c_aaadb154683e62ce2604a31c0e535de91}} 
+\index{main.c@{main.c}!mainStack@{mainStack}}
+\index{mainStack@{mainStack}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{mainStack}{mainStack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} main\+Stack\mbox{[}\mbox{\hyperlink{defs_8h_ac931b29d117bd7fb8c1908e96766cd83}{STACKSIZEBYTES}}/sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}})\mbox{]}}
+
+\mbox{\Hypertarget{main_8c_a5e349ddd41c1429ebc746c6f1d5d9b24}\label{main_8c_a5e349ddd41c1429ebc746c6f1d5d9b24}} 
+\index{main.c@{main.c}!mem\_heap@{mem\_heap}}
+\index{mem\_heap@{mem\_heap}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{mem\_heap}{mem\_heap}}
+{\footnotesize\ttfamily char mem\+\_\+heap\mbox{[}\mbox{\hyperlink{mem__heap_8h_adefef76e33ce56e5e5d42b4c25ca98b5}{MEM\+\_\+\+HEAP\+\_\+\+SIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{main_8c_aca3c3ce78c9d52026d5330776da4f904}\label{main_8c_aca3c3ce78c9d52026d5330776da4f904}} 
+\index{main.c@{main.c}!PiMessageQ@{PiMessageQ}}
+\index{PiMessageQ@{PiMessageQ}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{PiMessageQ}{PiMessageQ}}
+{\footnotesize\ttfamily OSMesg\+Queue Pi\+MessageQ\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_ae16b44f201a62a6dd5071f416b63671c}\label{main_8c_ae16b44f201a62a6dd5071f416b63671c}} 
+\index{main.c@{main.c}!PiMessages@{PiMessages}}
+\index{PiMessages@{PiMessages}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{PiMessages}{PiMessages}}
+{\footnotesize\ttfamily OSMesg Pi\+Messages\mbox{[}\mbox{\hyperlink{defs_8h_a10e1679d6cbffd931cff4a59e742ce51}{DMA\+\_\+\+QUEUE\+\_\+\+SIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a08c9e1b31ed12c22598862e110f46cf4}\label{main_8c_a08c9e1b31ed12c22598862e110f46cf4}} 
+\index{main.c@{main.c}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{scheduler}{scheduler}}
+{\footnotesize\ttfamily OSSched scheduler}
+
+\mbox{\Hypertarget{main_8c_ada08e58214d8a44bede7a838d72014fe}\label{main_8c_ada08e58214d8a44bede7a838d72014fe}} 
+\index{main.c@{main.c}!schedulerCommandQueue@{schedulerCommandQueue}}
+\index{schedulerCommandQueue@{schedulerCommandQueue}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{schedulerCommandQueue}{schedulerCommandQueue}}
+{\footnotesize\ttfamily OSMesg\+Queue$\ast$ scheduler\+Command\+Queue}
+
+\mbox{\Hypertarget{main_8c_a7e7035ddf80c660200d48ed3d9fdb7cb}\label{main_8c_a7e7035ddf80c660200d48ed3d9fdb7cb}} 
+\index{main.c@{main.c}!scheduleStack@{scheduleStack}}
+\index{scheduleStack@{scheduleStack}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{scheduleStack}{scheduleStack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} schedule\+Stack\mbox{[}OS\+\_\+\+SC\+\_\+\+STACKSIZE/8\mbox{]}}
+

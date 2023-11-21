@@ -1,0 +1,80 @@
+\hypertarget{modeltype_8c}{}\doxysection{src/modeltype.c File Reference}
+\label{modeltype_8c}\index{src/modeltype.c@{src/modeltype.c}}
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+Include dependency graph for modeltype.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{modeltype_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{modeltype_8c_afac9412e7970dca1b276d19da4744185}{DEFAULT\+\_\+\+MODEL\+\_\+\+PROPERTIES}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{modeltype_8c_a5613c8ccf9d88411d108236d6811d437}{Model\+Type\+Strings}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} \mbox{\hyperlink{modeltype_8c_a5c22adae3eb1bf8b6713d92142c931b3}{model\+Types\+Properties}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{modeltype_8c_afac9412e7970dca1b276d19da4744185}\label{modeltype_8c_afac9412e7970dca1b276d19da4744185}} 
+\index{modeltype.c@{modeltype.c}!DEFAULT\_MODEL\_PROPERTIES@{DEFAULT\_MODEL\_PROPERTIES}}
+\index{DEFAULT\_MODEL\_PROPERTIES@{DEFAULT\_MODEL\_PROPERTIES}!modeltype.c@{modeltype.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_MODEL\_PROPERTIES}{DEFAULT\_MODEL\_PROPERTIES}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+MODEL\+\_\+\+PROPERTIES}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ \textcolor{comment}{/* mass */}                                                      \(\backslash\)}
+\DoxyCodeLine{        100, \textcolor{comment}{/* radius */} 10.0, \textcolor{comment}{/* centroidOffset */} \{0.0, 0.0, 0.0\}, \(\backslash\)}
+\DoxyCodeLine{            \textcolor{comment}{/*scale*/} 1.0, \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aea2ef0c4fcbcd431dcf00c5afd6b6962}{GenericModelType}}                           \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{modeltype_8c_a5c22adae3eb1bf8b6713d92142c931b3}\label{modeltype_8c_a5c22adae3eb1bf8b6713d92142c931b3}} 
+\index{modeltype.c@{modeltype.c}!modelTypesProperties@{modelTypesProperties}}
+\index{modelTypesProperties@{modelTypesProperties}!modeltype.c@{modeltype.c}}
+\doxysubsubsection{\texorpdfstring{modelTypesProperties}{modelTypesProperties}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} model\+Types\+Properties\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{modeltype_8c_a5613c8ccf9d88411d108236d6811d437}\label{modeltype_8c_a5613c8ccf9d88411d108236d6811d437}} 
+\index{modeltype.c@{modeltype.c}!ModelTypeStrings@{ModelTypeStrings}}
+\index{ModelTypeStrings@{ModelTypeStrings}!modeltype.c@{modeltype.c}}
+\doxysubsubsection{\texorpdfstring{ModelTypeStrings}{ModelTypeStrings}}
+{\footnotesize\ttfamily char$\ast$ Model\+Type\+Strings\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}NoneModel"{}},              }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}GooseModel"{}},             }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BookItemModel"{}},          }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}HomeworkItemModel"{}},      }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}CakeItemModel"{}},          }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}UniBldgModel"{}},           }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}UniFloorModel"{}},          }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BushModel"{}},              }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}FlagpoleModel"{}},          }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}GardenerCharacterModel"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}WallModel"{}},              }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}PlanterModel"{}},           }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}GroundModel"{}},            }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}WaterModel"{}},             }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}RockModel"{}},              }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}WatergrassModel"{}},        }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ReedModel"{}},              }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}LilypadModel"{}},           }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}MAX\_MODEL\_TYPE"{}},         }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

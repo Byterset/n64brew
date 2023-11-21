@@ -1,0 +1,152 @@
+\hypertarget{structs64ModelHelper}{}\doxysection{s64\+Model\+Helper Struct Reference}
+\label{structs64ModelHelper}\index{s64ModelHelper@{s64ModelHelper}}
+
+
+S64 Model Helper. Holds the model data, the current animation, the current keyframe, the current animation tick, the current matrix, the pre draw and post draw functions and the model data.  
+
+
+
+
+{\ttfamily \#include $<$sausage64.\+h$>$}
+
+
+
+Collaboration diagram for s64\+Model\+Helper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structs64ModelHelper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{structs64ModelHelper_a7531760fd6d9893c5aa3451bfaab4cd6}{interpolate}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{structs64ModelHelper_a398f13320bddc3bd11ae04a0acb5ea16}{loop}}
+\item 
+\mbox{\hyperlink{sausage64_8h_structs64Animation}{s64\+Animation}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_a16b367c2e41d21ce7b2e351f7db3b427}{curanim}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{structs64ModelHelper_a1d7c28389e28f80f492ac3a0a11b5f15}{curanimlen}}
+\item 
+float \mbox{\hyperlink{structs64ModelHelper_a0432886e612f616c21a50175e44b5c3e}{animtick}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{structs64ModelHelper_aae4ce9823ff5d9d8fe787cd1da3a5759}{curkeyframe}}
+\item 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_af9948ef5a2bf85f6504e4368cc39e88b}{matrix}}
+\item 
+void($\ast$ \mbox{\hyperlink{structs64ModelHelper_ad1355a01208ac0a592a4872d17f5580e}{predraw}} )(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})
+\item 
+void($\ast$ \mbox{\hyperlink{structs64ModelHelper_a8e7232ee2959034b6087a819016248e2}{postdraw}} )(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})
+\item 
+void($\ast$ \mbox{\hyperlink{structs64ModelHelper_acafe57c6afdbd0fbab172448f842d94a}{animcallback}} )(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})
+\item 
+\mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_a78be8fab40dbb6cc3a62605b7aa45c09}{mdldata}}
+\item 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_a4ac3270b95beac4abe80be99c6786866}{position}}
+\item 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_ae1f61550cc95be08468168d024c04d91}{scale}}
+\item 
+\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$ \mbox{\hyperlink{structs64ModelHelper_a5b9e81b74d000d6570d5a6665784cd7d}{rotation}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+S64 Model Helper. Holds the model data, the current animation, the current keyframe, the current animation tick, the current matrix, the pre draw and post draw functions and the model data. 
+
+\begin{DoxyNote}{Note}
+This is used to actually create and hold a Sausage64 Model and it\textquotesingle{}s data. Initialize it using sausage64\+\_\+initmodel 
+\end{DoxyNote}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structs64ModelHelper_acafe57c6afdbd0fbab172448f842d94a}\label{structs64ModelHelper_acafe57c6afdbd0fbab172448f842d94a}} 
+\index{s64ModelHelper@{s64ModelHelper}!animcallback@{animcallback}}
+\index{animcallback@{animcallback}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{animcallback}{animcallback}}
+{\footnotesize\ttfamily void($\ast$ s64\+Model\+Helper\+::animcallback) (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}
+
+\mbox{\Hypertarget{structs64ModelHelper_a0432886e612f616c21a50175e44b5c3e}\label{structs64ModelHelper_a0432886e612f616c21a50175e44b5c3e}} 
+\index{s64ModelHelper@{s64ModelHelper}!animtick@{animtick}}
+\index{animtick@{animtick}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{animtick}{animtick}}
+{\footnotesize\ttfamily float s64\+Model\+Helper\+::animtick}
+
+\mbox{\Hypertarget{structs64ModelHelper_a16b367c2e41d21ce7b2e351f7db3b427}\label{structs64ModelHelper_a16b367c2e41d21ce7b2e351f7db3b427}} 
+\index{s64ModelHelper@{s64ModelHelper}!curanim@{curanim}}
+\index{curanim@{curanim}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{curanim}{curanim}}
+{\footnotesize\ttfamily \mbox{\hyperlink{sausage64_8h_structs64Animation}{s64\+Animation}}$\ast$ s64\+Model\+Helper\+::curanim}
+
+\mbox{\Hypertarget{structs64ModelHelper_a1d7c28389e28f80f492ac3a0a11b5f15}\label{structs64ModelHelper_a1d7c28389e28f80f492ac3a0a11b5f15}} 
+\index{s64ModelHelper@{s64ModelHelper}!curanimlen@{curanimlen}}
+\index{curanimlen@{curanimlen}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{curanimlen}{curanimlen}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} s64\+Model\+Helper\+::curanimlen}
+
+\mbox{\Hypertarget{structs64ModelHelper_aae4ce9823ff5d9d8fe787cd1da3a5759}\label{structs64ModelHelper_aae4ce9823ff5d9d8fe787cd1da3a5759}} 
+\index{s64ModelHelper@{s64ModelHelper}!curkeyframe@{curkeyframe}}
+\index{curkeyframe@{curkeyframe}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{curkeyframe}{curkeyframe}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} s64\+Model\+Helper\+::curkeyframe}
+
+\mbox{\Hypertarget{structs64ModelHelper_a7531760fd6d9893c5aa3451bfaab4cd6}\label{structs64ModelHelper_a7531760fd6d9893c5aa3451bfaab4cd6}} 
+\index{s64ModelHelper@{s64ModelHelper}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{interpolate}{interpolate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} s64\+Model\+Helper\+::interpolate}
+
+\mbox{\Hypertarget{structs64ModelHelper_a398f13320bddc3bd11ae04a0acb5ea16}\label{structs64ModelHelper_a398f13320bddc3bd11ae04a0acb5ea16}} 
+\index{s64ModelHelper@{s64ModelHelper}!loop@{loop}}
+\index{loop@{loop}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{loop}{loop}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} s64\+Model\+Helper\+::loop}
+
+\mbox{\Hypertarget{structs64ModelHelper_af9948ef5a2bf85f6504e4368cc39e88b}\label{structs64ModelHelper_af9948ef5a2bf85f6504e4368cc39e88b}} 
+\index{s64ModelHelper@{s64ModelHelper}!matrix@{matrix}}
+\index{matrix@{matrix}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{matrix}{matrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}$\ast$ s64\+Model\+Helper\+::matrix}
+
+\mbox{\Hypertarget{structs64ModelHelper_a78be8fab40dbb6cc3a62605b7aa45c09}\label{structs64ModelHelper_a78be8fab40dbb6cc3a62605b7aa45c09}} 
+\index{s64ModelHelper@{s64ModelHelper}!mdldata@{mdldata}}
+\index{mdldata@{mdldata}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{mdldata}{mdldata}}
+{\footnotesize\ttfamily \mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}}$\ast$ s64\+Model\+Helper\+::mdldata}
+
+\mbox{\Hypertarget{structs64ModelHelper_a4ac3270b95beac4abe80be99c6786866}\label{structs64ModelHelper_a4ac3270b95beac4abe80be99c6786866}} 
+\index{s64ModelHelper@{s64ModelHelper}!position@{position}}
+\index{position@{position}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}$\ast$ s64\+Model\+Helper\+::position}
+
+\mbox{\Hypertarget{structs64ModelHelper_a8e7232ee2959034b6087a819016248e2}\label{structs64ModelHelper_a8e7232ee2959034b6087a819016248e2}} 
+\index{s64ModelHelper@{s64ModelHelper}!postdraw@{postdraw}}
+\index{postdraw@{postdraw}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{postdraw}{postdraw}}
+{\footnotesize\ttfamily void($\ast$ s64\+Model\+Helper\+::postdraw) (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}
+
+\mbox{\Hypertarget{structs64ModelHelper_ad1355a01208ac0a592a4872d17f5580e}\label{structs64ModelHelper_ad1355a01208ac0a592a4872d17f5580e}} 
+\index{s64ModelHelper@{s64ModelHelper}!predraw@{predraw}}
+\index{predraw@{predraw}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{predraw}{predraw}}
+{\footnotesize\ttfamily void($\ast$ s64\+Model\+Helper\+::predraw) (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}
+
+\mbox{\Hypertarget{structs64ModelHelper_a5b9e81b74d000d6570d5a6665784cd7d}\label{structs64ModelHelper_a5b9e81b74d000d6570d5a6665784cd7d}} 
+\index{s64ModelHelper@{s64ModelHelper}!rotation@{rotation}}
+\index{rotation@{rotation}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{rotation}{rotation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}}$\ast$ s64\+Model\+Helper\+::rotation}
+
+\mbox{\Hypertarget{structs64ModelHelper_ae1f61550cc95be08468168d024c04d91}\label{structs64ModelHelper_ae1f61550cc95be08468168d024c04d91}} 
+\index{s64ModelHelper@{s64ModelHelper}!scale@{scale}}
+\index{scale@{scale}!s64ModelHelper@{s64ModelHelper}}
+\doxysubsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}$\ast$ s64\+Model\+Helper\+::scale}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/sausage64/\mbox{\hyperlink{sausage64_8h}{sausage64.\+h}}\end{DoxyCompactItemize}

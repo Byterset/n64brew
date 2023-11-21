@@ -1,0 +1,57 @@
+\hypertarget{ed64io__sys_8h}{}\doxysection{src/ed64/ed64io\+\_\+sys.h File Reference}
+\label{ed64io__sys_8h}\index{src/ed64/ed64io\_sys.h@{src/ed64/ed64io\_sys.h}}
+{\ttfamily \#include \char`\"{}ed64io\+\_\+types.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+sys.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{ed64io__sys_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__sys_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ed64io__sys_8h_a29dfe135b0195f45c102f06e865cf9c1}{dma\+\_\+read\+\_\+s}} (void $\ast$ram\+\_\+address, unsigned long pi\+\_\+address, unsigned long len, int use\+Polling)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8h_aaf64e90a3aee4602002058eafed31c3f}{dma\+\_\+write\+\_\+s}} (void $\ast$ram\+\_\+address, unsigned long pi\+\_\+address, unsigned long len)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8h_aff15242f7862039a126fd2b9a266ec8a}{evd\+\_\+sleep}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} ms)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8h_a44484e1214919a738ea74d503d134ee7}{evd\+Pi\+Read\+Rom}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} rom\+\_\+addr, void $\ast$buf\+\_\+ptr, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} size, int use\+Polling)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__sys_8h_a29dfe135b0195f45c102f06e865cf9c1}\label{ed64io__sys_8h_a29dfe135b0195f45c102f06e865cf9c1}} 
+\index{ed64io\_sys.h@{ed64io\_sys.h}!dma\_read\_s@{dma\_read\_s}}
+\index{dma\_read\_s@{dma\_read\_s}!ed64io\_sys.h@{ed64io\_sys.h}}
+\doxysubsubsection{\texorpdfstring{dma\_read\_s()}{dma\_read\_s()}}
+{\footnotesize\ttfamily void dma\+\_\+read\+\_\+s (\begin{DoxyParamCaption}\item[{void $\ast$}]{ram\+\_\+address,  }\item[{unsigned long}]{pi\+\_\+address,  }\item[{unsigned long}]{len,  }\item[{int}]{use\+Polling }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8h_aaf64e90a3aee4602002058eafed31c3f}\label{ed64io__sys_8h_aaf64e90a3aee4602002058eafed31c3f}} 
+\index{ed64io\_sys.h@{ed64io\_sys.h}!dma\_write\_s@{dma\_write\_s}}
+\index{dma\_write\_s@{dma\_write\_s}!ed64io\_sys.h@{ed64io\_sys.h}}
+\doxysubsubsection{\texorpdfstring{dma\_write\_s()}{dma\_write\_s()}}
+{\footnotesize\ttfamily void dma\+\_\+write\+\_\+s (\begin{DoxyParamCaption}\item[{void $\ast$}]{ram\+\_\+address,  }\item[{unsigned long}]{pi\+\_\+address,  }\item[{unsigned long}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8h_aff15242f7862039a126fd2b9a266ec8a}\label{ed64io__sys_8h_aff15242f7862039a126fd2b9a266ec8a}} 
+\index{ed64io\_sys.h@{ed64io\_sys.h}!evd\_sleep@{evd\_sleep}}
+\index{evd\_sleep@{evd\_sleep}!ed64io\_sys.h@{ed64io\_sys.h}}
+\doxysubsubsection{\texorpdfstring{evd\_sleep()}{evd\_sleep()}}
+{\footnotesize\ttfamily void evd\+\_\+sleep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{ms }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8h_a44484e1214919a738ea74d503d134ee7}\label{ed64io__sys_8h_a44484e1214919a738ea74d503d134ee7}} 
+\index{ed64io\_sys.h@{ed64io\_sys.h}!evdPiReadRom@{evdPiReadRom}}
+\index{evdPiReadRom@{evdPiReadRom}!ed64io\_sys.h@{ed64io\_sys.h}}
+\doxysubsubsection{\texorpdfstring{evdPiReadRom()}{evdPiReadRom()}}
+{\footnotesize\ttfamily void evd\+Pi\+Read\+Rom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{rom\+\_\+addr,  }\item[{void $\ast$}]{buf\+\_\+ptr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{size,  }\item[{int}]{use\+Polling }\end{DoxyParamCaption})}
+

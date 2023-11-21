@@ -1,0 +1,163 @@
+\hypertarget{graphics_8c}{}\doxysection{src/graphics/graphics.c File Reference}
+\label{graphics_8c}\index{src/graphics/graphics.c@{src/graphics/graphics.c}}
+{\ttfamily \#include \char`\"{}graphics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}initgfx.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controls/controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../audio/soundplayer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../../build/src/audio/clips.\+h\char`\"{}}\newline
+Include dependency graph for graphics.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{graphics_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{graphics_8c_a06c8ddf0d0c0c25171b03d22a85a087a}{FORCE\+\_\+\+VALIDATOR}}~1
+\item 
+\#define \mbox{\hyperlink{graphics_8c_a42e354aadfda9935e9fd52c43037ccd7}{RDP\+\_\+\+OUTPUT\+\_\+\+SIZE}}~0x4000
+\item 
+\#define \mbox{\hyperlink{graphics_8c_a78b3bf8c57a639b5811d32bb58814af4}{CLEAR\+\_\+\+COLOR}}~GPACK\+\_\+\+RGBA5551(0x32, 0x5D, 0x79, 1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{graphics_8c_add23640082fc35c975e7609309c3d88b}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((aligned(16)))
+\item 
+void \mbox{\hyperlink{graphics_8c_a52e0183ec88ae230f73f3d36acb729ca}{graphics\+Create\+Task}} (struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$target\+Task, \mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}} callback, void $\ast$data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} \mbox{\hyperlink{graphics_8c_a5b521368e849c81417a643a0654e4656}{g\+Graphics\+Tasks}} \mbox{[}2\mbox{]}
+\item 
+\mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} \mbox{\hyperlink{graphics_8c_a1b2476beec167121d9bfd5836daaf2a1}{gfx\+\_\+dynamic}} \mbox{[}2\mbox{]}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{graphics_8c_a085c257eebf80f748ab04aab3ecd8eea}{gfx\+Frame\+MsgQ}}
+\item 
+OSMesg\+Queue $\ast$ \mbox{\hyperlink{graphics_8c_ada08e58214d8a44bede7a838d72014fe}{scheduler\+Command\+Queue}}
+\item 
+\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} \mbox{\hyperlink{graphics_8c_ae0c1265e855deb83d50cb9ffa92dc16a}{g\+Render\+Mode}} = \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}{Toon\+Flat\+Shading\+Render\+Mode}}
+\item 
+void $\ast$ \mbox{\hyperlink{graphics_8c_ae06480fe7d456e703520e0d551b253ad}{g\+Level\+Segment}}
+\item 
+void $\ast$ \mbox{\hyperlink{graphics_8c_a1e3a65bf44e5defd533ee53b3963308b}{g\+Material\+Segment}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} $\ast$ \mbox{\hyperlink{graphics_8c_a36909bb1265b0008a69e600f5907a4cc}{rdp\+Output}}
+\item 
+int \mbox{\hyperlink{graphics_8c_a88802d2fb202c192dfbb9bb48699e26d}{fps\+Slowdown}} = 0
+\item 
+int \mbox{\hyperlink{graphics_8c_a45b67662d620a977a2cfe519f7ab6273}{fps}} = 0
+\item 
+int \mbox{\hyperlink{graphics_8c_aa5509c6a4bd7e5308e69f0500d97fd1a}{heap\+Check\+Counter}} = 200
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{graphics_8c_a78b3bf8c57a639b5811d32bb58814af4}\label{graphics_8c_a78b3bf8c57a639b5811d32bb58814af4}} 
+\index{graphics.c@{graphics.c}!CLEAR\_COLOR@{CLEAR\_COLOR}}
+\index{CLEAR\_COLOR@{CLEAR\_COLOR}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{CLEAR\_COLOR}{CLEAR\_COLOR}}
+{\footnotesize\ttfamily \#define CLEAR\+\_\+\+COLOR~GPACK\+\_\+\+RGBA5551(0x32, 0x5D, 0x79, 1)}
+
+\mbox{\Hypertarget{graphics_8c_a06c8ddf0d0c0c25171b03d22a85a087a}\label{graphics_8c_a06c8ddf0d0c0c25171b03d22a85a087a}} 
+\index{graphics.c@{graphics.c}!FORCE\_VALIDATOR@{FORCE\_VALIDATOR}}
+\index{FORCE\_VALIDATOR@{FORCE\_VALIDATOR}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{FORCE\_VALIDATOR}{FORCE\_VALIDATOR}}
+{\footnotesize\ttfamily \#define FORCE\+\_\+\+VALIDATOR~1}
+
+\mbox{\Hypertarget{graphics_8c_a42e354aadfda9935e9fd52c43037ccd7}\label{graphics_8c_a42e354aadfda9935e9fd52c43037ccd7}} 
+\index{graphics.c@{graphics.c}!RDP\_OUTPUT\_SIZE@{RDP\_OUTPUT\_SIZE}}
+\index{RDP\_OUTPUT\_SIZE@{RDP\_OUTPUT\_SIZE}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{RDP\_OUTPUT\_SIZE}{RDP\_OUTPUT\_SIZE}}
+{\footnotesize\ttfamily \#define RDP\+\_\+\+OUTPUT\+\_\+\+SIZE~0x4000}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{graphics_8c_add23640082fc35c975e7609309c3d88b}\label{graphics_8c_add23640082fc35c975e7609309c3d88b}} 
+\index{graphics.c@{graphics.c}!\_\_attribute\_\_@{\_\_attribute\_\_}}
+\index{\_\_attribute\_\_@{\_\_attribute\_\_}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{\_\_attribute\_\_()}{\_\_attribute\_\_()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(aligned(16))}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{graphics_8c_a52e0183ec88ae230f73f3d36acb729ca}\label{graphics_8c_a52e0183ec88ae230f73f3d36acb729ca}} 
+\index{graphics.c@{graphics.c}!graphicsCreateTask@{graphicsCreateTask}}
+\index{graphicsCreateTask@{graphicsCreateTask}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{graphicsCreateTask()}{graphicsCreateTask()}}
+{\footnotesize\ttfamily void graphics\+Create\+Task (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$}]{target\+Task,  }\item[{\mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}}}]{callback,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{graphics_8c_a45b67662d620a977a2cfe519f7ab6273}\label{graphics_8c_a45b67662d620a977a2cfe519f7ab6273}} 
+\index{graphics.c@{graphics.c}!fps@{fps}}
+\index{fps@{fps}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{fps}{fps}}
+{\footnotesize\ttfamily int fps = 0}
+
+\mbox{\Hypertarget{graphics_8c_a88802d2fb202c192dfbb9bb48699e26d}\label{graphics_8c_a88802d2fb202c192dfbb9bb48699e26d}} 
+\index{graphics.c@{graphics.c}!fpsSlowdown@{fpsSlowdown}}
+\index{fpsSlowdown@{fpsSlowdown}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{fpsSlowdown}{fpsSlowdown}}
+{\footnotesize\ttfamily int fps\+Slowdown = 0}
+
+\mbox{\Hypertarget{graphics_8c_a1b2476beec167121d9bfd5836daaf2a1}\label{graphics_8c_a1b2476beec167121d9bfd5836daaf2a1}} 
+\index{graphics.c@{graphics.c}!gfx\_dynamic@{gfx\_dynamic}}
+\index{gfx\_dynamic@{gfx\_dynamic}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gfx\_dynamic}{gfx\_dynamic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} gfx\+\_\+dynamic\mbox{[}2\mbox{]}}
+
+\mbox{\Hypertarget{graphics_8c_a085c257eebf80f748ab04aab3ecd8eea}\label{graphics_8c_a085c257eebf80f748ab04aab3ecd8eea}} 
+\index{graphics.c@{graphics.c}!gfxFrameMsgQ@{gfxFrameMsgQ}}
+\index{gfxFrameMsgQ@{gfxFrameMsgQ}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gfxFrameMsgQ}{gfxFrameMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue gfx\+Frame\+MsgQ\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8c_a5b521368e849c81417a643a0654e4656}\label{graphics_8c_a5b521368e849c81417a643a0654e4656}} 
+\index{graphics.c@{graphics.c}!gGraphicsTasks@{gGraphicsTasks}}
+\index{gGraphicsTasks@{gGraphicsTasks}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gGraphicsTasks}{gGraphicsTasks}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} g\+Graphics\+Tasks\mbox{[}2\mbox{]}}
+
+\mbox{\Hypertarget{graphics_8c_ae06480fe7d456e703520e0d551b253ad}\label{graphics_8c_ae06480fe7d456e703520e0d551b253ad}} 
+\index{graphics.c@{graphics.c}!gLevelSegment@{gLevelSegment}}
+\index{gLevelSegment@{gLevelSegment}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gLevelSegment}{gLevelSegment}}
+{\footnotesize\ttfamily void$\ast$ g\+Level\+Segment}
+
+\mbox{\Hypertarget{graphics_8c_a1e3a65bf44e5defd533ee53b3963308b}\label{graphics_8c_a1e3a65bf44e5defd533ee53b3963308b}} 
+\index{graphics.c@{graphics.c}!gMaterialSegment@{gMaterialSegment}}
+\index{gMaterialSegment@{gMaterialSegment}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gMaterialSegment}{gMaterialSegment}}
+{\footnotesize\ttfamily void$\ast$ g\+Material\+Segment}
+
+\mbox{\Hypertarget{graphics_8c_ae0c1265e855deb83d50cb9ffa92dc16a}\label{graphics_8c_ae0c1265e855deb83d50cb9ffa92dc16a}} 
+\index{graphics.c@{graphics.c}!gRenderMode@{gRenderMode}}
+\index{gRenderMode@{gRenderMode}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{gRenderMode}{gRenderMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} g\+Render\+Mode = \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}{Toon\+Flat\+Shading\+Render\+Mode}}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8c_aa5509c6a4bd7e5308e69f0500d97fd1a}\label{graphics_8c_aa5509c6a4bd7e5308e69f0500d97fd1a}} 
+\index{graphics.c@{graphics.c}!heapCheckCounter@{heapCheckCounter}}
+\index{heapCheckCounter@{heapCheckCounter}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{heapCheckCounter}{heapCheckCounter}}
+{\footnotesize\ttfamily int heap\+Check\+Counter = 200}
+
+\mbox{\Hypertarget{graphics_8c_a36909bb1265b0008a69e600f5907a4cc}\label{graphics_8c_a36909bb1265b0008a69e600f5907a4cc}} 
+\index{graphics.c@{graphics.c}!rdpOutput@{rdpOutput}}
+\index{rdpOutput@{rdpOutput}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{rdpOutput}{rdpOutput}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}$\ast$ rdp\+Output}
+
+\mbox{\Hypertarget{graphics_8c_ada08e58214d8a44bede7a838d72014fe}\label{graphics_8c_ada08e58214d8a44bede7a838d72014fe}} 
+\index{graphics.c@{graphics.c}!schedulerCommandQueue@{schedulerCommandQueue}}
+\index{schedulerCommandQueue@{schedulerCommandQueue}!graphics.c@{graphics.c}}
+\doxysubsubsection{\texorpdfstring{schedulerCommandQueue}{schedulerCommandQueue}}
+{\footnotesize\ttfamily OSMesg\+Queue$\ast$ scheduler\+Command\+Queue\hspace{0.3cm}{\ttfamily [extern]}}
+

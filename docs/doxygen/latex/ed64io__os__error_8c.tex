@@ -1,0 +1,96 @@
+\hypertarget{ed64io__os__error_8c}{}\doxysection{src/ed64/ed64io\+\_\+os\+\_\+error.c File Reference}
+\label{ed64io__os__error_8c}\index{src/ed64/ed64io\_os\_error.c@{src/ed64/ed64io\_os\_error.c}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+usb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+os\+\_\+error.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+os\+\_\+error.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__os__error_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{ed64io__os__error_8c_structerrorFormat}{error\+Format}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__os__error_8c_ae1649fc947ca37a86917a08354f48d1a}{PRINTF}}~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{ed64io__os__error_8c_a33d84d3143bbcc516c3619bc72878f13}{errorhandler}} (\mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}} code, \mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}} num\+Args,...)
+\item 
+void \mbox{\hyperlink{ed64io__os__error_8c_aa584691957a9a796faa9f5f808d5a1d7}{ed64\+Register\+OSError\+Handler}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+OSError\+Handler \mbox{\hyperlink{ed64io__os__error_8c_aae24b102aba6247277f8da65d8204af5}{\+\_\+\+\_\+os\+Common\+Handler}}
+\item 
+static \mbox{\hyperlink{ed64io__os__error_8c_structerrorFormat}{error\+Format}} \mbox{\hyperlink{ed64io__os__error_8c_afc403800ee553d8fe00adea395e28136}{errorfmts}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{errorFormat@{errorFormat}}\label{structerrorFormat}
+\Hypertarget{ed64io__os__error_8c_structerrorFormat}
+\doxysubsubsection{struct error\+Format}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__os__error_8c_a995c75ae4dda95d3071020bd390e470d}\label{ed64io__os__error_8c_a995c75ae4dda95d3071020bd390e470d}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+code&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__os__error_8c_a7cdea627884f4e6726f864692bbd5871}\label{ed64io__os__error_8c_a7cdea627884f4e6726f864692bbd5871}} 
+char $\ast$&
+fmt&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__os__error_8c_ae1649fc947ca37a86917a08354f48d1a}\label{ed64io__os__error_8c_ae1649fc947ca37a86917a08354f48d1a}} 
+\index{ed64io\_os\_error.c@{ed64io\_os\_error.c}!PRINTF@{PRINTF}}
+\index{PRINTF@{PRINTF}!ed64io\_os\_error.c@{ed64io\_os\_error.c}}
+\doxysubsubsection{\texorpdfstring{PRINTF}{PRINTF}}
+{\footnotesize\ttfamily \#define PRINTF~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__os__error_8c_aa584691957a9a796faa9f5f808d5a1d7}\label{ed64io__os__error_8c_aa584691957a9a796faa9f5f808d5a1d7}} 
+\index{ed64io\_os\_error.c@{ed64io\_os\_error.c}!ed64RegisterOSErrorHandler@{ed64RegisterOSErrorHandler}}
+\index{ed64RegisterOSErrorHandler@{ed64RegisterOSErrorHandler}!ed64io\_os\_error.c@{ed64io\_os\_error.c}}
+\doxysubsubsection{\texorpdfstring{ed64RegisterOSErrorHandler()}{ed64RegisterOSErrorHandler()}}
+{\footnotesize\ttfamily void ed64\+Register\+OSError\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__os__error_8c_a33d84d3143bbcc516c3619bc72878f13}\label{ed64io__os__error_8c_a33d84d3143bbcc516c3619bc72878f13}} 
+\index{ed64io\_os\_error.c@{ed64io\_os\_error.c}!errorhandler@{errorhandler}}
+\index{errorhandler@{errorhandler}!ed64io\_os\_error.c@{ed64io\_os\_error.c}}
+\doxysubsubsection{\texorpdfstring{errorhandler()}{errorhandler()}}
+{\footnotesize\ttfamily static void errorhandler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}}}]{code,  }\item[{\mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}}}]{num\+Args,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ed64io__os__error_8c_aae24b102aba6247277f8da65d8204af5}\label{ed64io__os__error_8c_aae24b102aba6247277f8da65d8204af5}} 
+\index{ed64io\_os\_error.c@{ed64io\_os\_error.c}!\_\_osCommonHandler@{\_\_osCommonHandler}}
+\index{\_\_osCommonHandler@{\_\_osCommonHandler}!ed64io\_os\_error.c@{ed64io\_os\_error.c}}
+\doxysubsubsection{\texorpdfstring{\_\_osCommonHandler}{\_\_osCommonHandler}}
+{\footnotesize\ttfamily OSError\+Handler \+\_\+\+\_\+os\+Common\+Handler\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{ed64io__os__error_8c_afc403800ee553d8fe00adea395e28136}\label{ed64io__os__error_8c_afc403800ee553d8fe00adea395e28136}} 
+\index{ed64io\_os\_error.c@{ed64io\_os\_error.c}!errorfmts@{errorfmts}}
+\index{errorfmts@{errorfmts}!ed64io\_os\_error.c@{ed64io\_os\_error.c}}
+\doxysubsubsection{\texorpdfstring{errorfmts}{errorfmts}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__os__error_8c_structerrorFormat}{error\+Format}} errorfmts\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+

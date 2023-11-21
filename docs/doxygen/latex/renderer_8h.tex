@@ -1,0 +1,195 @@
+\hypertarget{renderer_8h}{}\doxysection{src/graphics/renderer.h File Reference}
+\label{renderer_8h}\index{src/graphics/renderer.h@{src/graphics/renderer.h}}
+{\ttfamily \#include \char`\"{}../math/frustum.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graphics.\+h\char`\"{}}\newline
+Include dependency graph for renderer.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{renderer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{renderer_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} \mbox{\hyperlink{renderer_8h_a59726ccdf410e1a72313f8d870deec54}{Renderer\+Sort\+Distance}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{renderer_8h_ab45fd2a31ce052c56a5148c901dee46e}{Renderer\+\_\+is\+Dynamic\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{renderer_8h_a03a569d38c2a3e77d9ed4a5d566c7d27}{Renderer\+\_\+is\+ZBuffered\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{renderer_8h_a8d55481591160192ab4eb736b7b913be}{Renderer\+\_\+is\+ZWrite\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{renderer_8h_a0fd7610eb7f17dcc49597e25d2e05d74}{Renderer\+\_\+is\+Background\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{renderer_8h_aaa68052a7adfa7910623c5aeeeb3605b}{Renderer\+\_\+is\+Lit\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{renderer_8h_a06ccdbb8d4c066566b00568dc269362a}{Renderer\+\_\+is\+Animated\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+void \mbox{\hyperlink{renderer_8h_a3f157dc1f7530566b5969efa0fcfd9fc}{Renderer\+\_\+sort\+Visible\+Objects}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$world\+Objects, int world\+Objects\+Count, int $\ast$world\+Objects\+Visibility, int visible\+Objects\+Count, \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$result, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$\mbox{\hyperlink{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}{view\+Pos}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$local\+AABBs)
+\item 
+int \mbox{\hyperlink{renderer_8h_a7c36f378a4b45584da5c88d282acab24}{Renderer\+\_\+frustum\+Cull}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$world\+Objects, int world\+Objects\+Count, int $\ast$world\+Objects\+Visibility, \mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$\mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$local\+AABBs)
+\item 
+void \mbox{\hyperlink{renderer_8h_a9e942d7ad0964f5680cdbe2342fbd5dd}{Renderer\+\_\+calc\+Intersecting}} (int $\ast$objects\+Intersecting, int objects\+Count, \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$sorted\+Objects, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$local\+AABBs)
+\item 
+void \mbox{\hyperlink{renderer_8h_a934594fcfdb9c1007ddfe09fe6106fc3}{Renderer\+\_\+get\+Separating\+Plane}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$a, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$b, \mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$separating\+Plane)
+\item 
+int \mbox{\hyperlink{renderer_8h_a798d8a318fd9a48b6a7210769afd89bc}{Renderer\+\_\+is\+Closer\+By\+Separating\+Plane}} (\mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$a, \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$b, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$\mbox{\hyperlink{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}{view\+Pos}})
+\item 
+int \mbox{\hyperlink{renderer_8h_a00dc353445bdd73c49e9c3118c82f83a}{Renderer\+\_\+screen\+Project}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$obj, \mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} model\+Matrix, \mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} proj\+Matrix, \mbox{\hyperlink{graphics_8h_add1a34a4ecebab03484e2c232de43ec6}{ViewportF}} viewport, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$win)
+\item 
+void \mbox{\hyperlink{renderer_8h_a6885910cb1d215ee3c84cbdfc001e129}{Renderer\+\_\+closest\+Point\+On\+AABB}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$b, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$q)
+\item 
+\mbox{\hyperlink{collision_8h_structAABB}{AABB}} \mbox{\hyperlink{renderer_8h_a02beb424bf2955e18078958578520f02}{Renderer\+\_\+get\+World\+AABB}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$local\+AABBs, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{RendererSortDistance@{RendererSortDistance}}\label{structRendererSortDistance}
+\Hypertarget{renderer_8h_structRendererSortDistance}
+\doxysubsubsection{struct Renderer\+Sort\+Distance}
+
+
+Collaboration diagram for Renderer\+Sort\+Distance\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structRendererSortDistance__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{renderer_8h_aa78249f305c641cc54b1f03881e9b2c0}\label{renderer_8h_aa78249f305c641cc54b1f03881e9b2c0}} 
+float&
+distance&
+\\
+\hline
+
+\mbox{\Hypertarget{renderer_8h_ab10dd9c2417fc3c63d12be86136f1db1}\label{renderer_8h_ab10dd9c2417fc3c63d12be86136f1db1}} 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{GameObject}} $\ast$&
+obj&
+\\
+\hline
+
+\mbox{\Hypertarget{renderer_8h_ad801bcfcb66d9cfb3c13561a169614e8}\label{renderer_8h_ad801bcfcb66d9cfb3c13561a169614e8}} 
+\mbox{\hyperlink{collision_8h_structAABB}{AABB}}&
+worldAABB&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{renderer_8h_a59726ccdf410e1a72313f8d870deec54}\label{renderer_8h_a59726ccdf410e1a72313f8d870deec54}} 
+\index{renderer.h@{renderer.h}!RendererSortDistance@{RendererSortDistance}}
+\index{RendererSortDistance@{RendererSortDistance}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{RendererSortDistance}{RendererSortDistance}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{renderer_8h_a9e942d7ad0964f5680cdbe2342fbd5dd}\label{renderer_8h_a9e942d7ad0964f5680cdbe2342fbd5dd}} 
+\index{renderer.h@{renderer.h}!Renderer\_calcIntersecting@{Renderer\_calcIntersecting}}
+\index{Renderer\_calcIntersecting@{Renderer\_calcIntersecting}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_calcIntersecting()}{Renderer\_calcIntersecting()}}
+{\footnotesize\ttfamily void Renderer\+\_\+calc\+Intersecting (\begin{DoxyParamCaption}\item[{int $\ast$}]{objects\+Intersecting,  }\item[{int}]{objects\+Count,  }\item[{\mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$}]{sorted\+Objects,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{local\+AABBs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a6885910cb1d215ee3c84cbdfc001e129}\label{renderer_8h_a6885910cb1d215ee3c84cbdfc001e129}} 
+\index{renderer.h@{renderer.h}!Renderer\_closestPointOnAABB@{Renderer\_closestPointOnAABB}}
+\index{Renderer\_closestPointOnAABB@{Renderer\_closestPointOnAABB}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_closestPointOnAABB()}{Renderer\_closestPointOnAABB()}}
+{\footnotesize\ttfamily void Renderer\+\_\+closest\+Point\+On\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{b,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{q }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a7c36f378a4b45584da5c88d282acab24}\label{renderer_8h_a7c36f378a4b45584da5c88d282acab24}} 
+\index{renderer.h@{renderer.h}!Renderer\_frustumCull@{Renderer\_frustumCull}}
+\index{Renderer\_frustumCull@{Renderer\_frustumCull}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_frustumCull()}{Renderer\_frustumCull()}}
+{\footnotesize\ttfamily int Renderer\+\_\+frustum\+Cull (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{world\+Objects,  }\item[{int}]{world\+Objects\+Count,  }\item[{int $\ast$}]{world\+Objects\+Visibility,  }\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{local\+AABBs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a934594fcfdb9c1007ddfe09fe6106fc3}\label{renderer_8h_a934594fcfdb9c1007ddfe09fe6106fc3}} 
+\index{renderer.h@{renderer.h}!Renderer\_getSeparatingPlane@{Renderer\_getSeparatingPlane}}
+\index{Renderer\_getSeparatingPlane@{Renderer\_getSeparatingPlane}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_getSeparatingPlane()}{Renderer\_getSeparatingPlane()}}
+{\footnotesize\ttfamily void Renderer\+\_\+get\+Separating\+Plane (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{a,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{separating\+Plane }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a02beb424bf2955e18078958578520f02}\label{renderer_8h_a02beb424bf2955e18078958578520f02}} 
+\index{renderer.h@{renderer.h}!Renderer\_getWorldAABB@{Renderer\_getWorldAABB}}
+\index{Renderer\_getWorldAABB@{Renderer\_getWorldAABB}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_getWorldAABB()}{Renderer\_getWorldAABB()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{collision_8h_structAABB}{AABB}} Renderer\+\_\+get\+World\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{local\+AABBs,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a06ccdbb8d4c066566b00568dc269362a}\label{renderer_8h_a06ccdbb8d4c066566b00568dc269362a}} 
+\index{renderer.h@{renderer.h}!Renderer\_isAnimatedGameObject@{Renderer\_isAnimatedGameObject}}
+\index{Renderer\_isAnimatedGameObject@{Renderer\_isAnimatedGameObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isAnimatedGameObject()}{Renderer\_isAnimatedGameObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+Animated\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a0fd7610eb7f17dcc49597e25d2e05d74}\label{renderer_8h_a0fd7610eb7f17dcc49597e25d2e05d74}} 
+\index{renderer.h@{renderer.h}!Renderer\_isBackgroundGameObject@{Renderer\_isBackgroundGameObject}}
+\index{Renderer\_isBackgroundGameObject@{Renderer\_isBackgroundGameObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isBackgroundGameObject()}{Renderer\_isBackgroundGameObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+Background\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a798d8a318fd9a48b6a7210769afd89bc}\label{renderer_8h_a798d8a318fd9a48b6a7210769afd89bc}} 
+\index{renderer.h@{renderer.h}!Renderer\_isCloserBySeparatingPlane@{Renderer\_isCloserBySeparatingPlane}}
+\index{Renderer\_isCloserBySeparatingPlane@{Renderer\_isCloserBySeparatingPlane}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isCloserBySeparatingPlane()}{Renderer\_isCloserBySeparatingPlane()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+Closer\+By\+Separating\+Plane (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$}]{b,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{view\+Pos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_ab45fd2a31ce052c56a5148c901dee46e}\label{renderer_8h_ab45fd2a31ce052c56a5148c901dee46e}} 
+\index{renderer.h@{renderer.h}!Renderer\_isDynamicObject@{Renderer\_isDynamicObject}}
+\index{Renderer\_isDynamicObject@{Renderer\_isDynamicObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isDynamicObject()}{Renderer\_isDynamicObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+Dynamic\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_aaa68052a7adfa7910623c5aeeeb3605b}\label{renderer_8h_aaa68052a7adfa7910623c5aeeeb3605b}} 
+\index{renderer.h@{renderer.h}!Renderer\_isLitGameObject@{Renderer\_isLitGameObject}}
+\index{Renderer\_isLitGameObject@{Renderer\_isLitGameObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isLitGameObject()}{Renderer\_isLitGameObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+Lit\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a03a569d38c2a3e77d9ed4a5d566c7d27}\label{renderer_8h_a03a569d38c2a3e77d9ed4a5d566c7d27}} 
+\index{renderer.h@{renderer.h}!Renderer\_isZBufferedGameObject@{Renderer\_isZBufferedGameObject}}
+\index{Renderer\_isZBufferedGameObject@{Renderer\_isZBufferedGameObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isZBufferedGameObject()}{Renderer\_isZBufferedGameObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+ZBuffered\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a8d55481591160192ab4eb736b7b913be}\label{renderer_8h_a8d55481591160192ab4eb736b7b913be}} 
+\index{renderer.h@{renderer.h}!Renderer\_isZWriteGameObject@{Renderer\_isZWriteGameObject}}
+\index{Renderer\_isZWriteGameObject@{Renderer\_isZWriteGameObject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_isZWriteGameObject()}{Renderer\_isZWriteGameObject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+is\+ZWrite\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a00dc353445bdd73c49e9c3118c82f83a}\label{renderer_8h_a00dc353445bdd73c49e9c3118c82f83a}} 
+\index{renderer.h@{renderer.h}!Renderer\_screenProject@{Renderer\_screenProject}}
+\index{Renderer\_screenProject@{Renderer\_screenProject}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_screenProject()}{Renderer\_screenProject()}}
+{\footnotesize\ttfamily int Renderer\+\_\+screen\+Project (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{obj,  }\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}}}]{model\+Matrix,  }\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}}}]{proj\+Matrix,  }\item[{\mbox{\hyperlink{graphics_8h_add1a34a4ecebab03484e2c232de43ec6}{ViewportF}}}]{viewport,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{win }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a3f157dc1f7530566b5969efa0fcfd9fc}\label{renderer_8h_a3f157dc1f7530566b5969efa0fcfd9fc}} 
+\index{renderer.h@{renderer.h}!Renderer\_sortVisibleObjects@{Renderer\_sortVisibleObjects}}
+\index{Renderer\_sortVisibleObjects@{Renderer\_sortVisibleObjects}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_sortVisibleObjects()}{Renderer\_sortVisibleObjects()}}
+{\footnotesize\ttfamily void Renderer\+\_\+sort\+Visible\+Objects (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{world\+Objects,  }\item[{int}]{world\+Objects\+Count,  }\item[{int $\ast$}]{world\+Objects\+Visibility,  }\item[{int}]{visible\+Objects\+Count,  }\item[{\mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} $\ast$}]{result,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{view\+Pos,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{local\+AABBs }\end{DoxyParamCaption})}
+

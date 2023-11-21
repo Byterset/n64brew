@@ -1,0 +1,82 @@
+\hypertarget{ed64io__sys_8c}{}\doxysection{src/ed64/ed64io\+\_\+sys.c File Reference}
+\label{ed64io__sys_8c}\index{src/ed64/ed64io\_sys.c@{src/ed64/ed64io\_sys.c}}
+{\ttfamily \#include \char`\"{}ed64io\+\_\+everdrive.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+sys.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+errors.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+usb.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+sys.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__sys_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__sys_8c_a738b3194d8e34d0316263a3bd4ddda4b}{NU\+\_\+\+PI\+\_\+\+CART\+\_\+\+BLOCK\+\_\+\+READ\+\_\+\+SIZE}}~0x4000 /$\ast$ cart read block size $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{ed64io__sys_8c_aa8f3f49c6652dc559c0efcb6e4242d8b}{strcon}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$str1, \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$str2, \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$dst, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} max\+\_\+len)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8c_a44484e1214919a738ea74d503d134ee7}{evd\+Pi\+Read\+Rom}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} rom\+\_\+addr, void $\ast$buf\+\_\+ptr, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} size, int use\+Polling)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8c_a1956b297434b283cad39896f56cdeb71}{evd\+Pi\+Write\+Rom}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} rom\+\_\+addr, void $\ast$buf\+\_\+ptr, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} size)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8c_a29dfe135b0195f45c102f06e865cf9c1}{dma\+\_\+read\+\_\+s}} (void $\ast$ram\+\_\+address, unsigned long pi\+\_\+address, unsigned long len, int use\+Polling)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8c_aaf64e90a3aee4602002058eafed31c3f}{dma\+\_\+write\+\_\+s}} (void $\ast$ram\+\_\+address, unsigned long pi\+\_\+address, unsigned long len)
+\item 
+void \mbox{\hyperlink{ed64io__sys_8c_aff15242f7862039a126fd2b9a266ec8a}{evd\+\_\+sleep}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} ms)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__sys_8c_a738b3194d8e34d0316263a3bd4ddda4b}\label{ed64io__sys_8c_a738b3194d8e34d0316263a3bd4ddda4b}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!NU\_PI\_CART\_BLOCK\_READ\_SIZE@{NU\_PI\_CART\_BLOCK\_READ\_SIZE}}
+\index{NU\_PI\_CART\_BLOCK\_READ\_SIZE@{NU\_PI\_CART\_BLOCK\_READ\_SIZE}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{NU\_PI\_CART\_BLOCK\_READ\_SIZE}{NU\_PI\_CART\_BLOCK\_READ\_SIZE}}
+{\footnotesize\ttfamily \#define NU\+\_\+\+PI\+\_\+\+CART\+\_\+\+BLOCK\+\_\+\+READ\+\_\+\+SIZE~0x4000 /$\ast$ cart read block size $\ast$/}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__sys_8c_a29dfe135b0195f45c102f06e865cf9c1}\label{ed64io__sys_8c_a29dfe135b0195f45c102f06e865cf9c1}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!dma\_read\_s@{dma\_read\_s}}
+\index{dma\_read\_s@{dma\_read\_s}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{dma\_read\_s()}{dma\_read\_s()}}
+{\footnotesize\ttfamily void dma\+\_\+read\+\_\+s (\begin{DoxyParamCaption}\item[{void $\ast$}]{ram\+\_\+address,  }\item[{unsigned long}]{pi\+\_\+address,  }\item[{unsigned long}]{len,  }\item[{int}]{use\+Polling }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8c_aaf64e90a3aee4602002058eafed31c3f}\label{ed64io__sys_8c_aaf64e90a3aee4602002058eafed31c3f}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!dma\_write\_s@{dma\_write\_s}}
+\index{dma\_write\_s@{dma\_write\_s}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{dma\_write\_s()}{dma\_write\_s()}}
+{\footnotesize\ttfamily void dma\+\_\+write\+\_\+s (\begin{DoxyParamCaption}\item[{void $\ast$}]{ram\+\_\+address,  }\item[{unsigned long}]{pi\+\_\+address,  }\item[{unsigned long}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8c_aff15242f7862039a126fd2b9a266ec8a}\label{ed64io__sys_8c_aff15242f7862039a126fd2b9a266ec8a}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!evd\_sleep@{evd\_sleep}}
+\index{evd\_sleep@{evd\_sleep}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{evd\_sleep()}{evd\_sleep()}}
+{\footnotesize\ttfamily void evd\+\_\+sleep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{ms }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8c_a44484e1214919a738ea74d503d134ee7}\label{ed64io__sys_8c_a44484e1214919a738ea74d503d134ee7}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!evdPiReadRom@{evdPiReadRom}}
+\index{evdPiReadRom@{evdPiReadRom}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{evdPiReadRom()}{evdPiReadRom()}}
+{\footnotesize\ttfamily void evd\+Pi\+Read\+Rom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{rom\+\_\+addr,  }\item[{void $\ast$}]{buf\+\_\+ptr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{size,  }\item[{int}]{use\+Polling }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8c_a1956b297434b283cad39896f56cdeb71}\label{ed64io__sys_8c_a1956b297434b283cad39896f56cdeb71}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!evdPiWriteRom@{evdPiWriteRom}}
+\index{evdPiWriteRom@{evdPiWriteRom}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{evdPiWriteRom()}{evdPiWriteRom()}}
+{\footnotesize\ttfamily void evd\+Pi\+Write\+Rom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{rom\+\_\+addr,  }\item[{void $\ast$}]{buf\+\_\+ptr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__sys_8c_aa8f3f49c6652dc559c0efcb6e4242d8b}\label{ed64io__sys_8c_aa8f3f49c6652dc559c0efcb6e4242d8b}} 
+\index{ed64io\_sys.c@{ed64io\_sys.c}!strcon@{strcon}}
+\index{strcon@{strcon}!ed64io\_sys.c@{ed64io\_sys.c}}
+\doxysubsubsection{\texorpdfstring{strcon()}{strcon()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} strcon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$}]{str1,  }\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$}]{str2,  }\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$}]{dst,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{max\+\_\+len }\end{DoxyParamCaption})}
+

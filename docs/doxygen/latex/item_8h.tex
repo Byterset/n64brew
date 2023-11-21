@@ -1,0 +1,66 @@
+\hypertarget{item_8h}{}\doxysection{src/item.h File Reference}
+\label{item_8h}\index{src/item.h@{src/item.h}}
+{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gametypes.\+h\char`\"{}}\newline
+Include dependency graph for item.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{item_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{item_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{item_8h_a73afdddcdc3d214b66f9c32302d3fbbf}{Item\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj, \mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{item_8h_a19eabb8262e9058c25c4080cb6be3f1d}{Item\+\_\+take}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self, \mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$new\+Holder)
+\item 
+void \mbox{\hyperlink{item_8h_adb28b5ed00cea54668bbd3abf110b41b}{Item\+\_\+drop}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self)
+\item 
+void \mbox{\hyperlink{item_8h_ab8d9d8d84cf10026c404e9f589ed68fb}{Item\+Holder\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$self, \mbox{\hyperlink{gametypes_8h_a8447589ce7b40950457b6857e7c6ad63}{Item\+Holder\+Type}} item\+Holder\+Type, void $\ast$owner)
+\item 
+void \mbox{\hyperlink{item_8h_a4427bc4f566fca91bc9fc1fa5bd8ba4e}{Item\+\_\+print}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{item_8h_adb28b5ed00cea54668bbd3abf110b41b}\label{item_8h_adb28b5ed00cea54668bbd3abf110b41b}} 
+\index{item.h@{item.h}!Item\_drop@{Item\_drop}}
+\index{Item\_drop@{Item\_drop}!item.h@{item.h}}
+\doxysubsubsection{\texorpdfstring{Item\_drop()}{Item\_drop()}}
+{\footnotesize\ttfamily void Item\+\_\+drop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8h_a73afdddcdc3d214b66f9c32302d3fbbf}\label{item_8h_a73afdddcdc3d214b66f9c32302d3fbbf}} 
+\index{item.h@{item.h}!Item\_init@{Item\_init}}
+\index{Item\_init@{Item\_init}!item.h@{item.h}}
+\doxysubsubsection{\texorpdfstring{Item\_init()}{Item\_init()}}
+{\footnotesize\ttfamily void Item\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj,  }\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8h_a4427bc4f566fca91bc9fc1fa5bd8ba4e}\label{item_8h_a4427bc4f566fca91bc9fc1fa5bd8ba4e}} 
+\index{item.h@{item.h}!Item\_print@{Item\_print}}
+\index{Item\_print@{Item\_print}!item.h@{item.h}}
+\doxysubsubsection{\texorpdfstring{Item\_print()}{Item\_print()}}
+{\footnotesize\ttfamily void Item\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8h_a19eabb8262e9058c25c4080cb6be3f1d}\label{item_8h_a19eabb8262e9058c25c4080cb6be3f1d}} 
+\index{item.h@{item.h}!Item\_take@{Item\_take}}
+\index{Item\_take@{Item\_take}!item.h@{item.h}}
+\doxysubsubsection{\texorpdfstring{Item\_take()}{Item\_take()}}
+{\footnotesize\ttfamily void Item\+\_\+take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$}]{new\+Holder }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8h_ab8d9d8d84cf10026c404e9f589ed68fb}\label{item_8h_ab8d9d8d84cf10026c404e9f589ed68fb}} 
+\index{item.h@{item.h}!ItemHolder\_init@{ItemHolder\_init}}
+\index{ItemHolder\_init@{ItemHolder\_init}!item.h@{item.h}}
+\doxysubsubsection{\texorpdfstring{ItemHolder\_init()}{ItemHolder\_init()}}
+{\footnotesize\ttfamily void Item\+Holder\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_a8447589ce7b40950457b6857e7c6ad63}{Item\+Holder\+Type}}}]{item\+Holder\+Type,  }\item[{void $\ast$}]{owner }\end{DoxyParamCaption})}
+

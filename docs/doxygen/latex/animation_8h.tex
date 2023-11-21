@@ -1,0 +1,393 @@
+\hypertarget{animation_8h}{}\doxysection{src/animation/animation.h File Reference}
+\label{animation_8h}\index{src/animation/animation.h@{src/animation/animation.h}}
+
+
+Animation Headerfile.  
+
+
+{\ttfamily \#include \char`\"{}../modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../n64compat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/rotation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
+Include dependency graph for animation.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{animation_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{animation_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}}
+\item 
+struct \mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{animation_8h_aba6791b5c5eb7757980dd2db5005e75d}{MAX\+\_\+\+ANIM\+\_\+\+MESH\+\_\+\+PARTS}}~12
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} \mbox{\hyperlink{animation_8h_a597df6dbc526a5f6b751d997d67cb6e5}{Animation\+Frame}}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}} \mbox{\hyperlink{animation_8h_ad43332a5cf3e4a1c8a4677ab6f7887b1}{Animation\+Range}}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}} \mbox{\hyperlink{animation_8h_a45237178db07ab413121122064a2fd6f}{Animation\+Bone\+Attachment}}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}} \mbox{\hyperlink{animation_8h_a88510b68bd0decc1222de4a53e6ed411}{Animation\+Bone\+Sprite\+Attachment}}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} \mbox{\hyperlink{animation_8h_ae5055c617242e6a89d3f7ea28f049b20}{Animation\+State}}
+\item 
+typedef struct \mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} \mbox{\hyperlink{animation_8h_a75a932b774a48fb3b2e53a42af7df59f}{Animation\+Interpolation}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{animation_8h_a4d3838d645a5b79340245381fa546b33}{Animation\+State\+\_\+init}} (\mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} $\ast$self)
+\item 
+void \mbox{\hyperlink{animation_8h_a2903d535019f5ed7fee2e59212d23682}{Animation\+Bone\+Attachment\+\_\+init}} (\mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}} $\ast$self)
+\item 
+void \mbox{\hyperlink{animation_8h_a400413eccf1968d67814c1cf269be74a}{Animation\+Bone\+Sprite\+Attachment\+\_\+init}} (\mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}} $\ast$self)
+\item 
+void \mbox{\hyperlink{animation_8h_a24884d6d4cc1a1269e954cc2a1d6cb88}{Animation\+Interpolation\+\_\+calc}} (\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$self, \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} $\ast$state, \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}} $\ast$anim\+Range)
+\item 
+void \mbox{\hyperlink{animation_8h_adc1f4114b15cd3ffc975d8f15de5a65c}{Animation\+Frame\+\_\+get}} (\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$interp, \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$anim\+Data, int anim\+Data\+Num\+Bones, int bone\+Idx, \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$result)
+\item 
+void \mbox{\hyperlink{animation_8h_aab4d72744c9cd3a70a0f291a49e27a2c}{Animation\+Frame\+\_\+lerp}} (\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$interp, \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$anim\+Data, int anim\+Data\+Num\+Bones, int bone\+Idx, \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$result)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Animation Headerfile. 
+
+\begin{DoxyAuthor}{Author}
+James Friend 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{AnimationFrame@{AnimationFrame}}\label{structAnimationFrame}
+\Hypertarget{animation_8h_structAnimationFrame}
+\doxysubsubsection{struct Animation\+Frame}
+
+
+Collaboration diagram for Animation\+Frame\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{structAnimationFrame__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_a909f90611602d925b1fa970473f96be1}\label{animation_8h_a909f90611602d925b1fa970473f96be1}} 
+int&
+frame&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a730eac41ae609a045d3e823fb0cdb31c}\label{animation_8h_a730eac41ae609a045d3e823fb0cdb31c}} 
+int&
+object&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a1e73d9d0ffd12cab1e6b22c9b36c28b7}\label{animation_8h_a1e73d9d0ffd12cab1e6b22c9b36c28b7}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+position&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a234c220add9fa124dd113bcbed6a8414}\label{animation_8h_a234c220add9fa124dd113bcbed6a8414}} 
+\mbox{\hyperlink{rotation_8h_structEulerDegrees}{EulerDegrees}}&
+rotation&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AnimationRange@{AnimationRange}}\label{structAnimationRange}
+\Hypertarget{animation_8h_structAnimationRange}
+\doxysubsubsection{struct Animation\+Range}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_a1318b3e7780773272c8063a938758562}\label{animation_8h_a1318b3e7780773272c8063a938758562}} 
+int&
+end&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a380f2f045f510caa35f8b10a6299ad29}\label{animation_8h_a380f2f045f510caa35f8b10a6299ad29}} 
+int&
+start&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AnimationBoneAttachment@{AnimationBoneAttachment}}\label{structAnimationBoneAttachment}
+\Hypertarget{animation_8h_structAnimationBoneAttachment}
+\doxysubsubsection{struct Animation\+Bone\+Attachment}
+
+
+Collaboration diagram for Animation\+Bone\+Attachment\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{structAnimationBoneAttachment__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_a782e39788d4f045b3ddb8ea613792978}\label{animation_8h_a782e39788d4f045b3ddb8ea613792978}} 
+int&
+boneIndex&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a9f5b393a68f76183fe9c8855830fc8ff}\label{animation_8h_a9f5b393a68f76183fe9c8855830fc8ff}} 
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{ModelType}}&
+modelType&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_ae82876ebb22a74665fc2d7e1f112f22e}\label{animation_8h_ae82876ebb22a74665fc2d7e1f112f22e}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+offset&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a124acfcdf3d1ad1a6c16f8a5c4b95e29}\label{animation_8h_a124acfcdf3d1ad1a6c16f8a5c4b95e29}} 
+\mbox{\hyperlink{rotation_8h_structEulerDegrees}{EulerDegrees}}&
+rotation&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AnimationBoneSpriteAttachment@{AnimationBoneSpriteAttachment}}\label{structAnimationBoneSpriteAttachment}
+\Hypertarget{animation_8h_structAnimationBoneSpriteAttachment}
+\doxysubsubsection{struct Animation\+Bone\+Sprite\+Attachment}
+
+
+Collaboration diagram for Animation\+Bone\+Sprite\+Attachment\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{structAnimationBoneSpriteAttachment__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_a959760ff1ab4689ffb05d3ddda5f0e78}\label{animation_8h_a959760ff1ab4689ffb05d3ddda5f0e78}} 
+int&
+boneIndex&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a1edfdfc439fd330434ac6ea81b7dcdda}\label{animation_8h_a1edfdfc439fd330434ac6ea81b7dcdda}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+offset&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a75d4d5a9ce36d735d54f3ea5568cf853}\label{animation_8h_a75d4d5a9ce36d735d54f3ea5568cf853}} 
+\mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{SpriteType}}&
+spriteType&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_ae91357d362ae880a8af0542626669065}\label{animation_8h_ae91357d362ae880a8af0542626669065}} 
+int&
+startTick&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AnimationState@{AnimationState}}\label{structAnimationState}
+\Hypertarget{animation_8h_structAnimationState}
+\doxysubsubsection{struct Animation\+State}
+
+
+Collaboration diagram for Animation\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structAnimationState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_afa244556b96b8664aa4bd5c42a9257e5}\label{animation_8h_afa244556b96b8664aa4bd5c42a9257e5}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+animMeshTransform\mbox{[}\mbox{\hyperlink{animation_8h_aba6791b5c5eb7757980dd2db5005e75d}{MAX\_ANIM\_MESH\_PARTS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a981e3f73c04db060f9291d9bdd4f82cd}\label{animation_8h_a981e3f73c04db060f9291d9bdd4f82cd}} 
+\mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{AnimationBoneAttachment}}&
+attachment&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a5c60570cff2dc7ef06c59b760c72cc5e}\label{animation_8h_a5c60570cff2dc7ef06c59b760c72cc5e}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+attachmentSpriteTransform&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a68f654d51e4b8e047e67921d160f03a9}\label{animation_8h_a68f654d51e4b8e047e67921d160f03a9}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+attachmentTransform&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a0c93f31cf7106e9c680fc719123573aa}\label{animation_8h_a0c93f31cf7106e9c680fc719123573aa}} 
+float&
+progress&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a6555fd8e67b5ee35b39d45fa42458a95}\label{animation_8h_a6555fd8e67b5ee35b39d45fa42458a95}} 
+\mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{AnimationBoneSpriteAttachment}}&
+spriteAttachment&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a2efa1a16f07840ce5bf99058e448a392}\label{animation_8h_a2efa1a16f07840ce5bf99058e448a392}} 
+int&
+state&
+\\
+\hline
+
+\end{DoxyFields}
+\index{AnimationInterpolation@{AnimationInterpolation}}\label{structAnimationInterpolation}
+\Hypertarget{animation_8h_structAnimationInterpolation}
+\doxysubsubsection{struct Animation\+Interpolation}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{animation_8h_ab53a7d21c6f399bf3d743adeec5cb3d7}\label{animation_8h_ab53a7d21c6f399bf3d743adeec5cb3d7}} 
+int&
+currentFrame&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_ae4d24b2232de6ff6195ad9bad42272fe}\label{animation_8h_ae4d24b2232de6ff6195ad9bad42272fe}} 
+int&
+nextFrame&
+\\
+\hline
+
+\mbox{\Hypertarget{animation_8h_a5d9d8151010b838eeb5ecf10f8acbffb}\label{animation_8h_a5d9d8151010b838eeb5ecf10f8acbffb}} 
+float&
+t&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{animation_8h_aba6791b5c5eb7757980dd2db5005e75d}\label{animation_8h_aba6791b5c5eb7757980dd2db5005e75d}} 
+\index{animation.h@{animation.h}!MAX\_ANIM\_MESH\_PARTS@{MAX\_ANIM\_MESH\_PARTS}}
+\index{MAX\_ANIM\_MESH\_PARTS@{MAX\_ANIM\_MESH\_PARTS}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_ANIM\_MESH\_PARTS}{MAX\_ANIM\_MESH\_PARTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ANIM\+\_\+\+MESH\+\_\+\+PARTS~12}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{animation_8h_a45237178db07ab413121122064a2fd6f}\label{animation_8h_a45237178db07ab413121122064a2fd6f}} 
+\index{animation.h@{animation.h}!AnimationBoneAttachment@{AnimationBoneAttachment}}
+\index{AnimationBoneAttachment@{AnimationBoneAttachment}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationBoneAttachment}{AnimationBoneAttachment}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}} \mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}}}
+
+\mbox{\Hypertarget{animation_8h_a88510b68bd0decc1222de4a53e6ed411}\label{animation_8h_a88510b68bd0decc1222de4a53e6ed411}} 
+\index{animation.h@{animation.h}!AnimationBoneSpriteAttachment@{AnimationBoneSpriteAttachment}}
+\index{AnimationBoneSpriteAttachment@{AnimationBoneSpriteAttachment}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationBoneSpriteAttachment}{AnimationBoneSpriteAttachment}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}} \mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}}}
+
+\mbox{\Hypertarget{animation_8h_a597df6dbc526a5f6b751d997d67cb6e5}\label{animation_8h_a597df6dbc526a5f6b751d997d67cb6e5}} 
+\index{animation.h@{animation.h}!AnimationFrame@{AnimationFrame}}
+\index{AnimationFrame@{AnimationFrame}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationFrame}{AnimationFrame}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}}}
+
+\mbox{\Hypertarget{animation_8h_a75a932b774a48fb3b2e53a42af7df59f}\label{animation_8h_a75a932b774a48fb3b2e53a42af7df59f}} 
+\index{animation.h@{animation.h}!AnimationInterpolation@{AnimationInterpolation}}
+\index{AnimationInterpolation@{AnimationInterpolation}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationInterpolation}{AnimationInterpolation}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} \mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}}}
+
+\mbox{\Hypertarget{animation_8h_ad43332a5cf3e4a1c8a4677ab6f7887b1}\label{animation_8h_ad43332a5cf3e4a1c8a4677ab6f7887b1}} 
+\index{animation.h@{animation.h}!AnimationRange@{AnimationRange}}
+\index{AnimationRange@{AnimationRange}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationRange}{AnimationRange}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}} \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}}}
+
+\mbox{\Hypertarget{animation_8h_ae5055c617242e6a89d3f7ea28f049b20}\label{animation_8h_ae5055c617242e6a89d3f7ea28f049b20}} 
+\index{animation.h@{animation.h}!AnimationState@{AnimationState}}
+\index{AnimationState@{AnimationState}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationState}{AnimationState}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{animation_8h_a2903d535019f5ed7fee2e59212d23682}\label{animation_8h_a2903d535019f5ed7fee2e59212d23682}} 
+\index{animation.h@{animation.h}!AnimationBoneAttachment\_init@{AnimationBoneAttachment\_init}}
+\index{AnimationBoneAttachment\_init@{AnimationBoneAttachment\_init}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationBoneAttachment\_init()}{AnimationBoneAttachment\_init()}}
+{\footnotesize\ttfamily void Animation\+Bone\+Attachment\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationBoneAttachment}{Animation\+Bone\+Attachment}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{animation_8h_a400413eccf1968d67814c1cf269be74a}\label{animation_8h_a400413eccf1968d67814c1cf269be74a}} 
+\index{animation.h@{animation.h}!AnimationBoneSpriteAttachment\_init@{AnimationBoneSpriteAttachment\_init}}
+\index{AnimationBoneSpriteAttachment\_init@{AnimationBoneSpriteAttachment\_init}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationBoneSpriteAttachment\_init()}{AnimationBoneSpriteAttachment\_init()}}
+{\footnotesize\ttfamily void Animation\+Bone\+Sprite\+Attachment\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationBoneSpriteAttachment}{Animation\+Bone\+Sprite\+Attachment}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{animation_8h_adc1f4114b15cd3ffc975d8f15de5a65c}\label{animation_8h_adc1f4114b15cd3ffc975d8f15de5a65c}} 
+\index{animation.h@{animation.h}!AnimationFrame\_get@{AnimationFrame\_get}}
+\index{AnimationFrame\_get@{AnimationFrame\_get}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationFrame\_get()}{AnimationFrame\_get()}}
+{\footnotesize\ttfamily void Animation\+Frame\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$}]{interp,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$}]{anim\+Data,  }\item[{int}]{anim\+Data\+Num\+Bones,  }\item[{int}]{bone\+Idx,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{animation_8h_aab4d72744c9cd3a70a0f291a49e27a2c}\label{animation_8h_aab4d72744c9cd3a70a0f291a49e27a2c}} 
+\index{animation.h@{animation.h}!AnimationFrame\_lerp@{AnimationFrame\_lerp}}
+\index{AnimationFrame\_lerp@{AnimationFrame\_lerp}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationFrame\_lerp()}{AnimationFrame\_lerp()}}
+{\footnotesize\ttfamily void Animation\+Frame\+\_\+lerp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$}]{interp,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$}]{anim\+Data,  }\item[{int}]{anim\+Data\+Num\+Bones,  }\item[{int}]{bone\+Idx,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{animation_8h_a24884d6d4cc1a1269e954cc2a1d6cb88}\label{animation_8h_a24884d6d4cc1a1269e954cc2a1d6cb88}} 
+\index{animation.h@{animation.h}!AnimationInterpolation\_calc@{AnimationInterpolation\_calc}}
+\index{AnimationInterpolation\_calc@{AnimationInterpolation\_calc}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationInterpolation\_calc()}{AnimationInterpolation\_calc()}}
+{\footnotesize\ttfamily void Animation\+Interpolation\+\_\+calc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationInterpolation}{Animation\+Interpolation}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}} $\ast$}]{anim\+Range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{animation_8h_a4d3838d645a5b79340245381fa546b33}\label{animation_8h_a4d3838d645a5b79340245381fa546b33}} 
+\index{animation.h@{animation.h}!AnimationState\_init@{AnimationState\_init}}
+\index{AnimationState\_init@{AnimationState\_init}!animation.h@{animation.h}}
+\doxysubsubsection{\texorpdfstring{AnimationState\_init()}{AnimationState\_init()}}
+{\footnotesize\ttfamily void Animation\+State\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} $\ast$}]{self }\end{DoxyParamCaption})}
+

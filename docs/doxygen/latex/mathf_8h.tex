@@ -1,0 +1,230 @@
+\hypertarget{mathf_8h}{}\doxysection{src/math/mathf.h File Reference}
+\label{mathf_8h}\index{src/math/mathf.h@{src/math/mathf.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mathf_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mathf_8h_a5197b278b9dd88d5c7509db1a9f76a56}{isnan}}(a)~((a) != (a))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mathf_8h_acc6770e541ada2c5486a378db311f8ee}{random\+Seed}} (int seed, int seedw)
+\item 
+unsigned int \mbox{\hyperlink{mathf_8h_a08d1fda07e8989be637cd4dfa7b46075}{random\+Int}} ()
+\item 
+int \mbox{\hyperlink{mathf_8h_a35e72fcb02e12adb430b475cdbb7cc73}{random\+In\+Range}} (int min, int max\+Plus\+One)
+\item 
+float \mbox{\hyperlink{mathf_8h_ae03697bbe9d0498034eabc4b02e59436}{random\+In\+Rangef}} (float min, float max\+Plus\+One)
+\item 
+float \mbox{\hyperlink{mathf_8h_a59f5831ae7483911eaac4ff7313ddaff}{mathf\+Lerp}} (float from, float to, float t)
+\item 
+float \mbox{\hyperlink{mathf_8h_a6af02a32aefd1b44da79dd77702a0f49}{mathf\+Move\+Towards}} (float from, float to, float max\+Move)
+\item 
+float \mbox{\hyperlink{mathf_8h_a925f010f6d4cbb39fb7f72cb157a5aee}{mathf\+Bounce\+Back\+Lerp}} (float t)
+\item 
+float \mbox{\hyperlink{mathf_8h_a0277c3f180434b9a97c21d84c119c2b9}{mathf\+Ease\+In}} (float t, float over\+Ease)
+\item 
+float \mbox{\hyperlink{mathf_8h_a94be578985a62018db649fbb1798eff4}{mathf\+Random\+Float}} ()
+\item 
+float \mbox{\hyperlink{mathf_8h_a8b0fef6cb1a8e98b60a5fd02925a9479}{mathf\+Mod}} (float \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, float divisor)
+\item 
+float \mbox{\hyperlink{mathf_8h_aa7858054b72ec722a2fff626dde6c162}{clampf}} (float \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, float min, float max)
+\item 
+float \mbox{\hyperlink{mathf_8h_a830616f72203d3f08af4fa4a04b97e1b}{signf}} (float \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+int \mbox{\hyperlink{mathf_8h_a17975af688b8d89e588d17c7a6ccdbdb}{sign}} (int \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+int \mbox{\hyperlink{mathf_8h_a1ff31894b892df2e0f53fac574ab8145}{abs}} (int \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+float \mbox{\hyperlink{mathf_8h_abd5a96cf9b26f8374579dfee9b8e0c42}{sqrtf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_a03f6d8cf8c48e1ee7b02eecf14e859d2}{powf}} (float base, float exp)
+\item 
+float \mbox{\hyperlink{mathf_8h_aaf8f74b31bea0f391c633dd681120237}{cosf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_a9bc62a320ad480d2081e3943b63525b7}{sinf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_a1f60c5f197ba7002fe98f075b1c7d2fd}{fabsf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_a598cfc127e4d9d063f1da1311415c849}{floorf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_aa9f4f419ccc1f13398b3c0aa7330cec7}{ceilf}} (float in)
+\item 
+float \mbox{\hyperlink{mathf_8h_a91cf7fd61cef0dfb2ced53179f5d2ffd}{minf}} (float a, float b)
+\item 
+float \mbox{\hyperlink{mathf_8h_a7ba1f6b16d865c77066a7aa05d51ca02}{maxf}} (float a, float b)
+\item 
+char \mbox{\hyperlink{mathf_8h_aef1f014c7a760e71bfc86b26d6c14c87}{float\+Tos8norm}} (float \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+float \mbox{\hyperlink{mathf_8h_a34572ad9f1a303f44df699338281f3ef}{safe\+Invert}} (float \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mathf_8h_a5197b278b9dd88d5c7509db1a9f76a56}\label{mathf_8h_a5197b278b9dd88d5c7509db1a9f76a56}} 
+\index{mathf.h@{mathf.h}!isnan@{isnan}}
+\index{isnan@{isnan}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{isnan}{isnan}}
+{\footnotesize\ttfamily \#define isnan(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~((a) != (a))}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mathf_8h_a1ff31894b892df2e0f53fac574ab8145}\label{mathf_8h_a1ff31894b892df2e0f53fac574ab8145}} 
+\index{mathf.h@{mathf.h}!abs@{abs}}
+\index{abs@{abs}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{abs()}{abs()}}
+{\footnotesize\ttfamily int abs (\begin{DoxyParamCaption}\item[{int}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_aa9f4f419ccc1f13398b3c0aa7330cec7}\label{mathf_8h_aa9f4f419ccc1f13398b3c0aa7330cec7}} 
+\index{mathf.h@{mathf.h}!ceilf@{ceilf}}
+\index{ceilf@{ceilf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{ceilf()}{ceilf()}}
+{\footnotesize\ttfamily float ceilf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_aa7858054b72ec722a2fff626dde6c162}\label{mathf_8h_aa7858054b72ec722a2fff626dde6c162}} 
+\index{mathf.h@{mathf.h}!clampf@{clampf}}
+\index{clampf@{clampf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{clampf()}{clampf()}}
+{\footnotesize\ttfamily float clampf (\begin{DoxyParamCaption}\item[{float}]{input,  }\item[{float}]{min,  }\item[{float}]{max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_aaf8f74b31bea0f391c633dd681120237}\label{mathf_8h_aaf8f74b31bea0f391c633dd681120237}} 
+\index{mathf.h@{mathf.h}!cosf@{cosf}}
+\index{cosf@{cosf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{cosf()}{cosf()}}
+{\footnotesize\ttfamily float cosf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a1f60c5f197ba7002fe98f075b1c7d2fd}\label{mathf_8h_a1f60c5f197ba7002fe98f075b1c7d2fd}} 
+\index{mathf.h@{mathf.h}!fabsf@{fabsf}}
+\index{fabsf@{fabsf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{fabsf()}{fabsf()}}
+{\footnotesize\ttfamily float fabsf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_aef1f014c7a760e71bfc86b26d6c14c87}\label{mathf_8h_aef1f014c7a760e71bfc86b26d6c14c87}} 
+\index{mathf.h@{mathf.h}!floatTos8norm@{floatTos8norm}}
+\index{floatTos8norm@{floatTos8norm}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{floatTos8norm()}{floatTos8norm()}}
+{\footnotesize\ttfamily char float\+Tos8norm (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a598cfc127e4d9d063f1da1311415c849}\label{mathf_8h_a598cfc127e4d9d063f1da1311415c849}} 
+\index{mathf.h@{mathf.h}!floorf@{floorf}}
+\index{floorf@{floorf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{floorf()}{floorf()}}
+{\footnotesize\ttfamily float floorf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a925f010f6d4cbb39fb7f72cb157a5aee}\label{mathf_8h_a925f010f6d4cbb39fb7f72cb157a5aee}} 
+\index{mathf.h@{mathf.h}!mathfBounceBackLerp@{mathfBounceBackLerp}}
+\index{mathfBounceBackLerp@{mathfBounceBackLerp}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfBounceBackLerp()}{mathfBounceBackLerp()}}
+{\footnotesize\ttfamily float mathf\+Bounce\+Back\+Lerp (\begin{DoxyParamCaption}\item[{float}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a0277c3f180434b9a97c21d84c119c2b9}\label{mathf_8h_a0277c3f180434b9a97c21d84c119c2b9}} 
+\index{mathf.h@{mathf.h}!mathfEaseIn@{mathfEaseIn}}
+\index{mathfEaseIn@{mathfEaseIn}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfEaseIn()}{mathfEaseIn()}}
+{\footnotesize\ttfamily float mathf\+Ease\+In (\begin{DoxyParamCaption}\item[{float}]{t,  }\item[{float}]{over\+Ease }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a59f5831ae7483911eaac4ff7313ddaff}\label{mathf_8h_a59f5831ae7483911eaac4ff7313ddaff}} 
+\index{mathf.h@{mathf.h}!mathfLerp@{mathfLerp}}
+\index{mathfLerp@{mathfLerp}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfLerp()}{mathfLerp()}}
+{\footnotesize\ttfamily float mathf\+Lerp (\begin{DoxyParamCaption}\item[{float}]{from,  }\item[{float}]{to,  }\item[{float}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a8b0fef6cb1a8e98b60a5fd02925a9479}\label{mathf_8h_a8b0fef6cb1a8e98b60a5fd02925a9479}} 
+\index{mathf.h@{mathf.h}!mathfMod@{mathfMod}}
+\index{mathfMod@{mathfMod}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfMod()}{mathfMod()}}
+{\footnotesize\ttfamily float mathf\+Mod (\begin{DoxyParamCaption}\item[{float}]{input,  }\item[{float}]{divisor }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a6af02a32aefd1b44da79dd77702a0f49}\label{mathf_8h_a6af02a32aefd1b44da79dd77702a0f49}} 
+\index{mathf.h@{mathf.h}!mathfMoveTowards@{mathfMoveTowards}}
+\index{mathfMoveTowards@{mathfMoveTowards}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfMoveTowards()}{mathfMoveTowards()}}
+{\footnotesize\ttfamily float mathf\+Move\+Towards (\begin{DoxyParamCaption}\item[{float}]{from,  }\item[{float}]{to,  }\item[{float}]{max\+Move }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a94be578985a62018db649fbb1798eff4}\label{mathf_8h_a94be578985a62018db649fbb1798eff4}} 
+\index{mathf.h@{mathf.h}!mathfRandomFloat@{mathfRandomFloat}}
+\index{mathfRandomFloat@{mathfRandomFloat}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{mathfRandomFloat()}{mathfRandomFloat()}}
+{\footnotesize\ttfamily float mathf\+Random\+Float (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a7ba1f6b16d865c77066a7aa05d51ca02}\label{mathf_8h_a7ba1f6b16d865c77066a7aa05d51ca02}} 
+\index{mathf.h@{mathf.h}!maxf@{maxf}}
+\index{maxf@{maxf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{maxf()}{maxf()}}
+{\footnotesize\ttfamily float maxf (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a91cf7fd61cef0dfb2ced53179f5d2ffd}\label{mathf_8h_a91cf7fd61cef0dfb2ced53179f5d2ffd}} 
+\index{mathf.h@{mathf.h}!minf@{minf}}
+\index{minf@{minf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{minf()}{minf()}}
+{\footnotesize\ttfamily float minf (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a03f6d8cf8c48e1ee7b02eecf14e859d2}\label{mathf_8h_a03f6d8cf8c48e1ee7b02eecf14e859d2}} 
+\index{mathf.h@{mathf.h}!powf@{powf}}
+\index{powf@{powf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{powf()}{powf()}}
+{\footnotesize\ttfamily float powf (\begin{DoxyParamCaption}\item[{float}]{base,  }\item[{float}]{exp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a35e72fcb02e12adb430b475cdbb7cc73}\label{mathf_8h_a35e72fcb02e12adb430b475cdbb7cc73}} 
+\index{mathf.h@{mathf.h}!randomInRange@{randomInRange}}
+\index{randomInRange@{randomInRange}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{randomInRange()}{randomInRange()}}
+{\footnotesize\ttfamily int random\+In\+Range (\begin{DoxyParamCaption}\item[{int}]{min,  }\item[{int}]{max\+Plus\+One }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_ae03697bbe9d0498034eabc4b02e59436}\label{mathf_8h_ae03697bbe9d0498034eabc4b02e59436}} 
+\index{mathf.h@{mathf.h}!randomInRangef@{randomInRangef}}
+\index{randomInRangef@{randomInRangef}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{randomInRangef()}{randomInRangef()}}
+{\footnotesize\ttfamily float random\+In\+Rangef (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max\+Plus\+One }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a08d1fda07e8989be637cd4dfa7b46075}\label{mathf_8h_a08d1fda07e8989be637cd4dfa7b46075}} 
+\index{mathf.h@{mathf.h}!randomInt@{randomInt}}
+\index{randomInt@{randomInt}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{randomInt()}{randomInt()}}
+{\footnotesize\ttfamily unsigned int random\+Int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_acc6770e541ada2c5486a378db311f8ee}\label{mathf_8h_acc6770e541ada2c5486a378db311f8ee}} 
+\index{mathf.h@{mathf.h}!randomSeed@{randomSeed}}
+\index{randomSeed@{randomSeed}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{randomSeed()}{randomSeed()}}
+{\footnotesize\ttfamily void random\+Seed (\begin{DoxyParamCaption}\item[{int}]{seed,  }\item[{int}]{seedw }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a34572ad9f1a303f44df699338281f3ef}\label{mathf_8h_a34572ad9f1a303f44df699338281f3ef}} 
+\index{mathf.h@{mathf.h}!safeInvert@{safeInvert}}
+\index{safeInvert@{safeInvert}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{safeInvert()}{safeInvert()}}
+{\footnotesize\ttfamily float safe\+Invert (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a17975af688b8d89e588d17c7a6ccdbdb}\label{mathf_8h_a17975af688b8d89e588d17c7a6ccdbdb}} 
+\index{mathf.h@{mathf.h}!sign@{sign}}
+\index{sign@{sign}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{sign()}{sign()}}
+{\footnotesize\ttfamily int sign (\begin{DoxyParamCaption}\item[{int}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a830616f72203d3f08af4fa4a04b97e1b}\label{mathf_8h_a830616f72203d3f08af4fa4a04b97e1b}} 
+\index{mathf.h@{mathf.h}!signf@{signf}}
+\index{signf@{signf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{signf()}{signf()}}
+{\footnotesize\ttfamily float signf (\begin{DoxyParamCaption}\item[{float}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_a9bc62a320ad480d2081e3943b63525b7}\label{mathf_8h_a9bc62a320ad480d2081e3943b63525b7}} 
+\index{mathf.h@{mathf.h}!sinf@{sinf}}
+\index{sinf@{sinf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{sinf()}{sinf()}}
+{\footnotesize\ttfamily float sinf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mathf_8h_abd5a96cf9b26f8374579dfee9b8e0c42}\label{mathf_8h_abd5a96cf9b26f8374579dfee9b8e0c42}} 
+\index{mathf.h@{mathf.h}!sqrtf@{sqrtf}}
+\index{sqrtf@{sqrtf}!mathf.h@{mathf.h}}
+\doxysubsubsection{\texorpdfstring{sqrtf()}{sqrtf()}}
+{\footnotesize\ttfamily float sqrtf (\begin{DoxyParamCaption}\item[{float}]{in }\end{DoxyParamCaption})}
+

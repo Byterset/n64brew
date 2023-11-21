@@ -1,0 +1,86 @@
+Included functions list (Libultra)
+
+This library contains a single .c and .h file which you can drag and drop into your N64 project in order to have support for Sausage64 models converted by the \href{../Sample\%20Parser}{\texttt{ Sample Parser}} tool. It is designed for both Libultra and Libdragon (using Open\+GL).
+
+In order to use the library with Libdragon, make sure you uncomment the {\ttfamily \#define LIBDRAGON} to enable Libdragon support. The API changes slightly between both versions, so please double check below what functions you are supposed to be using.
+
+The library is, currently, very basic. It can be expanded in the future in order to add more features, such as animation speed and blending.
+
+With this implementation of the library, matrix transformations are done on the CPU in order to reduce the memory footprint. This does mean that the CPU will be doing a bit more work, but that will probably not be too much of a problem given that most games are fillrate limited. Animations are also expected to playback at 30 frames per second.
+
+A tutorial on how to use the library is available \href{../../../wiki/5\%29-Sample-library-tutorial}{\texttt{ in the wiki}}. You also have an example implementation available in the \href{../Sample\%20ROM}{\texttt{ Sample ROM}} folder.
+
+$<$details$>$ 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_initmodel}}
+\DoxyCodeLine{\textcolor{comment}{    Initialize a model helper struct}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper to initialize}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model data }}
+\DoxyCodeLine{\textcolor{comment}{    @param An array of matrices for each mesh part}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a479f260a40fd5782e68e76d97f4c22a1}{sausage64\_initmodel}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64ModelData}}* mdldata, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}* matrices);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_set\_camera}}
+\DoxyCodeLine{\textcolor{comment}{    Sets the camera for Sausage64 to use for billboarding}}
+\DoxyCodeLine{\textcolor{comment}{    @param The view matrix}}
+\DoxyCodeLine{\textcolor{comment}{    @param The projection matrix}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a8068a3ee1d3f07d703b6eebcf94a8d54}{sausage64\_set\_camera}}(\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}* view, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}* projection);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_set\_anim}}
+\DoxyCodeLine{\textcolor{comment}{    Sets an animation on the model. Does not perform }}
+\DoxyCodeLine{\textcolor{comment}{    error checking if an invalid animation is given.}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The ANIMATION\_* macro to set}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a735acedae57f0790d886987751f35bbf}{sausage64\_set\_anim}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} anim);}
+\DoxyCodeLine{        }
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_set\_animcallback}}
+\DoxyCodeLine{\textcolor{comment}{    Set a function that gets called when an animation finishes}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The animation end callback function}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a0a34ba272478ab532a52098460220ddb}{sausage64\_set\_animcallback}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \textcolor{keywordtype}{void} (*animcallback)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_set\_predrawfunc}}
+\DoxyCodeLine{\textcolor{comment}{    Set a function that gets called before any mesh is rendered}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The pre draw function}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a550c30e1db3c40ee683927e6bca056a8}{sausage64\_set\_predrawfunc}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \textcolor{keywordtype}{void} (*predraw)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_set\_postdrawfunc}}
+\DoxyCodeLine{\textcolor{comment}{    Set a function that gets called after any mesh is rendered}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The post draw function}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a5be4201206c30a4618dca19efe4a77d6}{sausage64\_set\_postdrawfunc}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \textcolor{keywordtype}{void} (*postdraw)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_advance\_anim}}
+\DoxyCodeLine{\textcolor{comment}{    Advances the animation tick by the given amount}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The amount to increase the animation tick by}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a48b963121eeaadd6daa05ce65647e4f5}{sausage64\_advance\_anim}}(\mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl, \textcolor{keywordtype}{float} tickamount);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*==============================}}
+\DoxyCodeLine{\textcolor{comment}{    sausage64\_drawmodel}}
+\DoxyCodeLine{\textcolor{comment}{    Renders a Sausage64 model}}
+\DoxyCodeLine{\textcolor{comment}{    @param A pointer to a display list pointer}}
+\DoxyCodeLine{\textcolor{comment}{    @param The model helper data}}
+\DoxyCodeLine{\textcolor{comment}{==============================*/}}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{sausage64_8c_a1e736dc5aff6424321c3ee208b5b80bc}{sausage64\_drawmodel}}(Gfx** glistp, \mbox{\hyperlink{structs64ModelHelper}{s64ModelHelper}}* mdl);}
+
+\end{DoxyCode}
+ 
+
+$<$/details$>$  

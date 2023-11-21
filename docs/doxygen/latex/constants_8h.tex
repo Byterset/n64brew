@@ -1,0 +1,301 @@
+\hypertarget{constants_8h}{}\doxysection{src/constants.h File Reference}
+\label{constants_8h}\index{src/constants.h@{src/constants.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for constants.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{constants_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{constants_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{constants_8h_a8e43f4a3b88c32f926af9673c3764e4d}{MAX\+\_\+\+WORLD\+\_\+\+OBJECTS}}~100
+\item 
+\#define \mbox{\hyperlink{constants_8h_ad99919ace47067c9f6b420bd7739636a}{N64\+\_\+\+SCALE\+\_\+\+FACTOR}}~30
+\item 
+\#define \mbox{\hyperlink{constants_8h_a9959b6b784db3bf03c785f54769f9088}{DEFAULT\+\_\+\+FOVY}}~15.\+0f
+\item 
+\#define \mbox{\hyperlink{constants_8h_adfde598c3de16fbbc0ea99663188eb40}{DEFAULT\+\_\+\+NEARPLANE}}~100
+\item 
+\#define \mbox{\hyperlink{constants_8h_a831e91a5d33e974a29bb3dfe47bdb9bf}{DEFAULT\+\_\+\+FARPLANE}}~4000
+\item 
+\#define \mbox{\hyperlink{constants_8h_a9fe2d5c94f121818392a5ee8113d74d7}{HIGH\+\_\+\+RESOLUTION}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a40054b477ae0ee02a027b0fa6c482f4c}{HIGH\+\_\+\+RESOLUTION\+\_\+\+HALF\+\_\+Y}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a22b84559348bbbbc49c4568141b6dbf7}{ANTIALIASING}}~1
+\item 
+\#define \mbox{\hyperlink{constants_8h_a6c17169f464fb1a2995dbe06faa47a5f}{CONSOLE}}~1
+\item 
+\#define \mbox{\hyperlink{constants_8h_a9f8601df47e482693d8023f2d9e33ff8}{NU\+\_\+\+PERF\+\_\+\+BAR}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_ae0e0d8359ef72919138340d250dd1929}{WATER\+\_\+\+HEIGHT}}~-\/70.\+0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}{CONST\+\_\+\+PI}}~3.\+14159265358979323846
+\item 
+\#define \mbox{\hyperlink{constants_8h_ae9b10e0d9166f7a4fac6502bba06b47d}{deg\+To\+Rad}}(angle\+In\+Degrees)~((angle\+In\+Degrees)$\ast$\mbox{\hyperlink{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}{CONST\+\_\+\+PI}} / 180.\+0)
+\item 
+\#define \mbox{\hyperlink{constants_8h_a6a1b651d5cbae978c9e1bfe00ef54f5d}{rad\+To\+Deg}}(angle\+In\+Radians)~((angle\+In\+Radians)$\ast$180.\+0 / \mbox{\hyperlink{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}{CONST\+\_\+\+PI}})
+\item 
+\#define \mbox{\hyperlink{constants_8h_ad1ae494d203279fb7e15c64057ea2cb4}{VSYNC\+\_\+\+FPS}}~60
+\item 
+\#define \mbox{\hyperlink{constants_8h_a0c2b1b2d194b0322c812b4abbfc3872f}{FRAME\+\_\+\+SKIP}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a6016d8fe3425b2bb1338dec66f829a46}{RAND}}(x)~(rand() \% (x)) /$\ast$ random number between 0 to x $\ast$/
+\item 
+\#define \mbox{\hyperlink{constants_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}}~1
+\item 
+\#define \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}~0
+\item 
+\#define \mbox{\hyperlink{constants_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}}(a,  b)~(((a) $<$ (b)) ? (a) \+: (b))
+\item 
+\#define \mbox{\hyperlink{constants_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}}(a,  b)~(((a) $>$ (b)) ? (a) \+: (b))
+\item 
+\#define \mbox{\hyperlink{constants_8h_a52a8c67405c41892537f726aad89941c}{CLAMP}}(x,  low,  high)~ (((x) $>$ (high)) ? (high) \+: (((x) $<$ (low)) ? (low) \+: (x)))
+\item 
+\#define \mbox{\hyperlink{constants_8h_a79f02c599216c879b959b06730eb6df1}{INTFLOOR}}(x)~(int)x
+\item 
+\#define \mbox{\hyperlink{constants_8h_a110a60bf19994ec45719ed995efff190}{INTCEIL}}(x)~((int)x) + 1
+\item 
+\#define \mbox{\hyperlink{constants_8h_a94d76f325af05727bf195c75fedafa4a}{debug\+Printf}}~printf
+\item 
+\#define \mbox{\hyperlink{constants_8h_aaa0abbe5a0a57d8464187897cb4c813c}{debug\+Printf\+Sync}}~printf
+\item 
+\#define \mbox{\hyperlink{constants_8h_ab6acaec854169756098dfd26138a1a0e}{die}}(msg)
+\item 
+\#define \mbox{\hyperlink{constants_8h_a9308be5acedce9d9e9b5b5dc0921fce0}{beacon}}()~\mbox{\hyperlink{constants_8h_aaa0abbe5a0a57d8464187897cb4c813c}{debug\+Printf\+Sync}}(\char`\"{}at \%d in \%s\textbackslash{}n\char`\"{}, \+\_\+\+\_\+\+LINE\+\_\+\+\_\+, \+\_\+\+\_\+\+FUNCTION\+\_\+\+\_\+);
+\item 
+\#define \mbox{\hyperlink{constants_8h_a3ecfa2c8eaffcaa69d36ca190aafad1f}{invariant}}(expression)~assert(expression)
+\item 
+\#define \mbox{\hyperlink{constants_8h_a600a9362e677c28d20a014367ca0987d}{EXTERN\+\_\+\+SEGMENT}}(name)
+\item 
+\#define \mbox{\hyperlink{constants_8h_a33a251f525c89ae44ff03397987c1922}{EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS}}(name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{constants_8h_a22b84559348bbbbc49c4568141b6dbf7}\label{constants_8h_a22b84559348bbbbc49c4568141b6dbf7}} 
+\index{constants.h@{constants.h}!ANTIALIASING@{ANTIALIASING}}
+\index{ANTIALIASING@{ANTIALIASING}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{ANTIALIASING}{ANTIALIASING}}
+{\footnotesize\ttfamily \#define ANTIALIASING~1}
+
+\mbox{\Hypertarget{constants_8h_a9308be5acedce9d9e9b5b5dc0921fce0}\label{constants_8h_a9308be5acedce9d9e9b5b5dc0921fce0}} 
+\index{constants.h@{constants.h}!beacon@{beacon}}
+\index{beacon@{beacon}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{beacon}{beacon}}
+{\footnotesize\ttfamily \#define beacon(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\mbox{\hyperlink{constants_8h_aaa0abbe5a0a57d8464187897cb4c813c}{debug\+Printf\+Sync}}(\char`\"{}at \%d in \%s\textbackslash{}n\char`\"{}, \+\_\+\+\_\+\+LINE\+\_\+\+\_\+, \+\_\+\+\_\+\+FUNCTION\+\_\+\+\_\+);}
+
+\mbox{\Hypertarget{constants_8h_a52a8c67405c41892537f726aad89941c}\label{constants_8h_a52a8c67405c41892537f726aad89941c}} 
+\index{constants.h@{constants.h}!CLAMP@{CLAMP}}
+\index{CLAMP@{CLAMP}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{CLAMP}{CLAMP}}
+{\footnotesize\ttfamily \#define CLAMP(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{low,  }\item[{}]{high }\end{DoxyParamCaption})~ (((x) $>$ (high)) ? (high) \+: (((x) $<$ (low)) ? (low) \+: (x)))}
+
+\mbox{\Hypertarget{constants_8h_a6c17169f464fb1a2995dbe06faa47a5f}\label{constants_8h_a6c17169f464fb1a2995dbe06faa47a5f}} 
+\index{constants.h@{constants.h}!CONSOLE@{CONSOLE}}
+\index{CONSOLE@{CONSOLE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{CONSOLE}{CONSOLE}}
+{\footnotesize\ttfamily \#define CONSOLE~1}
+
+\mbox{\Hypertarget{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}\label{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}} 
+\index{constants.h@{constants.h}!CONST\_PI@{CONST\_PI}}
+\index{CONST\_PI@{CONST\_PI}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{CONST\_PI}{CONST\_PI}}
+{\footnotesize\ttfamily \#define CONST\+\_\+\+PI~3.\+14159265358979323846}
+
+\mbox{\Hypertarget{constants_8h_a94d76f325af05727bf195c75fedafa4a}\label{constants_8h_a94d76f325af05727bf195c75fedafa4a}} 
+\index{constants.h@{constants.h}!debugPrintf@{debugPrintf}}
+\index{debugPrintf@{debugPrintf}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{debugPrintf}{debugPrintf}}
+{\footnotesize\ttfamily \#define debug\+Printf~printf}
+
+\mbox{\Hypertarget{constants_8h_aaa0abbe5a0a57d8464187897cb4c813c}\label{constants_8h_aaa0abbe5a0a57d8464187897cb4c813c}} 
+\index{constants.h@{constants.h}!debugPrintfSync@{debugPrintfSync}}
+\index{debugPrintfSync@{debugPrintfSync}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{debugPrintfSync}{debugPrintfSync}}
+{\footnotesize\ttfamily \#define debug\+Printf\+Sync~printf}
+
+\mbox{\Hypertarget{constants_8h_a831e91a5d33e974a29bb3dfe47bdb9bf}\label{constants_8h_a831e91a5d33e974a29bb3dfe47bdb9bf}} 
+\index{constants.h@{constants.h}!DEFAULT\_FARPLANE@{DEFAULT\_FARPLANE}}
+\index{DEFAULT\_FARPLANE@{DEFAULT\_FARPLANE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_FARPLANE}{DEFAULT\_FARPLANE}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+FARPLANE~4000}
+
+\mbox{\Hypertarget{constants_8h_a9959b6b784db3bf03c785f54769f9088}\label{constants_8h_a9959b6b784db3bf03c785f54769f9088}} 
+\index{constants.h@{constants.h}!DEFAULT\_FOVY@{DEFAULT\_FOVY}}
+\index{DEFAULT\_FOVY@{DEFAULT\_FOVY}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_FOVY}{DEFAULT\_FOVY}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+FOVY~15.\+0f}
+
+\mbox{\Hypertarget{constants_8h_adfde598c3de16fbbc0ea99663188eb40}\label{constants_8h_adfde598c3de16fbbc0ea99663188eb40}} 
+\index{constants.h@{constants.h}!DEFAULT\_NEARPLANE@{DEFAULT\_NEARPLANE}}
+\index{DEFAULT\_NEARPLANE@{DEFAULT\_NEARPLANE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_NEARPLANE}{DEFAULT\_NEARPLANE}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+NEARPLANE~100}
+
+\mbox{\Hypertarget{constants_8h_ae9b10e0d9166f7a4fac6502bba06b47d}\label{constants_8h_ae9b10e0d9166f7a4fac6502bba06b47d}} 
+\index{constants.h@{constants.h}!degToRad@{degToRad}}
+\index{degToRad@{degToRad}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{degToRad}{degToRad}}
+{\footnotesize\ttfamily \#define deg\+To\+Rad(\begin{DoxyParamCaption}\item[{}]{angle\+In\+Degrees }\end{DoxyParamCaption})~((angle\+In\+Degrees)$\ast$\mbox{\hyperlink{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}{CONST\+\_\+\+PI}} / 180.\+0)}
+
+\mbox{\Hypertarget{constants_8h_ab6acaec854169756098dfd26138a1a0e}\label{constants_8h_ab6acaec854169756098dfd26138a1a0e}} 
+\index{constants.h@{constants.h}!die@{die}}
+\index{die@{die}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{die}{die}}
+{\footnotesize\ttfamily \#define die(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    printf(\textcolor{stringliteral}{"{}died: \(\backslash\)"{}\%s\(\backslash\)"{} in \%s at \%s:\%d\(\backslash\)n"{}}, msg, \_\_FUNCTION\_\_, \_\_FILE\_\_, \(\backslash\)}
+\DoxyCodeLine{           \_\_LINE\_\_);                                                    \(\backslash\)}
+\DoxyCodeLine{    assert(\mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}});}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{constants_8h_a600a9362e677c28d20a014367ca0987d}\label{constants_8h_a600a9362e677c28d20a014367ca0987d}} 
+\index{constants.h@{constants.h}!EXTERN\_SEGMENT@{EXTERN\_SEGMENT}}
+\index{EXTERN\_SEGMENT@{EXTERN\_SEGMENT}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN\_SEGMENT}{EXTERN\_SEGMENT}}
+{\footnotesize\ttfamily \#define EXTERN\+\_\+\+SEGMENT(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{extern} \textcolor{keywordtype}{char} \_\#\#name\#\#SegmentStart[], \_\#\#name\#\#SegmentEnd[], \(\backslash\)}
+\DoxyCodeLine{        \_\#\#name\#\#SegmentRomStart[], \_\#\#name\#\#SegmentRomEnd[]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{constants_8h_a33a251f525c89ae44ff03397987c1922}\label{constants_8h_a33a251f525c89ae44ff03397987c1922}} 
+\index{constants.h@{constants.h}!EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}}
+\index{EXTERN\_SEGMENT\_WITH\_BSS@{EXTERN\_SEGMENT\_WITH\_BSS}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN\_SEGMENT\_WITH\_BSS}{EXTERN\_SEGMENT\_WITH\_BSS}}
+{\footnotesize\ttfamily \#define EXTERN\+\_\+\+SEGMENT\+\_\+\+WITH\+\_\+\+BSS(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{extern} \textcolor{keywordtype}{char} \_\#\#name\#\#SegmentStart[], \_\#\#name\#\#SegmentEnd[], \(\backslash\)}
+\DoxyCodeLine{        \_\#\#name\#\#SegmentRomStart[], \_\#\#name\#\#SegmentRomEnd[],   \(\backslash\)}
+\DoxyCodeLine{        \_\#\#name\#\#SegmentBssStart[], \_\#\#name\#\#SegmentBssEnd[]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}\label{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
+\index{constants.h@{constants.h}!FALSE@{FALSE}}
+\index{FALSE@{FALSE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{FALSE}{FALSE}}
+{\footnotesize\ttfamily \#define FALSE~0}
+
+\mbox{\Hypertarget{constants_8h_a0c2b1b2d194b0322c812b4abbfc3872f}\label{constants_8h_a0c2b1b2d194b0322c812b4abbfc3872f}} 
+\index{constants.h@{constants.h}!FRAME\_SKIP@{FRAME\_SKIP}}
+\index{FRAME\_SKIP@{FRAME\_SKIP}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{FRAME\_SKIP}{FRAME\_SKIP}}
+{\footnotesize\ttfamily \#define FRAME\+\_\+\+SKIP~0}
+
+\mbox{\Hypertarget{constants_8h_a9fe2d5c94f121818392a5ee8113d74d7}\label{constants_8h_a9fe2d5c94f121818392a5ee8113d74d7}} 
+\index{constants.h@{constants.h}!HIGH\_RESOLUTION@{HIGH\_RESOLUTION}}
+\index{HIGH\_RESOLUTION@{HIGH\_RESOLUTION}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{HIGH\_RESOLUTION}{HIGH\_RESOLUTION}}
+{\footnotesize\ttfamily \#define HIGH\+\_\+\+RESOLUTION~0}
+
+\mbox{\Hypertarget{constants_8h_a40054b477ae0ee02a027b0fa6c482f4c}\label{constants_8h_a40054b477ae0ee02a027b0fa6c482f4c}} 
+\index{constants.h@{constants.h}!HIGH\_RESOLUTION\_HALF\_Y@{HIGH\_RESOLUTION\_HALF\_Y}}
+\index{HIGH\_RESOLUTION\_HALF\_Y@{HIGH\_RESOLUTION\_HALF\_Y}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{HIGH\_RESOLUTION\_HALF\_Y}{HIGH\_RESOLUTION\_HALF\_Y}}
+{\footnotesize\ttfamily \#define HIGH\+\_\+\+RESOLUTION\+\_\+\+HALF\+\_\+Y~0}
+
+\mbox{\Hypertarget{constants_8h_a110a60bf19994ec45719ed995efff190}\label{constants_8h_a110a60bf19994ec45719ed995efff190}} 
+\index{constants.h@{constants.h}!INTCEIL@{INTCEIL}}
+\index{INTCEIL@{INTCEIL}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{INTCEIL}{INTCEIL}}
+{\footnotesize\ttfamily \#define INTCEIL(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((int)x) + 1}
+
+\mbox{\Hypertarget{constants_8h_a79f02c599216c879b959b06730eb6df1}\label{constants_8h_a79f02c599216c879b959b06730eb6df1}} 
+\index{constants.h@{constants.h}!INTFLOOR@{INTFLOOR}}
+\index{INTFLOOR@{INTFLOOR}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{INTFLOOR}{INTFLOOR}}
+{\footnotesize\ttfamily \#define INTFLOOR(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(int)x}
+
+\mbox{\Hypertarget{constants_8h_a3ecfa2c8eaffcaa69d36ca190aafad1f}\label{constants_8h_a3ecfa2c8eaffcaa69d36ca190aafad1f}} 
+\index{constants.h@{constants.h}!invariant@{invariant}}
+\index{invariant@{invariant}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{invariant}{invariant}}
+{\footnotesize\ttfamily \#define invariant(\begin{DoxyParamCaption}\item[{}]{expression }\end{DoxyParamCaption})~assert(expression)}
+
+\mbox{\Hypertarget{constants_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}\label{constants_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}} 
+\index{constants.h@{constants.h}!MAX@{MAX}}
+\index{MAX@{MAX}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MAX}{MAX}}
+{\footnotesize\ttfamily \#define MAX(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})~(((a) $>$ (b)) ? (a) \+: (b))}
+
+\mbox{\Hypertarget{constants_8h_a8e43f4a3b88c32f926af9673c3764e4d}\label{constants_8h_a8e43f4a3b88c32f926af9673c3764e4d}} 
+\index{constants.h@{constants.h}!MAX\_WORLD\_OBJECTS@{MAX\_WORLD\_OBJECTS}}
+\index{MAX\_WORLD\_OBJECTS@{MAX\_WORLD\_OBJECTS}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_WORLD\_OBJECTS}{MAX\_WORLD\_OBJECTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+WORLD\+\_\+\+OBJECTS~100}
+
+\mbox{\Hypertarget{constants_8h_a3acffbd305ee72dcd4593c0d8af64a4f}\label{constants_8h_a3acffbd305ee72dcd4593c0d8af64a4f}} 
+\index{constants.h@{constants.h}!MIN@{MIN}}
+\index{MIN@{MIN}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MIN}{MIN}}
+{\footnotesize\ttfamily \#define MIN(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})~(((a) $<$ (b)) ? (a) \+: (b))}
+
+\mbox{\Hypertarget{constants_8h_ad99919ace47067c9f6b420bd7739636a}\label{constants_8h_ad99919ace47067c9f6b420bd7739636a}} 
+\index{constants.h@{constants.h}!N64\_SCALE\_FACTOR@{N64\_SCALE\_FACTOR}}
+\index{N64\_SCALE\_FACTOR@{N64\_SCALE\_FACTOR}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{N64\_SCALE\_FACTOR}{N64\_SCALE\_FACTOR}}
+{\footnotesize\ttfamily \#define N64\+\_\+\+SCALE\+\_\+\+FACTOR~30}
+
+\mbox{\Hypertarget{constants_8h_a9f8601df47e482693d8023f2d9e33ff8}\label{constants_8h_a9f8601df47e482693d8023f2d9e33ff8}} 
+\index{constants.h@{constants.h}!NU\_PERF\_BAR@{NU\_PERF\_BAR}}
+\index{NU\_PERF\_BAR@{NU\_PERF\_BAR}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{NU\_PERF\_BAR}{NU\_PERF\_BAR}}
+{\footnotesize\ttfamily \#define NU\+\_\+\+PERF\+\_\+\+BAR~0}
+
+\mbox{\Hypertarget{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}\label{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}} 
+\index{constants.h@{constants.h}!NULL@{NULL}}
+\index{NULL@{NULL}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{NULL}{NULL}}
+{\footnotesize\ttfamily \#define NULL~0}
+
+\mbox{\Hypertarget{constants_8h_a6a1b651d5cbae978c9e1bfe00ef54f5d}\label{constants_8h_a6a1b651d5cbae978c9e1bfe00ef54f5d}} 
+\index{constants.h@{constants.h}!radToDeg@{radToDeg}}
+\index{radToDeg@{radToDeg}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{radToDeg}{radToDeg}}
+{\footnotesize\ttfamily \#define rad\+To\+Deg(\begin{DoxyParamCaption}\item[{}]{angle\+In\+Radians }\end{DoxyParamCaption})~((angle\+In\+Radians)$\ast$180.\+0 / \mbox{\hyperlink{constants_8h_a02b01cde332fa86c92d54802cce7f3d2}{CONST\+\_\+\+PI}})}
+
+\mbox{\Hypertarget{constants_8h_a6016d8fe3425b2bb1338dec66f829a46}\label{constants_8h_a6016d8fe3425b2bb1338dec66f829a46}} 
+\index{constants.h@{constants.h}!RAND@{RAND}}
+\index{RAND@{RAND}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{RAND}{RAND}}
+{\footnotesize\ttfamily \#define RAND(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(rand() \% (x)) /$\ast$ random number between 0 to x $\ast$/}
+
+\mbox{\Hypertarget{constants_8h_aa8cecfc5c5c054d2875c03e77b7be15d}\label{constants_8h_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\index{constants.h@{constants.h}!TRUE@{TRUE}}
+\index{TRUE@{TRUE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{TRUE}{TRUE}}
+{\footnotesize\ttfamily \#define TRUE~1}
+
+\mbox{\Hypertarget{constants_8h_ad1ae494d203279fb7e15c64057ea2cb4}\label{constants_8h_ad1ae494d203279fb7e15c64057ea2cb4}} 
+\index{constants.h@{constants.h}!VSYNC\_FPS@{VSYNC\_FPS}}
+\index{VSYNC\_FPS@{VSYNC\_FPS}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{VSYNC\_FPS}{VSYNC\_FPS}}
+{\footnotesize\ttfamily \#define VSYNC\+\_\+\+FPS~60}
+
+\mbox{\Hypertarget{constants_8h_ae0e0d8359ef72919138340d250dd1929}\label{constants_8h_ae0e0d8359ef72919138340d250dd1929}} 
+\index{constants.h@{constants.h}!WATER\_HEIGHT@{WATER\_HEIGHT}}
+\index{WATER\_HEIGHT@{WATER\_HEIGHT}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{WATER\_HEIGHT}{WATER\_HEIGHT}}
+{\footnotesize\ttfamily \#define WATER\+\_\+\+HEIGHT~-\/70.\+0}
+

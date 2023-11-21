@@ -1,0 +1,277 @@
+\hypertarget{modeltype_8h}{}\doxysection{src/modeltype.h File Reference}
+\label{modeltype_8h}\index{src/modeltype.h@{src/modeltype.h}}
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+Include dependency graph for modeltype.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{modeltype_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{modeltype_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} \mbox{\hyperlink{modeltype_8h_a6eaf617b6f2bacf456fbb7585e5a2634}{Model\+Type}}
+\item 
+typedef enum \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}} \mbox{\hyperlink{modeltype_8h_aa254198af94d4032afca124bcb56342c}{Model\+Type\+Category}}
+\item 
+typedef struct \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} \mbox{\hyperlink{modeltype_8h_a022cbed4fb6f55b23961d2eb03a3dc87}{Model\+Properties}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} \{ \newline
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da02ce09c539e433a313d09eba09935112}{None\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da321b28af3e1fd99ea8560dbe4ff16900}{Goose\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da2d828001d855b54381af548ffc57e304}{Book\+Item\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf136aab00c78ac41f7c446e6d27ff952}{Homework\+Item\+Model}}
+, \newline
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da6703fd0d2ab5b0ce2a00b7ef1a61685c}{Cake\+Item\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da8681022de6bc693027370c6e07bc97ac}{Uni\+Bldg\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac66a6194f47744ce879cc35a6673da08}{Uni\+Floor\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da7b8ed9720cbbc1c4d7e0ca1abeaf2ee8}{Bush\+Model}}
+, \newline
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac16872c7c42b0c9c0f242d1235e40743}{Flagpole\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dad90e1191cb7dfa0346578d98f9f24f57}{Gardener\+Character\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da9a156fdfe9946263b229f5042b39c000}{Wall\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daa8076a3c4e29047eb85240f6f7b86467}{Planter\+Model}}
+, \newline
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da82f9435c813b241caa7c9a4993007d06}{Ground\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da05e9108f75a1a0e67cd02372a575f7dc}{Water\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da5136f40bba3ee1f8f2f84dc625b7d26b}{Rock\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1b30f779a2ad4cd5b838838c6a726a11}{Watergrass\+Model}}
+, \newline
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1a19fadbddd592cfa57fb3dd6576309a}{Reed\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf2e1eef47379145b21aa5816081d3b07}{Lilypad\+Model}}
+, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da551f36dd3943304fb0aa2896996aa513}{MAX\+\_\+\+MODEL\+\_\+\+TYPE}}
+ \}
+\item 
+enum \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}} \{ \newline
+\mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aea2ef0c4fcbcd431dcf00c5afd6b6962}{Generic\+Model\+Type}}
+, \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a66d39e5e36654a76325693a7b00d7c14}{Item\+Model\+Type}}
+, \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a031612e52cae8c7fc4defab6d36b7c52}{Character\+Model\+Type}}
+, \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a7ab7487093f0dc0aa7cf12350f4f9770}{Player\+Model\+Type}}
+, \newline
+\mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aec0830d4e754bac1f0c30ce723b2a7b3}{MAX\+\_\+\+MODEL\+\_\+\+TYPE\+\_\+\+CATEGORY}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} \mbox{\hyperlink{modeltype_8h_a5c22adae3eb1bf8b6713d92142c931b3}{model\+Types\+Properties}} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ \mbox{\hyperlink{modeltype_8h_a5613c8ccf9d88411d108236d6811d437}{Model\+Type\+Strings}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{ModelProperties@{ModelProperties}}\label{structModelProperties}
+\Hypertarget{modeltype_8h_structModelProperties}
+\doxysubsubsection{struct Model\+Properties}
+
+
+Collaboration diagram for Model\+Properties\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{structModelProperties__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{modeltype_8h_a1497cb236fe8b4d8f6d4ef156c357e2a}\label{modeltype_8h_a1497cb236fe8b4d8f6d4ef156c357e2a}} 
+\mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{ModelTypeCategory}}&
+category&
+\\
+\hline
+
+\mbox{\Hypertarget{modeltype_8h_aca5caec4ef47a5b83361133441c4ddde}\label{modeltype_8h_aca5caec4ef47a5b83361133441c4ddde}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+centroidOffset&
+\\
+\hline
+
+\mbox{\Hypertarget{modeltype_8h_a4e5723596e80c7d76cf6dc54ca5c4633}\label{modeltype_8h_a4e5723596e80c7d76cf6dc54ca5c4633}} 
+float&
+mass&
+\\
+\hline
+
+\mbox{\Hypertarget{modeltype_8h_a7c7e88ac528b608bdb1a122179bde64c}\label{modeltype_8h_a7c7e88ac528b608bdb1a122179bde64c}} 
+float&
+radius&
+\\
+\hline
+
+\mbox{\Hypertarget{modeltype_8h_a8c51d917df0a1255b13a10bb7071b2d7}\label{modeltype_8h_a8c51d917df0a1255b13a10bb7071b2d7}} 
+float&
+scale&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{modeltype_8h_a022cbed4fb6f55b23961d2eb03a3dc87}\label{modeltype_8h_a022cbed4fb6f55b23961d2eb03a3dc87}} 
+\index{modeltype.h@{modeltype.h}!ModelProperties@{ModelProperties}}
+\index{ModelProperties@{ModelProperties}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelProperties}{ModelProperties}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}}}
+
+\mbox{\Hypertarget{modeltype_8h_a6eaf617b6f2bacf456fbb7585e5a2634}\label{modeltype_8h_a6eaf617b6f2bacf456fbb7585e5a2634}} 
+\index{modeltype.h@{modeltype.h}!ModelType@{ModelType}}
+\index{ModelType@{ModelType}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelType}{ModelType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}
+
+\mbox{\Hypertarget{modeltype_8h_aa254198af94d4032afca124bcb56342c}\label{modeltype_8h_aa254198af94d4032afca124bcb56342c}} 
+\index{modeltype.h@{modeltype.h}!ModelTypeCategory@{ModelTypeCategory}}
+\index{ModelTypeCategory@{ModelTypeCategory}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelTypeCategory}{ModelTypeCategory}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}} \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}} 
+\index{modeltype.h@{modeltype.h}!ModelType@{ModelType}}
+\index{ModelType@{ModelType}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelType}{ModelType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NoneModel@{NoneModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!NoneModel@{NoneModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da02ce09c539e433a313d09eba09935112}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da02ce09c539e433a313d09eba09935112}} 
+None\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GooseModel@{GooseModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!GooseModel@{GooseModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da321b28af3e1fd99ea8560dbe4ff16900}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da321b28af3e1fd99ea8560dbe4ff16900}} 
+Goose\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BookItemModel@{BookItemModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!BookItemModel@{BookItemModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da2d828001d855b54381af548ffc57e304}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da2d828001d855b54381af548ffc57e304}} 
+Book\+Item\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HomeworkItemModel@{HomeworkItemModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!HomeworkItemModel@{HomeworkItemModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf136aab00c78ac41f7c446e6d27ff952}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf136aab00c78ac41f7c446e6d27ff952}} 
+Homework\+Item\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CakeItemModel@{CakeItemModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!CakeItemModel@{CakeItemModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da6703fd0d2ab5b0ce2a00b7ef1a61685c}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da6703fd0d2ab5b0ce2a00b7ef1a61685c}} 
+Cake\+Item\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UniBldgModel@{UniBldgModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!UniBldgModel@{UniBldgModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da8681022de6bc693027370c6e07bc97ac}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da8681022de6bc693027370c6e07bc97ac}} 
+Uni\+Bldg\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UniFloorModel@{UniFloorModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!UniFloorModel@{UniFloorModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac66a6194f47744ce879cc35a6673da08}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac66a6194f47744ce879cc35a6673da08}} 
+Uni\+Floor\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BushModel@{BushModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!BushModel@{BushModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da7b8ed9720cbbc1c4d7e0ca1abeaf2ee8}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da7b8ed9720cbbc1c4d7e0ca1abeaf2ee8}} 
+Bush\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FlagpoleModel@{FlagpoleModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!FlagpoleModel@{FlagpoleModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac16872c7c42b0c9c0f242d1235e40743}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dac16872c7c42b0c9c0f242d1235e40743}} 
+Flagpole\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GardenerCharacterModel@{GardenerCharacterModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!GardenerCharacterModel@{GardenerCharacterModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dad90e1191cb7dfa0346578d98f9f24f57}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15dad90e1191cb7dfa0346578d98f9f24f57}} 
+Gardener\+Character\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WallModel@{WallModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!WallModel@{WallModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da9a156fdfe9946263b229f5042b39c000}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da9a156fdfe9946263b229f5042b39c000}} 
+Wall\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PlanterModel@{PlanterModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!PlanterModel@{PlanterModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daa8076a3c4e29047eb85240f6f7b86467}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daa8076a3c4e29047eb85240f6f7b86467}} 
+Planter\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GroundModel@{GroundModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!GroundModel@{GroundModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da82f9435c813b241caa7c9a4993007d06}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da82f9435c813b241caa7c9a4993007d06}} 
+Ground\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WaterModel@{WaterModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!WaterModel@{WaterModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da05e9108f75a1a0e67cd02372a575f7dc}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da05e9108f75a1a0e67cd02372a575f7dc}} 
+Water\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RockModel@{RockModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!RockModel@{RockModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da5136f40bba3ee1f8f2f84dc625b7d26b}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da5136f40bba3ee1f8f2f84dc625b7d26b}} 
+Rock\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WatergrassModel@{WatergrassModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!WatergrassModel@{WatergrassModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1b30f779a2ad4cd5b838838c6a726a11}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1b30f779a2ad4cd5b838838c6a726a11}} 
+Watergrass\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ReedModel@{ReedModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!ReedModel@{ReedModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1a19fadbddd592cfa57fb3dd6576309a}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da1a19fadbddd592cfa57fb3dd6576309a}} 
+Reed\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LilypadModel@{LilypadModel}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!LilypadModel@{LilypadModel}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf2e1eef47379145b21aa5816081d3b07}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15daf2e1eef47379145b21aa5816081d3b07}} 
+Lilypad\+Model&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_MODEL\_TYPE@{MAX\_MODEL\_TYPE}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!MAX\_MODEL\_TYPE@{MAX\_MODEL\_TYPE}}}\mbox{\Hypertarget{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da551f36dd3943304fb0aa2896996aa513}\label{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15da551f36dd3943304fb0aa2896996aa513}} 
+MAX\+\_\+\+MODEL\+\_\+\+TYPE&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}} 
+\index{modeltype.h@{modeltype.h}!ModelTypeCategory@{ModelTypeCategory}}
+\index{ModelTypeCategory@{ModelTypeCategory}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelTypeCategory}{ModelTypeCategory}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GenericModelType@{GenericModelType}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!GenericModelType@{GenericModelType}}}\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aea2ef0c4fcbcd431dcf00c5afd6b6962}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aea2ef0c4fcbcd431dcf00c5afd6b6962}} 
+Generic\+Model\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ItemModelType@{ItemModelType}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!ItemModelType@{ItemModelType}}}\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a66d39e5e36654a76325693a7b00d7c14}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a66d39e5e36654a76325693a7b00d7c14}} 
+Item\+Model\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CharacterModelType@{CharacterModelType}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!CharacterModelType@{CharacterModelType}}}\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a031612e52cae8c7fc4defab6d36b7c52}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a031612e52cae8c7fc4defab6d36b7c52}} 
+Character\+Model\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PlayerModelType@{PlayerModelType}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!PlayerModelType@{PlayerModelType}}}\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a7ab7487093f0dc0aa7cf12350f4f9770}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21a7ab7487093f0dc0aa7cf12350f4f9770}} 
+Player\+Model\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_MODEL\_TYPE\_CATEGORY@{MAX\_MODEL\_TYPE\_CATEGORY}!modeltype.h@{modeltype.h}}\index{modeltype.h@{modeltype.h}!MAX\_MODEL\_TYPE\_CATEGORY@{MAX\_MODEL\_TYPE\_CATEGORY}}}\mbox{\Hypertarget{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aec0830d4e754bac1f0c30ce723b2a7b3}\label{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21aec0830d4e754bac1f0c30ce723b2a7b3}} 
+MAX\+\_\+\+MODEL\+\_\+\+TYPE\+\_\+\+CATEGORY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{modeltype_8h_a5c22adae3eb1bf8b6713d92142c931b3}\label{modeltype_8h_a5c22adae3eb1bf8b6713d92142c931b3}} 
+\index{modeltype.h@{modeltype.h}!modelTypesProperties@{modelTypesProperties}}
+\index{modelTypesProperties@{modelTypesProperties}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{modelTypesProperties}{modelTypesProperties}}
+{\footnotesize\ttfamily \mbox{\hyperlink{modeltype_8h_structModelProperties}{Model\+Properties}} model\+Types\+Properties\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{modeltype_8h_a5613c8ccf9d88411d108236d6811d437}\label{modeltype_8h_a5613c8ccf9d88411d108236d6811d437}} 
+\index{modeltype.h@{modeltype.h}!ModelTypeStrings@{ModelTypeStrings}}
+\index{ModelTypeStrings@{ModelTypeStrings}!modeltype.h@{modeltype.h}}
+\doxysubsubsection{\texorpdfstring{ModelTypeStrings}{ModelTypeStrings}}
+{\footnotesize\ttfamily char$\ast$ Model\+Type\+Strings\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

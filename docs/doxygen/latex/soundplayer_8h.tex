@@ -1,0 +1,207 @@
+\hypertarget{soundplayer_8h}{}\doxysection{src/audio/soundplayer.h File Reference}
+\label{soundplayer_8h}\index{src/audio/soundplayer.h@{src/audio/soundplayer.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/quaternion.\+h\char`\"{}}\newline
+Include dependency graph for soundplayer.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{soundplayer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{soundplayer_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{soundplayer_8h_a7bbdbdcfece918fba0f794f7419cd6ac}{MAX\+\_\+\+SOUNDS}}~128
+\item 
+\#define \mbox{\hyperlink{soundplayer_8h_a5d6a67cd00f656b7a1c81d71cf4f81fb}{MAX\+\_\+\+SOUND\+\_\+\+LISTENERS}}~3
+\item 
+\#define \mbox{\hyperlink{soundplayer_8h_a2a46a3eb7ec4aace36e072618265f250}{SOUND\+\_\+\+SAMPLE\+\_\+\+RATE}}~22500
+\item 
+\#define \mbox{\hyperlink{soundplayer_8h_a1a82e5fd4ef5ebf42606863f26079e03}{SOUND\+\_\+\+ID\+\_\+\+NONE}}~-\/1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{soundplayer_8h_ad5994cc6921b69b73a9d98684d9cbfe7}{sound\+Clip\+Length}} (int sound\+Clip\+Id, float speed)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_ad4d57513674ff7ced4b552c3bcdb85d0}{sound\+Player\+Init}} ()
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a67ae40088e6e57674c8cc7cf02c95043}{sound\+Player\+Update}} ()
+\item 
+ALSnd\+Id \mbox{\hyperlink{soundplayer_8h_ad231a4d3adc993a422b2701b44035a80}{sound\+Player\+Play}} (int sound\+Clip\+Id, float volume, float pitch, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$at)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a44b45fe6b1ec16bac10fd7010b098214}{sound\+Player\+Stop}} (ALSnd\+Id sound\+Id)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a5858be728a9ff6e77d5546e3bf5003ba}{sound\+Player\+Update\+Position}} (ALSnd\+Id sound\+Id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$at)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_ab3f44394b73da6c343652d026d75f18e}{sound\+Player\+Update\+Volume}} (ALSnd\+Id sound\+Id, float volume)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_ad1c328f9db01b367da888ee592808ebb}{sound\+Player\+Update\+Pitch}} (ALSnd\+Id sound\+Id, float pitch)
+\item 
+int \mbox{\hyperlink{soundplayer_8h_a178581f459fe47717fc1b0c97558ed28}{sound\+Player\+Is\+Playing}} (ALSnd\+Id sound\+Id)
+\item 
+short \mbox{\hyperlink{soundplayer_8h_a31a6932ed43263f1237f55bee78ec763}{sound\+Player\+Sound\+Clip\+Id}} (ALSnd\+Id sound\+Id)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a29a2091e6560afee11c6c038290a1972}{sound\+Listener\+Update}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$rotation, int listener\+Index)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a74725fb981315e874ea3dfd22eb0ea15}{sound\+Listener\+Set\+Count}} (int count)
+\item 
+void \mbox{\hyperlink{soundplayer_8h_a3fcedf65bb4428a1d695d98009da2934}{sound\+Player\+Stop\+All}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{soundplayer_8h_ad84687aafe279f25cc0a21f71cdb6c78}{\+\_\+sounds\+Segment\+Rom\+Start}} \mbox{[}$\,$\mbox{]}
+\item 
+char \mbox{\hyperlink{soundplayer_8h_ad289cbe0e46705105b0cb8beac8710d4}{\+\_\+sounds\+Segment\+Rom\+End}} \mbox{[}$\,$\mbox{]}
+\item 
+char \mbox{\hyperlink{soundplayer_8h_a25ac759a5b76c5ea1dc8b2515df9d6f2}{\+\_\+sounds\+Tbl\+Segment\+Rom\+Start}} \mbox{[}$\,$\mbox{]}
+\item 
+char \mbox{\hyperlink{soundplayer_8h_aaa9ac1dd4cdc45cbe687cff61e561927}{\+\_\+sounds\+Tbl\+Segment\+Rom\+End}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{soundplayer_8h_a5d6a67cd00f656b7a1c81d71cf4f81fb}\label{soundplayer_8h_a5d6a67cd00f656b7a1c81d71cf4f81fb}} 
+\index{soundplayer.h@{soundplayer.h}!MAX\_SOUND\_LISTENERS@{MAX\_SOUND\_LISTENERS}}
+\index{MAX\_SOUND\_LISTENERS@{MAX\_SOUND\_LISTENERS}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_SOUND\_LISTENERS}{MAX\_SOUND\_LISTENERS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+SOUND\+\_\+\+LISTENERS~3}
+
+\mbox{\Hypertarget{soundplayer_8h_a7bbdbdcfece918fba0f794f7419cd6ac}\label{soundplayer_8h_a7bbdbdcfece918fba0f794f7419cd6ac}} 
+\index{soundplayer.h@{soundplayer.h}!MAX\_SOUNDS@{MAX\_SOUNDS}}
+\index{MAX\_SOUNDS@{MAX\_SOUNDS}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_SOUNDS}{MAX\_SOUNDS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+SOUNDS~128}
+
+\mbox{\Hypertarget{soundplayer_8h_a1a82e5fd4ef5ebf42606863f26079e03}\label{soundplayer_8h_a1a82e5fd4ef5ebf42606863f26079e03}} 
+\index{soundplayer.h@{soundplayer.h}!SOUND\_ID\_NONE@{SOUND\_ID\_NONE}}
+\index{SOUND\_ID\_NONE@{SOUND\_ID\_NONE}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{SOUND\_ID\_NONE}{SOUND\_ID\_NONE}}
+{\footnotesize\ttfamily \#define SOUND\+\_\+\+ID\+\_\+\+NONE~-\/1}
+
+\mbox{\Hypertarget{soundplayer_8h_a2a46a3eb7ec4aace36e072618265f250}\label{soundplayer_8h_a2a46a3eb7ec4aace36e072618265f250}} 
+\index{soundplayer.h@{soundplayer.h}!SOUND\_SAMPLE\_RATE@{SOUND\_SAMPLE\_RATE}}
+\index{SOUND\_SAMPLE\_RATE@{SOUND\_SAMPLE\_RATE}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{SOUND\_SAMPLE\_RATE}{SOUND\_SAMPLE\_RATE}}
+{\footnotesize\ttfamily \#define SOUND\+\_\+\+SAMPLE\+\_\+\+RATE~22500}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{soundplayer_8h_ad5994cc6921b69b73a9d98684d9cbfe7}\label{soundplayer_8h_ad5994cc6921b69b73a9d98684d9cbfe7}} 
+\index{soundplayer.h@{soundplayer.h}!soundClipLength@{soundClipLength}}
+\index{soundClipLength@{soundClipLength}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundClipLength()}{soundClipLength()}}
+{\footnotesize\ttfamily float sound\+Clip\+Length (\begin{DoxyParamCaption}\item[{int}]{sound\+Clip\+Id,  }\item[{float}]{speed }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a74725fb981315e874ea3dfd22eb0ea15}\label{soundplayer_8h_a74725fb981315e874ea3dfd22eb0ea15}} 
+\index{soundplayer.h@{soundplayer.h}!soundListenerSetCount@{soundListenerSetCount}}
+\index{soundListenerSetCount@{soundListenerSetCount}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundListenerSetCount()}{soundListenerSetCount()}}
+{\footnotesize\ttfamily void sound\+Listener\+Set\+Count (\begin{DoxyParamCaption}\item[{int}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a29a2091e6560afee11c6c038290a1972}\label{soundplayer_8h_a29a2091e6560afee11c6c038290a1972}} 
+\index{soundplayer.h@{soundplayer.h}!soundListenerUpdate@{soundListenerUpdate}}
+\index{soundListenerUpdate@{soundListenerUpdate}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundListenerUpdate()}{soundListenerUpdate()}}
+{\footnotesize\ttfamily void sound\+Listener\+Update (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{rotation,  }\item[{int}]{listener\+Index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_ad4d57513674ff7ced4b552c3bcdb85d0}\label{soundplayer_8h_ad4d57513674ff7ced4b552c3bcdb85d0}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerInit@{soundPlayerInit}}
+\index{soundPlayerInit@{soundPlayerInit}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerInit()}{soundPlayerInit()}}
+{\footnotesize\ttfamily void sound\+Player\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a178581f459fe47717fc1b0c97558ed28}\label{soundplayer_8h_a178581f459fe47717fc1b0c97558ed28}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerIsPlaying@{soundPlayerIsPlaying}}
+\index{soundPlayerIsPlaying@{soundPlayerIsPlaying}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerIsPlaying()}{soundPlayerIsPlaying()}}
+{\footnotesize\ttfamily int sound\+Player\+Is\+Playing (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_ad231a4d3adc993a422b2701b44035a80}\label{soundplayer_8h_ad231a4d3adc993a422b2701b44035a80}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerPlay@{soundPlayerPlay}}
+\index{soundPlayerPlay@{soundPlayerPlay}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerPlay()}{soundPlayerPlay()}}
+{\footnotesize\ttfamily ALSnd\+Id sound\+Player\+Play (\begin{DoxyParamCaption}\item[{int}]{sound\+Clip\+Id,  }\item[{float}]{volume,  }\item[{float}]{pitch,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{at }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a31a6932ed43263f1237f55bee78ec763}\label{soundplayer_8h_a31a6932ed43263f1237f55bee78ec763}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerSoundClipId@{soundPlayerSoundClipId}}
+\index{soundPlayerSoundClipId@{soundPlayerSoundClipId}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerSoundClipId()}{soundPlayerSoundClipId()}}
+{\footnotesize\ttfamily short sound\+Player\+Sound\+Clip\+Id (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a44b45fe6b1ec16bac10fd7010b098214}\label{soundplayer_8h_a44b45fe6b1ec16bac10fd7010b098214}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerStop@{soundPlayerStop}}
+\index{soundPlayerStop@{soundPlayerStop}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerStop()}{soundPlayerStop()}}
+{\footnotesize\ttfamily void sound\+Player\+Stop (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a3fcedf65bb4428a1d695d98009da2934}\label{soundplayer_8h_a3fcedf65bb4428a1d695d98009da2934}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerStopAll@{soundPlayerStopAll}}
+\index{soundPlayerStopAll@{soundPlayerStopAll}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerStopAll()}{soundPlayerStopAll()}}
+{\footnotesize\ttfamily void sound\+Player\+Stop\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a67ae40088e6e57674c8cc7cf02c95043}\label{soundplayer_8h_a67ae40088e6e57674c8cc7cf02c95043}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerUpdate@{soundPlayerUpdate}}
+\index{soundPlayerUpdate@{soundPlayerUpdate}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerUpdate()}{soundPlayerUpdate()}}
+{\footnotesize\ttfamily void sound\+Player\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_ad1c328f9db01b367da888ee592808ebb}\label{soundplayer_8h_ad1c328f9db01b367da888ee592808ebb}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerUpdatePitch@{soundPlayerUpdatePitch}}
+\index{soundPlayerUpdatePitch@{soundPlayerUpdatePitch}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerUpdatePitch()}{soundPlayerUpdatePitch()}}
+{\footnotesize\ttfamily void sound\+Player\+Update\+Pitch (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id,  }\item[{float}]{pitch }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_a5858be728a9ff6e77d5546e3bf5003ba}\label{soundplayer_8h_a5858be728a9ff6e77d5546e3bf5003ba}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerUpdatePosition@{soundPlayerUpdatePosition}}
+\index{soundPlayerUpdatePosition@{soundPlayerUpdatePosition}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerUpdatePosition()}{soundPlayerUpdatePosition()}}
+{\footnotesize\ttfamily void sound\+Player\+Update\+Position (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{at }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{soundplayer_8h_ab3f44394b73da6c343652d026d75f18e}\label{soundplayer_8h_ab3f44394b73da6c343652d026d75f18e}} 
+\index{soundplayer.h@{soundplayer.h}!soundPlayerUpdateVolume@{soundPlayerUpdateVolume}}
+\index{soundPlayerUpdateVolume@{soundPlayerUpdateVolume}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{soundPlayerUpdateVolume()}{soundPlayerUpdateVolume()}}
+{\footnotesize\ttfamily void sound\+Player\+Update\+Volume (\begin{DoxyParamCaption}\item[{ALSnd\+Id}]{sound\+Id,  }\item[{float}]{volume }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{soundplayer_8h_ad289cbe0e46705105b0cb8beac8710d4}\label{soundplayer_8h_ad289cbe0e46705105b0cb8beac8710d4}} 
+\index{soundplayer.h@{soundplayer.h}!\_soundsSegmentRomEnd@{\_soundsSegmentRomEnd}}
+\index{\_soundsSegmentRomEnd@{\_soundsSegmentRomEnd}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{\_soundsSegmentRomEnd}{\_soundsSegmentRomEnd}}
+{\footnotesize\ttfamily char \+\_\+sounds\+Segment\+Rom\+End\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{soundplayer_8h_ad84687aafe279f25cc0a21f71cdb6c78}\label{soundplayer_8h_ad84687aafe279f25cc0a21f71cdb6c78}} 
+\index{soundplayer.h@{soundplayer.h}!\_soundsSegmentRomStart@{\_soundsSegmentRomStart}}
+\index{\_soundsSegmentRomStart@{\_soundsSegmentRomStart}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{\_soundsSegmentRomStart}{\_soundsSegmentRomStart}}
+{\footnotesize\ttfamily char \+\_\+sounds\+Segment\+Rom\+Start\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{soundplayer_8h_aaa9ac1dd4cdc45cbe687cff61e561927}\label{soundplayer_8h_aaa9ac1dd4cdc45cbe687cff61e561927}} 
+\index{soundplayer.h@{soundplayer.h}!\_soundsTblSegmentRomEnd@{\_soundsTblSegmentRomEnd}}
+\index{\_soundsTblSegmentRomEnd@{\_soundsTblSegmentRomEnd}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{\_soundsTblSegmentRomEnd}{\_soundsTblSegmentRomEnd}}
+{\footnotesize\ttfamily char \+\_\+sounds\+Tbl\+Segment\+Rom\+End\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{soundplayer_8h_a25ac759a5b76c5ea1dc8b2515df9d6f2}\label{soundplayer_8h_a25ac759a5b76c5ea1dc8b2515df9d6f2}} 
+\index{soundplayer.h@{soundplayer.h}!\_soundsTblSegmentRomStart@{\_soundsTblSegmentRomStart}}
+\index{\_soundsTblSegmentRomStart@{\_soundsTblSegmentRomStart}!soundplayer.h@{soundplayer.h}}
+\doxysubsubsection{\texorpdfstring{\_soundsTblSegmentRomStart}{\_soundsTblSegmentRomStart}}
+{\footnotesize\ttfamily char \+\_\+sounds\+Tbl\+Segment\+Rom\+Start\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

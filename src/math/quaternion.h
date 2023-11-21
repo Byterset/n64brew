@@ -1,10 +1,20 @@
-
+/**
+ * @file quaternion.h
+ * @author initial: James Lambert, modified: Kevin Reier
+ * @brief Quaternion math functions Headerfile
+ * @date 2023-11-21
+ * 
+ */
 #ifndef _QUATERNION_H
 #define _QUATERNION_H
 
 #include "vector3.h"
 #include "vector2.h"
 
+/**
+ * @brief The Quaternion struct.
+ * 
+ */
 typedef struct Quaternion
 {
 	float x, y, z, w;
@@ -15,7 +25,7 @@ void quatAxisAngle(struct Vector3 *axis, float angle, struct Quaternion *out);
 void quatAxisComplex(struct Vector3 *axis, struct Vector2 *complex, struct Quaternion *out);
 void quatConjugate(struct Quaternion *in, struct Quaternion *out);
 void quatNegate(struct Quaternion *in, struct Quaternion *out);
-void quatMultVector(struct Quaternion *q, struct Vector3 *a, struct Vector3 *out);
+void quatRotateVector(struct Quaternion *q, struct Vector3 *a, struct Vector3 *out);
 void quatRotatedBoundingBoxSize(struct Quaternion *q, struct Vector3 *halfBoxSize, struct Vector3 *out);
 void quatMultiply(struct Quaternion *a, struct Quaternion *b, struct Quaternion *out);
 void quatAdd(struct Quaternion *a, struct Quaternion *b, struct Quaternion *out);
@@ -28,5 +38,5 @@ void quatEulerAngles(struct Vector3 *angles, struct Quaternion *out);
 void quatLerp(struct Quaternion *a, struct Quaternion *b, float t, struct Quaternion *out);
 void quatApplyAngularVelocity(struct Quaternion *input, struct Vector3 *w, float timeStep, struct Quaternion *output);
 void quatDecompose(struct Quaternion *input, struct Vector3 *axis, float *angle);
-
+float quatDotProduct(struct Quaternion *a, struct Quaternion *b);
 #endif

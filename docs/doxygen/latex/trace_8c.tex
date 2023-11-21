@@ -1,0 +1,119 @@
+\hypertarget{trace_8c}{}\doxysection{src/util/trace.c File Reference}
+\label{trace_8c}\index{src/util/trace.c@{src/util/trace.c}}
+{\ttfamily \#include \char`\"{}trace.\+h\char`\"{}}\newline
+Include dependency graph for trace.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{trace_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{trace_8c_a4d93ca2c1c658edcfa6c2b2bea9fbe60}{Trace\+\_\+add\+Event}} (short type, float start, float end)
+\item 
+void \mbox{\hyperlink{trace_8c_ad11d7f1c0039b2561ccfa69f507fd03d}{Trace\+\_\+clear}} ()
+\item 
+int \mbox{\hyperlink{trace_8c_a2f110dbdb5e10143e7a9176ce684dcde}{Trace\+\_\+is\+Full}} ()
+\item 
+void \mbox{\hyperlink{trace_8c_a4eeef4aafb2e5d5c6cc43a68368808bc}{Trace\+\_\+start}} ()
+\item 
+void \mbox{\hyperlink{trace_8c_a63f18ea54398d764e516bb90aa59580f}{Trace\+\_\+stop}} ()
+\item 
+int \mbox{\hyperlink{trace_8c_a40472d77d0f7639c19f5c7ce92947509}{Trace\+\_\+get\+Events\+Count}} ()
+\item 
+int \mbox{\hyperlink{trace_8c_a2a4540959b61804d315245d0c922fb8b}{Trace\+\_\+is\+Tracing}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{trace_8c_a64025670e096e44f252c4b99a6c931b8}{profiling\+Accumulated}} \mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}
+\item 
+int \mbox{\hyperlink{trace_8c_a1a39bb5b3832e1b1ca5e76814b7f4b42}{profiling\+Counts}} \mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}
+\item 
+\mbox{\hyperlink{trace_8h_structTraceEvent}{Trace\+Event}} \mbox{\hyperlink{trace_8c_a07cbe9fe61252a5f2e759ef7ea946b1a}{trace\+Events}} \mbox{[}\mbox{\hyperlink{trace_8h_a8b23f1099863faea154788ee18635e79}{TRACE\+\_\+\+EVENT\+\_\+\+BUFFER\+\_\+\+SIZE}}\mbox{]}
+\item 
+static int \mbox{\hyperlink{trace_8c_a6f6f20f1647b370c5b0af38ff7948375}{trace\+Events\+Count}} = 0
+\item 
+static int \mbox{\hyperlink{trace_8c_aabb3224d6d21edc1e648582158b71f5d}{tracing\+Enabled}} = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{trace_8c_a4d93ca2c1c658edcfa6c2b2bea9fbe60}\label{trace_8c_a4d93ca2c1c658edcfa6c2b2bea9fbe60}} 
+\index{trace.c@{trace.c}!Trace\_addEvent@{Trace\_addEvent}}
+\index{Trace\_addEvent@{Trace\_addEvent}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_addEvent()}{Trace\_addEvent()}}
+{\footnotesize\ttfamily void Trace\+\_\+add\+Event (\begin{DoxyParamCaption}\item[{short}]{type,  }\item[{float}]{start,  }\item[{float}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_ad11d7f1c0039b2561ccfa69f507fd03d}\label{trace_8c_ad11d7f1c0039b2561ccfa69f507fd03d}} 
+\index{trace.c@{trace.c}!Trace\_clear@{Trace\_clear}}
+\index{Trace\_clear@{Trace\_clear}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_clear()}{Trace\_clear()}}
+{\footnotesize\ttfamily void Trace\+\_\+clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_a40472d77d0f7639c19f5c7ce92947509}\label{trace_8c_a40472d77d0f7639c19f5c7ce92947509}} 
+\index{trace.c@{trace.c}!Trace\_getEventsCount@{Trace\_getEventsCount}}
+\index{Trace\_getEventsCount@{Trace\_getEventsCount}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_getEventsCount()}{Trace\_getEventsCount()}}
+{\footnotesize\ttfamily int Trace\+\_\+get\+Events\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_a2f110dbdb5e10143e7a9176ce684dcde}\label{trace_8c_a2f110dbdb5e10143e7a9176ce684dcde}} 
+\index{trace.c@{trace.c}!Trace\_isFull@{Trace\_isFull}}
+\index{Trace\_isFull@{Trace\_isFull}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_isFull()}{Trace\_isFull()}}
+{\footnotesize\ttfamily int Trace\+\_\+is\+Full (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_a2a4540959b61804d315245d0c922fb8b}\label{trace_8c_a2a4540959b61804d315245d0c922fb8b}} 
+\index{trace.c@{trace.c}!Trace\_isTracing@{Trace\_isTracing}}
+\index{Trace\_isTracing@{Trace\_isTracing}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_isTracing()}{Trace\_isTracing()}}
+{\footnotesize\ttfamily int Trace\+\_\+is\+Tracing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_a4eeef4aafb2e5d5c6cc43a68368808bc}\label{trace_8c_a4eeef4aafb2e5d5c6cc43a68368808bc}} 
+\index{trace.c@{trace.c}!Trace\_start@{Trace\_start}}
+\index{Trace\_start@{Trace\_start}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_start()}{Trace\_start()}}
+{\footnotesize\ttfamily void Trace\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trace_8c_a63f18ea54398d764e516bb90aa59580f}\label{trace_8c_a63f18ea54398d764e516bb90aa59580f}} 
+\index{trace.c@{trace.c}!Trace\_stop@{Trace\_stop}}
+\index{Trace\_stop@{Trace\_stop}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{Trace\_stop()}{Trace\_stop()}}
+{\footnotesize\ttfamily void Trace\+\_\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{trace_8c_a64025670e096e44f252c4b99a6c931b8}\label{trace_8c_a64025670e096e44f252c4b99a6c931b8}} 
+\index{trace.c@{trace.c}!profilingAccumulated@{profilingAccumulated}}
+\index{profilingAccumulated@{profilingAccumulated}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{profilingAccumulated}{profilingAccumulated}}
+{\footnotesize\ttfamily float profiling\+Accumulated\mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}}
+
+\mbox{\Hypertarget{trace_8c_a1a39bb5b3832e1b1ca5e76814b7f4b42}\label{trace_8c_a1a39bb5b3832e1b1ca5e76814b7f4b42}} 
+\index{trace.c@{trace.c}!profilingCounts@{profilingCounts}}
+\index{profilingCounts@{profilingCounts}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{profilingCounts}{profilingCounts}}
+{\footnotesize\ttfamily int profiling\+Counts\mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}}
+
+\mbox{\Hypertarget{trace_8c_a07cbe9fe61252a5f2e759ef7ea946b1a}\label{trace_8c_a07cbe9fe61252a5f2e759ef7ea946b1a}} 
+\index{trace.c@{trace.c}!traceEvents@{traceEvents}}
+\index{traceEvents@{traceEvents}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{traceEvents}{traceEvents}}
+{\footnotesize\ttfamily \mbox{\hyperlink{trace_8h_structTraceEvent}{Trace\+Event}} trace\+Events\mbox{[}\mbox{\hyperlink{trace_8h_a8b23f1099863faea154788ee18635e79}{TRACE\+\_\+\+EVENT\+\_\+\+BUFFER\+\_\+\+SIZE}}\mbox{]}}
+
+\mbox{\Hypertarget{trace_8c_a6f6f20f1647b370c5b0af38ff7948375}\label{trace_8c_a6f6f20f1647b370c5b0af38ff7948375}} 
+\index{trace.c@{trace.c}!traceEventsCount@{traceEventsCount}}
+\index{traceEventsCount@{traceEventsCount}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{traceEventsCount}{traceEventsCount}}
+{\footnotesize\ttfamily int trace\+Events\+Count = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{trace_8c_aabb3224d6d21edc1e648582158b71f5d}\label{trace_8c_aabb3224d6d21edc1e648582158b71f5d}} 
+\index{trace.c@{trace.c}!tracingEnabled@{tracingEnabled}}
+\index{tracingEnabled@{tracingEnabled}!trace.c@{trace.c}}
+\doxysubsubsection{\texorpdfstring{tracingEnabled}{tracingEnabled}}
+{\footnotesize\ttfamily int tracing\+Enabled = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}\hspace{0.3cm}{\ttfamily [static]}}
+

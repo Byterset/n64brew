@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['text_5fsprite_2331',['text_sprite',['../font_8h.html#a295ad2ed26a8c2d909fa81e94d086091',1,'text_sprite(Sprite *, char *, Font *, int, int):&#160;font.c'],['../font_8c.html#a76707329e83ccefe9951eccc41271dcb',1,'text_sprite(Sprite *txt, char *str, Font *fnt, int xlen, int ylen):&#160;font.c']]],
+  ['timeupdatedelta_2332',['timeUpdateDelta',['../time_8c.html#a04c8544725e8281ddc2da0c3b000bafc',1,'timeUpdateDelta():&#160;time.c'],['../time_8h.html#a04c8544725e8281ddc2da0c3b000bafc',1,'timeUpdateDelta():&#160;time.c']]],
+  ['trace_5faddevent_2333',['Trace_addEvent',['../trace_8c.html#a4d93ca2c1c658edcfa6c2b2bea9fbe60',1,'Trace_addEvent(short type, float start, float end):&#160;trace.c'],['../trace_8h.html#a4d93ca2c1c658edcfa6c2b2bea9fbe60',1,'Trace_addEvent(short type, float start, float end):&#160;trace.c']]],
+  ['trace_5fclear_2334',['Trace_clear',['../trace_8c.html#ad11d7f1c0039b2561ccfa69f507fd03d',1,'Trace_clear():&#160;trace.c'],['../trace_8h.html#ad11d7f1c0039b2561ccfa69f507fd03d',1,'Trace_clear():&#160;trace.c']]],
+  ['trace_5fgeteventscount_2335',['Trace_getEventsCount',['../trace_8c.html#a40472d77d0f7639c19f5c7ce92947509',1,'Trace_getEventsCount():&#160;trace.c'],['../trace_8h.html#a40472d77d0f7639c19f5c7ce92947509',1,'Trace_getEventsCount():&#160;trace.c']]],
+  ['trace_5fisfull_2336',['Trace_isFull',['../trace_8c.html#a2f110dbdb5e10143e7a9176ce684dcde',1,'Trace_isFull():&#160;trace.c'],['../trace_8h.html#a2f110dbdb5e10143e7a9176ce684dcde',1,'Trace_isFull():&#160;trace.c']]],
+  ['trace_5fistracing_2337',['Trace_isTracing',['../trace_8c.html#a2a4540959b61804d315245d0c922fb8b',1,'Trace_isTracing():&#160;trace.c'],['../trace_8h.html#a2a4540959b61804d315245d0c922fb8b',1,'Trace_isTracing():&#160;trace.c']]],
+  ['trace_5fstart_2338',['Trace_start',['../trace_8c.html#a4eeef4aafb2e5d5c6cc43a68368808bc',1,'Trace_start():&#160;trace.c'],['../trace_8h.html#a4eeef4aafb2e5d5c6cc43a68368808bc',1,'Trace_start():&#160;trace.c']]],
+  ['trace_5fstop_2339',['Trace_stop',['../trace_8c.html#a63f18ea54398d764e516bb90aa59580f',1,'Trace_stop():&#160;trace.c'],['../trace_8h.html#a63f18ea54398d764e516bb90aa59580f',1,'Trace_stop():&#160;trace.c']]],
+  ['traceinit_2340',['traceInit',['../main_8c.html#a21d04f2971e96d4a5468faacedd3d6e8',1,'main.c']]],
+  ['triangle_5fcomparepoint_2341',['Triangle_comparePoint',['../collision_8c.html#a3fadef7151669333c803716400428350',1,'Triangle_comparePoint(Triangle *triangle, struct Vector3 *point):&#160;collision.c'],['../collision_8h.html#a3fadef7151669333c803716400428350',1,'Triangle_comparePoint(Triangle *triangle, struct Vector3 *point):&#160;collision.c']]],
+  ['triangle_5fgetcentroid_2342',['Triangle_getCentroid',['../collision_8c.html#a446e495450b310fad895c7aec69b2512',1,'Triangle_getCentroid(Triangle *triangle, struct Vector3 *result):&#160;collision.c'],['../collision_8h.html#a446e495450b310fad895c7aec69b2512',1,'Triangle_getCentroid(Triangle *triangle, struct Vector3 *result):&#160;collision.c']]],
+  ['triangle_5fgetnormal_2343',['Triangle_getNormal',['../collision_8c.html#acc9088dd936867d37daba0d6a684d582',1,'Triangle_getNormal(Triangle *triangle, struct Vector3 *result):&#160;collision.c'],['../collision_8h.html#acc9088dd936867d37daba0d6a684d582',1,'Triangle_getNormal(Triangle *triangle, struct Vector3 *result):&#160;collision.c']]]
+];

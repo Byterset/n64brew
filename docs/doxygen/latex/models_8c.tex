@@ -1,0 +1,103 @@
+\hypertarget{models_8c}{}\doxysection{src/models.c File Reference}
+\label{models_8c}\index{src/models.c@{src/models.c}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}models.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64/ed64io\+\_\+usb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/objects/book/book.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/plants/bush/bush.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/characters/gardener/characterrig.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/characters/goose/gooserig.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/environment/garden\+\_\+ground/ground.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/plants/lilypad/lilypad.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/buildings/planter/planter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/plants/reed/reed.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/environment/rocks/rocks.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/test/testing\+Cube.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/buildings/wall\+\_\+small/wall.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/environment/garden\+\_\+water/water.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../build/assets/models/plants/watergrass/watergrass.\+h\char`\"{}}\newline
+Include dependency graph for models.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{models_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Gfx $\ast$ \mbox{\hyperlink{models_8c_aafaf25e60db2efc18e2c2da2374f4c93}{get\+Mesh\+Display\+List\+For\+Model\+Mesh\+Part}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type, int mesh\+Part)
+\item 
+Gfx $\ast$ \mbox{\hyperlink{models_8c_a8bd5bdd1b14769e9031c9699ed476bbc}{get\+Model\+Display\+List}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type, int subtype)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Gfx $\ast$ \mbox{\hyperlink{models_8c_afbf5398db3eb454ea1e132076d9ebaec}{Goose\+Mesh\+List}} \mbox{[}8\mbox{]}
+\item 
+Gfx $\ast$ \mbox{\hyperlink{models_8c_adfdc599585d6206f99357d5538aa549d}{Character\+Mesh\+List}} \mbox{[}12\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{models_8c_aafaf25e60db2efc18e2c2da2374f4c93}\label{models_8c_aafaf25e60db2efc18e2c2da2374f4c93}} 
+\index{models.c@{models.c}!getMeshDisplayListForModelMeshPart@{getMeshDisplayListForModelMeshPart}}
+\index{getMeshDisplayListForModelMeshPart@{getMeshDisplayListForModelMeshPart}!models.c@{models.c}}
+\doxysubsubsection{\texorpdfstring{getMeshDisplayListForModelMeshPart()}{getMeshDisplayListForModelMeshPart()}}
+{\footnotesize\ttfamily Gfx$\ast$ get\+Mesh\+Display\+List\+For\+Model\+Mesh\+Part (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type,  }\item[{int}]{mesh\+Part }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{models_8c_a8bd5bdd1b14769e9031c9699ed476bbc}\label{models_8c_a8bd5bdd1b14769e9031c9699ed476bbc}} 
+\index{models.c@{models.c}!getModelDisplayList@{getModelDisplayList}}
+\index{getModelDisplayList@{getModelDisplayList}!models.c@{models.c}}
+\doxysubsubsection{\texorpdfstring{getModelDisplayList()}{getModelDisplayList()}}
+{\footnotesize\ttfamily Gfx$\ast$ get\+Model\+Display\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type,  }\item[{int}]{subtype }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{models_8c_adfdc599585d6206f99357d5538aa549d}\label{models_8c_adfdc599585d6206f99357d5538aa549d}} 
+\index{models.c@{models.c}!CharacterMeshList@{CharacterMeshList}}
+\index{CharacterMeshList@{CharacterMeshList}!models.c@{models.c}}
+\doxysubsubsection{\texorpdfstring{CharacterMeshList}{CharacterMeshList}}
+{\footnotesize\ttfamily Gfx$\ast$ Character\+Mesh\+List\mbox{[}12\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    Wtx\_characterrig\_gkbicep\_l\_gkbicep\_lrmesh,     }
+\DoxyCodeLine{    Wtx\_characterrig\_gkbicep\_r\_gkbicep\_rmesh,      }
+\DoxyCodeLine{    Wtx\_characterrig\_gkfoot\_l\_gkfoot\_lrmesh,       }
+\DoxyCodeLine{    Wtx\_characterrig\_gkfoot\_r\_gkfoot\_rmesh,        }
+\DoxyCodeLine{    Wtx\_characterrig\_gkforearm\_l\_gkforearm\_lrmesh, }
+\DoxyCodeLine{    Wtx\_characterrig\_gkforearm\_r\_gkforearm\_rmesh,  }
+\DoxyCodeLine{    Wtx\_characterrig\_gkhead\_gkheadmesh,            }
+\DoxyCodeLine{    Wtx\_characterrig\_gkshin\_l\_gkshin\_lmesh,        }
+\DoxyCodeLine{    Wtx\_characterrig\_gkshin\_r\_gkshin\_rmesh,        }
+\DoxyCodeLine{    Wtx\_characterrig\_gktorso\_gktorsomesh,          }
+\DoxyCodeLine{    Wtx\_characterrig\_gkthigh\_l\_gkthigh\_lmesh,      }
+\DoxyCodeLine{    Wtx\_characterrig\_gkthigh\_r\_gkthigh\_rmesh,      }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{models_8c_afbf5398db3eb454ea1e132076d9ebaec}\label{models_8c_afbf5398db3eb454ea1e132076d9ebaec}} 
+\index{models.c@{models.c}!GooseMeshList@{GooseMeshList}}
+\index{GooseMeshList@{GooseMeshList}!models.c@{models.c}}
+\doxysubsubsection{\texorpdfstring{GooseMeshList}{GooseMeshList}}
+{\footnotesize\ttfamily Gfx$\ast$ Goose\+Mesh\+List\mbox{[}8\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    Wtx\_gooserig\_goosebody\_goosebodymesh,     }
+\DoxyCodeLine{    Wtx\_gooserig\_goosehead\_gooseheadmesh,     }
+\DoxyCodeLine{    Wtx\_gooserig\_gooseleg\_l\_gooseleg\_lmesh,   }
+\DoxyCodeLine{    Wtx\_gooserig\_goosefoot\_l\_goosefoot\_lmesh, }
+\DoxyCodeLine{    Wtx\_gooserig\_gooseleg\_r\_gooseleg\_rmesh,   }
+\DoxyCodeLine{    Wtx\_gooserig\_goosefoot\_r\_goosefoot\_rmesh, }
+\DoxyCodeLine{    Wtx\_gooserig\_gooseneck\_gooseneckmesh,     }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\hypertarget{rom_8h}{}\doxysection{src/util/rom.h File Reference}
+\label{rom_8h}\index{src/util/rom.h@{src/util/rom.h}}
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+Include dependency graph for rom.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{rom_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rom_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rom_8h_a81f75b7f5fe624243af549e8b010f6e2}{LOAD\+\_\+\+SEGMENT}}(segment\+Name,  dest)
+\item 
+\#define \mbox{\hyperlink{rom_8h_ae3bf84533766f8b5446a492fcb80d402}{CALC\+\_\+\+ROM\+\_\+\+POINTER}}(segment\+Name,  addr)~((void $\ast$)(((unsigned)addr) -\/ (unsigned)\+\_\+\#\#segment\+Name\#\#Segment\+Start + (unsigned)\+\_\+\#\#segment\+Name\#\#Segment\+Rom\+Start))
+\item 
+\#define \mbox{\hyperlink{rom_8h_a4eb279ffa1f2bc5099b64653c261f1f2}{CALC\+\_\+\+RAM\+\_\+\+POINTER}}(addr,  ram\+Start)~(void $\ast$)(((unsigned)(addr)\&0x\+FFFFFF) + (unsigned)(ram\+Start))
+\item 
+\#define \mbox{\hyperlink{rom_8h_a3b461b80abf21b68d6797a13669e17f4}{ADJUST\+\_\+\+POINTER\+\_\+\+POS}}(ptr,  offset)~(void $\ast$)((ptr) ? (char $\ast$)(ptr) + (offset) \+: 0)
+\item 
+\#define \mbox{\hyperlink{rom_8h_a4686c9e9fa3ff6f46be53a8d35e54909}{ADJUST\+\_\+\+POINTER\+\_\+\+FOR\+\_\+\+SEGMENT}}(ptr,  memorystart,  segment\+Number)~((char $\ast$)ptr + (int)(memorystart) -\/ ((segment\+Number) $<$$<$ 24))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rom_8h_add73510c983e7b64bb524a9167f63eb3}{rom\+Init}} ()
+\item 
+void \mbox{\hyperlink{rom_8h_a09209b781e943978d62aea56d50ee0e0}{rom\+Copy}} (const char $\ast$src, const char $\ast$dest, const int len)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rom_8h_a4686c9e9fa3ff6f46be53a8d35e54909}\label{rom_8h_a4686c9e9fa3ff6f46be53a8d35e54909}} 
+\index{rom.h@{rom.h}!ADJUST\_POINTER\_FOR\_SEGMENT@{ADJUST\_POINTER\_FOR\_SEGMENT}}
+\index{ADJUST\_POINTER\_FOR\_SEGMENT@{ADJUST\_POINTER\_FOR\_SEGMENT}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{ADJUST\_POINTER\_FOR\_SEGMENT}{ADJUST\_POINTER\_FOR\_SEGMENT}}
+{\footnotesize\ttfamily \#define ADJUST\+\_\+\+POINTER\+\_\+\+FOR\+\_\+\+SEGMENT(\begin{DoxyParamCaption}\item[{}]{ptr,  }\item[{}]{memorystart,  }\item[{}]{segment\+Number }\end{DoxyParamCaption})~((char $\ast$)ptr + (int)(memorystart) -\/ ((segment\+Number) $<$$<$ 24))}
+
+\mbox{\Hypertarget{rom_8h_a3b461b80abf21b68d6797a13669e17f4}\label{rom_8h_a3b461b80abf21b68d6797a13669e17f4}} 
+\index{rom.h@{rom.h}!ADJUST\_POINTER\_POS@{ADJUST\_POINTER\_POS}}
+\index{ADJUST\_POINTER\_POS@{ADJUST\_POINTER\_POS}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{ADJUST\_POINTER\_POS}{ADJUST\_POINTER\_POS}}
+{\footnotesize\ttfamily \#define ADJUST\+\_\+\+POINTER\+\_\+\+POS(\begin{DoxyParamCaption}\item[{}]{ptr,  }\item[{}]{offset }\end{DoxyParamCaption})~(void $\ast$)((ptr) ? (char $\ast$)(ptr) + (offset) \+: 0)}
+
+\mbox{\Hypertarget{rom_8h_a4eb279ffa1f2bc5099b64653c261f1f2}\label{rom_8h_a4eb279ffa1f2bc5099b64653c261f1f2}} 
+\index{rom.h@{rom.h}!CALC\_RAM\_POINTER@{CALC\_RAM\_POINTER}}
+\index{CALC\_RAM\_POINTER@{CALC\_RAM\_POINTER}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{CALC\_RAM\_POINTER}{CALC\_RAM\_POINTER}}
+{\footnotesize\ttfamily \#define CALC\+\_\+\+RAM\+\_\+\+POINTER(\begin{DoxyParamCaption}\item[{}]{addr,  }\item[{}]{ram\+Start }\end{DoxyParamCaption})~(void $\ast$)(((unsigned)(addr)\&0x\+FFFFFF) + (unsigned)(ram\+Start))}
+
+\mbox{\Hypertarget{rom_8h_ae3bf84533766f8b5446a492fcb80d402}\label{rom_8h_ae3bf84533766f8b5446a492fcb80d402}} 
+\index{rom.h@{rom.h}!CALC\_ROM\_POINTER@{CALC\_ROM\_POINTER}}
+\index{CALC\_ROM\_POINTER@{CALC\_ROM\_POINTER}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{CALC\_ROM\_POINTER}{CALC\_ROM\_POINTER}}
+{\footnotesize\ttfamily \#define CALC\+\_\+\+ROM\+\_\+\+POINTER(\begin{DoxyParamCaption}\item[{}]{segment\+Name,  }\item[{}]{addr }\end{DoxyParamCaption})~((void $\ast$)(((unsigned)addr) -\/ (unsigned)\+\_\+\#\#segment\+Name\#\#Segment\+Start + (unsigned)\+\_\+\#\#segment\+Name\#\#Segment\+Rom\+Start))}
+
+\mbox{\Hypertarget{rom_8h_a81f75b7f5fe624243af549e8b010f6e2}\label{rom_8h_a81f75b7f5fe624243af549e8b010f6e2}} 
+\index{rom.h@{rom.h}!LOAD\_SEGMENT@{LOAD\_SEGMENT}}
+\index{LOAD\_SEGMENT@{LOAD\_SEGMENT}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{LOAD\_SEGMENT}{LOAD\_SEGMENT}}
+{\footnotesize\ttfamily \#define LOAD\+\_\+\+SEGMENT(\begin{DoxyParamCaption}\item[{}]{segment\+Name,  }\item[{}]{dest }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    dest = \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc}}((\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}})(\_\#\#segmentName\#\#SegmentRomEnd -\/ \_\#\#segmentName\#\#SegmentRomStart)); \(\backslash\)}
+\DoxyCodeLine{    romCopy(\_\#\#segmentName\#\#SegmentRomStart, dest, (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}})(\_\#\#segmentName\#\#SegmentRomEnd -\/ \_\#\#segmentName\#\#SegmentRomStart));}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rom_8h_a09209b781e943978d62aea56d50ee0e0}\label{rom_8h_a09209b781e943978d62aea56d50ee0e0}} 
+\index{rom.h@{rom.h}!romCopy@{romCopy}}
+\index{romCopy@{romCopy}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{romCopy()}{romCopy()}}
+{\footnotesize\ttfamily void rom\+Copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{src,  }\item[{const char $\ast$}]{dest,  }\item[{const int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rom_8h_add73510c983e7b64bb524a9167f63eb3}\label{rom_8h_add73510c983e7b64bb524a9167f63eb3}} 
+\index{rom.h@{rom.h}!romInit@{romInit}}
+\index{romInit@{romInit}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{romInit()}{romInit()}}
+{\footnotesize\ttfamily void rom\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

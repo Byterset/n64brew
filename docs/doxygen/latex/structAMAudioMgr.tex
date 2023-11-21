@@ -1,0 +1,94 @@
+\hypertarget{structAMAudioMgr}{}\doxysection{AMAudio\+Mgr Struct Reference}
+\label{structAMAudioMgr}\index{AMAudioMgr@{AMAudioMgr}}
+
+
+Collaboration diagram for AMAudio\+Mgr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{structAMAudioMgr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_a747ebc2b622111abeb119831dbbcf159}\label{structAMAudioMgr_a747ebc2b622111abeb119831dbbcf159}} 
+Acmd $\ast$ {\bfseries ACMDList} \mbox{[}NUM\+\_\+\+ACMD\+\_\+\+LISTS\mbox{]}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_ac696b6dd4ede16d2b29e63b4eb5684ba}\label{structAMAudioMgr_ac696b6dd4ede16d2b29e63b4eb5684ba}} 
+\mbox{\hyperlink{structAudioInfo__s}{Audio\+Info}} $\ast$ {\bfseries audio\+Info} \mbox{[}NUM\+\_\+\+OUTPUT\+\_\+\+BUFFERS\mbox{]}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_a0f591b785af5117eb6755119228061e9}\label{structAMAudioMgr_a0f591b785af5117eb6755119228061e9}} 
+OSThread {\bfseries thread}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_af2e1168cd161e83849499296d1c0baf9}\label{structAMAudioMgr_af2e1168cd161e83849499296d1c0baf9}} 
+OSMesg\+Queue {\bfseries audio\+Frame\+MsgQ}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_a5322048518cd134b67ba3c90b1542ad5}\label{structAMAudioMgr_a5322048518cd134b67ba3c90b1542ad5}} 
+OSMesg {\bfseries audio\+Frame\+Msg\+Buf} \mbox{[}MAX\+\_\+\+AUDIO\+\_\+\+MESGS\mbox{]}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_afea03233d8cd3bb0be51b9cfe266e4f6}\label{structAMAudioMgr_afea03233d8cd3bb0be51b9cfe266e4f6}} 
+OSMesg\+Queue {\bfseries audio\+Reply\+MsgQ}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_abaa2643905331b282f125f5e07d0fc0b}\label{structAMAudioMgr_abaa2643905331b282f125f5e07d0fc0b}} 
+OSMesg {\bfseries audio\+Reply\+Msg\+Buf} \mbox{[}MAX\+\_\+\+AUDIO\+\_\+\+MESGS\mbox{]}
+\item 
+\mbox{\Hypertarget{structAMAudioMgr_a33b0efab45c19dc50ba99e3dc2ecdadf}\label{structAMAudioMgr_a33b0efab45c19dc50ba99e3dc2ecdadf}} 
+ALGlobals {\bfseries g}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structAMAudioMgr_a747ebc2b622111abeb119831dbbcf159}\label{structAMAudioMgr_a747ebc2b622111abeb119831dbbcf159}} 
+\index{AMAudioMgr@{AMAudioMgr}!ACMDList@{ACMDList}}
+\index{ACMDList@{ACMDList}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{ACMDList}{ACMDList}}
+{\footnotesize\ttfamily Acmd$\ast$ AMAudio\+Mgr\+::\+ACMDList\mbox{[}NUM\+\_\+\+ACMD\+\_\+\+LISTS\mbox{]}}
+
+\mbox{\Hypertarget{structAMAudioMgr_a5322048518cd134b67ba3c90b1542ad5}\label{structAMAudioMgr_a5322048518cd134b67ba3c90b1542ad5}} 
+\index{AMAudioMgr@{AMAudioMgr}!audioFrameMsgBuf@{audioFrameMsgBuf}}
+\index{audioFrameMsgBuf@{audioFrameMsgBuf}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{audioFrameMsgBuf}{audioFrameMsgBuf}}
+{\footnotesize\ttfamily OSMesg AMAudio\+Mgr\+::audio\+Frame\+Msg\+Buf\mbox{[}MAX\+\_\+\+AUDIO\+\_\+\+MESGS\mbox{]}}
+
+\mbox{\Hypertarget{structAMAudioMgr_af2e1168cd161e83849499296d1c0baf9}\label{structAMAudioMgr_af2e1168cd161e83849499296d1c0baf9}} 
+\index{AMAudioMgr@{AMAudioMgr}!audioFrameMsgQ@{audioFrameMsgQ}}
+\index{audioFrameMsgQ@{audioFrameMsgQ}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{audioFrameMsgQ}{audioFrameMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue AMAudio\+Mgr\+::audio\+Frame\+MsgQ}
+
+\mbox{\Hypertarget{structAMAudioMgr_ac696b6dd4ede16d2b29e63b4eb5684ba}\label{structAMAudioMgr_ac696b6dd4ede16d2b29e63b4eb5684ba}} 
+\index{AMAudioMgr@{AMAudioMgr}!audioInfo@{audioInfo}}
+\index{audioInfo@{audioInfo}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{audioInfo}{audioInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structAudioInfo__s}{Audio\+Info}}$\ast$ AMAudio\+Mgr\+::audio\+Info\mbox{[}NUM\+\_\+\+OUTPUT\+\_\+\+BUFFERS\mbox{]}}
+
+\mbox{\Hypertarget{structAMAudioMgr_abaa2643905331b282f125f5e07d0fc0b}\label{structAMAudioMgr_abaa2643905331b282f125f5e07d0fc0b}} 
+\index{AMAudioMgr@{AMAudioMgr}!audioReplyMsgBuf@{audioReplyMsgBuf}}
+\index{audioReplyMsgBuf@{audioReplyMsgBuf}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{audioReplyMsgBuf}{audioReplyMsgBuf}}
+{\footnotesize\ttfamily OSMesg AMAudio\+Mgr\+::audio\+Reply\+Msg\+Buf\mbox{[}MAX\+\_\+\+AUDIO\+\_\+\+MESGS\mbox{]}}
+
+\mbox{\Hypertarget{structAMAudioMgr_afea03233d8cd3bb0be51b9cfe266e4f6}\label{structAMAudioMgr_afea03233d8cd3bb0be51b9cfe266e4f6}} 
+\index{AMAudioMgr@{AMAudioMgr}!audioReplyMsgQ@{audioReplyMsgQ}}
+\index{audioReplyMsgQ@{audioReplyMsgQ}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{audioReplyMsgQ}{audioReplyMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue AMAudio\+Mgr\+::audio\+Reply\+MsgQ}
+
+\mbox{\Hypertarget{structAMAudioMgr_a33b0efab45c19dc50ba99e3dc2ecdadf}\label{structAMAudioMgr_a33b0efab45c19dc50ba99e3dc2ecdadf}} 
+\index{AMAudioMgr@{AMAudioMgr}!g@{g}}
+\index{g@{g}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{g}{g}}
+{\footnotesize\ttfamily ALGlobals AMAudio\+Mgr\+::g}
+
+\mbox{\Hypertarget{structAMAudioMgr_a0f591b785af5117eb6755119228061e9}\label{structAMAudioMgr_a0f591b785af5117eb6755119228061e9}} 
+\index{AMAudioMgr@{AMAudioMgr}!thread@{thread}}
+\index{thread@{thread}!AMAudioMgr@{AMAudioMgr}}
+\doxysubsubsection{\texorpdfstring{thread}{thread}}
+{\footnotesize\ttfamily OSThread AMAudio\+Mgr\+::thread}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/audio/audiomgr.\+c\end{DoxyCompactItemize}

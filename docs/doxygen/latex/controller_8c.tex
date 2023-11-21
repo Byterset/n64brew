@@ -1,0 +1,232 @@
+\hypertarget{controller_8c}{}\doxysection{src/controls/controller.c File Reference}
+\label{controller_8c}\index{src/controls/controller.c@{src/controls/controller.c}}
+{\ttfamily \#include \char`\"{}controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/memory.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sched.\+h$>$}\newline
+Include dependency graph for controller.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{controller_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}~4
+\item 
+\#define \mbox{\hyperlink{controller_8c_a713ed0a0dc6ec823157cfd23bc2ce968}{REMAP\+\_\+\+PLAYER\+\_\+\+INDEX}}(index)~(index)
+\item 
+\#define \mbox{\hyperlink{controller_8c_aac656226a540da101e76f677551c3023}{CONTROLLER\+\_\+\+READ\+\_\+\+SKIP\+\_\+\+NUMBER}}~10
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{controller_8c_a6e0af3d04a375083cd7d067b8572d518}{controllers\+Clear\+State}} ()
+\item 
+int \mbox{\hyperlink{controller_8c_ab6877ca391d7e9c53d71af51ac25d5e4}{controller\+Is\+Connected}} (int index)
+\item 
+void \mbox{\hyperlink{controller_8c_a594f5674e7db34cf185943a9500a197d}{controllers\+Init}} (void)
+\item 
+void \mbox{\hyperlink{controller_8c_a04a75bbac12c0c23303f44a27e6f10b5}{controllers\+Update}} (void)
+\item 
+int \mbox{\hyperlink{controller_8c_a30eb283eb30fa31d32c7ec1a8d92f75e}{controller\+Has\+Pending\+Message}} ()
+\item 
+void \mbox{\hyperlink{controller_8c_ae4861648f566cf27caaebf89390ba0a4}{controllers\+Trigger\+Read}} (void)
+\item 
+OSCont\+Pad $\ast$ \mbox{\hyperlink{controller_8c_a1576e9711faba792734187b0288b7914}{controllers\+Get\+Controller\+Data}} (int index)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{controller_8c_ad7be02201e8cf0a24a49165fec9ca6fb}{controller\+Get\+Last\+Button}} (int index)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{controller_8c_abc2a5774afdd0caa0bc9f45c2277cc06}{controller\+Get\+Button}} (int index, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} button)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{controller_8c_a32bc01ebc8d56dc32e694990659922b3}{controller\+Get\+Button\+Down}} (int index, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} button)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{controller_8c_a310e4196bda70a6e9bba7b891ab5555a}{controller\+Get\+Button\+Up}} (int index, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} button)
+\item 
+enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} \mbox{\hyperlink{controller_8c_a3f5e26d04fcaf987f9d8b11e99c7aefc}{controller\+Get\+Direction}} (int index)
+\item 
+enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} \mbox{\hyperlink{controller_8c_a43799622088e1fb623253806c5158208}{controller\+Get\+Direction\+Down}} (int index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{controller_8c_a5e1965a10f9d484c25aed740c0076990}{validcontrollers}} = 0
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{controller_8c_a0ff28c4424991526acb0ef37f3898d27}{cntrl\+Read\+In\+Prog}} = 0
+\item 
+static OSCont\+Status \mbox{\hyperlink{controller_8c_a0d103ca9dae49b5696858541edba5fb7}{g\+Controller\+Status}} \mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}
+\item 
+static OSCont\+Pad \mbox{\hyperlink{controller_8c_a79539cfcdc93b73b29e74e51634db166}{g\+Controller\+Data}} \mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}
+\item 
+OSSc\+Msg \mbox{\hyperlink{controller_8c_aee6e73a1fed389ed2ddbd1e38d856863}{g\+Controller\+Message}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{controller_8c_ae4b8ff6658664b479f76d6d2d6421c15}{g\+Controller\+Last\+Button}} \mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}
+\item 
+static enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} \mbox{\hyperlink{controller_8c_a2b2b937fdd2965dbdba79bd48cff81a1}{g\+Controller\+Last\+Direction}} \mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}
+\item 
+static int \mbox{\hyperlink{controller_8c_aa55d204282d02b67e068f91595332221}{g\+Controller\+Dead\+Frames}}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{controller_8c_a085c257eebf80f748ab04aab3ecd8eea}{gfx\+Frame\+MsgQ}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{controller_8c_aac656226a540da101e76f677551c3023}\label{controller_8c_aac656226a540da101e76f677551c3023}} 
+\index{controller.c@{controller.c}!CONTROLLER\_READ\_SKIP\_NUMBER@{CONTROLLER\_READ\_SKIP\_NUMBER}}
+\index{CONTROLLER\_READ\_SKIP\_NUMBER@{CONTROLLER\_READ\_SKIP\_NUMBER}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{CONTROLLER\_READ\_SKIP\_NUMBER}{CONTROLLER\_READ\_SKIP\_NUMBER}}
+{\footnotesize\ttfamily \#define CONTROLLER\+\_\+\+READ\+\_\+\+SKIP\+\_\+\+NUMBER~10}
+
+\mbox{\Hypertarget{controller_8c_a1c346c944e8204fd06dc057393c7c96d}\label{controller_8c_a1c346c944e8204fd06dc057393c7c96d}} 
+\index{controller.c@{controller.c}!MAX\_PLAYERS@{MAX\_PLAYERS}}
+\index{MAX\_PLAYERS@{MAX\_PLAYERS}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_PLAYERS}{MAX\_PLAYERS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+PLAYERS~4}
+
+\mbox{\Hypertarget{controller_8c_a713ed0a0dc6ec823157cfd23bc2ce968}\label{controller_8c_a713ed0a0dc6ec823157cfd23bc2ce968}} 
+\index{controller.c@{controller.c}!REMAP\_PLAYER\_INDEX@{REMAP\_PLAYER\_INDEX}}
+\index{REMAP\_PLAYER\_INDEX@{REMAP\_PLAYER\_INDEX}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{REMAP\_PLAYER\_INDEX}{REMAP\_PLAYER\_INDEX}}
+{\footnotesize\ttfamily \#define REMAP\+\_\+\+PLAYER\+\_\+\+INDEX(\begin{DoxyParamCaption}\item[{}]{index }\end{DoxyParamCaption})~(index)}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{controller_8c_abc2a5774afdd0caa0bc9f45c2277cc06}\label{controller_8c_abc2a5774afdd0caa0bc9f45c2277cc06}} 
+\index{controller.c@{controller.c}!controllerGetButton@{controllerGetButton}}
+\index{controllerGetButton@{controllerGetButton}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetButton()}{controllerGetButton()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} controller\+Get\+Button (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{button }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a32bc01ebc8d56dc32e694990659922b3}\label{controller_8c_a32bc01ebc8d56dc32e694990659922b3}} 
+\index{controller.c@{controller.c}!controllerGetButtonDown@{controllerGetButtonDown}}
+\index{controllerGetButtonDown@{controllerGetButtonDown}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetButtonDown()}{controllerGetButtonDown()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} controller\+Get\+Button\+Down (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{button }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a310e4196bda70a6e9bba7b891ab5555a}\label{controller_8c_a310e4196bda70a6e9bba7b891ab5555a}} 
+\index{controller.c@{controller.c}!controllerGetButtonUp@{controllerGetButtonUp}}
+\index{controllerGetButtonUp@{controllerGetButtonUp}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetButtonUp()}{controllerGetButtonUp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} controller\+Get\+Button\+Up (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{button }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a3f5e26d04fcaf987f9d8b11e99c7aefc}\label{controller_8c_a3f5e26d04fcaf987f9d8b11e99c7aefc}} 
+\index{controller.c@{controller.c}!controllerGetDirection@{controllerGetDirection}}
+\index{controllerGetDirection@{controllerGetDirection}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetDirection()}{controllerGetDirection()}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} controller\+Get\+Direction (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a43799622088e1fb623253806c5158208}\label{controller_8c_a43799622088e1fb623253806c5158208}} 
+\index{controller.c@{controller.c}!controllerGetDirectionDown@{controllerGetDirectionDown}}
+\index{controllerGetDirectionDown@{controllerGetDirectionDown}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetDirectionDown()}{controllerGetDirectionDown()}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} controller\+Get\+Direction\+Down (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_ad7be02201e8cf0a24a49165fec9ca6fb}\label{controller_8c_ad7be02201e8cf0a24a49165fec9ca6fb}} 
+\index{controller.c@{controller.c}!controllerGetLastButton@{controllerGetLastButton}}
+\index{controllerGetLastButton@{controllerGetLastButton}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerGetLastButton()}{controllerGetLastButton()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} controller\+Get\+Last\+Button (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a30eb283eb30fa31d32c7ec1a8d92f75e}\label{controller_8c_a30eb283eb30fa31d32c7ec1a8d92f75e}} 
+\index{controller.c@{controller.c}!controllerHasPendingMessage@{controllerHasPendingMessage}}
+\index{controllerHasPendingMessage@{controllerHasPendingMessage}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerHasPendingMessage()}{controllerHasPendingMessage()}}
+{\footnotesize\ttfamily int controller\+Has\+Pending\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_ab6877ca391d7e9c53d71af51ac25d5e4}\label{controller_8c_ab6877ca391d7e9c53d71af51ac25d5e4}} 
+\index{controller.c@{controller.c}!controllerIsConnected@{controllerIsConnected}}
+\index{controllerIsConnected@{controllerIsConnected}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllerIsConnected()}{controllerIsConnected()}}
+{\footnotesize\ttfamily int controller\+Is\+Connected (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a6e0af3d04a375083cd7d067b8572d518}\label{controller_8c_a6e0af3d04a375083cd7d067b8572d518}} 
+\index{controller.c@{controller.c}!controllersClearState@{controllersClearState}}
+\index{controllersClearState@{controllersClearState}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllersClearState()}{controllersClearState()}}
+{\footnotesize\ttfamily void controllers\+Clear\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a1576e9711faba792734187b0288b7914}\label{controller_8c_a1576e9711faba792734187b0288b7914}} 
+\index{controller.c@{controller.c}!controllersGetControllerData@{controllersGetControllerData}}
+\index{controllersGetControllerData@{controllersGetControllerData}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllersGetControllerData()}{controllersGetControllerData()}}
+{\footnotesize\ttfamily OSCont\+Pad$\ast$ controllers\+Get\+Controller\+Data (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a594f5674e7db34cf185943a9500a197d}\label{controller_8c_a594f5674e7db34cf185943a9500a197d}} 
+\index{controller.c@{controller.c}!controllersInit@{controllersInit}}
+\index{controllersInit@{controllersInit}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllersInit()}{controllersInit()}}
+{\footnotesize\ttfamily void controllers\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_ae4861648f566cf27caaebf89390ba0a4}\label{controller_8c_ae4861648f566cf27caaebf89390ba0a4}} 
+\index{controller.c@{controller.c}!controllersTriggerRead@{controllersTriggerRead}}
+\index{controllersTriggerRead@{controllersTriggerRead}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllersTriggerRead()}{controllersTriggerRead()}}
+{\footnotesize\ttfamily void controllers\+Trigger\+Read (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{controller_8c_a04a75bbac12c0c23303f44a27e6f10b5}\label{controller_8c_a04a75bbac12c0c23303f44a27e6f10b5}} 
+\index{controller.c@{controller.c}!controllersUpdate@{controllersUpdate}}
+\index{controllersUpdate@{controllersUpdate}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{controllersUpdate()}{controllersUpdate()}}
+{\footnotesize\ttfamily void controllers\+Update (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{controller_8c_a0ff28c4424991526acb0ef37f3898d27}\label{controller_8c_a0ff28c4424991526acb0ef37f3898d27}} 
+\index{controller.c@{controller.c}!cntrlReadInProg@{cntrlReadInProg}}
+\index{cntrlReadInProg@{cntrlReadInProg}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{cntrlReadInProg}{cntrlReadInProg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} cntrl\+Read\+In\+Prog = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_a79539cfcdc93b73b29e74e51634db166}\label{controller_8c_a79539cfcdc93b73b29e74e51634db166}} 
+\index{controller.c@{controller.c}!gControllerData@{gControllerData}}
+\index{gControllerData@{gControllerData}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerData}{gControllerData}}
+{\footnotesize\ttfamily OSCont\+Pad g\+Controller\+Data\mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_aa55d204282d02b67e068f91595332221}\label{controller_8c_aa55d204282d02b67e068f91595332221}} 
+\index{controller.c@{controller.c}!gControllerDeadFrames@{gControllerDeadFrames}}
+\index{gControllerDeadFrames@{gControllerDeadFrames}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerDeadFrames}{gControllerDeadFrames}}
+{\footnotesize\ttfamily int g\+Controller\+Dead\+Frames\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_ae4b8ff6658664b479f76d6d2d6421c15}\label{controller_8c_ae4b8ff6658664b479f76d6d2d6421c15}} 
+\index{controller.c@{controller.c}!gControllerLastButton@{gControllerLastButton}}
+\index{gControllerLastButton@{gControllerLastButton}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerLastButton}{gControllerLastButton}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} g\+Controller\+Last\+Button\mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_a2b2b937fdd2965dbdba79bd48cff81a1}\label{controller_8c_a2b2b937fdd2965dbdba79bd48cff81a1}} 
+\index{controller.c@{controller.c}!gControllerLastDirection@{gControllerLastDirection}}
+\index{gControllerLastDirection@{gControllerLastDirection}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerLastDirection}{gControllerLastDirection}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{controller_8h_a608e4dd2354115dc168adcfc0039f88b}{Controller\+Direction}} g\+Controller\+Last\+Direction\mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_aee6e73a1fed389ed2ddbd1e38d856863}\label{controller_8c_aee6e73a1fed389ed2ddbd1e38d856863}} 
+\index{controller.c@{controller.c}!gControllerMessage@{gControllerMessage}}
+\index{gControllerMessage@{gControllerMessage}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerMessage}{gControllerMessage}}
+{\footnotesize\ttfamily OSSc\+Msg g\+Controller\+Message}
+
+\mbox{\Hypertarget{controller_8c_a0d103ca9dae49b5696858541edba5fb7}\label{controller_8c_a0d103ca9dae49b5696858541edba5fb7}} 
+\index{controller.c@{controller.c}!gControllerStatus@{gControllerStatus}}
+\index{gControllerStatus@{gControllerStatus}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gControllerStatus}{gControllerStatus}}
+{\footnotesize\ttfamily OSCont\+Status g\+Controller\+Status\mbox{[}\mbox{\hyperlink{controller_8c_a1c346c944e8204fd06dc057393c7c96d}{MAX\+\_\+\+PLAYERS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{controller_8c_a085c257eebf80f748ab04aab3ecd8eea}\label{controller_8c_a085c257eebf80f748ab04aab3ecd8eea}} 
+\index{controller.c@{controller.c}!gfxFrameMsgQ@{gfxFrameMsgQ}}
+\index{gfxFrameMsgQ@{gfxFrameMsgQ}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{gfxFrameMsgQ}{gfxFrameMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue gfx\+Frame\+MsgQ\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{controller_8c_a5e1965a10f9d484c25aed740c0076990}\label{controller_8c_a5e1965a10f9d484c25aed740c0076990}} 
+\index{controller.c@{controller.c}!validcontrollers@{validcontrollers}}
+\index{validcontrollers@{validcontrollers}!controller.c@{controller.c}}
+\doxysubsubsection{\texorpdfstring{validcontrollers}{validcontrollers}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} validcontrollers = 0\hspace{0.3cm}{\ttfamily [static]}}
+

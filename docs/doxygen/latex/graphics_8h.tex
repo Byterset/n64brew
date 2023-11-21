@@ -1,0 +1,422 @@
+\hypertarget{graphics_8h}{}\doxysection{src/graphics/graphics.h File Reference}
+\label{graphics_8h}\index{src/graphics/graphics.h@{src/graphics/graphics.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sched.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}renderstate.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../font/font\+\_\+ext.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/debug\+\_\+console.\+h\char`\"{}}\newline
+Include dependency graph for graphics.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{graphics_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{graphics_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}}
+\item 
+struct \mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\+\_\+\+WD}}~320
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\+\_\+\+HT}}~240
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a09a5b0bedf7ea1e1bc6c98e48d1695a3}{SCREEN\+\_\+\+WD\+\_\+\+MAX}}~640
+\item 
+\#define \mbox{\hyperlink{graphics_8h_aa1f8b6c8915b5d676e4e09860151a665}{XSCALE\+\_\+\+MAX}}~0x400
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a5d454c132b3c98ea732a30b2e9bffa83}{SCREEN\+\_\+\+WD\+\_\+\+HI}}~640
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a6153336a4408dbc7470125fdd215b4ac}{SCREEN\+\_\+\+HT\+\_\+\+HI}}~480
+\item 
+\#define \mbox{\hyperlink{graphics_8h_ab6ff5573d38b8ad6be027c5b1dac8dce}{RES\+\_\+\+SCALE\+\_\+X}}(x)~((float)x / (float)\mbox{\hyperlink{graphics_8h_a5d454c132b3c98ea732a30b2e9bffa83}{SCREEN\+\_\+\+WD\+\_\+\+HI}} $\ast$ (float)\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\+\_\+\+WD}})
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a3c422c016143971785aebf9451f8893d}{RES\+\_\+\+SCALE\+\_\+Y}}(y)~((float)y / (float)\mbox{\hyperlink{graphics_8h_a6153336a4408dbc7470125fdd215b4ac}{SCREEN\+\_\+\+HT\+\_\+\+HI}} $\ast$ (float)\mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\+\_\+\+HT}})
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}{RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(clk)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_adb74b14749d12f5e72df274eb425a112}{G\+\_\+\+RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}~\mbox{\hyperlink{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}{RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(1)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_aa46647bfb0b843e5c8ccc4bab24343cc}{G\+\_\+\+RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF2}}~\mbox{\hyperlink{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}{RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(2)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}{RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(clk)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_afb7b8604a647f9298f215ecaa65da90e}{G\+\_\+\+RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}~\mbox{\hyperlink{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}{RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(1)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a2962f0b2aaae9d3f2feb789ad501c7dd}{G\+\_\+\+RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF2}}~\mbox{\hyperlink{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}{RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(2)
+\item 
+\#define \mbox{\hyperlink{graphics_8h_a6974138f00740cc3b22c23d498e95709}{GET\+\_\+\+GFX\+\_\+\+TYPE}}(gfx)~(\+\_\+\+SHIFTR((gfx)-\/$>$words.\+w0, 24, 8))
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} \mbox{\hyperlink{graphics_8h_a3da462c99634e27b12ec1a24790f756d}{Render\+Mode}}
+\item 
+typedef float \mbox{\hyperlink{graphics_8h_add1a34a4ecebab03484e2c232de43ec6}{ViewportF}}\mbox{[}4\mbox{]}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}}) (void $\ast$data, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$task)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} \{ \newline
+\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}{Toon\+Flat\+Shading\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac}{Texture\+And\+Lighting\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849}{Texture\+No\+Lighting\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}{No\+Texture\+No\+Lighting\+Render\+Mode}}
+, \newline
+\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}{Lighting\+No\+Texture\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935}{Wireframe\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697}{MAX\+\_\+\+RENDER\+\_\+\+MODE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$ \mbox{\hyperlink{graphics_8h_ad33ad9954af6d7af39bfb766eeec387a}{graphics\+Layout\+Screen\+Buffers}} (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$memory\+End)
+\item 
+void \mbox{\hyperlink{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}{graphics\+Create\+Task}} (struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$target\+Task, \mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}} callback, void $\ast$data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} \mbox{\hyperlink{graphics_8h_ae0c1265e855deb83d50cb9ffa92dc16a}{g\+Render\+Mode}}
+\item 
+\mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} \mbox{\hyperlink{graphics_8h_a8cbecb32f7032d17eb245871573a238b}{gfx\+\_\+dynamic}} \mbox{[}$\,$\mbox{]}
+\item 
+struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} \mbox{\hyperlink{graphics_8h_a5b521368e849c81417a643a0654e4656}{g\+Graphics\+Tasks}} \mbox{[}2\mbox{]}
+\item 
+Vp \mbox{\hyperlink{graphics_8h_a74d3996519245b4a7dc8d32ea056700a}{fullscreen\+Viewport}}
+\item 
+void $\ast$ \mbox{\hyperlink{graphics_8h_ae06480fe7d456e703520e0d551b253ad}{g\+Level\+Segment}}
+\item 
+void $\ast$ \mbox{\hyperlink{graphics_8h_a1e3a65bf44e5defd533ee53b3963308b}{g\+Material\+Segment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{GraphicsTask@{GraphicsTask}}\label{structGraphicsTask}
+\Hypertarget{graphics_8h_structGraphicsTask}
+\doxysubsubsection{struct Graphics\+Task}
+
+
+Collaboration diagram for Graphics\+Task\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{structGraphicsTask__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{graphics_8h_a04e4f9bbe2bee3214e758a2e3fcc46ad}\label{graphics_8h_a04e4f9bbe2bee3214e758a2e3fcc46ad}} 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$&
+framebuffer&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_a42e4992418c5bb7a1c3bad8a6e887cfc}\label{graphics_8h_a42e4992418c5bb7a1c3bad8a6e887cfc}} 
+OSScMsg&
+msg&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_aef213a63c499b454eb5bbe0440ae39e0}\label{graphics_8h_aef213a63c499b454eb5bbe0440ae39e0}} 
+struct \mbox{\hyperlink{renderstate_8h_structRenderState}{RenderState}}&
+renderState&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_a8212e5ba5b481d631c2768e1f9f5f337}\label{graphics_8h_a8212e5ba5b481d631c2768e1f9f5f337}} 
+OSScTask&
+task&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_aaaa4011ece08466eed6823e5c41a339f}\label{graphics_8h_aaaa4011ece08466eed6823e5c41a339f}} 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}&
+taskIndex&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Dynamic@{Dynamic}}\label{structDynamic}
+\Hypertarget{graphics_8h_structDynamic}
+\doxysubsubsection{struct Dynamic}
+
+
+Collaboration diagram for Dynamic\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{structDynamic__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{graphics_8h_a84ee4d6864241e82e884583d02ae518a}\label{graphics_8h_a84ee4d6864241e82e884583d02ae518a}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+camera&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_a88460b9ff8b0e2b7727f636c2a4888c5}\label{graphics_8h_a88460b9ff8b0e2b7727f636c2a4888c5}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+modeling&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_a67266d2060ee4e16b3e286cd39f06d3d}\label{graphics_8h_a67266d2060ee4e16b3e286cd39f06d3d}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+objTransforms\mbox{[}\mbox{\hyperlink{constants_8h_a8e43f4a3b88c32f926af9673c3764e4d}{MAX\_WORLD\_OBJECTS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_ad2716716da81cef7a6307f184577b856}\label{graphics_8h_ad2716716da81cef7a6307f184577b856}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+projection&
+\\
+\hline
+
+\mbox{\Hypertarget{graphics_8h_a74dced27b1f6425d7fb0ceb3f354ed33}\label{graphics_8h_a74dced27b1f6425d7fb0ceb3f354ed33}} 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}&
+zUpToYUpCoordinatesRotation&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{graphics_8h_adb74b14749d12f5e72df274eb425a112}\label{graphics_8h_adb74b14749d12f5e72df274eb425a112}} 
+\index{graphics.h@{graphics.h}!G\_RM\_AA\_ZUPD\_OPA\_SURF@{G\_RM\_AA\_ZUPD\_OPA\_SURF}}
+\index{G\_RM\_AA\_ZUPD\_OPA\_SURF@{G\_RM\_AA\_ZUPD\_OPA\_SURF}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{G\_RM\_AA\_ZUPD\_OPA\_SURF}{G\_RM\_AA\_ZUPD\_OPA\_SURF}}
+{\footnotesize\ttfamily \#define G\+\_\+\+RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF~\mbox{\hyperlink{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}{RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(1)}
+
+\mbox{\Hypertarget{graphics_8h_aa46647bfb0b843e5c8ccc4bab24343cc}\label{graphics_8h_aa46647bfb0b843e5c8ccc4bab24343cc}} 
+\index{graphics.h@{graphics.h}!G\_RM\_AA\_ZUPD\_OPA\_SURF2@{G\_RM\_AA\_ZUPD\_OPA\_SURF2}}
+\index{G\_RM\_AA\_ZUPD\_OPA\_SURF2@{G\_RM\_AA\_ZUPD\_OPA\_SURF2}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{G\_RM\_AA\_ZUPD\_OPA\_SURF2}{G\_RM\_AA\_ZUPD\_OPA\_SURF2}}
+{\footnotesize\ttfamily \#define G\+\_\+\+RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF2~\mbox{\hyperlink{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}{RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(2)}
+
+\mbox{\Hypertarget{graphics_8h_afb7b8604a647f9298f215ecaa65da90e}\label{graphics_8h_afb7b8604a647f9298f215ecaa65da90e}} 
+\index{graphics.h@{graphics.h}!G\_RM\_ZUPD\_OPA\_SURF@{G\_RM\_ZUPD\_OPA\_SURF}}
+\index{G\_RM\_ZUPD\_OPA\_SURF@{G\_RM\_ZUPD\_OPA\_SURF}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{G\_RM\_ZUPD\_OPA\_SURF}{G\_RM\_ZUPD\_OPA\_SURF}}
+{\footnotesize\ttfamily \#define G\+\_\+\+RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF~\mbox{\hyperlink{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}{RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(1)}
+
+\mbox{\Hypertarget{graphics_8h_a2962f0b2aaae9d3f2feb789ad501c7dd}\label{graphics_8h_a2962f0b2aaae9d3f2feb789ad501c7dd}} 
+\index{graphics.h@{graphics.h}!G\_RM\_ZUPD\_OPA\_SURF2@{G\_RM\_ZUPD\_OPA\_SURF2}}
+\index{G\_RM\_ZUPD\_OPA\_SURF2@{G\_RM\_ZUPD\_OPA\_SURF2}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{G\_RM\_ZUPD\_OPA\_SURF2}{G\_RM\_ZUPD\_OPA\_SURF2}}
+{\footnotesize\ttfamily \#define G\+\_\+\+RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF2~\mbox{\hyperlink{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}{RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF}}(2)}
+
+\mbox{\Hypertarget{graphics_8h_a6974138f00740cc3b22c23d498e95709}\label{graphics_8h_a6974138f00740cc3b22c23d498e95709}} 
+\index{graphics.h@{graphics.h}!GET\_GFX\_TYPE@{GET\_GFX\_TYPE}}
+\index{GET\_GFX\_TYPE@{GET\_GFX\_TYPE}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{GET\_GFX\_TYPE}{GET\_GFX\_TYPE}}
+{\footnotesize\ttfamily \#define GET\+\_\+\+GFX\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{gfx }\end{DoxyParamCaption})~(\+\_\+\+SHIFTR((gfx)-\/$>$words.\+w0, 24, 8))}
+
+\mbox{\Hypertarget{graphics_8h_ab6ff5573d38b8ad6be027c5b1dac8dce}\label{graphics_8h_ab6ff5573d38b8ad6be027c5b1dac8dce}} 
+\index{graphics.h@{graphics.h}!RES\_SCALE\_X@{RES\_SCALE\_X}}
+\index{RES\_SCALE\_X@{RES\_SCALE\_X}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RES\_SCALE\_X}{RES\_SCALE\_X}}
+{\footnotesize\ttfamily \#define RES\+\_\+\+SCALE\+\_\+X(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((float)x / (float)\mbox{\hyperlink{graphics_8h_a5d454c132b3c98ea732a30b2e9bffa83}{SCREEN\+\_\+\+WD\+\_\+\+HI}} $\ast$ (float)\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\+\_\+\+WD}})}
+
+\mbox{\Hypertarget{graphics_8h_a3c422c016143971785aebf9451f8893d}\label{graphics_8h_a3c422c016143971785aebf9451f8893d}} 
+\index{graphics.h@{graphics.h}!RES\_SCALE\_Y@{RES\_SCALE\_Y}}
+\index{RES\_SCALE\_Y@{RES\_SCALE\_Y}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RES\_SCALE\_Y}{RES\_SCALE\_Y}}
+{\footnotesize\ttfamily \#define RES\+\_\+\+SCALE\+\_\+Y(\begin{DoxyParamCaption}\item[{}]{y }\end{DoxyParamCaption})~((float)y / (float)\mbox{\hyperlink{graphics_8h_a6153336a4408dbc7470125fdd215b4ac}{SCREEN\+\_\+\+HT\+\_\+\+HI}} $\ast$ (float)\mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\+\_\+\+HT}})}
+
+\mbox{\Hypertarget{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}\label{graphics_8h_a99b741a52c5be02b0f57ca9e559e8e40}} 
+\index{graphics.h@{graphics.h}!RM\_AA\_ZUPD\_OPA\_SURF@{RM\_AA\_ZUPD\_OPA\_SURF}}
+\index{RM\_AA\_ZUPD\_OPA\_SURF@{RM\_AA\_ZUPD\_OPA\_SURF}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RM\_AA\_ZUPD\_OPA\_SURF}{RM\_AA\_ZUPD\_OPA\_SURF}}
+{\footnotesize\ttfamily \#define RM\+\_\+\+AA\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF(\begin{DoxyParamCaption}\item[{}]{clk }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    AA\_EN | Z\_UPD | IM\_RD | CVG\_DST\_CLAMP | ZMODE\_OPA | ALPHA\_CVG\_SEL | \(\backslash\)}
+\DoxyCodeLine{        GBL\_c\#\#clk(G\_BL\_CLR\_IN, G\_BL\_A\_IN, G\_BL\_CLR\_MEM, G\_BL\_A\_MEM)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}\label{graphics_8h_a5f8c1ff3e2794bcc5f23b4187a633cab}} 
+\index{graphics.h@{graphics.h}!RM\_ZUPD\_OPA\_SURF@{RM\_ZUPD\_OPA\_SURF}}
+\index{RM\_ZUPD\_OPA\_SURF@{RM\_ZUPD\_OPA\_SURF}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RM\_ZUPD\_OPA\_SURF}{RM\_ZUPD\_OPA\_SURF}}
+{\footnotesize\ttfamily \#define RM\+\_\+\+ZUPD\+\_\+\+OPA\+\_\+\+SURF(\begin{DoxyParamCaption}\item[{}]{clk }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    Z\_UPD | CVG\_DST\_FULL | ALPHA\_CVG\_SEL | ZMODE\_OPA | \(\backslash\)}
+\DoxyCodeLine{        GBL\_c\#\#clk(G\_BL\_CLR\_IN, G\_BL\_A\_IN, G\_BL\_CLR\_MEM, G\_BL\_A\_MEM)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{graphics_8h_a149af865bbf6d8b977732d99337dded4}\label{graphics_8h_a149af865bbf6d8b977732d99337dded4}} 
+\index{graphics.h@{graphics.h}!SCREEN\_HT@{SCREEN\_HT}}
+\index{SCREEN\_HT@{SCREEN\_HT}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{SCREEN\_HT}{SCREEN\_HT}}
+{\footnotesize\ttfamily \#define SCREEN\+\_\+\+HT~240}
+
+\mbox{\Hypertarget{graphics_8h_a6153336a4408dbc7470125fdd215b4ac}\label{graphics_8h_a6153336a4408dbc7470125fdd215b4ac}} 
+\index{graphics.h@{graphics.h}!SCREEN\_HT\_HI@{SCREEN\_HT\_HI}}
+\index{SCREEN\_HT\_HI@{SCREEN\_HT\_HI}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{SCREEN\_HT\_HI}{SCREEN\_HT\_HI}}
+{\footnotesize\ttfamily \#define SCREEN\+\_\+\+HT\+\_\+\+HI~480}
+
+\mbox{\Hypertarget{graphics_8h_a7b057213f570d9f55be4020d091eeb28}\label{graphics_8h_a7b057213f570d9f55be4020d091eeb28}} 
+\index{graphics.h@{graphics.h}!SCREEN\_WD@{SCREEN\_WD}}
+\index{SCREEN\_WD@{SCREEN\_WD}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{SCREEN\_WD}{SCREEN\_WD}}
+{\footnotesize\ttfamily \#define SCREEN\+\_\+\+WD~320}
+
+\mbox{\Hypertarget{graphics_8h_a5d454c132b3c98ea732a30b2e9bffa83}\label{graphics_8h_a5d454c132b3c98ea732a30b2e9bffa83}} 
+\index{graphics.h@{graphics.h}!SCREEN\_WD\_HI@{SCREEN\_WD\_HI}}
+\index{SCREEN\_WD\_HI@{SCREEN\_WD\_HI}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{SCREEN\_WD\_HI}{SCREEN\_WD\_HI}}
+{\footnotesize\ttfamily \#define SCREEN\+\_\+\+WD\+\_\+\+HI~640}
+
+\mbox{\Hypertarget{graphics_8h_a09a5b0bedf7ea1e1bc6c98e48d1695a3}\label{graphics_8h_a09a5b0bedf7ea1e1bc6c98e48d1695a3}} 
+\index{graphics.h@{graphics.h}!SCREEN\_WD\_MAX@{SCREEN\_WD\_MAX}}
+\index{SCREEN\_WD\_MAX@{SCREEN\_WD\_MAX}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{SCREEN\_WD\_MAX}{SCREEN\_WD\_MAX}}
+{\footnotesize\ttfamily \#define SCREEN\+\_\+\+WD\+\_\+\+MAX~640}
+
+\mbox{\Hypertarget{graphics_8h_aa1f8b6c8915b5d676e4e09860151a665}\label{graphics_8h_aa1f8b6c8915b5d676e4e09860151a665}} 
+\index{graphics.h@{graphics.h}!XSCALE\_MAX@{XSCALE\_MAX}}
+\index{XSCALE\_MAX@{XSCALE\_MAX}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{XSCALE\_MAX}{XSCALE\_MAX}}
+{\footnotesize\ttfamily \#define XSCALE\+\_\+\+MAX~0x400}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}\label{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}} 
+\index{graphics.h@{graphics.h}!GraphicsCallback@{GraphicsCallback}}
+\index{GraphicsCallback@{GraphicsCallback}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{GraphicsCallback}{GraphicsCallback}}
+{\footnotesize\ttfamily typedef void($\ast$ Graphics\+Callback) (void $\ast$data, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$task)}
+
+\mbox{\Hypertarget{graphics_8h_a3da462c99634e27b12ec1a24790f756d}\label{graphics_8h_a3da462c99634e27b12ec1a24790f756d}} 
+\index{graphics.h@{graphics.h}!RenderMode@{RenderMode}}
+\index{RenderMode@{RenderMode}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RenderMode}{RenderMode}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}}}
+
+\mbox{\Hypertarget{graphics_8h_add1a34a4ecebab03484e2c232de43ec6}\label{graphics_8h_add1a34a4ecebab03484e2c232de43ec6}} 
+\index{graphics.h@{graphics.h}!ViewportF@{ViewportF}}
+\index{ViewportF@{ViewportF}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{ViewportF}{ViewportF}}
+{\footnotesize\ttfamily typedef float ViewportF\mbox{[}4\mbox{]}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}} 
+\index{graphics.h@{graphics.h}!RenderMode@{RenderMode}}
+\index{RenderMode@{RenderMode}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{RenderMode}{RenderMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ToonFlatShadingRenderMode@{ToonFlatShadingRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!ToonFlatShadingRenderMode@{ToonFlatShadingRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}} 
+Toon\+Flat\+Shading\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TextureAndLightingRenderMode@{TextureAndLightingRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!TextureAndLightingRenderMode@{TextureAndLightingRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac}} 
+Texture\+And\+Lighting\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TextureNoLightingRenderMode@{TextureNoLightingRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!TextureNoLightingRenderMode@{TextureNoLightingRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849}} 
+Texture\+No\+Lighting\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NoTextureNoLightingRenderMode@{NoTextureNoLightingRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!NoTextureNoLightingRenderMode@{NoTextureNoLightingRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}} 
+No\+Texture\+No\+Lighting\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightingNoTextureRenderMode@{LightingNoTextureRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!LightingNoTextureRenderMode@{LightingNoTextureRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}} 
+Lighting\+No\+Texture\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WireframeRenderMode@{WireframeRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!WireframeRenderMode@{WireframeRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935}} 
+Wireframe\+Render\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_RENDER\_MODE@{MAX\_RENDER\_MODE}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!MAX\_RENDER\_MODE@{MAX\_RENDER\_MODE}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697}} 
+MAX\+\_\+\+RENDER\+\_\+\+MODE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}\label{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}} 
+\index{graphics.h@{graphics.h}!graphicsCreateTask@{graphicsCreateTask}}
+\index{graphicsCreateTask@{graphicsCreateTask}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{graphicsCreateTask()}{graphicsCreateTask()}}
+{\footnotesize\ttfamily void graphics\+Create\+Task (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$}]{target\+Task,  }\item[{\mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}}}]{callback,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{graphics_8h_ad33ad9954af6d7af39bfb766eeec387a}\label{graphics_8h_ad33ad9954af6d7af39bfb766eeec387a}} 
+\index{graphics.h@{graphics.h}!graphicsLayoutScreenBuffers@{graphicsLayoutScreenBuffers}}
+\index{graphicsLayoutScreenBuffers@{graphicsLayoutScreenBuffers}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{graphicsLayoutScreenBuffers()}{graphicsLayoutScreenBuffers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}$\ast$ graphics\+Layout\+Screen\+Buffers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$}]{memory\+End }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{graphics_8h_a74d3996519245b4a7dc8d32ea056700a}\label{graphics_8h_a74d3996519245b4a7dc8d32ea056700a}} 
+\index{graphics.h@{graphics.h}!fullscreenViewport@{fullscreenViewport}}
+\index{fullscreenViewport@{fullscreenViewport}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{fullscreenViewport}{fullscreenViewport}}
+{\footnotesize\ttfamily Vp fullscreen\+Viewport\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8h_a8cbecb32f7032d17eb245871573a238b}\label{graphics_8h_a8cbecb32f7032d17eb245871573a238b}} 
+\index{graphics.h@{graphics.h}!gfx\_dynamic@{gfx\_dynamic}}
+\index{gfx\_dynamic@{gfx\_dynamic}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{gfx\_dynamic}{gfx\_dynamic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} gfx\+\_\+dynamic\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8h_a5b521368e849c81417a643a0654e4656}\label{graphics_8h_a5b521368e849c81417a643a0654e4656}} 
+\index{graphics.h@{graphics.h}!gGraphicsTasks@{gGraphicsTasks}}
+\index{gGraphicsTasks@{gGraphicsTasks}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{gGraphicsTasks}{gGraphicsTasks}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} g\+Graphics\+Tasks\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8h_ae06480fe7d456e703520e0d551b253ad}\label{graphics_8h_ae06480fe7d456e703520e0d551b253ad}} 
+\index{graphics.h@{graphics.h}!gLevelSegment@{gLevelSegment}}
+\index{gLevelSegment@{gLevelSegment}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{gLevelSegment}{gLevelSegment}}
+{\footnotesize\ttfamily void$\ast$ g\+Level\+Segment\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8h_a1e3a65bf44e5defd533ee53b3963308b}\label{graphics_8h_a1e3a65bf44e5defd533ee53b3963308b}} 
+\index{graphics.h@{graphics.h}!gMaterialSegment@{gMaterialSegment}}
+\index{gMaterialSegment@{gMaterialSegment}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{gMaterialSegment}{gMaterialSegment}}
+{\footnotesize\ttfamily void$\ast$ g\+Material\+Segment\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{graphics_8h_ae0c1265e855deb83d50cb9ffa92dc16a}\label{graphics_8h_ae0c1265e855deb83d50cb9ffa92dc16a}} 
+\index{graphics.h@{graphics.h}!gRenderMode@{gRenderMode}}
+\index{gRenderMode@{gRenderMode}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{gRenderMode}{gRenderMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mode}} g\+Render\+Mode\hspace{0.3cm}{\ttfamily [extern]}}
+

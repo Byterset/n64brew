@@ -1,0 +1,91 @@
+\hypertarget{sprite_8h}{}\doxysection{src/sprite.h File Reference}
+\label{sprite_8h}\index{src/sprite.h@{src/sprite.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sprite_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sprite_8h_a11c1935c0fe600e023123c42b975dddd}{HONK\+\_\+\+SPRITE\+\_\+\+FRAMES}}~3
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}} \mbox{\hyperlink{sprite_8h_a2c779a05ff95827b4ff88108017722fc}{Sprite\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}} \{ \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa20ebd7b6fac434484cd89857bdc77e51}{None\+Sprite}}
+, \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa3220b8a65cc18d0bac0a338fb6dfd6af}{Honk\+Sprite}}
+, \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aab6b6096f15bbb744dd829dc599aaa6d8}{MAX\+\_\+\+SPRITE\+\_\+\+TYPE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short $\ast$ \mbox{\hyperlink{sprite_8h_a05e982914932f2bf2ba8aa5f8abf7705}{get\+Sprite\+For\+Sprite\+Type}} (\mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}} sprite\+Type, int frame)
+\item 
+int \mbox{\hyperlink{sprite_8h_a28a0b0fc4c379e7508327b567524c022}{Sprite\+\_\+frame\+Cycle}} (int num\+Frame\+Assets, int frame\+Duration\+Ticks, int current\+Tick)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{sprite_8h_a11c1935c0fe600e023123c42b975dddd}\label{sprite_8h_a11c1935c0fe600e023123c42b975dddd}} 
+\index{sprite.h@{sprite.h}!HONK\_SPRITE\_FRAMES@{HONK\_SPRITE\_FRAMES}}
+\index{HONK\_SPRITE\_FRAMES@{HONK\_SPRITE\_FRAMES}!sprite.h@{sprite.h}}
+\doxysubsubsection{\texorpdfstring{HONK\_SPRITE\_FRAMES}{HONK\_SPRITE\_FRAMES}}
+{\footnotesize\ttfamily \#define HONK\+\_\+\+SPRITE\+\_\+\+FRAMES~3}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{sprite_8h_a2c779a05ff95827b4ff88108017722fc}\label{sprite_8h_a2c779a05ff95827b4ff88108017722fc}} 
+\index{sprite.h@{sprite.h}!SpriteType@{SpriteType}}
+\index{SpriteType@{SpriteType}!sprite.h@{sprite.h}}
+\doxysubsubsection{\texorpdfstring{SpriteType}{SpriteType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}} \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}\label{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}} 
+\index{sprite.h@{sprite.h}!SpriteType@{SpriteType}}
+\index{SpriteType@{SpriteType}!sprite.h@{sprite.h}}
+\doxysubsubsection{\texorpdfstring{SpriteType}{SpriteType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NoneSprite@{NoneSprite}!sprite.h@{sprite.h}}\index{sprite.h@{sprite.h}!NoneSprite@{NoneSprite}}}\mbox{\Hypertarget{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa20ebd7b6fac434484cd89857bdc77e51}\label{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa20ebd7b6fac434484cd89857bdc77e51}} 
+None\+Sprite&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HonkSprite@{HonkSprite}!sprite.h@{sprite.h}}\index{sprite.h@{sprite.h}!HonkSprite@{HonkSprite}}}\mbox{\Hypertarget{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa3220b8a65cc18d0bac0a338fb6dfd6af}\label{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aa3220b8a65cc18d0bac0a338fb6dfd6af}} 
+Honk\+Sprite&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_SPRITE\_TYPE@{MAX\_SPRITE\_TYPE}!sprite.h@{sprite.h}}\index{sprite.h@{sprite.h}!MAX\_SPRITE\_TYPE@{MAX\_SPRITE\_TYPE}}}\mbox{\Hypertarget{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aab6b6096f15bbb744dd829dc599aaa6d8}\label{sprite_8h_ac6fa10729dffeb6a192492f13c25e31aab6b6096f15bbb744dd829dc599aaa6d8}} 
+MAX\+\_\+\+SPRITE\+\_\+\+TYPE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sprite_8h_a05e982914932f2bf2ba8aa5f8abf7705}\label{sprite_8h_a05e982914932f2bf2ba8aa5f8abf7705}} 
+\index{sprite.h@{sprite.h}!getSpriteForSpriteType@{getSpriteForSpriteType}}
+\index{getSpriteForSpriteType@{getSpriteForSpriteType}!sprite.h@{sprite.h}}
+\doxysubsubsection{\texorpdfstring{getSpriteForSpriteType()}{getSpriteForSpriteType()}}
+{\footnotesize\ttfamily unsigned short$\ast$ get\+Sprite\+For\+Sprite\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{sprite_8h_ac6fa10729dffeb6a192492f13c25e31a}{Sprite\+Type}}}]{sprite\+Type,  }\item[{int}]{frame }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{sprite_8h_a28a0b0fc4c379e7508327b567524c022}\label{sprite_8h_a28a0b0fc4c379e7508327b567524c022}} 
+\index{sprite.h@{sprite.h}!Sprite\_frameCycle@{Sprite\_frameCycle}}
+\index{Sprite\_frameCycle@{Sprite\_frameCycle}!sprite.h@{sprite.h}}
+\doxysubsubsection{\texorpdfstring{Sprite\_frameCycle()}{Sprite\_frameCycle()}}
+{\footnotesize\ttfamily int Sprite\+\_\+frame\+Cycle (\begin{DoxyParamCaption}\item[{int}]{num\+Frame\+Assets,  }\item[{int}]{frame\+Duration\+Ticks,  }\item[{int}]{current\+Tick }\end{DoxyParamCaption})}
+

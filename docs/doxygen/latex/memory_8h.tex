@@ -1,0 +1,299 @@
+\hypertarget{memory_8h}{}\doxysection{src/util/memory.h File Reference}
+\label{memory_8h}\index{src/util/memory.h@{src/util/memory.h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for memory.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{memory_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{memory_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{memory_8h_structHeapUsedSegment}{Heap\+Used\+Segment}}
+\item 
+struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}}
+\item 
+struct \mbox{\hyperlink{memory_8h_structHeapSegmentFooter}{Heap\+Segment\+Footer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{memory_8h_ad24469deee3806379982ccf51d116ac6}{ALIGN\+\_\+8}}(size)~(((size) + 0x7) \& $\sim$0x7)
+\item 
+\#define \mbox{\hyperlink{memory_8h_a9739fc18d63bc6f152126a42df96568a}{MALLOC\+\_\+\+FREE\+\_\+\+BLOCK}}~0x\+FEEE
+\item 
+\#define \mbox{\hyperlink{memory_8h_a183a3c0eb02329ef4558964be2db5eb3}{MALLOC\+\_\+\+USED\+\_\+\+BLOCK}}~0x\+EEEF
+\item 
+\#define \mbox{\hyperlink{memory_8h_aa3527f3994bc5894e0cdc58c6b9bc474}{MALLOC\+\_\+\+BLOCK\+\_\+\+HEAD}}~0x\+EEAD0000
+\item 
+\#define \mbox{\hyperlink{memory_8h_a9e175c3075ecae10e205e4c57f7f98e7}{MALLOC\+\_\+\+BLOCK\+\_\+\+FOOT}}~0x\+F0000000
+\item 
+\#define \mbox{\hyperlink{memory_8h_a77bf942f580ac80bc1483a630011d5d0}{MIN\+\_\+\+HEAP\+\_\+\+BLOCK\+\_\+\+SIZE}}~(sizeof(struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}}) + sizeof(struct \mbox{\hyperlink{memory_8h_structHeapSegmentFooter}{Heap\+Segment\+Footer}}))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{memory_8h_aa907f50b4132168d751785806bcbd100}{heap\+Init}} (void $\ast$heap\+Start, void $\ast$heap\+End)
+\item 
+void \mbox{\hyperlink{memory_8h_a0f5c523a6de6d53e689d25c35e34a438}{heap\+Reset}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{memory_8h_ae054763213e99725646ce0e4a761b507}{cache\+Free\+Pointer}} (void $\ast$target)
+\item 
+void $\ast$ \mbox{\hyperlink{memory_8h_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc}} (unsigned int size)
+\item 
+void $\ast$ \mbox{\hyperlink{memory_8h_adaf8910abb922b24d0b085e8a6c6a269}{realloc}} (void $\ast$target, unsigned int size)
+\item 
+void \mbox{\hyperlink{memory_8h_a60f5516345fd73917286398679b0d911}{free}} (void $\ast$target)
+\item 
+int \mbox{\hyperlink{memory_8h_a0c95f50af9af96902e480ed340db0978}{calculate\+Bytes\+Free}} ()
+\item 
+int \mbox{\hyperlink{memory_8h_a5571c5db0602104833d57fa97d8179de}{calculate\+Heap\+Size}} ()
+\item 
+int \mbox{\hyperlink{memory_8h_a55b08bf0df84dfc90cb09e27962f98b8}{calculate\+Largest\+Free\+Chunk}} ()
+\item 
+void \mbox{\hyperlink{memory_8h_ade3b4edbfcd79e5ed12e0227e780a59e}{zero\+Memory}} (void $\ast$memory, int size)
+\item 
+void \mbox{\hyperlink{memory_8h_af4ed8187db74bae721b4bfa986ac2912}{mem\+Copy}} (void $\ast$target, const void $\ast$src, int size)
+\item 
+void \mbox{\hyperlink{memory_8h_aa501bfa237d73fb01f96610623d25426}{stack\+Malloc\+Reset}} ()
+\item 
+void \mbox{\hyperlink{memory_8h_ad6a69ad824cfe1fa329ed2a6732682b1}{stack\+Malloc\+Free}} (void $\ast$ptr)
+\item 
+void $\ast$ \mbox{\hyperlink{memory_8h_a3eee27199ddc46e71ea582c4ebfc66a6}{stack\+Malloc}} (int size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$ \mbox{\hyperlink{memory_8h_a5804bc097b6a630ed526bfac8e25f49c}{g\+First\+Heap\+Segment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{HeapUsedSegment@{HeapUsedSegment}}\label{structHeapUsedSegment}
+\Hypertarget{memory_8h_structHeapUsedSegment}
+\doxysubsubsection{struct Heap\+Used\+Segment}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{memory_8h_aef048b9a816991aec44913b4f8b18917}\label{memory_8h_aef048b9a816991aec44913b4f8b18917}} 
+unsigned int&
+header&
+\\
+\hline
+
+\mbox{\Hypertarget{memory_8h_acf3718558898fcca2b8198aa0503c9c6}\label{memory_8h_acf3718558898fcca2b8198aa0503c9c6}} 
+void $\ast$&
+segmentEnd&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HeapSegment@{HeapSegment}}\label{structHeapSegment}
+\Hypertarget{memory_8h_structHeapSegment}
+\doxysubsubsection{struct Heap\+Segment}
+
+
+Collaboration diagram for Heap\+Segment\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{structHeapSegment__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{memory_8h_a9b73f7718148ec211f9b38865b2f2185}\label{memory_8h_a9b73f7718148ec211f9b38865b2f2185}} 
+unsigned int&
+header&
+\\
+\hline
+
+\mbox{\Hypertarget{memory_8h_a125693f14e6a114288b43327b82dfb7c}\label{memory_8h_a125693f14e6a114288b43327b82dfb7c}} 
+struct \mbox{\hyperlink{memory_8h_structHeapSegment}{HeapSegment}} $\ast$&
+nextSegment&
+\\
+\hline
+
+\mbox{\Hypertarget{memory_8h_ad0fb6cab1eba6fbe940e20933004b335}\label{memory_8h_ad0fb6cab1eba6fbe940e20933004b335}} 
+struct \mbox{\hyperlink{memory_8h_structHeapSegment}{HeapSegment}} $\ast$&
+prevSegment&
+\\
+\hline
+
+\mbox{\Hypertarget{memory_8h_a099acf74a28e16f2e69bda1bce2a2b92}\label{memory_8h_a099acf74a28e16f2e69bda1bce2a2b92}} 
+void $\ast$&
+segmentEnd&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HeapSegmentFooter@{HeapSegmentFooter}}\label{structHeapSegmentFooter}
+\Hypertarget{memory_8h_structHeapSegmentFooter}
+\doxysubsubsection{struct Heap\+Segment\+Footer}
+
+
+Collaboration diagram for Heap\+Segment\+Footer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{structHeapSegmentFooter__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{memory_8h_a96d58a0a5e5f2f2aff0a106c72b0d597}\label{memory_8h_a96d58a0a5e5f2f2aff0a106c72b0d597}} 
+unsigned int&
+footer&
+\\
+\hline
+
+\mbox{\Hypertarget{memory_8h_a5656047cc90feed9e83e6e372caaaa08}\label{memory_8h_a5656047cc90feed9e83e6e372caaaa08}} 
+struct \mbox{\hyperlink{memory_8h_structHeapSegment}{HeapSegment}} $\ast$&
+header&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{memory_8h_ad24469deee3806379982ccf51d116ac6}\label{memory_8h_ad24469deee3806379982ccf51d116ac6}} 
+\index{memory.h@{memory.h}!ALIGN\_8@{ALIGN\_8}}
+\index{ALIGN\_8@{ALIGN\_8}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{ALIGN\_8}{ALIGN\_8}}
+{\footnotesize\ttfamily \#define ALIGN\+\_\+8(\begin{DoxyParamCaption}\item[{}]{size }\end{DoxyParamCaption})~(((size) + 0x7) \& $\sim$0x7)}
+
+\mbox{\Hypertarget{memory_8h_a9e175c3075ecae10e205e4c57f7f98e7}\label{memory_8h_a9e175c3075ecae10e205e4c57f7f98e7}} 
+\index{memory.h@{memory.h}!MALLOC\_BLOCK\_FOOT@{MALLOC\_BLOCK\_FOOT}}
+\index{MALLOC\_BLOCK\_FOOT@{MALLOC\_BLOCK\_FOOT}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{MALLOC\_BLOCK\_FOOT}{MALLOC\_BLOCK\_FOOT}}
+{\footnotesize\ttfamily \#define MALLOC\+\_\+\+BLOCK\+\_\+\+FOOT~0x\+F0000000}
+
+\mbox{\Hypertarget{memory_8h_aa3527f3994bc5894e0cdc58c6b9bc474}\label{memory_8h_aa3527f3994bc5894e0cdc58c6b9bc474}} 
+\index{memory.h@{memory.h}!MALLOC\_BLOCK\_HEAD@{MALLOC\_BLOCK\_HEAD}}
+\index{MALLOC\_BLOCK\_HEAD@{MALLOC\_BLOCK\_HEAD}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{MALLOC\_BLOCK\_HEAD}{MALLOC\_BLOCK\_HEAD}}
+{\footnotesize\ttfamily \#define MALLOC\+\_\+\+BLOCK\+\_\+\+HEAD~0x\+EEAD0000}
+
+\mbox{\Hypertarget{memory_8h_a9739fc18d63bc6f152126a42df96568a}\label{memory_8h_a9739fc18d63bc6f152126a42df96568a}} 
+\index{memory.h@{memory.h}!MALLOC\_FREE\_BLOCK@{MALLOC\_FREE\_BLOCK}}
+\index{MALLOC\_FREE\_BLOCK@{MALLOC\_FREE\_BLOCK}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{MALLOC\_FREE\_BLOCK}{MALLOC\_FREE\_BLOCK}}
+{\footnotesize\ttfamily \#define MALLOC\+\_\+\+FREE\+\_\+\+BLOCK~0x\+FEEE}
+
+\mbox{\Hypertarget{memory_8h_a183a3c0eb02329ef4558964be2db5eb3}\label{memory_8h_a183a3c0eb02329ef4558964be2db5eb3}} 
+\index{memory.h@{memory.h}!MALLOC\_USED\_BLOCK@{MALLOC\_USED\_BLOCK}}
+\index{MALLOC\_USED\_BLOCK@{MALLOC\_USED\_BLOCK}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{MALLOC\_USED\_BLOCK}{MALLOC\_USED\_BLOCK}}
+{\footnotesize\ttfamily \#define MALLOC\+\_\+\+USED\+\_\+\+BLOCK~0x\+EEEF}
+
+\mbox{\Hypertarget{memory_8h_a77bf942f580ac80bc1483a630011d5d0}\label{memory_8h_a77bf942f580ac80bc1483a630011d5d0}} 
+\index{memory.h@{memory.h}!MIN\_HEAP\_BLOCK\_SIZE@{MIN\_HEAP\_BLOCK\_SIZE}}
+\index{MIN\_HEAP\_BLOCK\_SIZE@{MIN\_HEAP\_BLOCK\_SIZE}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_HEAP\_BLOCK\_SIZE}{MIN\_HEAP\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+HEAP\+\_\+\+BLOCK\+\_\+\+SIZE~(sizeof(struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}}) + sizeof(struct \mbox{\hyperlink{memory_8h_structHeapSegmentFooter}{Heap\+Segment\+Footer}}))}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{memory_8h_ae054763213e99725646ce0e4a761b507}\label{memory_8h_ae054763213e99725646ce0e4a761b507}} 
+\index{memory.h@{memory.h}!cacheFreePointer@{cacheFreePointer}}
+\index{cacheFreePointer@{cacheFreePointer}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{cacheFreePointer()}{cacheFreePointer()}}
+{\footnotesize\ttfamily void$\ast$ cache\+Free\+Pointer (\begin{DoxyParamCaption}\item[{void $\ast$}]{target }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a0c95f50af9af96902e480ed340db0978}\label{memory_8h_a0c95f50af9af96902e480ed340db0978}} 
+\index{memory.h@{memory.h}!calculateBytesFree@{calculateBytesFree}}
+\index{calculateBytesFree@{calculateBytesFree}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{calculateBytesFree()}{calculateBytesFree()}}
+{\footnotesize\ttfamily int calculate\+Bytes\+Free (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a5571c5db0602104833d57fa97d8179de}\label{memory_8h_a5571c5db0602104833d57fa97d8179de}} 
+\index{memory.h@{memory.h}!calculateHeapSize@{calculateHeapSize}}
+\index{calculateHeapSize@{calculateHeapSize}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{calculateHeapSize()}{calculateHeapSize()}}
+{\footnotesize\ttfamily int calculate\+Heap\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a55b08bf0df84dfc90cb09e27962f98b8}\label{memory_8h_a55b08bf0df84dfc90cb09e27962f98b8}} 
+\index{memory.h@{memory.h}!calculateLargestFreeChunk@{calculateLargestFreeChunk}}
+\index{calculateLargestFreeChunk@{calculateLargestFreeChunk}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{calculateLargestFreeChunk()}{calculateLargestFreeChunk()}}
+{\footnotesize\ttfamily int calculate\+Largest\+Free\+Chunk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a60f5516345fd73917286398679b0d911}\label{memory_8h_a60f5516345fd73917286398679b0d911}} 
+\index{memory.h@{memory.h}!free@{free}}
+\index{free@{free}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{free()}{free()}}
+{\footnotesize\ttfamily void free (\begin{DoxyParamCaption}\item[{void $\ast$}]{target }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_aa907f50b4132168d751785806bcbd100}\label{memory_8h_aa907f50b4132168d751785806bcbd100}} 
+\index{memory.h@{memory.h}!heapInit@{heapInit}}
+\index{heapInit@{heapInit}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{heapInit()}{heapInit()}}
+{\footnotesize\ttfamily void heap\+Init (\begin{DoxyParamCaption}\item[{void $\ast$}]{heap\+Start,  }\item[{void $\ast$}]{heap\+End }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a0f5c523a6de6d53e689d25c35e34a438}\label{memory_8h_a0f5c523a6de6d53e689d25c35e34a438}} 
+\index{memory.h@{memory.h}!heapReset@{heapReset}}
+\index{heapReset@{heapReset}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{heapReset()}{heapReset()}}
+{\footnotesize\ttfamily void heap\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_ac0a811fd8b7a378500f100a2d9a1f1a2}\label{memory_8h_ac0a811fd8b7a378500f100a2d9a1f1a2}} 
+\index{memory.h@{memory.h}!malloc@{malloc}}
+\index{malloc@{malloc}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{malloc()}{malloc()}}
+{\footnotesize\ttfamily void$\ast$ malloc (\begin{DoxyParamCaption}\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_af4ed8187db74bae721b4bfa986ac2912}\label{memory_8h_af4ed8187db74bae721b4bfa986ac2912}} 
+\index{memory.h@{memory.h}!memCopy@{memCopy}}
+\index{memCopy@{memCopy}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{memCopy()}{memCopy()}}
+{\footnotesize\ttfamily void mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{target,  }\item[{const void $\ast$}]{src,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_adaf8910abb922b24d0b085e8a6c6a269}\label{memory_8h_adaf8910abb922b24d0b085e8a6c6a269}} 
+\index{memory.h@{memory.h}!realloc@{realloc}}
+\index{realloc@{realloc}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{realloc()}{realloc()}}
+{\footnotesize\ttfamily void$\ast$ realloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{target,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_a3eee27199ddc46e71ea582c4ebfc66a6}\label{memory_8h_a3eee27199ddc46e71ea582c4ebfc66a6}} 
+\index{memory.h@{memory.h}!stackMalloc@{stackMalloc}}
+\index{stackMalloc@{stackMalloc}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{stackMalloc()}{stackMalloc()}}
+{\footnotesize\ttfamily void$\ast$ stack\+Malloc (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_ad6a69ad824cfe1fa329ed2a6732682b1}\label{memory_8h_ad6a69ad824cfe1fa329ed2a6732682b1}} 
+\index{memory.h@{memory.h}!stackMallocFree@{stackMallocFree}}
+\index{stackMallocFree@{stackMallocFree}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{stackMallocFree()}{stackMallocFree()}}
+{\footnotesize\ttfamily void stack\+Malloc\+Free (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_aa501bfa237d73fb01f96610623d25426}\label{memory_8h_aa501bfa237d73fb01f96610623d25426}} 
+\index{memory.h@{memory.h}!stackMallocReset@{stackMallocReset}}
+\index{stackMallocReset@{stackMallocReset}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{stackMallocReset()}{stackMallocReset()}}
+{\footnotesize\ttfamily void stack\+Malloc\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{memory_8h_ade3b4edbfcd79e5ed12e0227e780a59e}\label{memory_8h_ade3b4edbfcd79e5ed12e0227e780a59e}} 
+\index{memory.h@{memory.h}!zeroMemory@{zeroMemory}}
+\index{zeroMemory@{zeroMemory}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{zeroMemory()}{zeroMemory()}}
+{\footnotesize\ttfamily void zero\+Memory (\begin{DoxyParamCaption}\item[{void $\ast$}]{memory,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{memory_8h_a5804bc097b6a630ed526bfac8e25f49c}\label{memory_8h_a5804bc097b6a630ed526bfac8e25f49c}} 
+\index{memory.h@{memory.h}!gFirstHeapSegment@{gFirstHeapSegment}}
+\index{gFirstHeapSegment@{gFirstHeapSegment}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{gFirstHeapSegment}{gFirstHeapSegment}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}}$\ast$ g\+First\+Heap\+Segment\hspace{0.3cm}{\ttfamily [extern]}}
+

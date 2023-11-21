@@ -1,0 +1,92 @@
+\hypertarget{initgfx_8c}{}\doxysection{src/graphics/initgfx.c File Reference}
+\label{initgfx_8c}\index{src/graphics/initgfx.c@{src/graphics/initgfx.c}}
+{\ttfamily \#include \char`\"{}initgfx.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graphics.\+h\char`\"{}}\newline
+Include dependency graph for initgfx.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initgfx_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Vp \mbox{\hyperlink{initgfx_8c_a74d3996519245b4a7dc8d32ea056700a}{fullscreen\+Viewport}}
+\item 
+Gfx \mbox{\hyperlink{initgfx_8c_a0a801a56ee192d697ffc6b794b3f568f}{rdpstateinit\+\_\+dl}} \mbox{[}$\,$\mbox{]}
+\item 
+Gfx \mbox{\hyperlink{initgfx_8c_ab9da22c346c73244740169f3643bf4ea}{setup\+\_\+rdpstate}} \mbox{[}$\,$\mbox{]}
+\item 
+Lights1 \mbox{\hyperlink{initgfx_8c_a5928a1f43dba7c1b78b1f0616cd22e49}{g\+Initial\+Lights}} = gd\+SPDef\+Lights1(0, 0, 0, 0, 0, 0, 0, 0x7f, 0)
+\item 
+Gfx \mbox{\hyperlink{initgfx_8c_a45738bcbb7a5c1ca305d3c3c53870849}{setup\+\_\+rspstate}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{initgfx_8c_a74d3996519245b4a7dc8d32ea056700a}\label{initgfx_8c_a74d3996519245b4a7dc8d32ea056700a}} 
+\index{initgfx.c@{initgfx.c}!fullscreenViewport@{fullscreenViewport}}
+\index{fullscreenViewport@{fullscreenViewport}!initgfx.c@{initgfx.c}}
+\doxysubsubsection{\texorpdfstring{fullscreenViewport}{fullscreenViewport}}
+{\footnotesize\ttfamily Vp fullscreen\+Viewport}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .vp = \{}
+\DoxyCodeLine{        .vscale = \{\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\_WD}} * 2, \mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\_HT}} * 2, G\_MAXZ / 2, 0\}, }
+\DoxyCodeLine{        .vtrans = \{\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\_WD}} * 2, \mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\_HT}} * 2, G\_MAXZ / 2, 0\}, }
+\DoxyCodeLine{    \}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{initgfx_8c_a5928a1f43dba7c1b78b1f0616cd22e49}\label{initgfx_8c_a5928a1f43dba7c1b78b1f0616cd22e49}} 
+\index{initgfx.c@{initgfx.c}!gInitialLights@{gInitialLights}}
+\index{gInitialLights@{gInitialLights}!initgfx.c@{initgfx.c}}
+\doxysubsubsection{\texorpdfstring{gInitialLights}{gInitialLights}}
+{\footnotesize\ttfamily Lights1 g\+Initial\+Lights = gd\+SPDef\+Lights1(0, 0, 0, 0, 0, 0, 0, 0x7f, 0)}
+
+\mbox{\Hypertarget{initgfx_8c_a0a801a56ee192d697ffc6b794b3f568f}\label{initgfx_8c_a0a801a56ee192d697ffc6b794b3f568f}} 
+\index{initgfx.c@{initgfx.c}!rdpstateinit\_dl@{rdpstateinit\_dl}}
+\index{rdpstateinit\_dl@{rdpstateinit\_dl}!initgfx.c@{initgfx.c}}
+\doxysubsubsection{\texorpdfstring{rdpstateinit\_dl}{rdpstateinit\_dl}}
+{\footnotesize\ttfamily Gfx rdpstateinit\+\_\+dl\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{initgfx_8c_ab9da22c346c73244740169f3643bf4ea}\label{initgfx_8c_ab9da22c346c73244740169f3643bf4ea}} 
+\index{initgfx.c@{initgfx.c}!setup\_rdpstate@{setup\_rdpstate}}
+\index{setup\_rdpstate@{setup\_rdpstate}!initgfx.c@{initgfx.c}}
+\doxysubsubsection{\texorpdfstring{setup\_rdpstate}{setup\_rdpstate}}
+{\footnotesize\ttfamily Gfx setup\+\_\+rdpstate\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    gsDPSetRenderMode(G\_RM\_OPA\_SURF, G\_RM\_OPA\_SURF2),}
+\DoxyCodeLine{    gsDPSetScissor(G\_SC\_NON\_INTERLACE, 0, 0, \mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\_WD}}, \mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\_HT}}),}
+\DoxyCodeLine{    gsDPSetColorDither(G\_CD\_DISABLE),}
+\DoxyCodeLine{    gsDPSetAlphaDither(G\_AD\_DISABLE),}
+\DoxyCodeLine{    gsDPSetTexturePersp(G\_TP\_PERSP),}
+\DoxyCodeLine{}
+\DoxyCodeLine{    gsSPEndDisplayList(),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{initgfx_8c_a45738bcbb7a5c1ca305d3c3c53870849}\label{initgfx_8c_a45738bcbb7a5c1ca305d3c3c53870849}} 
+\index{initgfx.c@{initgfx.c}!setup\_rspstate@{setup\_rspstate}}
+\index{setup\_rspstate@{setup\_rspstate}!initgfx.c@{initgfx.c}}
+\doxysubsubsection{\texorpdfstring{setup\_rspstate}{setup\_rspstate}}
+{\footnotesize\ttfamily Gfx setup\+\_\+rspstate\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    gsSPViewport(\&\mbox{\hyperlink{initgfx_8c_a74d3996519245b4a7dc8d32ea056700a}{fullscreenViewport}}),}
+\DoxyCodeLine{    gsSPClearGeometryMode(G\_SHADE | G\_SHADING\_SMOOTH | G\_CULL\_BOTH | G\_FOG | G\_LIGHTING | G\_TEXTURE\_GEN | G\_TEXTURE\_GEN\_LINEAR),}
+\DoxyCodeLine{    gsSPSetGeometryMode(G\_ZBUFFER | G\_SHADE | G\_SHADING\_SMOOTH | G\_CULL\_BACK),}
+\DoxyCodeLine{    gsSPTexture(0, 0, 0, 0, G\_OFF),}
+\DoxyCodeLine{    gsSPSetLights1(\mbox{\hyperlink{initgfx_8c_a5928a1f43dba7c1b78b1f0616cd22e49}{gInitialLights}}),}
+\DoxyCodeLine{    gsSPEndDisplayList(),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

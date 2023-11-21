@@ -1,0 +1,187 @@
+\hypertarget{ed64io__usb_8h}{}\doxysection{src/ed64/ed64io\+\_\+usb.h File Reference}
+\label{ed64io__usb_8h}\index{src/ed64/ed64io\_usb.h@{src/ed64/ed64io\_usb.h}}
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+types.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+usb.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{ed64io__usb_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__usb_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__usb_8h_a8cab69e396b3b22e1bf2490c9823feb1}{usb\+Logger\+Flush}}~\mbox{\hyperlink{ed64io__usb_8h_a24fc005899e3058fd0a5c97bf84a420e}{ed64\+Async\+Logger\+Flush}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} \mbox{\hyperlink{ed64io__usb_8h_a40376781d7ba7841223a7763effa4f01}{Usb\+Logger\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ed64io__usb_8h_a24fc005899e3058fd0a5c97bf84a420e}{ed64\+Async\+Logger\+Flush}} ()
+\item 
+void \mbox{\hyperlink{ed64io__usb_8h_a21363f122341aad68d757c0802288081}{usb\+Logger\+Get\+State}} (\mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} $\ast$res)
+\item 
+int \mbox{\hyperlink{ed64io__usb_8h_a65e74c23ce6e1329b4a7db5f620fb605}{usb\+Logger\+Buffer\+Remaining}} ()
+\item 
+void \mbox{\hyperlink{ed64io__usb_8h_adfaebbf42f258091ab3991e6b43c5f71}{ed64\+Printf}} (const char $\ast$fmt,...)
+\item 
+void \mbox{\hyperlink{ed64io__usb_8h_a25206b2c39009008faecab13126cc311}{ed64\+Printf\+Sync}} (const char $\ast$fmt,...)
+\item 
+void \mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}} (const char $\ast$fmt,...)
+\item 
+void \mbox{\hyperlink{ed64io__usb_8h_a2baec034f17c5b9119c43e378a0fd171}{ed64\+VPrintf\+Sync2}} (const char $\ast$fmt, va\+\_\+list ap)
+\item 
+int \mbox{\hyperlink{ed64io__usb_8h_aae014b89a9582b17ec4189898161eb92}{ed64\+Send\+Binary\+Data}} (const void $\ast$data, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} type, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} length)
+\item 
+void $\ast$ \mbox{\hyperlink{ed64io__usb_8h_ad73b9bbf38f6dd0983087b7d90205014}{ed64\+Print\+Func\+Impl}} (void $\ast$str, register const char $\ast$buf, register int n)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{UsbLoggerState@{UsbLoggerState}}\label{structUsbLoggerState}
+\Hypertarget{ed64io__usb_8h_structUsbLoggerState}
+\doxysubsubsection{struct Usb\+Logger\+State}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__usb_8h_a5a6c83f4343b95f6a338d5c8826cb9ab}\label{ed64io__usb_8h_a5a6c83f4343b95f6a338d5c8826cb9ab}} 
+int&
+countDone&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_a9abc0d17a0c758cbd6e558a44b6f48d5}\label{ed64io__usb_8h_a9abc0d17a0c758cbd6e558a44b6f48d5}} 
+int&
+fifoWriteState&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_abe18ee1eeecd0646cb4aa65ae332af05}\label{ed64io__usb_8h_abe18ee1eeecd0646cb4aa65ae332af05}} 
+int&
+msgID&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_adff95db60c0ce4c71a8d0165408798b8}\label{ed64io__usb_8h_adff95db60c0ce4c71a8d0165408798b8}} 
+int&
+msgQSize&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_aaf4254d15acae0156074c92c648f96a9}\label{ed64io__usb_8h_aaf4254d15acae0156074c92c648f96a9}} 
+int&
+usbLoggerFlushing&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_ae2b38852da06a057c491b66c379d94d3}\label{ed64io__usb_8h_ae2b38852da06a057c491b66c379d94d3}} 
+int&
+usbLoggerOffset&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_ad5a061e9b9491dc354b5837fe6b64591}\label{ed64io__usb_8h_ad5a061e9b9491dc354b5837fe6b64591}} 
+int&
+usbLoggerOverflow&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__usb_8h_a1206a6c1f775fb00fc74f5ce94a1ab66}\label{ed64io__usb_8h_a1206a6c1f775fb00fc74f5ce94a1ab66}} 
+int&
+writeError&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__usb_8h_a8cab69e396b3b22e1bf2490c9823feb1}\label{ed64io__usb_8h_a8cab69e396b3b22e1bf2490c9823feb1}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!usbLoggerFlush@{usbLoggerFlush}}
+\index{usbLoggerFlush@{usbLoggerFlush}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{usbLoggerFlush}{usbLoggerFlush}}
+{\footnotesize\ttfamily \#define usb\+Logger\+Flush~\mbox{\hyperlink{ed64io__usb_8h_a24fc005899e3058fd0a5c97bf84a420e}{ed64\+Async\+Logger\+Flush}}}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{ed64io__usb_8h_a40376781d7ba7841223a7763effa4f01}\label{ed64io__usb_8h_a40376781d7ba7841223a7763effa4f01}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!UsbLoggerState@{UsbLoggerState}}
+\index{UsbLoggerState@{UsbLoggerState}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{UsbLoggerState}{UsbLoggerState}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__usb_8h_a24fc005899e3058fd0a5c97bf84a420e}\label{ed64io__usb_8h_a24fc005899e3058fd0a5c97bf84a420e}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64AsyncLoggerFlush@{ed64AsyncLoggerFlush}}
+\index{ed64AsyncLoggerFlush@{ed64AsyncLoggerFlush}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64AsyncLoggerFlush()}{ed64AsyncLoggerFlush()}}
+{\footnotesize\ttfamily int ed64\+Async\+Logger\+Flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_adfaebbf42f258091ab3991e6b43c5f71}\label{ed64io__usb_8h_adfaebbf42f258091ab3991e6b43c5f71}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64Printf@{ed64Printf}}
+\index{ed64Printf@{ed64Printf}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64Printf()}{ed64Printf()}}
+{\footnotesize\ttfamily void ed64\+Printf (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_a25206b2c39009008faecab13126cc311}\label{ed64io__usb_8h_a25206b2c39009008faecab13126cc311}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64PrintfSync@{ed64PrintfSync}}
+\index{ed64PrintfSync@{ed64PrintfSync}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64PrintfSync()}{ed64PrintfSync()}}
+{\footnotesize\ttfamily void ed64\+Printf\+Sync (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}\label{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64PrintfSync2@{ed64PrintfSync2}}
+\index{ed64PrintfSync2@{ed64PrintfSync2}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64PrintfSync2()}{ed64PrintfSync2()}}
+{\footnotesize\ttfamily void ed64\+Printf\+Sync2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_ad73b9bbf38f6dd0983087b7d90205014}\label{ed64io__usb_8h_ad73b9bbf38f6dd0983087b7d90205014}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64PrintFuncImpl@{ed64PrintFuncImpl}}
+\index{ed64PrintFuncImpl@{ed64PrintFuncImpl}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64PrintFuncImpl()}{ed64PrintFuncImpl()}}
+{\footnotesize\ttfamily void$\ast$ ed64\+Print\+Func\+Impl (\begin{DoxyParamCaption}\item[{void $\ast$}]{str,  }\item[{register const char $\ast$}]{buf,  }\item[{register int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_aae014b89a9582b17ec4189898161eb92}\label{ed64io__usb_8h_aae014b89a9582b17ec4189898161eb92}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64SendBinaryData@{ed64SendBinaryData}}
+\index{ed64SendBinaryData@{ed64SendBinaryData}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64SendBinaryData()}{ed64SendBinaryData()}}
+{\footnotesize\ttfamily int ed64\+Send\+Binary\+Data (\begin{DoxyParamCaption}\item[{const void $\ast$}]{data,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{type,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_a2baec034f17c5b9119c43e378a0fd171}\label{ed64io__usb_8h_a2baec034f17c5b9119c43e378a0fd171}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!ed64VPrintfSync2@{ed64VPrintfSync2}}
+\index{ed64VPrintfSync2@{ed64VPrintfSync2}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{ed64VPrintfSync2()}{ed64VPrintfSync2()}}
+{\footnotesize\ttfamily void ed64\+VPrintf\+Sync2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fmt,  }\item[{va\+\_\+list}]{ap }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_a65e74c23ce6e1329b4a7db5f620fb605}\label{ed64io__usb_8h_a65e74c23ce6e1329b4a7db5f620fb605}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!usbLoggerBufferRemaining@{usbLoggerBufferRemaining}}
+\index{usbLoggerBufferRemaining@{usbLoggerBufferRemaining}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{usbLoggerBufferRemaining()}{usbLoggerBufferRemaining()}}
+{\footnotesize\ttfamily int usb\+Logger\+Buffer\+Remaining (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__usb_8h_a21363f122341aad68d757c0802288081}\label{ed64io__usb_8h_a21363f122341aad68d757c0802288081}} 
+\index{ed64io\_usb.h@{ed64io\_usb.h}!usbLoggerGetState@{usbLoggerGetState}}
+\index{usbLoggerGetState@{usbLoggerGetState}!ed64io\_usb.h@{ed64io\_usb.h}}
+\doxysubsubsection{\texorpdfstring{usbLoggerGetState()}{usbLoggerGetState()}}
+{\footnotesize\ttfamily void usb\+Logger\+Get\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} $\ast$}]{res }\end{DoxyParamCaption})}
+

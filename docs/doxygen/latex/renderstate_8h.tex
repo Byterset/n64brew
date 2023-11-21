@@ -1,0 +1,292 @@
+\hypertarget{renderstate_8h}{}\doxysection{src/graphics/renderstate.h File Reference}
+\label{renderstate_8h}\index{src/graphics/renderstate.h@{src/graphics/renderstate.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}color.\+h\char`\"{}}\newline
+Include dependency graph for renderstate.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{renderstate_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{renderstate_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{renderstate_8h_structSpriteState}{Sprite\+State}}
+\item 
+struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{renderstate_8h_a9782188defb2ddfa6fc632153c27e58a}{MAX\+\_\+\+DL\+\_\+\+LENGTH}}~6000
+\item 
+\#define \mbox{\hyperlink{renderstate_8h_aecf0488bdb21a5e9d5c4c4a1b59c1270}{MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY}}~12000
+\item 
+\#define \mbox{\hyperlink{renderstate_8h_a1da4701716ebe4964928826f39373061}{MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY\+\_\+\+CHUNKS}}~(\mbox{\hyperlink{renderstate_8h_aecf0488bdb21a5e9d5c4c4a1b59c1270}{MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY}} / sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}))
+\item 
+\#define \mbox{\hyperlink{renderstate_8h_a5eb97ea233909c1c78e0f1eec948ca3b}{MAX\+\_\+\+DYNAMIC\+\_\+\+LIGHTS}}~128
+\item 
+\#define \mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\+\_\+\+LAYER\+\_\+\+COUNT}}~16
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{renderstate_8h_a8c5836cb97278fa576cf05cd54801e83}{render\+State\+Init}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$framebuffer, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$depth\+Buffer)
+\item 
+void $\ast$ \mbox{\hyperlink{renderstate_8h_a0cc566d5407acf9decafcbd82a41ff42}{render\+State\+Request\+Memory}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, unsigned size)
+\item 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$ \mbox{\hyperlink{renderstate_8h_a1afc3162436c4f7da5ade017199f975f}{render\+State\+Request\+Matrices}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, unsigned count)
+\item 
+Light $\ast$ \mbox{\hyperlink{renderstate_8h_a24155357f98cbfca46c6720610870858}{render\+State\+Request\+Lights}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, unsigned count)
+\item 
+Vp $\ast$ \mbox{\hyperlink{renderstate_8h_a47888b08c24fec41dbd787097c54aebe}{render\+State\+Request\+Viewport}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+Vtx $\ast$ \mbox{\hyperlink{renderstate_8h_a58c76eefacf1f514382d6b3b083e5833}{render\+State\+Request\+Vertices}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, unsigned count)
+\item 
+Look\+At $\ast$ \mbox{\hyperlink{renderstate_8h_ae422dd047a51c44a219e04f027a66137}{render\+State\+Request\+Look\+At}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+void \mbox{\hyperlink{renderstate_8h_aa6c7e1b2455fea1e5072ce75f4bfc3f3}{render\+State\+Flush\+Cache}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+Gfx $\ast$ \mbox{\hyperlink{renderstate_8h_ae4f725b8a2ca64a161009058be4a087f}{render\+State\+Allocate\+DLChunk}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, unsigned count)
+\item 
+Gfx $\ast$ \mbox{\hyperlink{renderstate_8h_ad174ba6a097195bda02e3471fde8307a}{render\+State\+Replace\+DL}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, Gfx $\ast$next\+DL)
+\item 
+Gfx $\ast$ \mbox{\hyperlink{renderstate_8h_a6c78e0a91ff528d7a1446709275d1d40}{render\+State\+Start\+Chunk}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+Gfx $\ast$ \mbox{\hyperlink{renderstate_8h_a5ac0f17bdaa4368ab4af1ed4fd2b89bb}{render\+State\+End\+Chunk}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, Gfx $\ast$chunk\+Start)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{SpriteState@{SpriteState}}\label{structSpriteState}
+\Hypertarget{renderstate_8h_structSpriteState}
+\doxysubsubsection{struct Sprite\+State}
+
+
+Collaboration diagram for Sprite\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{structSpriteState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{renderstate_8h_a77c26e7c901d4f756659faec6e06940f}\label{renderstate_8h_a77c26e7c901d4f756659faec6e06940f}} 
+Gfx $\ast$&
+currentChunkEnd\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_abbabc66061a7e6ef6d2fff64f79e5f93}\label{renderstate_8h_abbabc66061a7e6ef6d2fff64f79e5f93}} 
+Gfx $\ast$&
+currentLayerDL\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a74cc2d6b21813784322f76a7830e6525}\label{renderstate_8h_a74cc2d6b21813784322f76a7830e6525}} 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}}&
+layerColor\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a00c26772c11a28cdea771b0328024cd7}\label{renderstate_8h_a00c26772c11a28cdea771b0328024cd7}} 
+Gfx $\ast$&
+layerDL\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a7e329045caacb7f423595d2151102f50}\label{renderstate_8h_a7e329045caacb7f423595d2151102f50}} 
+Gfx $\ast$&
+layerRevert\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a5fcf66fb775426200d13013b2774f1ee}\label{renderstate_8h_a5fcf66fb775426200d13013b2774f1ee}} 
+Gfx $\ast$&
+layerSetup\mbox{[}\mbox{\hyperlink{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}{MAX\_LAYER\_COUNT}}\mbox{]}&
+\\
+\hline
+
+\end{DoxyFields}
+\index{RenderState@{RenderState}}\label{structRenderState}
+\Hypertarget{renderstate_8h_structRenderState}
+\doxysubsubsection{struct Render\+State}
+
+
+Collaboration diagram for Render\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{structRenderState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{renderstate_8h_a202e4e4b5b9bfe42151941a1db86939f}\label{renderstate_8h_a202e4e4b5b9bfe42151941a1db86939f}} 
+unsigned short&
+currentChunkEnd&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a5c97cbb010484ec472c9ea440a8eeb55}\label{renderstate_8h_a5c97cbb010484ec472c9ea440a8eeb55}} 
+unsigned short&
+currentMemoryChunk&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a2edba931016753f5b4495fe51b7cf4be}\label{renderstate_8h_a2edba931016753f5b4495fe51b7cf4be}} 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$&
+depthBuffer&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a671242e360c03d71b1d5c533040c122f}\label{renderstate_8h_a671242e360c03d71b1d5c533040c122f}} 
+Gfx $\ast$&
+dl&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_ac0d3014e504928c9df25fef8b14c773d}\label{renderstate_8h_ac0d3014e504928c9df25fef8b14c773d}} 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$&
+framebuffer&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a390ed001cdba0e504ba7786682e108f8}\label{renderstate_8h_a390ed001cdba0e504ba7786682e108f8}} 
+Gfx&
+glist\mbox{[}\mbox{\hyperlink{renderstate_8h_a9782188defb2ddfa6fc632153c27e58a}{MAX\_DL\_LENGTH}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_ad8551ffdb3421303537db32f0808e554}\label{renderstate_8h_ad8551ffdb3421303537db32f0808e554}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+renderStateMemory\mbox{[}\mbox{\hyperlink{renderstate_8h_a1da4701716ebe4964928826f39373061}{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS}}\mbox{]}&
+\\
+\hline
+
+\mbox{\Hypertarget{renderstate_8h_a25730d2f91cb731e347b6759a7d48881}\label{renderstate_8h_a25730d2f91cb731e347b6759a7d48881}} 
+struct \mbox{\hyperlink{renderstate_8h_structSpriteState}{SpriteState}}&
+spriteState&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{renderstate_8h_a9782188defb2ddfa6fc632153c27e58a}\label{renderstate_8h_a9782188defb2ddfa6fc632153c27e58a}} 
+\index{renderstate.h@{renderstate.h}!MAX\_DL\_LENGTH@{MAX\_DL\_LENGTH}}
+\index{MAX\_DL\_LENGTH@{MAX\_DL\_LENGTH}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_DL\_LENGTH}{MAX\_DL\_LENGTH}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+DL\+\_\+\+LENGTH~6000}
+
+\mbox{\Hypertarget{renderstate_8h_a5eb97ea233909c1c78e0f1eec948ca3b}\label{renderstate_8h_a5eb97ea233909c1c78e0f1eec948ca3b}} 
+\index{renderstate.h@{renderstate.h}!MAX\_DYNAMIC\_LIGHTS@{MAX\_DYNAMIC\_LIGHTS}}
+\index{MAX\_DYNAMIC\_LIGHTS@{MAX\_DYNAMIC\_LIGHTS}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_DYNAMIC\_LIGHTS}{MAX\_DYNAMIC\_LIGHTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+DYNAMIC\+\_\+\+LIGHTS~128}
+
+\mbox{\Hypertarget{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}\label{renderstate_8h_a198aea0dac3e7a23632fe6841103671f}} 
+\index{renderstate.h@{renderstate.h}!MAX\_LAYER\_COUNT@{MAX\_LAYER\_COUNT}}
+\index{MAX\_LAYER\_COUNT@{MAX\_LAYER\_COUNT}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_LAYER\_COUNT}{MAX\_LAYER\_COUNT}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+LAYER\+\_\+\+COUNT~16}
+
+\mbox{\Hypertarget{renderstate_8h_aecf0488bdb21a5e9d5c4c4a1b59c1270}\label{renderstate_8h_aecf0488bdb21a5e9d5c4c4a1b59c1270}} 
+\index{renderstate.h@{renderstate.h}!MAX\_RENDER\_STATE\_MEMORY@{MAX\_RENDER\_STATE\_MEMORY}}
+\index{MAX\_RENDER\_STATE\_MEMORY@{MAX\_RENDER\_STATE\_MEMORY}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_RENDER\_STATE\_MEMORY}{MAX\_RENDER\_STATE\_MEMORY}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY~12000}
+
+\mbox{\Hypertarget{renderstate_8h_a1da4701716ebe4964928826f39373061}\label{renderstate_8h_a1da4701716ebe4964928826f39373061}} 
+\index{renderstate.h@{renderstate.h}!MAX\_RENDER\_STATE\_MEMORY\_CHUNKS@{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS}}
+\index{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS@{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS}{MAX\_RENDER\_STATE\_MEMORY\_CHUNKS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY\+\_\+\+CHUNKS~(\mbox{\hyperlink{renderstate_8h_aecf0488bdb21a5e9d5c4c4a1b59c1270}{MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY}} / sizeof(\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}))}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{renderstate_8h_ae4f725b8a2ca64a161009058be4a087f}\label{renderstate_8h_ae4f725b8a2ca64a161009058be4a087f}} 
+\index{renderstate.h@{renderstate.h}!renderStateAllocateDLChunk@{renderStateAllocateDLChunk}}
+\index{renderStateAllocateDLChunk@{renderStateAllocateDLChunk}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateAllocateDLChunk()}{renderStateAllocateDLChunk()}}
+{\footnotesize\ttfamily Gfx$\ast$ render\+State\+Allocate\+DLChunk (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{unsigned}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a5ac0f17bdaa4368ab4af1ed4fd2b89bb}\label{renderstate_8h_a5ac0f17bdaa4368ab4af1ed4fd2b89bb}} 
+\index{renderstate.h@{renderstate.h}!renderStateEndChunk@{renderStateEndChunk}}
+\index{renderStateEndChunk@{renderStateEndChunk}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateEndChunk()}{renderStateEndChunk()}}
+{\footnotesize\ttfamily Gfx$\ast$ render\+State\+End\+Chunk (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{Gfx $\ast$}]{chunk\+Start }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_aa6c7e1b2455fea1e5072ce75f4bfc3f3}\label{renderstate_8h_aa6c7e1b2455fea1e5072ce75f4bfc3f3}} 
+\index{renderstate.h@{renderstate.h}!renderStateFlushCache@{renderStateFlushCache}}
+\index{renderStateFlushCache@{renderStateFlushCache}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateFlushCache()}{renderStateFlushCache()}}
+{\footnotesize\ttfamily void render\+State\+Flush\+Cache (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a8c5836cb97278fa576cf05cd54801e83}\label{renderstate_8h_a8c5836cb97278fa576cf05cd54801e83}} 
+\index{renderstate.h@{renderstate.h}!renderStateInit@{renderStateInit}}
+\index{renderStateInit@{renderStateInit}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateInit()}{renderStateInit()}}
+{\footnotesize\ttfamily void render\+State\+Init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$}]{framebuffer,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$}]{depth\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_ad174ba6a097195bda02e3471fde8307a}\label{renderstate_8h_ad174ba6a097195bda02e3471fde8307a}} 
+\index{renderstate.h@{renderstate.h}!renderStateReplaceDL@{renderStateReplaceDL}}
+\index{renderStateReplaceDL@{renderStateReplaceDL}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateReplaceDL()}{renderStateReplaceDL()}}
+{\footnotesize\ttfamily Gfx$\ast$ render\+State\+Replace\+DL (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{Gfx $\ast$}]{next\+DL }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a24155357f98cbfca46c6720610870858}\label{renderstate_8h_a24155357f98cbfca46c6720610870858}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestLights@{renderStateRequestLights}}
+\index{renderStateRequestLights@{renderStateRequestLights}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestLights()}{renderStateRequestLights()}}
+{\footnotesize\ttfamily Light$\ast$ render\+State\+Request\+Lights (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{unsigned}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_ae422dd047a51c44a219e04f027a66137}\label{renderstate_8h_ae422dd047a51c44a219e04f027a66137}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestLookAt@{renderStateRequestLookAt}}
+\index{renderStateRequestLookAt@{renderStateRequestLookAt}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestLookAt()}{renderStateRequestLookAt()}}
+{\footnotesize\ttfamily Look\+At$\ast$ render\+State\+Request\+Look\+At (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a1afc3162436c4f7da5ade017199f975f}\label{renderstate_8h_a1afc3162436c4f7da5ade017199f975f}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestMatrices@{renderStateRequestMatrices}}
+\index{renderStateRequestMatrices@{renderStateRequestMatrices}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestMatrices()}{renderStateRequestMatrices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}}$\ast$ render\+State\+Request\+Matrices (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{unsigned}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a0cc566d5407acf9decafcbd82a41ff42}\label{renderstate_8h_a0cc566d5407acf9decafcbd82a41ff42}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestMemory@{renderStateRequestMemory}}
+\index{renderStateRequestMemory@{renderStateRequestMemory}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestMemory()}{renderStateRequestMemory()}}
+{\footnotesize\ttfamily void$\ast$ render\+State\+Request\+Memory (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{unsigned}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a58c76eefacf1f514382d6b3b083e5833}\label{renderstate_8h_a58c76eefacf1f514382d6b3b083e5833}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestVertices@{renderStateRequestVertices}}
+\index{renderStateRequestVertices@{renderStateRequestVertices}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestVertices()}{renderStateRequestVertices()}}
+{\footnotesize\ttfamily Vtx$\ast$ render\+State\+Request\+Vertices (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{unsigned}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a47888b08c24fec41dbd787097c54aebe}\label{renderstate_8h_a47888b08c24fec41dbd787097c54aebe}} 
+\index{renderstate.h@{renderstate.h}!renderStateRequestViewport@{renderStateRequestViewport}}
+\index{renderStateRequestViewport@{renderStateRequestViewport}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateRequestViewport()}{renderStateRequestViewport()}}
+{\footnotesize\ttfamily Vp$\ast$ render\+State\+Request\+Viewport (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderstate_8h_a6c78e0a91ff528d7a1446709275d1d40}\label{renderstate_8h_a6c78e0a91ff528d7a1446709275d1d40}} 
+\index{renderstate.h@{renderstate.h}!renderStateStartChunk@{renderStateStartChunk}}
+\index{renderStateStartChunk@{renderStateStartChunk}!renderstate.h@{renderstate.h}}
+\doxysubsubsection{\texorpdfstring{renderStateStartChunk()}{renderStateStartChunk()}}
+{\footnotesize\ttfamily Gfx$\ast$ render\+State\+Start\+Chunk (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+

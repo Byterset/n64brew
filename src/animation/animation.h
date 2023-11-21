@@ -1,4 +1,10 @@
-
+/**
+ * @file animation.h
+ * @author James Friend
+ * @brief Animation Headerfile
+ * @version 0.1
+ * 
+ */
 #ifndef ANIMATION_H
 #define ANIMATION_H
 

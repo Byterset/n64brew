@@ -1,0 +1,183 @@
+\hypertarget{frustum_8c}{}\doxysection{src/math/frustum.c File Reference}
+\label{frustum_8c}\index{src/math/frustum.c@{src/math/frustum.c}}
+{\ttfamily \#include \char`\"{}frustum.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../physics/collision.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+Include dependency graph for frustum.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{frustum_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{frustum_8c_aae549947c043b8f2e6dec16826a12ede}{Plane\+\_\+set\+Normal\+And\+Point}} (\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$normal, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$point)
+\item 
+void \mbox{\hyperlink{frustum_8c_ae59e18d42f609721c837667367549ed2}{Plane\+\_\+set3\+Points}} (\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$v1, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$v2, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$v3)
+\item 
+float \mbox{\hyperlink{frustum_8c_a99f758ff13a66dec87545eb5296bda3a}{Plane\+\_\+distance}} (\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p)
+\item 
+void \mbox{\hyperlink{frustum_8c_a96704fdaf29f672c719860b0177277ca}{Plane\+\_\+point\+Closest\+Point}} (\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$p, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$q, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+float \mbox{\hyperlink{frustum_8c_acb834bcb68773be2796a25671721c7f3}{Plane\+\_\+dist\+Point\+To\+Plane}} (\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$p, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$q)
+\item 
+void \mbox{\hyperlink{frustum_8c_aae5db484304cdfac65df0985f7925522}{Frustum\+\_\+set\+Cam\+Internals}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$self, float \mbox{\hyperlink{stage00_8c_ab8b6bac71429352489e9c023bc346e8a}{fovy}}, float \mbox{\hyperlink{stage00_8c_a55f4de4cbfd03a9857b1926425be0c6b}{aspect}}, float nearD, float farD)
+\item 
+void \mbox{\hyperlink{frustum_8c_a8547586c78a1836cd317abeae12d51de}{Frustum\+\_\+set\+Cam\+Def}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$l, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$u)
+\item 
+void \mbox{\hyperlink{frustum_8c_a863b5f542a0c0b53a812d97bda94fa70}{Frustum\+\_\+set\+Cam\+Def2}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$l, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$u)
+\item 
+void \mbox{\hyperlink{frustum_8c_aefdf1bfd532a24921fe5518ba8756a0c}{Frustum\+\_\+get\+AABBVertexP}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$normal, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+void \mbox{\hyperlink{frustum_8c_a6817824c64cc2b1204897b2770a27e35}{Frustum\+\_\+get\+AABBVertexN}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$normal, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} \mbox{\hyperlink{frustum_8c_a90d993513b6f6051ec4a340c9c5bf2e2}{Frustum\+\_\+box\+Frustum\+Plane\+Test\+RTCD}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$\mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb, int plane\+Idx)
+\item 
+\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} \mbox{\hyperlink{frustum_8c_a56f8913dc0a0571c730b9427a70f1de4}{Frustum\+\_\+box\+Frustum\+Plane\+Test\+PN}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$\mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb, int plane\+Idx)
+\item 
+\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} \mbox{\hyperlink{frustum_8c_a322be372267e52e49d99204fc99139a0}{Frustum\+\_\+box\+In\+Frustum}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$\mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb)
+\item 
+void \mbox{\hyperlink{frustum_8c_a2c824e22801ce08d85ab1bacd39671fc}{Frustum\+\_\+get\+AABBVertex}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb, int vertex, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} \mbox{\hyperlink{frustum_8c_aa6adfe79f2c6868bf4e48b3ccbb7b796}{Frustum\+\_\+box\+In\+Frustum\+Naive}} (\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$\mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{frustum_8c_aac312cb6aae54446d085ad7b576afd1c}{Frustum\+Test\+Result\+Strings}} \mbox{[}\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918aaa384bc752da69c041fbcd8af9a0d420e}{MAX\+\_\+\+FRUSTUM\+\_\+\+TEST\+\_\+\+RESULT}}\mbox{]}
+\item 
+char $\ast$ \mbox{\hyperlink{frustum_8c_acb0c14b9793a23c768eca8f4b6c8757a}{Frustum\+Planes\+Strings}} \mbox{[}\mbox{\hyperlink{frustum_8h_ad8d1a8357079160de618959537ac90f9a0b5c1a47f240e27aaa7be92ce136dc3a}{NUM\+\_\+\+FRUSTUM\+\_\+\+PLANES}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{frustum_8c_a56f8913dc0a0571c730b9427a70f1de4}\label{frustum_8c_a56f8913dc0a0571c730b9427a70f1de4}} 
+\index{frustum.c@{frustum.c}!Frustum\_boxFrustumPlaneTestPN@{Frustum\_boxFrustumPlaneTestPN}}
+\index{Frustum\_boxFrustumPlaneTestPN@{Frustum\_boxFrustumPlaneTestPN}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_boxFrustumPlaneTestPN()}{Frustum\_boxFrustumPlaneTestPN()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} Frustum\+\_\+box\+Frustum\+Plane\+Test\+PN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb,  }\item[{int}]{plane\+Idx }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a90d993513b6f6051ec4a340c9c5bf2e2}\label{frustum_8c_a90d993513b6f6051ec4a340c9c5bf2e2}} 
+\index{frustum.c@{frustum.c}!Frustum\_boxFrustumPlaneTestRTCD@{Frustum\_boxFrustumPlaneTestRTCD}}
+\index{Frustum\_boxFrustumPlaneTestRTCD@{Frustum\_boxFrustumPlaneTestRTCD}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_boxFrustumPlaneTestRTCD()}{Frustum\_boxFrustumPlaneTestRTCD()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} Frustum\+\_\+box\+Frustum\+Plane\+Test\+RTCD (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb,  }\item[{int}]{plane\+Idx }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a322be372267e52e49d99204fc99139a0}\label{frustum_8c_a322be372267e52e49d99204fc99139a0}} 
+\index{frustum.c@{frustum.c}!Frustum\_boxInFrustum@{Frustum\_boxInFrustum}}
+\index{Frustum\_boxInFrustum@{Frustum\_boxInFrustum}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_boxInFrustum()}{Frustum\_boxInFrustum()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} Frustum\+\_\+box\+In\+Frustum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_aa6adfe79f2c6868bf4e48b3ccbb7b796}\label{frustum_8c_aa6adfe79f2c6868bf4e48b3ccbb7b796}} 
+\index{frustum.c@{frustum.c}!Frustum\_boxInFrustumNaive@{Frustum\_boxInFrustumNaive}}
+\index{Frustum\_boxInFrustumNaive@{Frustum\_boxInFrustumNaive}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_boxInFrustumNaive()}{Frustum\_boxInFrustumNaive()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918a}{Frustum\+Test\+Result}} Frustum\+\_\+box\+In\+Frustum\+Naive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a2c824e22801ce08d85ab1bacd39671fc}\label{frustum_8c_a2c824e22801ce08d85ab1bacd39671fc}} 
+\index{frustum.c@{frustum.c}!Frustum\_getAABBVertex@{Frustum\_getAABBVertex}}
+\index{Frustum\_getAABBVertex@{Frustum\_getAABBVertex}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_getAABBVertex()}{Frustum\_getAABBVertex()}}
+{\footnotesize\ttfamily void Frustum\+\_\+get\+AABBVertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb,  }\item[{int}]{vertex,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a6817824c64cc2b1204897b2770a27e35}\label{frustum_8c_a6817824c64cc2b1204897b2770a27e35}} 
+\index{frustum.c@{frustum.c}!Frustum\_getAABBVertexN@{Frustum\_getAABBVertexN}}
+\index{Frustum\_getAABBVertexN@{Frustum\_getAABBVertexN}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_getAABBVertexN()}{Frustum\_getAABBVertexN()}}
+{\footnotesize\ttfamily void Frustum\+\_\+get\+AABBVertexN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{normal,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_aefdf1bfd532a24921fe5518ba8756a0c}\label{frustum_8c_aefdf1bfd532a24921fe5518ba8756a0c}} 
+\index{frustum.c@{frustum.c}!Frustum\_getAABBVertexP@{Frustum\_getAABBVertexP}}
+\index{Frustum\_getAABBVertexP@{Frustum\_getAABBVertexP}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_getAABBVertexP()}{Frustum\_getAABBVertexP()}}
+{\footnotesize\ttfamily void Frustum\+\_\+get\+AABBVertexP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{normal,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a8547586c78a1836cd317abeae12d51de}\label{frustum_8c_a8547586c78a1836cd317abeae12d51de}} 
+\index{frustum.c@{frustum.c}!Frustum\_setCamDef@{Frustum\_setCamDef}}
+\index{Frustum\_setCamDef@{Frustum\_setCamDef}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_setCamDef()}{Frustum\_setCamDef()}}
+{\footnotesize\ttfamily void Frustum\+\_\+set\+Cam\+Def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{l,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{u }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a863b5f542a0c0b53a812d97bda94fa70}\label{frustum_8c_a863b5f542a0c0b53a812d97bda94fa70}} 
+\index{frustum.c@{frustum.c}!Frustum\_setCamDef2@{Frustum\_setCamDef2}}
+\index{Frustum\_setCamDef2@{Frustum\_setCamDef2}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_setCamDef2()}{Frustum\_setCamDef2()}}
+{\footnotesize\ttfamily void Frustum\+\_\+set\+Cam\+Def2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{l,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{u }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_aae5db484304cdfac65df0985f7925522}\label{frustum_8c_aae5db484304cdfac65df0985f7925522}} 
+\index{frustum.c@{frustum.c}!Frustum\_setCamInternals@{Frustum\_setCamInternals}}
+\index{Frustum\_setCamInternals@{Frustum\_setCamInternals}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Frustum\_setCamInternals()}{Frustum\_setCamInternals()}}
+{\footnotesize\ttfamily void Frustum\+\_\+set\+Cam\+Internals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{self,  }\item[{float}]{fovy,  }\item[{float}]{aspect,  }\item[{float}]{nearD,  }\item[{float}]{farD }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a99f758ff13a66dec87545eb5296bda3a}\label{frustum_8c_a99f758ff13a66dec87545eb5296bda3a}} 
+\index{frustum.c@{frustum.c}!Plane\_distance@{Plane\_distance}}
+\index{Plane\_distance@{Plane\_distance}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Plane\_distance()}{Plane\_distance()}}
+{\footnotesize\ttfamily float Plane\+\_\+distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_acb834bcb68773be2796a25671721c7f3}\label{frustum_8c_acb834bcb68773be2796a25671721c7f3}} 
+\index{frustum.c@{frustum.c}!Plane\_distPointToPlane@{Plane\_distPointToPlane}}
+\index{Plane\_distPointToPlane@{Plane\_distPointToPlane}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Plane\_distPointToPlane()}{Plane\_distPointToPlane()}}
+{\footnotesize\ttfamily float Plane\+\_\+dist\+Point\+To\+Plane (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{p,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{q }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_a96704fdaf29f672c719860b0177277ca}\label{frustum_8c_a96704fdaf29f672c719860b0177277ca}} 
+\index{frustum.c@{frustum.c}!Plane\_pointClosestPoint@{Plane\_pointClosestPoint}}
+\index{Plane\_pointClosestPoint@{Plane\_pointClosestPoint}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Plane\_pointClosestPoint()}{Plane\_pointClosestPoint()}}
+{\footnotesize\ttfamily void Plane\+\_\+point\+Closest\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{p,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{q,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_ae59e18d42f609721c837667367549ed2}\label{frustum_8c_ae59e18d42f609721c837667367549ed2}} 
+\index{frustum.c@{frustum.c}!Plane\_set3Points@{Plane\_set3Points}}
+\index{Plane\_set3Points@{Plane\_set3Points}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Plane\_set3Points()}{Plane\_set3Points()}}
+{\footnotesize\ttfamily void Plane\+\_\+set3\+Points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{v1,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{v2,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{v3 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{frustum_8c_aae549947c043b8f2e6dec16826a12ede}\label{frustum_8c_aae549947c043b8f2e6dec16826a12ede}} 
+\index{frustum.c@{frustum.c}!Plane\_setNormalAndPoint@{Plane\_setNormalAndPoint}}
+\index{Plane\_setNormalAndPoint@{Plane\_setNormalAndPoint}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{Plane\_setNormalAndPoint()}{Plane\_setNormalAndPoint()}}
+{\footnotesize\ttfamily void Plane\+\_\+set\+Normal\+And\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{frustum_8h_structPlane}{Plane}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{normal,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{point }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{frustum_8c_acb0c14b9793a23c768eca8f4b6c8757a}\label{frustum_8c_acb0c14b9793a23c768eca8f4b6c8757a}} 
+\index{frustum.c@{frustum.c}!FrustumPlanesStrings@{FrustumPlanesStrings}}
+\index{FrustumPlanesStrings@{FrustumPlanesStrings}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{FrustumPlanesStrings}{FrustumPlanesStrings}}
+{\footnotesize\ttfamily char$\ast$ Frustum\+Planes\+Strings\mbox{[}\mbox{\hyperlink{frustum_8h_ad8d1a8357079160de618959537ac90f9a0b5c1a47f240e27aaa7be92ce136dc3a}{NUM\+\_\+\+FRUSTUM\+\_\+\+PLANES}}\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}NearFrustumPlane"{}},   }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}FarFrustumPlane"{}},    }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}TopFrustumPlane"{}},    }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BottomFrustumPlane"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}LeftFrustumPlane"{}},   }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}RightFrustumPlane"{}},  }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{frustum_8c_aac312cb6aae54446d085ad7b576afd1c}\label{frustum_8c_aac312cb6aae54446d085ad7b576afd1c}} 
+\index{frustum.c@{frustum.c}!FrustumTestResultStrings@{FrustumTestResultStrings}}
+\index{FrustumTestResultStrings@{FrustumTestResultStrings}!frustum.c@{frustum.c}}
+\doxysubsubsection{\texorpdfstring{FrustumTestResultStrings}{FrustumTestResultStrings}}
+{\footnotesize\ttfamily char$\ast$ Frustum\+Test\+Result\+Strings\mbox{[}\mbox{\hyperlink{frustum_8h_aa39fcec883acbdeacf7cba8c6959918aaa384bc752da69c041fbcd8af9a0d420e}{MAX\+\_\+\+FRUSTUM\+\_\+\+TEST\+\_\+\+RESULT}}\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Inside"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Outside"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Intersecting"{}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

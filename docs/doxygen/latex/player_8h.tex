@@ -1,0 +1,67 @@
+\hypertarget{player_8h}{}\doxysection{src/player.h File Reference}
+\label{player_8h}\index{src/player.h@{src/player.h}}
+{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gametypes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controls/input.\+h\char`\"{}}\newline
+Include dependency graph for player.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{player_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{player_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{player_8h_a3751327fcb4799902065b379727918bd}{Player\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+void \mbox{\hyperlink{player_8h_a359353e5f71f76c2d0fb139872b24a70}{Player\+\_\+update}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, \mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{player_8h_a00f7acda4893d7f0708885d26f53f0be}{Player\+\_\+have\+Item\+Taken}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$item)
+\item 
+void \mbox{\hyperlink{player_8h_a3917b0a1b6317a3daae335e0b22ad7ce}{Player\+\_\+print}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self)
+\item 
+void \mbox{\hyperlink{player_8h_a483ceca88f0964627ae132bb9721c596}{Player\+\_\+to\+String}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, char $\ast$buffer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{player_8h_a00f7acda4893d7f0708885d26f53f0be}\label{player_8h_a00f7acda4893d7f0708885d26f53f0be}} 
+\index{player.h@{player.h}!Player\_haveItemTaken@{Player\_haveItemTaken}}
+\index{Player\_haveItemTaken@{Player\_haveItemTaken}!player.h@{player.h}}
+\doxysubsubsection{\texorpdfstring{Player\_haveItemTaken()}{Player\_haveItemTaken()}}
+{\footnotesize\ttfamily void Player\+\_\+have\+Item\+Taken (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{item }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8h_a3751327fcb4799902065b379727918bd}\label{player_8h_a3751327fcb4799902065b379727918bd}} 
+\index{player.h@{player.h}!Player\_init@{Player\_init}}
+\index{Player\_init@{Player\_init}!player.h@{player.h}}
+\doxysubsubsection{\texorpdfstring{Player\_init()}{Player\_init()}}
+{\footnotesize\ttfamily void Player\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8h_a3917b0a1b6317a3daae335e0b22ad7ce}\label{player_8h_a3917b0a1b6317a3daae335e0b22ad7ce}} 
+\index{player.h@{player.h}!Player\_print@{Player\_print}}
+\index{Player\_print@{Player\_print}!player.h@{player.h}}
+\doxysubsubsection{\texorpdfstring{Player\_print()}{Player\_print()}}
+{\footnotesize\ttfamily void Player\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8h_a483ceca88f0964627ae132bb9721c596}\label{player_8h_a483ceca88f0964627ae132bb9721c596}} 
+\index{player.h@{player.h}!Player\_toString@{Player\_toString}}
+\index{Player\_toString@{Player\_toString}!player.h@{player.h}}
+\doxysubsubsection{\texorpdfstring{Player\_toString()}{Player\_toString()}}
+{\footnotesize\ttfamily void Player\+\_\+to\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8h_a359353e5f71f76c2d0fb139872b24a70}\label{player_8h_a359353e5f71f76c2d0fb139872b24a70}} 
+\index{player.h@{player.h}!Player\_update@{Player\_update}}
+\index{Player\_update@{Player\_update}!player.h@{player.h}}
+\doxysubsubsection{\texorpdfstring{Player\_update()}{Player\_update()}}
+{\footnotesize\ttfamily void Player\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{input,  }\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+

@@ -1,0 +1,319 @@
+\hypertarget{garden__map__graph_8c}{}\doxysection{src/pathfinding/garden/garden\+\_\+map\+\_\+graph.c File Reference}
+\label{garden__map__graph_8c}\index{src/pathfinding/garden/garden\_map\_graph.c@{src/pathfinding/garden/garden\_map\_graph.c}}
+{\ttfamily \#include \char`\"{}garden\+\_\+map\+\_\+graph.\+h\char`\"{}}\newline
+Include dependency graph for garden\+\_\+map\+\_\+graph.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{garden__map__graph_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} \mbox{\hyperlink{garden__map__graph_8c_a5a84cf0a1294113c4a1e3b9e743f676c}{garden\+\_\+map\+\_\+graph\+Nodes}} \mbox{[}$\,$\mbox{]}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a6b3c9333dfb22db29a11aa9931819ca7}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node0}} \mbox{[}$\,$\mbox{]} = \{1, 2, 4, 21\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_ad0ec80f569b66d6bdcc6815078cfee7c}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node1}} \mbox{[}$\,$\mbox{]} = \{0, 2\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_abc47572da6d6f6bfad2e34d30b23a09d}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node2}} \mbox{[}$\,$\mbox{]} = \{0, 1, 3\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_ac6a63bec8bc1ff3ccd9cd4cef4e54016}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node3}} \mbox{[}$\,$\mbox{]} = \{2\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a72d7e3b460dc23827147c1718d6c9848}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node4}} \mbox{[}$\,$\mbox{]} = \{0, 5, 21, 22\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a526a042188817ad9d7ac77cd38595bc9}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node5}} \mbox{[}$\,$\mbox{]} = \{4, 6, 11, 22\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_ae2263ba9656d256dda6bcb419bb57527}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node6}} \mbox{[}$\,$\mbox{]} = \{5, 7, 16, 22\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a2d00bec208fda75a7346ba691086bf83}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node7}} \mbox{[}$\,$\mbox{]} = \{6, 8, 22, 23, 28\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a371ba341513fd82f6f4151ebb7a19167}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node8}} \mbox{[}$\,$\mbox{]} = \{7, 9\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a8ad9f2311949d2fdb1f00396a54ec208}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node9}} \mbox{[}$\,$\mbox{]} = \{8, 10, 12\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a90f67a7a42814557cdbf8d3d3206518a}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node10}} \mbox{[}$\,$\mbox{]} = \{9, 11\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_aef40bbbef75d095eda9f1ad0182d8b6f}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node11}} \mbox{[}$\,$\mbox{]} = \{5, 10\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_abf0714559e1fc07c60d22190383b2293}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node12}} \mbox{[}$\,$\mbox{]} = \{9, 13\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a36eefcc23c1a3adbc4c7b2a551362803}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node13}} \mbox{[}$\,$\mbox{]} = \{12, 14\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a650304d3c18c5a8cc322b07114087d28}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node14}} \mbox{[}$\,$\mbox{]} = \{13, 15\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a1a3c63c231083a1b8820ccdd652ae43c}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node15}} \mbox{[}$\,$\mbox{]} = \{14, 23, 24\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a7ac841c20db51725250b526078ba615d}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node16}} \mbox{[}$\,$\mbox{]} = \{6, 17, 21, 22, 27, 28\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a56a2f72fd6a7996862dedf8f654cd990}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node17}} \mbox{[}$\,$\mbox{]} = \{16, 18\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a394b12f339f3bba399b335530240715b}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node18}} \mbox{[}$\,$\mbox{]} = \{17, 24, 25\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a623009fea6b5116c1ae81ad99247b5e1}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node19}} \mbox{[}$\,$\mbox{]} = \{25, 26\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a5d4c08d6b29709781439209fe1eef35a}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node20}} \mbox{[}$\,$\mbox{]} = \{21, 22, 26, 27\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a599109056c5f315bb946734452ebdbb8}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node21}} \mbox{[}$\,$\mbox{]} = \{0, 4, 16, 20, 22\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a5e6833bf0ff8bc3c52e7223e634babfc}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node22}} \mbox{[}$\,$\mbox{]} = \{4, 5, 6, 7, 16, 20, 21\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a8c8c68f329597b770e4c8523e4f906d2}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node23}} \mbox{[}$\,$\mbox{]} = \{7, 15\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a973e81ac386e9ad377d011cec7dfe79a}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node24}} \mbox{[}$\,$\mbox{]} = \{15, 18\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_ab06bab7b68a26c8a5f808825f906b4e4}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node25}} \mbox{[}$\,$\mbox{]} = \{18, 19\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a2fddc4aee045677904c44b4765b681e8}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node26}} \mbox{[}$\,$\mbox{]} = \{19, 20\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a91ffeb84d6e937beeb9028a8a50982df}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node27}} \mbox{[}$\,$\mbox{]} = \{16, 20\}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a188ae3eb81c16e1205b89632b8d6cadd}{garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node28}} \mbox{[}$\,$\mbox{]} = \{7, 16\}
+\item 
+\mbox{\hyperlink{pathfinding_8h_structEdgeList}{Edge\+List}} \mbox{\hyperlink{garden__map__graph_8c_a138c03d11f31731136b74aab35cdf4d6}{garden\+\_\+map\+\_\+graph\+Edges}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} \mbox{\hyperlink{garden__map__graph_8c_a8593e5acc7b02d8bdd3f2d7d101b7550}{garden\+\_\+map\+\_\+graph}}
+\item 
+\mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} \mbox{\hyperlink{garden__map__graph_8c_a6871527c5377b5d859c3dcbf755d3ef1}{garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+node\+\_\+states}} \mbox{[}\mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\+\_\+\+MAP\+\_\+\+GRAPH\+\_\+\+SIZE}}\mbox{]}
+\item 
+int \mbox{\hyperlink{garden__map__graph_8c_a0252800e2e0b290d24e1449a729edf7d}{garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+result}} \mbox{[}\mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\+\_\+\+MAP\+\_\+\+GRAPH\+\_\+\+SIZE}}\mbox{]}
+\item 
+\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} \mbox{\hyperlink{garden__map__graph_8c_ae8b375c12f693829ce03f1512711b923}{garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+state}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{garden__map__graph_8c_a8593e5acc7b02d8bdd3f2d7d101b7550}\label{garden__map__graph_8c_a8593e5acc7b02d8bdd3f2d7d101b7550}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph@{garden\_map\_graph}}
+\index{garden\_map\_graph@{garden\_map\_graph}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph}{garden\_map\_graph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} garden\+\_\+map\+\_\+graph}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\_MAP\_GRAPH\_SIZE}}, }
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8c_a5a84cf0a1294113c4a1e3b9e743f676c}{garden\_map\_graphNodes}}, }
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8c_a138c03d11f31731136b74aab35cdf4d6}{garden\_map\_graphEdges}}, }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{garden__map__graph_8c_a6b3c9333dfb22db29a11aa9931819ca7}\label{garden__map__graph_8c_a6b3c9333dfb22db29a11aa9931819ca7}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node0@{garden\_map\_graph\_edges\_node0}}
+\index{garden\_map\_graph\_edges\_node0@{garden\_map\_graph\_edges\_node0}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node0}{garden\_map\_graph\_edges\_node0}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node0\mbox{[}$\,$\mbox{]} = \{1, 2, 4, 21\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_ad0ec80f569b66d6bdcc6815078cfee7c}\label{garden__map__graph_8c_ad0ec80f569b66d6bdcc6815078cfee7c}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node1@{garden\_map\_graph\_edges\_node1}}
+\index{garden\_map\_graph\_edges\_node1@{garden\_map\_graph\_edges\_node1}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node1}{garden\_map\_graph\_edges\_node1}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node1\mbox{[}$\,$\mbox{]} = \{0, 2\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a90f67a7a42814557cdbf8d3d3206518a}\label{garden__map__graph_8c_a90f67a7a42814557cdbf8d3d3206518a}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node10@{garden\_map\_graph\_edges\_node10}}
+\index{garden\_map\_graph\_edges\_node10@{garden\_map\_graph\_edges\_node10}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node10}{garden\_map\_graph\_edges\_node10}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node10\mbox{[}$\,$\mbox{]} = \{9, 11\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_aef40bbbef75d095eda9f1ad0182d8b6f}\label{garden__map__graph_8c_aef40bbbef75d095eda9f1ad0182d8b6f}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node11@{garden\_map\_graph\_edges\_node11}}
+\index{garden\_map\_graph\_edges\_node11@{garden\_map\_graph\_edges\_node11}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node11}{garden\_map\_graph\_edges\_node11}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node11\mbox{[}$\,$\mbox{]} = \{5, 10\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_abf0714559e1fc07c60d22190383b2293}\label{garden__map__graph_8c_abf0714559e1fc07c60d22190383b2293}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node12@{garden\_map\_graph\_edges\_node12}}
+\index{garden\_map\_graph\_edges\_node12@{garden\_map\_graph\_edges\_node12}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node12}{garden\_map\_graph\_edges\_node12}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node12\mbox{[}$\,$\mbox{]} = \{9, 13\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a36eefcc23c1a3adbc4c7b2a551362803}\label{garden__map__graph_8c_a36eefcc23c1a3adbc4c7b2a551362803}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node13@{garden\_map\_graph\_edges\_node13}}
+\index{garden\_map\_graph\_edges\_node13@{garden\_map\_graph\_edges\_node13}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node13}{garden\_map\_graph\_edges\_node13}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node13\mbox{[}$\,$\mbox{]} = \{12, 14\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a650304d3c18c5a8cc322b07114087d28}\label{garden__map__graph_8c_a650304d3c18c5a8cc322b07114087d28}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node14@{garden\_map\_graph\_edges\_node14}}
+\index{garden\_map\_graph\_edges\_node14@{garden\_map\_graph\_edges\_node14}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node14}{garden\_map\_graph\_edges\_node14}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node14\mbox{[}$\,$\mbox{]} = \{13, 15\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a1a3c63c231083a1b8820ccdd652ae43c}\label{garden__map__graph_8c_a1a3c63c231083a1b8820ccdd652ae43c}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node15@{garden\_map\_graph\_edges\_node15}}
+\index{garden\_map\_graph\_edges\_node15@{garden\_map\_graph\_edges\_node15}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node15}{garden\_map\_graph\_edges\_node15}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node15\mbox{[}$\,$\mbox{]} = \{14, 23, 24\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a7ac841c20db51725250b526078ba615d}\label{garden__map__graph_8c_a7ac841c20db51725250b526078ba615d}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node16@{garden\_map\_graph\_edges\_node16}}
+\index{garden\_map\_graph\_edges\_node16@{garden\_map\_graph\_edges\_node16}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node16}{garden\_map\_graph\_edges\_node16}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node16\mbox{[}$\,$\mbox{]} = \{6, 17, 21, 22, 27, 28\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a56a2f72fd6a7996862dedf8f654cd990}\label{garden__map__graph_8c_a56a2f72fd6a7996862dedf8f654cd990}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node17@{garden\_map\_graph\_edges\_node17}}
+\index{garden\_map\_graph\_edges\_node17@{garden\_map\_graph\_edges\_node17}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node17}{garden\_map\_graph\_edges\_node17}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node17\mbox{[}$\,$\mbox{]} = \{16, 18\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a394b12f339f3bba399b335530240715b}\label{garden__map__graph_8c_a394b12f339f3bba399b335530240715b}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node18@{garden\_map\_graph\_edges\_node18}}
+\index{garden\_map\_graph\_edges\_node18@{garden\_map\_graph\_edges\_node18}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node18}{garden\_map\_graph\_edges\_node18}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node18\mbox{[}$\,$\mbox{]} = \{17, 24, 25\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a623009fea6b5116c1ae81ad99247b5e1}\label{garden__map__graph_8c_a623009fea6b5116c1ae81ad99247b5e1}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node19@{garden\_map\_graph\_edges\_node19}}
+\index{garden\_map\_graph\_edges\_node19@{garden\_map\_graph\_edges\_node19}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node19}{garden\_map\_graph\_edges\_node19}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node19\mbox{[}$\,$\mbox{]} = \{25, 26\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_abc47572da6d6f6bfad2e34d30b23a09d}\label{garden__map__graph_8c_abc47572da6d6f6bfad2e34d30b23a09d}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node2@{garden\_map\_graph\_edges\_node2}}
+\index{garden\_map\_graph\_edges\_node2@{garden\_map\_graph\_edges\_node2}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node2}{garden\_map\_graph\_edges\_node2}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node2\mbox{[}$\,$\mbox{]} = \{0, 1, 3\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a5d4c08d6b29709781439209fe1eef35a}\label{garden__map__graph_8c_a5d4c08d6b29709781439209fe1eef35a}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node20@{garden\_map\_graph\_edges\_node20}}
+\index{garden\_map\_graph\_edges\_node20@{garden\_map\_graph\_edges\_node20}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node20}{garden\_map\_graph\_edges\_node20}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node20\mbox{[}$\,$\mbox{]} = \{21, 22, 26, 27\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a599109056c5f315bb946734452ebdbb8}\label{garden__map__graph_8c_a599109056c5f315bb946734452ebdbb8}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node21@{garden\_map\_graph\_edges\_node21}}
+\index{garden\_map\_graph\_edges\_node21@{garden\_map\_graph\_edges\_node21}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node21}{garden\_map\_graph\_edges\_node21}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node21\mbox{[}$\,$\mbox{]} = \{0, 4, 16, 20, 22\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a5e6833bf0ff8bc3c52e7223e634babfc}\label{garden__map__graph_8c_a5e6833bf0ff8bc3c52e7223e634babfc}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node22@{garden\_map\_graph\_edges\_node22}}
+\index{garden\_map\_graph\_edges\_node22@{garden\_map\_graph\_edges\_node22}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node22}{garden\_map\_graph\_edges\_node22}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node22\mbox{[}$\,$\mbox{]} = \{4, 5, 6, 7, 16, 20, 21\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a8c8c68f329597b770e4c8523e4f906d2}\label{garden__map__graph_8c_a8c8c68f329597b770e4c8523e4f906d2}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node23@{garden\_map\_graph\_edges\_node23}}
+\index{garden\_map\_graph\_edges\_node23@{garden\_map\_graph\_edges\_node23}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node23}{garden\_map\_graph\_edges\_node23}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node23\mbox{[}$\,$\mbox{]} = \{7, 15\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a973e81ac386e9ad377d011cec7dfe79a}\label{garden__map__graph_8c_a973e81ac386e9ad377d011cec7dfe79a}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node24@{garden\_map\_graph\_edges\_node24}}
+\index{garden\_map\_graph\_edges\_node24@{garden\_map\_graph\_edges\_node24}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node24}{garden\_map\_graph\_edges\_node24}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node24\mbox{[}$\,$\mbox{]} = \{15, 18\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_ab06bab7b68a26c8a5f808825f906b4e4}\label{garden__map__graph_8c_ab06bab7b68a26c8a5f808825f906b4e4}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node25@{garden\_map\_graph\_edges\_node25}}
+\index{garden\_map\_graph\_edges\_node25@{garden\_map\_graph\_edges\_node25}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node25}{garden\_map\_graph\_edges\_node25}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node25\mbox{[}$\,$\mbox{]} = \{18, 19\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a2fddc4aee045677904c44b4765b681e8}\label{garden__map__graph_8c_a2fddc4aee045677904c44b4765b681e8}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node26@{garden\_map\_graph\_edges\_node26}}
+\index{garden\_map\_graph\_edges\_node26@{garden\_map\_graph\_edges\_node26}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node26}{garden\_map\_graph\_edges\_node26}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node26\mbox{[}$\,$\mbox{]} = \{19, 20\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a91ffeb84d6e937beeb9028a8a50982df}\label{garden__map__graph_8c_a91ffeb84d6e937beeb9028a8a50982df}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node27@{garden\_map\_graph\_edges\_node27}}
+\index{garden\_map\_graph\_edges\_node27@{garden\_map\_graph\_edges\_node27}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node27}{garden\_map\_graph\_edges\_node27}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node27\mbox{[}$\,$\mbox{]} = \{16, 20\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a188ae3eb81c16e1205b89632b8d6cadd}\label{garden__map__graph_8c_a188ae3eb81c16e1205b89632b8d6cadd}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node28@{garden\_map\_graph\_edges\_node28}}
+\index{garden\_map\_graph\_edges\_node28@{garden\_map\_graph\_edges\_node28}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node28}{garden\_map\_graph\_edges\_node28}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node28\mbox{[}$\,$\mbox{]} = \{7, 16\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_ac6a63bec8bc1ff3ccd9cd4cef4e54016}\label{garden__map__graph_8c_ac6a63bec8bc1ff3ccd9cd4cef4e54016}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node3@{garden\_map\_graph\_edges\_node3}}
+\index{garden\_map\_graph\_edges\_node3@{garden\_map\_graph\_edges\_node3}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node3}{garden\_map\_graph\_edges\_node3}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node3\mbox{[}$\,$\mbox{]} = \{2\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a72d7e3b460dc23827147c1718d6c9848}\label{garden__map__graph_8c_a72d7e3b460dc23827147c1718d6c9848}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node4@{garden\_map\_graph\_edges\_node4}}
+\index{garden\_map\_graph\_edges\_node4@{garden\_map\_graph\_edges\_node4}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node4}{garden\_map\_graph\_edges\_node4}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node4\mbox{[}$\,$\mbox{]} = \{0, 5, 21, 22\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a526a042188817ad9d7ac77cd38595bc9}\label{garden__map__graph_8c_a526a042188817ad9d7ac77cd38595bc9}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node5@{garden\_map\_graph\_edges\_node5}}
+\index{garden\_map\_graph\_edges\_node5@{garden\_map\_graph\_edges\_node5}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node5}{garden\_map\_graph\_edges\_node5}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node5\mbox{[}$\,$\mbox{]} = \{4, 6, 11, 22\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_ae2263ba9656d256dda6bcb419bb57527}\label{garden__map__graph_8c_ae2263ba9656d256dda6bcb419bb57527}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node6@{garden\_map\_graph\_edges\_node6}}
+\index{garden\_map\_graph\_edges\_node6@{garden\_map\_graph\_edges\_node6}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node6}{garden\_map\_graph\_edges\_node6}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node6\mbox{[}$\,$\mbox{]} = \{5, 7, 16, 22\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a2d00bec208fda75a7346ba691086bf83}\label{garden__map__graph_8c_a2d00bec208fda75a7346ba691086bf83}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node7@{garden\_map\_graph\_edges\_node7}}
+\index{garden\_map\_graph\_edges\_node7@{garden\_map\_graph\_edges\_node7}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node7}{garden\_map\_graph\_edges\_node7}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node7\mbox{[}$\,$\mbox{]} = \{6, 8, 22, 23, 28\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a371ba341513fd82f6f4151ebb7a19167}\label{garden__map__graph_8c_a371ba341513fd82f6f4151ebb7a19167}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node8@{garden\_map\_graph\_edges\_node8}}
+\index{garden\_map\_graph\_edges\_node8@{garden\_map\_graph\_edges\_node8}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node8}{garden\_map\_graph\_edges\_node8}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node8\mbox{[}$\,$\mbox{]} = \{7, 9\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a8ad9f2311949d2fdb1f00396a54ec208}\label{garden__map__graph_8c_a8ad9f2311949d2fdb1f00396a54ec208}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_edges\_node9@{garden\_map\_graph\_edges\_node9}}
+\index{garden\_map\_graph\_edges\_node9@{garden\_map\_graph\_edges\_node9}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_edges\_node9}{garden\_map\_graph\_edges\_node9}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+edges\+\_\+node9\mbox{[}$\,$\mbox{]} = \{8, 10, 12\}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a6871527c5377b5d859c3dcbf755d3ef1}\label{garden__map__graph_8c_a6871527c5377b5d859c3dcbf755d3ef1}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_pathfinding\_node\_states@{garden\_map\_graph\_pathfinding\_node\_states}}
+\index{garden\_map\_graph\_pathfinding\_node\_states@{garden\_map\_graph\_pathfinding\_node\_states}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_pathfinding\_node\_states}{garden\_map\_graph\_pathfinding\_node\_states}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+node\+\_\+states\mbox{[}\mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\+\_\+\+MAP\+\_\+\+GRAPH\+\_\+\+SIZE}}\mbox{]}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a0252800e2e0b290d24e1449a729edf7d}\label{garden__map__graph_8c_a0252800e2e0b290d24e1449a729edf7d}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_pathfinding\_result@{garden\_map\_graph\_pathfinding\_result}}
+\index{garden\_map\_graph\_pathfinding\_result@{garden\_map\_graph\_pathfinding\_result}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_pathfinding\_result}{garden\_map\_graph\_pathfinding\_result}}
+{\footnotesize\ttfamily int garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+result\mbox{[}\mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\+\_\+\+MAP\+\_\+\+GRAPH\+\_\+\+SIZE}}\mbox{]}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_ae8b375c12f693829ce03f1512711b923}\label{garden__map__graph_8c_ae8b375c12f693829ce03f1512711b923}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graph\_pathfinding\_state@{garden\_map\_graph\_pathfinding\_state}}
+\index{garden\_map\_graph\_pathfinding\_state@{garden\_map\_graph\_pathfinding\_state}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graph\_pathfinding\_state}{garden\_map\_graph\_pathfinding\_state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} garden\+\_\+map\+\_\+graph\+\_\+pathfinding\+\_\+state}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \mbox{\hyperlink{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}, }
+\DoxyCodeLine{    \mbox{\hyperlink{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}, }
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8c_a6871527c5377b5d859c3dcbf755d3ef1}{garden\_map\_graph\_pathfinding\_node\_states}},}
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8h_a11da515122d4c330467ad31121efa64d}{GARDEN\_MAP\_GRAPH\_SIZE}},              }
+\DoxyCodeLine{    0,                                   }
+\DoxyCodeLine{    \mbox{\hyperlink{garden__map__graph_8c_a0252800e2e0b290d24e1449a729edf7d}{garden\_map\_graph\_pathfinding\_result}}, }
+\DoxyCodeLine{    0,                                   }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{garden__map__graph_8c_a138c03d11f31731136b74aab35cdf4d6}\label{garden__map__graph_8c_a138c03d11f31731136b74aab35cdf4d6}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graphEdges@{garden\_map\_graphEdges}}
+\index{garden\_map\_graphEdges@{garden\_map\_graphEdges}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graphEdges}{garden\_map\_graphEdges}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structEdgeList}{Edge\+List}} garden\+\_\+map\+\_\+graph\+Edges\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{garden__map__graph_8c_a5a84cf0a1294113c4a1e3b9e743f676c}\label{garden__map__graph_8c_a5a84cf0a1294113c4a1e3b9e743f676c}} 
+\index{garden\_map\_graph.c@{garden\_map\_graph.c}!garden\_map\_graphNodes@{garden\_map\_graphNodes}}
+\index{garden\_map\_graphNodes@{garden\_map\_graphNodes}!garden\_map\_graph.c@{garden\_map\_graph.c}}
+\doxysubsubsection{\texorpdfstring{garden\_map\_graphNodes}{garden\_map\_graphNodes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structNode}{Node}} garden\+\_\+map\+\_\+graph\+Nodes\mbox{[}$\,$\mbox{]}}
+

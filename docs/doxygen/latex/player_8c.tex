@@ -1,0 +1,174 @@
+\hypertarget{player_8c}{}\doxysection{src/player.c File Reference}
+\label{player_8c}\index{src/player.c@{src/player.c}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}animation/animation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameutils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gooseanimtypes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}item.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for player.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{player_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}{GOOSE\+\_\+\+SPEED}}~3.\+0F
+\item 
+\#define \mbox{\hyperlink{player_8c_aa36df0187ef7891852f1f7c82db09695}{GOOSE\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO}}~0.\+5
+\item 
+\#define \mbox{\hyperlink{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}{GOOSE\+\_\+\+FORCE}}~5000.\+0F
+\item 
+\#define \mbox{\hyperlink{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}{GOOSE\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED}}~15.\+0f
+\item 
+\#define \mbox{\hyperlink{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}{PLAYER\+\_\+\+NEAR\+\_\+\+OBJ\+\_\+\+DIST}}~100.\+0f
+\item 
+\#define \mbox{\hyperlink{player_8c_af2ce310d044a75ba854bd84679dd9d3f}{PLAYER\+\_\+\+PICKUP\+\_\+\+COOLDOWN}}~10
+\item 
+\#define \mbox{\hyperlink{player_8c_a507e3aa28738ac69afb28ee36f6eaac1}{PLAYER\+\_\+\+WALK\+\_\+\+ANIM\+\_\+\+MOVEMENT\+\_\+\+DIVISOR}}~100.\+0
+\item 
+\#define \mbox{\hyperlink{player_8c_a90aad407dc258a4db0bbf0ff5c14b75c}{PLAYER\+\_\+\+PHYS\+\_\+\+WALK\+\_\+\+ANIM\+\_\+\+MOVEMENT\+\_\+\+DIVISOR}}~5200.\+0
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{player_8c_a3751327fcb4799902065b379727918bd}{Player\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{player_8c_afbafa5a98a1332e1270324a7962253fa}{Player\+\_\+debounce\+Input}} (unsigned int last\+Trigger, unsigned int cooldown)
+\item 
+void \mbox{\hyperlink{player_8c_a831040f74f1dffea12f537277096e032}{Player\+\_\+set\+Visible\+Item\+Attachment}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
+\item 
+float \mbox{\hyperlink{player_8c_a1f60cc7ba4b0d49473e0b19957988381}{Player\+\_\+move}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, \mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{player_8c_a359353e5f71f76c2d0fb139872b24a70}{Player\+\_\+update}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, \mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{player_8c_a00f7acda4893d7f0708885d26f53f0be}{Player\+\_\+have\+Item\+Taken}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, \mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$item)
+\item 
+void \mbox{\hyperlink{player_8c_a3917b0a1b6317a3daae335e0b22ad7ce}{Player\+\_\+print}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self)
+\item 
+void \mbox{\hyperlink{player_8c_a483ceca88f0964627ae132bb9721c596}{Player\+\_\+to\+String}} (\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$self, char $\ast$buffer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{player_8c_aa483cded9352a3a429ee6eb663205caa}{player\+Item\+Offset}} = \{0.\+0F, 80.\+0F, 0.\+0F\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}\label{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}} 
+\index{player.c@{player.c}!GOOSE\_FORCE@{GOOSE\_FORCE}}
+\index{GOOSE\_FORCE@{GOOSE\_FORCE}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{GOOSE\_FORCE}{GOOSE\_FORCE}}
+{\footnotesize\ttfamily \#define GOOSE\+\_\+\+FORCE~5000.\+0F}
+
+\mbox{\Hypertarget{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}\label{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}} 
+\index{player.c@{player.c}!GOOSE\_MAX\_TURN\_SPEED@{GOOSE\_MAX\_TURN\_SPEED}}
+\index{GOOSE\_MAX\_TURN\_SPEED@{GOOSE\_MAX\_TURN\_SPEED}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{GOOSE\_MAX\_TURN\_SPEED}{GOOSE\_MAX\_TURN\_SPEED}}
+{\footnotesize\ttfamily \#define GOOSE\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED~15.\+0f}
+
+\mbox{\Hypertarget{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}\label{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}} 
+\index{player.c@{player.c}!GOOSE\_SPEED@{GOOSE\_SPEED}}
+\index{GOOSE\_SPEED@{GOOSE\_SPEED}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{GOOSE\_SPEED}{GOOSE\_SPEED}}
+{\footnotesize\ttfamily \#define GOOSE\+\_\+\+SPEED~3.\+0F}
+
+\mbox{\Hypertarget{player_8c_aa36df0187ef7891852f1f7c82db09695}\label{player_8c_aa36df0187ef7891852f1f7c82db09695}} 
+\index{player.c@{player.c}!GOOSE\_WALK\_SPEED\_RATIO@{GOOSE\_WALK\_SPEED\_RATIO}}
+\index{GOOSE\_WALK\_SPEED\_RATIO@{GOOSE\_WALK\_SPEED\_RATIO}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{GOOSE\_WALK\_SPEED\_RATIO}{GOOSE\_WALK\_SPEED\_RATIO}}
+{\footnotesize\ttfamily \#define GOOSE\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO~0.\+5}
+
+\mbox{\Hypertarget{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}\label{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}} 
+\index{player.c@{player.c}!PLAYER\_NEAR\_OBJ\_DIST@{PLAYER\_NEAR\_OBJ\_DIST}}
+\index{PLAYER\_NEAR\_OBJ\_DIST@{PLAYER\_NEAR\_OBJ\_DIST}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_NEAR\_OBJ\_DIST}{PLAYER\_NEAR\_OBJ\_DIST}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+NEAR\+\_\+\+OBJ\+\_\+\+DIST~100.\+0f}
+
+\mbox{\Hypertarget{player_8c_a90aad407dc258a4db0bbf0ff5c14b75c}\label{player_8c_a90aad407dc258a4db0bbf0ff5c14b75c}} 
+\index{player.c@{player.c}!PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
+\index{PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR}{PLAYER\_PHYS\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+PHYS\+\_\+\+WALK\+\_\+\+ANIM\+\_\+\+MOVEMENT\+\_\+\+DIVISOR~5200.\+0}
+
+\mbox{\Hypertarget{player_8c_af2ce310d044a75ba854bd84679dd9d3f}\label{player_8c_af2ce310d044a75ba854bd84679dd9d3f}} 
+\index{player.c@{player.c}!PLAYER\_PICKUP\_COOLDOWN@{PLAYER\_PICKUP\_COOLDOWN}}
+\index{PLAYER\_PICKUP\_COOLDOWN@{PLAYER\_PICKUP\_COOLDOWN}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_PICKUP\_COOLDOWN}{PLAYER\_PICKUP\_COOLDOWN}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+PICKUP\+\_\+\+COOLDOWN~10}
+
+\mbox{\Hypertarget{player_8c_a507e3aa28738ac69afb28ee36f6eaac1}\label{player_8c_a507e3aa28738ac69afb28ee36f6eaac1}} 
+\index{player.c@{player.c}!PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
+\index{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+WALK\+\_\+\+ANIM\+\_\+\+MOVEMENT\+\_\+\+DIVISOR~100.\+0}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{player_8c_afbafa5a98a1332e1270324a7962253fa}\label{player_8c_afbafa5a98a1332e1270324a7962253fa}} 
+\index{player.c@{player.c}!Player\_debounceInput@{Player\_debounceInput}}
+\index{Player\_debounceInput@{Player\_debounceInput}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_debounceInput()}{Player\_debounceInput()}}
+{\footnotesize\ttfamily int Player\+\_\+debounce\+Input (\begin{DoxyParamCaption}\item[{unsigned int}]{last\+Trigger,  }\item[{unsigned int}]{cooldown }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a00f7acda4893d7f0708885d26f53f0be}\label{player_8c_a00f7acda4893d7f0708885d26f53f0be}} 
+\index{player.c@{player.c}!Player\_haveItemTaken@{Player\_haveItemTaken}}
+\index{Player\_haveItemTaken@{Player\_haveItemTaken}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_haveItemTaken()}{Player\_haveItemTaken()}}
+{\footnotesize\ttfamily void Player\+\_\+have\+Item\+Taken (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{item }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a3751327fcb4799902065b379727918bd}\label{player_8c_a3751327fcb4799902065b379727918bd}} 
+\index{player.c@{player.c}!Player\_init@{Player\_init}}
+\index{Player\_init@{Player\_init}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_init()}{Player\_init()}}
+{\footnotesize\ttfamily void Player\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a1f60cc7ba4b0d49473e0b19957988381}\label{player_8c_a1f60cc7ba4b0d49473e0b19957988381}} 
+\index{player.c@{player.c}!Player\_move@{Player\_move}}
+\index{Player\_move@{Player\_move}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_move()}{Player\_move()}}
+{\footnotesize\ttfamily float Player\+\_\+move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{input,  }\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a3917b0a1b6317a3daae335e0b22ad7ce}\label{player_8c_a3917b0a1b6317a3daae335e0b22ad7ce}} 
+\index{player.c@{player.c}!Player\_print@{Player\_print}}
+\index{Player\_print@{Player\_print}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_print()}{Player\_print()}}
+{\footnotesize\ttfamily void Player\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a831040f74f1dffea12f537277096e032}\label{player_8c_a831040f74f1dffea12f537277096e032}} 
+\index{player.c@{player.c}!Player\_setVisibleItemAttachment@{Player\_setVisibleItemAttachment}}
+\index{Player\_setVisibleItemAttachment@{Player\_setVisibleItemAttachment}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_setVisibleItemAttachment()}{Player\_setVisibleItemAttachment()}}
+{\footnotesize\ttfamily void Player\+\_\+set\+Visible\+Item\+Attachment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a483ceca88f0964627ae132bb9721c596}\label{player_8c_a483ceca88f0964627ae132bb9721c596}} 
+\index{player.c@{player.c}!Player\_toString@{Player\_toString}}
+\index{Player\_toString@{Player\_toString}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_toString()}{Player\_toString()}}
+{\footnotesize\ttfamily void Player\+\_\+to\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{player_8c_a359353e5f71f76c2d0fb139872b24a70}\label{player_8c_a359353e5f71f76c2d0fb139872b24a70}} 
+\index{player.c@{player.c}!Player\_update@{Player\_update}}
+\index{Player\_update@{Player\_update}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{Player\_update()}{Player\_update()}}
+{\footnotesize\ttfamily void Player\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structPlayer}{Player}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{input,  }\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{player_8c_aa483cded9352a3a429ee6eb663205caa}\label{player_8c_aa483cded9352a3a429ee6eb663205caa}} 
+\index{player.c@{player.c}!playerItemOffset@{playerItemOffset}}
+\index{playerItemOffset@{playerItemOffset}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{playerItemOffset}{playerItemOffset}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} player\+Item\+Offset = \{0.\+0F, 80.\+0F, 0.\+0F\}\hspace{0.3cm}{\ttfamily [static]}}
+

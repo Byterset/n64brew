@@ -1,0 +1,205 @@
+\hypertarget{game_8c}{}\doxysection{src/game.c File Reference}
+\label{game_8c}\index{src/game.c@{src/game.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}float.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}util/memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}actors/gardener/character.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameutils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}item.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/trace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controls/controller.\+h\char`\"{}}\newline
+Include dependency graph for game.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{game_8c_aede616d57d9cb5f6a2818ba0fa68ffbb}{GENERATE\+\_\+\+DEBUG\+\_\+\+BODIES}}~0
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{game_8c_a20a0bfb1a9c053d9e3cad0ecb4d6ffaa}{Game\+\_\+init\+Game\+Object\+Phys\+Body}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$body, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+void \mbox{\hyperlink{game_8c_a7327259b7e7ffe633293bc6dc1a8dd92}{Game\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$world\+Objects, int world\+Objects\+Count, \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} $\ast$\mbox{\hyperlink{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}{phys\+World\+Data}})
+\item 
+void \mbox{\hyperlink{game_8c_af99ea6559259d565c4c6338b8a5a158a}{Game\+\_\+destroy}} ()
+\item 
+\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$ \mbox{\hyperlink{game_8c_ab9c4372c45d895bf30346c4842797dbc}{Game\+\_\+get}} ()
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{game_8c_ab769d2e36fa04bcff0a2beb215f05774}{Game\+\_\+get\+Object\+By\+ID}} (int id)
+\item 
+int \mbox{\hyperlink{game_8c_a7ae10863971b019eb66a392db6186810}{Game\+\_\+count\+Objects\+In\+Category}} (\mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}} category)
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{game_8c_a9e304ecc2aea0fc0fcc5a4ecd0889f58}{Game\+\_\+find\+Object\+By\+Type}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{game_8c_ac6934074e4c1b7a2a1278c8c1056cdc2}{Game\+\_\+find\+Object\+NBy\+Type}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type, int n)
+\item 
+void \mbox{\hyperlink{game_8c_af51e695f9065748a9369666e4d4751a7}{Game\+\_\+update\+Camera}} (\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}}, \mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+void \mbox{\hyperlink{game_8c_a9ddd27f9f5e89c0ff6be33792f596d52}{Game\+\_\+update\+Physics}} (\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{game_8c_a5758f961af5618542e4c81bf7df1c394}{Game\+\_\+update}} (\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}})
+\item 
+float \mbox{\hyperlink{game_8c_afc883a99f9cbfce724010365244560d6}{Game\+\_\+ray\+Intersects\+Sphere\+Dist}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$origin, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+Direction, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$obj\+Center, float obj\+Radius)
+\item 
+int \mbox{\hyperlink{game_8c_a90552cd6541187ad43c4fa8bfe8cb24c}{Game\+\_\+ray\+Intersects\+Sphere}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$origin, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+Direction, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$obj\+Center, float obj\+Radius)
+\item 
+void \mbox{\hyperlink{game_8c_aefc4d4893e0a7026314f39bcc3a0eb56}{Game\+\_\+get\+Obj\+Center}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+float \mbox{\hyperlink{game_8c_aab7010e104c7acde6107df9890c04d99}{Game\+\_\+get\+Obj\+Radius}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+float \mbox{\hyperlink{game_8c_aed600a52e15ed79ff051c68e20586833}{Game\+\_\+distance\+To\+Game\+Object}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$from, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$to)
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{game_8c_a7968b9ab2ac6940300b1fc0c8562c480}{Game\+\_\+get\+Intersecting\+Object}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+Source, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+Direction)
+\item 
+int \mbox{\hyperlink{game_8c_ab09612e2799d21535a9d67062bfbcb72}{Game\+\_\+can\+See\+Other\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$viewer, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$target, float viewer\+Eye\+Offset, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$occuluding\+Objects, int occuluding\+Objects\+Count)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{gametypes_8h_structGame}{Game}} \mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{game_8c_aede616d57d9cb5f6a2818ba0fa68ffbb}\label{game_8c_aede616d57d9cb5f6a2818ba0fa68ffbb}} 
+\index{game.c@{game.c}!GENERATE\_DEBUG\_BODIES@{GENERATE\_DEBUG\_BODIES}}
+\index{GENERATE\_DEBUG\_BODIES@{GENERATE\_DEBUG\_BODIES}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{GENERATE\_DEBUG\_BODIES}{GENERATE\_DEBUG\_BODIES}}
+{\footnotesize\ttfamily \#define GENERATE\+\_\+\+DEBUG\+\_\+\+BODIES~0}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{game_8c_ab09612e2799d21535a9d67062bfbcb72}\label{game_8c_ab09612e2799d21535a9d67062bfbcb72}} 
+\index{game.c@{game.c}!Game\_canSeeOtherObject@{Game\_canSeeOtherObject}}
+\index{Game\_canSeeOtherObject@{Game\_canSeeOtherObject}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_canSeeOtherObject()}{Game\_canSeeOtherObject()}}
+{\footnotesize\ttfamily int Game\+\_\+can\+See\+Other\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{viewer,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{target,  }\item[{float}]{viewer\+Eye\+Offset,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{occuluding\+Objects,  }\item[{int}]{occuluding\+Objects\+Count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a7ae10863971b019eb66a392db6186810}\label{game_8c_a7ae10863971b019eb66a392db6186810}} 
+\index{game.c@{game.c}!Game\_countObjectsInCategory@{Game\_countObjectsInCategory}}
+\index{Game\_countObjectsInCategory@{Game\_countObjectsInCategory}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_countObjectsInCategory()}{Game\_countObjectsInCategory()}}
+{\footnotesize\ttfamily int Game\+\_\+count\+Objects\+In\+Category (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a1cbd1845058d2f33793c727662a5dc21}{Model\+Type\+Category}}}]{category }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_af99ea6559259d565c4c6338b8a5a158a}\label{game_8c_af99ea6559259d565c4c6338b8a5a158a}} 
+\index{game.c@{game.c}!Game\_destroy@{Game\_destroy}}
+\index{Game\_destroy@{Game\_destroy}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_destroy()}{Game\_destroy()}}
+{\footnotesize\ttfamily void Game\+\_\+destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_aed600a52e15ed79ff051c68e20586833}\label{game_8c_aed600a52e15ed79ff051c68e20586833}} 
+\index{game.c@{game.c}!Game\_distanceToGameObject@{Game\_distanceToGameObject}}
+\index{Game\_distanceToGameObject@{Game\_distanceToGameObject}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_distanceToGameObject()}{Game\_distanceToGameObject()}}
+{\footnotesize\ttfamily float Game\+\_\+distance\+To\+Game\+Object (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{from,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{to }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a9e304ecc2aea0fc0fcc5a4ecd0889f58}\label{game_8c_a9e304ecc2aea0fc0fcc5a4ecd0889f58}} 
+\index{game.c@{game.c}!Game\_findObjectByType@{Game\_findObjectByType}}
+\index{Game\_findObjectByType@{Game\_findObjectByType}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_findObjectByType()}{Game\_findObjectByType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+\_\+find\+Object\+By\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_ac6934074e4c1b7a2a1278c8c1056cdc2}\label{game_8c_ac6934074e4c1b7a2a1278c8c1056cdc2}} 
+\index{game.c@{game.c}!Game\_findObjectNByType@{Game\_findObjectNByType}}
+\index{Game\_findObjectNByType@{Game\_findObjectNByType}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_findObjectNByType()}{Game\_findObjectNByType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+\_\+find\+Object\+NBy\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_ab9c4372c45d895bf30346c4842797dbc}\label{game_8c_ab9c4372c45d895bf30346c4842797dbc}} 
+\index{game.c@{game.c}!Game\_get@{Game\_get}}
+\index{Game\_get@{Game\_get}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_get()}{Game\_get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gametypes_8h_structGame}{Game}}$\ast$ Game\+\_\+get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a7968b9ab2ac6940300b1fc0c8562c480}\label{game_8c_a7968b9ab2ac6940300b1fc0c8562c480}} 
+\index{game.c@{game.c}!Game\_getIntersectingObject@{Game\_getIntersectingObject}}
+\index{Game\_getIntersectingObject@{Game\_getIntersectingObject}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_getIntersectingObject()}{Game\_getIntersectingObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+\_\+get\+Intersecting\+Object (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+Source,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+Direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_aefc4d4893e0a7026314f39bcc3a0eb56}\label{game_8c_aefc4d4893e0a7026314f39bcc3a0eb56}} 
+\index{game.c@{game.c}!Game\_getObjCenter@{Game\_getObjCenter}}
+\index{Game\_getObjCenter@{Game\_getObjCenter}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_getObjCenter()}{Game\_getObjCenter()}}
+{\footnotesize\ttfamily void Game\+\_\+get\+Obj\+Center (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_ab769d2e36fa04bcff0a2beb215f05774}\label{game_8c_ab769d2e36fa04bcff0a2beb215f05774}} 
+\index{game.c@{game.c}!Game\_getObjectByID@{Game\_getObjectByID}}
+\index{Game\_getObjectByID@{Game\_getObjectByID}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_getObjectByID()}{Game\_getObjectByID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+\_\+get\+Object\+By\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_aab7010e104c7acde6107df9890c04d99}\label{game_8c_aab7010e104c7acde6107df9890c04d99}} 
+\index{game.c@{game.c}!Game\_getObjRadius@{Game\_getObjRadius}}
+\index{Game\_getObjRadius@{Game\_getObjRadius}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_getObjRadius()}{Game\_getObjRadius()}}
+{\footnotesize\ttfamily float Game\+\_\+get\+Obj\+Radius (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a7327259b7e7ffe633293bc6dc1a8dd92}\label{game_8c_a7327259b7e7ffe633293bc6dc1a8dd92}} 
+\index{game.c@{game.c}!Game\_init@{Game\_init}}
+\index{Game\_init@{Game\_init}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_init()}{Game\_init()}}
+{\footnotesize\ttfamily void Game\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{world\+Objects,  }\item[{int}]{world\+Objects\+Count,  }\item[{\mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} $\ast$}]{phys\+World\+Data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a20a0bfb1a9c053d9e3cad0ecb4d6ffaa}\label{game_8c_a20a0bfb1a9c053d9e3cad0ecb4d6ffaa}} 
+\index{game.c@{game.c}!Game\_initGameObjectPhysBody@{Game\_initGameObjectPhysBody}}
+\index{Game\_initGameObjectPhysBody@{Game\_initGameObjectPhysBody}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_initGameObjectPhysBody()}{Game\_initGameObjectPhysBody()}}
+{\footnotesize\ttfamily void Game\+\_\+init\+Game\+Object\+Phys\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{body,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a90552cd6541187ad43c4fa8bfe8cb24c}\label{game_8c_a90552cd6541187ad43c4fa8bfe8cb24c}} 
+\index{game.c@{game.c}!Game\_rayIntersectsSphere@{Game\_rayIntersectsSphere}}
+\index{Game\_rayIntersectsSphere@{Game\_rayIntersectsSphere}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_rayIntersectsSphere()}{Game\_rayIntersectsSphere()}}
+{\footnotesize\ttfamily int Game\+\_\+ray\+Intersects\+Sphere (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{origin,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+Direction,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{obj\+Center,  }\item[{float}]{obj\+Radius }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_afc883a99f9cbfce724010365244560d6}\label{game_8c_afc883a99f9cbfce724010365244560d6}} 
+\index{game.c@{game.c}!Game\_rayIntersectsSphereDist@{Game\_rayIntersectsSphereDist}}
+\index{Game\_rayIntersectsSphereDist@{Game\_rayIntersectsSphereDist}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_rayIntersectsSphereDist()}{Game\_rayIntersectsSphereDist()}}
+{\footnotesize\ttfamily float Game\+\_\+ray\+Intersects\+Sphere\+Dist (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{origin,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+Direction,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{obj\+Center,  }\item[{float}]{obj\+Radius }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a5758f961af5618542e4c81bf7df1c394}\label{game_8c_a5758f961af5618542e4c81bf7df1c394}} 
+\index{game.c@{game.c}!Game\_update@{Game\_update}}
+\index{Game\_update@{Game\_update}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_update()}{Game\_update()}}
+{\footnotesize\ttfamily void Game\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_af51e695f9065748a9369666e4d4751a7}\label{game_8c_af51e695f9065748a9369666e4d4751a7}} 
+\index{game.c@{game.c}!Game\_updateCamera@{Game\_updateCamera}}
+\index{Game\_updateCamera@{Game\_updateCamera}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_updateCamera()}{Game\_updateCamera()}}
+{\footnotesize\ttfamily void Game\+\_\+update\+Camera (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game,  }\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{game_8c_a9ddd27f9f5e89c0ff6be33792f596d52}\label{game_8c_a9ddd27f9f5e89c0ff6be33792f596d52}} 
+\index{game.c@{game.c}!Game\_updatePhysics@{Game\_updatePhysics}}
+\index{Game\_updatePhysics@{Game\_updatePhysics}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{Game\_updatePhysics()}{Game\_updatePhysics()}}
+{\footnotesize\ttfamily void Game\+\_\+update\+Physics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}\label{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}} 
+\index{game.c@{game.c}!game@{game}}
+\index{game@{game}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gametypes_8h_structGame}{Game}} game\hspace{0.3cm}{\ttfamily [static]}}
+

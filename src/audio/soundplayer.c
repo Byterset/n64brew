@@ -380,7 +380,7 @@ short soundPlayerSoundClipId(ALSndId soundId)
 void soundListenerUpdate(struct Vector3 *position, struct Quaternion *rotation, int listenerIndex)
 {
 	gSoundListeners[listenerIndex].worldPos = *position;
-	quatMultVector(rotation, &gRight, &gSoundListeners[listenerIndex].rightVector);
+	quatRotateVector(rotation, &gRight, &gSoundListeners[listenerIndex].rightVector);
 }
 
 void soundListenerSetCount(int count)

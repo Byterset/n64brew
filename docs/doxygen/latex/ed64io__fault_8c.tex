@@ -1,0 +1,1202 @@
+\hypertarget{ed64io__fault_8c}{}\doxysection{src/ed64/ed64io\+\_\+fault.c File Reference}
+\label{ed64io__fault_8c}\index{src/ed64/ed64io\_fault.c@{src/ed64/ed64io\_fault.c}}
+{\ttfamily \#include $<$PR/os\+\_\+internal\+\_\+error.\+h$>$}\newline
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+sys.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+usb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+everdrive.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+fault.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+fault.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__fault_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{ed64io__fault_8c_struct____OSThreadContextHack}{\+\_\+\+\_\+\+OSThread\+Context\+Hack}}
+\item 
+struct \mbox{\hyperlink{ed64io__fault_8c_structRegistersState}{Registers\+State}}
+\item 
+struct \mbox{\hyperlink{ed64io__fault_8c_structBreakpoint}{Breakpoint}}
+\item 
+struct \mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_ae1649fc947ca37a86917a08354f48d1a}{PRINTF}}~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a0c88a91f0e53a766bb4dd3084727bc7b}{DEBUGPRINT}}~0
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a09b023eab29cd2b4e99613f527242efb}{DBGPRINT}}(args...)
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_ac6292e0964d48dd2c4a66546f59966d6}{MSG\+\_\+\+FAULT}}~0x10
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a8658a1892588bf946a8eae56dab8abc5}{MAX\+\_\+\+STACK\+\_\+\+TRACE}}~100
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}{MAX\+\_\+\+STOPPED\+\_\+\+THREADS}}~200
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_aaa17f86c34a9ceeedc6febdb2e6b3775}{BREAK\+\_\+\+INSTRUCTION\+\_\+\+MASK}}~0xfc00003f
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a108debbfea321098e2d49a5d743dff4e}{breakinst}}(n)~(0x0d $\vert$ (((n + 16) \& 0xfffff) $<$$<$ 6))
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a745745ccddcf6addb1e184972bd344ba}{breakinst\+\_\+no\+\_\+offset}}(n)~(0x0d $\vert$ (((n)\&0xfffff) $<$$<$ 6))
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a5d24c49ed5e99e27981c5ee2929ec2ea}{NUM\+\_\+\+BREAKPOINTS}}~2
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a00e00daba2ac29b1cd95db570f03aa59}{THREADSTATE\+\_\+\+MESSAGE\+\_\+\+MAX\+\_\+\+SIZE}}~  sizeof(\mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}}) + (100 $\ast$ sizeof(\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}))
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8c_a3e9831dce5cda179a0ef5b26f2722c47}{USB\+\_\+\+BUFFER\+\_\+\+SIZE}}~128
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{ed64io__fault_8c_structRegistersState}{Registers\+State}} \mbox{\hyperlink{ed64io__fault_8c_aa160d856a1c4dc5119df5bb8a3ca99da}{Registers\+State}}
+\item 
+typedef struct \mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}} \mbox{\hyperlink{ed64io__fault_8c_ad6cbedb8c0e59ffac68faa90e77ca169}{Thread\+State\+Message}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fb}{Debugger\+Packet\+Type}} \{ \mbox{\hyperlink{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba93d06e6f0428f773506f6435fb924d48}{None\+Packet}}
+, \mbox{\hyperlink{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba357ff8f0762bee495ebb799c079d1233}{Registers\+Packet}}
+, \mbox{\hyperlink{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba78ea87fa39051f8616f2cd21b01afc33}{Thread\+Packet}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a7d79204ff9e59f51e9527f5a06034619}{print\+Register}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} reg\+Value, char $\ast$reg\+Name, \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} $\ast$reg\+Desc)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_aef84da8e15fc5d374631888d5fd2f89f}{print\+Fault\+Data}} (OSThread $\ast$t)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a2a72fdd4ab265cb40bffaabff0e34274}{set\+Breakpoint}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$addr1, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$addr2)
+\item 
+static int \mbox{\hyperlink{ed64io__fault_8c_aed6c5b96f032599bcd5cb69f95f3e983}{do\+Single\+Step}} (int thread, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$instptr)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a25f3a4cf6b8e9697ecd7d3f56464788c}{clear\+Breakpoint}} (void)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a158d676906522412c7c0c30a4027eed2}{walk\+Faulted\+Threads}} (void)
+\item 
+int \mbox{\hyperlink{ed64io__fault_8c_ac16de1e86344fd6cc4f45d42c1f33a01}{get\+Prev\+Stack\+Pointer\+And\+Return\+Address}} (void $\ast$$\ast$prev\+\_\+sp, void $\ast$$\ast$prev\+\_\+ra, void $\ast$sp, void $\ast$ra)
+\item 
+int \mbox{\hyperlink{ed64io__fault_8c_a778c62aeb397e579f95fbbbfde7f798b}{get\+Call\+Stack\+No\+Fp}} (\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} sp\+\_\+val, \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} ra\+\_\+val)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8c_ac95b07ad0c8bf60022100ff98a6180a5}{ed64\+Print\+Stack\+Trace}} (OSThread $\ast$t, int frames\+To\+Skip)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_adbe678eab90215b90d071d799bf616c1}{send\+Registers}} (OSThread $\ast$t)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_af5ce5a0836145d30dd8321bbfa0c78ac}{send\+Stack}} (OSThread $\ast$t)
+\item 
+OSThread $\ast$ \mbox{\hyperlink{ed64io__fault_8c_a2d9381f0b3ef07c92f0361e1010bdbdd}{\+\_\+\+\_\+os\+Get\+Active\+Queue}} (void)
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{ed64io__fault_8c_a0389f4d1a96736fafc0eddb1a2e1a61f}{get\+Thread\+State\+For\+Debugger}} (OSThread $\ast$tptr)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_abe8ee43be4ddb21ea69edd47c187477b}{stop\+User\+Threads}} ()
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a556081d6356dd7e181d0f4405bad39db}{resume\+User\+Threads}} ()
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a153efc8f9053441af08fef1908c0f5ca}{faultproc}} (char $\ast$argv)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8c_a61fd5618cad96dbc0588b717ac1b6cca}{ed64\+Start\+Fault\+Handler\+Thread}} (int main\+Thread\+Pri)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8c_a17250c9c3e1533740f2b9a7f8264a90c}{ed64\+Set\+Breakpoint}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$address)
+\item 
+static int \mbox{\hyperlink{ed64io__fault_8c_ada23afff535398fe5fd5c649a53c7c31}{is\+Jump\+Instruction}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} inst)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{ed64io__fault_8c_af17406affe018ee415a41215b38e8a9a}{\+\_\+\+\_\+rmon\+Get\+Branch\+Target}} (int, int, char $\ast$)
+\item 
+static char $\ast$ \mbox{\hyperlink{ed64io__fault_8c_a1d8279fdb054aee6b29b22584cd26829}{get\+Thread\+State\+Name}} (int state)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8c_a6fe493deb695aca69a3aa28cdbe40bc7}{ed64\+Print\+Threads}} (int with\+Stack\+Trace)
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a5647041177f486edd5a8deaaa2a7d754}{send\+Thread\+States}} ()
+\item 
+static void \mbox{\hyperlink{ed64io__fault_8c_a9be4da6c4c246aafc55c6aeffbbc1f2f}{dump\+Threads}} ()
+\item 
+int \mbox{\hyperlink{ed64io__fault_8c_aa64093a51cf72f12abe8a34ec0aa4e30}{ed64\+Debugger\+Usb\+Listener}} (OSThread $\ast$tptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static void $\ast$ \mbox{\hyperlink{ed64io__fault_8c_aff25a478b434212af135a28904e362de}{stack\+Trace\+Return\+Addresses}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a8658a1892588bf946a8eae56dab8abc5}{MAX\+\_\+\+STACK\+\_\+\+TRACE}}\mbox{]}
+\item 
+static int \mbox{\hyperlink{ed64io__fault_8c_a2444b1ff4228f714e293b6eb6c28f1ac}{stopped\+Threads\+Count}} = 0
+\item 
+static OSThread $\ast$ \mbox{\hyperlink{ed64io__fault_8c_aba400785c4e6aa1aa4c799ac5aeb62fc}{stopped\+Threads}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}{MAX\+\_\+\+STOPPED\+\_\+\+THREADS}}\mbox{]}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{ed64io__fault_8c_a0a3a01128884291c9d90233b4a17a2c3}{stopped\+Threads\+States}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}{MAX\+\_\+\+STOPPED\+\_\+\+THREADS}}\mbox{]}
+\item 
+static OSMesg\+Queue \mbox{\hyperlink{ed64io__fault_8c_a94f91d2482b57d21ca111533f19923ae}{fault\+MsgQ}}
+\item 
+static OSMesg \mbox{\hyperlink{ed64io__fault_8c_a5ef75eb6899edee3818f2fa0096f1761}{fault\+Msg\+Buf}}
+\item 
+static int \mbox{\hyperlink{ed64io__fault_8c_ab92df6309b9e2357a8fd387a6642bacd}{fault\+Thread\+Pri}}
+\item 
+static OSThread \mbox{\hyperlink{ed64io__fault_8c_ab6d45beb156d4d9ac2b205a715b957e0}{fault\+Thread}}
+\item 
+static char \mbox{\hyperlink{ed64io__fault_8c_afe818bd1def56e9fb5f8c5b2fd77bfdb}{fault\+Thread\+Stack}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}{ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE}}\mbox{]}
+\item 
+int \mbox{\hyperlink{ed64io__fault_8c_aa1dbd1cc4789bf3e33fc8743a11545ba}{startedfaultproc}} = 0
+\item 
+static OSMesg \mbox{\hyperlink{ed64io__fault_8c_a8a19e809a8bd2541c0bab2b47a12cced}{break\+Msg}} = (OSMesg)0xaaaaaaaa
+\item 
+static \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} \mbox{\hyperlink{ed64io__fault_8c_a31e128628d0a72f618515c30bbeceb14}{cause\+Desc}} \mbox{[}$\,$\mbox{]}
+\item 
+static \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} \mbox{\hyperlink{ed64io__fault_8c_ae9daa7bab5c95e8a3ebe716f1cf47123}{sr\+Desc}} \mbox{[}$\,$\mbox{]}
+\item 
+static \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} \mbox{\hyperlink{ed64io__fault_8c_a3a53eb8fa7b0e0a049379db065789318}{fpcsr\+Desc}} \mbox{[}$\,$\mbox{]}
+\item 
+static \mbox{\hyperlink{ed64io__fault_8c_structBreakpoint}{Breakpoint}} \mbox{\hyperlink{ed64io__fault_8c_a214057c667779f1d2f3f7ccfbfd546fd}{breakpoints}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a5d24c49ed5e99e27981c5ee2929ec2ea}{NUM\+\_\+\+BREAKPOINTS}}\mbox{]}
+\item 
+static \mbox{\hyperlink{ed64io__fault_8c_structBreakpoint}{Breakpoint}} \mbox{\hyperlink{ed64io__fault_8c_a9fd2faaf90215548adeee25dec108b02}{alt\+Break}}
+\item 
+OSThread $\ast$ \mbox{\hyperlink{ed64io__fault_8c_a4c57f3342a3bc2e836d06b78c85d70f0}{\+\_\+\+\_\+os\+Running\+Thread}}
+\item 
+OSThread $\ast$ \mbox{\hyperlink{ed64io__fault_8c_a95bd5a78cf0d49f922eb22c02533774e}{\+\_\+\+\_\+os\+Run\+Queue}}
+\item 
+static char $\ast$ \mbox{\hyperlink{ed64io__fault_8c_a53257c59fdbb3274d293f58f821a7657}{thread\+State\+Strings}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{regDesc\_t@{regDesc\_t}}\label{structregDesc__t}
+\Hypertarget{ed64io__fault_8c_structregDesc__t}
+\doxysubsubsection{struct reg\+Desc\+\_\+t}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__fault_8c_a48f36d9bb7d5dd91b461b5217892953d}\label{ed64io__fault_8c_a48f36d9bb7d5dd91b461b5217892953d}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+mask&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad1c1188478168aa2f2402b02bf4f37c0}\label{ed64io__fault_8c_ad1c1188478168aa2f2402b02bf4f37c0}} 
+char $\ast$&
+string&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a879768e281fe650a819ed77d6626c7c2}\label{ed64io__fault_8c_a879768e281fe650a819ed77d6626c7c2}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+value&
+\\
+\hline
+
+\end{DoxyFields}
+\index{\_\_OSThreadContextHack@{\_\_OSThreadContextHack}}\label{struct____OSThreadContextHack}
+\Hypertarget{ed64io__fault_8c_struct____OSThreadContextHack}
+\doxysubsubsection{struct \+\_\+\+\_\+\+OSThread\+Context\+Hack}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__fault_8c_a682f6cbec9d2a971c0e5c84fba854381}\label{ed64io__fault_8c_a682f6cbec9d2a971c0e5c84fba854381}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+\_s8&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a37a6990990a3a63886a823df3903e60d}\label{ed64io__fault_8c_a37a6990990a3a63886a823df3903e60d}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a612ff21ebc1f80e422d923dde56ddd83}\label{ed64io__fault_8c_a612ff21ebc1f80e422d923dde56ddd83}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa3883c719b811e659e184ce3d578ca9c}\label{ed64io__fault_8c_aa3883c719b811e659e184ce3d578ca9c}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2e3353c96052081e71087a3305472862}\label{ed64io__fault_8c_a2e3353c96052081e71087a3305472862}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a937de55010ffec8c5a044eb4b88662f4}\label{ed64io__fault_8c_a937de55010ffec8c5a044eb4b88662f4}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+at&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a20490b08b670f190d349f23bf2f1e61a}\label{ed64io__fault_8c_a20490b08b670f190d349f23bf2f1e61a}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+badvaddr&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2ab0a83dc6d51a7aed47ed9570c6d4de}\label{ed64io__fault_8c_a2ab0a83dc6d51a7aed47ed9570c6d4de}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+cause&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa327f4b562b4c97b87682538384fc232}\label{ed64io__fault_8c_aa327f4b562b4c97b87682538384fc232}} 
+\_\_OSfp&
+fp0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9afe41ca8848cd2c4c51ca3a935f3d6f}\label{ed64io__fault_8c_a9afe41ca8848cd2c4c51ca3a935f3d6f}} 
+\_\_OSfp&
+fp10&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a82dc7d98f9e6186f5734aed73fb70f24}\label{ed64io__fault_8c_a82dc7d98f9e6186f5734aed73fb70f24}} 
+\_\_OSfp&
+fp12&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad26128329df5dda56c113b45ce786498}\label{ed64io__fault_8c_ad26128329df5dda56c113b45ce786498}} 
+\_\_OSfp&
+fp14&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0de2a8b7640fb8d7b0739ca821b7428f}\label{ed64io__fault_8c_a0de2a8b7640fb8d7b0739ca821b7428f}} 
+\_\_OSfp&
+fp16&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3afe502720e5fb00b12fdcc8972362c6}\label{ed64io__fault_8c_a3afe502720e5fb00b12fdcc8972362c6}} 
+\_\_OSfp&
+fp18&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa773f5662ed91e9e7f3cc3acbac6a1be}\label{ed64io__fault_8c_aa773f5662ed91e9e7f3cc3acbac6a1be}} 
+\_\_OSfp&
+fp2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a4a3b493a644d8005641994d3cc685807}\label{ed64io__fault_8c_a4a3b493a644d8005641994d3cc685807}} 
+\_\_OSfp&
+fp20&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a84f35ebe618f567d4a28bd928217e8c2}\label{ed64io__fault_8c_a84f35ebe618f567d4a28bd928217e8c2}} 
+\_\_OSfp&
+fp22&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2c3a27b460836fd94767c431b99aab1a}\label{ed64io__fault_8c_a2c3a27b460836fd94767c431b99aab1a}} 
+\_\_OSfp&
+fp24&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a629aa88950283861864b3f55cff4d348}\label{ed64io__fault_8c_a629aa88950283861864b3f55cff4d348}} 
+\_\_OSfp&
+fp26&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9353dc65ef0e91b67738b5b31f029241}\label{ed64io__fault_8c_a9353dc65ef0e91b67738b5b31f029241}} 
+\_\_OSfp&
+fp28&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9a2635756382954fc7639dfd8425ad2c}\label{ed64io__fault_8c_a9a2635756382954fc7639dfd8425ad2c}} 
+\_\_OSfp&
+fp30&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad9c9746c7fe5f0ecc3cbca2b96525a51}\label{ed64io__fault_8c_ad9c9746c7fe5f0ecc3cbca2b96525a51}} 
+\_\_OSfp&
+fp4&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a44e3dec5c4a2a4530be03f9a34fb2cdb}\label{ed64io__fault_8c_a44e3dec5c4a2a4530be03f9a34fb2cdb}} 
+\_\_OSfp&
+fp6&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a5eb4399aa89f068992803725ae3d81ef}\label{ed64io__fault_8c_a5eb4399aa89f068992803725ae3d81ef}} 
+\_\_OSfp&
+fp8&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_afb32a57239edbfcf82d7ed025360fb5b}\label{ed64io__fault_8c_afb32a57239edbfcf82d7ed025360fb5b}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+fpcsr&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aab219ae054bba3cffa4366ee37f2aa8c}\label{ed64io__fault_8c_aab219ae054bba3cffa4366ee37f2aa8c}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+gp&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a971f59fc8e4ee3a8958d40f6f8fc8682}\label{ed64io__fault_8c_a971f59fc8e4ee3a8958d40f6f8fc8682}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+hi&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a086aa867470219f6569b449d86953d77}\label{ed64io__fault_8c_a086aa867470219f6569b449d86953d77}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+lo&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a072042eb4f6f57309705416061126f0c}\label{ed64io__fault_8c_a072042eb4f6f57309705416061126f0c}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+pc&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_af6781c682139fbbfc142e72633f50c8b}\label{ed64io__fault_8c_af6781c682139fbbfc142e72633f50c8b}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+ra&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3420b679c3d15575721a69569b22dbe5}\label{ed64io__fault_8c_a3420b679c3d15575721a69569b22dbe5}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+rcp&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_abc297301bb18c2ca2f4645fb3a3b5b9e}\label{ed64io__fault_8c_abc297301bb18c2ca2f4645fb3a3b5b9e}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_adcab519576a80a1d8af54588440b37c8}\label{ed64io__fault_8c_adcab519576a80a1d8af54588440b37c8}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a308473df9e58023974b5d8ca9205489d}\label{ed64io__fault_8c_a308473df9e58023974b5d8ca9205489d}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a61b26f4212dd8b9636a151bd89f42772}\label{ed64io__fault_8c_a61b26f4212dd8b9636a151bd89f42772}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a1712b008ad4c78b12079a86d3a086d78}\label{ed64io__fault_8c_a1712b008ad4c78b12079a86d3a086d78}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s4&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a79d914b31dc37124e7d6627046db0f36}\label{ed64io__fault_8c_a79d914b31dc37124e7d6627046db0f36}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s5&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_add872bb6f32e7548b555f4e93a74e532}\label{ed64io__fault_8c_add872bb6f32e7548b555f4e93a74e532}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s6&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ac3ab31f41167d6dd72f3139bca3e32e6}\label{ed64io__fault_8c_ac3ab31f41167d6dd72f3139bca3e32e6}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s7&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3d7b3bbec8c5fd8e69c644e2e89062b6}\label{ed64io__fault_8c_a3d7b3bbec8c5fd8e69c644e2e89062b6}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+sp&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a4c821db0bce897732cc68dac3f5c13fd}\label{ed64io__fault_8c_a4c821db0bce897732cc68dac3f5c13fd}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+sr&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_adf0ea6a1f6aa0404e67c99a9583ad72f}\label{ed64io__fault_8c_adf0ea6a1f6aa0404e67c99a9583ad72f}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_afd4b417bb331c6518c691e71de08643a}\label{ed64io__fault_8c_afd4b417bb331c6518c691e71de08643a}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad9253aca3fe414004c5905c6b3f4a56c}\label{ed64io__fault_8c_ad9253aca3fe414004c5905c6b3f4a56c}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab6669d9080461331464f7de6f25384a1}\label{ed64io__fault_8c_ab6669d9080461331464f7de6f25384a1}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a03da79c50652b0553e2c0e4dff8e30d5}\label{ed64io__fault_8c_a03da79c50652b0553e2c0e4dff8e30d5}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t4&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab4895f820ee3738fb51fd65ee05faeff}\label{ed64io__fault_8c_ab4895f820ee3738fb51fd65ee05faeff}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t5&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_af80671bdfa5d202fd0e0b914e14b86df}\label{ed64io__fault_8c_af80671bdfa5d202fd0e0b914e14b86df}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t6&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aff06a8d802ef4dd8e3a2490b3839c3a6}\label{ed64io__fault_8c_aff06a8d802ef4dd8e3a2490b3839c3a6}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t7&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a427667f0ec68434174b0b9df5f33519f}\label{ed64io__fault_8c_a427667f0ec68434174b0b9df5f33519f}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t8&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a517081f96f7b4fcb0bf4e73a6e57ef92}\label{ed64io__fault_8c_a517081f96f7b4fcb0bf4e73a6e57ef92}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t9&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a535c96bd6cdba6644e30670944305d1c}\label{ed64io__fault_8c_a535c96bd6cdba6644e30670944305d1c}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aedb6f6a530b5ecdab8fd7e283188076f}\label{ed64io__fault_8c_aedb6f6a530b5ecdab8fd7e283188076f}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+v1&
+\\
+\hline
+
+\end{DoxyFields}
+\index{RegistersState@{RegistersState}}\label{structRegistersState}
+\Hypertarget{ed64io__fault_8c_structRegistersState}
+\doxysubsubsection{struct Registers\+State}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__fault_8c_ada5da8f9fe5e85703a3b14fb3bef834c}\label{ed64io__fault_8c_ada5da8f9fe5e85703a3b14fb3bef834c}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+\_s8&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a314d3c6d476ee9ff771787821bf7ac06}\label{ed64io__fault_8c_a314d3c6d476ee9ff771787821bf7ac06}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a7d057848f10727dc4bea03344c47151b}\label{ed64io__fault_8c_a7d057848f10727dc4bea03344c47151b}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9e8179d97766c0c64165ff095910855f}\label{ed64io__fault_8c_a9e8179d97766c0c64165ff095910855f}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ae4f6246332139c8775e824b5a112d69e}\label{ed64io__fault_8c_ae4f6246332139c8775e824b5a112d69e}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+a3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aad96ae3c8a6716d6acc195e549d39126}\label{ed64io__fault_8c_aad96ae3c8a6716d6acc195e549d39126}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+at&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0d5dc454d49d700e49b210c2eef60a33}\label{ed64io__fault_8c_a0d5dc454d49d700e49b210c2eef60a33}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+gp&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a674cca5f66d3787b46620cec91c485f7}\label{ed64io__fault_8c_a674cca5f66d3787b46620cec91c485f7}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+id&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a04a07ae041b939f11c507abe2230386d}\label{ed64io__fault_8c_a04a07ae041b939f11c507abe2230386d}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+ra&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a8e6959ae5ddbba86effa7a3004a4873b}\label{ed64io__fault_8c_a8e6959ae5ddbba86effa7a3004a4873b}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ae860443899a755eef0fe83390c3deabf}\label{ed64io__fault_8c_ae860443899a755eef0fe83390c3deabf}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a39e16f774a3edface38894ab2244a824}\label{ed64io__fault_8c_a39e16f774a3edface38894ab2244a824}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab296435f4365664ded574b9ec32daae4}\label{ed64io__fault_8c_ab296435f4365664ded574b9ec32daae4}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_accce72e7ee8cdc3188de377e7da56c58}\label{ed64io__fault_8c_accce72e7ee8cdc3188de377e7da56c58}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s4&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3a64048594404d25200f3c7603cf6f32}\label{ed64io__fault_8c_a3a64048594404d25200f3c7603cf6f32}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s5&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a1c822fd10557ad541ed0e5b23956fa36}\label{ed64io__fault_8c_a1c822fd10557ad541ed0e5b23956fa36}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s6&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_af712c031e6857a70b61db96fc625b319}\label{ed64io__fault_8c_af712c031e6857a70b61db96fc625b319}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+s7&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab10a0e0ee9836022f51156bf077eedf0}\label{ed64io__fault_8c_ab10a0e0ee9836022f51156bf077eedf0}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+sp&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a57bcc7555e41cf3d53c1b22e39106661}\label{ed64io__fault_8c_a57bcc7555e41cf3d53c1b22e39106661}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a1e08e9832cbec787302c1926d8fb4a11}\label{ed64io__fault_8c_a1e08e9832cbec787302c1926d8fb4a11}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t1&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa1011f7c422450f46492399204b3794f}\label{ed64io__fault_8c_aa1011f7c422450f46492399204b3794f}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t2&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad8fa00cd6b05fad422201bfade764d27}\label{ed64io__fault_8c_ad8fa00cd6b05fad422201bfade764d27}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t3&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_af2eb12e88e2e1e00fe304a44571a3419}\label{ed64io__fault_8c_af2eb12e88e2e1e00fe304a44571a3419}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t4&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0e4a89c3f9cccedbd7f6f2431e2d36da}\label{ed64io__fault_8c_a0e4a89c3f9cccedbd7f6f2431e2d36da}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t5&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aca48aca1ecc7b9e161d69a5b937dd239}\label{ed64io__fault_8c_aca48aca1ecc7b9e161d69a5b937dd239}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t6&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2f002cd8a51a5d554b5dd6b3186e7e07}\label{ed64io__fault_8c_a2f002cd8a51a5d554b5dd6b3186e7e07}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t7&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a70fceeb81ec22ffcea64ec0bbdf89408}\label{ed64io__fault_8c_a70fceeb81ec22ffcea64ec0bbdf89408}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t8&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a4562bfccaa570d8ad3a5120dc107acb3}\label{ed64io__fault_8c_a4562bfccaa570d8ad3a5120dc107acb3}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+t9&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9fff7fa63ca1f08af01b395530a3c2eb}\label{ed64io__fault_8c_a9fff7fa63ca1f08af01b395530a3c2eb}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa3bcc1c803b866d9beed59a851fceeac}\label{ed64io__fault_8c_aa3bcc1c803b866d9beed59a851fceeac}} 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}&
+v1&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Breakpoint@{Breakpoint}}\label{structBreakpoint}
+\Hypertarget{ed64io__fault_8c_structBreakpoint}
+\doxysubsubsection{struct Breakpoint}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__fault_8c_aee200d1a8cb1546a5026ff207395d23b}\label{ed64io__fault_8c_aee200d1a8cb1546a5026ff207395d23b}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$&
+breakAddress&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a822ed63a0fdbdcef6ab16f31152fd4d1}\label{ed64io__fault_8c_a822ed63a0fdbdcef6ab16f31152fd4d1}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+oldInstruction&
+\\
+\hline
+
+\end{DoxyFields}
+\index{ThreadStateMessage@{ThreadStateMessage}}\label{structThreadStateMessage}
+\Hypertarget{ed64io__fault_8c_structThreadStateMessage}
+\doxysubsubsection{struct Thread\+State\+Message}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{ed64io__fault_8c_a04e424f285edabefc5f819bbea876904}\label{ed64io__fault_8c_a04e424f285edabefc5f819bbea876904}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+id&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab2d9fdbeeb42b397f2a9abb0199fcf8d}\label{ed64io__fault_8c_ab2d9fdbeeb42b397f2a9abb0199fcf8d}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+pc&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a683973cb785324427c16a06ec8dd8fca}\label{ed64io__fault_8c_a683973cb785324427c16a06ec8dd8fca}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+priority&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_ae13764cda73a0c683528f24a80142ad1}\label{ed64io__fault_8c_ae13764cda73a0c683528f24a80142ad1}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+ra&
+\\
+\hline
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2743c365c09bea38fc0a715f791a7df9}\label{ed64io__fault_8c_a2743c365c09bea38fc0a715f791a7df9}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+state&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__fault_8c_aaa17f86c34a9ceeedc6febdb2e6b3775}\label{ed64io__fault_8c_aaa17f86c34a9ceeedc6febdb2e6b3775}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!BREAK\_INSTRUCTION\_MASK@{BREAK\_INSTRUCTION\_MASK}}
+\index{BREAK\_INSTRUCTION\_MASK@{BREAK\_INSTRUCTION\_MASK}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{BREAK\_INSTRUCTION\_MASK}{BREAK\_INSTRUCTION\_MASK}}
+{\footnotesize\ttfamily \#define BREAK\+\_\+\+INSTRUCTION\+\_\+\+MASK~0xfc00003f}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a108debbfea321098e2d49a5d743dff4e}\label{ed64io__fault_8c_a108debbfea321098e2d49a5d743dff4e}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!breakinst@{breakinst}}
+\index{breakinst@{breakinst}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{breakinst}{breakinst}}
+{\footnotesize\ttfamily \#define breakinst(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})~(0x0d $\vert$ (((n + 16) \& 0xfffff) $<$$<$ 6))}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a745745ccddcf6addb1e184972bd344ba}\label{ed64io__fault_8c_a745745ccddcf6addb1e184972bd344ba}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!breakinst\_no\_offset@{breakinst\_no\_offset}}
+\index{breakinst\_no\_offset@{breakinst\_no\_offset}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{breakinst\_no\_offset}{breakinst\_no\_offset}}
+{\footnotesize\ttfamily \#define breakinst\+\_\+no\+\_\+offset(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})~(0x0d $\vert$ (((n)\&0xfffff) $<$$<$ 6))}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a09b023eab29cd2b4e99613f527242efb}\label{ed64io__fault_8c_a09b023eab29cd2b4e99613f527242efb}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!DBGPRINT@{DBGPRINT}}
+\index{DBGPRINT@{DBGPRINT}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{DBGPRINT}{DBGPRINT}}
+{\footnotesize\ttfamily \#define DBGPRINT(\begin{DoxyParamCaption}\item[{}]{args... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0c88a91f0e53a766bb4dd3084727bc7b}\label{ed64io__fault_8c_a0c88a91f0e53a766bb4dd3084727bc7b}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!DEBUGPRINT@{DEBUGPRINT}}
+\index{DEBUGPRINT@{DEBUGPRINT}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{DEBUGPRINT}{DEBUGPRINT}}
+{\footnotesize\ttfamily \#define DEBUGPRINT~0}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a8658a1892588bf946a8eae56dab8abc5}\label{ed64io__fault_8c_a8658a1892588bf946a8eae56dab8abc5}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!MAX\_STACK\_TRACE@{MAX\_STACK\_TRACE}}
+\index{MAX\_STACK\_TRACE@{MAX\_STACK\_TRACE}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_STACK\_TRACE}{MAX\_STACK\_TRACE}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+STACK\+\_\+\+TRACE~100}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}\label{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!MAX\_STOPPED\_THREADS@{MAX\_STOPPED\_THREADS}}
+\index{MAX\_STOPPED\_THREADS@{MAX\_STOPPED\_THREADS}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_STOPPED\_THREADS}{MAX\_STOPPED\_THREADS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+STOPPED\+\_\+\+THREADS~200}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ac6292e0964d48dd2c4a66546f59966d6}\label{ed64io__fault_8c_ac6292e0964d48dd2c4a66546f59966d6}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!MSG\_FAULT@{MSG\_FAULT}}
+\index{MSG\_FAULT@{MSG\_FAULT}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{MSG\_FAULT}{MSG\_FAULT}}
+{\footnotesize\ttfamily \#define MSG\+\_\+\+FAULT~0x10}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a5d24c49ed5e99e27981c5ee2929ec2ea}\label{ed64io__fault_8c_a5d24c49ed5e99e27981c5ee2929ec2ea}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!NUM\_BREAKPOINTS@{NUM\_BREAKPOINTS}}
+\index{NUM\_BREAKPOINTS@{NUM\_BREAKPOINTS}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{NUM\_BREAKPOINTS}{NUM\_BREAKPOINTS}}
+{\footnotesize\ttfamily \#define NUM\+\_\+\+BREAKPOINTS~2}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ae1649fc947ca37a86917a08354f48d1a}\label{ed64io__fault_8c_ae1649fc947ca37a86917a08354f48d1a}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!PRINTF@{PRINTF}}
+\index{PRINTF@{PRINTF}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{PRINTF}{PRINTF}}
+{\footnotesize\ttfamily \#define PRINTF~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a00e00daba2ac29b1cd95db570f03aa59}\label{ed64io__fault_8c_a00e00daba2ac29b1cd95db570f03aa59}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!THREADSTATE\_MESSAGE\_MAX\_SIZE@{THREADSTATE\_MESSAGE\_MAX\_SIZE}}
+\index{THREADSTATE\_MESSAGE\_MAX\_SIZE@{THREADSTATE\_MESSAGE\_MAX\_SIZE}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{THREADSTATE\_MESSAGE\_MAX\_SIZE}{THREADSTATE\_MESSAGE\_MAX\_SIZE}}
+{\footnotesize\ttfamily \#define THREADSTATE\+\_\+\+MESSAGE\+\_\+\+MAX\+\_\+\+SIZE~  sizeof(\mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}}) + (100 $\ast$ sizeof(\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}))}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3e9831dce5cda179a0ef5b26f2722c47}\label{ed64io__fault_8c_a3e9831dce5cda179a0ef5b26f2722c47}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!USB\_BUFFER\_SIZE@{USB\_BUFFER\_SIZE}}
+\index{USB\_BUFFER\_SIZE@{USB\_BUFFER\_SIZE}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{USB\_BUFFER\_SIZE}{USB\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define USB\+\_\+\+BUFFER\+\_\+\+SIZE~128}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{ed64io__fault_8c_aa160d856a1c4dc5119df5bb8a3ca99da}\label{ed64io__fault_8c_aa160d856a1c4dc5119df5bb8a3ca99da}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!RegistersState@{RegistersState}}
+\index{RegistersState@{RegistersState}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{RegistersState}{RegistersState}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{ed64io__fault_8c_structRegistersState}{Registers\+State}} \mbox{\hyperlink{ed64io__fault_8c_structRegistersState}{Registers\+State}}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ad6cbedb8c0e59ffac68faa90e77ca169}\label{ed64io__fault_8c_ad6cbedb8c0e59ffac68faa90e77ca169}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ThreadStateMessage@{ThreadStateMessage}}
+\index{ThreadStateMessage@{ThreadStateMessage}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ThreadStateMessage}{ThreadStateMessage}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}} \mbox{\hyperlink{ed64io__fault_8c_structThreadStateMessage}{Thread\+State\+Message}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fb}\label{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fb}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!DebuggerPacketType@{DebuggerPacketType}}
+\index{DebuggerPacketType@{DebuggerPacketType}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{DebuggerPacketType}{DebuggerPacketType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fb}{Debugger\+Packet\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NonePacket@{NonePacket}!ed64io\_fault.c@{ed64io\_fault.c}}\index{ed64io\_fault.c@{ed64io\_fault.c}!NonePacket@{NonePacket}}}\mbox{\Hypertarget{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba93d06e6f0428f773506f6435fb924d48}\label{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba93d06e6f0428f773506f6435fb924d48}} 
+None\+Packet&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RegistersPacket@{RegistersPacket}!ed64io\_fault.c@{ed64io\_fault.c}}\index{ed64io\_fault.c@{ed64io\_fault.c}!RegistersPacket@{RegistersPacket}}}\mbox{\Hypertarget{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba357ff8f0762bee495ebb799c079d1233}\label{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba357ff8f0762bee495ebb799c079d1233}} 
+Registers\+Packet&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ThreadPacket@{ThreadPacket}!ed64io\_fault.c@{ed64io\_fault.c}}\index{ed64io\_fault.c@{ed64io\_fault.c}!ThreadPacket@{ThreadPacket}}}\mbox{\Hypertarget{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba78ea87fa39051f8616f2cd21b01afc33}\label{ed64io__fault_8c_aaf130e8032593a493886a9357782f2fba78ea87fa39051f8616f2cd21b01afc33}} 
+Thread\+Packet&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__fault_8c_a2d9381f0b3ef07c92f0361e1010bdbdd}\label{ed64io__fault_8c_a2d9381f0b3ef07c92f0361e1010bdbdd}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!\_\_osGetActiveQueue@{\_\_osGetActiveQueue}}
+\index{\_\_osGetActiveQueue@{\_\_osGetActiveQueue}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{\_\_osGetActiveQueue()}{\_\_osGetActiveQueue()}}
+{\footnotesize\ttfamily OSThread$\ast$ \+\_\+\+\_\+os\+Get\+Active\+Queue (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_af17406affe018ee415a41215b38e8a9a}\label{ed64io__fault_8c_af17406affe018ee415a41215b38e8a9a}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!\_\_rmonGetBranchTarget@{\_\_rmonGetBranchTarget}}
+\index{\_\_rmonGetBranchTarget@{\_\_rmonGetBranchTarget}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{\_\_rmonGetBranchTarget()}{\_\_rmonGetBranchTarget()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \+\_\+\+\_\+rmon\+Get\+Branch\+Target (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{int}]{,  }\item[{char $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a25f3a4cf6b8e9697ecd7d3f56464788c}\label{ed64io__fault_8c_a25f3a4cf6b8e9697ecd7d3f56464788c}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!clearBreakpoint@{clearBreakpoint}}
+\index{clearBreakpoint@{clearBreakpoint}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{clearBreakpoint()}{clearBreakpoint()}}
+{\footnotesize\ttfamily static void clear\+Breakpoint (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aed6c5b96f032599bcd5cb69f95f3e983}\label{ed64io__fault_8c_aed6c5b96f032599bcd5cb69f95f3e983}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!doSingleStep@{doSingleStep}}
+\index{doSingleStep@{doSingleStep}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{doSingleStep()}{doSingleStep()}}
+{\footnotesize\ttfamily static int do\+Single\+Step (\begin{DoxyParamCaption}\item[{int}]{thread,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{instptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9be4da6c4c246aafc55c6aeffbbc1f2f}\label{ed64io__fault_8c_a9be4da6c4c246aafc55c6aeffbbc1f2f}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!dumpThreads@{dumpThreads}}
+\index{dumpThreads@{dumpThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{dumpThreads()}{dumpThreads()}}
+{\footnotesize\ttfamily static void dump\+Threads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa64093a51cf72f12abe8a34ec0aa4e30}\label{ed64io__fault_8c_aa64093a51cf72f12abe8a34ec0aa4e30}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ed64DebuggerUsbListener@{ed64DebuggerUsbListener}}
+\index{ed64DebuggerUsbListener@{ed64DebuggerUsbListener}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ed64DebuggerUsbListener()}{ed64DebuggerUsbListener()}}
+{\footnotesize\ttfamily int ed64\+Debugger\+Usb\+Listener (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{tptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ac95b07ad0c8bf60022100ff98a6180a5}\label{ed64io__fault_8c_ac95b07ad0c8bf60022100ff98a6180a5}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ed64PrintStackTrace@{ed64PrintStackTrace}}
+\index{ed64PrintStackTrace@{ed64PrintStackTrace}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ed64PrintStackTrace()}{ed64PrintStackTrace()}}
+{\footnotesize\ttfamily void ed64\+Print\+Stack\+Trace (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{t,  }\item[{int}]{frames\+To\+Skip }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a6fe493deb695aca69a3aa28cdbe40bc7}\label{ed64io__fault_8c_a6fe493deb695aca69a3aa28cdbe40bc7}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ed64PrintThreads@{ed64PrintThreads}}
+\index{ed64PrintThreads@{ed64PrintThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ed64PrintThreads()}{ed64PrintThreads()}}
+{\footnotesize\ttfamily void ed64\+Print\+Threads (\begin{DoxyParamCaption}\item[{int}]{with\+Stack\+Trace }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a17250c9c3e1533740f2b9a7f8264a90c}\label{ed64io__fault_8c_a17250c9c3e1533740f2b9a7f8264a90c}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ed64SetBreakpoint@{ed64SetBreakpoint}}
+\index{ed64SetBreakpoint@{ed64SetBreakpoint}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ed64SetBreakpoint()}{ed64SetBreakpoint()}}
+{\footnotesize\ttfamily void ed64\+Set\+Breakpoint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{address }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a61fd5618cad96dbc0588b717ac1b6cca}\label{ed64io__fault_8c_a61fd5618cad96dbc0588b717ac1b6cca}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!ed64StartFaultHandlerThread@{ed64StartFaultHandlerThread}}
+\index{ed64StartFaultHandlerThread@{ed64StartFaultHandlerThread}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{ed64StartFaultHandlerThread()}{ed64StartFaultHandlerThread()}}
+{\footnotesize\ttfamily void ed64\+Start\+Fault\+Handler\+Thread (\begin{DoxyParamCaption}\item[{int}]{main\+Thread\+Pri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a153efc8f9053441af08fef1908c0f5ca}\label{ed64io__fault_8c_a153efc8f9053441af08fef1908c0f5ca}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultproc@{faultproc}}
+\index{faultproc@{faultproc}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultproc()}{faultproc()}}
+{\footnotesize\ttfamily static void faultproc (\begin{DoxyParamCaption}\item[{char $\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a778c62aeb397e579f95fbbbfde7f798b}\label{ed64io__fault_8c_a778c62aeb397e579f95fbbbfde7f798b}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!getCallStackNoFp@{getCallStackNoFp}}
+\index{getCallStackNoFp@{getCallStackNoFp}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{getCallStackNoFp()}{getCallStackNoFp()}}
+{\footnotesize\ttfamily int get\+Call\+Stack\+No\+Fp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}}]{sp\+\_\+val,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}}}]{ra\+\_\+val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ac16de1e86344fd6cc4f45d42c1f33a01}\label{ed64io__fault_8c_ac16de1e86344fd6cc4f45d42c1f33a01}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!getPrevStackPointerAndReturnAddress@{getPrevStackPointerAndReturnAddress}}
+\index{getPrevStackPointerAndReturnAddress@{getPrevStackPointerAndReturnAddress}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{getPrevStackPointerAndReturnAddress()}{getPrevStackPointerAndReturnAddress()}}
+{\footnotesize\ttfamily int get\+Prev\+Stack\+Pointer\+And\+Return\+Address (\begin{DoxyParamCaption}\item[{void $\ast$$\ast$}]{prev\+\_\+sp,  }\item[{void $\ast$$\ast$}]{prev\+\_\+ra,  }\item[{void $\ast$}]{sp,  }\item[{void $\ast$}]{ra }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0389f4d1a96736fafc0eddb1a2e1a61f}\label{ed64io__fault_8c_a0389f4d1a96736fafc0eddb1a2e1a61f}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!getThreadStateForDebugger@{getThreadStateForDebugger}}
+\index{getThreadStateForDebugger@{getThreadStateForDebugger}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{getThreadStateForDebugger()}{getThreadStateForDebugger()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} get\+Thread\+State\+For\+Debugger (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{tptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a1d8279fdb054aee6b29b22584cd26829}\label{ed64io__fault_8c_a1d8279fdb054aee6b29b22584cd26829}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!getThreadStateName@{getThreadStateName}}
+\index{getThreadStateName@{getThreadStateName}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{getThreadStateName()}{getThreadStateName()}}
+{\footnotesize\ttfamily static char$\ast$ get\+Thread\+State\+Name (\begin{DoxyParamCaption}\item[{int}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ada23afff535398fe5fd5c649a53c7c31}\label{ed64io__fault_8c_ada23afff535398fe5fd5c649a53c7c31}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!isJumpInstruction@{isJumpInstruction}}
+\index{isJumpInstruction@{isJumpInstruction}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{isJumpInstruction()}{isJumpInstruction()}}
+{\footnotesize\ttfamily static int is\+Jump\+Instruction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{inst }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aef84da8e15fc5d374631888d5fd2f89f}\label{ed64io__fault_8c_aef84da8e15fc5d374631888d5fd2f89f}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!printFaultData@{printFaultData}}
+\index{printFaultData@{printFaultData}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{printFaultData()}{printFaultData()}}
+{\footnotesize\ttfamily void print\+Fault\+Data (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a7d79204ff9e59f51e9527f5a06034619}\label{ed64io__fault_8c_a7d79204ff9e59f51e9527f5a06034619}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!printRegister@{printRegister}}
+\index{printRegister@{printRegister}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{printRegister()}{printRegister()}}
+{\footnotesize\ttfamily static void print\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{reg\+Value,  }\item[{char $\ast$}]{reg\+Name,  }\item[{\mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} $\ast$}]{reg\+Desc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a556081d6356dd7e181d0f4405bad39db}\label{ed64io__fault_8c_a556081d6356dd7e181d0f4405bad39db}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!resumeUserThreads@{resumeUserThreads}}
+\index{resumeUserThreads@{resumeUserThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{resumeUserThreads()}{resumeUserThreads()}}
+{\footnotesize\ttfamily static void resume\+User\+Threads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_adbe678eab90215b90d071d799bf616c1}\label{ed64io__fault_8c_adbe678eab90215b90d071d799bf616c1}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!sendRegisters@{sendRegisters}}
+\index{sendRegisters@{sendRegisters}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{sendRegisters()}{sendRegisters()}}
+{\footnotesize\ttfamily static void send\+Registers (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_af5ce5a0836145d30dd8321bbfa0c78ac}\label{ed64io__fault_8c_af5ce5a0836145d30dd8321bbfa0c78ac}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!sendStack@{sendStack}}
+\index{sendStack@{sendStack}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{sendStack()}{sendStack()}}
+{\footnotesize\ttfamily static void send\+Stack (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a5647041177f486edd5a8deaaa2a7d754}\label{ed64io__fault_8c_a5647041177f486edd5a8deaaa2a7d754}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!sendThreadStates@{sendThreadStates}}
+\index{sendThreadStates@{sendThreadStates}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{sendThreadStates()}{sendThreadStates()}}
+{\footnotesize\ttfamily static void send\+Thread\+States (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2a72fdd4ab265cb40bffaabff0e34274}\label{ed64io__fault_8c_a2a72fdd4ab265cb40bffaabff0e34274}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!setBreakpoint@{setBreakpoint}}
+\index{setBreakpoint@{setBreakpoint}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{setBreakpoint()}{setBreakpoint()}}
+{\footnotesize\ttfamily static void set\+Breakpoint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{addr1,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{addr2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_abe8ee43be4ddb21ea69edd47c187477b}\label{ed64io__fault_8c_abe8ee43be4ddb21ea69edd47c187477b}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!stopUserThreads@{stopUserThreads}}
+\index{stopUserThreads@{stopUserThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{stopUserThreads()}{stopUserThreads()}}
+{\footnotesize\ttfamily static void stop\+User\+Threads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a158d676906522412c7c0c30a4027eed2}\label{ed64io__fault_8c_a158d676906522412c7c0c30a4027eed2}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!walkFaultedThreads@{walkFaultedThreads}}
+\index{walkFaultedThreads@{walkFaultedThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{walkFaultedThreads()}{walkFaultedThreads()}}
+{\footnotesize\ttfamily static void walk\+Faulted\+Threads (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ed64io__fault_8c_a4c57f3342a3bc2e836d06b78c85d70f0}\label{ed64io__fault_8c_a4c57f3342a3bc2e836d06b78c85d70f0}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!\_\_osRunningThread@{\_\_osRunningThread}}
+\index{\_\_osRunningThread@{\_\_osRunningThread}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{\_\_osRunningThread}{\_\_osRunningThread}}
+{\footnotesize\ttfamily OSThread$\ast$ \+\_\+\+\_\+os\+Running\+Thread\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a95bd5a78cf0d49f922eb22c02533774e}\label{ed64io__fault_8c_a95bd5a78cf0d49f922eb22c02533774e}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!\_\_osRunQueue@{\_\_osRunQueue}}
+\index{\_\_osRunQueue@{\_\_osRunQueue}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{\_\_osRunQueue}{\_\_osRunQueue}}
+{\footnotesize\ttfamily OSThread$\ast$ \+\_\+\+\_\+os\+Run\+Queue\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a9fd2faaf90215548adeee25dec108b02}\label{ed64io__fault_8c_a9fd2faaf90215548adeee25dec108b02}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!altBreak@{altBreak}}
+\index{altBreak@{altBreak}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{altBreak}{altBreak}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__fault_8c_structBreakpoint}{Breakpoint}} alt\+Break\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a8a19e809a8bd2541c0bab2b47a12cced}\label{ed64io__fault_8c_a8a19e809a8bd2541c0bab2b47a12cced}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!breakMsg@{breakMsg}}
+\index{breakMsg@{breakMsg}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{breakMsg}{breakMsg}}
+{\footnotesize\ttfamily OSMesg break\+Msg = (OSMesg)0xaaaaaaaa\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a214057c667779f1d2f3f7ccfbfd546fd}\label{ed64io__fault_8c_a214057c667779f1d2f3f7ccfbfd546fd}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!breakpoints@{breakpoints}}
+\index{breakpoints@{breakpoints}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{breakpoints}{breakpoints}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__fault_8c_structBreakpoint}{Breakpoint}} breakpoints\mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a5d24c49ed5e99e27981c5ee2929ec2ea}{NUM\+\_\+\+BREAKPOINTS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a31e128628d0a72f618515c30bbeceb14}\label{ed64io__fault_8c_a31e128628d0a72f618515c30bbeceb14}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!causeDesc@{causeDesc}}
+\index{causeDesc@{causeDesc}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{causeDesc}{causeDesc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} cause\+Desc\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{CAUSE\_BD, CAUSE\_BD, \textcolor{stringliteral}{"{}BD"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP8, CAUSE\_IP8, \textcolor{stringliteral}{"{}IP8"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP7, CAUSE\_IP7, \textcolor{stringliteral}{"{}IP7"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP6, CAUSE\_IP6, \textcolor{stringliteral}{"{}IP6"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP5, CAUSE\_IP5, \textcolor{stringliteral}{"{}IP5"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP4, CAUSE\_IP4, \textcolor{stringliteral}{"{}IP4"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_IP3, CAUSE\_IP3, \textcolor{stringliteral}{"{}IP3"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_SW2, CAUSE\_SW2, \textcolor{stringliteral}{"{}IP2"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_SW1, CAUSE\_SW1, \textcolor{stringliteral}{"{}IP1"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_INT, \textcolor{stringliteral}{"{}Interrupt"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_MOD, \textcolor{stringliteral}{"{}TLB modification exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_RMISS, \textcolor{stringliteral}{"{}TLB exception on load or instruction fetch"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_WMISS, \textcolor{stringliteral}{"{}TLB exception on store"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_RADE, \textcolor{stringliteral}{"{}Address error on load or instruction fetch"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_WADE, \textcolor{stringliteral}{"{}Address error on store"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_IBE, \textcolor{stringliteral}{"{}Bus error exception on instruction fetch"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_DBE, \textcolor{stringliteral}{"{}Bus error exception on data reference"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_SYSCALL, \textcolor{stringliteral}{"{}System call exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_BREAK, \textcolor{stringliteral}{"{}Breakpoint exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_II, \textcolor{stringliteral}{"{}Reserved instruction exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_CPU, \textcolor{stringliteral}{"{}Coprocessor unusable exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_OV, \textcolor{stringliteral}{"{}Arithmetic overflow exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_TRAP, \textcolor{stringliteral}{"{}Trap exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_VCEI,}
+\DoxyCodeLine{     \textcolor{stringliteral}{"{}Virtual coherency exception on intruction fetch"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_FPE, \textcolor{stringliteral}{"{}Floating point exception (see fpcsr)"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_WATCH, \textcolor{stringliteral}{"{}Watchpoint exception"{}}\},}
+\DoxyCodeLine{    \{CAUSE\_EXCMASK, EXC\_VCED, \textcolor{stringliteral}{"{}Virtual coherency exception on data reference"{}}\},}
+\DoxyCodeLine{    \{0, 0, \textcolor{stringliteral}{"{}"{}}\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{ed64io__fault_8c_a5ef75eb6899edee3818f2fa0096f1761}\label{ed64io__fault_8c_a5ef75eb6899edee3818f2fa0096f1761}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultMsgBuf@{faultMsgBuf}}
+\index{faultMsgBuf@{faultMsgBuf}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultMsgBuf}{faultMsgBuf}}
+{\footnotesize\ttfamily OSMesg fault\+Msg\+Buf\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a94f91d2482b57d21ca111533f19923ae}\label{ed64io__fault_8c_a94f91d2482b57d21ca111533f19923ae}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultMsgQ@{faultMsgQ}}
+\index{faultMsgQ@{faultMsgQ}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultMsgQ}{faultMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue fault\+MsgQ\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab6d45beb156d4d9ac2b205a715b957e0}\label{ed64io__fault_8c_ab6d45beb156d4d9ac2b205a715b957e0}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultThread@{faultThread}}
+\index{faultThread@{faultThread}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultThread}{faultThread}}
+{\footnotesize\ttfamily OSThread fault\+Thread\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_ab92df6309b9e2357a8fd387a6642bacd}\label{ed64io__fault_8c_ab92df6309b9e2357a8fd387a6642bacd}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultThreadPri@{faultThreadPri}}
+\index{faultThreadPri@{faultThreadPri}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultThreadPri}{faultThreadPri}}
+{\footnotesize\ttfamily int fault\+Thread\+Pri\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_afe818bd1def56e9fb5f8c5b2fd77bfdb}\label{ed64io__fault_8c_afe818bd1def56e9fb5f8c5b2fd77bfdb}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!faultThreadStack@{faultThreadStack}}
+\index{faultThreadStack@{faultThreadStack}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{faultThreadStack}{faultThreadStack}}
+{\footnotesize\ttfamily char fault\+Thread\+Stack\mbox{[}\mbox{\hyperlink{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}{ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a3a53eb8fa7b0e0a049379db065789318}\label{ed64io__fault_8c_a3a53eb8fa7b0e0a049379db065789318}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!fpcsrDesc@{fpcsrDesc}}
+\index{fpcsrDesc@{fpcsrDesc}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{fpcsrDesc}{fpcsrDesc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} fpcsr\+Desc\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{\{FPCSR\_FS, FPCSR\_FS, \textcolor{stringliteral}{"{}FS"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_C, FPCSR\_C, \textcolor{stringliteral}{"{}C"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CE, FPCSR\_CE, \textcolor{stringliteral}{"{}Unimplemented operation"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CV, FPCSR\_CV, \textcolor{stringliteral}{"{}Invalid operation"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CZ, FPCSR\_CZ, \textcolor{stringliteral}{"{}Division by zero"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CO, FPCSR\_CO, \textcolor{stringliteral}{"{}Overflow"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CU, FPCSR\_CU, \textcolor{stringliteral}{"{}Underflow"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_CI, FPCSR\_CI, \textcolor{stringliteral}{"{}Inexact operation"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_EV, FPCSR\_EV, \textcolor{stringliteral}{"{}EV"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_EZ, FPCSR\_EZ, \textcolor{stringliteral}{"{}EZ"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_EO, FPCSR\_EO, \textcolor{stringliteral}{"{}EO"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_EU, FPCSR\_EU, \textcolor{stringliteral}{"{}EU"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_EI, FPCSR\_EI, \textcolor{stringliteral}{"{}EI"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_FV, FPCSR\_FV, \textcolor{stringliteral}{"{}FV"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_FZ, FPCSR\_FZ, \textcolor{stringliteral}{"{}FZ"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_FO, FPCSR\_FO, \textcolor{stringliteral}{"{}FO"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_FU, FPCSR\_FU, \textcolor{stringliteral}{"{}FU"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_FI, FPCSR\_FI, \textcolor{stringliteral}{"{}FI"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_RM\_MASK, FPCSR\_RM\_RN, \textcolor{stringliteral}{"{}RN"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_RM\_MASK, FPCSR\_RM\_RZ, \textcolor{stringliteral}{"{}RZ"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_RM\_MASK, FPCSR\_RM\_RP, \textcolor{stringliteral}{"{}RP"{}}\},}
+\DoxyCodeLine{                                \{FPCSR\_RM\_MASK, FPCSR\_RM\_RM, \textcolor{stringliteral}{"{}RM"{}}\},}
+\DoxyCodeLine{                                \{0, 0, \textcolor{stringliteral}{"{}"{}}\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{ed64io__fault_8c_ae9daa7bab5c95e8a3ebe716f1cf47123}\label{ed64io__fault_8c_ae9daa7bab5c95e8a3ebe716f1cf47123}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!srDesc@{srDesc}}
+\index{srDesc@{srDesc}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{srDesc}{srDesc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__fault_8c_structregDesc__t}{reg\+Desc\+\_\+t}} sr\+Desc\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aff25a478b434212af135a28904e362de}\label{ed64io__fault_8c_aff25a478b434212af135a28904e362de}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!stackTraceReturnAddresses@{stackTraceReturnAddresses}}
+\index{stackTraceReturnAddresses@{stackTraceReturnAddresses}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{stackTraceReturnAddresses}{stackTraceReturnAddresses}}
+{\footnotesize\ttfamily void$\ast$ stack\+Trace\+Return\+Addresses\mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a8658a1892588bf946a8eae56dab8abc5}{MAX\+\_\+\+STACK\+\_\+\+TRACE}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aa1dbd1cc4789bf3e33fc8743a11545ba}\label{ed64io__fault_8c_aa1dbd1cc4789bf3e33fc8743a11545ba}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!startedfaultproc@{startedfaultproc}}
+\index{startedfaultproc@{startedfaultproc}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{startedfaultproc}{startedfaultproc}}
+{\footnotesize\ttfamily int startedfaultproc = 0}
+
+\mbox{\Hypertarget{ed64io__fault_8c_aba400785c4e6aa1aa4c799ac5aeb62fc}\label{ed64io__fault_8c_aba400785c4e6aa1aa4c799ac5aeb62fc}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!stoppedThreads@{stoppedThreads}}
+\index{stoppedThreads@{stoppedThreads}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{stoppedThreads}{stoppedThreads}}
+{\footnotesize\ttfamily OSThread$\ast$ stopped\+Threads\mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}{MAX\+\_\+\+STOPPED\+\_\+\+THREADS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a2444b1ff4228f714e293b6eb6c28f1ac}\label{ed64io__fault_8c_a2444b1ff4228f714e293b6eb6c28f1ac}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!stoppedThreadsCount@{stoppedThreadsCount}}
+\index{stoppedThreadsCount@{stoppedThreadsCount}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{stoppedThreadsCount}{stoppedThreadsCount}}
+{\footnotesize\ttfamily int stopped\+Threads\+Count = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a0a3a01128884291c9d90233b4a17a2c3}\label{ed64io__fault_8c_a0a3a01128884291c9d90233b4a17a2c3}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!stoppedThreadsStates@{stoppedThreadsStates}}
+\index{stoppedThreadsStates@{stoppedThreadsStates}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{stoppedThreadsStates}{stoppedThreadsStates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} stopped\+Threads\+States\mbox{[}\mbox{\hyperlink{ed64io__fault_8c_a277ebadb01b9fb68bfc3cffdbe638198}{MAX\+\_\+\+STOPPED\+\_\+\+THREADS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__fault_8c_a53257c59fdbb3274d293f58f821a7657}\label{ed64io__fault_8c_a53257c59fdbb3274d293f58f821a7657}} 
+\index{ed64io\_fault.c@{ed64io\_fault.c}!threadStateStrings@{threadStateStrings}}
+\index{threadStateStrings@{threadStateStrings}!ed64io\_fault.c@{ed64io\_fault.c}}
+\doxysubsubsection{\texorpdfstring{threadStateStrings}{threadStateStrings}}
+{\footnotesize\ttfamily char$\ast$ thread\+State\+Strings\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{\textcolor{stringliteral}{"{}stopped"{}}, \textcolor{stringliteral}{"{}runnable"{}}, \textcolor{stringliteral}{"{}running"{}},}
+\DoxyCodeLine{                                     \textcolor{stringliteral}{"{}waiting"{}}, \textcolor{stringliteral}{"{}invalid"{}}\}}
+
+\end{DoxyCode}

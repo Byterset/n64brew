@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['name_2762',['name',['../sausage64_8h.html#a9438aaf9da6b164d682cace4013d222d',1,'s64Mesh::name()'],['../sausage64_8h.html#a4bf3713fd8617418b1d2f05870ae27a6',1,'s64Animation::name()']]],
+  ['neard_2763',['nearD',['../frustum_8h.html#a10b439632dcd21fbc1abde1ec81aa9a9',1,'Frustum']]],
+  ['nearplane_2764',['nearPlane',['../stage00_8c.html#a07c7baf137fc6799fc0ed231a98200d5',1,'stage00.c']]],
+  ['newsoundticks_2765',['newSoundTicks',['../soundplayer_8c.html#aaba0ed2bc7488027fe7295f476703622',1,'ActiveSound']]],
+  ['nextdma_2766',['nextDMA',['../audiomgr_8c.html#aeca683650cdd5c960b74ecde67c694de',1,'audiomgr.c']]],
+  ['nextframe_2767',['nextFrame',['../animation_8h.html#ae4d24b2232de6ff6195ad9bad42272fe',1,'AnimationInterpolation']]],
+  ['nextsegment_2768',['nextSegment',['../memory_8h.html#a125693f14e6a114288b43327b82dfb7c',1,'HeapSegment']]],
+  ['nh_2769',['nh',['../frustum_8h.html#a8cd2d2d235773a06a29415b92bb39420',1,'Frustum']]],
+  ['node_2770',['node',['../audiomgr_8c.html#aac74841327dad8c71a63045993ae4741',1,'AMDMABuffer::node()'],['../pathfinding_8h.html#af56d3fd66578771545bef043cc88d58d',1,'NodeState::node()']]],
+  ['nodeid_2771',['nodeID',['../pathfinding_8h.html#a0b0389c5c6f66f0f4a8487557816780a',1,'NodeState']]],
+  ['nodes_2772',['nodes',['../pathfinding_8h.html#a19c47a8b645646a87c21c5a0ed86f29a',1,'Graph']]],
+  ['nodestates_2773',['nodeStates',['../pathfinding_8h.html#a282abfb277199cedd89a8fa0cad867af',1,'PathfindingState']]],
+  ['nodestatesize_2774',['nodeStateSize',['../pathfinding_8h.html#a32e40920812e7555112c8a38e544e4c6',1,'PathfindingState']]],
+  ['nonintegralacceleration_2775',['nonIntegralAcceleration',['../physics_8h.html#aafe2dcd51be31e8fa6563c57952a9c96',1,'PhysBody']]],
+  ['nonintegralvelocity_2776',['nonIntegralVelocity',['../physics_8h.html#a28a4d5957e5e67c4690ace41cd1faf81',1,'PhysBody']]],
+  ['normal_2777',['normal',['../frustum_8h.html#a01be1f450e514274fb97af483ca8b5d2',1,'Plane']]],
+  ['num_5fconsole_5fmsgs_2778',['num_console_msgs',['../debug__console_8c.html#ad9b9e3576d758d011d41f4982cdf6df9',1,'num_console_msgs():&#160;debug_console.c'],['../debug__console_8h.html#ad9b9e3576d758d011d41f4982cdf6df9',1,'num_console_msgs():&#160;debug_console.c']]],
+  ['numbuckets_2779',['numBuckets',['../collision_8h.html#a5e592fb3e8e10a128baa8a9752658da4',1,'SpatialHash']]],
+  ['nw_2780',['nw',['../frustum_8h.html#a85b9e04c1b826dc8fb83db15dfa8f6a2',1,'Frustum']]]
+];

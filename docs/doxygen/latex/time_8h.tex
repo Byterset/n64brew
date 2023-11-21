@@ -1,0 +1,79 @@
+\hypertarget{time_8h}{}\doxysection{src/util/time.h File Reference}
+\label{time_8h}\index{src/util/time.h@{src/util/time.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../compat.\+h\char`\"{}}\newline
+Include dependency graph for time.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{time_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{time_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{time_8h_a6618b522a9a8d9d95491f96a61b54407}{FIXED\+\_\+\+DELTA\+\_\+\+TIME}}~((1.\+0f + \mbox{\hyperlink{constants_8h_a0c2b1b2d194b0322c812b4abbfc3872f}{FRAME\+\_\+\+SKIP}}) / 60.\+0f)
+\item 
+\#define \mbox{\hyperlink{time_8h_a0fef5d4f4175418d5b25ce574923bb1d}{CUR\+\_\+\+TIME\+\_\+\+MS}}()~\mbox{\hyperlink{compat_8h_a19f0cc4d0579ff5f7f543483def8b9e9}{get\+Elapsed\+Time\+MS}}()
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{time_8h_a04c8544725e8281ddc2da0c3b000bafc}{time\+Update\+Delta}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{time_8h_a6d280824622b6986a74bac23974818d5}{g\+Delta\+Time\+MS}}
+\item 
+float \mbox{\hyperlink{time_8h_a87a433df2cd7fc96e03cd9ac2c207516}{g\+Delta\+Time\+Sec}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{time_8h_a0fef5d4f4175418d5b25ce574923bb1d}\label{time_8h_a0fef5d4f4175418d5b25ce574923bb1d}} 
+\index{time.h@{time.h}!CUR\_TIME\_MS@{CUR\_TIME\_MS}}
+\index{CUR\_TIME\_MS@{CUR\_TIME\_MS}!time.h@{time.h}}
+\doxysubsubsection{\texorpdfstring{CUR\_TIME\_MS}{CUR\_TIME\_MS}}
+{\footnotesize\ttfamily \#define CUR\+\_\+\+TIME\+\_\+\+MS(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\mbox{\hyperlink{compat_8h_a19f0cc4d0579ff5f7f543483def8b9e9}{get\+Elapsed\+Time\+MS}}()}
+
+\mbox{\Hypertarget{time_8h_a6618b522a9a8d9d95491f96a61b54407}\label{time_8h_a6618b522a9a8d9d95491f96a61b54407}} 
+\index{time.h@{time.h}!FIXED\_DELTA\_TIME@{FIXED\_DELTA\_TIME}}
+\index{FIXED\_DELTA\_TIME@{FIXED\_DELTA\_TIME}!time.h@{time.h}}
+\doxysubsubsection{\texorpdfstring{FIXED\_DELTA\_TIME}{FIXED\_DELTA\_TIME}}
+{\footnotesize\ttfamily \#define FIXED\+\_\+\+DELTA\+\_\+\+TIME~((1.\+0f + \mbox{\hyperlink{constants_8h_a0c2b1b2d194b0322c812b4abbfc3872f}{FRAME\+\_\+\+SKIP}}) / 60.\+0f)}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{time_8h_a04c8544725e8281ddc2da0c3b000bafc}\label{time_8h_a04c8544725e8281ddc2da0c3b000bafc}} 
+\index{time.h@{time.h}!timeUpdateDelta@{timeUpdateDelta}}
+\index{timeUpdateDelta@{timeUpdateDelta}!time.h@{time.h}}
+\doxysubsubsection{\texorpdfstring{timeUpdateDelta()}{timeUpdateDelta()}}
+{\footnotesize\ttfamily void time\+Update\+Delta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{time_8h_a6d280824622b6986a74bac23974818d5}\label{time_8h_a6d280824622b6986a74bac23974818d5}} 
+\index{time.h@{time.h}!gDeltaTimeMS@{gDeltaTimeMS}}
+\index{gDeltaTimeMS@{gDeltaTimeMS}!time.h@{time.h}}
+\doxysubsubsection{\texorpdfstring{gDeltaTimeMS}{gDeltaTimeMS}}
+{\footnotesize\ttfamily double g\+Delta\+Time\+MS\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{time_8h_a87a433df2cd7fc96e03cd9ac2c207516}\label{time_8h_a87a433df2cd7fc96e03cd9ac2c207516}} 
+\index{time.h@{time.h}!gDeltaTimeSec@{gDeltaTimeSec}}
+\index{gDeltaTimeSec@{gDeltaTimeSec}!time.h@{time.h}}
+\doxysubsubsection{\texorpdfstring{gDeltaTimeSec}{gDeltaTimeSec}}
+{\footnotesize\ttfamily float g\+Delta\+Time\+Sec\hspace{0.3cm}{\ttfamily [extern]}}
+

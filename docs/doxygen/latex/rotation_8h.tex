@@ -1,0 +1,188 @@
+\hypertarget{rotation_8h}{}\doxysection{src/math/rotation.h File Reference}
+\label{rotation_8h}\index{src/math/rotation.h@{src/math/rotation.h}}
+{\ttfamily \#include \char`\"{}quaternion.\+h\char`\"{}}\newline
+Include dependency graph for rotation.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{rotation_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rotation_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}}
+\item 
+struct \mbox{\hyperlink{rotation_8h_structEuler}{Euler}}
+\item 
+struct \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} \mbox{\hyperlink{rotation_8h_a130bef64c840c4c97350186168a16227}{Matrix4}}
+\item 
+typedef struct \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} \mbox{\hyperlink{rotation_8h_af315d80a495cfbe1c50d61560bb58d03}{Euler}}
+\item 
+typedef struct \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} \mbox{\hyperlink{rotation_8h_a378e5051ddd90be12ccb9fb58e6f2cac}{Euler\+Degrees}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rotation_8h_a3480d22bf809fd69df33befb1d9fc2ce}{Euler\+\_\+from\+Euler\+Degrees}} (\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$radians, \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$degrees)
+\item 
+void \mbox{\hyperlink{rotation_8h_ac3b80844d7c5843097c21964d9ef40c5}{Euler\+\_\+set\+From\+Quaternion}} (\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$self, \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$quaternion)
+\item 
+void \mbox{\hyperlink{rotation_8h_aba22b6847655208c43cbadcc1476190f}{Euler\+Degrees\+\_\+from\+Euler}} (\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$degrees, \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$radians)
+\item 
+\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$ \mbox{\hyperlink{rotation_8h_a607fed803cdcc26f13fa0e41820c2317}{Euler\+Degrees\+\_\+origin}} (\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$self)
+\item 
+void \mbox{\hyperlink{rotation_8h_a7c4b255c0aaa1a854d39ade603c856ee}{Matrix4\+\_\+make\+Rotation\+From\+Euler}} (\mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} $\ast$self, \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$euler)
+\item 
+void \mbox{\hyperlink{rotation_8h_ad0d61b54990a670ce42bd564482da283}{Quaternion\+\_\+from\+Euler}} (\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$self, \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$euler)
+\item 
+void \mbox{\hyperlink{rotation_8h_ad000b086f2324aaf1c248fba90e4df54}{Quaternion\+\_\+slerp}} (\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$self, \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$qb, float t)
+\item 
+void \mbox{\hyperlink{rotation_8h_a7974693c76672d53b931ddb0bc40716d}{Quaternion\+\_\+set\+From\+Rotation\+Matrix}} (\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$self, \mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} $\ast$m)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{Matrix4@{Matrix4}}\label{structMatrix4}
+\Hypertarget{rotation_8h_structMatrix4}
+\doxysubsubsection{struct Matrix4}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{rotation_8h_aad799176ac5b76159563aed48a62e3c6}\label{rotation_8h_aad799176ac5b76159563aed48a62e3c6}} 
+float&
+elements\mbox{[}16\mbox{]}&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Euler@{Euler}}\label{structEuler}
+\Hypertarget{rotation_8h_structEuler}
+\doxysubsubsection{struct Euler}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{rotation_8h_a08ad5454063adc83dcb48a30135490fc}\label{rotation_8h_a08ad5454063adc83dcb48a30135490fc}} 
+float&
+x&
+\\
+\hline
+
+\mbox{\Hypertarget{rotation_8h_a6c587daf4b0768ac78a7318937bbc603}\label{rotation_8h_a6c587daf4b0768ac78a7318937bbc603}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{rotation_8h_aa615156bea3912a3509915cb970eca2c}\label{rotation_8h_aa615156bea3912a3509915cb970eca2c}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+\index{EulerDegrees@{EulerDegrees}}\label{structEulerDegrees}
+\Hypertarget{rotation_8h_structEulerDegrees}
+\doxysubsubsection{struct Euler\+Degrees}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{rotation_8h_aa5d7b17901837499f731446ce3ff13bc}\label{rotation_8h_aa5d7b17901837499f731446ce3ff13bc}} 
+float&
+x&
+\\
+\hline
+
+\mbox{\Hypertarget{rotation_8h_a0fdf59a70cddf4d6f48c339f131bedb1}\label{rotation_8h_a0fdf59a70cddf4d6f48c339f131bedb1}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{rotation_8h_a9a3c058a6b0aa9edd0a526f9b1b7372e}\label{rotation_8h_a9a3c058a6b0aa9edd0a526f9b1b7372e}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{rotation_8h_af315d80a495cfbe1c50d61560bb58d03}\label{rotation_8h_af315d80a495cfbe1c50d61560bb58d03}} 
+\index{rotation.h@{rotation.h}!Euler@{Euler}}
+\index{Euler@{Euler}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Euler}{Euler}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} \mbox{\hyperlink{rotation_8h_structEuler}{Euler}}}
+
+\mbox{\Hypertarget{rotation_8h_a378e5051ddd90be12ccb9fb58e6f2cac}\label{rotation_8h_a378e5051ddd90be12ccb9fb58e6f2cac}} 
+\index{rotation.h@{rotation.h}!EulerDegrees@{EulerDegrees}}
+\index{EulerDegrees@{EulerDegrees}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{EulerDegrees}{EulerDegrees}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}}}
+
+\mbox{\Hypertarget{rotation_8h_a130bef64c840c4c97350186168a16227}\label{rotation_8h_a130bef64c840c4c97350186168a16227}} 
+\index{rotation.h@{rotation.h}!Matrix4@{Matrix4}}
+\index{Matrix4@{Matrix4}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Matrix4}{Matrix4}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} \mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rotation_8h_a3480d22bf809fd69df33befb1d9fc2ce}\label{rotation_8h_a3480d22bf809fd69df33befb1d9fc2ce}} 
+\index{rotation.h@{rotation.h}!Euler\_fromEulerDegrees@{Euler\_fromEulerDegrees}}
+\index{Euler\_fromEulerDegrees@{Euler\_fromEulerDegrees}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Euler\_fromEulerDegrees()}{Euler\_fromEulerDegrees()}}
+{\footnotesize\ttfamily void Euler\+\_\+from\+Euler\+Degrees (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{radians,  }\item[{\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$}]{degrees }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_ac3b80844d7c5843097c21964d9ef40c5}\label{rotation_8h_ac3b80844d7c5843097c21964d9ef40c5}} 
+\index{rotation.h@{rotation.h}!Euler\_setFromQuaternion@{Euler\_setFromQuaternion}}
+\index{Euler\_setFromQuaternion@{Euler\_setFromQuaternion}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Euler\_setFromQuaternion()}{Euler\_setFromQuaternion()}}
+{\footnotesize\ttfamily void Euler\+\_\+set\+From\+Quaternion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{quaternion }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_aba22b6847655208c43cbadcc1476190f}\label{rotation_8h_aba22b6847655208c43cbadcc1476190f}} 
+\index{rotation.h@{rotation.h}!EulerDegrees\_fromEuler@{EulerDegrees\_fromEuler}}
+\index{EulerDegrees\_fromEuler@{EulerDegrees\_fromEuler}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{EulerDegrees\_fromEuler()}{EulerDegrees\_fromEuler()}}
+{\footnotesize\ttfamily void Euler\+Degrees\+\_\+from\+Euler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$}]{degrees,  }\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{radians }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_a607fed803cdcc26f13fa0e41820c2317}\label{rotation_8h_a607fed803cdcc26f13fa0e41820c2317}} 
+\index{rotation.h@{rotation.h}!EulerDegrees\_origin@{EulerDegrees\_origin}}
+\index{EulerDegrees\_origin@{EulerDegrees\_origin}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{EulerDegrees\_origin()}{EulerDegrees\_origin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}}$\ast$ Euler\+Degrees\+\_\+origin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rotation_8h_structEulerDegrees}{Euler\+Degrees}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_a7c4b255c0aaa1a854d39ade603c856ee}\label{rotation_8h_a7c4b255c0aaa1a854d39ade603c856ee}} 
+\index{rotation.h@{rotation.h}!Matrix4\_makeRotationFromEuler@{Matrix4\_makeRotationFromEuler}}
+\index{Matrix4\_makeRotationFromEuler@{Matrix4\_makeRotationFromEuler}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Matrix4\_makeRotationFromEuler()}{Matrix4\_makeRotationFromEuler()}}
+{\footnotesize\ttfamily void Matrix4\+\_\+make\+Rotation\+From\+Euler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{euler }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_ad0d61b54990a670ce42bd564482da283}\label{rotation_8h_ad0d61b54990a670ce42bd564482da283}} 
+\index{rotation.h@{rotation.h}!Quaternion\_fromEuler@{Quaternion\_fromEuler}}
+\index{Quaternion\_fromEuler@{Quaternion\_fromEuler}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Quaternion\_fromEuler()}{Quaternion\_fromEuler()}}
+{\footnotesize\ttfamily void Quaternion\+\_\+from\+Euler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{euler }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_a7974693c76672d53b931ddb0bc40716d}\label{rotation_8h_a7974693c76672d53b931ddb0bc40716d}} 
+\index{rotation.h@{rotation.h}!Quaternion\_setFromRotationMatrix@{Quaternion\_setFromRotationMatrix}}
+\index{Quaternion\_setFromRotationMatrix@{Quaternion\_setFromRotationMatrix}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Quaternion\_setFromRotationMatrix()}{Quaternion\_setFromRotationMatrix()}}
+{\footnotesize\ttfamily void Quaternion\+\_\+set\+From\+Rotation\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{rotation_8h_structMatrix4}{Matrix4}} $\ast$}]{m }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rotation_8h_ad000b086f2324aaf1c248fba90e4df54}\label{rotation_8h_ad000b086f2324aaf1c248fba90e4df54}} 
+\index{rotation.h@{rotation.h}!Quaternion\_slerp@{Quaternion\_slerp}}
+\index{Quaternion\_slerp@{Quaternion\_slerp}!rotation.h@{rotation.h}}
+\doxysubsubsection{\texorpdfstring{Quaternion\_slerp()}{Quaternion\_slerp()}}
+{\footnotesize\ttfamily void Quaternion\+\_\+slerp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{qb,  }\item[{float}]{t }\end{DoxyParamCaption})}
+

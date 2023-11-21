@@ -1,0 +1,872 @@
+\hypertarget{ed64io__everdrive_8c}{}\doxysection{src/ed64/ed64io\+\_\+everdrive.c File Reference}
+\label{ed64io__everdrive_8c}\index{src/ed64/ed64io\_everdrive.c@{src/ed64/ed64io\_everdrive.c}}
+{\ttfamily \#include \char`\"{}ed64io\+\_\+everdrive.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+errors.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64io\+\_\+sys.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+everdrive.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__everdrive_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a938c1466755f12fb04ac0d1b775584d1}{CMD0}}~0x40
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aca9979f299fa78c1128d778084478673}{CMD1}}~0x41
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_afc5c4b6ab1c918966cbd02b1a7d9d68c}{CMD2}}~0x42
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a130f4c4e31a70d8f61750a581687e39a}{CMD3}}~0x43
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a096675dbae532a107dd5f638993a1f67}{CMD4}}~0x44
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_af1f24155531bae5091603a273a426437}{CMD5}}~0x45
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a8f99cc8c10435831e23c0e7923445bba}{CMD6}}~0x46
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a8d3c60653ad9483b8f3d276cc838a3c9}{CMD7}}~0x47
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ac75b3e0ad1fb013ea946fb49bbe65668}{CMD8}}~0x48
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a1fac6a251d7e7dc204d21639bf521459}{CMD9}}~0x49
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ae7b800ed8e7bd52e6f570a5ce72b8104}{CMD10}}~0x4A
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_af6aa8edd1a1d6ca68d5ca6e3e2ebe1f8}{CMD11}}~0x4B
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a8d6283c9b060afbaa0e6d1ff7e5ea7b8}{CMD12}}~0x4C
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a4bf0d32fc9e480f24e5282fb3c4752bb}{CMD13}}~0x4D
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a724e3c5003987525d422e6e1b45f456b}{CMD14}}~0x4E
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a607d3285379685b5f736c20f2a98ab7a}{CMD15}}~0x4F
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aaeab261b94f2031ba41a1d4d857c3541}{CMD16}}~0x50
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a6bbfe7dc16a19b7f40efcf554b5666ad}{CMD17}}~0x51
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a3d32c27a6be061b865ba539127278f14}{CMD18}}~0x52
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a2647d51b93b3496ecf97f0410f44bef3}{CMD19}}~0x53
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a207b9646ac2917dd904d8ba5699a027d}{CMD20}}~0x54
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ac1839f1a861812310886ef7656ff606c}{CMD21}}~0x55
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a8f62c024061074c1c80075b9db5e8368}{CMD22}}~0x56
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a14506e981f38b6177bc36f72c2ca18b1}{CMD23}}~0x57
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a252300302c6f7960df547a7f5c25be85}{CMD24}}~0x58
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aee2c673fba987178f4642531fdeefe9e}{CMD25}}~0x59
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a7aabc9a46185c195501fedd6dd33169c}{CMD26}}~0x5A
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a86bfadef15f0f96886470d422419fada}{CMD27}}~0x5B
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ad69413163404b63841303043b0e3b454}{CMD28}}~0x5C
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a19639149b72d0c8d4917faeb1f16a4b0}{CMD29}}~0x5D
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aa2fcf8d240115b99ed973cd1a5557f98}{CMD30}}~0x5E
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ac778762b14dadc075faea7f5d2457ef5}{CMD31}}~0x5F
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_af822a2ff9987b3a48982731fa4ba5f7b}{CMD32}}~0x60
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a309d932899cca7255395821dc32dace0}{CMD33}}~0x61
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aff6398eae8ce82da239b9e1356a771c9}{CMD34}}~0x62
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ab9c80756cedda908a54634c75e57b431}{CMD35}}~0x63
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a6cd610050bb2db4b959b30343d4647cc}{CMD36}}~0x64
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a1bff0d4d45c2e0170cdb80527d880cd8}{CMD37}}~0x65
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a6af4991146dfb0a47c4aa6f166efb046}{CMD38}}~0x66
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aa624f4c6d95bf679e5c8093993926e79}{CMD39}}~0x67
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ae67c32f1cd480ae41e05fba2ab03b961}{CMD40}}~0x68
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a3ca1450d0ac55d2705aab03537bf2865}{CMD41}}~0x69
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aa2c209c54f179ba623500a83db4a6669}{CMD42}}~0x6A
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aa7a26b2cf17e1ff5967820a1fa41a7aa}{CMD58}}~0x7A
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aa8ea570644ddff6d18b63e4abbf39e0d}{CMD59}}~0x7B
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a53ce8ac4bb6bd327e7f63088af52ac91}{ED\+\_\+\+STATE\+\_\+\+DMA\+\_\+\+BUSY}}~0
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a2bf55c0204029a4f541bdc114be62de5}{ED\+\_\+\+STATE\+\_\+\+DMA\+\_\+\+TOUT}}~1
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a429812107e653488c44f1ac3c8b5a077}{ED\+\_\+\+STATE\+\_\+\+TXE}}~2
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ae7c15dd07b18ce581f6221c420ad0549}{ED\+\_\+\+STATE\+\_\+\+RXF}}~3
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ac4bf91bd588c0dddadd7766a935159be}{ED\+\_\+\+STATE\+\_\+\+SPI}}~4
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a9786e3f24077767751fd1c5a49a8120d}{SPI\+\_\+\+CFG\+\_\+\+SPD0}}~0
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a3ec55fa77d5b5aa921382aeee32bf99b}{SPI\+\_\+\+CFG\+\_\+\+SPD1}}~1
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aefda39db8b114cfde1261bae33abe4c7}{SPI\+\_\+\+CFG\+\_\+\+SS}}~2
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a0078177d4e8c284cd39db659b7049acf}{SPI\+\_\+\+CFG\+\_\+\+RD}}~3
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a5d18c336eb8de935480694c152eddd3c}{SPI\+\_\+\+CFG\+\_\+\+DAT}}~4
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a78c70d50d82fa4413d30a578a2255c02}{SPI\+\_\+\+CFG\+\_\+1\+BIT}}~5
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_ab416cc3a94d3884092cb5c0a3157afc1}{SAV\+\_\+\+EEP\+\_\+\+ON}}~0
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_accfa9a757c506d10f4869cb0fe2ffb14}{SAV\+\_\+\+SRM\+\_\+\+ON}}~1
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aea71c707b75825d5723446f60f0aea67}{SAV\+\_\+\+EEP\+\_\+\+SIZE}}~2
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_a19f238b8d9bc0983b3535b32607af9f0}{SAV\+\_\+\+SRM\+\_\+\+SIZE}}~3
+\item 
+\#define \mbox{\hyperlink{ed64io__everdrive_8c_aabfa4a230b5c9dd2db16a81d49f6cfd1}{EVERDRIVE\+\_\+\+CART\+\_\+\+BLOCK\+\_\+\+WRITE\+\_\+\+SIZE}}~0x4000 /$\ast$ cart write block size $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a05ff35b8379cbb5577e05d213d837bed}{evd\+\_\+set\+Spi\+Speed}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} speed)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_ad42692848b762965a3665bd71526e15b}{evd\+\_\+mmc\+Cmd}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} cmd, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} arg)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_ad55036afe0794cc83725ed43f5cd382e}{evd\+\_\+set\+Dma\+Addr}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} addr)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a5d2955977c48e501cc327b037fe15412}{evd\+\_\+init}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a11462c383415e07fbf20c1950687d0e0}{evd\+\_\+lock\+Regs}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a584cd0fa3a47d0b556c80496a32a4678}{evd\+\_\+fifo\+Rxf}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a0ba6ebb5e1cb1f7d0b7624a6e3dffca6}{evd\+\_\+fifo\+Txe}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a2fb40255db69dfc178f924e914c59604}{evd\+\_\+is\+Dma\+Busy}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a08f02fb590ed21c6cefa72ae82f647f1}{evd\+\_\+is\+Dma\+Busy\+No\+Wait}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_afea7d06027cfbdfc1d9b96bda64cf2dc}{evd\+\_\+is\+Dma\+Timeout}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_ac40be546dfc38e9a2b61019261059bc1}{evd\+\_\+fifo\+Rd\+To\+Cart}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} cart\+\_\+addr, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} blocks)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a105154bfc82b40b8d2eb3ab5bd8f4514}{evd\+\_\+fifo\+Wr\+From\+Cart}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} cart\+\_\+addr, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} blocks)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a5ec4a768eb7185f5bcf4bf3c5da91a8a}{evd\+\_\+fifo\+Rd}} (void $\ast$buff, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} blocks)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a0dabf6e84c24c764933fc323087b681a}{evd\+\_\+fifo\+Wr}} (void $\ast$buff, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} blocks)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a15fd80333d7a416b9e5c5da68edad46e}{evd\+\_\+fifo\+Wr\+Nonblock\+State\+Init}} (\mbox{\hyperlink{ed64io__everdrive_8h_structevd__fifoWrNonblockState}{evd\+\_\+fifo\+Wr\+Nonblock\+State}} $\ast$state)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a5be35f29b57e2cace1f1af2929af7a64}{evd\+\_\+fifo\+Wr\+Nonblock}} (void $\ast$buff, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} blocks, \mbox{\hyperlink{ed64io__everdrive_8h_structevd__fifoWrNonblockState}{evd\+\_\+fifo\+Wr\+Nonblock\+State}} $\ast$state)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a59c8066cdac035c2f121efc58a68d1a6}{evd\+\_\+is\+Spi\+Busy}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a9c7a2bd450b60692153eecf4529d0f9e}{evd\+\_\+\+SPI}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} dat)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a07c68a21869544220f443f468f1d4765}{evd\+\_\+spi\+SSOn}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a87499d9dab8051441b6a6e7e28f1df7d}{evd\+\_\+spi\+SSOff}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a61946dd47a9bc0ec493aaf58ed9a155d}{evd\+\_\+enable\+SDMode}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a1736b5e1714b492b823f1f2ea39f003f}{evd\+\_\+enable\+SPIMode}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a0743ea1952fee1a7324af3259485f049}{evd\+\_\+is\+SDMode}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a71ac7d4058fd8ade54a90fd5d9a5c64a}{evd\+\_\+\+SDcmd\+Write\+Mode}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} bit1\+\_\+mode)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a75869c974a66d90d5f75cf3048c94387}{evd\+\_\+\+SDcmd\+Read\+Mode}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} bit1\+\_\+mode)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a7967514ce83871dc1ae73fd419ed17b2}{evd\+\_\+\+SDdat\+Write\+Mode}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} bit4\+\_\+mode)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a9f76cae40ace869c21df7f38f599a66e}{evd\+\_\+\+SDdat\+Read\+Mode}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} bit4\+\_\+mode)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a51422c4838aa2e2274d8f9d93403ff36}{evd\+\_\+mmc\+Read\+To\+Cart}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} cart\+\_\+addr, \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} len)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a99fbc9e38e49c43f85031aa058febf79}{evd\+\_\+set\+Cfg\+Bit}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} option, \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} state)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{ed64io__everdrive_8c_aafc4f64b72ae4a4f79516f1a2d445e5d}{evd\+\_\+read\+Reg}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} reg)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_ae4631105c24085bbb23fa4ba04034a6d}{evd\+\_\+set\+Save\+Type}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} type)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_af3b7aa891812f28a93bc8c81c6d5a34a}{evd\+\_\+write\+Reg}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} reg, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} val)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a105d34011eb88d7260ccb84803976d7e}{evd\+\_\+mmc\+Set\+Dma\+Swap}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} state)
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a7cb4a1beef5c5cbb0439b475d1bf2e99}{evd\+\_\+write\+Msg}} (\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} dat)
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_ab59fdf434b5dda14c2f496f22d3478a6}{evd\+\_\+read\+Msg}} ()
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{ed64io__everdrive_8c_abfb30c5929e640d2970b0e8d16894cf6}{evd\+\_\+get\+Firm\+Version}} ()
+\item 
+void \mbox{\hyperlink{ed64io__everdrive_8c_a5c89a2cbf720d8de214416eea5d99c0b}{evd\+\_\+set\+Dma\+Callback}} (void($\ast$callback)())
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_aada7184ada3e3728240f535a93f532ba}{sd\+\_\+mode}}
+\item 
+volatile \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_af7a1a6097b641e4dbdfd05ce9a4626ba}{spi\+\_\+cfg}}
+\item 
+volatile \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_acad0e3d90b4199f50c39cc21356f0adb}{evd\+\_\+cfg}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} \mbox{\hyperlink{ed64io__everdrive_8c_a3f622afca3a82b76b3b98ccd003de26f}{sd\+\_\+type}}
+\item 
+volatile \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$ \mbox{\hyperlink{ed64io__everdrive_8c_a485673941c93c2d5036fdb8169f2e104}{regs\+\_\+ptr}} = (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}$\ast$)0x\+A8040000
+\item 
+void($\ast$ \mbox{\hyperlink{ed64io__everdrive_8c_abe6a66a796d77f3c9e1a84179f705436}{dma\+\_\+busy\+\_\+callback}} )()
+\item 
+static int \mbox{\hyperlink{ed64io__everdrive_8c_aa72c01879aee8a58bd94a0ce93ff039c}{evd\+\_\+fifo\+Wr\+Nonblock\+Msg\+Id}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__everdrive_8c_a938c1466755f12fb04ac0d1b775584d1}\label{ed64io__everdrive_8c_a938c1466755f12fb04ac0d1b775584d1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD0@{CMD0}}
+\index{CMD0@{CMD0}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD0}{CMD0}}
+{\footnotesize\ttfamily \#define CMD0~0x40}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aca9979f299fa78c1128d778084478673}\label{ed64io__everdrive_8c_aca9979f299fa78c1128d778084478673}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD1@{CMD1}}
+\index{CMD1@{CMD1}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD1}{CMD1}}
+{\footnotesize\ttfamily \#define CMD1~0x41}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ae7b800ed8e7bd52e6f570a5ce72b8104}\label{ed64io__everdrive_8c_ae7b800ed8e7bd52e6f570a5ce72b8104}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD10@{CMD10}}
+\index{CMD10@{CMD10}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD10}{CMD10}}
+{\footnotesize\ttfamily \#define CMD10~0x4A}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_af6aa8edd1a1d6ca68d5ca6e3e2ebe1f8}\label{ed64io__everdrive_8c_af6aa8edd1a1d6ca68d5ca6e3e2ebe1f8}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD11@{CMD11}}
+\index{CMD11@{CMD11}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD11}{CMD11}}
+{\footnotesize\ttfamily \#define CMD11~0x4B}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a8d6283c9b060afbaa0e6d1ff7e5ea7b8}\label{ed64io__everdrive_8c_a8d6283c9b060afbaa0e6d1ff7e5ea7b8}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD12@{CMD12}}
+\index{CMD12@{CMD12}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD12}{CMD12}}
+{\footnotesize\ttfamily \#define CMD12~0x4C}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a4bf0d32fc9e480f24e5282fb3c4752bb}\label{ed64io__everdrive_8c_a4bf0d32fc9e480f24e5282fb3c4752bb}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD13@{CMD13}}
+\index{CMD13@{CMD13}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD13}{CMD13}}
+{\footnotesize\ttfamily \#define CMD13~0x4D}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a724e3c5003987525d422e6e1b45f456b}\label{ed64io__everdrive_8c_a724e3c5003987525d422e6e1b45f456b}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD14@{CMD14}}
+\index{CMD14@{CMD14}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD14}{CMD14}}
+{\footnotesize\ttfamily \#define CMD14~0x4E}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a607d3285379685b5f736c20f2a98ab7a}\label{ed64io__everdrive_8c_a607d3285379685b5f736c20f2a98ab7a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD15@{CMD15}}
+\index{CMD15@{CMD15}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD15}{CMD15}}
+{\footnotesize\ttfamily \#define CMD15~0x4F}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aaeab261b94f2031ba41a1d4d857c3541}\label{ed64io__everdrive_8c_aaeab261b94f2031ba41a1d4d857c3541}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD16@{CMD16}}
+\index{CMD16@{CMD16}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD16}{CMD16}}
+{\footnotesize\ttfamily \#define CMD16~0x50}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a6bbfe7dc16a19b7f40efcf554b5666ad}\label{ed64io__everdrive_8c_a6bbfe7dc16a19b7f40efcf554b5666ad}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD17@{CMD17}}
+\index{CMD17@{CMD17}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD17}{CMD17}}
+{\footnotesize\ttfamily \#define CMD17~0x51}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a3d32c27a6be061b865ba539127278f14}\label{ed64io__everdrive_8c_a3d32c27a6be061b865ba539127278f14}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD18@{CMD18}}
+\index{CMD18@{CMD18}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD18}{CMD18}}
+{\footnotesize\ttfamily \#define CMD18~0x52}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a2647d51b93b3496ecf97f0410f44bef3}\label{ed64io__everdrive_8c_a2647d51b93b3496ecf97f0410f44bef3}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD19@{CMD19}}
+\index{CMD19@{CMD19}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD19}{CMD19}}
+{\footnotesize\ttfamily \#define CMD19~0x53}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_afc5c4b6ab1c918966cbd02b1a7d9d68c}\label{ed64io__everdrive_8c_afc5c4b6ab1c918966cbd02b1a7d9d68c}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD2@{CMD2}}
+\index{CMD2@{CMD2}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD2}{CMD2}}
+{\footnotesize\ttfamily \#define CMD2~0x42}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a207b9646ac2917dd904d8ba5699a027d}\label{ed64io__everdrive_8c_a207b9646ac2917dd904d8ba5699a027d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD20@{CMD20}}
+\index{CMD20@{CMD20}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD20}{CMD20}}
+{\footnotesize\ttfamily \#define CMD20~0x54}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ac1839f1a861812310886ef7656ff606c}\label{ed64io__everdrive_8c_ac1839f1a861812310886ef7656ff606c}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD21@{CMD21}}
+\index{CMD21@{CMD21}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD21}{CMD21}}
+{\footnotesize\ttfamily \#define CMD21~0x55}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a8f62c024061074c1c80075b9db5e8368}\label{ed64io__everdrive_8c_a8f62c024061074c1c80075b9db5e8368}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD22@{CMD22}}
+\index{CMD22@{CMD22}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD22}{CMD22}}
+{\footnotesize\ttfamily \#define CMD22~0x56}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a14506e981f38b6177bc36f72c2ca18b1}\label{ed64io__everdrive_8c_a14506e981f38b6177bc36f72c2ca18b1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD23@{CMD23}}
+\index{CMD23@{CMD23}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD23}{CMD23}}
+{\footnotesize\ttfamily \#define CMD23~0x57}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a252300302c6f7960df547a7f5c25be85}\label{ed64io__everdrive_8c_a252300302c6f7960df547a7f5c25be85}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD24@{CMD24}}
+\index{CMD24@{CMD24}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD24}{CMD24}}
+{\footnotesize\ttfamily \#define CMD24~0x58}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aee2c673fba987178f4642531fdeefe9e}\label{ed64io__everdrive_8c_aee2c673fba987178f4642531fdeefe9e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD25@{CMD25}}
+\index{CMD25@{CMD25}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD25}{CMD25}}
+{\footnotesize\ttfamily \#define CMD25~0x59}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a7aabc9a46185c195501fedd6dd33169c}\label{ed64io__everdrive_8c_a7aabc9a46185c195501fedd6dd33169c}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD26@{CMD26}}
+\index{CMD26@{CMD26}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD26}{CMD26}}
+{\footnotesize\ttfamily \#define CMD26~0x5A}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a86bfadef15f0f96886470d422419fada}\label{ed64io__everdrive_8c_a86bfadef15f0f96886470d422419fada}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD27@{CMD27}}
+\index{CMD27@{CMD27}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD27}{CMD27}}
+{\footnotesize\ttfamily \#define CMD27~0x5B}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ad69413163404b63841303043b0e3b454}\label{ed64io__everdrive_8c_ad69413163404b63841303043b0e3b454}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD28@{CMD28}}
+\index{CMD28@{CMD28}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD28}{CMD28}}
+{\footnotesize\ttfamily \#define CMD28~0x5C}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a19639149b72d0c8d4917faeb1f16a4b0}\label{ed64io__everdrive_8c_a19639149b72d0c8d4917faeb1f16a4b0}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD29@{CMD29}}
+\index{CMD29@{CMD29}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD29}{CMD29}}
+{\footnotesize\ttfamily \#define CMD29~0x5D}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a130f4c4e31a70d8f61750a581687e39a}\label{ed64io__everdrive_8c_a130f4c4e31a70d8f61750a581687e39a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD3@{CMD3}}
+\index{CMD3@{CMD3}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD3}{CMD3}}
+{\footnotesize\ttfamily \#define CMD3~0x43}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa2fcf8d240115b99ed973cd1a5557f98}\label{ed64io__everdrive_8c_aa2fcf8d240115b99ed973cd1a5557f98}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD30@{CMD30}}
+\index{CMD30@{CMD30}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD30}{CMD30}}
+{\footnotesize\ttfamily \#define CMD30~0x5E}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ac778762b14dadc075faea7f5d2457ef5}\label{ed64io__everdrive_8c_ac778762b14dadc075faea7f5d2457ef5}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD31@{CMD31}}
+\index{CMD31@{CMD31}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD31}{CMD31}}
+{\footnotesize\ttfamily \#define CMD31~0x5F}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_af822a2ff9987b3a48982731fa4ba5f7b}\label{ed64io__everdrive_8c_af822a2ff9987b3a48982731fa4ba5f7b}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD32@{CMD32}}
+\index{CMD32@{CMD32}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD32}{CMD32}}
+{\footnotesize\ttfamily \#define CMD32~0x60}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a309d932899cca7255395821dc32dace0}\label{ed64io__everdrive_8c_a309d932899cca7255395821dc32dace0}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD33@{CMD33}}
+\index{CMD33@{CMD33}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD33}{CMD33}}
+{\footnotesize\ttfamily \#define CMD33~0x61}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aff6398eae8ce82da239b9e1356a771c9}\label{ed64io__everdrive_8c_aff6398eae8ce82da239b9e1356a771c9}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD34@{CMD34}}
+\index{CMD34@{CMD34}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD34}{CMD34}}
+{\footnotesize\ttfamily \#define CMD34~0x62}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ab9c80756cedda908a54634c75e57b431}\label{ed64io__everdrive_8c_ab9c80756cedda908a54634c75e57b431}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD35@{CMD35}}
+\index{CMD35@{CMD35}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD35}{CMD35}}
+{\footnotesize\ttfamily \#define CMD35~0x63}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a6cd610050bb2db4b959b30343d4647cc}\label{ed64io__everdrive_8c_a6cd610050bb2db4b959b30343d4647cc}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD36@{CMD36}}
+\index{CMD36@{CMD36}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD36}{CMD36}}
+{\footnotesize\ttfamily \#define CMD36~0x64}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a1bff0d4d45c2e0170cdb80527d880cd8}\label{ed64io__everdrive_8c_a1bff0d4d45c2e0170cdb80527d880cd8}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD37@{CMD37}}
+\index{CMD37@{CMD37}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD37}{CMD37}}
+{\footnotesize\ttfamily \#define CMD37~0x65}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a6af4991146dfb0a47c4aa6f166efb046}\label{ed64io__everdrive_8c_a6af4991146dfb0a47c4aa6f166efb046}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD38@{CMD38}}
+\index{CMD38@{CMD38}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD38}{CMD38}}
+{\footnotesize\ttfamily \#define CMD38~0x66}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa624f4c6d95bf679e5c8093993926e79}\label{ed64io__everdrive_8c_aa624f4c6d95bf679e5c8093993926e79}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD39@{CMD39}}
+\index{CMD39@{CMD39}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD39}{CMD39}}
+{\footnotesize\ttfamily \#define CMD39~0x67}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a096675dbae532a107dd5f638993a1f67}\label{ed64io__everdrive_8c_a096675dbae532a107dd5f638993a1f67}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD4@{CMD4}}
+\index{CMD4@{CMD4}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD4}{CMD4}}
+{\footnotesize\ttfamily \#define CMD4~0x44}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ae67c32f1cd480ae41e05fba2ab03b961}\label{ed64io__everdrive_8c_ae67c32f1cd480ae41e05fba2ab03b961}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD40@{CMD40}}
+\index{CMD40@{CMD40}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD40}{CMD40}}
+{\footnotesize\ttfamily \#define CMD40~0x68}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a3ca1450d0ac55d2705aab03537bf2865}\label{ed64io__everdrive_8c_a3ca1450d0ac55d2705aab03537bf2865}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD41@{CMD41}}
+\index{CMD41@{CMD41}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD41}{CMD41}}
+{\footnotesize\ttfamily \#define CMD41~0x69}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa2c209c54f179ba623500a83db4a6669}\label{ed64io__everdrive_8c_aa2c209c54f179ba623500a83db4a6669}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD42@{CMD42}}
+\index{CMD42@{CMD42}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD42}{CMD42}}
+{\footnotesize\ttfamily \#define CMD42~0x6A}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_af1f24155531bae5091603a273a426437}\label{ed64io__everdrive_8c_af1f24155531bae5091603a273a426437}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD5@{CMD5}}
+\index{CMD5@{CMD5}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD5}{CMD5}}
+{\footnotesize\ttfamily \#define CMD5~0x45}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa7a26b2cf17e1ff5967820a1fa41a7aa}\label{ed64io__everdrive_8c_aa7a26b2cf17e1ff5967820a1fa41a7aa}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD58@{CMD58}}
+\index{CMD58@{CMD58}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD58}{CMD58}}
+{\footnotesize\ttfamily \#define CMD58~0x7A}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa8ea570644ddff6d18b63e4abbf39e0d}\label{ed64io__everdrive_8c_aa8ea570644ddff6d18b63e4abbf39e0d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD59@{CMD59}}
+\index{CMD59@{CMD59}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD59}{CMD59}}
+{\footnotesize\ttfamily \#define CMD59~0x7B}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a8f99cc8c10435831e23c0e7923445bba}\label{ed64io__everdrive_8c_a8f99cc8c10435831e23c0e7923445bba}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD6@{CMD6}}
+\index{CMD6@{CMD6}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD6}{CMD6}}
+{\footnotesize\ttfamily \#define CMD6~0x46}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a8d3c60653ad9483b8f3d276cc838a3c9}\label{ed64io__everdrive_8c_a8d3c60653ad9483b8f3d276cc838a3c9}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD7@{CMD7}}
+\index{CMD7@{CMD7}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD7}{CMD7}}
+{\footnotesize\ttfamily \#define CMD7~0x47}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ac75b3e0ad1fb013ea946fb49bbe65668}\label{ed64io__everdrive_8c_ac75b3e0ad1fb013ea946fb49bbe65668}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD8@{CMD8}}
+\index{CMD8@{CMD8}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD8}{CMD8}}
+{\footnotesize\ttfamily \#define CMD8~0x48}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a1fac6a251d7e7dc204d21639bf521459}\label{ed64io__everdrive_8c_a1fac6a251d7e7dc204d21639bf521459}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!CMD9@{CMD9}}
+\index{CMD9@{CMD9}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{CMD9}{CMD9}}
+{\footnotesize\ttfamily \#define CMD9~0x49}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a53ce8ac4bb6bd327e7f63088af52ac91}\label{ed64io__everdrive_8c_a53ce8ac4bb6bd327e7f63088af52ac91}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!ED\_STATE\_DMA\_BUSY@{ED\_STATE\_DMA\_BUSY}}
+\index{ED\_STATE\_DMA\_BUSY@{ED\_STATE\_DMA\_BUSY}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{ED\_STATE\_DMA\_BUSY}{ED\_STATE\_DMA\_BUSY}}
+{\footnotesize\ttfamily \#define ED\+\_\+\+STATE\+\_\+\+DMA\+\_\+\+BUSY~0}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a2bf55c0204029a4f541bdc114be62de5}\label{ed64io__everdrive_8c_a2bf55c0204029a4f541bdc114be62de5}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!ED\_STATE\_DMA\_TOUT@{ED\_STATE\_DMA\_TOUT}}
+\index{ED\_STATE\_DMA\_TOUT@{ED\_STATE\_DMA\_TOUT}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{ED\_STATE\_DMA\_TOUT}{ED\_STATE\_DMA\_TOUT}}
+{\footnotesize\ttfamily \#define ED\+\_\+\+STATE\+\_\+\+DMA\+\_\+\+TOUT~1}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ae7c15dd07b18ce581f6221c420ad0549}\label{ed64io__everdrive_8c_ae7c15dd07b18ce581f6221c420ad0549}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!ED\_STATE\_RXF@{ED\_STATE\_RXF}}
+\index{ED\_STATE\_RXF@{ED\_STATE\_RXF}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{ED\_STATE\_RXF}{ED\_STATE\_RXF}}
+{\footnotesize\ttfamily \#define ED\+\_\+\+STATE\+\_\+\+RXF~3}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ac4bf91bd588c0dddadd7766a935159be}\label{ed64io__everdrive_8c_ac4bf91bd588c0dddadd7766a935159be}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!ED\_STATE\_SPI@{ED\_STATE\_SPI}}
+\index{ED\_STATE\_SPI@{ED\_STATE\_SPI}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{ED\_STATE\_SPI}{ED\_STATE\_SPI}}
+{\footnotesize\ttfamily \#define ED\+\_\+\+STATE\+\_\+\+SPI~4}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a429812107e653488c44f1ac3c8b5a077}\label{ed64io__everdrive_8c_a429812107e653488c44f1ac3c8b5a077}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!ED\_STATE\_TXE@{ED\_STATE\_TXE}}
+\index{ED\_STATE\_TXE@{ED\_STATE\_TXE}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{ED\_STATE\_TXE}{ED\_STATE\_TXE}}
+{\footnotesize\ttfamily \#define ED\+\_\+\+STATE\+\_\+\+TXE~2}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aabfa4a230b5c9dd2db16a81d49f6cfd1}\label{ed64io__everdrive_8c_aabfa4a230b5c9dd2db16a81d49f6cfd1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE@{EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE}}
+\index{EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE@{EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE}{EVERDRIVE\_CART\_BLOCK\_WRITE\_SIZE}}
+{\footnotesize\ttfamily \#define EVERDRIVE\+\_\+\+CART\+\_\+\+BLOCK\+\_\+\+WRITE\+\_\+\+SIZE~0x4000 /$\ast$ cart write block size $\ast$/}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ab416cc3a94d3884092cb5c0a3157afc1}\label{ed64io__everdrive_8c_ab416cc3a94d3884092cb5c0a3157afc1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SAV\_EEP\_ON@{SAV\_EEP\_ON}}
+\index{SAV\_EEP\_ON@{SAV\_EEP\_ON}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SAV\_EEP\_ON}{SAV\_EEP\_ON}}
+{\footnotesize\ttfamily \#define SAV\+\_\+\+EEP\+\_\+\+ON~0}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aea71c707b75825d5723446f60f0aea67}\label{ed64io__everdrive_8c_aea71c707b75825d5723446f60f0aea67}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SAV\_EEP\_SIZE@{SAV\_EEP\_SIZE}}
+\index{SAV\_EEP\_SIZE@{SAV\_EEP\_SIZE}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SAV\_EEP\_SIZE}{SAV\_EEP\_SIZE}}
+{\footnotesize\ttfamily \#define SAV\+\_\+\+EEP\+\_\+\+SIZE~2}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_accfa9a757c506d10f4869cb0fe2ffb14}\label{ed64io__everdrive_8c_accfa9a757c506d10f4869cb0fe2ffb14}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SAV\_SRM\_ON@{SAV\_SRM\_ON}}
+\index{SAV\_SRM\_ON@{SAV\_SRM\_ON}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SAV\_SRM\_ON}{SAV\_SRM\_ON}}
+{\footnotesize\ttfamily \#define SAV\+\_\+\+SRM\+\_\+\+ON~1}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a19f238b8d9bc0983b3535b32607af9f0}\label{ed64io__everdrive_8c_a19f238b8d9bc0983b3535b32607af9f0}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SAV\_SRM\_SIZE@{SAV\_SRM\_SIZE}}
+\index{SAV\_SRM\_SIZE@{SAV\_SRM\_SIZE}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SAV\_SRM\_SIZE}{SAV\_SRM\_SIZE}}
+{\footnotesize\ttfamily \#define SAV\+\_\+\+SRM\+\_\+\+SIZE~3}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a78c70d50d82fa4413d30a578a2255c02}\label{ed64io__everdrive_8c_a78c70d50d82fa4413d30a578a2255c02}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_1BIT@{SPI\_CFG\_1BIT}}
+\index{SPI\_CFG\_1BIT@{SPI\_CFG\_1BIT}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_1BIT}{SPI\_CFG\_1BIT}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+1\+BIT~5}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a5d18c336eb8de935480694c152eddd3c}\label{ed64io__everdrive_8c_a5d18c336eb8de935480694c152eddd3c}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_DAT@{SPI\_CFG\_DAT}}
+\index{SPI\_CFG\_DAT@{SPI\_CFG\_DAT}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_DAT}{SPI\_CFG\_DAT}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+\+DAT~4}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a0078177d4e8c284cd39db659b7049acf}\label{ed64io__everdrive_8c_a0078177d4e8c284cd39db659b7049acf}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_RD@{SPI\_CFG\_RD}}
+\index{SPI\_CFG\_RD@{SPI\_CFG\_RD}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_RD}{SPI\_CFG\_RD}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+\+RD~3}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a9786e3f24077767751fd1c5a49a8120d}\label{ed64io__everdrive_8c_a9786e3f24077767751fd1c5a49a8120d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_SPD0@{SPI\_CFG\_SPD0}}
+\index{SPI\_CFG\_SPD0@{SPI\_CFG\_SPD0}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_SPD0}{SPI\_CFG\_SPD0}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+\+SPD0~0}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a3ec55fa77d5b5aa921382aeee32bf99b}\label{ed64io__everdrive_8c_a3ec55fa77d5b5aa921382aeee32bf99b}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_SPD1@{SPI\_CFG\_SPD1}}
+\index{SPI\_CFG\_SPD1@{SPI\_CFG\_SPD1}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_SPD1}{SPI\_CFG\_SPD1}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+\+SPD1~1}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aefda39db8b114cfde1261bae33abe4c7}\label{ed64io__everdrive_8c_aefda39db8b114cfde1261bae33abe4c7}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!SPI\_CFG\_SS@{SPI\_CFG\_SS}}
+\index{SPI\_CFG\_SS@{SPI\_CFG\_SS}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{SPI\_CFG\_SS}{SPI\_CFG\_SS}}
+{\footnotesize\ttfamily \#define SPI\+\_\+\+CFG\+\_\+\+SS~2}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__everdrive_8c_a61946dd47a9bc0ec493aaf58ed9a155d}\label{ed64io__everdrive_8c_a61946dd47a9bc0ec493aaf58ed9a155d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_enableSDMode@{evd\_enableSDMode}}
+\index{evd\_enableSDMode@{evd\_enableSDMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_enableSDMode()}{evd\_enableSDMode()}}
+{\footnotesize\ttfamily void evd\+\_\+enable\+SDMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a1736b5e1714b492b823f1f2ea39f003f}\label{ed64io__everdrive_8c_a1736b5e1714b492b823f1f2ea39f003f}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_enableSPIMode@{evd\_enableSPIMode}}
+\index{evd\_enableSPIMode@{evd\_enableSPIMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_enableSPIMode()}{evd\_enableSPIMode()}}
+{\footnotesize\ttfamily void evd\+\_\+enable\+SPIMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a5ec4a768eb7185f5bcf4bf3c5da91a8a}\label{ed64io__everdrive_8c_a5ec4a768eb7185f5bcf4bf3c5da91a8a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoRd@{evd\_fifoRd}}
+\index{evd\_fifoRd@{evd\_fifoRd}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoRd()}{evd\_fifoRd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Rd (\begin{DoxyParamCaption}\item[{void $\ast$}]{buff,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{blocks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ac40be546dfc38e9a2b61019261059bc1}\label{ed64io__everdrive_8c_ac40be546dfc38e9a2b61019261059bc1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoRdToCart@{evd\_fifoRdToCart}}
+\index{evd\_fifoRdToCart@{evd\_fifoRdToCart}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoRdToCart()}{evd\_fifoRdToCart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Rd\+To\+Cart (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{cart\+\_\+addr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{blocks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a584cd0fa3a47d0b556c80496a32a4678}\label{ed64io__everdrive_8c_a584cd0fa3a47d0b556c80496a32a4678}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoRxf@{evd\_fifoRxf}}
+\index{evd\_fifoRxf@{evd\_fifoRxf}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoRxf()}{evd\_fifoRxf()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Rxf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a0ba6ebb5e1cb1f7d0b7624a6e3dffca6}\label{ed64io__everdrive_8c_a0ba6ebb5e1cb1f7d0b7624a6e3dffca6}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoTxe@{evd\_fifoTxe}}
+\index{evd\_fifoTxe@{evd\_fifoTxe}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoTxe()}{evd\_fifoTxe()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Txe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a0dabf6e84c24c764933fc323087b681a}\label{ed64io__everdrive_8c_a0dabf6e84c24c764933fc323087b681a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoWr@{evd\_fifoWr}}
+\index{evd\_fifoWr@{evd\_fifoWr}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoWr()}{evd\_fifoWr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Wr (\begin{DoxyParamCaption}\item[{void $\ast$}]{buff,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{blocks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a105154bfc82b40b8d2eb3ab5bd8f4514}\label{ed64io__everdrive_8c_a105154bfc82b40b8d2eb3ab5bd8f4514}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoWrFromCart@{evd\_fifoWrFromCart}}
+\index{evd\_fifoWrFromCart@{evd\_fifoWrFromCart}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoWrFromCart()}{evd\_fifoWrFromCart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+fifo\+Wr\+From\+Cart (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{cart\+\_\+addr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{blocks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a5be35f29b57e2cace1f1af2929af7a64}\label{ed64io__everdrive_8c_a5be35f29b57e2cace1f1af2929af7a64}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoWrNonblock@{evd\_fifoWrNonblock}}
+\index{evd\_fifoWrNonblock@{evd\_fifoWrNonblock}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoWrNonblock()}{evd\_fifoWrNonblock()}}
+{\footnotesize\ttfamily void evd\+\_\+fifo\+Wr\+Nonblock (\begin{DoxyParamCaption}\item[{void $\ast$}]{buff,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{blocks,  }\item[{\mbox{\hyperlink{ed64io__everdrive_8h_structevd__fifoWrNonblockState}{evd\+\_\+fifo\+Wr\+Nonblock\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a15fd80333d7a416b9e5c5da68edad46e}\label{ed64io__everdrive_8c_a15fd80333d7a416b9e5c5da68edad46e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoWrNonblockStateInit@{evd\_fifoWrNonblockStateInit}}
+\index{evd\_fifoWrNonblockStateInit@{evd\_fifoWrNonblockStateInit}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoWrNonblockStateInit()}{evd\_fifoWrNonblockStateInit()}}
+{\footnotesize\ttfamily void evd\+\_\+fifo\+Wr\+Nonblock\+State\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__everdrive_8h_structevd__fifoWrNonblockState}{evd\+\_\+fifo\+Wr\+Nonblock\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_abfb30c5929e640d2970b0e8d16894cf6}\label{ed64io__everdrive_8c_abfb30c5929e640d2970b0e8d16894cf6}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_getFirmVersion@{evd\_getFirmVersion}}
+\index{evd\_getFirmVersion@{evd\_getFirmVersion}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_getFirmVersion()}{evd\_getFirmVersion()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} evd\+\_\+get\+Firm\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a5d2955977c48e501cc327b037fe15412}\label{ed64io__everdrive_8c_a5d2955977c48e501cc327b037fe15412}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_init@{evd\_init}}
+\index{evd\_init@{evd\_init}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_init()}{evd\_init()}}
+{\footnotesize\ttfamily void evd\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a2fb40255db69dfc178f924e914c59604}\label{ed64io__everdrive_8c_a2fb40255db69dfc178f924e914c59604}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_isDmaBusy@{evd\_isDmaBusy}}
+\index{evd\_isDmaBusy@{evd\_isDmaBusy}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_isDmaBusy()}{evd\_isDmaBusy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+is\+Dma\+Busy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a08f02fb590ed21c6cefa72ae82f647f1}\label{ed64io__everdrive_8c_a08f02fb590ed21c6cefa72ae82f647f1}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_isDmaBusyNoWait@{evd\_isDmaBusyNoWait}}
+\index{evd\_isDmaBusyNoWait@{evd\_isDmaBusyNoWait}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_isDmaBusyNoWait()}{evd\_isDmaBusyNoWait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+is\+Dma\+Busy\+No\+Wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_afea7d06027cfbdfc1d9b96bda64cf2dc}\label{ed64io__everdrive_8c_afea7d06027cfbdfc1d9b96bda64cf2dc}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_isDmaTimeout@{evd\_isDmaTimeout}}
+\index{evd\_isDmaTimeout@{evd\_isDmaTimeout}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_isDmaTimeout()}{evd\_isDmaTimeout()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+is\+Dma\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a0743ea1952fee1a7324af3259485f049}\label{ed64io__everdrive_8c_a0743ea1952fee1a7324af3259485f049}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_isSDMode@{evd\_isSDMode}}
+\index{evd\_isSDMode@{evd\_isSDMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_isSDMode()}{evd\_isSDMode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+is\+SDMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a59c8066cdac035c2f121efc58a68d1a6}\label{ed64io__everdrive_8c_a59c8066cdac035c2f121efc58a68d1a6}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_isSpiBusy@{evd\_isSpiBusy}}
+\index{evd\_isSpiBusy@{evd\_isSpiBusy}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_isSpiBusy()}{evd\_isSpiBusy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+is\+Spi\+Busy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a11462c383415e07fbf20c1950687d0e0}\label{ed64io__everdrive_8c_a11462c383415e07fbf20c1950687d0e0}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_lockRegs@{evd\_lockRegs}}
+\index{evd\_lockRegs@{evd\_lockRegs}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_lockRegs()}{evd\_lockRegs()}}
+{\footnotesize\ttfamily void evd\+\_\+lock\+Regs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ad42692848b762965a3665bd71526e15b}\label{ed64io__everdrive_8c_ad42692848b762965a3665bd71526e15b}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_mmcCmd@{evd\_mmcCmd}}
+\index{evd\_mmcCmd@{evd\_mmcCmd}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_mmcCmd()}{evd\_mmcCmd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+mmc\+Cmd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{cmd,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a51422c4838aa2e2274d8f9d93403ff36}\label{ed64io__everdrive_8c_a51422c4838aa2e2274d8f9d93403ff36}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_mmcReadToCart@{evd\_mmcReadToCart}}
+\index{evd\_mmcReadToCart@{evd\_mmcReadToCart}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_mmcReadToCart()}{evd\_mmcReadToCart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+mmc\+Read\+To\+Cart (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{cart\+\_\+addr,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a105d34011eb88d7260ccb84803976d7e}\label{ed64io__everdrive_8c_a105d34011eb88d7260ccb84803976d7e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_mmcSetDmaSwap@{evd\_mmcSetDmaSwap}}
+\index{evd\_mmcSetDmaSwap@{evd\_mmcSetDmaSwap}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_mmcSetDmaSwap()}{evd\_mmcSetDmaSwap()}}
+{\footnotesize\ttfamily void evd\+\_\+mmc\+Set\+Dma\+Swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ab59fdf434b5dda14c2f496f22d3478a6}\label{ed64io__everdrive_8c_ab59fdf434b5dda14c2f496f22d3478a6}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_readMsg@{evd\_readMsg}}
+\index{evd\_readMsg@{evd\_readMsg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_readMsg()}{evd\_readMsg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+read\+Msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aafc4f64b72ae4a4f79516f1a2d445e5d}\label{ed64io__everdrive_8c_aafc4f64b72ae4a4f79516f1a2d445e5d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_readReg@{evd\_readReg}}
+\index{evd\_readReg@{evd\_readReg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_readReg()}{evd\_readReg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} evd\+\_\+read\+Reg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{reg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a75869c974a66d90d5f75cf3048c94387}\label{ed64io__everdrive_8c_a75869c974a66d90d5f75cf3048c94387}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_SDcmdReadMode@{evd\_SDcmdReadMode}}
+\index{evd\_SDcmdReadMode@{evd\_SDcmdReadMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_SDcmdReadMode()}{evd\_SDcmdReadMode()}}
+{\footnotesize\ttfamily void evd\+\_\+\+SDcmd\+Read\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{bit1\+\_\+mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a71ac7d4058fd8ade54a90fd5d9a5c64a}\label{ed64io__everdrive_8c_a71ac7d4058fd8ade54a90fd5d9a5c64a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_SDcmdWriteMode@{evd\_SDcmdWriteMode}}
+\index{evd\_SDcmdWriteMode@{evd\_SDcmdWriteMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_SDcmdWriteMode()}{evd\_SDcmdWriteMode()}}
+{\footnotesize\ttfamily void evd\+\_\+\+SDcmd\+Write\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{bit1\+\_\+mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a9f76cae40ace869c21df7f38f599a66e}\label{ed64io__everdrive_8c_a9f76cae40ace869c21df7f38f599a66e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_SDdatReadMode@{evd\_SDdatReadMode}}
+\index{evd\_SDdatReadMode@{evd\_SDdatReadMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_SDdatReadMode()}{evd\_SDdatReadMode()}}
+{\footnotesize\ttfamily void evd\+\_\+\+SDdat\+Read\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{bit4\+\_\+mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a7967514ce83871dc1ae73fd419ed17b2}\label{ed64io__everdrive_8c_a7967514ce83871dc1ae73fd419ed17b2}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_SDdatWriteMode@{evd\_SDdatWriteMode}}
+\index{evd\_SDdatWriteMode@{evd\_SDdatWriteMode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_SDdatWriteMode()}{evd\_SDdatWriteMode()}}
+{\footnotesize\ttfamily void evd\+\_\+\+SDdat\+Write\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{bit4\+\_\+mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a99fbc9e38e49c43f85031aa058febf79}\label{ed64io__everdrive_8c_a99fbc9e38e49c43f85031aa058febf79}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_setCfgBit@{evd\_setCfgBit}}
+\index{evd\_setCfgBit@{evd\_setCfgBit}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_setCfgBit()}{evd\_setCfgBit()}}
+{\footnotesize\ttfamily void evd\+\_\+set\+Cfg\+Bit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{option,  }\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ad55036afe0794cc83725ed43f5cd382e}\label{ed64io__everdrive_8c_ad55036afe0794cc83725ed43f5cd382e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_setDmaAddr@{evd\_setDmaAddr}}
+\index{evd\_setDmaAddr@{evd\_setDmaAddr}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_setDmaAddr()}{evd\_setDmaAddr()}}
+{\footnotesize\ttfamily void evd\+\_\+set\+Dma\+Addr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}}]{addr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a5c89a2cbf720d8de214416eea5d99c0b}\label{ed64io__everdrive_8c_a5c89a2cbf720d8de214416eea5d99c0b}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_setDmaCallback@{evd\_setDmaCallback}}
+\index{evd\_setDmaCallback@{evd\_setDmaCallback}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_setDmaCallback()}{evd\_setDmaCallback()}}
+{\footnotesize\ttfamily void evd\+\_\+set\+Dma\+Callback (\begin{DoxyParamCaption}\item[{void($\ast$)()}]{callback }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_ae4631105c24085bbb23fa4ba04034a6d}\label{ed64io__everdrive_8c_ae4631105c24085bbb23fa4ba04034a6d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_setSaveType@{evd\_setSaveType}}
+\index{evd\_setSaveType@{evd\_setSaveType}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_setSaveType()}{evd\_setSaveType()}}
+{\footnotesize\ttfamily void evd\+\_\+set\+Save\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a05ff35b8379cbb5577e05d213d837bed}\label{ed64io__everdrive_8c_a05ff35b8379cbb5577e05d213d837bed}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_setSpiSpeed@{evd\_setSpiSpeed}}
+\index{evd\_setSpiSpeed@{evd\_setSpiSpeed}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_setSpiSpeed()}{evd\_setSpiSpeed()}}
+{\footnotesize\ttfamily void evd\+\_\+set\+Spi\+Speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{speed }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a9c7a2bd450b60692153eecf4529d0f9e}\label{ed64io__everdrive_8c_a9c7a2bd450b60692153eecf4529d0f9e}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_SPI@{evd\_SPI}}
+\index{evd\_SPI@{evd\_SPI}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_SPI()}{evd\_SPI()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+\+SPI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{dat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a87499d9dab8051441b6a6e7e28f1df7d}\label{ed64io__everdrive_8c_a87499d9dab8051441b6a6e7e28f1df7d}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_spiSSOff@{evd\_spiSSOff}}
+\index{evd\_spiSSOff@{evd\_spiSSOff}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_spiSSOff()}{evd\_spiSSOff()}}
+{\footnotesize\ttfamily void evd\+\_\+spi\+SSOff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a07c68a21869544220f443f468f1d4765}\label{ed64io__everdrive_8c_a07c68a21869544220f443f468f1d4765}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_spiSSOn@{evd\_spiSSOn}}
+\index{evd\_spiSSOn@{evd\_spiSSOn}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_spiSSOn()}{evd\_spiSSOn()}}
+{\footnotesize\ttfamily void evd\+\_\+spi\+SSOn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a7cb4a1beef5c5cbb0439b475d1bf2e99}\label{ed64io__everdrive_8c_a7cb4a1beef5c5cbb0439b475d1bf2e99}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_writeMsg@{evd\_writeMsg}}
+\index{evd\_writeMsg@{evd\_writeMsg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_writeMsg()}{evd\_writeMsg()}}
+{\footnotesize\ttfamily void evd\+\_\+write\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{dat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_af3b7aa891812f28a93bc8c81c6d5a34a}\label{ed64io__everdrive_8c_af3b7aa891812f28a93bc8c81c6d5a34a}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_writeReg@{evd\_writeReg}}
+\index{evd\_writeReg@{evd\_writeReg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_writeReg()}{evd\_writeReg()}}
+{\footnotesize\ttfamily void evd\+\_\+write\+Reg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{reg,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{val }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ed64io__everdrive_8c_abe6a66a796d77f3c9e1a84179f705436}\label{ed64io__everdrive_8c_abe6a66a796d77f3c9e1a84179f705436}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!dma\_busy\_callback@{dma\_busy\_callback}}
+\index{dma\_busy\_callback@{dma\_busy\_callback}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{dma\_busy\_callback}{dma\_busy\_callback}}
+{\footnotesize\ttfamily void($\ast$ dma\+\_\+busy\+\_\+callback) () (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_acad0e3d90b4199f50c39cc21356f0adb}\label{ed64io__everdrive_8c_acad0e3d90b4199f50c39cc21356f0adb}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_cfg@{evd\_cfg}}
+\index{evd\_cfg@{evd\_cfg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_cfg}{evd\_cfg}}
+{\footnotesize\ttfamily volatile \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} evd\+\_\+cfg}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aa72c01879aee8a58bd94a0ce93ff039c}\label{ed64io__everdrive_8c_aa72c01879aee8a58bd94a0ce93ff039c}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!evd\_fifoWrNonblockMsgId@{evd\_fifoWrNonblockMsgId}}
+\index{evd\_fifoWrNonblockMsgId@{evd\_fifoWrNonblockMsgId}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{evd\_fifoWrNonblockMsgId}{evd\_fifoWrNonblockMsgId}}
+{\footnotesize\ttfamily int evd\+\_\+fifo\+Wr\+Nonblock\+Msg\+Id = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a485673941c93c2d5036fdb8169f2e104}\label{ed64io__everdrive_8c_a485673941c93c2d5036fdb8169f2e104}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!regs\_ptr@{regs\_ptr}}
+\index{regs\_ptr@{regs\_ptr}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{regs\_ptr}{regs\_ptr}}
+{\footnotesize\ttfamily volatile \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}$\ast$ regs\+\_\+ptr = (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}$\ast$)0x\+A8040000}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_aada7184ada3e3728240f535a93f532ba}\label{ed64io__everdrive_8c_aada7184ada3e3728240f535a93f532ba}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!sd\_mode@{sd\_mode}}
+\index{sd\_mode@{sd\_mode}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{sd\_mode}{sd\_mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} sd\+\_\+mode}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_a3f622afca3a82b76b3b98ccd003de26f}\label{ed64io__everdrive_8c_a3f622afca3a82b76b3b98ccd003de26f}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!sd\_type@{sd\_type}}
+\index{sd\_type@{sd\_type}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{sd\_type}{sd\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} sd\+\_\+type}
+
+\mbox{\Hypertarget{ed64io__everdrive_8c_af7a1a6097b641e4dbdfd05ce9a4626ba}\label{ed64io__everdrive_8c_af7a1a6097b641e4dbdfd05ce9a4626ba}} 
+\index{ed64io\_everdrive.c@{ed64io\_everdrive.c}!spi\_cfg@{spi\_cfg}}
+\index{spi\_cfg@{spi\_cfg}!ed64io\_everdrive.c@{ed64io\_everdrive.c}}
+\doxysubsubsection{\texorpdfstring{spi\_cfg}{spi\_cfg}}
+{\footnotesize\ttfamily volatile \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} spi\+\_\+cfg}
+

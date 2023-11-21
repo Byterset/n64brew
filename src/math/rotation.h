@@ -2,7 +2,6 @@
 #ifndef ROTATION_H
 #define ROTATION_H
 
-#include "vector3.h"
 #include "quaternion.h"
 
 typedef struct Matrix4

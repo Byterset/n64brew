@@ -1,0 +1,67 @@
+\hypertarget{gameutils_8h}{}\doxysection{src/gameutils.h File Reference}
+\label{gameutils_8h}\index{src/gameutils.h@{src/gameutils.h}}
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+Include dependency graph for gameutils.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gameutils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gameutils_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{gameutils_8h_aab10273b21767bda5dfc6f48cf49424c}{Game\+Utils\+\_\+lerp\+Degrees}} (float start, float end, float amount)
+\item 
+float \mbox{\hyperlink{gameutils_8h_af528460b179005c82d64f5d7cb005cf1}{Game\+Utils\+\_\+fclamp}} (float x, float lower, float upper)
+\item 
+float \mbox{\hyperlink{gameutils_8h_aad0f9d4c09f8571b03b1363ed5991bd0}{Game\+Utils\+\_\+rotate\+Towards\+Clamped}} (float from, float to, float max\+Speed)
+\item 
+void \mbox{\hyperlink{gameutils_8h_a57b15a66c3a0951314c9892e3d13e806}{Game\+Utils\+\_\+direction\+From\+Top\+Down\+Angle}} (float angle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+int \mbox{\hyperlink{gameutils_8h_a8254fb8f460998bacc333b5d9b201709}{Game\+Utils\+\_\+in\+Water}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{gameutils_8h_a57b15a66c3a0951314c9892e3d13e806}\label{gameutils_8h_a57b15a66c3a0951314c9892e3d13e806}} 
+\index{gameutils.h@{gameutils.h}!GameUtils\_directionFromTopDownAngle@{GameUtils\_directionFromTopDownAngle}}
+\index{GameUtils\_directionFromTopDownAngle@{GameUtils\_directionFromTopDownAngle}!gameutils.h@{gameutils.h}}
+\doxysubsubsection{\texorpdfstring{GameUtils\_directionFromTopDownAngle()}{GameUtils\_directionFromTopDownAngle()}}
+{\footnotesize\ttfamily void Game\+Utils\+\_\+direction\+From\+Top\+Down\+Angle (\begin{DoxyParamCaption}\item[{float}]{angle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gameutils_8h_af528460b179005c82d64f5d7cb005cf1}\label{gameutils_8h_af528460b179005c82d64f5d7cb005cf1}} 
+\index{gameutils.h@{gameutils.h}!GameUtils\_fclamp@{GameUtils\_fclamp}}
+\index{GameUtils\_fclamp@{GameUtils\_fclamp}!gameutils.h@{gameutils.h}}
+\doxysubsubsection{\texorpdfstring{GameUtils\_fclamp()}{GameUtils\_fclamp()}}
+{\footnotesize\ttfamily float Game\+Utils\+\_\+fclamp (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{lower,  }\item[{float}]{upper }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gameutils_8h_a8254fb8f460998bacc333b5d9b201709}\label{gameutils_8h_a8254fb8f460998bacc333b5d9b201709}} 
+\index{gameutils.h@{gameutils.h}!GameUtils\_inWater@{GameUtils\_inWater}}
+\index{GameUtils\_inWater@{GameUtils\_inWater}!gameutils.h@{gameutils.h}}
+\doxysubsubsection{\texorpdfstring{GameUtils\_inWater()}{GameUtils\_inWater()}}
+{\footnotesize\ttfamily int Game\+Utils\+\_\+in\+Water (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gameutils_8h_aab10273b21767bda5dfc6f48cf49424c}\label{gameutils_8h_aab10273b21767bda5dfc6f48cf49424c}} 
+\index{gameutils.h@{gameutils.h}!GameUtils\_lerpDegrees@{GameUtils\_lerpDegrees}}
+\index{GameUtils\_lerpDegrees@{GameUtils\_lerpDegrees}!gameutils.h@{gameutils.h}}
+\doxysubsubsection{\texorpdfstring{GameUtils\_lerpDegrees()}{GameUtils\_lerpDegrees()}}
+{\footnotesize\ttfamily float Game\+Utils\+\_\+lerp\+Degrees (\begin{DoxyParamCaption}\item[{float}]{start,  }\item[{float}]{end,  }\item[{float}]{amount }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gameutils_8h_aad0f9d4c09f8571b03b1363ed5991bd0}\label{gameutils_8h_aad0f9d4c09f8571b03b1363ed5991bd0}} 
+\index{gameutils.h@{gameutils.h}!GameUtils\_rotateTowardsClamped@{GameUtils\_rotateTowardsClamped}}
+\index{GameUtils\_rotateTowardsClamped@{GameUtils\_rotateTowardsClamped}!gameutils.h@{gameutils.h}}
+\doxysubsubsection{\texorpdfstring{GameUtils\_rotateTowardsClamped()}{GameUtils\_rotateTowardsClamped()}}
+{\footnotesize\ttfamily float Game\+Utils\+\_\+rotate\+Towards\+Clamped (\begin{DoxyParamCaption}\item[{float}]{from,  }\item[{float}]{to,  }\item[{float}]{max\+Speed }\end{DoxyParamCaption})}
+

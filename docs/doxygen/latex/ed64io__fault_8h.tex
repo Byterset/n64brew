@@ -1,0 +1,71 @@
+\hypertarget{ed64io__fault_8h}{}\doxysection{src/ed64/ed64io\+\_\+fault.h File Reference}
+\label{ed64io__fault_8h}\index{src/ed64/ed64io\_fault.h@{src/ed64/ed64io\_fault.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+Include dependency graph for ed64io\+\_\+fault.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{ed64io__fault_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__fault_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}{ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE}}~0x2000
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ed64io__fault_8h_a61fd5618cad96dbc0588b717ac1b6cca}{ed64\+Start\+Fault\+Handler\+Thread}} (int main\+Thread\+Pri)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8h_ac95b07ad0c8bf60022100ff98a6180a5}{ed64\+Print\+Stack\+Trace}} (OSThread $\ast$t, int frames\+To\+Skip)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8h_a17250c9c3e1533740f2b9a7f8264a90c}{ed64\+Set\+Breakpoint}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$address)
+\item 
+void \mbox{\hyperlink{ed64io__fault_8h_a6fe493deb695aca69a3aa28cdbe40bc7}{ed64\+Print\+Threads}} (int with\+Stack\+Trace)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}\label{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}} 
+\index{ed64io\_fault.h@{ed64io\_fault.h}!ED64IO\_FAULT\_STACKSIZE@{ED64IO\_FAULT\_STACKSIZE}}
+\index{ED64IO\_FAULT\_STACKSIZE@{ED64IO\_FAULT\_STACKSIZE}!ed64io\_fault.h@{ed64io\_fault.h}}
+\doxysubsubsection{\texorpdfstring{ED64IO\_FAULT\_STACKSIZE}{ED64IO\_FAULT\_STACKSIZE}}
+{\footnotesize\ttfamily \#define ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE~0x2000}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__fault_8h_ac95b07ad0c8bf60022100ff98a6180a5}\label{ed64io__fault_8h_ac95b07ad0c8bf60022100ff98a6180a5}} 
+\index{ed64io\_fault.h@{ed64io\_fault.h}!ed64PrintStackTrace@{ed64PrintStackTrace}}
+\index{ed64PrintStackTrace@{ed64PrintStackTrace}!ed64io\_fault.h@{ed64io\_fault.h}}
+\doxysubsubsection{\texorpdfstring{ed64PrintStackTrace()}{ed64PrintStackTrace()}}
+{\footnotesize\ttfamily void ed64\+Print\+Stack\+Trace (\begin{DoxyParamCaption}\item[{OSThread $\ast$}]{t,  }\item[{int}]{frames\+To\+Skip }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8h_a6fe493deb695aca69a3aa28cdbe40bc7}\label{ed64io__fault_8h_a6fe493deb695aca69a3aa28cdbe40bc7}} 
+\index{ed64io\_fault.h@{ed64io\_fault.h}!ed64PrintThreads@{ed64PrintThreads}}
+\index{ed64PrintThreads@{ed64PrintThreads}!ed64io\_fault.h@{ed64io\_fault.h}}
+\doxysubsubsection{\texorpdfstring{ed64PrintThreads()}{ed64PrintThreads()}}
+{\footnotesize\ttfamily void ed64\+Print\+Threads (\begin{DoxyParamCaption}\item[{int}]{with\+Stack\+Trace }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8h_a17250c9c3e1533740f2b9a7f8264a90c}\label{ed64io__fault_8h_a17250c9c3e1533740f2b9a7f8264a90c}} 
+\index{ed64io\_fault.h@{ed64io\_fault.h}!ed64SetBreakpoint@{ed64SetBreakpoint}}
+\index{ed64SetBreakpoint@{ed64SetBreakpoint}!ed64io\_fault.h@{ed64io\_fault.h}}
+\doxysubsubsection{\texorpdfstring{ed64SetBreakpoint()}{ed64SetBreakpoint()}}
+{\footnotesize\ttfamily void ed64\+Set\+Breakpoint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{address }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__fault_8h_a61fd5618cad96dbc0588b717ac1b6cca}\label{ed64io__fault_8h_a61fd5618cad96dbc0588b717ac1b6cca}} 
+\index{ed64io\_fault.h@{ed64io\_fault.h}!ed64StartFaultHandlerThread@{ed64StartFaultHandlerThread}}
+\index{ed64StartFaultHandlerThread@{ed64StartFaultHandlerThread}!ed64io\_fault.h@{ed64io\_fault.h}}
+\doxysubsubsection{\texorpdfstring{ed64StartFaultHandlerThread()}{ed64StartFaultHandlerThread()}}
+{\footnotesize\ttfamily void ed64\+Start\+Fault\+Handler\+Thread (\begin{DoxyParamCaption}\item[{int}]{main\+Thread\+Pri }\end{DoxyParamCaption})}
+

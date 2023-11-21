@@ -1,0 +1,141 @@
+\hypertarget{ed64io__watchdog_8c}{}\doxysection{src/ed64/ed64io\+\_\+watchdog.c File Reference}
+\label{ed64io__watchdog_8c}\index{src/ed64/ed64io\_watchdog.c@{src/ed64/ed64io\_watchdog.c}}
+{\ttfamily \#include \char`\"{}ed64io.\+h\char`\"{}}\newline
+Include dependency graph for ed64io\+\_\+watchdog.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ed64io__watchdog_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed64io__watchdog_8c_ae1649fc947ca37a86917a08354f48d1a}{PRINTF}}~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}
+\item 
+\#define \mbox{\hyperlink{ed64io__watchdog_8c_a0c88a91f0e53a766bb4dd3084727bc7b}{DEBUGPRINT}}~0
+\item 
+\#define \mbox{\hyperlink{ed64io__watchdog_8c_a09b023eab29cd2b4e99613f527242efb}{DBGPRINT}}(args...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{ed64io__watchdog_8c_a6eb3dbcdda146e7dd3667adb3083ae20}{watchdogproc}} (char $\ast$argv)
+\item 
+void \mbox{\hyperlink{ed64io__watchdog_8c_aad429f46f62adbc74b73c353545c89c0}{ed64\+Start\+Watchdog\+Thread}} (int $\ast$val\+To\+Watch\+Init, int interval\+MS)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static OSMesg\+Queue \mbox{\hyperlink{ed64io__watchdog_8c_aff7ffbe9b9b7f6aae8d91447ad5e456f}{watchdog\+MsgQ}}
+\item 
+static OSMesg \mbox{\hyperlink{ed64io__watchdog_8c_adc8c8a8672ed700465a6de441c9cc50e}{watchdog\+Msg\+Buf}}
+\item 
+static int \mbox{\hyperlink{ed64io__watchdog_8c_a5b94cbf6647c9c5eed042927eed15bf5}{watchdog\+Thread\+Pri}}
+\item 
+static OSThread \mbox{\hyperlink{ed64io__watchdog_8c_a0bd9b5ba47015daee54c588edce92e57}{watchdog\+Thread}}
+\item 
+static char \mbox{\hyperlink{ed64io__watchdog_8c_af09b92a261b40bdc4ddcd1989a31a2b5}{watchdog\+Thread\+Stack}} \mbox{[}\mbox{\hyperlink{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}{ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE}}\mbox{]}
+\item 
+static int \mbox{\hyperlink{ed64io__watchdog_8c_a4f5e0773802ac617b9cd27eb4b8f18b3}{startedwatchdogproc}} = 0
+\item 
+static int \mbox{\hyperlink{ed64io__watchdog_8c_a1407e3649933302c5afe4b04139be2b9}{last\+Val\+To\+Watch}} = 0
+\item 
+static int $\ast$ \mbox{\hyperlink{ed64io__watchdog_8c_abcdd8c79fc3b1599c29462587d0e7039}{val\+To\+Watch}} = \mbox{\hyperlink{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
+\item 
+OSTimer \mbox{\hyperlink{ed64io__watchdog_8c_acaae01ed9e6206a19035c61a172e17ff}{watchdog\+Timer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed64io__watchdog_8c_a09b023eab29cd2b4e99613f527242efb}\label{ed64io__watchdog_8c_a09b023eab29cd2b4e99613f527242efb}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!DBGPRINT@{DBGPRINT}}
+\index{DBGPRINT@{DBGPRINT}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{DBGPRINT}{DBGPRINT}}
+{\footnotesize\ttfamily \#define DBGPRINT(\begin{DoxyParamCaption}\item[{}]{args... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_a0c88a91f0e53a766bb4dd3084727bc7b}\label{ed64io__watchdog_8c_a0c88a91f0e53a766bb4dd3084727bc7b}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!DEBUGPRINT@{DEBUGPRINT}}
+\index{DEBUGPRINT@{DEBUGPRINT}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{DEBUGPRINT}{DEBUGPRINT}}
+{\footnotesize\ttfamily \#define DEBUGPRINT~0}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_ae1649fc947ca37a86917a08354f48d1a}\label{ed64io__watchdog_8c_ae1649fc947ca37a86917a08354f48d1a}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!PRINTF@{PRINTF}}
+\index{PRINTF@{PRINTF}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{PRINTF}{PRINTF}}
+{\footnotesize\ttfamily \#define PRINTF~\mbox{\hyperlink{ed64io__usb_8h_ad8204e8b0455f6faa37b77f444ea7fe2}{ed64\+Printf\+Sync2}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ed64io__watchdog_8c_aad429f46f62adbc74b73c353545c89c0}\label{ed64io__watchdog_8c_aad429f46f62adbc74b73c353545c89c0}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!ed64StartWatchdogThread@{ed64StartWatchdogThread}}
+\index{ed64StartWatchdogThread@{ed64StartWatchdogThread}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{ed64StartWatchdogThread()}{ed64StartWatchdogThread()}}
+{\footnotesize\ttfamily void ed64\+Start\+Watchdog\+Thread (\begin{DoxyParamCaption}\item[{int $\ast$}]{val\+To\+Watch\+Init,  }\item[{int}]{interval\+MS }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_a6eb3dbcdda146e7dd3667adb3083ae20}\label{ed64io__watchdog_8c_a6eb3dbcdda146e7dd3667adb3083ae20}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogproc@{watchdogproc}}
+\index{watchdogproc@{watchdogproc}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogproc()}{watchdogproc()}}
+{\footnotesize\ttfamily static void watchdogproc (\begin{DoxyParamCaption}\item[{char $\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ed64io__watchdog_8c_a1407e3649933302c5afe4b04139be2b9}\label{ed64io__watchdog_8c_a1407e3649933302c5afe4b04139be2b9}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!lastValToWatch@{lastValToWatch}}
+\index{lastValToWatch@{lastValToWatch}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{lastValToWatch}{lastValToWatch}}
+{\footnotesize\ttfamily int last\+Val\+To\+Watch = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_a4f5e0773802ac617b9cd27eb4b8f18b3}\label{ed64io__watchdog_8c_a4f5e0773802ac617b9cd27eb4b8f18b3}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!startedwatchdogproc@{startedwatchdogproc}}
+\index{startedwatchdogproc@{startedwatchdogproc}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{startedwatchdogproc}{startedwatchdogproc}}
+{\footnotesize\ttfamily int startedwatchdogproc = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_abcdd8c79fc3b1599c29462587d0e7039}\label{ed64io__watchdog_8c_abcdd8c79fc3b1599c29462587d0e7039}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!valToWatch@{valToWatch}}
+\index{valToWatch@{valToWatch}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{valToWatch}{valToWatch}}
+{\footnotesize\ttfamily int$\ast$ val\+To\+Watch = \mbox{\hyperlink{constants_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_adc8c8a8672ed700465a6de441c9cc50e}\label{ed64io__watchdog_8c_adc8c8a8672ed700465a6de441c9cc50e}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogMsgBuf@{watchdogMsgBuf}}
+\index{watchdogMsgBuf@{watchdogMsgBuf}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogMsgBuf}{watchdogMsgBuf}}
+{\footnotesize\ttfamily OSMesg watchdog\+Msg\+Buf\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_aff7ffbe9b9b7f6aae8d91447ad5e456f}\label{ed64io__watchdog_8c_aff7ffbe9b9b7f6aae8d91447ad5e456f}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogMsgQ@{watchdogMsgQ}}
+\index{watchdogMsgQ@{watchdogMsgQ}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogMsgQ}{watchdogMsgQ}}
+{\footnotesize\ttfamily OSMesg\+Queue watchdog\+MsgQ\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_a0bd9b5ba47015daee54c588edce92e57}\label{ed64io__watchdog_8c_a0bd9b5ba47015daee54c588edce92e57}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogThread@{watchdogThread}}
+\index{watchdogThread@{watchdogThread}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogThread}{watchdogThread}}
+{\footnotesize\ttfamily OSThread watchdog\+Thread\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_a5b94cbf6647c9c5eed042927eed15bf5}\label{ed64io__watchdog_8c_a5b94cbf6647c9c5eed042927eed15bf5}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogThreadPri@{watchdogThreadPri}}
+\index{watchdogThreadPri@{watchdogThreadPri}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogThreadPri}{watchdogThreadPri}}
+{\footnotesize\ttfamily int watchdog\+Thread\+Pri\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_af09b92a261b40bdc4ddcd1989a31a2b5}\label{ed64io__watchdog_8c_af09b92a261b40bdc4ddcd1989a31a2b5}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogThreadStack@{watchdogThreadStack}}
+\index{watchdogThreadStack@{watchdogThreadStack}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogThreadStack}{watchdogThreadStack}}
+{\footnotesize\ttfamily char watchdog\+Thread\+Stack\mbox{[}\mbox{\hyperlink{ed64io__fault_8h_a5ce376ca24078bbadee45498b06ff453}{ED64\+IO\+\_\+\+FAULT\+\_\+\+STACKSIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{ed64io__watchdog_8c_acaae01ed9e6206a19035c61a172e17ff}\label{ed64io__watchdog_8c_acaae01ed9e6206a19035c61a172e17ff}} 
+\index{ed64io\_watchdog.c@{ed64io\_watchdog.c}!watchdogTimer@{watchdogTimer}}
+\index{watchdogTimer@{watchdogTimer}!ed64io\_watchdog.c@{ed64io\_watchdog.c}}
+\doxysubsubsection{\texorpdfstring{watchdogTimer}{watchdogTimer}}
+{\footnotesize\ttfamily OSTimer watchdog\+Timer}
+

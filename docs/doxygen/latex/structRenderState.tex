@@ -1,0 +1,94 @@
+\hypertarget{structRenderState}{}\doxysection{Render\+State Struct Reference}
+\label{structRenderState}\index{RenderState@{RenderState}}
+
+
+Collaboration diagram for Render\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{structRenderState__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structRenderState_a390ed001cdba0e504ba7786682e108f8}\label{structRenderState_a390ed001cdba0e504ba7786682e108f8}} 
+Gfx {\bfseries glist} \mbox{[}MAX\+\_\+\+DL\+\_\+\+LENGTH\mbox{]}
+\item 
+\mbox{\Hypertarget{structRenderState_ad8551ffdb3421303537db32f0808e554}\label{structRenderState_ad8551ffdb3421303537db32f0808e554}} 
+u64 {\bfseries render\+State\+Memory} \mbox{[}MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY\+\_\+\+CHUNKS\mbox{]}
+\item 
+\mbox{\Hypertarget{structRenderState_a25730d2f91cb731e347b6759a7d48881}\label{structRenderState_a25730d2f91cb731e347b6759a7d48881}} 
+struct \mbox{\hyperlink{structSpriteState}{Sprite\+State}} {\bfseries sprite\+State}
+\item 
+\mbox{\Hypertarget{structRenderState_a671242e360c03d71b1d5c533040c122f}\label{structRenderState_a671242e360c03d71b1d5c533040c122f}} 
+Gfx $\ast$ {\bfseries dl}
+\item 
+\mbox{\Hypertarget{structRenderState_ac0d3014e504928c9df25fef8b14c773d}\label{structRenderState_ac0d3014e504928c9df25fef8b14c773d}} 
+u16 $\ast$ {\bfseries framebuffer}
+\item 
+\mbox{\Hypertarget{structRenderState_a2edba931016753f5b4495fe51b7cf4be}\label{structRenderState_a2edba931016753f5b4495fe51b7cf4be}} 
+u16 $\ast$ {\bfseries depth\+Buffer}
+\item 
+\mbox{\Hypertarget{structRenderState_a5c97cbb010484ec472c9ea440a8eeb55}\label{structRenderState_a5c97cbb010484ec472c9ea440a8eeb55}} 
+unsigned short {\bfseries current\+Memory\+Chunk}
+\item 
+\mbox{\Hypertarget{structRenderState_a202e4e4b5b9bfe42151941a1db86939f}\label{structRenderState_a202e4e4b5b9bfe42151941a1db86939f}} 
+unsigned short {\bfseries current\+Chunk\+End}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structRenderState_a202e4e4b5b9bfe42151941a1db86939f}\label{structRenderState_a202e4e4b5b9bfe42151941a1db86939f}} 
+\index{RenderState@{RenderState}!currentChunkEnd@{currentChunkEnd}}
+\index{currentChunkEnd@{currentChunkEnd}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{currentChunkEnd}{currentChunkEnd}}
+{\footnotesize\ttfamily unsigned short Render\+State\+::current\+Chunk\+End}
+
+\mbox{\Hypertarget{structRenderState_a5c97cbb010484ec472c9ea440a8eeb55}\label{structRenderState_a5c97cbb010484ec472c9ea440a8eeb55}} 
+\index{RenderState@{RenderState}!currentMemoryChunk@{currentMemoryChunk}}
+\index{currentMemoryChunk@{currentMemoryChunk}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{currentMemoryChunk}{currentMemoryChunk}}
+{\footnotesize\ttfamily unsigned short Render\+State\+::current\+Memory\+Chunk}
+
+\mbox{\Hypertarget{structRenderState_a2edba931016753f5b4495fe51b7cf4be}\label{structRenderState_a2edba931016753f5b4495fe51b7cf4be}} 
+\index{RenderState@{RenderState}!depthBuffer@{depthBuffer}}
+\index{depthBuffer@{depthBuffer}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{depthBuffer}{depthBuffer}}
+{\footnotesize\ttfamily u16$\ast$ Render\+State\+::depth\+Buffer}
+
+\mbox{\Hypertarget{structRenderState_a671242e360c03d71b1d5c533040c122f}\label{structRenderState_a671242e360c03d71b1d5c533040c122f}} 
+\index{RenderState@{RenderState}!dl@{dl}}
+\index{dl@{dl}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{dl}{dl}}
+{\footnotesize\ttfamily Gfx$\ast$ Render\+State\+::dl}
+
+\mbox{\Hypertarget{structRenderState_ac0d3014e504928c9df25fef8b14c773d}\label{structRenderState_ac0d3014e504928c9df25fef8b14c773d}} 
+\index{RenderState@{RenderState}!framebuffer@{framebuffer}}
+\index{framebuffer@{framebuffer}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{framebuffer}{framebuffer}}
+{\footnotesize\ttfamily u16$\ast$ Render\+State\+::framebuffer}
+
+\mbox{\Hypertarget{structRenderState_a390ed001cdba0e504ba7786682e108f8}\label{structRenderState_a390ed001cdba0e504ba7786682e108f8}} 
+\index{RenderState@{RenderState}!glist@{glist}}
+\index{glist@{glist}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{glist}{glist}}
+{\footnotesize\ttfamily Gfx Render\+State\+::glist\mbox{[}MAX\+\_\+\+DL\+\_\+\+LENGTH\mbox{]}}
+
+\mbox{\Hypertarget{structRenderState_ad8551ffdb3421303537db32f0808e554}\label{structRenderState_ad8551ffdb3421303537db32f0808e554}} 
+\index{RenderState@{RenderState}!renderStateMemory@{renderStateMemory}}
+\index{renderStateMemory@{renderStateMemory}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{renderStateMemory}{renderStateMemory}}
+{\footnotesize\ttfamily u64 Render\+State\+::render\+State\+Memory\mbox{[}MAX\+\_\+\+RENDER\+\_\+\+STATE\+\_\+\+MEMORY\+\_\+\+CHUNKS\mbox{]}}
+
+\mbox{\Hypertarget{structRenderState_a25730d2f91cb731e347b6759a7d48881}\label{structRenderState_a25730d2f91cb731e347b6759a7d48881}} 
+\index{RenderState@{RenderState}!spriteState@{spriteState}}
+\index{spriteState@{spriteState}!RenderState@{RenderState}}
+\doxysubsubsection{\texorpdfstring{spriteState}{spriteState}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structSpriteState}{Sprite\+State}} Render\+State\+::sprite\+State}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/renderstate.\+h\end{DoxyCompactItemize}

@@ -1,3 +1,10 @@
+/**
+ * @file animation.c
+ * @author James Friend
+ * @brief Implements animated models
+
+ * 
+ */
 #include <math.h>
 #ifndef __N64__
 #include <assert.h>

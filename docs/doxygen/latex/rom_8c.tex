@@ -1,0 +1,78 @@
+\hypertarget{rom_8c}{}\doxysection{src/util/rom.c File Reference}
+\label{rom_8c}\index{src/util/rom.c@{src/util/rom.c}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rom.\+h\char`\"{}}\newline
+Include dependency graph for rom.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{rom_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rom_8c_a6b9bf6435d259f5362ec4e6d9f18aaf8}{DMA\+\_\+\+MESSAGE\+\_\+\+SIZE}}~20
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rom_8c_add73510c983e7b64bb524a9167f63eb3}{rom\+Init}} ()
+\item 
+void \mbox{\hyperlink{rom_8c_a09209b781e943978d62aea56d50ee0e0}{rom\+Copy}} (const char $\ast$src, const char $\ast$dest, const int len)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+OSMesg\+Queue \mbox{\hyperlink{rom_8c_a2ec2ce001f8f12172d783666012ae40c}{dma\+MessageQ}}
+\item 
+OSMesg \mbox{\hyperlink{rom_8c_ab9a8831ce3bb8c6f57fbdbb82d28af3e}{dma\+Messages}} \mbox{[}\mbox{\hyperlink{rom_8c_a6b9bf6435d259f5362ec4e6d9f18aaf8}{DMA\+\_\+\+MESSAGE\+\_\+\+SIZE}}\mbox{]}
+\item 
+OSPi\+Handle $\ast$ \mbox{\hyperlink{rom_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}{g\+Pi\+Handle}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rom_8c_a6b9bf6435d259f5362ec4e6d9f18aaf8}\label{rom_8c_a6b9bf6435d259f5362ec4e6d9f18aaf8}} 
+\index{rom.c@{rom.c}!DMA\_MESSAGE\_SIZE@{DMA\_MESSAGE\_SIZE}}
+\index{DMA\_MESSAGE\_SIZE@{DMA\_MESSAGE\_SIZE}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{DMA\_MESSAGE\_SIZE}{DMA\_MESSAGE\_SIZE}}
+{\footnotesize\ttfamily \#define DMA\+\_\+\+MESSAGE\+\_\+\+SIZE~20}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rom_8c_a09209b781e943978d62aea56d50ee0e0}\label{rom_8c_a09209b781e943978d62aea56d50ee0e0}} 
+\index{rom.c@{rom.c}!romCopy@{romCopy}}
+\index{romCopy@{romCopy}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{romCopy()}{romCopy()}}
+{\footnotesize\ttfamily void rom\+Copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{src,  }\item[{const char $\ast$}]{dest,  }\item[{const int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rom_8c_add73510c983e7b64bb524a9167f63eb3}\label{rom_8c_add73510c983e7b64bb524a9167f63eb3}} 
+\index{rom.c@{rom.c}!romInit@{romInit}}
+\index{romInit@{romInit}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{romInit()}{romInit()}}
+{\footnotesize\ttfamily void rom\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{rom_8c_a2ec2ce001f8f12172d783666012ae40c}\label{rom_8c_a2ec2ce001f8f12172d783666012ae40c}} 
+\index{rom.c@{rom.c}!dmaMessageQ@{dmaMessageQ}}
+\index{dmaMessageQ@{dmaMessageQ}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{dmaMessageQ}{dmaMessageQ}}
+{\footnotesize\ttfamily OSMesg\+Queue dma\+MessageQ}
+
+\mbox{\Hypertarget{rom_8c_ab9a8831ce3bb8c6f57fbdbb82d28af3e}\label{rom_8c_ab9a8831ce3bb8c6f57fbdbb82d28af3e}} 
+\index{rom.c@{rom.c}!dmaMessages@{dmaMessages}}
+\index{dmaMessages@{dmaMessages}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{dmaMessages}{dmaMessages}}
+{\footnotesize\ttfamily OSMesg dma\+Messages\mbox{[}\mbox{\hyperlink{rom_8c_a6b9bf6435d259f5362ec4e6d9f18aaf8}{DMA\+\_\+\+MESSAGE\+\_\+\+SIZE}}\mbox{]}}
+
+\mbox{\Hypertarget{rom_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}\label{rom_8c_a38a8a68a6353d42ba2174b4a28dd6bf6}} 
+\index{rom.c@{rom.c}!gPiHandle@{gPiHandle}}
+\index{gPiHandle@{gPiHandle}!rom.c@{rom.c}}
+\doxysubsubsection{\texorpdfstring{gPiHandle}{gPiHandle}}
+{\footnotesize\ttfamily OSPi\+Handle$\ast$ g\+Pi\+Handle\hspace{0.3cm}{\ttfamily [extern]}}
+

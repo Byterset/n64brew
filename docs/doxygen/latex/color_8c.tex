@@ -1,0 +1,80 @@
+\hypertarget{color_8c}{}\doxysection{src/graphics/color.c File Reference}
+\label{color_8c}\index{src/graphics/color.c@{src/graphics/color.c}}
+{\ttfamily \#include \char`\"{}color.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/mathf.\+h\char`\"{}}\newline
+Include dependency graph for color.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{color_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{color_8c_afd88807eaa11ea0c633a3b16c901ada7}{color\+U8\+Lerp}} (struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$from, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$to, float lerp, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$output)
+\item 
+unsigned char \mbox{\hyperlink{color_8c_afd842d5d65503ddeddfa0530d6e32397}{color\+Mul\+Single\+Channel}} (unsigned char a, unsigned char b)
+\item 
+void \mbox{\hyperlink{color_8c_acbf5f5932a774c77a2b35b4241bb02db}{color\+U8\+Mul}} (struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$a, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$b, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$out)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8c_a05e0cec691f36c7ea58ba56b5f030bc4}{g\+Color\+Black}} = \{0, 0, 0, 255\}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8c_ad777173d7cacf670ffeca7179c98bc49}{g\+Color\+White}} = \{255, 255, 255, 255\}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8c_a6077b59d58856d034d5ad007e3eb3f2a}{g\+Half\+Transparent\+Black}} = \{0, 0, 0, 128\}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8c_a3f866584c1e6eec6ca77ecb343a88294}{g\+Half\+Transparent\+White}} = \{255, 255, 255, 128\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{color_8c_afd842d5d65503ddeddfa0530d6e32397}\label{color_8c_afd842d5d65503ddeddfa0530d6e32397}} 
+\index{color.c@{color.c}!colorMulSingleChannel@{colorMulSingleChannel}}
+\index{colorMulSingleChannel@{colorMulSingleChannel}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{colorMulSingleChannel()}{colorMulSingleChannel()}}
+{\footnotesize\ttfamily unsigned char color\+Mul\+Single\+Channel (\begin{DoxyParamCaption}\item[{unsigned char}]{a,  }\item[{unsigned char}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{color_8c_afd88807eaa11ea0c633a3b16c901ada7}\label{color_8c_afd88807eaa11ea0c633a3b16c901ada7}} 
+\index{color.c@{color.c}!colorU8Lerp@{colorU8Lerp}}
+\index{colorU8Lerp@{colorU8Lerp}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{colorU8Lerp()}{colorU8Lerp()}}
+{\footnotesize\ttfamily void color\+U8\+Lerp (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{from,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{to,  }\item[{float}]{lerp,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{color_8c_acbf5f5932a774c77a2b35b4241bb02db}\label{color_8c_acbf5f5932a774c77a2b35b4241bb02db}} 
+\index{color.c@{color.c}!colorU8Mul@{colorU8Mul}}
+\index{colorU8Mul@{colorU8Mul}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{colorU8Mul()}{colorU8Mul()}}
+{\footnotesize\ttfamily void color\+U8\+Mul (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{a,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{b,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{color_8c_a05e0cec691f36c7ea58ba56b5f030bc4}\label{color_8c_a05e0cec691f36c7ea58ba56b5f030bc4}} 
+\index{color.c@{color.c}!gColorBlack@{gColorBlack}}
+\index{gColorBlack@{gColorBlack}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{gColorBlack}{gColorBlack}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Color\+Black = \{0, 0, 0, 255\}}
+
+\mbox{\Hypertarget{color_8c_ad777173d7cacf670ffeca7179c98bc49}\label{color_8c_ad777173d7cacf670ffeca7179c98bc49}} 
+\index{color.c@{color.c}!gColorWhite@{gColorWhite}}
+\index{gColorWhite@{gColorWhite}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{gColorWhite}{gColorWhite}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Color\+White = \{255, 255, 255, 255\}}
+
+\mbox{\Hypertarget{color_8c_a6077b59d58856d034d5ad007e3eb3f2a}\label{color_8c_a6077b59d58856d034d5ad007e3eb3f2a}} 
+\index{color.c@{color.c}!gHalfTransparentBlack@{gHalfTransparentBlack}}
+\index{gHalfTransparentBlack@{gHalfTransparentBlack}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{gHalfTransparentBlack}{gHalfTransparentBlack}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Half\+Transparent\+Black = \{0, 0, 0, 128\}}
+
+\mbox{\Hypertarget{color_8c_a3f866584c1e6eec6ca77ecb343a88294}\label{color_8c_a3f866584c1e6eec6ca77ecb343a88294}} 
+\index{color.c@{color.c}!gHalfTransparentWhite@{gHalfTransparentWhite}}
+\index{gHalfTransparentWhite@{gHalfTransparentWhite}!color.c@{color.c}}
+\doxysubsubsection{\texorpdfstring{gHalfTransparentWhite}{gHalfTransparentWhite}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Half\+Transparent\+White = \{255, 255, 255, 128\}}
+

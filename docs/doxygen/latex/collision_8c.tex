@@ -1,0 +1,291 @@
+\hypertarget{collision_8c}{}\doxysection{src/physics/collision.c File Reference}
+\label{collision_8c}\index{src/physics/collision.c@{src/physics/collision.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}collision.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../util/trace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}float.\+h\char`\"{}}\newline
+Include dependency graph for collision.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{collision_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{collision_8c_a18dc759760c15e5bb6753be7d95e8360}{COLLISION\+\_\+\+SPATIAL\+\_\+\+HASH\+\_\+\+MAX\+\_\+\+RESULTS}}~100
+\item 
+\#define \mbox{\hyperlink{collision_8c_a076e8faa425bbdf19defb1d08df5543a}{COLLISION\+\_\+\+SPATIAL\+\_\+\+HASH\+\_\+\+PRUNING\+\_\+\+ENABLED}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}} \mbox{\hyperlink{collision_8c_ad1ef7e8cb7ba932440493a8d37ff2b97}{Get\+Triangles\+Visit\+Bucket\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{collision_8c_a446e495450b310fad895c7aec69b2512}{Triangle\+\_\+get\+Centroid}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+void \mbox{\hyperlink{collision_8c_acc9088dd936867d37daba0d6a684d582}{Triangle\+\_\+get\+Normal}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$result)
+\item 
+float \mbox{\hyperlink{collision_8c_a3fadef7151669333c803716400428350}{Triangle\+\_\+compare\+Point}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$point)
+\item 
+void \mbox{\hyperlink{collision_8c_adb9c6c043d559883a0134def128a2807}{AABB\+\_\+from\+Sphere}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$sphere\+Center, float sphere\+Radius, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$result)
+\item 
+void \mbox{\hyperlink{collision_8c_add16c7135772753f8f21407fd378ed18}{AABB\+\_\+from\+Triangle}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$result)
+\item 
+void \mbox{\hyperlink{collision_8c_a9b9599be6c7985c73b5f6ad6e7077579}{AABB\+\_\+expand\+By\+Point}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$self, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$point)
+\item 
+int \mbox{\hyperlink{collision_8c_ae4960e2a7a244c53a3f159d26cedb5b6}{Collision\+\_\+intersect\+AABBAABB}} (\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$a, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$b)
+\item 
+int \mbox{\hyperlink{collision_8c_a9868b7ffb6bfe2e0a4b8432906a310aa}{Collision\+\_\+intersect\+Ray\+Triangle}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$pt, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$dir, \mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$tri, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$out)
+\item 
+int \mbox{\hyperlink{collision_8c_a96da1fdba6a6bddc4a27e1e2a2b8694f}{Collision\+\_\+sphere\+Triangle\+Is\+Separated}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$P, double r)
+\item 
+void \mbox{\hyperlink{collision_8c_ae73c543fd776b43aa05f5c53a5a2b6c1}{Collision\+\_\+distance\+Point\+Triangle\+Exact}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$point, \mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangle, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$closest)
+\item 
+float \mbox{\hyperlink{collision_8c_ae66d07719974fe7d9b8339e1da213fc2}{Collision\+\_\+sq\+Distance\+Point\+AABB}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$b)
+\item 
+int \mbox{\hyperlink{collision_8c_a677f6bf6dbe0d6a0a97ccea84689f709}{Collision\+\_\+test\+Sphere\+AABBCollision}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$sphere\+Center, float sphere\+Radius, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$aabb)
+\item 
+int \mbox{\hyperlink{collision_8c_a2aa9f263dbe0bcf447e81acd377c1a9c}{Collision\+\_\+test\+Mesh\+Sphere\+Collision}} (\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$triangles, int triangles\+Length, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$obj\+Center, float obj\+Radius, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash, \mbox{\hyperlink{collision_8h_structSphereTriangleCollision}{Sphere\+Triangle\+Collision}} $\ast$result)
+\item 
+int \mbox{\hyperlink{collision_8c_a41fdc9e4fead7934a10af9173194f4ac}{Collision\+\_\+test\+Segment\+AABBCollision}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p0, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$p1, \mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$b)
+\item 
+int \mbox{\hyperlink{collision_8c_a73a35c7266b981753f1ec0d48ce08485}{Spatial\+Hash\+\_\+get\+Bucket\+Index}} (int cellX, int cellY, int cells\+In\+Dimension)
+\item 
+int \mbox{\hyperlink{collision_8c_a5c3e27592c64f4ccf8c562da315e35c4}{Spatial\+Hash\+\_\+units\+To\+Grid\+For\+Dimension}} (float units\+Pos, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash)
+\item 
+float \mbox{\hyperlink{collision_8c_a86bf83d605cce5600a5b1ebc9ebcc33a}{Spatial\+Hash\+\_\+units\+To\+Grid\+Float\+For\+Dimension}} (float units\+Pos, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash)
+\item 
+float \mbox{\hyperlink{collision_8c_acf59554d3a9da12082ace2d4544a65a9}{Spatial\+Hash\+\_\+grid\+To\+Units\+For\+Dimension}} (float grid\+Cell, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash)
+\item 
+void \mbox{\hyperlink{collision_8c_adb646db878bfeadaf9aad8bc66927ba6}{Spatial\+Hash\+\_\+raycast}} (float x0, float y0, float x1, float y1, \mbox{\hyperlink{collision_8h_a2e9a5e148568ac956a3ade3c1e0ffc96}{Spatial\+Hash\+Raycast\+Callback}} traversal\+Visitor, void $\ast$traversal\+State)
+\item 
+\mbox{\hyperlink{collision_8h_structSpatialHashBucket}{Spatial\+Hash\+Bucket}} $\ast$ \mbox{\hyperlink{collision_8c_a0b61a9148e89b826577ce436ef473e5b}{Spatial\+Hash\+\_\+get\+Bucket}} (float x, float y, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash)
+\item 
+void \mbox{\hyperlink{collision_8c_a4700019a261c54fc4477f2285f52c762}{Spatial\+Hash\+\_\+get\+Triangles\+Visit\+Bucket}} (int cellX, int cellY, \mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}} $\ast$state)
+\item 
+int \mbox{\hyperlink{collision_8c_a45a304b004dbe0d47017ea27c2cb995f}{Spatial\+Hash\+\_\+get\+Triangles\+For\+Raycast}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+Start, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$ray\+End, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash, int $\ast$results, int max\+Results)
+\item 
+int \mbox{\hyperlink{collision_8c_a04fa14e0f637d79d0e44cbc4373a24b1}{Spatial\+Hash\+\_\+get\+Triangles}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, float radius, \mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$spatial\+Hash, int $\ast$results, int max\+Results)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{GetTrianglesVisitBucketState@{GetTrianglesVisitBucketState}}\label{structGetTrianglesVisitBucketState}
+\Hypertarget{collision_8c_structGetTrianglesVisitBucketState}
+\doxysubsubsection{struct Get\+Triangles\+Visit\+Bucket\+State}
+
+
+Collaboration diagram for Get\+Triangles\+Visit\+Bucket\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{structGetTrianglesVisitBucketState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{collision_8c_a0357d70a0de72a7f299dd9cf2dcbac36}\label{collision_8c_a0357d70a0de72a7f299dd9cf2dcbac36}} 
+int&
+maxResults&
+\\
+\hline
+
+\mbox{\Hypertarget{collision_8c_a794ac30f08bdd0ba7be41dc69143a291}\label{collision_8c_a794ac30f08bdd0ba7be41dc69143a291}} 
+int $\ast$&
+results&
+\\
+\hline
+
+\mbox{\Hypertarget{collision_8c_adf782660ea3d3096d9344d32a0d33648}\label{collision_8c_adf782660ea3d3096d9344d32a0d33648}} 
+int&
+resultsFound&
+\\
+\hline
+
+\mbox{\Hypertarget{collision_8c_ad13cb33adda12dffbd83c720a988ea0d}\label{collision_8c_ad13cb33adda12dffbd83c720a988ea0d}} 
+\mbox{\hyperlink{collision_8h_structSpatialHash}{SpatialHash}} $\ast$&
+spatialHash&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{collision_8c_a18dc759760c15e5bb6753be7d95e8360}\label{collision_8c_a18dc759760c15e5bb6753be7d95e8360}} 
+\index{collision.c@{collision.c}!COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS@{COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS}}
+\index{COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS@{COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS}{COLLISION\_SPATIAL\_HASH\_MAX\_RESULTS}}
+{\footnotesize\ttfamily \#define COLLISION\+\_\+\+SPATIAL\+\_\+\+HASH\+\_\+\+MAX\+\_\+\+RESULTS~100}
+
+\mbox{\Hypertarget{collision_8c_a076e8faa425bbdf19defb1d08df5543a}\label{collision_8c_a076e8faa425bbdf19defb1d08df5543a}} 
+\index{collision.c@{collision.c}!COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED@{COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED}}
+\index{COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED@{COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED}{COLLISION\_SPATIAL\_HASH\_PRUNING\_ENABLED}}
+{\footnotesize\ttfamily \#define COLLISION\+\_\+\+SPATIAL\+\_\+\+HASH\+\_\+\+PRUNING\+\_\+\+ENABLED~1}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{collision_8c_ad1ef7e8cb7ba932440493a8d37ff2b97}\label{collision_8c_ad1ef7e8cb7ba932440493a8d37ff2b97}} 
+\index{collision.c@{collision.c}!GetTrianglesVisitBucketState@{GetTrianglesVisitBucketState}}
+\index{GetTrianglesVisitBucketState@{GetTrianglesVisitBucketState}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{GetTrianglesVisitBucketState}{GetTrianglesVisitBucketState}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}} \mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{collision_8c_a9b9599be6c7985c73b5f6ad6e7077579}\label{collision_8c_a9b9599be6c7985c73b5f6ad6e7077579}} 
+\index{collision.c@{collision.c}!AABB\_expandByPoint@{AABB\_expandByPoint}}
+\index{AABB\_expandByPoint@{AABB\_expandByPoint}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{AABB\_expandByPoint()}{AABB\_expandByPoint()}}
+{\footnotesize\ttfamily void AABB\+\_\+expand\+By\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{self,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_adb9c6c043d559883a0134def128a2807}\label{collision_8c_adb9c6c043d559883a0134def128a2807}} 
+\index{collision.c@{collision.c}!AABB\_fromSphere@{AABB\_fromSphere}}
+\index{AABB\_fromSphere@{AABB\_fromSphere}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{AABB\_fromSphere()}{AABB\_fromSphere()}}
+{\footnotesize\ttfamily void AABB\+\_\+from\+Sphere (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{sphere\+Center,  }\item[{float}]{sphere\+Radius,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_add16c7135772753f8f21407fd378ed18}\label{collision_8c_add16c7135772753f8f21407fd378ed18}} 
+\index{collision.c@{collision.c}!AABB\_fromTriangle@{AABB\_fromTriangle}}
+\index{AABB\_fromTriangle@{AABB\_fromTriangle}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{AABB\_fromTriangle()}{AABB\_fromTriangle()}}
+{\footnotesize\ttfamily void AABB\+\_\+from\+Triangle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_ae73c543fd776b43aa05f5c53a5a2b6c1}\label{collision_8c_ae73c543fd776b43aa05f5c53a5a2b6c1}} 
+\index{collision.c@{collision.c}!Collision\_distancePointTriangleExact@{Collision\_distancePointTriangleExact}}
+\index{Collision\_distancePointTriangleExact@{Collision\_distancePointTriangleExact}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_distancePointTriangleExact()}{Collision\_distancePointTriangleExact()}}
+{\footnotesize\ttfamily void Collision\+\_\+distance\+Point\+Triangle\+Exact (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{point,  }\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{closest }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_ae4960e2a7a244c53a3f159d26cedb5b6}\label{collision_8c_ae4960e2a7a244c53a3f159d26cedb5b6}} 
+\index{collision.c@{collision.c}!Collision\_intersectAABBAABB@{Collision\_intersectAABBAABB}}
+\index{Collision\_intersectAABBAABB@{Collision\_intersectAABBAABB}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_intersectAABBAABB()}{Collision\_intersectAABBAABB()}}
+{\footnotesize\ttfamily int Collision\+\_\+intersect\+AABBAABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a9868b7ffb6bfe2e0a4b8432906a310aa}\label{collision_8c_a9868b7ffb6bfe2e0a4b8432906a310aa}} 
+\index{collision.c@{collision.c}!Collision\_intersectRayTriangle@{Collision\_intersectRayTriangle}}
+\index{Collision\_intersectRayTriangle@{Collision\_intersectRayTriangle}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_intersectRayTriangle()}{Collision\_intersectRayTriangle()}}
+{\footnotesize\ttfamily int Collision\+\_\+intersect\+Ray\+Triangle (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{pt,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{dir,  }\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{tri,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a96da1fdba6a6bddc4a27e1e2a2b8694f}\label{collision_8c_a96da1fdba6a6bddc4a27e1e2a2b8694f}} 
+\index{collision.c@{collision.c}!Collision\_sphereTriangleIsSeparated@{Collision\_sphereTriangleIsSeparated}}
+\index{Collision\_sphereTriangleIsSeparated@{Collision\_sphereTriangleIsSeparated}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_sphereTriangleIsSeparated()}{Collision\_sphereTriangleIsSeparated()}}
+{\footnotesize\ttfamily int Collision\+\_\+sphere\+Triangle\+Is\+Separated (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{P,  }\item[{double}]{r }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_ae66d07719974fe7d9b8339e1da213fc2}\label{collision_8c_ae66d07719974fe7d9b8339e1da213fc2}} 
+\index{collision.c@{collision.c}!Collision\_sqDistancePointAABB@{Collision\_sqDistancePointAABB}}
+\index{Collision\_sqDistancePointAABB@{Collision\_sqDistancePointAABB}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_sqDistancePointAABB()}{Collision\_sqDistancePointAABB()}}
+{\footnotesize\ttfamily float Collision\+\_\+sq\+Distance\+Point\+AABB (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a2aa9f263dbe0bcf447e81acd377c1a9c}\label{collision_8c_a2aa9f263dbe0bcf447e81acd377c1a9c}} 
+\index{collision.c@{collision.c}!Collision\_testMeshSphereCollision@{Collision\_testMeshSphereCollision}}
+\index{Collision\_testMeshSphereCollision@{Collision\_testMeshSphereCollision}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_testMeshSphereCollision()}{Collision\_testMeshSphereCollision()}}
+{\footnotesize\ttfamily int Collision\+\_\+test\+Mesh\+Sphere\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangles,  }\item[{int}]{triangles\+Length,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{obj\+Center,  }\item[{float}]{obj\+Radius,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash,  }\item[{\mbox{\hyperlink{collision_8h_structSphereTriangleCollision}{Sphere\+Triangle\+Collision}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a41fdc9e4fead7934a10af9173194f4ac}\label{collision_8c_a41fdc9e4fead7934a10af9173194f4ac}} 
+\index{collision.c@{collision.c}!Collision\_testSegmentAABBCollision@{Collision\_testSegmentAABBCollision}}
+\index{Collision\_testSegmentAABBCollision@{Collision\_testSegmentAABBCollision}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_testSegmentAABBCollision()}{Collision\_testSegmentAABBCollision()}}
+{\footnotesize\ttfamily int Collision\+\_\+test\+Segment\+AABBCollision (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p0,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{p1,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a677f6bf6dbe0d6a0a97ccea84689f709}\label{collision_8c_a677f6bf6dbe0d6a0a97ccea84689f709}} 
+\index{collision.c@{collision.c}!Collision\_testSphereAABBCollision@{Collision\_testSphereAABBCollision}}
+\index{Collision\_testSphereAABBCollision@{Collision\_testSphereAABBCollision}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Collision\_testSphereAABBCollision()}{Collision\_testSphereAABBCollision()}}
+{\footnotesize\ttfamily int Collision\+\_\+test\+Sphere\+AABBCollision (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{sphere\+Center,  }\item[{float}]{sphere\+Radius,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{aabb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a0b61a9148e89b826577ce436ef473e5b}\label{collision_8c_a0b61a9148e89b826577ce436ef473e5b}} 
+\index{collision.c@{collision.c}!SpatialHash\_getBucket@{SpatialHash\_getBucket}}
+\index{SpatialHash\_getBucket@{SpatialHash\_getBucket}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_getBucket()}{SpatialHash\_getBucket()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{collision_8h_structSpatialHashBucket}{Spatial\+Hash\+Bucket}}$\ast$ Spatial\+Hash\+\_\+get\+Bucket (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a73a35c7266b981753f1ec0d48ce08485}\label{collision_8c_a73a35c7266b981753f1ec0d48ce08485}} 
+\index{collision.c@{collision.c}!SpatialHash\_getBucketIndex@{SpatialHash\_getBucketIndex}}
+\index{SpatialHash\_getBucketIndex@{SpatialHash\_getBucketIndex}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_getBucketIndex()}{SpatialHash\_getBucketIndex()}}
+{\footnotesize\ttfamily int Spatial\+Hash\+\_\+get\+Bucket\+Index (\begin{DoxyParamCaption}\item[{int}]{cellX,  }\item[{int}]{cellY,  }\item[{int}]{cells\+In\+Dimension }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a04fa14e0f637d79d0e44cbc4373a24b1}\label{collision_8c_a04fa14e0f637d79d0e44cbc4373a24b1}} 
+\index{collision.c@{collision.c}!SpatialHash\_getTriangles@{SpatialHash\_getTriangles}}
+\index{SpatialHash\_getTriangles@{SpatialHash\_getTriangles}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_getTriangles()}{SpatialHash\_getTriangles()}}
+{\footnotesize\ttfamily int Spatial\+Hash\+\_\+get\+Triangles (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{float}]{radius,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash,  }\item[{int $\ast$}]{results,  }\item[{int}]{max\+Results }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a45a304b004dbe0d47017ea27c2cb995f}\label{collision_8c_a45a304b004dbe0d47017ea27c2cb995f}} 
+\index{collision.c@{collision.c}!SpatialHash\_getTrianglesForRaycast@{SpatialHash\_getTrianglesForRaycast}}
+\index{SpatialHash\_getTrianglesForRaycast@{SpatialHash\_getTrianglesForRaycast}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_getTrianglesForRaycast()}{SpatialHash\_getTrianglesForRaycast()}}
+{\footnotesize\ttfamily int Spatial\+Hash\+\_\+get\+Triangles\+For\+Raycast (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+Start,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{ray\+End,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash,  }\item[{int $\ast$}]{results,  }\item[{int}]{max\+Results }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a4700019a261c54fc4477f2285f52c762}\label{collision_8c_a4700019a261c54fc4477f2285f52c762}} 
+\index{collision.c@{collision.c}!SpatialHash\_getTrianglesVisitBucket@{SpatialHash\_getTrianglesVisitBucket}}
+\index{SpatialHash\_getTrianglesVisitBucket@{SpatialHash\_getTrianglesVisitBucket}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_getTrianglesVisitBucket()}{SpatialHash\_getTrianglesVisitBucket()}}
+{\footnotesize\ttfamily void Spatial\+Hash\+\_\+get\+Triangles\+Visit\+Bucket (\begin{DoxyParamCaption}\item[{int}]{cellX,  }\item[{int}]{cellY,  }\item[{\mbox{\hyperlink{collision_8c_structGetTrianglesVisitBucketState}{Get\+Triangles\+Visit\+Bucket\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_acf59554d3a9da12082ace2d4544a65a9}\label{collision_8c_acf59554d3a9da12082ace2d4544a65a9}} 
+\index{collision.c@{collision.c}!SpatialHash\_gridToUnitsForDimension@{SpatialHash\_gridToUnitsForDimension}}
+\index{SpatialHash\_gridToUnitsForDimension@{SpatialHash\_gridToUnitsForDimension}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_gridToUnitsForDimension()}{SpatialHash\_gridToUnitsForDimension()}}
+{\footnotesize\ttfamily float Spatial\+Hash\+\_\+grid\+To\+Units\+For\+Dimension (\begin{DoxyParamCaption}\item[{float}]{grid\+Cell,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_adb646db878bfeadaf9aad8bc66927ba6}\label{collision_8c_adb646db878bfeadaf9aad8bc66927ba6}} 
+\index{collision.c@{collision.c}!SpatialHash\_raycast@{SpatialHash\_raycast}}
+\index{SpatialHash\_raycast@{SpatialHash\_raycast}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_raycast()}{SpatialHash\_raycast()}}
+{\footnotesize\ttfamily void Spatial\+Hash\+\_\+raycast (\begin{DoxyParamCaption}\item[{float}]{x0,  }\item[{float}]{y0,  }\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{\mbox{\hyperlink{collision_8h_a2e9a5e148568ac956a3ade3c1e0ffc96}{Spatial\+Hash\+Raycast\+Callback}}}]{traversal\+Visitor,  }\item[{void $\ast$}]{traversal\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a86bf83d605cce5600a5b1ebc9ebcc33a}\label{collision_8c_a86bf83d605cce5600a5b1ebc9ebcc33a}} 
+\index{collision.c@{collision.c}!SpatialHash\_unitsToGridFloatForDimension@{SpatialHash\_unitsToGridFloatForDimension}}
+\index{SpatialHash\_unitsToGridFloatForDimension@{SpatialHash\_unitsToGridFloatForDimension}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_unitsToGridFloatForDimension()}{SpatialHash\_unitsToGridFloatForDimension()}}
+{\footnotesize\ttfamily float Spatial\+Hash\+\_\+units\+To\+Grid\+Float\+For\+Dimension (\begin{DoxyParamCaption}\item[{float}]{units\+Pos,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a5c3e27592c64f4ccf8c562da315e35c4}\label{collision_8c_a5c3e27592c64f4ccf8c562da315e35c4}} 
+\index{collision.c@{collision.c}!SpatialHash\_unitsToGridForDimension@{SpatialHash\_unitsToGridForDimension}}
+\index{SpatialHash\_unitsToGridForDimension@{SpatialHash\_unitsToGridForDimension}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{SpatialHash\_unitsToGridForDimension()}{SpatialHash\_unitsToGridForDimension()}}
+{\footnotesize\ttfamily int Spatial\+Hash\+\_\+units\+To\+Grid\+For\+Dimension (\begin{DoxyParamCaption}\item[{float}]{units\+Pos,  }\item[{\mbox{\hyperlink{collision_8h_structSpatialHash}{Spatial\+Hash}} $\ast$}]{spatial\+Hash }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a3fadef7151669333c803716400428350}\label{collision_8c_a3fadef7151669333c803716400428350}} 
+\index{collision.c@{collision.c}!Triangle\_comparePoint@{Triangle\_comparePoint}}
+\index{Triangle\_comparePoint@{Triangle\_comparePoint}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Triangle\_comparePoint()}{Triangle\_comparePoint()}}
+{\footnotesize\ttfamily float Triangle\+\_\+compare\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_a446e495450b310fad895c7aec69b2512}\label{collision_8c_a446e495450b310fad895c7aec69b2512}} 
+\index{collision.c@{collision.c}!Triangle\_getCentroid@{Triangle\_getCentroid}}
+\index{Triangle\_getCentroid@{Triangle\_getCentroid}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Triangle\_getCentroid()}{Triangle\_getCentroid()}}
+{\footnotesize\ttfamily void Triangle\+\_\+get\+Centroid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{collision_8c_acc9088dd936867d37daba0d6a684d582}\label{collision_8c_acc9088dd936867d37daba0d6a684d582}} 
+\index{collision.c@{collision.c}!Triangle\_getNormal@{Triangle\_getNormal}}
+\index{Triangle\_getNormal@{Triangle\_getNormal}!collision.c@{collision.c}}
+\doxysubsubsection{\texorpdfstring{Triangle\_getNormal()}{Triangle\_getNormal()}}
+{\footnotesize\ttfamily void Triangle\+\_\+get\+Normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$}]{triangle,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{result }\end{DoxyParamCaption})}
+

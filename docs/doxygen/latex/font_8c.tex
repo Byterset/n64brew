@@ -1,0 +1,273 @@
+\hypertarget{font_8c}{}\doxysection{src/font/font.c File Reference}
+\label{font_8c}\index{src/font/font.c@{src/font/font.c}}
+{\ttfamily \#include $<$PR/mbi.\+h$>$}\newline
+{\ttfamily \#include $<$PR/sp.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}font.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}font\+\_\+ext.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}letters\+\_\+img.\+h\char`\"{}}\newline
+Include dependency graph for font.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{font_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}{SHOWFONT}}(glp,  str,  x,  y)
+\item 
+\#define \mbox{\hyperlink{font_8c_a9ea30527c46f41e368052e1e602f1e59}{DYN\+\_\+\+SPRITE\+\_\+\+HACK}}
+\item 
+\#define \mbox{\hyperlink{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}{NUM\+\_\+template\+\_\+\+BMS}}~(24$\ast$40)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{font_8c_ac219326ee66c6daa0ad7c000d1372243}{my\+\_\+strchr}} (char $\ast$, char)
+\item 
+void \mbox{\hyperlink{font_8c_a76707329e83ccefe9951eccc41271dcb}{text\+\_\+sprite}} (Sprite $\ast$txt, char $\ast$str, \mbox{\hyperlink{font_8h_afe10d185b692bb386b3771a1ae382c75}{Font}} $\ast$fnt, int xlen, int ylen)
+\item 
+void \mbox{\hyperlink{font_8c_aebacfb88a524a8af2718c701b15a787c}{font\+\_\+init}} (Gfx $\ast$$\ast$glistp)
+\item 
+void \mbox{\hyperlink{font_8c_a426c350196d15a22a055a2f370cceb86}{font\+\_\+finish}} (Gfx $\ast$$\ast$glistp)
+\item 
+void \mbox{\hyperlink{font_8c_aafd3d8e4e5e32cffde933f132f731159}{font\+\_\+set\+\_\+win}} (int width, int height)
+\item 
+void \mbox{\hyperlink{font_8c_ab41bdac079872a0638c02c4ec9dd08e1}{font\+\_\+set\+\_\+pos}} (int xpos, int ypos)
+\item 
+void \mbox{\hyperlink{font_8c_a84c7a0cd9e9c59f332e88d8a7a1c4ce3}{font\+\_\+set\+\_\+scale}} (double xscale, double yscale)
+\item 
+void \mbox{\hyperlink{font_8c_a98a417f2156a6f95bf72abc6f373411c}{font\+\_\+set\+\_\+color}} (unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
+\item 
+void \mbox{\hyperlink{font_8c_ae404445dbfa5b89b654f638fdd9d3db9}{font\+\_\+set\+\_\+transparent}} (int flag)
+\item 
+void \mbox{\hyperlink{font_8c_a04a92ff5100a7cf0c12fd645c26b23bf}{font\+\_\+show\+\_\+string}} (Gfx $\ast$$\ast$glistp, char $\ast$val\+\_\+str)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static char \mbox{\hyperlink{font_8c_a3dd494b9d5c10cc357be7b2dd6b069dd}{letters\+\_\+string}} \mbox{[}$\,$\mbox{]} = \char`\"{}abcdefhiuvsnorm.\+klxz4321567890\`{}!gjpqytw,EFGHKLNOPRSUVXZ@JM\+:\+WIYABCD\textquotesingle{}T\textbackslash{}\char`\"{}+-\/=Q\+\_\+/?()\mbox{[}$\,$\mbox{]}\char`\"{}
+\item 
+static Bitmap \mbox{\hyperlink{font_8c_aaf86da006b0b40cdfd25b885a58b899c}{letters\+\_\+bms}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{font_8h_afe10d185b692bb386b3771a1ae382c75}{Font}} \mbox{\hyperlink{font_8c_a413a91ef5364aaf7f8458a244fac65e0}{letters\+\_\+font}} = \{ \mbox{\hyperlink{font_8c_a3dd494b9d5c10cc357be7b2dd6b069dd}{letters\+\_\+string}}, \mbox{\hyperlink{font_8c_aaf86da006b0b40cdfd25b885a58b899c}{letters\+\_\+bms}}, \mbox{\hyperlink{letters__img_8h_aec0b93219b03bb055fec23c71f82ee8d}{letters\+\_\+img}} \}
+\item 
+static Bitmap \mbox{\hyperlink{font_8c_a7c23d74f11039e7b04d5e8d344119472}{template\+\_\+bm}} \mbox{[}\mbox{\hyperlink{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}{NUM\+\_\+template\+\_\+\+BMS}}\mbox{]}
+\item 
+static Gfx \mbox{\hyperlink{font_8c_a077b21565cc17fe43084e781ee39dc84}{template\+\_\+dl}} \mbox{[}NUM\+\_\+\+DL(\mbox{\hyperlink{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}{NUM\+\_\+template\+\_\+\+BMS}})\mbox{]}
+\item 
+Sprite \mbox{\hyperlink{font_8c_a055b77ee52b910fbd41e1e1dfe017469}{template\+\_\+sprite}}
+\item 
+static unsigned char \mbox{\hyperlink{font_8c_a7ec7462a981853ead97b829e0ccdbe9a}{font\+\_\+red}} = 255
+\item 
+static unsigned char \mbox{\hyperlink{font_8c_a95f964d9c0fd95b4d4bcf39cfdaf0058}{font\+\_\+grn}} = 255
+\item 
+static unsigned char \mbox{\hyperlink{font_8c_a7d868efda858d827ea2a117e919f9cd5}{font\+\_\+blu}} = 255
+\item 
+static unsigned char \mbox{\hyperlink{font_8c_aa21e7f2cc84c6db617fa9cc6232958c4}{font\+\_\+alf}} = 255
+\item 
+static int \mbox{\hyperlink{font_8c_a9b8e7e8d4e9f0d6e9ad1100fc2d2c917}{font\+\_\+xpos}} = 0
+\item 
+static int \mbox{\hyperlink{font_8c_a6c97b0dec47bc76a97c6ca95bdc573c4}{font\+\_\+ypos}} = 0
+\item 
+static int \mbox{\hyperlink{font_8c_a8d71c2aaa1f558a4348d99b80b48e8bb}{font\+\_\+win\+\_\+width}} = 40
+\item 
+static int \mbox{\hyperlink{font_8c_ab455b87988dce16bfe61f3d1bb96ac16}{font\+\_\+win\+\_\+height}} = 1
+\item 
+static double \mbox{\hyperlink{font_8c_ab9d4161d235c25831200a0a956133689}{font\+\_\+xscale}} = 1.\+0
+\item 
+static double \mbox{\hyperlink{font_8c_aae57c2927109f7c892b1a79cebd3c228}{font\+\_\+yscale}} = 1.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{font_8c_a9ea30527c46f41e368052e1e602f1e59}\label{font_8c_a9ea30527c46f41e368052e1e602f1e59}} 
+\index{font.c@{font.c}!DYN\_SPRITE\_HACK@{DYN\_SPRITE\_HACK}}
+\index{DYN\_SPRITE\_HACK@{DYN\_SPRITE\_HACK}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{DYN\_SPRITE\_HACK}{DYN\_SPRITE\_HACK}}
+{\footnotesize\ttfamily \#define DYN\+\_\+\+SPRITE\+\_\+\+HACK}
+
+\mbox{\Hypertarget{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}\label{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}} 
+\index{font.c@{font.c}!NUM\_template\_BMS@{NUM\_template\_BMS}}
+\index{NUM\_template\_BMS@{NUM\_template\_BMS}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{NUM\_template\_BMS}{NUM\_template\_BMS}}
+{\footnotesize\ttfamily \#define NUM\+\_\+template\+\_\+\+BMS~(24$\ast$40)}
+
+\mbox{\Hypertarget{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}\label{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}} 
+\index{font.c@{font.c}!SHOWFONT@{SHOWFONT}}
+\index{SHOWFONT@{SHOWFONT}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{SHOWFONT}{SHOWFONT}}
+{\footnotesize\ttfamily \#define SHOWFONT(\begin{DoxyParamCaption}\item[{}]{glp,  }\item[{}]{str,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                \{           \(\backslash\)}
+\DoxyCodeLine{                font\_set\_color( 0,0,0,255); \(\backslash\)}
+\DoxyCodeLine{                font\_set\_pos( x, y );       \(\backslash\)}
+\DoxyCodeLine{                font\_show\_string( glp, str );\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{font_8c_a426c350196d15a22a055a2f370cceb86}\label{font_8c_a426c350196d15a22a055a2f370cceb86}} 
+\index{font.c@{font.c}!font\_finish@{font\_finish}}
+\index{font\_finish@{font\_finish}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_finish()}{font\_finish()}}
+{\footnotesize\ttfamily void font\+\_\+finish (\begin{DoxyParamCaption}\item[{Gfx $\ast$$\ast$}]{glistp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_aebacfb88a524a8af2718c701b15a787c}\label{font_8c_aebacfb88a524a8af2718c701b15a787c}} 
+\index{font.c@{font.c}!font\_init@{font\_init}}
+\index{font\_init@{font\_init}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_init()}{font\_init()}}
+{\footnotesize\ttfamily void font\+\_\+init (\begin{DoxyParamCaption}\item[{Gfx $\ast$$\ast$}]{glistp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_a98a417f2156a6f95bf72abc6f373411c}\label{font_8c_a98a417f2156a6f95bf72abc6f373411c}} 
+\index{font.c@{font.c}!font\_set\_color@{font\_set\_color}}
+\index{font\_set\_color@{font\_set\_color}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_set\_color()}{font\_set\_color()}}
+{\footnotesize\ttfamily void font\+\_\+set\+\_\+color (\begin{DoxyParamCaption}\item[{unsigned char}]{red,  }\item[{unsigned char}]{green,  }\item[{unsigned char}]{blue,  }\item[{unsigned char}]{alpha }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_ab41bdac079872a0638c02c4ec9dd08e1}\label{font_8c_ab41bdac079872a0638c02c4ec9dd08e1}} 
+\index{font.c@{font.c}!font\_set\_pos@{font\_set\_pos}}
+\index{font\_set\_pos@{font\_set\_pos}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_set\_pos()}{font\_set\_pos()}}
+{\footnotesize\ttfamily void font\+\_\+set\+\_\+pos (\begin{DoxyParamCaption}\item[{int}]{xpos,  }\item[{int}]{ypos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_a84c7a0cd9e9c59f332e88d8a7a1c4ce3}\label{font_8c_a84c7a0cd9e9c59f332e88d8a7a1c4ce3}} 
+\index{font.c@{font.c}!font\_set\_scale@{font\_set\_scale}}
+\index{font\_set\_scale@{font\_set\_scale}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_set\_scale()}{font\_set\_scale()}}
+{\footnotesize\ttfamily void font\+\_\+set\+\_\+scale (\begin{DoxyParamCaption}\item[{double}]{xscale,  }\item[{double}]{yscale }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_ae404445dbfa5b89b654f638fdd9d3db9}\label{font_8c_ae404445dbfa5b89b654f638fdd9d3db9}} 
+\index{font.c@{font.c}!font\_set\_transparent@{font\_set\_transparent}}
+\index{font\_set\_transparent@{font\_set\_transparent}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_set\_transparent()}{font\_set\_transparent()}}
+{\footnotesize\ttfamily void font\+\_\+set\+\_\+transparent (\begin{DoxyParamCaption}\item[{int}]{flag }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_aafd3d8e4e5e32cffde933f132f731159}\label{font_8c_aafd3d8e4e5e32cffde933f132f731159}} 
+\index{font.c@{font.c}!font\_set\_win@{font\_set\_win}}
+\index{font\_set\_win@{font\_set\_win}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_set\_win()}{font\_set\_win()}}
+{\footnotesize\ttfamily void font\+\_\+set\+\_\+win (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_a04a92ff5100a7cf0c12fd645c26b23bf}\label{font_8c_a04a92ff5100a7cf0c12fd645c26b23bf}} 
+\index{font.c@{font.c}!font\_show\_string@{font\_show\_string}}
+\index{font\_show\_string@{font\_show\_string}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_show\_string()}{font\_show\_string()}}
+{\footnotesize\ttfamily void font\+\_\+show\+\_\+string (\begin{DoxyParamCaption}\item[{Gfx $\ast$$\ast$}]{glistp,  }\item[{char $\ast$}]{val\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_ac219326ee66c6daa0ad7c000d1372243}\label{font_8c_ac219326ee66c6daa0ad7c000d1372243}} 
+\index{font.c@{font.c}!my\_strchr@{my\_strchr}}
+\index{my\_strchr@{my\_strchr}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{my\_strchr()}{my\_strchr()}}
+{\footnotesize\ttfamily char $\ast$ my\+\_\+strchr (\begin{DoxyParamCaption}\item[{char $\ast$}]{str,  }\item[{char}]{target }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{font_8c_a76707329e83ccefe9951eccc41271dcb}\label{font_8c_a76707329e83ccefe9951eccc41271dcb}} 
+\index{font.c@{font.c}!text\_sprite@{text\_sprite}}
+\index{text\_sprite@{text\_sprite}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{text\_sprite()}{text\_sprite()}}
+{\footnotesize\ttfamily void text\+\_\+sprite (\begin{DoxyParamCaption}\item[{Sprite $\ast$}]{txt,  }\item[{char $\ast$}]{str,  }\item[{\mbox{\hyperlink{font_8h_afe10d185b692bb386b3771a1ae382c75}{Font}} $\ast$}]{fnt,  }\item[{int}]{xlen,  }\item[{int}]{ylen }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{font_8c_aa21e7f2cc84c6db617fa9cc6232958c4}\label{font_8c_aa21e7f2cc84c6db617fa9cc6232958c4}} 
+\index{font.c@{font.c}!font\_alf@{font\_alf}}
+\index{font\_alf@{font\_alf}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_alf}{font\_alf}}
+{\footnotesize\ttfamily unsigned char font\+\_\+alf = 255\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a7d868efda858d827ea2a117e919f9cd5}\label{font_8c_a7d868efda858d827ea2a117e919f9cd5}} 
+\index{font.c@{font.c}!font\_blu@{font\_blu}}
+\index{font\_blu@{font\_blu}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_blu}{font\_blu}}
+{\footnotesize\ttfamily unsigned char font\+\_\+blu = 255\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a95f964d9c0fd95b4d4bcf39cfdaf0058}\label{font_8c_a95f964d9c0fd95b4d4bcf39cfdaf0058}} 
+\index{font.c@{font.c}!font\_grn@{font\_grn}}
+\index{font\_grn@{font\_grn}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_grn}{font\_grn}}
+{\footnotesize\ttfamily unsigned char font\+\_\+grn = 255\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a7ec7462a981853ead97b829e0ccdbe9a}\label{font_8c_a7ec7462a981853ead97b829e0ccdbe9a}} 
+\index{font.c@{font.c}!font\_red@{font\_red}}
+\index{font\_red@{font\_red}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_red}{font\_red}}
+{\footnotesize\ttfamily unsigned char font\+\_\+red = 255\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_ab455b87988dce16bfe61f3d1bb96ac16}\label{font_8c_ab455b87988dce16bfe61f3d1bb96ac16}} 
+\index{font.c@{font.c}!font\_win\_height@{font\_win\_height}}
+\index{font\_win\_height@{font\_win\_height}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_win\_height}{font\_win\_height}}
+{\footnotesize\ttfamily int font\+\_\+win\+\_\+height = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a8d71c2aaa1f558a4348d99b80b48e8bb}\label{font_8c_a8d71c2aaa1f558a4348d99b80b48e8bb}} 
+\index{font.c@{font.c}!font\_win\_width@{font\_win\_width}}
+\index{font\_win\_width@{font\_win\_width}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_win\_width}{font\_win\_width}}
+{\footnotesize\ttfamily int font\+\_\+win\+\_\+width = 40\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a9b8e7e8d4e9f0d6e9ad1100fc2d2c917}\label{font_8c_a9b8e7e8d4e9f0d6e9ad1100fc2d2c917}} 
+\index{font.c@{font.c}!font\_xpos@{font\_xpos}}
+\index{font\_xpos@{font\_xpos}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_xpos}{font\_xpos}}
+{\footnotesize\ttfamily int font\+\_\+xpos = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_ab9d4161d235c25831200a0a956133689}\label{font_8c_ab9d4161d235c25831200a0a956133689}} 
+\index{font.c@{font.c}!font\_xscale@{font\_xscale}}
+\index{font\_xscale@{font\_xscale}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_xscale}{font\_xscale}}
+{\footnotesize\ttfamily double font\+\_\+xscale = 1.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a6c97b0dec47bc76a97c6ca95bdc573c4}\label{font_8c_a6c97b0dec47bc76a97c6ca95bdc573c4}} 
+\index{font.c@{font.c}!font\_ypos@{font\_ypos}}
+\index{font\_ypos@{font\_ypos}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_ypos}{font\_ypos}}
+{\footnotesize\ttfamily int font\+\_\+ypos = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_aae57c2927109f7c892b1a79cebd3c228}\label{font_8c_aae57c2927109f7c892b1a79cebd3c228}} 
+\index{font.c@{font.c}!font\_yscale@{font\_yscale}}
+\index{font\_yscale@{font\_yscale}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{font\_yscale}{font\_yscale}}
+{\footnotesize\ttfamily double font\+\_\+yscale = 1.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_aaf86da006b0b40cdfd25b885a58b899c}\label{font_8c_aaf86da006b0b40cdfd25b885a58b899c}} 
+\index{font.c@{font.c}!letters\_bms@{letters\_bms}}
+\index{letters\_bms@{letters\_bms}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{letters\_bms}{letters\_bms}}
+{\footnotesize\ttfamily Bitmap letters\+\_\+bms\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a413a91ef5364aaf7f8458a244fac65e0}\label{font_8c_a413a91ef5364aaf7f8458a244fac65e0}} 
+\index{font.c@{font.c}!letters\_font@{letters\_font}}
+\index{letters\_font@{letters\_font}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{letters\_font}{letters\_font}}
+{\footnotesize\ttfamily \mbox{\hyperlink{font_8h_afe10d185b692bb386b3771a1ae382c75}{Font}} letters\+\_\+font = \{ \mbox{\hyperlink{font_8c_a3dd494b9d5c10cc357be7b2dd6b069dd}{letters\+\_\+string}}, \mbox{\hyperlink{font_8c_aaf86da006b0b40cdfd25b885a58b899c}{letters\+\_\+bms}}, \mbox{\hyperlink{letters__img_8h_aec0b93219b03bb055fec23c71f82ee8d}{letters\+\_\+img}} \}}
+
+\mbox{\Hypertarget{font_8c_a3dd494b9d5c10cc357be7b2dd6b069dd}\label{font_8c_a3dd494b9d5c10cc357be7b2dd6b069dd}} 
+\index{font.c@{font.c}!letters\_string@{letters\_string}}
+\index{letters\_string@{letters\_string}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{letters\_string}{letters\_string}}
+{\footnotesize\ttfamily char letters\+\_\+string\mbox{[}$\,$\mbox{]} = \char`\"{}abcdefhiuvsnorm.\+klxz4321567890\`{}!gjpqytw,EFGHKLNOPRSUVXZ@JM\+:\+WIYABCD\textquotesingle{}T\textbackslash{}\char`\"{}+-\/=Q\+\_\+/?()\mbox{[}$\,$\mbox{]}\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a7c23d74f11039e7b04d5e8d344119472}\label{font_8c_a7c23d74f11039e7b04d5e8d344119472}} 
+\index{font.c@{font.c}!template\_bm@{template\_bm}}
+\index{template\_bm@{template\_bm}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{template\_bm}{template\_bm}}
+{\footnotesize\ttfamily Bitmap template\+\_\+bm\mbox{[}\mbox{\hyperlink{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}{NUM\+\_\+template\+\_\+\+BMS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a077b21565cc17fe43084e781ee39dc84}\label{font_8c_a077b21565cc17fe43084e781ee39dc84}} 
+\index{font.c@{font.c}!template\_dl@{template\_dl}}
+\index{template\_dl@{template\_dl}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{template\_dl}{template\_dl}}
+{\footnotesize\ttfamily Gfx template\+\_\+dl\mbox{[}NUM\+\_\+\+DL(\mbox{\hyperlink{font_8c_a2cc99b88a9fefefc45f2048ff1807c19}{NUM\+\_\+template\+\_\+\+BMS}})\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{font_8c_a055b77ee52b910fbd41e1e1dfe017469}\label{font_8c_a055b77ee52b910fbd41e1e1dfe017469}} 
+\index{font.c@{font.c}!template\_sprite@{template\_sprite}}
+\index{template\_sprite@{template\_sprite}!font.c@{font.c}}
+\doxysubsubsection{\texorpdfstring{template\_sprite}{template\_sprite}}
+{\footnotesize\ttfamily Sprite template\+\_\+sprite}
+

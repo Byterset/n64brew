@@ -1,0 +1,118 @@
+\hypertarget{item_8c}{}\doxysection{src/item.c File Reference}
+\label{item_8c}\index{src/item.c@{src/item.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}src/actors/gardener/character.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameutils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for item.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{item_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{item_8c_ad5f6121ab3afb1ac40a49e8cc0119e23}{ITEM\+\_\+\+DEBUG}}~1
+\item 
+\#define \mbox{\hyperlink{item_8c_a0596262f5a98baa6f9b0c1dd3d5cf133}{ITEM\+\_\+\+PICKUP\+\_\+\+COOLDOWN}}~60
+\item 
+\#define \mbox{\hyperlink{item_8c_a3a4164a5d875874ae8829824332ecaa1}{ITEM\+\_\+\+STEAL\+\_\+\+COOLDOWN}}~120
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{item_8c_a73afdddcdc3d214b66f9c32302d3fbbf}{Item\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self, \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj, \mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$\mbox{\hyperlink{game_8c_ac6a5ed6191fcf3a5bf0445921feb4f48}{game}})
+\item 
+void \mbox{\hyperlink{item_8c_a19eabb8262e9058c25c4080cb6be3f1d}{Item\+\_\+take}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self, \mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$new\+Holder)
+\item 
+void \mbox{\hyperlink{item_8c_adb28b5ed00cea54668bbd3abf110b41b}{Item\+\_\+drop}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self)
+\item 
+void \mbox{\hyperlink{item_8c_ab8d9d8d84cf10026c404e9f589ed68fb}{Item\+Holder\+\_\+init}} (\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$self, \mbox{\hyperlink{gametypes_8h_a8447589ce7b40950457b6857e7c6ad63}{Item\+Holder\+Type}} item\+Holder\+Type, void $\ast$owner)
+\item 
+void \mbox{\hyperlink{item_8c_a4427bc4f566fca91bc9fc1fa5bd8ba4e}{Item\+\_\+print}} (\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{item_8c_ad37a0926668c0228c00b49c6a9195a15}{Item\+Holder\+Type\+Strings}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{item_8c_ad5f6121ab3afb1ac40a49e8cc0119e23}\label{item_8c_ad5f6121ab3afb1ac40a49e8cc0119e23}} 
+\index{item.c@{item.c}!ITEM\_DEBUG@{ITEM\_DEBUG}}
+\index{ITEM\_DEBUG@{ITEM\_DEBUG}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{ITEM\_DEBUG}{ITEM\_DEBUG}}
+{\footnotesize\ttfamily \#define ITEM\+\_\+\+DEBUG~1}
+
+\mbox{\Hypertarget{item_8c_a0596262f5a98baa6f9b0c1dd3d5cf133}\label{item_8c_a0596262f5a98baa6f9b0c1dd3d5cf133}} 
+\index{item.c@{item.c}!ITEM\_PICKUP\_COOLDOWN@{ITEM\_PICKUP\_COOLDOWN}}
+\index{ITEM\_PICKUP\_COOLDOWN@{ITEM\_PICKUP\_COOLDOWN}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{ITEM\_PICKUP\_COOLDOWN}{ITEM\_PICKUP\_COOLDOWN}}
+{\footnotesize\ttfamily \#define ITEM\+\_\+\+PICKUP\+\_\+\+COOLDOWN~60}
+
+\mbox{\Hypertarget{item_8c_a3a4164a5d875874ae8829824332ecaa1}\label{item_8c_a3a4164a5d875874ae8829824332ecaa1}} 
+\index{item.c@{item.c}!ITEM\_STEAL\_COOLDOWN@{ITEM\_STEAL\_COOLDOWN}}
+\index{ITEM\_STEAL\_COOLDOWN@{ITEM\_STEAL\_COOLDOWN}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{ITEM\_STEAL\_COOLDOWN}{ITEM\_STEAL\_COOLDOWN}}
+{\footnotesize\ttfamily \#define ITEM\+\_\+\+STEAL\+\_\+\+COOLDOWN~120}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{item_8c_adb28b5ed00cea54668bbd3abf110b41b}\label{item_8c_adb28b5ed00cea54668bbd3abf110b41b}} 
+\index{item.c@{item.c}!Item\_drop@{Item\_drop}}
+\index{Item\_drop@{Item\_drop}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{Item\_drop()}{Item\_drop()}}
+{\footnotesize\ttfamily void Item\+\_\+drop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8c_a73afdddcdc3d214b66f9c32302d3fbbf}\label{item_8c_a73afdddcdc3d214b66f9c32302d3fbbf}} 
+\index{item.c@{item.c}!Item\_init@{Item\_init}}
+\index{Item\_init@{Item\_init}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{Item\_init()}{Item\_init()}}
+{\footnotesize\ttfamily void Item\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj,  }\item[{\mbox{\hyperlink{gametypes_8h_structGame}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8c_a4427bc4f566fca91bc9fc1fa5bd8ba4e}\label{item_8c_a4427bc4f566fca91bc9fc1fa5bd8ba4e}} 
+\index{item.c@{item.c}!Item\_print@{Item\_print}}
+\index{Item\_print@{Item\_print}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{Item\_print()}{Item\_print()}}
+{\footnotesize\ttfamily void Item\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8c_a19eabb8262e9058c25c4080cb6be3f1d}\label{item_8c_a19eabb8262e9058c25c4080cb6be3f1d}} 
+\index{item.c@{item.c}!Item\_take@{Item\_take}}
+\index{Item\_take@{Item\_take}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{Item\_take()}{Item\_take()}}
+{\footnotesize\ttfamily void Item\+\_\+take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_abaf91ffd369bbaec3ca6ca8c94c56d14}{Item}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$}]{new\+Holder }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{item_8c_ab8d9d8d84cf10026c404e9f589ed68fb}\label{item_8c_ab8d9d8d84cf10026c404e9f589ed68fb}} 
+\index{item.c@{item.c}!ItemHolder\_init@{ItemHolder\_init}}
+\index{ItemHolder\_init@{ItemHolder\_init}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{ItemHolder\_init()}{ItemHolder\_init()}}
+{\footnotesize\ttfamily void Item\+Holder\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gametypes_8h_structItemHolder}{Item\+Holder}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{gametypes_8h_a8447589ce7b40950457b6857e7c6ad63}{Item\+Holder\+Type}}}]{item\+Holder\+Type,  }\item[{void $\ast$}]{owner }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{item_8c_ad37a0926668c0228c00b49c6a9195a15}\label{item_8c_ad37a0926668c0228c00b49c6a9195a15}} 
+\index{item.c@{item.c}!ItemHolderTypeStrings@{ItemHolderTypeStrings}}
+\index{ItemHolderTypeStrings@{ItemHolderTypeStrings}!item.c@{item.c}}
+\doxysubsubsection{\texorpdfstring{ItemHolderTypeStrings}{ItemHolderTypeStrings}}
+{\footnotesize\ttfamily char$\ast$ Item\+Holder\+Type\+Strings\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}PlayerItemHolder"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}CharacterItemHolder"{}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

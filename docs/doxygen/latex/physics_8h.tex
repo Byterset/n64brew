@@ -1,0 +1,361 @@
+\hypertarget{physics_8h}{}\doxysection{src/physics/physics.h File Reference}
+\label{physics_8h}\index{src/physics/physics.h@{src/physics/physics.h}}
+{\ttfamily \#include \char`\"{}collision.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for physics.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{physics_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{physics_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}}
+\item 
+struct \mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}}
+\item 
+struct \mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{physics_8h_a291fbb5fe2d0d98a81cea595bac49349}{PHYS\+\_\+\+MAX\+\_\+\+STEPS}}~4
+\item 
+\#define \mbox{\hyperlink{physics_8h_ad78677ebe133f19fa003647febd64896}{PHYS\+\_\+\+TIMESTEP}}~1.\+0 / 60.\+0
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} \mbox{\hyperlink{physics_8h_a851488fdf41d7eccfcb873a3555a8463}{Phys\+World\+Data}}
+\item 
+typedef struct \mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} \mbox{\hyperlink{physics_8h_a2a9342e959e66c7ddd72c344a0681ed3}{Phys\+State}}
+\item 
+typedef struct \mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} \mbox{\hyperlink{physics_8h_a436e0225db63bb7ace97e2f54c834d3f}{Phys\+Body}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{physics_8h_aabfbe495fcd4f11323999c0774409959}{Phys\+State\+\_\+init}} (\mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} $\ast$self, \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} $\ast$world\+Data)
+\item 
+void \mbox{\hyperlink{physics_8h_ac77849374b39900afc844681b73f8944}{Phys\+State\+\_\+step}} (\mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} $\ast$physics, \mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$bodies, int num\+Bodies, float now)
+\item 
+void \mbox{\hyperlink{physics_8h_a999a1ee9533bfda6cf8e78f904d3d399}{Phys\+Body\+\_\+init}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$self, float mass, float radius, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, int id)
+\item 
+void \mbox{\hyperlink{physics_8h_a84de4039617c6c3e2c473b0c72922932}{Phys\+Body\+\_\+apply\+Force}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$body, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$force)
+\item 
+void \mbox{\hyperlink{physics_8h_adb9c403477a6576d3ac7f2259c193b8d}{Phys\+Body\+\_\+translate\+Without\+Force}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$body, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$translation)
+\item 
+void \mbox{\hyperlink{physics_8h_a9a413e132aee3091af69f874d6bb08b3}{Phys\+Body\+\_\+set\+Enabled}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$body, int enabled)
+\item 
+void \mbox{\hyperlink{physics_8h_a3b5f1b21858df6ca98958c48d43e2869}{Phys\+Body\+\_\+to\+String}} (\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$self, char $\ast$buffer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{PhysWorldData@{PhysWorldData}}\label{structPhysWorldData}
+\Hypertarget{physics_8h_structPhysWorldData}
+\doxysubsubsection{struct Phys\+World\+Data}
+
+
+Collaboration diagram for Phys\+World\+Data\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{structPhysWorldData__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{physics_8h_a9932b73c8eb5b7ca608440ccad4be497}\label{physics_8h_a9932b73c8eb5b7ca608440ccad4be497}} 
+float&
+gravity&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_abe4260caa6102eda9ebb25fc54f3bf40}\label{physics_8h_abe4260caa6102eda9ebb25fc54f3bf40}} 
+float&
+viscosity&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a0d091c646bee8e7f4d6090e90ff8e140}\label{physics_8h_a0d091c646bee8e7f4d6090e90ff8e140}} 
+float&
+waterHeight&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aede825a2e356110675b44cc3f48110d2}\label{physics_8h_aede825a2e356110675b44cc3f48110d2}} 
+\mbox{\hyperlink{collision_8h_structSpatialHash}{SpatialHash}} $\ast$&
+worldMeshSpatialHash&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aa70b90cfcedfc9643c0c1738335338f7}\label{physics_8h_aa70b90cfcedfc9643c0c1738335338f7}} 
+\mbox{\hyperlink{collision_8h_structTriangle}{Triangle}} $\ast$&
+worldMeshTris&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a56708c40ccdac5a594517cc401cac258}\label{physics_8h_a56708c40ccdac5a594517cc401cac258}} 
+int&
+worldMeshTrisLength&
+\\
+\hline
+
+\end{DoxyFields}
+\index{PhysState@{PhysState}}\label{structPhysState}
+\Hypertarget{physics_8h_structPhysState}
+\doxysubsubsection{struct Phys\+State}
+
+
+Collaboration diagram for Phys\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{structPhysState__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{physics_8h_ac74f21f09e0b7ba6294f36520f62beb4}\label{physics_8h_ac74f21f09e0b7ba6294f36520f62beb4}} 
+float&
+accumulatedTime&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a66ef0c64691e980069a86b3297d77a08}\label{physics_8h_a66ef0c64691e980069a86b3297d77a08}} 
+float&
+clock&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a8ba4380a5535179dee4ee75090da57bf}\label{physics_8h_a8ba4380a5535179dee4ee75090da57bf}} 
+int&
+dynamicTimestep&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_abc51bd9d479a2ffb4740446d104c37a2}\label{physics_8h_abc51bd9d479a2ffb4740446d104c37a2}} 
+float&
+simulationRate&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aba1ae44352f6abaa4cf7b58beff39cf6}\label{physics_8h_aba1ae44352f6abaa4cf7b58beff39cf6}} 
+float&
+timeScale&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a5f2c0ac5722cb3be44ae3643fa177402}\label{physics_8h_a5f2c0ac5722cb3be44ae3643fa177402}} 
+float&
+viscosity&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a7da06563fc511029fc4fd7c63704f200}\label{physics_8h_a7da06563fc511029fc4fd7c63704f200}} 
+\mbox{\hyperlink{physics_8h_structPhysWorldData}{PhysWorldData}} $\ast$&
+worldData&
+\\
+\hline
+
+\end{DoxyFields}
+\index{PhysBody@{PhysBody}}\label{structPhysBody}
+\Hypertarget{physics_8h_structPhysBody}
+\doxysubsubsection{struct Phys\+Body}
+
+
+Collaboration diagram for Phys\+Body\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{structPhysBody__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{physics_8h_a72d5977d766de4f7db4c08e7eb0d10e0}\label{physics_8h_a72d5977d766de4f7db4c08e7eb0d10e0}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+acceleration&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a14258117189cf24835ac1ea5e0acdd84}\label{physics_8h_a14258117189cf24835ac1ea5e0acdd84}} 
+int&
+controlled&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aec1c4478e7898b2d39ca7bef0349d059}\label{physics_8h_aec1c4478e7898b2d39ca7bef0349d059}} 
+int&
+enabled&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aaf8c95478ad67e49826803461c8cd6f1}\label{physics_8h_aaf8c95478ad67e49826803461c8cd6f1}} 
+int&
+id&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_af4e276021b54de107d9071c7cc855ccc}\label{physics_8h_af4e276021b54de107d9071c7cc855ccc}} 
+float&
+mass&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a6d3439952e353452a73cc5e02b0dc83f}\label{physics_8h_a6d3439952e353452a73cc5e02b0dc83f}} 
+float&
+massInverse&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aafe2dcd51be31e8fa6563c57952a9c96}\label{physics_8h_aafe2dcd51be31e8fa6563c57952a9c96}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+nonIntegralAcceleration&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a28a4d5957e5e67c4690ace41cd1faf81}\label{physics_8h_a28a4d5957e5e67c4690ace41cd1faf81}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+nonIntegralVelocity&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aaff22a15785a53c0dab03c195f81ab52}\label{physics_8h_aaff22a15785a53c0dab03c195f81ab52}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+position&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_aef45e73ed365f549b55b0ab79a43f0be}\label{physics_8h_aef45e73ed365f549b55b0ab79a43f0be}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+prevAcceleration&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a0f3350482dd03f3d085c266b7053a5fc}\label{physics_8h_a0f3350482dd03f3d085c266b7053a5fc}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+prevPosition&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a2d7e84e44b573f866f6f479012723dcc}\label{physics_8h_a2d7e84e44b573f866f6f479012723dcc}} 
+float&
+radius&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a077057558d2a409f82d11ce20ada424b}\label{physics_8h_a077057558d2a409f82d11ce20ada424b}} 
+float&
+radiusSquared&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a1f0ab49749c55b9b7c1ac317693eff65}\label{physics_8h_a1f0ab49749c55b9b7c1ac317693eff65}} 
+float&
+restitution&
+\\
+\hline
+
+\mbox{\Hypertarget{physics_8h_a7753685c2a38f40459cbc5ecf64de281}\label{physics_8h_a7753685c2a38f40459cbc5ecf64de281}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+velocity&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{physics_8h_a291fbb5fe2d0d98a81cea595bac49349}\label{physics_8h_a291fbb5fe2d0d98a81cea595bac49349}} 
+\index{physics.h@{physics.h}!PHYS\_MAX\_STEPS@{PHYS\_MAX\_STEPS}}
+\index{PHYS\_MAX\_STEPS@{PHYS\_MAX\_STEPS}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PHYS\_MAX\_STEPS}{PHYS\_MAX\_STEPS}}
+{\footnotesize\ttfamily \#define PHYS\+\_\+\+MAX\+\_\+\+STEPS~4}
+
+\mbox{\Hypertarget{physics_8h_ad78677ebe133f19fa003647febd64896}\label{physics_8h_ad78677ebe133f19fa003647febd64896}} 
+\index{physics.h@{physics.h}!PHYS\_TIMESTEP@{PHYS\_TIMESTEP}}
+\index{PHYS\_TIMESTEP@{PHYS\_TIMESTEP}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PHYS\_TIMESTEP}{PHYS\_TIMESTEP}}
+{\footnotesize\ttfamily \#define PHYS\+\_\+\+TIMESTEP~1.\+0 / 60.\+0}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{physics_8h_a436e0225db63bb7ace97e2f54c834d3f}\label{physics_8h_a436e0225db63bb7ace97e2f54c834d3f}} 
+\index{physics.h@{physics.h}!PhysBody@{PhysBody}}
+\index{PhysBody@{PhysBody}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody}{PhysBody}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} \mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}}}
+
+\mbox{\Hypertarget{physics_8h_a2a9342e959e66c7ddd72c344a0681ed3}\label{physics_8h_a2a9342e959e66c7ddd72c344a0681ed3}} 
+\index{physics.h@{physics.h}!PhysState@{PhysState}}
+\index{PhysState@{PhysState}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysState}{PhysState}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} \mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}}}
+
+\mbox{\Hypertarget{physics_8h_a851488fdf41d7eccfcb873a3555a8463}\label{physics_8h_a851488fdf41d7eccfcb873a3555a8463}} 
+\index{physics.h@{physics.h}!PhysWorldData@{PhysWorldData}}
+\index{PhysWorldData@{PhysWorldData}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysWorldData}{PhysWorldData}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{physics_8h_a84de4039617c6c3e2c473b0c72922932}\label{physics_8h_a84de4039617c6c3e2c473b0c72922932}} 
+\index{physics.h@{physics.h}!PhysBody\_applyForce@{PhysBody\_applyForce}}
+\index{PhysBody\_applyForce@{PhysBody\_applyForce}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody\_applyForce()}{PhysBody\_applyForce()}}
+{\footnotesize\ttfamily void Phys\+Body\+\_\+apply\+Force (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{body,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{force }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_a999a1ee9533bfda6cf8e78f904d3d399}\label{physics_8h_a999a1ee9533bfda6cf8e78f904d3d399}} 
+\index{physics.h@{physics.h}!PhysBody\_init@{PhysBody\_init}}
+\index{PhysBody\_init@{PhysBody\_init}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody\_init()}{PhysBody\_init()}}
+{\footnotesize\ttfamily void Phys\+Body\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{self,  }\item[{float}]{mass,  }\item[{float}]{radius,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_a9a413e132aee3091af69f874d6bb08b3}\label{physics_8h_a9a413e132aee3091af69f874d6bb08b3}} 
+\index{physics.h@{physics.h}!PhysBody\_setEnabled@{PhysBody\_setEnabled}}
+\index{PhysBody\_setEnabled@{PhysBody\_setEnabled}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody\_setEnabled()}{PhysBody\_setEnabled()}}
+{\footnotesize\ttfamily void Phys\+Body\+\_\+set\+Enabled (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{body,  }\item[{int}]{enabled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_a3b5f1b21858df6ca98958c48d43e2869}\label{physics_8h_a3b5f1b21858df6ca98958c48d43e2869}} 
+\index{physics.h@{physics.h}!PhysBody\_toString@{PhysBody\_toString}}
+\index{PhysBody\_toString@{PhysBody\_toString}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody\_toString()}{PhysBody\_toString()}}
+{\footnotesize\ttfamily void Phys\+Body\+\_\+to\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{self,  }\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_adb9c403477a6576d3ac7f2259c193b8d}\label{physics_8h_adb9c403477a6576d3ac7f2259c193b8d}} 
+\index{physics.h@{physics.h}!PhysBody\_translateWithoutForce@{PhysBody\_translateWithoutForce}}
+\index{PhysBody\_translateWithoutForce@{PhysBody\_translateWithoutForce}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysBody\_translateWithoutForce()}{PhysBody\_translateWithoutForce()}}
+{\footnotesize\ttfamily void Phys\+Body\+\_\+translate\+Without\+Force (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{body,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{translation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_aabfbe495fcd4f11323999c0774409959}\label{physics_8h_aabfbe495fcd4f11323999c0774409959}} 
+\index{physics.h@{physics.h}!PhysState\_init@{PhysState\_init}}
+\index{PhysState\_init@{PhysState\_init}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysState\_init()}{PhysState\_init()}}
+{\footnotesize\ttfamily void Phys\+State\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} $\ast$}]{self,  }\item[{\mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} $\ast$}]{world\+Data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{physics_8h_ac77849374b39900afc844681b73f8944}\label{physics_8h_ac77849374b39900afc844681b73f8944}} 
+\index{physics.h@{physics.h}!PhysState\_step@{PhysState\_step}}
+\index{PhysState\_step@{PhysState\_step}!physics.h@{physics.h}}
+\doxysubsubsection{\texorpdfstring{PhysState\_step()}{PhysState\_step()}}
+{\footnotesize\ttfamily void Phys\+State\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{physics_8h_structPhysState}{Phys\+State}} $\ast$}]{physics,  }\item[{\mbox{\hyperlink{physics_8h_structPhysBody}{Phys\+Body}} $\ast$}]{bodies,  }\item[{int}]{num\+Bodies,  }\item[{float}]{now }\end{DoxyParamCaption})}
+

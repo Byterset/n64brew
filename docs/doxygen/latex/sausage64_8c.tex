@@ -1,0 +1,313 @@
+\hypertarget{sausage64_8c}{}\doxysection{src/sausage64/sausage64.c File Reference}
+\label{sausage64_8c}\index{src/sausage64/sausage64.c@{src/sausage64/sausage64.c}}
+
+
+A very simple library that handles Sausage64 models exported by Arabiki64.  
+
+
+{\ttfamily \#include \char`\"{}sausage64.\+h\char`\"{}}\newline
+Include dependency graph for sausage64.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{sausage64_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static f32 \mbox{\hyperlink{sausage64_8c_a0c23fd3993067b517a67d0e442130f28}{s64clamp}} (f32 value, f32 min, f32 max)
+\begin{DoxyCompactList}\small\item\em Clamps a value between two others. \end{DoxyCompactList}\item 
+static f32 \mbox{\hyperlink{sausage64_8c_a468c0a8de5d43b1b79d648e5c5a9b5ec}{s64lerp}} (f32 start\+Value, f32 end\+Value, f32 fraction)
+\begin{DoxyCompactList}\small\item\em Returns the linear interpolation of two values given a fraction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a479f260a40fd5782e68e76d97f4c22a1}{sausage64\+\_\+initmodel}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, \mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$mdldata, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$matrices, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$scale, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$rotation)
+\begin{DoxyCompactList}\small\item\em Initialize a model helper struct. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a8068a3ee1d3f07d703b6eebcf94a8d54}{sausage64\+\_\+set\+\_\+camera}} (\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$view, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$projection)
+\begin{DoxyCompactList}\small\item\em Sets the camera for Sausage64 to use for billboarding. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a550c30e1db3c40ee683927e6bca056a8}{sausage64\+\_\+set\+\_\+predrawfunc}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, void($\ast$predraw)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}))
+\begin{DoxyCompactList}\small\item\em Set a function that gets called before any model is rendered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a5be4201206c30a4618dca19efe4a77d6}{sausage64\+\_\+set\+\_\+postdrawfunc}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, void($\ast$postdraw)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}))
+\begin{DoxyCompactList}\small\item\em Set a function that gets called after any model is rendered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a0a34ba272478ab532a52098460220ddb}{sausage64\+\_\+set\+\_\+animcallback}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, void($\ast$animcallback)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}))
+\begin{DoxyCompactList}\small\item\em Set a function that gets called when an animation finishes. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{sausage64_8c_a0cf951dcbfb3c1e9fdc90aa21392deaf}{sausage64\+\_\+update\+\_\+anim}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl)
+\begin{DoxyCompactList}\small\item\em Updates the animation keyframe based on the animation tick. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a48b963121eeaadd6daa05ce65647e4f5}{sausage64\+\_\+advance\+\_\+anim}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, float tickamount)
+\begin{DoxyCompactList}\small\item\em Advances the animation tick by the given amount. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a735acedae57f0790d886987751f35bbf}{sausage64\+\_\+set\+\_\+anim}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} anim)
+\begin{DoxyCompactList}\small\item\em Sets an animation on the model. Does not perform error checking if an invalid animation is given. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{sausage64_8c_a0b62f7e042cb599ed6feb75216fc7ebb}{sausage64\+\_\+drawpart}} (Gfx $\ast$$\ast$glistp, \mbox{\hyperlink{sausage64_8h_structs64Mesh}{s64\+Mesh}} $\ast$mesh, const \mbox{\hyperlink{sausage64_8h_structs64FrameData}{s64\+Frame\+Data}} $\ast$cfdata, const \mbox{\hyperlink{sausage64_8h_structs64FrameData}{s64\+Frame\+Data}} $\ast$nfdata, const \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} interpolate, const f32 l, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$matrix)
+\begin{DoxyCompactList}\small\item\em Renders a part of a Sausage64 model. Calculates the model-\/view transformation matrix for the part based on position, rotation, and scale in the frame data. Handles interpolation between current and next frame data if enabled. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sausage64_8c_a1e736dc5aff6424321c3ee208b5b80bc}{sausage64\+\_\+drawmodel}} (Gfx $\ast$$\ast$glistp, \mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl)
+\begin{DoxyCompactList}\small\item\em Renders a Sausage64 model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{sausage64_8c_a6522fde7741ee5e519c72248778b1a76}{s64\+\_\+viewmat}} \mbox{[}4\mbox{]}\mbox{[}4\mbox{]}
+\item 
+static float \mbox{\hyperlink{sausage64_8c_a63117f2aabdfaf64717b6603bdfd2952}{s64\+\_\+projmat}} \mbox{[}4\mbox{]}\mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A very simple library that handles Sausage64 models exported by Arabiki64. 
+
+\begin{DoxyAuthor}{Author}
+original code by buu342 (\href{https://github.com/buu342/Blender-Sausage64}{\texttt{ https\+://github.\+com/buu342/\+Blender-\/\+Sausage64}}) modified by byterset (\href{https://github.com/byterset}{\texttt{ https\+://github.\+com/byterset}}) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023-\/11-\/21 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sausage64_8c_a0c23fd3993067b517a67d0e442130f28}\label{sausage64_8c_a0c23fd3993067b517a67d0e442130f28}} 
+\index{sausage64.c@{sausage64.c}!s64clamp@{s64clamp}}
+\index{s64clamp@{s64clamp}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{s64clamp()}{s64clamp()}}
+{\footnotesize\ttfamily static f32 s64clamp (\begin{DoxyParamCaption}\item[{f32}]{value,  }\item[{f32}]{min,  }\item[{f32}]{max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Clamps a value between two others. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to clamp \\
+\hline
+{\em min} & The minimum value \\
+\hline
+{\em max} & The maximum value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+f32 The clamped value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sausage64_8c_a468c0a8de5d43b1b79d648e5c5a9b5ec}\label{sausage64_8c_a468c0a8de5d43b1b79d648e5c5a9b5ec}} 
+\index{sausage64.c@{sausage64.c}!s64lerp@{s64lerp}}
+\index{s64lerp@{s64lerp}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{s64lerp()}{s64lerp()}}
+{\footnotesize\ttfamily static f32 s64lerp (\begin{DoxyParamCaption}\item[{f32}]{start\+Value,  }\item[{f32}]{end\+Value,  }\item[{f32}]{fraction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns the linear interpolation of two values given a fraction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Value} & The first value \\
+\hline
+{\em end\+Value} & The target value \\
+\hline
+{\em fraction} & The fraction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+f32 The interpolated result 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sausage64_8c_a48b963121eeaadd6daa05ce65647e4f5}\label{sausage64_8c_a48b963121eeaadd6daa05ce65647e4f5}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_advance\_anim@{sausage64\_advance\_anim}}
+\index{sausage64\_advance\_anim@{sausage64\_advance\_anim}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_advance\_anim()}{sausage64\_advance\_anim()}}
+{\footnotesize\ttfamily void sausage64\+\_\+advance\+\_\+anim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{float}]{tickamount }\end{DoxyParamCaption})}
+
+
+
+Advances the animation tick by the given amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+{\em tickamount} & The amount to increase the animation tick by \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a1e736dc5aff6424321c3ee208b5b80bc}\label{sausage64_8c_a1e736dc5aff6424321c3ee208b5b80bc}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_drawmodel@{sausage64\_drawmodel}}
+\index{sausage64\_drawmodel@{sausage64\_drawmodel}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_drawmodel()}{sausage64\_drawmodel()}}
+{\footnotesize\ttfamily void sausage64\+\_\+drawmodel (\begin{DoxyParamCaption}\item[{Gfx $\ast$$\ast$}]{glistp,  }\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl }\end{DoxyParamCaption})}
+
+
+
+Renders a Sausage64 model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em glistp} & A pointer to a display list pointer \\
+\hline
+{\em mdl} & The model helper data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a0b62f7e042cb599ed6feb75216fc7ebb}\label{sausage64_8c_a0b62f7e042cb599ed6feb75216fc7ebb}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_drawpart@{sausage64\_drawpart}}
+\index{sausage64\_drawpart@{sausage64\_drawpart}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_drawpart()}{sausage64\_drawpart()}}
+{\footnotesize\ttfamily static void sausage64\+\_\+drawpart (\begin{DoxyParamCaption}\item[{Gfx $\ast$$\ast$}]{glistp,  }\item[{\mbox{\hyperlink{sausage64_8h_structs64Mesh}{s64\+Mesh}} $\ast$}]{mesh,  }\item[{const \mbox{\hyperlink{sausage64_8h_structs64FrameData}{s64\+Frame\+Data}} $\ast$}]{cfdata,  }\item[{const \mbox{\hyperlink{sausage64_8h_structs64FrameData}{s64\+Frame\+Data}} $\ast$}]{nfdata,  }\item[{const \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}}]{interpolate,  }\item[{const f32}]{l,  }\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Renders a part of a Sausage64 model. Calculates the model-\/view transformation matrix for the part based on position, rotation, and scale in the frame data. Handles interpolation between current and next frame data if enabled. 
+
+For billboard parts, calculates a rotation matrix based on the current view matrix. For other parts, calculates a rotation matrix from the quaternion in the frame data.
+
+Multiplies the matrices together, converts to a N64 matrix, and sets it as the model-\/view matrix before drawing the display list for the part mesh.
+
+
+\begin{DoxyParams}{Parameters}
+{\em glistp} & A pointer to a display list pointer \\
+\hline
+{\em mesh} & The mesh that will be drawn \\
+\hline
+{\em cfdata} & The current frame data \\
+\hline
+{\em nfdata} & The next frame data \\
+\hline
+{\em interpolate} & Whether to interpolate between the current and next frame data \\
+\hline
+{\em l} & The interpolation amount \\
+\hline
+{\em matrix} & The matrix to store the mesh\textquotesingle{}s transformation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a479f260a40fd5782e68e76d97f4c22a1}\label{sausage64_8c_a479f260a40fd5782e68e76d97f4c22a1}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_initmodel@{sausage64\_initmodel}}
+\index{sausage64\_initmodel@{sausage64\_initmodel}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_initmodel()}{sausage64\_initmodel()}}
+{\footnotesize\ttfamily void sausage64\+\_\+initmodel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{\mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$}]{mdldata,  }\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{matrices,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{scale,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Initialize a model helper struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper to initialize \\
+\hline
+{\em mdldata} & The model data \\
+\hline
+{\em matrices} & The array of matrices for each mesh part \\
+\hline
+{\em position} & The position of the model \\
+\hline
+{\em scale} & The scale of the model \\
+\hline
+{\em rotation} & The rotation of the model \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a735acedae57f0790d886987751f35bbf}\label{sausage64_8c_a735acedae57f0790d886987751f35bbf}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_set\_anim@{sausage64\_set\_anim}}
+\index{sausage64\_set\_anim@{sausage64\_set\_anim}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_set\_anim()}{sausage64\_set\_anim()}}
+{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+anim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{anim }\end{DoxyParamCaption})}
+
+
+
+Sets an animation on the model. Does not perform error checking if an invalid animation is given. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+{\em anim} & The ANIMATION\+\_\+$\ast$ macro to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a0a34ba272478ab532a52098460220ddb}\label{sausage64_8c_a0a34ba272478ab532a52098460220ddb}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_set\_animcallback@{sausage64\_set\_animcallback}}
+\index{sausage64\_set\_animcallback@{sausage64\_set\_animcallback}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_set\_animcallback()}{sausage64\_set\_animcallback()}}
+{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+animcallback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{void($\ast$)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}]{animcallback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set a function that gets called when an animation finishes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+{\em animcallback} & The animation end callback function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a8068a3ee1d3f07d703b6eebcf94a8d54}\label{sausage64_8c_a8068a3ee1d3f07d703b6eebcf94a8d54}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_set\_camera@{sausage64\_set\_camera}}
+\index{sausage64\_set\_camera@{sausage64\_set\_camera}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_set\_camera()}{sausage64\_set\_camera()}}
+{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+camera (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{view,  }\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{projection }\end{DoxyParamCaption})}
+
+
+
+Sets the camera for Sausage64 to use for billboarding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The view matrix \\
+\hline
+{\em projection} & The projection matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a5be4201206c30a4618dca19efe4a77d6}\label{sausage64_8c_a5be4201206c30a4618dca19efe4a77d6}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_set\_postdrawfunc@{sausage64\_set\_postdrawfunc}}
+\index{sausage64\_set\_postdrawfunc@{sausage64\_set\_postdrawfunc}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_set\_postdrawfunc()}{sausage64\_set\_postdrawfunc()}}
+{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+postdrawfunc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{void($\ast$)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}]{postdraw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set a function that gets called after any model is rendered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+{\em postdraw} & The post draw function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a550c30e1db3c40ee683927e6bca056a8}\label{sausage64_8c_a550c30e1db3c40ee683927e6bca056a8}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_set\_predrawfunc@{sausage64\_set\_predrawfunc}}
+\index{sausage64\_set\_predrawfunc@{sausage64\_set\_predrawfunc}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_set\_predrawfunc()}{sausage64\_set\_predrawfunc()}}
+{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+predrawfunc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{void($\ast$)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}})}]{predraw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set a function that gets called before any model is rendered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+{\em predraw} & The pre draw function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sausage64_8c_a0cf951dcbfb3c1e9fdc90aa21392deaf}\label{sausage64_8c_a0cf951dcbfb3c1e9fdc90aa21392deaf}} 
+\index{sausage64.c@{sausage64.c}!sausage64\_update\_anim@{sausage64\_update\_anim}}
+\index{sausage64\_update\_anim@{sausage64\_update\_anim}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{sausage64\_update\_anim()}{sausage64\_update\_anim()}}
+{\footnotesize\ttfamily static void sausage64\+\_\+update\+\_\+anim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Updates the animation keyframe based on the animation tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdl} & The model helper pointer \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{sausage64_8c_a63117f2aabdfaf64717b6603bdfd2952}\label{sausage64_8c_a63117f2aabdfaf64717b6603bdfd2952}} 
+\index{sausage64.c@{sausage64.c}!s64\_projmat@{s64\_projmat}}
+\index{s64\_projmat@{s64\_projmat}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{s64\_projmat}{s64\_projmat}}
+{\footnotesize\ttfamily float s64\+\_\+projmat\mbox{[}4\mbox{]}\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{sausage64_8c_a6522fde7741ee5e519c72248778b1a76}\label{sausage64_8c_a6522fde7741ee5e519c72248778b1a76}} 
+\index{sausage64.c@{sausage64.c}!s64\_viewmat@{s64\_viewmat}}
+\index{s64\_viewmat@{s64\_viewmat}!sausage64.c@{sausage64.c}}
+\doxysubsubsection{\texorpdfstring{s64\_viewmat}{s64\_viewmat}}
+{\footnotesize\ttfamily float s64\+\_\+viewmat\mbox{[}4\mbox{]}\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+

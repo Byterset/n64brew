@@ -1,0 +1,193 @@
+\hypertarget{structCharacter}{}\doxysection{Character Struct Reference}
+\label{structCharacter}\index{Character@{Character}}
+
+
+Collaboration diagram for Character\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structCharacter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structCharacter_a0c9bd4abd9bbef78e080a6a449596d31}\label{structCharacter_a0c9bd4abd9bbef78e080a6a449596d31}} 
+\mbox{\hyperlink{structItemHolder}{Item\+Holder}} {\bfseries item\+Holder}
+\item 
+\mbox{\Hypertarget{structCharacter_a4db645560c5f9d2ff466f2696908f551}\label{structCharacter_a4db645560c5f9d2ff466f2696908f551}} 
+\mbox{\hyperlink{structGameObject}{Game\+Object}} $\ast$ {\bfseries obj}
+\item 
+\mbox{\Hypertarget{structCharacter_ae7fe4e3eb88240e44e05551aa12b1f0e}\label{structCharacter_ae7fe4e3eb88240e44e05551aa12b1f0e}} 
+\mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} {\bfseries anim\+State}
+\item 
+\mbox{\Hypertarget{structCharacter_a933ecb93b76f8af3c04cbbe7a1a77d9d}\label{structCharacter_a933ecb93b76f8af3c04cbbe7a1a77d9d}} 
+struct \mbox{\hyperlink{structItemStruct}{Item\+Struct}} $\ast$ {\bfseries target\+Item}
+\item 
+\mbox{\Hypertarget{structCharacter_a342b0d07c05ec889ba7c8988116a1da6}\label{structCharacter_a342b0d07c05ec889ba7c8988116a1da6}} 
+struct \mbox{\hyperlink{structItemStruct}{Item\+Struct}} $\ast$ {\bfseries default\+Activity\+Item}
+\item 
+\mbox{\Hypertarget{structCharacter_a6c5c9caa87dd03f31c5c1433380d6396}\label{structCharacter_a6c5c9caa87dd03f31c5c1433380d6396}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries default\+Activity\+Location}
+\item 
+\mbox{\Hypertarget{structCharacter_ab26d2396b3b41864b7ccf81692a45156}\label{structCharacter_ab26d2396b3b41864b7ccf81692a45156}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries movement\+Target}
+\item 
+\mbox{\Hypertarget{structCharacter_afeceda084cf4cb1555b656c8159d4372}\label{structCharacter_afeceda084cf4cb1555b656c8159d4372}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries target\+Location}
+\item 
+\mbox{\Hypertarget{structCharacter_a7ff67d35ac085aa43d6869b3f8201cc1}\label{structCharacter_a7ff67d35ac085aa43d6869b3f8201cc1}} 
+Character\+Target {\bfseries target\+Type}
+\item 
+\mbox{\Hypertarget{structCharacter_ac20f1ebda238017ddc245ecdce827037}\label{structCharacter_ac20f1ebda238017ddc245ecdce827037}} 
+Character\+State {\bfseries state}
+\item 
+\mbox{\Hypertarget{structCharacter_a088d7f8ff783726f27368685592a323f}\label{structCharacter_a088d7f8ff783726f27368685592a323f}} 
+\mbox{\hyperlink{structPathfindingState}{Pathfinding\+State}} $\ast$ {\bfseries pathfinding\+Result}
+\item 
+\mbox{\Hypertarget{structCharacter_a918b72a0df58d96ff7a824e788335d79}\label{structCharacter_a918b72a0df58d96ff7a824e788335d79}} 
+int {\bfseries path\+Progress}
+\item 
+\mbox{\Hypertarget{structCharacter_a5d9a55ce23bfff66357bbfec53d0fe68}\label{structCharacter_a5d9a55ce23bfff66357bbfec53d0fe68}} 
+float {\bfseries path\+Segment\+Progress}
+\item 
+\mbox{\Hypertarget{structCharacter_ae99b68e682cca15eae93335280ab5f56}\label{structCharacter_ae99b68e682cca15eae93335280ab5f56}} 
+float {\bfseries speed\+Scale\+For\+Heading}
+\item 
+\mbox{\Hypertarget{structCharacter_a50745443dcc109ae30b85dbf21abc6cf}\label{structCharacter_a50745443dcc109ae30b85dbf21abc6cf}} 
+float {\bfseries speed\+Multiplier}
+\item 
+\mbox{\Hypertarget{structCharacter_acdcaf40925af2937a3695737e9294f3b}\label{structCharacter_acdcaf40925af2937a3695737e9294f3b}} 
+float {\bfseries speed\+Scale\+For\+Arrival}
+\item 
+\mbox{\Hypertarget{structCharacter_a764711704634f909712527cf1aaa4fa4}\label{structCharacter_a764711704634f909712527cf1aaa4fa4}} 
+float {\bfseries turning\+Speed\+Scale\+For\+Heading}
+\item 
+\mbox{\Hypertarget{structCharacter_a97def98bf67cbdb4f2c37a070a0107dd}\label{structCharacter_a97def98bf67cbdb4f2c37a070a0107dd}} 
+unsigned int {\bfseries entered\+State\+Tick}
+\item 
+\mbox{\Hypertarget{structCharacter_a77facd1a2030fd8f5251283a8f5f6a1a}\label{structCharacter_a77facd1a2030fd8f5251283a8f5f6a1a}} 
+unsigned int {\bfseries started\+Activity\+Tick}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structCharacter_ae7fe4e3eb88240e44e05551aa12b1f0e}\label{structCharacter_ae7fe4e3eb88240e44e05551aa12b1f0e}} 
+\index{Character@{Character}!animState@{animState}}
+\index{animState@{animState}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{animState}{animState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{animation_8h_structAnimationState}{Animation\+State}} Character\+::anim\+State}
+
+\mbox{\Hypertarget{structCharacter_a342b0d07c05ec889ba7c8988116a1da6}\label{structCharacter_a342b0d07c05ec889ba7c8988116a1da6}} 
+\index{Character@{Character}!defaultActivityItem@{defaultActivityItem}}
+\index{defaultActivityItem@{defaultActivityItem}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{defaultActivityItem}{defaultActivityItem}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structItemStruct}{Item\+Struct}}$\ast$ Character\+::default\+Activity\+Item}
+
+\mbox{\Hypertarget{structCharacter_a6c5c9caa87dd03f31c5c1433380d6396}\label{structCharacter_a6c5c9caa87dd03f31c5c1433380d6396}} 
+\index{Character@{Character}!defaultActivityLocation@{defaultActivityLocation}}
+\index{defaultActivityLocation@{defaultActivityLocation}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{defaultActivityLocation}{defaultActivityLocation}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Character\+::default\+Activity\+Location}
+
+\mbox{\Hypertarget{structCharacter_a97def98bf67cbdb4f2c37a070a0107dd}\label{structCharacter_a97def98bf67cbdb4f2c37a070a0107dd}} 
+\index{Character@{Character}!enteredStateTick@{enteredStateTick}}
+\index{enteredStateTick@{enteredStateTick}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{enteredStateTick}{enteredStateTick}}
+{\footnotesize\ttfamily unsigned int Character\+::entered\+State\+Tick}
+
+\mbox{\Hypertarget{structCharacter_a0c9bd4abd9bbef78e080a6a449596d31}\label{structCharacter_a0c9bd4abd9bbef78e080a6a449596d31}} 
+\index{Character@{Character}!itemHolder@{itemHolder}}
+\index{itemHolder@{itemHolder}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{itemHolder}{itemHolder}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structItemHolder}{Item\+Holder}} Character\+::item\+Holder}
+
+\mbox{\Hypertarget{structCharacter_ab26d2396b3b41864b7ccf81692a45156}\label{structCharacter_ab26d2396b3b41864b7ccf81692a45156}} 
+\index{Character@{Character}!movementTarget@{movementTarget}}
+\index{movementTarget@{movementTarget}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{movementTarget}{movementTarget}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Character\+::movement\+Target}
+
+\mbox{\Hypertarget{structCharacter_a4db645560c5f9d2ff466f2696908f551}\label{structCharacter_a4db645560c5f9d2ff466f2696908f551}} 
+\index{Character@{Character}!obj@{obj}}
+\index{obj@{obj}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{obj}{obj}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGameObject}{Game\+Object}}$\ast$ Character\+::obj}
+
+\mbox{\Hypertarget{structCharacter_a088d7f8ff783726f27368685592a323f}\label{structCharacter_a088d7f8ff783726f27368685592a323f}} 
+\index{Character@{Character}!pathfindingResult@{pathfindingResult}}
+\index{pathfindingResult@{pathfindingResult}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{pathfindingResult}{pathfindingResult}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPathfindingState}{Pathfinding\+State}}$\ast$ Character\+::pathfinding\+Result}
+
+\mbox{\Hypertarget{structCharacter_a918b72a0df58d96ff7a824e788335d79}\label{structCharacter_a918b72a0df58d96ff7a824e788335d79}} 
+\index{Character@{Character}!pathProgress@{pathProgress}}
+\index{pathProgress@{pathProgress}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{pathProgress}{pathProgress}}
+{\footnotesize\ttfamily int Character\+::path\+Progress}
+
+\mbox{\Hypertarget{structCharacter_a5d9a55ce23bfff66357bbfec53d0fe68}\label{structCharacter_a5d9a55ce23bfff66357bbfec53d0fe68}} 
+\index{Character@{Character}!pathSegmentProgress@{pathSegmentProgress}}
+\index{pathSegmentProgress@{pathSegmentProgress}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{pathSegmentProgress}{pathSegmentProgress}}
+{\footnotesize\ttfamily float Character\+::path\+Segment\+Progress}
+
+\mbox{\Hypertarget{structCharacter_a50745443dcc109ae30b85dbf21abc6cf}\label{structCharacter_a50745443dcc109ae30b85dbf21abc6cf}} 
+\index{Character@{Character}!speedMultiplier@{speedMultiplier}}
+\index{speedMultiplier@{speedMultiplier}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{speedMultiplier}{speedMultiplier}}
+{\footnotesize\ttfamily float Character\+::speed\+Multiplier}
+
+\mbox{\Hypertarget{structCharacter_acdcaf40925af2937a3695737e9294f3b}\label{structCharacter_acdcaf40925af2937a3695737e9294f3b}} 
+\index{Character@{Character}!speedScaleForArrival@{speedScaleForArrival}}
+\index{speedScaleForArrival@{speedScaleForArrival}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{speedScaleForArrival}{speedScaleForArrival}}
+{\footnotesize\ttfamily float Character\+::speed\+Scale\+For\+Arrival}
+
+\mbox{\Hypertarget{structCharacter_ae99b68e682cca15eae93335280ab5f56}\label{structCharacter_ae99b68e682cca15eae93335280ab5f56}} 
+\index{Character@{Character}!speedScaleForHeading@{speedScaleForHeading}}
+\index{speedScaleForHeading@{speedScaleForHeading}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{speedScaleForHeading}{speedScaleForHeading}}
+{\footnotesize\ttfamily float Character\+::speed\+Scale\+For\+Heading}
+
+\mbox{\Hypertarget{structCharacter_a77facd1a2030fd8f5251283a8f5f6a1a}\label{structCharacter_a77facd1a2030fd8f5251283a8f5f6a1a}} 
+\index{Character@{Character}!startedActivityTick@{startedActivityTick}}
+\index{startedActivityTick@{startedActivityTick}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{startedActivityTick}{startedActivityTick}}
+{\footnotesize\ttfamily unsigned int Character\+::started\+Activity\+Tick}
+
+\mbox{\Hypertarget{structCharacter_ac20f1ebda238017ddc245ecdce827037}\label{structCharacter_ac20f1ebda238017ddc245ecdce827037}} 
+\index{Character@{Character}!state@{state}}
+\index{state@{state}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily Character\+State Character\+::state}
+
+\mbox{\Hypertarget{structCharacter_a933ecb93b76f8af3c04cbbe7a1a77d9d}\label{structCharacter_a933ecb93b76f8af3c04cbbe7a1a77d9d}} 
+\index{Character@{Character}!targetItem@{targetItem}}
+\index{targetItem@{targetItem}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{targetItem}{targetItem}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structItemStruct}{Item\+Struct}}$\ast$ Character\+::target\+Item}
+
+\mbox{\Hypertarget{structCharacter_afeceda084cf4cb1555b656c8159d4372}\label{structCharacter_afeceda084cf4cb1555b656c8159d4372}} 
+\index{Character@{Character}!targetLocation@{targetLocation}}
+\index{targetLocation@{targetLocation}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{targetLocation}{targetLocation}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Character\+::target\+Location}
+
+\mbox{\Hypertarget{structCharacter_a7ff67d35ac085aa43d6869b3f8201cc1}\label{structCharacter_a7ff67d35ac085aa43d6869b3f8201cc1}} 
+\index{Character@{Character}!targetType@{targetType}}
+\index{targetType@{targetType}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{targetType}{targetType}}
+{\footnotesize\ttfamily Character\+Target Character\+::target\+Type}
+
+\mbox{\Hypertarget{structCharacter_a764711704634f909712527cf1aaa4fa4}\label{structCharacter_a764711704634f909712527cf1aaa4fa4}} 
+\index{Character@{Character}!turningSpeedScaleForHeading@{turningSpeedScaleForHeading}}
+\index{turningSpeedScaleForHeading@{turningSpeedScaleForHeading}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{turningSpeedScaleForHeading}{turningSpeedScaleForHeading}}
+{\footnotesize\ttfamily float Character\+::turning\+Speed\+Scale\+For\+Heading}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/gametypes.\+h\end{DoxyCompactItemize}

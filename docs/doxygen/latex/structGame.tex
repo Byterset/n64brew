@@ -1,0 +1,229 @@
+\hypertarget{structGame}{}\doxysection{Game Struct Reference}
+\label{structGame}\index{Game@{Game}}
+
+
+Collaboration diagram for Game\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGame__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structGame_a170767eef3a1c7c3ffc0cf3558172f03}\label{structGame_a170767eef3a1c7c3ffc0cf3558172f03}} 
+unsigned int {\bfseries tick}
+\item 
+\mbox{\Hypertarget{structGame_ae065b29ce27a5cc18238e937cd23cd7e}\label{structGame_ae065b29ce27a5cc18238e937cd23cd7e}} 
+int {\bfseries paused}
+\item 
+\mbox{\Hypertarget{structGame_a8ffc91d8bc04b2deff4995d0d8acc2ea}\label{structGame_a8ffc91d8bc04b2deff4995d0d8acc2ea}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries view\+Pos}
+\item 
+\mbox{\Hypertarget{structGame_ac40dfabbe38765dd96413c12ae46f5bb}\label{structGame_ac40dfabbe38765dd96413c12ae46f5bb}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries view\+Rot}
+\item 
+\mbox{\Hypertarget{structGame_aa0c4017a6f43066b8e7c94b4cd0f0e90}\label{structGame_aa0c4017a6f43066b8e7c94b4cd0f0e90}} 
+struct \mbox{\hyperlink{structVector3}{Vector3}} {\bfseries view\+Target}
+\item 
+\mbox{\Hypertarget{structGame_a7f9f95f6b932a7cf3a83765cc98e304d}\label{structGame_a7f9f95f6b932a7cf3a83765cc98e304d}} 
+float {\bfseries view\+Zoom}
+\item 
+\mbox{\Hypertarget{structGame_a97ef6555b57f4b9652fae6d5f4f9af72}\label{structGame_a97ef6555b57f4b9652fae6d5f4f9af72}} 
+int {\bfseries free\+View}
+\item 
+\mbox{\Hypertarget{structGame_a3e7b8789c225e3f2d83a6cba0ad92002}\label{structGame_a3e7b8789c225e3f2d83a6cba0ad92002}} 
+\mbox{\hyperlink{structGameObject}{Game\+Object}} $\ast$ {\bfseries world\+Objects}
+\item 
+\mbox{\Hypertarget{structGame_ae7c01cda8c7259e20344a52b23903bce}\label{structGame_ae7c01cda8c7259e20344a52b23903bce}} 
+int {\bfseries world\+Objects\+Count}
+\item 
+\mbox{\Hypertarget{structGame_a2dda176f5d57b17c352338830da17cde}\label{structGame_a2dda176f5d57b17c352338830da17cde}} 
+\mbox{\hyperlink{structItemStruct}{Item}} $\ast$ {\bfseries items}
+\item 
+\mbox{\Hypertarget{structGame_aa32448eedc4db319b7c5259c0815e6fd}\label{structGame_aa32448eedc4db319b7c5259c0815e6fd}} 
+int {\bfseries items\+Count}
+\item 
+\mbox{\Hypertarget{structGame_ad820f5933005006c2a3e5dc74c05205d}\label{structGame_ad820f5933005006c2a3e5dc74c05205d}} 
+\mbox{\hyperlink{structCharacter}{Character}} $\ast$ {\bfseries characters}
+\item 
+\mbox{\Hypertarget{structGame_a9e570f1b01fd7842c80dd6b24b8e2ec9}\label{structGame_a9e570f1b01fd7842c80dd6b24b8e2ec9}} 
+int {\bfseries characters\+Count}
+\item 
+\mbox{\Hypertarget{structGame_a776b1cf9c44041b90159bd5ce01654d4}\label{structGame_a776b1cf9c44041b90159bd5ce01654d4}} 
+\mbox{\hyperlink{structPhysBody}{Phys\+Body}} $\ast$ {\bfseries physics\+Bodies}
+\item 
+\mbox{\Hypertarget{structGame_a0afaf87719225a6993626f799379faa1}\label{structGame_a0afaf87719225a6993626f799379faa1}} 
+int {\bfseries physics\+Bodies\+Count}
+\item 
+\mbox{\Hypertarget{structGame_a6e48721b0532833b99fd5615a3628792}\label{structGame_a6e48721b0532833b99fd5615a3628792}} 
+\mbox{\hyperlink{structPlayer}{Player}} {\bfseries player}
+\item 
+\mbox{\Hypertarget{structGame_ade1f8341bdb4b49a1d69a1f56cc94dea}\label{structGame_ade1f8341bdb4b49a1d69a1f56cc94dea}} 
+\mbox{\hyperlink{structPhysState}{Phys\+State}} {\bfseries physics\+State}
+\item 
+\mbox{\Hypertarget{structGame_a00f285f236ea50508299250bc3166843}\label{structGame_a00f285f236ea50508299250bc3166843}} 
+\mbox{\hyperlink{structGraph}{Graph}} $\ast$ {\bfseries pathfinding\+Graph}
+\item 
+\mbox{\Hypertarget{structGame_a86e4764b1eef23bdda436a12c0f6008b}\label{structGame_a86e4764b1eef23bdda436a12c0f6008b}} 
+\mbox{\hyperlink{structPathfindingState}{Pathfinding\+State}} $\ast$ {\bfseries pathfinding\+State}
+\item 
+\mbox{\Hypertarget{structGame_a98bcf7d7edaf54f8584afaaab5f3bc97}\label{structGame_a98bcf7d7edaf54f8584afaaab5f3bc97}} 
+float {\bfseries prof\+Time\+Characters}
+\item 
+\mbox{\Hypertarget{structGame_a106fd63d1e226b9a2a6a13a893a882a5}\label{structGame_a106fd63d1e226b9a2a6a13a893a882a5}} 
+float {\bfseries prof\+Time\+Physics}
+\item 
+\mbox{\Hypertarget{structGame_a227eef46458c43718321f56a5cf7d6f0}\label{structGame_a227eef46458c43718321f56a5cf7d6f0}} 
+float {\bfseries prof\+Time\+Draw}
+\item 
+\mbox{\Hypertarget{structGame_a7633d5bdf2f54142c2fbd8674a4401f3}\label{structGame_a7633d5bdf2f54142c2fbd8674a4401f3}} 
+float {\bfseries prof\+Time\+Path}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structGame_ad820f5933005006c2a3e5dc74c05205d}\label{structGame_ad820f5933005006c2a3e5dc74c05205d}} 
+\index{Game@{Game}!characters@{characters}}
+\index{characters@{characters}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{characters}{characters}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCharacter}{Character}}$\ast$ Game\+::characters}
+
+\mbox{\Hypertarget{structGame_a9e570f1b01fd7842c80dd6b24b8e2ec9}\label{structGame_a9e570f1b01fd7842c80dd6b24b8e2ec9}} 
+\index{Game@{Game}!charactersCount@{charactersCount}}
+\index{charactersCount@{charactersCount}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{charactersCount}{charactersCount}}
+{\footnotesize\ttfamily int Game\+::characters\+Count}
+
+\mbox{\Hypertarget{structGame_a97ef6555b57f4b9652fae6d5f4f9af72}\label{structGame_a97ef6555b57f4b9652fae6d5f4f9af72}} 
+\index{Game@{Game}!freeView@{freeView}}
+\index{freeView@{freeView}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{freeView}{freeView}}
+{\footnotesize\ttfamily int Game\+::free\+View}
+
+\mbox{\Hypertarget{structGame_a2dda176f5d57b17c352338830da17cde}\label{structGame_a2dda176f5d57b17c352338830da17cde}} 
+\index{Game@{Game}!items@{items}}
+\index{items@{items}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{items}{items}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structItemStruct}{Item}}$\ast$ Game\+::items}
+
+\mbox{\Hypertarget{structGame_aa32448eedc4db319b7c5259c0815e6fd}\label{structGame_aa32448eedc4db319b7c5259c0815e6fd}} 
+\index{Game@{Game}!itemsCount@{itemsCount}}
+\index{itemsCount@{itemsCount}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{itemsCount}{itemsCount}}
+{\footnotesize\ttfamily int Game\+::items\+Count}
+
+\mbox{\Hypertarget{structGame_a00f285f236ea50508299250bc3166843}\label{structGame_a00f285f236ea50508299250bc3166843}} 
+\index{Game@{Game}!pathfindingGraph@{pathfindingGraph}}
+\index{pathfindingGraph@{pathfindingGraph}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{pathfindingGraph}{pathfindingGraph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGraph}{Graph}}$\ast$ Game\+::pathfinding\+Graph}
+
+\mbox{\Hypertarget{structGame_a86e4764b1eef23bdda436a12c0f6008b}\label{structGame_a86e4764b1eef23bdda436a12c0f6008b}} 
+\index{Game@{Game}!pathfindingState@{pathfindingState}}
+\index{pathfindingState@{pathfindingState}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{pathfindingState}{pathfindingState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPathfindingState}{Pathfinding\+State}}$\ast$ Game\+::pathfinding\+State}
+
+\mbox{\Hypertarget{structGame_ae065b29ce27a5cc18238e937cd23cd7e}\label{structGame_ae065b29ce27a5cc18238e937cd23cd7e}} 
+\index{Game@{Game}!paused@{paused}}
+\index{paused@{paused}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{paused}{paused}}
+{\footnotesize\ttfamily int Game\+::paused}
+
+\mbox{\Hypertarget{structGame_a776b1cf9c44041b90159bd5ce01654d4}\label{structGame_a776b1cf9c44041b90159bd5ce01654d4}} 
+\index{Game@{Game}!physicsBodies@{physicsBodies}}
+\index{physicsBodies@{physicsBodies}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{physicsBodies}{physicsBodies}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPhysBody}{Phys\+Body}}$\ast$ Game\+::physics\+Bodies}
+
+\mbox{\Hypertarget{structGame_a0afaf87719225a6993626f799379faa1}\label{structGame_a0afaf87719225a6993626f799379faa1}} 
+\index{Game@{Game}!physicsBodiesCount@{physicsBodiesCount}}
+\index{physicsBodiesCount@{physicsBodiesCount}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{physicsBodiesCount}{physicsBodiesCount}}
+{\footnotesize\ttfamily int Game\+::physics\+Bodies\+Count}
+
+\mbox{\Hypertarget{structGame_ade1f8341bdb4b49a1d69a1f56cc94dea}\label{structGame_ade1f8341bdb4b49a1d69a1f56cc94dea}} 
+\index{Game@{Game}!physicsState@{physicsState}}
+\index{physicsState@{physicsState}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{physicsState}{physicsState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPhysState}{Phys\+State}} Game\+::physics\+State}
+
+\mbox{\Hypertarget{structGame_a6e48721b0532833b99fd5615a3628792}\label{structGame_a6e48721b0532833b99fd5615a3628792}} 
+\index{Game@{Game}!player@{player}}
+\index{player@{player}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPlayer}{Player}} Game\+::player}
+
+\mbox{\Hypertarget{structGame_a98bcf7d7edaf54f8584afaaab5f3bc97}\label{structGame_a98bcf7d7edaf54f8584afaaab5f3bc97}} 
+\index{Game@{Game}!profTimeCharacters@{profTimeCharacters}}
+\index{profTimeCharacters@{profTimeCharacters}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{profTimeCharacters}{profTimeCharacters}}
+{\footnotesize\ttfamily float Game\+::prof\+Time\+Characters}
+
+\mbox{\Hypertarget{structGame_a227eef46458c43718321f56a5cf7d6f0}\label{structGame_a227eef46458c43718321f56a5cf7d6f0}} 
+\index{Game@{Game}!profTimeDraw@{profTimeDraw}}
+\index{profTimeDraw@{profTimeDraw}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{profTimeDraw}{profTimeDraw}}
+{\footnotesize\ttfamily float Game\+::prof\+Time\+Draw}
+
+\mbox{\Hypertarget{structGame_a7633d5bdf2f54142c2fbd8674a4401f3}\label{structGame_a7633d5bdf2f54142c2fbd8674a4401f3}} 
+\index{Game@{Game}!profTimePath@{profTimePath}}
+\index{profTimePath@{profTimePath}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{profTimePath}{profTimePath}}
+{\footnotesize\ttfamily float Game\+::prof\+Time\+Path}
+
+\mbox{\Hypertarget{structGame_a106fd63d1e226b9a2a6a13a893a882a5}\label{structGame_a106fd63d1e226b9a2a6a13a893a882a5}} 
+\index{Game@{Game}!profTimePhysics@{profTimePhysics}}
+\index{profTimePhysics@{profTimePhysics}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{profTimePhysics}{profTimePhysics}}
+{\footnotesize\ttfamily float Game\+::prof\+Time\+Physics}
+
+\mbox{\Hypertarget{structGame_a170767eef3a1c7c3ffc0cf3558172f03}\label{structGame_a170767eef3a1c7c3ffc0cf3558172f03}} 
+\index{Game@{Game}!tick@{tick}}
+\index{tick@{tick}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{tick}{tick}}
+{\footnotesize\ttfamily unsigned int Game\+::tick}
+
+\mbox{\Hypertarget{structGame_a8ffc91d8bc04b2deff4995d0d8acc2ea}\label{structGame_a8ffc91d8bc04b2deff4995d0d8acc2ea}} 
+\index{Game@{Game}!viewPos@{viewPos}}
+\index{viewPos@{viewPos}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{viewPos}{viewPos}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Game\+::view\+Pos}
+
+\mbox{\Hypertarget{structGame_ac40dfabbe38765dd96413c12ae46f5bb}\label{structGame_ac40dfabbe38765dd96413c12ae46f5bb}} 
+\index{Game@{Game}!viewRot@{viewRot}}
+\index{viewRot@{viewRot}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{viewRot}{viewRot}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Game\+::view\+Rot}
+
+\mbox{\Hypertarget{structGame_aa0c4017a6f43066b8e7c94b4cd0f0e90}\label{structGame_aa0c4017a6f43066b8e7c94b4cd0f0e90}} 
+\index{Game@{Game}!viewTarget@{viewTarget}}
+\index{viewTarget@{viewTarget}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{viewTarget}{viewTarget}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVector3}{Vector3}} Game\+::view\+Target}
+
+\mbox{\Hypertarget{structGame_a7f9f95f6b932a7cf3a83765cc98e304d}\label{structGame_a7f9f95f6b932a7cf3a83765cc98e304d}} 
+\index{Game@{Game}!viewZoom@{viewZoom}}
+\index{viewZoom@{viewZoom}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{viewZoom}{viewZoom}}
+{\footnotesize\ttfamily float Game\+::view\+Zoom}
+
+\mbox{\Hypertarget{structGame_a3e7b8789c225e3f2d83a6cba0ad92002}\label{structGame_a3e7b8789c225e3f2d83a6cba0ad92002}} 
+\index{Game@{Game}!worldObjects@{worldObjects}}
+\index{worldObjects@{worldObjects}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{worldObjects}{worldObjects}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGameObject}{Game\+Object}}$\ast$ Game\+::world\+Objects}
+
+\mbox{\Hypertarget{structGame_ae7c01cda8c7259e20344a52b23903bce}\label{structGame_ae7c01cda8c7259e20344a52b23903bce}} 
+\index{Game@{Game}!worldObjectsCount@{worldObjectsCount}}
+\index{worldObjectsCount@{worldObjectsCount}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{worldObjectsCount}{worldObjectsCount}}
+{\footnotesize\ttfamily int Game\+::world\+Objects\+Count}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/gametypes.\+h\end{DoxyCompactItemize}

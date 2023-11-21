@@ -1,0 +1,611 @@
+\hypertarget{stage00_8c}{}\doxysection{src/stage00.c File Reference}
+\label{stage00_8c}\index{src/stage00.c@{src/stage00.c}}
+
+
+Stage 00, the Main stage that runs when the ROM starts.  
+
+
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../build/src/audio/clips.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}util/rom.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controls/controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}animation/animation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/frustum.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controls/input.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pathfinding/pathfinding.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}physics/physics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graphics/graphics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}graphics/renderer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/trace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audio/audio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audio/soundplayer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}models.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}segments.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../assets/levels/garden\+\_\+map.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../assets/levels/garden\+\_\+map\+\_\+collision.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pathfinding/garden/garden\+\_\+map\+\_\+graph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}actors/gardener/character\+\_\+anim.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}goose\+\_\+anim.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64/ed64io.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util/debug\+\_\+console.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sausage64/sausage64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}actors/catherine/catherine\+Tex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}actors/catherine/catherine\+Mdl.\+h\char`\"{}}\newline
+Include dependency graph for stage00.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stage00_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stage00_8c_af56e8a82806690583db0dae5e4303c67}{CONSOLE\+\_\+\+ED64\+LOG\+\_\+\+DEBUG}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a484519fc7d3ba80a99dba3c5c6bd1d6a}{CONSOLE\+\_\+\+SHOW\+\_\+\+PROFILING}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_aaa2248e3941885596187da09a4ba97a7}{CONSOLE\+\_\+\+SHOW\+\_\+\+TRACING}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a01491508718113f93d1ca345ac3692a7}{CONSOLE\+\_\+\+SHOW\+\_\+\+CULLING}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a60d1a3a86152fc02d556cf56b9c3eb20}{CONSOLE\+\_\+\+SHOW\+\_\+\+CAMERA}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a9ecf9dfd2370ef909e22fdd32e77468f}{CONSOLE\+\_\+\+SHOW\+\_\+\+SOUND}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a43c2b39937b756593b7a4c6d1fa3d35f}{CONSOLE\+\_\+\+SHOW\+\_\+\+RCP\+\_\+\+TASKS}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_ae02d6ed149d4a671ec711b1bbb7ec238}{LOG\+\_\+\+TRACES}}~0
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a64c476b0fbe683c2c0f1d7de9b975d6f}{CONTROLLER\+\_\+\+DEAD\+\_\+\+ZONE}}~0.\+1
+\item 
+\#define \mbox{\hyperlink{stage00_8c_ab05d9e22699b7d95b02907abe40b83ee}{DRAW\+\_\+\+SPRITES}}~1
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a13af5d116b2b3007ca63c07f37d7ade3}{DRAW\+\_\+\+OBJECTS}}~1
+\item 
+\#define \mbox{\hyperlink{stage00_8c_a4804af898127a2547250e117102399a0}{OBJ\+\_\+\+START\+\_\+\+VAL}}~1000
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}{Lighting\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \{ \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}{Sun\+Lighting}}
+, \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}{Only\+Ambient\+Lighting}}
+, \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}{MAX\+\_\+\+LIGHTING\+\_\+\+TYPE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{stage00_8c_a2faeeb34e081fcc1f16469b875dbd18c}{catherine\+\_\+predraw}} (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} part)
+\item 
+void \mbox{\hyperlink{stage00_8c_a43e0e9490beba227b32fd15844feef5d}{catherine\+\_\+animcallback}} (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} anim)
+\item 
+void \mbox{\hyperlink{stage00_8c_a1f880f3507b51239f51bdee24ef96394}{draw\+World\+Objects}} (\mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} $\ast$dynamicp, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+void \mbox{\hyperlink{stage00_8c_a63037816aab3988f89a206aa62c0db04}{draw\+Sprite}} (unsigned short $\ast$spr\+Data, int spr\+Width, int spr\+Height, int x, int y, int width, int height, int centered, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State)
+\item 
+void \mbox{\hyperlink{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}{init\+Stage00}} ()
+\item 
+void \mbox{\hyperlink{stage00_8c_a2c7357fa6d77c01378ac0065e71bc0b9}{stage00\+Render}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$data, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$task)
+\item 
+void \mbox{\hyperlink{stage00_8c_aa3fc22916cf89580dc261e887d5cd9f2}{update\+Game00}} (void)
+\item 
+\mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}{get\+Lighting\+Type}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+int \mbox{\hyperlink{stage00_8c_acac82efc4cd6b1f10ef2ae0443ab1551}{get\+Animation\+Num\+Model\+Mesh\+Parts}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
+\item 
+int \mbox{\hyperlink{stage00_8c_a987279f8ba392388e2702be73c563080}{should\+Lerp\+Animation}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
+\item 
+\mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}} $\ast$ \mbox{\hyperlink{stage00_8c_ac4b2d923a4e41fc26aa070ee57091c41}{get\+Current\+Animation\+Range}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+\mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} $\ast$ \mbox{\hyperlink{stage00_8c_a297c6eaa19ce2fb2997ee31d27f54fd8}{get\+Anim\+Data}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} \mbox{\hyperlink{stage00_8c_a0bcbfdf082cf47ae71ca9f0733601210}{catherine\+Mtx}} \mbox{[}MESHCOUNT\+\_\+\+Catherine\mbox{]}
+\item 
+\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} \mbox{\hyperlink{stage00_8c_a80a0e580f2e63f074bb1b140848f49dd}{catherine}}
+\item 
+float \mbox{\hyperlink{stage00_8c_a0d3bb31f3ff05190ddcd2be1cf18d9ce}{catherine\+\_\+animspeed}}
+\item 
+static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}{view\+Pos}}
+\item 
+static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{stage00_8c_a315474b2c14b00d4de12f251f9d34c46}{view\+Rot}}
+\item 
+static \mbox{\hyperlink{input_8h_structInput}{Input}} \mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{stage00_8c_aad3a9d6c27f38977b4a02b584d56462c}{persp\+Norm}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{stage00_8c_a07c7baf137fc6799fc0ed231a98200d5}{near\+Plane}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{stage00_8c_acc6f24b6c977bf3b0d86ded833fb6429}{far\+Plane}}
+\item 
+static \mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} \mbox{\hyperlink{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}{frustum}}
+\item 
+static float \mbox{\hyperlink{stage00_8c_a55f4de4cbfd03a9857b1926425be0c6b}{aspect}} = (f32)\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\+\_\+\+WD}} / (f32)\mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\+\_\+\+HT}}
+\item 
+static float \mbox{\hyperlink{stage00_8c_ab8b6bac71429352489e9c023bc346e8a}{fovy}} = \mbox{\hyperlink{constants_8h_a9959b6b784db3bf03c785f54769f9088}{DEFAULT\+\_\+\+FOVY}}
+\item 
+static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{stage00_8c_a245716fdd6f6f161eb0cd68af0299285}{up\+Vector}} = \{0.\+0f, 1.\+0f, 0.\+0f\}
+\item 
+float \mbox{\hyperlink{stage00_8c_a956f6bd9f0b87866ebc107afa220d015}{frame\+Counter\+Last\+Time}}
+\item 
+int \mbox{\hyperlink{stage00_8c_a6fcc2b025d84b4346437e911e45906fb}{frame\+Counter\+Cur\+Frames}}
+\item 
+int \mbox{\hyperlink{stage00_8c_a356bdd5ea2d218859661e536e4dc1f1c}{frame\+Counter\+Last\+Frames}}
+\item 
+int \mbox{\hyperlink{stage00_8c_ac996a8a2180f3f005d4b6e91a03b10b9}{total\+Updates}}
+\item 
+float \mbox{\hyperlink{stage00_8c_afe6f3805305986967b042b283a1b768d}{prof\+Avg\+Characters}}
+\item 
+float \mbox{\hyperlink{stage00_8c_aeb5aca1fa5b1c337efd870ab935a92e1}{prof\+Avg\+Physics}}
+\item 
+float \mbox{\hyperlink{stage00_8c_af29e463a8ead812a9332bc2e45cc86cc}{prof\+Avg\+Draw}}
+\item 
+float \mbox{\hyperlink{stage00_8c_aff787d982ce4ef334511506f14d7c55f}{prof\+Avg\+Path}}
+\item 
+float \mbox{\hyperlink{stage00_8c_acc4c8fa0e1bbd2a5cbbaa33ecfdf0c6d}{profiling\+Averages}} \mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}
+\item 
+static int \mbox{\hyperlink{stage00_8c_a269cc1ffaf294dd761179254e8148144}{usb\+Enabled}}
+\item 
+static int \mbox{\hyperlink{stage00_8c_ab2573d6379818e935463389f83508f12}{usb\+Result}}
+\item 
+static \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} \mbox{\hyperlink{stage00_8c_adfadbb65fc4048599d386f62915bc47b}{usb\+Logger\+State}}
+\item 
+static int \mbox{\hyperlink{stage00_8c_a77339925289d0c0fd78105b8c212604e}{log\+Trace\+Start\+Offset}} = 0
+\item 
+static int \mbox{\hyperlink{stage00_8c_a5fc3ab41e0396622499e9d49e3d03a9f}{logging\+Trace}} = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}
+\item 
+static int \mbox{\hyperlink{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}{two\+Cycle\+Mode}}
+\item 
+\mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} \mbox{\hyperlink{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}{phys\+World\+Data}}
+\item 
+Lights1 \mbox{\hyperlink{stage00_8c_aa93a9d4ffce372fde21d53863400915b}{sun\+\_\+light}}
+\item 
+Lights0 \mbox{\hyperlink{stage00_8c_a99994da3e0f2498ee09f83abf761fc8b}{amb\+\_\+light}} = gd\+SPDef\+Lights0(200, 200, 200 )
+\item 
+static float \mbox{\hyperlink{stage00_8c_a5967b675d5b37a489016be6ad02d1714}{snd\+Pitch}} = 10.\+5
+\item 
+static int \mbox{\hyperlink{stage00_8c_aab8eb4b22ab7687b6004262b3af111eb}{snd\+Number}} = 0
+\item 
+static int \mbox{\hyperlink{stage00_8c_a91f145bea20e1dc90f0782e771713455}{seq\+Playing}} = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}} \mbox{\hyperlink{stage00_8c_a3085ce80e9d4018947a085587df9a3ab}{seq\+Id}} = -\/1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stage 00, the Main stage that runs when the ROM starts. 
+
+\begin{DoxyAuthor}{Author}
+Kevin Reier 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023-\/11-\/21 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{stage00_8c_af56e8a82806690583db0dae5e4303c67}\label{stage00_8c_af56e8a82806690583db0dae5e4303c67}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_ED64LOG\_DEBUG@{CONSOLE\_ED64LOG\_DEBUG}}
+\index{CONSOLE\_ED64LOG\_DEBUG@{CONSOLE\_ED64LOG\_DEBUG}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_ED64LOG\_DEBUG}{CONSOLE\_ED64LOG\_DEBUG}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+ED64\+LOG\+\_\+\+DEBUG~0}
+
+\mbox{\Hypertarget{stage00_8c_a60d1a3a86152fc02d556cf56b9c3eb20}\label{stage00_8c_a60d1a3a86152fc02d556cf56b9c3eb20}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_CAMERA@{CONSOLE\_SHOW\_CAMERA}}
+\index{CONSOLE\_SHOW\_CAMERA@{CONSOLE\_SHOW\_CAMERA}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_CAMERA}{CONSOLE\_SHOW\_CAMERA}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+CAMERA~0}
+
+\mbox{\Hypertarget{stage00_8c_a01491508718113f93d1ca345ac3692a7}\label{stage00_8c_a01491508718113f93d1ca345ac3692a7}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_CULLING@{CONSOLE\_SHOW\_CULLING}}
+\index{CONSOLE\_SHOW\_CULLING@{CONSOLE\_SHOW\_CULLING}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_CULLING}{CONSOLE\_SHOW\_CULLING}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+CULLING~0}
+
+\mbox{\Hypertarget{stage00_8c_a484519fc7d3ba80a99dba3c5c6bd1d6a}\label{stage00_8c_a484519fc7d3ba80a99dba3c5c6bd1d6a}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_PROFILING@{CONSOLE\_SHOW\_PROFILING}}
+\index{CONSOLE\_SHOW\_PROFILING@{CONSOLE\_SHOW\_PROFILING}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_PROFILING}{CONSOLE\_SHOW\_PROFILING}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+PROFILING~0}
+
+\mbox{\Hypertarget{stage00_8c_a43c2b39937b756593b7a4c6d1fa3d35f}\label{stage00_8c_a43c2b39937b756593b7a4c6d1fa3d35f}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_RCP\_TASKS@{CONSOLE\_SHOW\_RCP\_TASKS}}
+\index{CONSOLE\_SHOW\_RCP\_TASKS@{CONSOLE\_SHOW\_RCP\_TASKS}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_RCP\_TASKS}{CONSOLE\_SHOW\_RCP\_TASKS}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+RCP\+\_\+\+TASKS~0}
+
+\mbox{\Hypertarget{stage00_8c_a9ecf9dfd2370ef909e22fdd32e77468f}\label{stage00_8c_a9ecf9dfd2370ef909e22fdd32e77468f}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_SOUND@{CONSOLE\_SHOW\_SOUND}}
+\index{CONSOLE\_SHOW\_SOUND@{CONSOLE\_SHOW\_SOUND}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_SOUND}{CONSOLE\_SHOW\_SOUND}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+SOUND~0}
+
+\mbox{\Hypertarget{stage00_8c_aaa2248e3941885596187da09a4ba97a7}\label{stage00_8c_aaa2248e3941885596187da09a4ba97a7}} 
+\index{stage00.c@{stage00.c}!CONSOLE\_SHOW\_TRACING@{CONSOLE\_SHOW\_TRACING}}
+\index{CONSOLE\_SHOW\_TRACING@{CONSOLE\_SHOW\_TRACING}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONSOLE\_SHOW\_TRACING}{CONSOLE\_SHOW\_TRACING}}
+{\footnotesize\ttfamily \#define CONSOLE\+\_\+\+SHOW\+\_\+\+TRACING~0}
+
+\mbox{\Hypertarget{stage00_8c_a64c476b0fbe683c2c0f1d7de9b975d6f}\label{stage00_8c_a64c476b0fbe683c2c0f1d7de9b975d6f}} 
+\index{stage00.c@{stage00.c}!CONTROLLER\_DEAD\_ZONE@{CONTROLLER\_DEAD\_ZONE}}
+\index{CONTROLLER\_DEAD\_ZONE@{CONTROLLER\_DEAD\_ZONE}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{CONTROLLER\_DEAD\_ZONE}{CONTROLLER\_DEAD\_ZONE}}
+{\footnotesize\ttfamily \#define CONTROLLER\+\_\+\+DEAD\+\_\+\+ZONE~0.\+1}
+
+\mbox{\Hypertarget{stage00_8c_a13af5d116b2b3007ca63c07f37d7ade3}\label{stage00_8c_a13af5d116b2b3007ca63c07f37d7ade3}} 
+\index{stage00.c@{stage00.c}!DRAW\_OBJECTS@{DRAW\_OBJECTS}}
+\index{DRAW\_OBJECTS@{DRAW\_OBJECTS}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{DRAW\_OBJECTS}{DRAW\_OBJECTS}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+OBJECTS~1}
+
+\mbox{\Hypertarget{stage00_8c_ab05d9e22699b7d95b02907abe40b83ee}\label{stage00_8c_ab05d9e22699b7d95b02907abe40b83ee}} 
+\index{stage00.c@{stage00.c}!DRAW\_SPRITES@{DRAW\_SPRITES}}
+\index{DRAW\_SPRITES@{DRAW\_SPRITES}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{DRAW\_SPRITES}{DRAW\_SPRITES}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+SPRITES~1}
+
+\mbox{\Hypertarget{stage00_8c_ae02d6ed149d4a671ec711b1bbb7ec238}\label{stage00_8c_ae02d6ed149d4a671ec711b1bbb7ec238}} 
+\index{stage00.c@{stage00.c}!LOG\_TRACES@{LOG\_TRACES}}
+\index{LOG\_TRACES@{LOG\_TRACES}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_TRACES}{LOG\_TRACES}}
+{\footnotesize\ttfamily \#define LOG\+\_\+\+TRACES~0}
+
+\mbox{\Hypertarget{stage00_8c_a4804af898127a2547250e117102399a0}\label{stage00_8c_a4804af898127a2547250e117102399a0}} 
+\index{stage00.c@{stage00.c}!OBJ\_START\_VAL@{OBJ\_START\_VAL}}
+\index{OBJ\_START\_VAL@{OBJ\_START\_VAL}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{OBJ\_START\_VAL}{OBJ\_START\_VAL}}
+{\footnotesize\ttfamily \#define OBJ\+\_\+\+START\+\_\+\+VAL~1000}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}\label{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}} 
+\index{stage00.c@{stage00.c}!LightingType@{LightingType}}
+\index{LightingType@{LightingType}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}} 
+\index{stage00.c@{stage00.c}!LightingType@{LightingType}}
+\index{LightingType@{LightingType}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SunLighting@{SunLighting}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!SunLighting@{SunLighting}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}} 
+Sun\+Lighting&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OnlyAmbientLighting@{OnlyAmbientLighting}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!OnlyAmbientLighting@{OnlyAmbientLighting}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}} 
+Only\+Ambient\+Lighting&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}} 
+MAX\+\_\+\+LIGHTING\+\_\+\+TYPE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stage00_8c_a43e0e9490beba227b32fd15844feef5d}\label{stage00_8c_a43e0e9490beba227b32fd15844feef5d}} 
+\index{stage00.c@{stage00.c}!catherine\_animcallback@{catherine\_animcallback}}
+\index{catherine\_animcallback@{catherine\_animcallback}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{catherine\_animcallback()}{catherine\_animcallback()}}
+{\footnotesize\ttfamily void catherine\+\_\+animcallback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{anim }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a2faeeb34e081fcc1f16469b875dbd18c}\label{stage00_8c_a2faeeb34e081fcc1f16469b875dbd18c}} 
+\index{stage00.c@{stage00.c}!catherine\_predraw@{catherine\_predraw}}
+\index{catherine\_predraw@{catherine\_predraw}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{catherine\_predraw()}{catherine\_predraw()}}
+{\footnotesize\ttfamily void catherine\+\_\+predraw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}}]{part }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a63037816aab3988f89a206aa62c0db04}\label{stage00_8c_a63037816aab3988f89a206aa62c0db04}} 
+\index{stage00.c@{stage00.c}!drawSprite@{drawSprite}}
+\index{drawSprite@{drawSprite}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{drawSprite()}{drawSprite()}}
+{\footnotesize\ttfamily void draw\+Sprite (\begin{DoxyParamCaption}\item[{unsigned short $\ast$}]{spr\+Data,  }\item[{int}]{spr\+Width,  }\item[{int}]{spr\+Height,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{centered,  }\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a1f880f3507b51239f51bdee24ef96394}\label{stage00_8c_a1f880f3507b51239f51bdee24ef96394}} 
+\index{stage00.c@{stage00.c}!drawWorldObjects@{drawWorldObjects}}
+\index{drawWorldObjects@{drawWorldObjects}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{drawWorldObjects()}{drawWorldObjects()}}
+{\footnotesize\ttfamily void draw\+World\+Objects (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} $\ast$}]{dynamicp,  }\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_acac82efc4cd6b1f10ef2ae0443ab1551}\label{stage00_8c_acac82efc4cd6b1f10ef2ae0443ab1551}} 
+\index{stage00.c@{stage00.c}!getAnimationNumModelMeshParts@{getAnimationNumModelMeshParts}}
+\index{getAnimationNumModelMeshParts@{getAnimationNumModelMeshParts}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{getAnimationNumModelMeshParts()}{getAnimationNumModelMeshParts()}}
+{\footnotesize\ttfamily int get\+Animation\+Num\+Model\+Mesh\+Parts (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a297c6eaa19ce2fb2997ee31d27f54fd8}\label{stage00_8c_a297c6eaa19ce2fb2997ee31d27f54fd8}} 
+\index{stage00.c@{stage00.c}!getAnimData@{getAnimData}}
+\index{getAnimData@{getAnimData}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{getAnimData()}{getAnimData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}}$\ast$ get\+Anim\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_ac4b2d923a4e41fc26aa070ee57091c41}\label{stage00_8c_ac4b2d923a4e41fc26aa070ee57091c41}} 
+\index{stage00.c@{stage00.c}!getCurrentAnimationRange@{getCurrentAnimationRange}}
+\index{getCurrentAnimationRange@{getCurrentAnimationRange}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{getCurrentAnimationRange()}{getCurrentAnimationRange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}}$\ast$ get\+Current\+Animation\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}\label{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}} 
+\index{stage00.c@{stage00.c}!getLightingType@{getLightingType}}
+\index{getLightingType@{getLightingType}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{getLightingType()}{getLightingType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} get\+Lighting\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}\label{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}} 
+\index{stage00.c@{stage00.c}!initStage00@{initStage00}}
+\index{initStage00@{initStage00}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{initStage00()}{initStage00()}}
+{\footnotesize\ttfamily void init\+Stage00 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a987279f8ba392388e2702be73c563080}\label{stage00_8c_a987279f8ba392388e2702be73c563080}} 
+\index{stage00.c@{stage00.c}!shouldLerpAnimation@{shouldLerpAnimation}}
+\index{shouldLerpAnimation@{shouldLerpAnimation}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{shouldLerpAnimation()}{shouldLerpAnimation()}}
+{\footnotesize\ttfamily int should\+Lerp\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}}}]{model\+Type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_a2c7357fa6d77c01378ac0065e71bc0b9}\label{stage00_8c_a2c7357fa6d77c01378ac0065e71bc0b9}} 
+\index{stage00.c@{stage00.c}!stage00Render@{stage00Render}}
+\index{stage00Render@{stage00Render}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{stage00Render()}{stage00Render()}}
+{\footnotesize\ttfamily void stage00\+Render (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$}]{data,  }\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$}]{task }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stage00_8c_aa3fc22916cf89580dc261e887d5cd9f2}\label{stage00_8c_aa3fc22916cf89580dc261e887d5cd9f2}} 
+\index{stage00.c@{stage00.c}!updateGame00@{updateGame00}}
+\index{updateGame00@{updateGame00}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{updateGame00()}{updateGame00()}}
+{\footnotesize\ttfamily void update\+Game00 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{stage00_8c_a99994da3e0f2498ee09f83abf761fc8b}\label{stage00_8c_a99994da3e0f2498ee09f83abf761fc8b}} 
+\index{stage00.c@{stage00.c}!amb\_light@{amb\_light}}
+\index{amb\_light@{amb\_light}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{amb\_light}{amb\_light}}
+{\footnotesize\ttfamily Lights0 amb\+\_\+light = gd\+SPDef\+Lights0(200, 200, 200 )}
+
+\mbox{\Hypertarget{stage00_8c_a55f4de4cbfd03a9857b1926425be0c6b}\label{stage00_8c_a55f4de4cbfd03a9857b1926425be0c6b}} 
+\index{stage00.c@{stage00.c}!aspect@{aspect}}
+\index{aspect@{aspect}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{aspect}{aspect}}
+{\footnotesize\ttfamily float aspect = (f32)\mbox{\hyperlink{graphics_8h_a7b057213f570d9f55be4020d091eeb28}{SCREEN\+\_\+\+WD}} / (f32)\mbox{\hyperlink{graphics_8h_a149af865bbf6d8b977732d99337dded4}{SCREEN\+\_\+\+HT}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a80a0e580f2e63f074bb1b140848f49dd}\label{stage00_8c_a80a0e580f2e63f074bb1b140848f49dd}} 
+\index{stage00.c@{stage00.c}!catherine@{catherine}}
+\index{catherine@{catherine}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{catherine}{catherine}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} catherine}
+
+\mbox{\Hypertarget{stage00_8c_a0d3bb31f3ff05190ddcd2be1cf18d9ce}\label{stage00_8c_a0d3bb31f3ff05190ddcd2be1cf18d9ce}} 
+\index{stage00.c@{stage00.c}!catherine\_animspeed@{catherine\_animspeed}}
+\index{catherine\_animspeed@{catherine\_animspeed}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{catherine\_animspeed}{catherine\_animspeed}}
+{\footnotesize\ttfamily float catherine\+\_\+animspeed}
+
+\mbox{\Hypertarget{stage00_8c_a0bcbfdf082cf47ae71ca9f0733601210}\label{stage00_8c_a0bcbfdf082cf47ae71ca9f0733601210}} 
+\index{stage00.c@{stage00.c}!catherineMtx@{catherineMtx}}
+\index{catherineMtx@{catherineMtx}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{catherineMtx}{catherineMtx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} catherine\+Mtx\mbox{[}MESHCOUNT\+\_\+\+Catherine\mbox{]}}
+
+\mbox{\Hypertarget{stage00_8c_acc6f24b6c977bf3b0d86ded833fb6429}\label{stage00_8c_acc6f24b6c977bf3b0d86ded833fb6429}} 
+\index{stage00.c@{stage00.c}!farPlane@{farPlane}}
+\index{farPlane@{farPlane}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{farPlane}{farPlane}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} far\+Plane\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_ab8b6bac71429352489e9c023bc346e8a}\label{stage00_8c_ab8b6bac71429352489e9c023bc346e8a}} 
+\index{stage00.c@{stage00.c}!fovy@{fovy}}
+\index{fovy@{fovy}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{fovy}{fovy}}
+{\footnotesize\ttfamily float fovy = \mbox{\hyperlink{constants_8h_a9959b6b784db3bf03c785f54769f9088}{DEFAULT\+\_\+\+FOVY}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a6fcc2b025d84b4346437e911e45906fb}\label{stage00_8c_a6fcc2b025d84b4346437e911e45906fb}} 
+\index{stage00.c@{stage00.c}!frameCounterCurFrames@{frameCounterCurFrames}}
+\index{frameCounterCurFrames@{frameCounterCurFrames}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{frameCounterCurFrames}{frameCounterCurFrames}}
+{\footnotesize\ttfamily int frame\+Counter\+Cur\+Frames}
+
+\mbox{\Hypertarget{stage00_8c_a356bdd5ea2d218859661e536e4dc1f1c}\label{stage00_8c_a356bdd5ea2d218859661e536e4dc1f1c}} 
+\index{stage00.c@{stage00.c}!frameCounterLastFrames@{frameCounterLastFrames}}
+\index{frameCounterLastFrames@{frameCounterLastFrames}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{frameCounterLastFrames}{frameCounterLastFrames}}
+{\footnotesize\ttfamily int frame\+Counter\+Last\+Frames}
+
+\mbox{\Hypertarget{stage00_8c_a956f6bd9f0b87866ebc107afa220d015}\label{stage00_8c_a956f6bd9f0b87866ebc107afa220d015}} 
+\index{stage00.c@{stage00.c}!frameCounterLastTime@{frameCounterLastTime}}
+\index{frameCounterLastTime@{frameCounterLastTime}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{frameCounterLastTime}{frameCounterLastTime}}
+{\footnotesize\ttfamily float frame\+Counter\+Last\+Time}
+
+\mbox{\Hypertarget{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}\label{stage00_8c_abe1837a57eb3e099b7b2ef01334bd01d}} 
+\index{stage00.c@{stage00.c}!frustum@{frustum}}
+\index{frustum@{frustum}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{frustum}{frustum}}
+{\footnotesize\ttfamily \mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} frustum\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}\label{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}} 
+\index{stage00.c@{stage00.c}!input@{input}}
+\index{input@{input}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily \mbox{\hyperlink{input_8h_structInput}{Input}} input\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a5fc3ab41e0396622499e9d49e3d03a9f}\label{stage00_8c_a5fc3ab41e0396622499e9d49e3d03a9f}} 
+\index{stage00.c@{stage00.c}!loggingTrace@{loggingTrace}}
+\index{loggingTrace@{loggingTrace}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{loggingTrace}{loggingTrace}}
+{\footnotesize\ttfamily int logging\+Trace = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a77339925289d0c0fd78105b8c212604e}\label{stage00_8c_a77339925289d0c0fd78105b8c212604e}} 
+\index{stage00.c@{stage00.c}!logTraceStartOffset@{logTraceStartOffset}}
+\index{logTraceStartOffset@{logTraceStartOffset}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{logTraceStartOffset}{logTraceStartOffset}}
+{\footnotesize\ttfamily int log\+Trace\+Start\+Offset = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a07c7baf137fc6799fc0ed231a98200d5}\label{stage00_8c_a07c7baf137fc6799fc0ed231a98200d5}} 
+\index{stage00.c@{stage00.c}!nearPlane@{nearPlane}}
+\index{nearPlane@{nearPlane}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{nearPlane}{nearPlane}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} near\+Plane\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_aad3a9d6c27f38977b4a02b584d56462c}\label{stage00_8c_aad3a9d6c27f38977b4a02b584d56462c}} 
+\index{stage00.c@{stage00.c}!perspNorm@{perspNorm}}
+\index{perspNorm@{perspNorm}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{perspNorm}{perspNorm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} persp\+Norm\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}\label{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}} 
+\index{stage00.c@{stage00.c}!physWorldData@{physWorldData}}
+\index{physWorldData@{physWorldData}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{physWorldData}{physWorldData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} phys\+World\+Data}
+
+\mbox{\Hypertarget{stage00_8c_afe6f3805305986967b042b283a1b768d}\label{stage00_8c_afe6f3805305986967b042b283a1b768d}} 
+\index{stage00.c@{stage00.c}!profAvgCharacters@{profAvgCharacters}}
+\index{profAvgCharacters@{profAvgCharacters}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{profAvgCharacters}{profAvgCharacters}}
+{\footnotesize\ttfamily float prof\+Avg\+Characters}
+
+\mbox{\Hypertarget{stage00_8c_af29e463a8ead812a9332bc2e45cc86cc}\label{stage00_8c_af29e463a8ead812a9332bc2e45cc86cc}} 
+\index{stage00.c@{stage00.c}!profAvgDraw@{profAvgDraw}}
+\index{profAvgDraw@{profAvgDraw}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{profAvgDraw}{profAvgDraw}}
+{\footnotesize\ttfamily float prof\+Avg\+Draw}
+
+\mbox{\Hypertarget{stage00_8c_aff787d982ce4ef334511506f14d7c55f}\label{stage00_8c_aff787d982ce4ef334511506f14d7c55f}} 
+\index{stage00.c@{stage00.c}!profAvgPath@{profAvgPath}}
+\index{profAvgPath@{profAvgPath}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{profAvgPath}{profAvgPath}}
+{\footnotesize\ttfamily float prof\+Avg\+Path}
+
+\mbox{\Hypertarget{stage00_8c_aeb5aca1fa5b1c337efd870ab935a92e1}\label{stage00_8c_aeb5aca1fa5b1c337efd870ab935a92e1}} 
+\index{stage00.c@{stage00.c}!profAvgPhysics@{profAvgPhysics}}
+\index{profAvgPhysics@{profAvgPhysics}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{profAvgPhysics}{profAvgPhysics}}
+{\footnotesize\ttfamily float prof\+Avg\+Physics}
+
+\mbox{\Hypertarget{stage00_8c_acc4c8fa0e1bbd2a5cbbaa33ecfdf0c6d}\label{stage00_8c_acc4c8fa0e1bbd2a5cbbaa33ecfdf0c6d}} 
+\index{stage00.c@{stage00.c}!profilingAverages@{profilingAverages}}
+\index{profilingAverages@{profilingAverages}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{profilingAverages}{profilingAverages}}
+{\footnotesize\ttfamily float profiling\+Averages\mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}}
+
+\mbox{\Hypertarget{stage00_8c_a3085ce80e9d4018947a085587df9a3ab}\label{stage00_8c_a3085ce80e9d4018947a085587df9a3ab}} 
+\index{stage00.c@{stage00.c}!seqId@{seqId}}
+\index{seqId@{seqId}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{seqId}{seqId}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_ad6aafede8a0cfa326715005e57f9d9f5}{s16}} seq\+Id = -\/1}
+
+\mbox{\Hypertarget{stage00_8c_a91f145bea20e1dc90f0782e771713455}\label{stage00_8c_a91f145bea20e1dc90f0782e771713455}} 
+\index{stage00.c@{stage00.c}!seqPlaying@{seqPlaying}}
+\index{seqPlaying@{seqPlaying}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{seqPlaying}{seqPlaying}}
+{\footnotesize\ttfamily int seq\+Playing = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_aab8eb4b22ab7687b6004262b3af111eb}\label{stage00_8c_aab8eb4b22ab7687b6004262b3af111eb}} 
+\index{stage00.c@{stage00.c}!sndNumber@{sndNumber}}
+\index{sndNumber@{sndNumber}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{sndNumber}{sndNumber}}
+{\footnotesize\ttfamily int snd\+Number = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a5967b675d5b37a489016be6ad02d1714}\label{stage00_8c_a5967b675d5b37a489016be6ad02d1714}} 
+\index{stage00.c@{stage00.c}!sndPitch@{sndPitch}}
+\index{sndPitch@{sndPitch}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{sndPitch}{sndPitch}}
+{\footnotesize\ttfamily float snd\+Pitch = 10.\+5\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_aa93a9d4ffce372fde21d53863400915b}\label{stage00_8c_aa93a9d4ffce372fde21d53863400915b}} 
+\index{stage00.c@{stage00.c}!sun\_light@{sun\_light}}
+\index{sun\_light@{sun\_light}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{sun\_light}{sun\_light}}
+{\footnotesize\ttfamily Lights1 sun\+\_\+light}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= gdSPDefLights1(120,}
+\DoxyCodeLine{                                   120,}
+\DoxyCodeLine{                                   120, }
+\DoxyCodeLine{                                   255,}
+\DoxyCodeLine{                                   255,}
+\DoxyCodeLine{                                   255, }
+\DoxyCodeLine{                                   80,}
+\DoxyCodeLine{                                   80,}
+\DoxyCodeLine{                                   0)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{stage00_8c_ac996a8a2180f3f005d4b6e91a03b10b9}\label{stage00_8c_ac996a8a2180f3f005d4b6e91a03b10b9}} 
+\index{stage00.c@{stage00.c}!totalUpdates@{totalUpdates}}
+\index{totalUpdates@{totalUpdates}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{totalUpdates}{totalUpdates}}
+{\footnotesize\ttfamily int total\+Updates}
+
+\mbox{\Hypertarget{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}\label{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}} 
+\index{stage00.c@{stage00.c}!twoCycleMode@{twoCycleMode}}
+\index{twoCycleMode@{twoCycleMode}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{twoCycleMode}{twoCycleMode}}
+{\footnotesize\ttfamily int two\+Cycle\+Mode\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a245716fdd6f6f161eb0cd68af0299285}\label{stage00_8c_a245716fdd6f6f161eb0cd68af0299285}} 
+\index{stage00.c@{stage00.c}!upVector@{upVector}}
+\index{upVector@{upVector}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{upVector}{upVector}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} up\+Vector = \{0.\+0f, 1.\+0f, 0.\+0f\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a269cc1ffaf294dd761179254e8148144}\label{stage00_8c_a269cc1ffaf294dd761179254e8148144}} 
+\index{stage00.c@{stage00.c}!usbEnabled@{usbEnabled}}
+\index{usbEnabled@{usbEnabled}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{usbEnabled}{usbEnabled}}
+{\footnotesize\ttfamily int usb\+Enabled\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_adfadbb65fc4048599d386f62915bc47b}\label{stage00_8c_adfadbb65fc4048599d386f62915bc47b}} 
+\index{stage00.c@{stage00.c}!usbLoggerState@{usbLoggerState}}
+\index{usbLoggerState@{usbLoggerState}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{usbLoggerState}{usbLoggerState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__usb_8h_structUsbLoggerState}{Usb\+Logger\+State}} usb\+Logger\+State\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_ab2573d6379818e935463389f83508f12}\label{stage00_8c_ab2573d6379818e935463389f83508f12}} 
+\index{stage00.c@{stage00.c}!usbResult@{usbResult}}
+\index{usbResult@{usbResult}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{usbResult}{usbResult}}
+{\footnotesize\ttfamily int usb\+Result\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}\label{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}} 
+\index{stage00.c@{stage00.c}!viewPos@{viewPos}}
+\index{viewPos@{viewPos}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{viewPos}{viewPos}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} view\+Pos\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a315474b2c14b00d4de12f251f9d34c46}\label{stage00_8c_a315474b2c14b00d4de12f251f9d34c46}} 
+\index{stage00.c@{stage00.c}!viewRot@{viewRot}}
+\index{viewRot@{viewRot}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{viewRot}{viewRot}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} view\+Rot\hspace{0.3cm}{\ttfamily [static]}}
+

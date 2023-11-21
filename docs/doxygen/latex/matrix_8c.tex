@@ -1,0 +1,68 @@
+\hypertarget{matrix_8c}{}\doxysection{src/math/matrix.c File Reference}
+\label{matrix_8c}\index{src/math/matrix.c@{src/math/matrix.c}}
+{\ttfamily \#include \char`\"{}matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+Include dependency graph for matrix.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{matrix_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{matrix_8c_a7378046ff2d37c8d7d61788f39147d15}{matrix\+Perspective}} (float matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]}, unsigned short $\ast$\mbox{\hyperlink{stage00_8c_aad3a9d6c27f38977b4a02b584d56462c}{persp\+Norm}}, float l, float r, float t, float b, float near, float far)
+\item 
+void \mbox{\hyperlink{matrix_8c_a7f2652d44292a7bd5ba9fcbfe43c3c11}{matrix\+Vec3\+Mul}} (float matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]}, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$\mbox{\hyperlink{stage00_8c_ad4db59ccea8946af2bb70f8269e99eeb}{input}}, struct \mbox{\hyperlink{vector4_8h_structVector4}{Vector4}} $\ast$output)
+\item 
+void \mbox{\hyperlink{matrix_8c_a32149866fd2d663759725fb789f39610}{matrix\+From\+Basis}} (float matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]}, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$origin, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$x, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$y, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$z)
+\item 
+void \mbox{\hyperlink{matrix_8c_ab9e8e4e70bc7d0a079e59989d6ccc2a4}{matrix\+From\+BasisL}} (\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$matrix, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$origin, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$x, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$y, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$z)
+\item 
+void \mbox{\hyperlink{matrix_8c_acba331ce2c296e52043044699806d55d}{mul\+Mtx\+FVecF}} (\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} matrix, float $\ast$in, float $\ast$out)
+\item 
+void \mbox{\hyperlink{matrix_8c_a5a6a2367c3cc3e2ee3c10cb7d0418843}{mul\+Mtx\+FMtxF}} (\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} matrix\+\_\+a, \mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} matrix\+\_\+b, \mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} $\ast$out)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{matrix_8c_a32149866fd2d663759725fb789f39610}\label{matrix_8c_a32149866fd2d663759725fb789f39610}} 
+\index{matrix.c@{matrix.c}!matrixFromBasis@{matrixFromBasis}}
+\index{matrixFromBasis@{matrixFromBasis}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrixFromBasis()}{matrixFromBasis()}}
+{\footnotesize\ttfamily void matrix\+From\+Basis (\begin{DoxyParamCaption}\item[{float}]{matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]},  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{origin,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{x,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{y,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{z }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ab9e8e4e70bc7d0a079e59989d6ccc2a4}\label{matrix_8c_ab9e8e4e70bc7d0a079e59989d6ccc2a4}} 
+\index{matrix.c@{matrix.c}!matrixFromBasisL@{matrixFromBasisL}}
+\index{matrixFromBasisL@{matrixFromBasisL}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrixFromBasisL()}{matrixFromBasisL()}}
+{\footnotesize\ttfamily void matrix\+From\+BasisL (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{matrix,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{origin,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{x,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{y,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{z }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a7378046ff2d37c8d7d61788f39147d15}\label{matrix_8c_a7378046ff2d37c8d7d61788f39147d15}} 
+\index{matrix.c@{matrix.c}!matrixPerspective@{matrixPerspective}}
+\index{matrixPerspective@{matrixPerspective}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrixPerspective()}{matrixPerspective()}}
+{\footnotesize\ttfamily void matrix\+Perspective (\begin{DoxyParamCaption}\item[{float}]{matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]},  }\item[{unsigned short $\ast$}]{persp\+Norm,  }\item[{float}]{l,  }\item[{float}]{r,  }\item[{float}]{t,  }\item[{float}]{b,  }\item[{float}]{near,  }\item[{float}]{far }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a7f2652d44292a7bd5ba9fcbfe43c3c11}\label{matrix_8c_a7f2652d44292a7bd5ba9fcbfe43c3c11}} 
+\index{matrix.c@{matrix.c}!matrixVec3Mul@{matrixVec3Mul}}
+\index{matrixVec3Mul@{matrixVec3Mul}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrixVec3Mul()}{matrixVec3Mul()}}
+{\footnotesize\ttfamily void matrix\+Vec3\+Mul (\begin{DoxyParamCaption}\item[{float}]{matrix\mbox{[}4\mbox{]}\mbox{[}4\mbox{]},  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{input,  }\item[{struct \mbox{\hyperlink{vector4_8h_structVector4}{Vector4}} $\ast$}]{output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a5a6a2367c3cc3e2ee3c10cb7d0418843}\label{matrix_8c_a5a6a2367c3cc3e2ee3c10cb7d0418843}} 
+\index{matrix.c@{matrix.c}!mulMtxFMtxF@{mulMtxFMtxF}}
+\index{mulMtxFMtxF@{mulMtxFMtxF}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{mulMtxFMtxF()}{mulMtxFMtxF()}}
+{\footnotesize\ttfamily void mul\+Mtx\+FMtxF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}}}]{matrix\+\_\+a,  }\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}}}]{matrix\+\_\+b,  }\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_acba331ce2c296e52043044699806d55d}\label{matrix_8c_acba331ce2c296e52043044699806d55d}} 
+\index{matrix.c@{matrix.c}!mulMtxFVecF@{mulMtxFVecF}}
+\index{mulMtxFVecF@{mulMtxFVecF}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{mulMtxFVecF()}{mulMtxFVecF()}}
+{\footnotesize\ttfamily void mul\+Mtx\+FVecF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{matrix_8h_a8d99b40f1d5cb96313d45c8dd0151edf}{MtxF}}}]{matrix,  }\item[{float $\ast$}]{in,  }\item[{float $\ast$}]{out }\end{DoxyParamCaption})}
+

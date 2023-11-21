@@ -1,0 +1,138 @@
+\hypertarget{color_8h}{}\doxysection{src/graphics/color.h File Reference}
+\label{color_8h}\index{src/graphics/color.h@{src/graphics/color.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{color_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}}
+\item 
+struct \mbox{\hyperlink{color_8h_structColorf32}{Colorf32}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{color_8h_afd88807eaa11ea0c633a3b16c901ada7}{color\+U8\+Lerp}} (struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$from, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$to, float lerp, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$output)
+\item 
+void \mbox{\hyperlink{color_8h_acbf5f5932a774c77a2b35b4241bb02db}{color\+U8\+Mul}} (struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$a, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$b, struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$out)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8h_a05e0cec691f36c7ea58ba56b5f030bc4}{g\+Color\+Black}}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8h_ad777173d7cacf670ffeca7179c98bc49}{g\+Color\+White}}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8h_a6077b59d58856d034d5ad007e3eb3f2a}{g\+Half\+Transparent\+Black}}
+\item 
+struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} \mbox{\hyperlink{color_8h_a3f866584c1e6eec6ca77ecb343a88294}{g\+Half\+Transparent\+White}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{Coloru8@{Coloru8}}\label{structColoru8}
+\Hypertarget{color_8h_structColoru8}
+\doxysubsubsection{struct Coloru8}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{color_8h_aceadf04df4b733d88c7275820a6fac47}\label{color_8h_aceadf04df4b733d88c7275820a6fac47}} 
+unsigned char&
+a&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_acdf6b32116a556527b17d1a19a1dc099}\label{color_8h_acdf6b32116a556527b17d1a19a1dc099}} 
+unsigned char&
+b&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_afa391420185a75a9776459ebdfab9ad8}\label{color_8h_afa391420185a75a9776459ebdfab9ad8}} 
+unsigned char&
+g&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_a9b49987ea30ea89d5f9feb5d0e6bdff5}\label{color_8h_a9b49987ea30ea89d5f9feb5d0e6bdff5}} 
+unsigned char&
+r&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Colorf32@{Colorf32}}\label{structColorf32}
+\Hypertarget{color_8h_structColorf32}
+\doxysubsubsection{struct Colorf32}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{color_8h_a3101031f22676997f4a53fa4bf8a5aac}\label{color_8h_a3101031f22676997f4a53fa4bf8a5aac}} 
+float&
+a&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_a21b7596be9c5871314da512b2c874861}\label{color_8h_a21b7596be9c5871314da512b2c874861}} 
+float&
+b&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_aebd2557c9fea52d34cdccc42c924cc40}\label{color_8h_aebd2557c9fea52d34cdccc42c924cc40}} 
+float&
+g&
+\\
+\hline
+
+\mbox{\Hypertarget{color_8h_ab7ba02eeca4be291e9834437c2046d6c}\label{color_8h_ab7ba02eeca4be291e9834437c2046d6c}} 
+float&
+r&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{color_8h_afd88807eaa11ea0c633a3b16c901ada7}\label{color_8h_afd88807eaa11ea0c633a3b16c901ada7}} 
+\index{color.h@{color.h}!colorU8Lerp@{colorU8Lerp}}
+\index{colorU8Lerp@{colorU8Lerp}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{colorU8Lerp()}{colorU8Lerp()}}
+{\footnotesize\ttfamily void color\+U8\+Lerp (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{from,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{to,  }\item[{float}]{lerp,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{color_8h_acbf5f5932a774c77a2b35b4241bb02db}\label{color_8h_acbf5f5932a774c77a2b35b4241bb02db}} 
+\index{color.h@{color.h}!colorU8Mul@{colorU8Mul}}
+\index{colorU8Mul@{colorU8Mul}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{colorU8Mul()}{colorU8Mul()}}
+{\footnotesize\ttfamily void color\+U8\+Mul (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{a,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{b,  }\item[{struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{color_8h_a05e0cec691f36c7ea58ba56b5f030bc4}\label{color_8h_a05e0cec691f36c7ea58ba56b5f030bc4}} 
+\index{color.h@{color.h}!gColorBlack@{gColorBlack}}
+\index{gColorBlack@{gColorBlack}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{gColorBlack}{gColorBlack}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Color\+Black\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{color_8h_ad777173d7cacf670ffeca7179c98bc49}\label{color_8h_ad777173d7cacf670ffeca7179c98bc49}} 
+\index{color.h@{color.h}!gColorWhite@{gColorWhite}}
+\index{gColorWhite@{gColorWhite}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{gColorWhite}{gColorWhite}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Color\+White\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{color_8h_a6077b59d58856d034d5ad007e3eb3f2a}\label{color_8h_a6077b59d58856d034d5ad007e3eb3f2a}} 
+\index{color.h@{color.h}!gHalfTransparentBlack@{gHalfTransparentBlack}}
+\index{gHalfTransparentBlack@{gHalfTransparentBlack}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{gHalfTransparentBlack}{gHalfTransparentBlack}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Half\+Transparent\+Black\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{color_8h_a3f866584c1e6eec6ca77ecb343a88294}\label{color_8h_a3f866584c1e6eec6ca77ecb343a88294}} 
+\index{color.h@{color.h}!gHalfTransparentWhite@{gHalfTransparentWhite}}
+\index{gHalfTransparentWhite@{gHalfTransparentWhite}!color.h@{color.h}}
+\doxysubsubsection{\texorpdfstring{gHalfTransparentWhite}{gHalfTransparentWhite}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{color_8h_structColoru8}{Coloru8}} g\+Half\+Transparent\+White\hspace{0.3cm}{\ttfamily [extern]}}
+

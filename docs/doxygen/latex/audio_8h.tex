@@ -1,0 +1,254 @@
+\hypertarget{audio_8h}{}\doxysection{src/audio/audio.h File Reference}
+\label{audio_8h}\index{src/audio/audio.h@{src/audio/audio.h}}
+{\ttfamily \#include $<$ultra64.\+h$>$}\newline
+{\ttfamily \#include $<$libaudio.\+h$>$}\newline
+{\ttfamily \#include $<$sched.\+h$>$}\newline
+Include dependency graph for audio.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{audio_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{audio_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{audio_8h_structamConfig}{am\+Config}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{audio_8h_a8dfea294a063a0b6b1c69b4713cb4960}{MAX\+\_\+\+UPDATES}}~64
+\item 
+\#define \mbox{\hyperlink{audio_8h_ae42954bb8545d24e3e9dcde5920c9a0b}{MAX\+\_\+\+EVENTS}}~128
+\item 
+\#define \mbox{\hyperlink{audio_8h_a47ad0c17ca696e995e47dad8177b3def}{AUDIO\+\_\+\+HEAP\+\_\+\+SIZE}}~300000
+\item 
+\#define \mbox{\hyperlink{audio_8h_a712d87e09737cc95e51899eacb6ebfa4}{AUDIO\+\_\+\+OUTPUT\+\_\+\+RATE}}~22050 /$\ast$ if the audio file is mathing this it will play normally at 1.\+0f pitch $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_aca618e8fa76e4f9eaf21bef1d1ddccd5}{MAX\+\_\+\+VOICES}}~64
+\item 
+\#define \mbox{\hyperlink{audio_8h_a1e585da60f73ee172c876e7046e38911}{EXTRA\+\_\+\+SAMPLES}}~80
+\item 
+\#define \mbox{\hyperlink{audio_8h_ab3e90e29afa8217ded0ec448f1bea176}{NUM\+\_\+\+OUTPUT\+\_\+\+BUFFERS}}~3 /$\ast$ Need three of these $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_aa51adf0f95cfeb0b28b11151cdc1274c}{OUTPUT\+\_\+\+RATE}}~44100
+\item 
+\#define \mbox{\hyperlink{audio_8h_a79c42f1d15f41cd79807385fb914905d}{MAX\+\_\+\+AUDIO\+\_\+\+MESGS}}~32
+\item 
+\#define \mbox{\hyperlink{audio_8h_a7e27dc39e4768f6c40b0b5312db09d36}{QUIT\+\_\+\+MSG}}~10
+\item 
+\#define \mbox{\hyperlink{audio_8h_ac0bed748d0fdb3fa4024cdfd6e1e6c3d}{DMA\+\_\+\+BUFFER\+\_\+\+LENGTH}}~0x800 /$\ast$ Larger buffers result in fewer DMA\textquotesingle{} but more  $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_a12c17c4cfae1f94b2f3e6b8ad2f6117c}{NUM\+\_\+\+ACMD\+\_\+\+LISTS}}~2  /$\ast$ two lists used by this example                $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_af4197c6e83c67faf67de6060fef3e2dd}{MAX\+\_\+\+RSP\+\_\+\+CMDS}}~4096 /$\ast$ max number of commands in any command list.   $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_a45c62b666cc4a2bda2aea3598c536ae2}{NUM\+\_\+\+DMA\+\_\+\+BUFFERS}}~24 /$\ast$ max number of dma buffers needed.             $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}{NUM\+\_\+\+DMA\+\_\+\+MESSAGES}}~32 /$\ast$ The maximum number of DMAs any one frame can  $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_a44a58ed35161ff13de8fbf41f913a729}{FRAME\+\_\+\+LAG}}~1 /$\ast$ The number of frames to keep a dma buffer.    $\ast$/
+\item 
+\#define \mbox{\hyperlink{audio_8h_a0403b973e2b93a9859a7fac343b8ceb1}{AUDIO\+\_\+\+STACKSIZE}}~0x2000
+\item 
+\#define \mbox{\hyperlink{audio_8h_a6f8cd06f001055fe10041006410420a9}{MAX\+\_\+\+SEQ\+\_\+\+LENGTH}}~20000
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{audio_8h_ac3cc43ec976c39d9eb57d718d84aa439}{am\+Create\+Audio\+Mgr}} (ALSyn\+Config $\ast$c, OSPri priority, \mbox{\hyperlink{audio_8h_structamConfig}{am\+Config}} $\ast$amc, int framerate)
+\item 
+void \mbox{\hyperlink{audio_8h_a432e926c5ca26a7ca9350627dab76d93}{init\+Audio}} (int framerate)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} \mbox{\hyperlink{audio_8h_afdbf90a7373a06ed4a547d339cd95a09}{aud\+Yield\+Buf}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}} $\ast$ \mbox{\hyperlink{audio_8h_af5c4bfd085729be3386a69514a2070e1}{g\+Audio\+Heap\+Buffer}}
+\item 
+ALHeap \mbox{\hyperlink{audio_8h_ae1c508eff321cdd7b33f0bc848570c7d}{g\+Audio\+Heap}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{amConfig@{amConfig}}\label{structamConfig}
+\Hypertarget{audio_8h_structamConfig}
+\doxysubsubsection{struct am\+Config}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{audio_8h_ad736ecfa5c3bfcba73fbcecb3013d9ab}\label{audio_8h_ad736ecfa5c3bfcba73fbcecb3013d9ab}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+framesPerField&
+\\
+\hline
+
+\mbox{\Hypertarget{audio_8h_a3b0176eaf2937531ac7da631de3055d7}\label{audio_8h_a3b0176eaf2937531ac7da631de3055d7}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+maxACMDSize&
+\\
+\hline
+
+\mbox{\Hypertarget{audio_8h_a434ec02041e392a6be066e5ae1d3b771}\label{audio_8h_a434ec02041e392a6be066e5ae1d3b771}} 
+\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}}&
+outputRate&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{audio_8h_a47ad0c17ca696e995e47dad8177b3def}\label{audio_8h_a47ad0c17ca696e995e47dad8177b3def}} 
+\index{audio.h@{audio.h}!AUDIO\_HEAP\_SIZE@{AUDIO\_HEAP\_SIZE}}
+\index{AUDIO\_HEAP\_SIZE@{AUDIO\_HEAP\_SIZE}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{AUDIO\_HEAP\_SIZE}{AUDIO\_HEAP\_SIZE}}
+{\footnotesize\ttfamily \#define AUDIO\+\_\+\+HEAP\+\_\+\+SIZE~300000}
+
+\mbox{\Hypertarget{audio_8h_a712d87e09737cc95e51899eacb6ebfa4}\label{audio_8h_a712d87e09737cc95e51899eacb6ebfa4}} 
+\index{audio.h@{audio.h}!AUDIO\_OUTPUT\_RATE@{AUDIO\_OUTPUT\_RATE}}
+\index{AUDIO\_OUTPUT\_RATE@{AUDIO\_OUTPUT\_RATE}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{AUDIO\_OUTPUT\_RATE}{AUDIO\_OUTPUT\_RATE}}
+{\footnotesize\ttfamily \#define AUDIO\+\_\+\+OUTPUT\+\_\+\+RATE~22050 /$\ast$ if the audio file is mathing this it will play normally at 1.\+0f pitch $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a0403b973e2b93a9859a7fac343b8ceb1}\label{audio_8h_a0403b973e2b93a9859a7fac343b8ceb1}} 
+\index{audio.h@{audio.h}!AUDIO\_STACKSIZE@{AUDIO\_STACKSIZE}}
+\index{AUDIO\_STACKSIZE@{AUDIO\_STACKSIZE}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{AUDIO\_STACKSIZE}{AUDIO\_STACKSIZE}}
+{\footnotesize\ttfamily \#define AUDIO\+\_\+\+STACKSIZE~0x2000}
+
+\mbox{\Hypertarget{audio_8h_ac0bed748d0fdb3fa4024cdfd6e1e6c3d}\label{audio_8h_ac0bed748d0fdb3fa4024cdfd6e1e6c3d}} 
+\index{audio.h@{audio.h}!DMA\_BUFFER\_LENGTH@{DMA\_BUFFER\_LENGTH}}
+\index{DMA\_BUFFER\_LENGTH@{DMA\_BUFFER\_LENGTH}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{DMA\_BUFFER\_LENGTH}{DMA\_BUFFER\_LENGTH}}
+{\footnotesize\ttfamily \#define DMA\+\_\+\+BUFFER\+\_\+\+LENGTH~0x800 /$\ast$ Larger buffers result in fewer DMA\textquotesingle{} but more  $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a1e585da60f73ee172c876e7046e38911}\label{audio_8h_a1e585da60f73ee172c876e7046e38911}} 
+\index{audio.h@{audio.h}!EXTRA\_SAMPLES@{EXTRA\_SAMPLES}}
+\index{EXTRA\_SAMPLES@{EXTRA\_SAMPLES}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{EXTRA\_SAMPLES}{EXTRA\_SAMPLES}}
+{\footnotesize\ttfamily \#define EXTRA\+\_\+\+SAMPLES~80}
+
+\mbox{\Hypertarget{audio_8h_a44a58ed35161ff13de8fbf41f913a729}\label{audio_8h_a44a58ed35161ff13de8fbf41f913a729}} 
+\index{audio.h@{audio.h}!FRAME\_LAG@{FRAME\_LAG}}
+\index{FRAME\_LAG@{FRAME\_LAG}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{FRAME\_LAG}{FRAME\_LAG}}
+{\footnotesize\ttfamily \#define FRAME\+\_\+\+LAG~1 /$\ast$ The number of frames to keep a dma buffer.    $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a79c42f1d15f41cd79807385fb914905d}\label{audio_8h_a79c42f1d15f41cd79807385fb914905d}} 
+\index{audio.h@{audio.h}!MAX\_AUDIO\_MESGS@{MAX\_AUDIO\_MESGS}}
+\index{MAX\_AUDIO\_MESGS@{MAX\_AUDIO\_MESGS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_AUDIO\_MESGS}{MAX\_AUDIO\_MESGS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+AUDIO\+\_\+\+MESGS~32}
+
+\mbox{\Hypertarget{audio_8h_ae42954bb8545d24e3e9dcde5920c9a0b}\label{audio_8h_ae42954bb8545d24e3e9dcde5920c9a0b}} 
+\index{audio.h@{audio.h}!MAX\_EVENTS@{MAX\_EVENTS}}
+\index{MAX\_EVENTS@{MAX\_EVENTS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_EVENTS}{MAX\_EVENTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+EVENTS~128}
+
+\mbox{\Hypertarget{audio_8h_af4197c6e83c67faf67de6060fef3e2dd}\label{audio_8h_af4197c6e83c67faf67de6060fef3e2dd}} 
+\index{audio.h@{audio.h}!MAX\_RSP\_CMDS@{MAX\_RSP\_CMDS}}
+\index{MAX\_RSP\_CMDS@{MAX\_RSP\_CMDS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_RSP\_CMDS}{MAX\_RSP\_CMDS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+RSP\+\_\+\+CMDS~4096 /$\ast$ max number of commands in any command list.   $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a6f8cd06f001055fe10041006410420a9}\label{audio_8h_a6f8cd06f001055fe10041006410420a9}} 
+\index{audio.h@{audio.h}!MAX\_SEQ\_LENGTH@{MAX\_SEQ\_LENGTH}}
+\index{MAX\_SEQ\_LENGTH@{MAX\_SEQ\_LENGTH}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_SEQ\_LENGTH}{MAX\_SEQ\_LENGTH}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+SEQ\+\_\+\+LENGTH~20000}
+
+\mbox{\Hypertarget{audio_8h_a8dfea294a063a0b6b1c69b4713cb4960}\label{audio_8h_a8dfea294a063a0b6b1c69b4713cb4960}} 
+\index{audio.h@{audio.h}!MAX\_UPDATES@{MAX\_UPDATES}}
+\index{MAX\_UPDATES@{MAX\_UPDATES}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_UPDATES}{MAX\_UPDATES}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+UPDATES~64}
+
+\mbox{\Hypertarget{audio_8h_aca618e8fa76e4f9eaf21bef1d1ddccd5}\label{audio_8h_aca618e8fa76e4f9eaf21bef1d1ddccd5}} 
+\index{audio.h@{audio.h}!MAX\_VOICES@{MAX\_VOICES}}
+\index{MAX\_VOICES@{MAX\_VOICES}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_VOICES}{MAX\_VOICES}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+VOICES~64}
+
+\mbox{\Hypertarget{audio_8h_a12c17c4cfae1f94b2f3e6b8ad2f6117c}\label{audio_8h_a12c17c4cfae1f94b2f3e6b8ad2f6117c}} 
+\index{audio.h@{audio.h}!NUM\_ACMD\_LISTS@{NUM\_ACMD\_LISTS}}
+\index{NUM\_ACMD\_LISTS@{NUM\_ACMD\_LISTS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_ACMD\_LISTS}{NUM\_ACMD\_LISTS}}
+{\footnotesize\ttfamily \#define NUM\+\_\+\+ACMD\+\_\+\+LISTS~2  /$\ast$ two lists used by this example                $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a45c62b666cc4a2bda2aea3598c536ae2}\label{audio_8h_a45c62b666cc4a2bda2aea3598c536ae2}} 
+\index{audio.h@{audio.h}!NUM\_DMA\_BUFFERS@{NUM\_DMA\_BUFFERS}}
+\index{NUM\_DMA\_BUFFERS@{NUM\_DMA\_BUFFERS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_DMA\_BUFFERS}{NUM\_DMA\_BUFFERS}}
+{\footnotesize\ttfamily \#define NUM\+\_\+\+DMA\+\_\+\+BUFFERS~24 /$\ast$ max number of dma buffers needed.             $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}\label{audio_8h_a2f2072e6bea6975f27885eafc7cd2712}} 
+\index{audio.h@{audio.h}!NUM\_DMA\_MESSAGES@{NUM\_DMA\_MESSAGES}}
+\index{NUM\_DMA\_MESSAGES@{NUM\_DMA\_MESSAGES}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_DMA\_MESSAGES}{NUM\_DMA\_MESSAGES}}
+{\footnotesize\ttfamily \#define NUM\+\_\+\+DMA\+\_\+\+MESSAGES~32 /$\ast$ The maximum number of DMAs any one frame can  $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_ab3e90e29afa8217ded0ec448f1bea176}\label{audio_8h_ab3e90e29afa8217ded0ec448f1bea176}} 
+\index{audio.h@{audio.h}!NUM\_OUTPUT\_BUFFERS@{NUM\_OUTPUT\_BUFFERS}}
+\index{NUM\_OUTPUT\_BUFFERS@{NUM\_OUTPUT\_BUFFERS}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_OUTPUT\_BUFFERS}{NUM\_OUTPUT\_BUFFERS}}
+{\footnotesize\ttfamily \#define NUM\+\_\+\+OUTPUT\+\_\+\+BUFFERS~3 /$\ast$ Need three of these $\ast$/}
+
+\mbox{\Hypertarget{audio_8h_aa51adf0f95cfeb0b28b11151cdc1274c}\label{audio_8h_aa51adf0f95cfeb0b28b11151cdc1274c}} 
+\index{audio.h@{audio.h}!OUTPUT\_RATE@{OUTPUT\_RATE}}
+\index{OUTPUT\_RATE@{OUTPUT\_RATE}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_RATE}{OUTPUT\_RATE}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+RATE~44100}
+
+\mbox{\Hypertarget{audio_8h_a7e27dc39e4768f6c40b0b5312db09d36}\label{audio_8h_a7e27dc39e4768f6c40b0b5312db09d36}} 
+\index{audio.h@{audio.h}!QUIT\_MSG@{QUIT\_MSG}}
+\index{QUIT\_MSG@{QUIT\_MSG}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{QUIT\_MSG}{QUIT\_MSG}}
+{\footnotesize\ttfamily \#define QUIT\+\_\+\+MSG~10}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{audio_8h_ac3cc43ec976c39d9eb57d718d84aa439}\label{audio_8h_ac3cc43ec976c39d9eb57d718d84aa439}} 
+\index{audio.h@{audio.h}!amCreateAudioMgr@{amCreateAudioMgr}}
+\index{amCreateAudioMgr@{amCreateAudioMgr}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{amCreateAudioMgr()}{amCreateAudioMgr()}}
+{\footnotesize\ttfamily void am\+Create\+Audio\+Mgr (\begin{DoxyParamCaption}\item[{ALSyn\+Config $\ast$}]{c,  }\item[{OSPri}]{priority,  }\item[{\mbox{\hyperlink{audio_8h_structamConfig}{am\+Config}} $\ast$}]{amc,  }\item[{int}]{framerate }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{audio_8h_a432e926c5ca26a7ca9350627dab76d93}\label{audio_8h_a432e926c5ca26a7ca9350627dab76d93}} 
+\index{audio.h@{audio.h}!initAudio@{initAudio}}
+\index{initAudio@{initAudio}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{initAudio()}{initAudio()}}
+{\footnotesize\ttfamily void init\+Audio (\begin{DoxyParamCaption}\item[{int}]{framerate }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{audio_8h_afdbf90a7373a06ed4a547d339cd95a09}\label{audio_8h_afdbf90a7373a06ed4a547d339cd95a09}} 
+\index{audio.h@{audio.h}!audYieldBuf@{audYieldBuf}}
+\index{audYieldBuf@{audYieldBuf}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{audYieldBuf}{audYieldBuf}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a969c7c1ebb4f70581e040a3034b14ee0}{u64}} aud\+Yield\+Buf\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{audio_8h_ae1c508eff321cdd7b33f0bc848570c7d}\label{audio_8h_ae1c508eff321cdd7b33f0bc848570c7d}} 
+\index{audio.h@{audio.h}!gAudioHeap@{gAudioHeap}}
+\index{gAudioHeap@{gAudioHeap}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{gAudioHeap}{gAudioHeap}}
+{\footnotesize\ttfamily ALHeap g\+Audio\+Heap\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{audio_8h_af5c4bfd085729be3386a69514a2070e1}\label{audio_8h_af5c4bfd085729be3386a69514a2070e1}} 
+\index{audio.h@{audio.h}!gAudioHeapBuffer@{gAudioHeapBuffer}}
+\index{gAudioHeapBuffer@{gAudioHeapBuffer}!audio.h@{audio.h}}
+\doxysubsubsection{\texorpdfstring{gAudioHeapBuffer}{gAudioHeapBuffer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_af3b86d961da0a3575b4f99c9ffaf01fd}{u8}}$\ast$ g\+Audio\+Heap\+Buffer\hspace{0.3cm}{\ttfamily [extern]}}
+

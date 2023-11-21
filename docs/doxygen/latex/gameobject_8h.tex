@@ -1,0 +1,136 @@
+\hypertarget{gameobject_8h}{}\doxysection{src/gameobject.h File Reference}
+\label{gameobject_8h}\index{src/gameobject.h@{src/gameobject.h}}
+{\ttfamily \#include \char`\"{}animation/animation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}physics/physics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/rotation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
+Include dependency graph for gameobject.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gameobject_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gameobject_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} \mbox{\hyperlink{gameobject_8h_ab0fb707a835e2853e4ab457d743d9640}{Game\+Object}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8h_a0ac79196efb421f3e0628ab715a7763c}{Game\+Object\+\_\+alloc}} ()
+\item 
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}{Game\+Object\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self, int id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$init\+Pos)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Data Structure Documentation}
+\index{GameObject@{GameObject}}\label{structGameObject}
+\Hypertarget{gameobject_8h_structGameObject}
+\doxysubsubsection{struct Game\+Object}
+
+
+Collaboration diagram for Game\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGameObject__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{gameobject_8h_ae980a319c1af1a3b0c817177a2d07a9c}\label{gameobject_8h_ae980a319c1af1a3b0c817177a2d07a9c}} 
+\mbox{\hyperlink{animation_8h_structAnimationState}{AnimationState}} $\ast$&
+animState&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a98291c60da12d9036e1ad24cfebcf6b3}\label{gameobject_8h_a98291c60da12d9036e1ad24cfebcf6b3}} 
+int&
+id&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a7ea970ecda2698767cc70fa269f1c25c}\label{gameobject_8h_a7ea970ecda2698767cc70fa269f1c25c}} 
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{ModelType}}&
+modelType&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a3c05520bfb3afeeea99a34c8817da166}\label{gameobject_8h_a3c05520bfb3afeeea99a34c8817da166}} 
+\mbox{\hyperlink{physics_8h_structPhysBody}{PhysBody}} $\ast$&
+physBody&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a7ee07f15ea5b54eb4bedbdeb92bf2eca}\label{gameobject_8h_a7ee07f15ea5b54eb4bedbdeb92bf2eca}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+position&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a0a000ed454032143e8b600cfb4f07b03}\label{gameobject_8h_a0a000ed454032143e8b600cfb4f07b03}} 
+\mbox{\hyperlink{rotation_8h_structEulerDegrees}{EulerDegrees}}&
+rotation&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_ace860ff40546bbe3e1a09f774d715a5b}\label{gameobject_8h_ace860ff40546bbe3e1a09f774d715a5b}} 
+int&
+solid&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a23fac7e8944428807b74b0edc3bc6dec}\label{gameobject_8h_a23fac7e8944428807b74b0edc3bc6dec}} 
+int&
+subtype&
+\\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a3f6d5ce1244f12d405af551253752502}\label{gameobject_8h_a3f6d5ce1244f12d405af551253752502}} 
+int&
+visible&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{gameobject_8h_ab0fb707a835e2853e4ab457d743d9640}\label{gameobject_8h_ab0fb707a835e2853e4ab457d743d9640}} 
+\index{gameobject.h@{gameobject.h}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!gameobject.h@{gameobject.h}}
+\doxysubsubsection{\texorpdfstring{GameObject}{GameObject}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{gameobject_8h_a0ac79196efb421f3e0628ab715a7763c}\label{gameobject_8h_a0ac79196efb421f3e0628ab715a7763c}} 
+\index{gameobject.h@{gameobject.h}!GameObject\_alloc@{GameObject\_alloc}}
+\index{GameObject\_alloc@{GameObject\_alloc}!gameobject.h@{gameobject.h}}
+\doxysubsubsection{\texorpdfstring{GameObject\_alloc()}{GameObject\_alloc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+alloc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}\label{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}} 
+\index{gameobject.h@{gameobject.h}!GameObject\_init@{GameObject\_init}}
+\index{GameObject\_init@{GameObject\_init}!gameobject.h@{gameobject.h}}
+\doxysubsubsection{\texorpdfstring{GameObject\_init()}{GameObject\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{self,  }\item[{int}]{id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{init\+Pos }\end{DoxyParamCaption})}
+

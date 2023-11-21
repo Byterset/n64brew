@@ -1,0 +1,117 @@
+\hypertarget{pathfinding_8c}{}\doxysection{src/pathfinding/pathfinding.c File Reference}
+\label{pathfinding_8c}\index{src/pathfinding/pathfinding.c@{src/pathfinding/pathfinding.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pathfinding.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}float.\+h\char`\"{}}\newline
+Include dependency graph for pathfinding.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pathfinding_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{pathfinding_8c_a0db9c6bdc11db9452958714bd51280cc}{Path\+\_\+distance}} (\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$a, \mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$b)
+\item 
+float \mbox{\hyperlink{pathfinding_8c_a8313f7ef878f8be2a0e57868b188059a}{Path\+\_\+heuristic}} (\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$a, \mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$b)
+\item 
+void \mbox{\hyperlink{pathfinding_8c_a9d52c8349074d553e6017dcd6889aa11}{Path\+\_\+init\+State}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, \mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state, \mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$start, \mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$end, \mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$node\+States, int node\+State\+Size, int $\ast$result)
+\item 
+void \mbox{\hyperlink{pathfinding_8c_acb379a7015b1f8fe65656f5cdaa9c301}{Path\+\_\+add\+To\+Open\+List}} (\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state, \mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$node\+State)
+\item 
+\mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$ \mbox{\hyperlink{pathfinding_8c_a351fb7175cb4e8ec99b403eaf42728cc}{Path\+\_\+get\+Smallest\+Open\+Node}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, \mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state)
+\item 
+\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$ \mbox{\hyperlink{pathfinding_8c_a4dc0e27ff3e3f8b4e87ad654760fdcd0}{Path\+\_\+get\+Node\+By\+ID}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, int node\+ID)
+\item 
+\mbox{\hyperlink{pathfinding_8h_structEdgeList}{Edge\+List}} $\ast$ \mbox{\hyperlink{pathfinding_8c_ac5746745ad3f82ba0912365ccaa7e046}{Path\+\_\+get\+Node\+Edges\+By\+ID}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, int node\+ID)
+\item 
+\mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$ \mbox{\hyperlink{pathfinding_8c_ae90e653c528543580b39f24ee69896f5}{Path\+\_\+get\+Node\+State}} (\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state, int node\+ID)
+\item 
+int \mbox{\hyperlink{pathfinding_8c_a58a598f6d57ada17ddc19e01cf367e3d}{Path\+\_\+quantize\+Position}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position)
+\item 
+void \mbox{\hyperlink{pathfinding_8c_acc67c2a0c95a5a909932a16a57101b9a}{Path\+\_\+reverse}} (\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state)
+\item 
+float \mbox{\hyperlink{pathfinding_8c_a7225cab610dae1cb61e7867a86e295da}{Path\+\_\+get\+Closest\+Point\+Parameter}} (struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$segment\+Point0, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$segment\+Point1, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$point)
+\item 
+int \mbox{\hyperlink{pathfinding_8c_ae439ab16ad1d62771ad608ab204850d0}{Path\+\_\+find\+AStar}} (\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$graph, \mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$state)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pathfinding_8c_acb379a7015b1f8fe65656f5cdaa9c301}\label{pathfinding_8c_acb379a7015b1f8fe65656f5cdaa9c301}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_addToOpenList@{Path\_addToOpenList}}
+\index{Path\_addToOpenList@{Path\_addToOpenList}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_addToOpenList()}{Path\_addToOpenList()}}
+{\footnotesize\ttfamily void Path\+\_\+add\+To\+Open\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$}]{node\+State }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a0db9c6bdc11db9452958714bd51280cc}\label{pathfinding_8c_a0db9c6bdc11db9452958714bd51280cc}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_distance@{Path\_distance}}
+\index{Path\_distance@{Path\_distance}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_distance()}{Path\_distance()}}
+{\footnotesize\ttfamily float Path\+\_\+distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_ae439ab16ad1d62771ad608ab204850d0}\label{pathfinding_8c_ae439ab16ad1d62771ad608ab204850d0}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_findAStar@{Path\_findAStar}}
+\index{Path\_findAStar@{Path\_findAStar}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_findAStar()}{Path\_findAStar()}}
+{\footnotesize\ttfamily int Path\+\_\+find\+AStar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a7225cab610dae1cb61e7867a86e295da}\label{pathfinding_8c_a7225cab610dae1cb61e7867a86e295da}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_getClosestPointParameter@{Path\_getClosestPointParameter}}
+\index{Path\_getClosestPointParameter@{Path\_getClosestPointParameter}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_getClosestPointParameter()}{Path\_getClosestPointParameter()}}
+{\footnotesize\ttfamily float Path\+\_\+get\+Closest\+Point\+Parameter (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{segment\+Point0,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{segment\+Point1,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a4dc0e27ff3e3f8b4e87ad654760fdcd0}\label{pathfinding_8c_a4dc0e27ff3e3f8b4e87ad654760fdcd0}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_getNodeByID@{Path\_getNodeByID}}
+\index{Path\_getNodeByID@{Path\_getNodeByID}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_getNodeByID()}{Path\_getNodeByID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structNode}{Node}}$\ast$ Path\+\_\+get\+Node\+By\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{int}]{node\+ID }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_ac5746745ad3f82ba0912365ccaa7e046}\label{pathfinding_8c_ac5746745ad3f82ba0912365ccaa7e046}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_getNodeEdgesByID@{Path\_getNodeEdgesByID}}
+\index{Path\_getNodeEdgesByID@{Path\_getNodeEdgesByID}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_getNodeEdgesByID()}{Path\_getNodeEdgesByID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structEdgeList}{Edge\+List}}$\ast$ Path\+\_\+get\+Node\+Edges\+By\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{int}]{node\+ID }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_ae90e653c528543580b39f24ee69896f5}\label{pathfinding_8c_ae90e653c528543580b39f24ee69896f5}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_getNodeState@{Path\_getNodeState}}
+\index{Path\_getNodeState@{Path\_getNodeState}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_getNodeState()}{Path\_getNodeState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}}$\ast$ Path\+\_\+get\+Node\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state,  }\item[{int}]{node\+ID }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a351fb7175cb4e8ec99b403eaf42728cc}\label{pathfinding_8c_a351fb7175cb4e8ec99b403eaf42728cc}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_getSmallestOpenNode@{Path\_getSmallestOpenNode}}
+\index{Path\_getSmallestOpenNode@{Path\_getSmallestOpenNode}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_getSmallestOpenNode()}{Path\_getSmallestOpenNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}}$\ast$ Path\+\_\+get\+Smallest\+Open\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a8313f7ef878f8be2a0e57868b188059a}\label{pathfinding_8c_a8313f7ef878f8be2a0e57868b188059a}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_heuristic@{Path\_heuristic}}
+\index{Path\_heuristic@{Path\_heuristic}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_heuristic()}{Path\_heuristic()}}
+{\footnotesize\ttfamily float Path\+\_\+heuristic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a9d52c8349074d553e6017dcd6889aa11}\label{pathfinding_8c_a9d52c8349074d553e6017dcd6889aa11}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_initState@{Path\_initState}}
+\index{Path\_initState@{Path\_initState}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_initState()}{Path\_initState()}}
+{\footnotesize\ttfamily void Path\+\_\+init\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{start,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNode}{Node}} $\ast$}]{end,  }\item[{\mbox{\hyperlink{pathfinding_8h_structNodeState}{Node\+State}} $\ast$}]{node\+States,  }\item[{int}]{node\+State\+Size,  }\item[{int $\ast$}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_a58a598f6d57ada17ddc19e01cf367e3d}\label{pathfinding_8c_a58a598f6d57ada17ddc19e01cf367e3d}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_quantizePosition@{Path\_quantizePosition}}
+\index{Path\_quantizePosition@{Path\_quantizePosition}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_quantizePosition()}{Path\_quantizePosition()}}
+{\footnotesize\ttfamily int Path\+\_\+quantize\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structGraph}{Graph}} $\ast$}]{graph,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinding_8c_acc67c2a0c95a5a909932a16a57101b9a}\label{pathfinding_8c_acc67c2a0c95a5a909932a16a57101b9a}} 
+\index{pathfinding.c@{pathfinding.c}!Path\_reverse@{Path\_reverse}}
+\index{Path\_reverse@{Path\_reverse}!pathfinding.c@{pathfinding.c}}
+\doxysubsubsection{\texorpdfstring{Path\_reverse()}{Path\_reverse()}}
+{\footnotesize\ttfamily void Path\+\_\+reverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pathfinding_8h_structPathfindingState}{Pathfinding\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
