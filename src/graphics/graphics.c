@@ -120,15 +120,16 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 		fpsSlowdown = 0;
 		fps = (int)(1000.0f/gDeltaTimeMS);
 	}
-	if(heapCheckCounter < 200){
-		heapCheckCounter++;
-	}
-	else{
-		heapCheckCounter = 0;
-		char *heapfree[20];
-		sprintf(heapfree, "free heap:%d", calculateBytesFree());
-		console_add_msg(heapfree);
-	}
+	//uncomment to track free heap in on-screen debug console
+	// if(heapCheckCounter < 200){
+	// 	heapCheckCounter++;
+	// }
+	// else{
+	// 	heapCheckCounter = 0;
+	// 	char *heapfree[20];
+	// 	sprintf(heapfree, "free heap:%d", calculateBytesFree());
+	// 	console_add_msg(heapfree);
+	// }
 
 	char *fps_str[7];
 	sprintf(fps_str, "fps:%d", fps);

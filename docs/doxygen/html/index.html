@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>n64brew: Main Page</title>
+<title>n64brew: n64brew</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,11 +62,74 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">n64brew Documentation</div>  </div>
+<div class="title">n64brew </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> This ist based off of <a href="https://github.com/jsdf/goose64">https://github.com/jsdf/goose64</a>. This aims to transform the work done by jsdf into a general purpose 3d engine for the n64.</p>
+<h1><a class="anchor" id="autotoc_md22"></a>
+what has been done so far</h1>
+<ul>
+<li>build process was mostly automized and need for manual export of meshes, collision or levels has been removed</li>
+<li>opengl build was removed</li>
+<li>makefile was redone</li>
+<li>various python scripts and tools have been adapted</li>
+<li>completely overhauled the structure of the project to scale better</li>
+<li>changed audio player to support wav, aiff &amp; ins (done by migrating to the existing solution by the amazing <a href="https://github.com/lambertjamesd/">https://github.com/lambertjamesd/</a>)</li>
+<li>added modified version of <a href="https://github.com/trhodeos/spicy">https://github.com/trhodeos/spicy</a> to tools to support custom rom headers (romheaders for PAL &amp; NTSC included in the root)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md23"></a>
+todos</h1>
+<ul>
+<li>improve model handling, right now I feel it is too much manual work to define the model properties</li>
+<li>support more collider shapes</li>
+<li>optimize collision solver (right now there is some funky behaviour with the collision solver)</li>
+<li>change skeletal animation to work for generalized meshes</li>
+<li>switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md24"></a>
+build for emulator/console</h1>
+<h2><a class="anchor" id="autotoc_md25"></a>
+install the n64 sdk</h2>
+<p>I am using the modern n64 homebrew sdk (crashsdk) and have based the build process around that.</p>
+<p>macOS/linux instructions: <a href="https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html">https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html</a></p>
+<h2><a class="anchor" id="autotoc_md26"></a>
+building the game</h2>
+<p>all commands should be run in the <code>root</code> directory of this repo</p>
+<p>make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.</p>
+<p>this repo contains a custom build of trhodeos' (<a href="https://github.com/trhodeos">https://github.com/trhodeos</a>) <code>spicy</code> (<a href="https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy">https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy</a>) which is an open source replacement for nintendo's <code>mild</code> to create ROMs. The only difference with this included <code>spicy</code> binary (tools/spicy/spicy) is that this version allows for custom rom headers so you can set the region, name etc of your rom.</p>
+<p>run <code>make</code> to build</p>
+<p>run <code>make clean</code> or <code>make clobber</code> to clean up the build directory and any build-byproducts</p>
+<p>this produces the rom file <code>game.z64</code> which you can then run with your favorite emulator or flashcart</p>
+<p>environment variables which affect the build:</p>
+<ul>
+<li><code>OPTIMIZE=1</code>: enable gcc optimization and use non-debug versions of sdk libraries</li>
+<li><code>ED64=1</code>: build with everdrive64 logging support (see <a href="https://github.com/jsdf/ed64log">ed64log</a>). don't use unless running on an everdrive64</li>
+</ul>
+<p>you can also create a file called <code>localdefs.makefile</code> containing any variables to override in the build, and it will be automatically included by the makefile.</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+dependencies</h1>
+<ul>
+<li>lua (mesh export)</li>
+<li>python (animation export, collision export, level export)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md28"></a>
+regenerate n64 header files for sprites</h1>
+<p>if you update any texture files:</p>
+<p>make sure you have python and pillow installed</p>
+<div class="fragment"><div class="line">pip install pillow</div>
+</div><!-- fragment --><p>then, to rebuild sprites</p>
+<div class="fragment"><div class="line">./tools/sh/sprites.sh </div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md29"></a>
+export map object data</h1>
+<ul>
+<li>open blender (or use <code>./blender.sh</code> to see console output)</li>
+<li>in the blender text editor editor, open and run export_positions.py then open and run export_collision_mesh.py</li>
+<li>see header files are created</li>
+<li>this script is run automatically when running <code>make</code>. So after updating a .blend file the headers should be rebuilt automatically. (given the .blend file for the level is in <code>./assets/levels/*</code>) </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

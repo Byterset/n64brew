@@ -1,0 +1,77 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ This ist based off of \href{https://github.com/jsdf/goose64}{\texttt{ https\+://github.\+com/jsdf/goose64}}. This aims to transform the work done by jsdf into a general purpose 3d engine for the n64.\hypertarget{index_autotoc_md22}{}\doxysection{what has been done so far}\label{index_autotoc_md22}
+
+\begin{DoxyItemize}
+\item build process was mostly automized and need for manual export of meshes, collision or levels has been removed
+\item opengl build was removed
+\item makefile was redone
+\item various python scripts and tools have been adapted
+\item completely overhauled the structure of the project to scale better
+\item changed audio player to support wav, aiff \& ins (done by migrating to the existing solution by the amazing \href{https://github.com/lambertjamesd/}{\texttt{ https\+://github.\+com/lambertjamesd/}})
+\item added modified version of \href{https://github.com/trhodeos/spicy}{\texttt{ https\+://github.\+com/trhodeos/spicy}} to tools to support custom rom headers (romheaders for PAL \& NTSC included in the root)
+\end{DoxyItemize}\hypertarget{index_autotoc_md23}{}\doxysection{todos}\label{index_autotoc_md23}
+
+\begin{DoxyItemize}
+\item improve model handling, right now I feel it is too much manual work to define the model properties
+\item support more collider shapes
+\item optimize collision solver (right now there is some funky behaviour with the collision solver)
+\item change skeletal animation to work for generalized meshes
+\item switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)
+\end{DoxyItemize}\hypertarget{index_autotoc_md24}{}\doxysection{build for emulator/console}\label{index_autotoc_md24}
+\hypertarget{index_autotoc_md25}{}\doxysubsection{install the n64 sdk}\label{index_autotoc_md25}
+I am using the modern n64 homebrew sdk (crashsdk) and have based the build process around that.
+
+mac\+OS/linux instructions\+: \href{https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html}{\texttt{ https\+://crashoveride95.\+github.\+io/n64hbrew/modernsdk/startoff.\+html}}\hypertarget{index_autotoc_md26}{}\doxysubsection{building the game}\label{index_autotoc_md26}
+all commands should be run in the {\ttfamily root} directory of this repo
+
+make sure your Makefile and modern.\+makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.
+
+this repo contains a custom build of trhodeos\textquotesingle{} (\href{https://github.com/trhodeos}{\texttt{ https\+://github.\+com/trhodeos}}) {\ttfamily spicy} (\href{https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy}{\texttt{ https\+://github.\+com/\+Byterset/spicyhttps\+://github.\+com/\+Byterset/spicy}}) which is an open source replacement for nintendo\textquotesingle{}s {\ttfamily mild} to create ROMs. The only difference with this included {\ttfamily spicy} binary (tools/spicy/spicy) is that this version allows for custom rom headers so you can set the region, name etc of your rom.
+
+run {\ttfamily make} to build
+
+run {\ttfamily make clean} or {\ttfamily make clobber} to clean up the build directory and any build-\/byproducts
+
+this produces the rom file {\ttfamily game.\+z64} which you can then run with your favorite emulator or flashcart
+
+environment variables which affect the build\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily OPTIMIZE=1}\+: enable gcc optimization and use non-\/debug versions of sdk libraries
+\item {\ttfamily ED64=1}\+: build with everdrive64 logging support (see \href{https://github.com/jsdf/ed64log}{\texttt{ ed64log}}). don\textquotesingle{}t use unless running on an everdrive64
+\end{DoxyItemize}
+
+you can also create a file called {\ttfamily localdefs.\+makefile} containing any variables to override in the build, and it will be automatically included by the makefile.\hypertarget{index_autotoc_md27}{}\doxysection{dependencies}\label{index_autotoc_md27}
+
+\begin{DoxyItemize}
+\item lua (mesh export)
+\item python (animation export, collision export, level export)
+\end{DoxyItemize}\hypertarget{index_autotoc_md28}{}\doxysection{regenerate n64 header files for sprites}\label{index_autotoc_md28}
+if you update any texture files\+:
+
+make sure you have python and pillow installed
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip install pillow}
+
+\end{DoxyCode}
+
+
+then, to rebuild sprites
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./tools/sh/sprites.sh }
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md29}{}\doxysection{export map object data}\label{index_autotoc_md29}
+
+\begin{DoxyItemize}
+\item open blender (or use {\ttfamily ./blender.sh} to see console output)
+\item in the blender text editor editor, open and run export\+\_\+positions.\+py then open and run export\+\_\+collision\+\_\+mesh.\+py
+\item see header files are created
+\item this script is run automatically when running {\ttfamily make}. So after updating a .blend file the headers should be rebuilt automatically. (given the .blend file for the level is in {\ttfamily ./assets/levels/$\ast$}) 
+\end{DoxyItemize}

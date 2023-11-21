@@ -1,0 +1,50 @@
+\hypertarget{md_docs_ART_autotoc_md2}{}\doxysection{Single-\/body Models}\label{md_docs_ART_autotoc_md2}
+For objects that have no moving parts (\textquotesingle{}single-\/body\textquotesingle{}), you can simply move them to the origin (though probably aligning the bottom to the origin is best, so they are \textquotesingle{}sitting on the ground\textquotesingle{}), and then export as OBJ.
+
+The model should be textured with a single UV-\/mapped 32x32 pixel BMP texture.
+
+Single-\/body models should be exported with the following {\bfseries{settings}} enabled\+:
+\begin{DoxyItemize}
+\item Write Normals
+\item Include UVs
+\end{DoxyItemize}
+
+plus any other ones which make sense for your scene/workflow (eg. Apply Modifiers, Selection Only, etc)
+
+Run {\ttfamily ./rebuild\+\_\+models.sh} to turn your .obj file into a .h file containing displaylists for rendering the model.
+
+\DoxyHorRuler{0}
+\hypertarget{md_docs_ART_autotoc_md4}{}\doxysection{Level Editing}\label{md_docs_ART_autotoc_md4}
+Place all the objects you want in your game level blend file. They should have the same name as the Model\+Type defined to represent them in the Model\+Types enum.
+
+Environment geometry can be exported directly from the level scene, using {\ttfamily export\+\_\+map\+\_\+meshes.\+py}. Select all mesh parts before running the script. If multiple parts are selected, the output .obj will contain them all. {\ttfamily ./rebuild\+\_\+models.sh} will produce a single .h file containing them all, with an array named {\ttfamily \mbox{[}objname\mbox{]}\+\_\+model\+\_\+meshes} to allow accessing mesh parts by index.
+
+To export the level, run the script {\ttfamily export\+\_\+positions.\+py} using Blender\textquotesingle{}s text editor (or however you prefer to run Blender Python scripts). This script runs automatically when using {\ttfamily make}. This script expects a collection called {\ttfamily worldobjects} containing all the levels geometry. Objects named with the same modeltype but suffixed with a .xxx number (as added by copy-\/paste in Blender) will be exported with the \textquotesingle{}subtype\textquotesingle{} field set to an incrementing number, which can be aligned with a multi part mesh to allow rendering of batch-\/exported environment geometry. Any further suffix after the string \textquotesingle{}.inst\textquotesingle{} will be stripped, allowing multiple instances of multi-\/part meshes to be created for geometry reuse. This means that you add a .inst suffix, then copy-\/paste, it will not create an additional subtype (eg. it will still use the same mesh part).
+
+The script will create a {\ttfamily \mbox{[}levelname\mbox{]}\+\_\+map.\+h} file at the location of the corresponding {\ttfamily \mbox{[}levelname\mbox{]}.blend} file, containing the position, rotation \& modeltype of each visible(!) object in the scene. \begin{quote}
+To export certain objects, set them to invisible in the Blender Editor before running the script. \end{quote}
+\hypertarget{md_docs_ART_autotoc_md5}{}\doxysection{$<$/blockquote$>$}\label{md_docs_ART_autotoc_md5}
+\hypertarget{md_docs_ART_autotoc_md6}{}\doxysection{Level Collision}\label{md_docs_ART_autotoc_md6}
+Similar to the export of the level map containing the level object layout the collision of a level can be exported using the {\ttfamily export\+\_\+collision\+\_\+mesh} script. This time a collection called {\ttfamily collision} is expected to contain the level collision geometry. Like before geometry can be excluded from the export by hiding the objects in the Blender editor first. The script will create multiple files, namely {\ttfamily \mbox{[}levelname\mbox{]}\+\_\+map\+\_\+collision.\+h}, {\ttfamily \mbox{[}levelname\mbox{]}\+\_\+map\+\_\+collision.\+c} \& {\ttfamily \mbox{[}levelname\mbox{]}\+\_\+map\+\_\+collision.\+json} file at the location of the corresponding {\ttfamily \mbox{[}levelname\mbox{]}.blend} file, containing the collision triangle and spatial hash information as well as metadata. \begin{quote}
+Note that the collision geometry in the {\ttfamily collision} collection must be triangulated. This can be achieved via the Blender Triangulate Modifier. \end{quote}
+-\/--- \hypertarget{md_docs_ART_autotoc_md7}{}\doxysection{Character Animation}\label{md_docs_ART_autotoc_md7}
+Create a rigid body animation in Blender. There should be one Blender object per animatable body. Using an armature and parenting all the bodies to bones makes this easier, but is not essential.
+
+There is a required naming scheme for the parts of the rigid body character. The parts must each be made up of an object containing a mesh which is named with the convention \$\{object\+\_\+name\}mesh, eg. an object called \textquotesingle{}gooseneck\textquotesingle{} should have a mesh called \textquotesingle{}gooseneckmesh\textquotesingle{} and when exported as .obj the resultant object section is called \textquotesingle{}gooseneck\+\_\+gooseneckmesh\textquotesingle{}.
+
+\mbox{\hyperlink{gametypes_8h_structCharacter}{Character}} models should be exported with the following settings enabled\+:
+\begin{DoxyItemize}
+\item Objects as OBJ objects
+\item Write Normals
+\item Include UVs
+\end{DoxyItemize}
+
+as well as any other flags that make sense for your workflow.
+
+To export the animation, run the script {\ttfamily export\+\_\+animation.\+py} in Blender which will generate {\ttfamily \$\{modelname\}\+\_\+anim.\+h}
+
+Manually create a {\ttfamily \$\{modelname\}animtypes.\+h} file defining a {\ttfamily \$\{Model\+Name\}Mesh\+Type} enum which includes all the enum values used to refer to model parts in {\ttfamily \$\{modelname\}\+\_\+anim\+\_\+data} of the generated {\ttfamily \$\{modelname\}\+\_\+anim.\+h} file. Also define another enum which includes all the animation names in the order they are defined in {\ttfamily \$\{modelname\}\+\_\+anim\+\_\+ranges}. (maybe we can just output these enums into the generated header file in future?)
+
+To export the character model, run the script {\ttfamily export\+\_\+character\+\_\+model.\+py} in Blender which will generate {\ttfamily \$\{modelname\}rig.\+obj}. Running {\ttfamily ./rebuild\+\_\+models.sh} will generate a .h file containing displaylists for rendering the model (one displaylist per model part).
+
+Somewhere (\mbox{\hyperlink{stage00_8c}{stage00.\+c}} ??) define an array like {\ttfamily Gfx$\ast$ \$\{modelname\}Mesh\+List\mbox{[}\mbox{]} = \{...\}} containing pointers to the displaylists to render for each model part, in the same order as the corresponding parts appear in the {\ttfamily \$\{Model\+Name\}Mesh\+Type} enum. This mapping will be used to determine which displaylist to render for each \mbox{\hyperlink{animation_8h_structAnimationFrame}{Animation\+Frame}} struct in the animation frame data. 

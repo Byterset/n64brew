@@ -1,0 +1,72 @@
+
+\begin{DoxyItemize}
+\item people have a default activity that they\textquotesingle{}re trying to do (walking somewhere, meditating, selling items at a bake sale)
+\item people have items which belong to them, which they will try to recover when lost
+\item you can chase some (meek) people by honking. some will fight back
+\item you can steal people\textquotesingle{}s items (but non-\/meek people will take them back)
+\item you have a todo list to complete
+\begin{DoxyItemize}
+\item soak the term paper
+\item steal the professor\textquotesingle{}s briefcase
+\item chase away the yoga class
+\item ruin the bake sale
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_docs_NOTES_autotoc_md17}{}\doxysubsection{stuff to build}\label{md_docs_NOTES_autotoc_md17}
+
+\begin{DoxyItemize}
+\item item pickup/drop
+\item people\textquotesingle{}s default activities
+\item people return item to original location
+\item indicators of people\textquotesingle{}s states
+\end{DoxyItemize}\hypertarget{md_docs_NOTES_autotoc_md18}{}\doxysubsection{nice to have}\label{md_docs_NOTES_autotoc_md18}
+
+\begin{DoxyItemize}
+\item dynamic music
+\end{DoxyItemize}\hypertarget{md_docs_NOTES_autotoc_md19}{}\doxysubsection{todo}\label{md_docs_NOTES_autotoc_md19}
+
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}\hypertarget{md_docs_NOTES_autotoc_md20}{}\doxysubsection{AI character states}\label{md_docs_NOTES_autotoc_md20}
+in descending order or priority (lower priority states won\textquotesingle{}t be entered from higher priority states)
+\begin{DoxyItemize}
+\item fleeing goose
+\begin{DoxyItemize}
+\item entered when a meek character is honked at enough times from close range
+\item run away from goose
+\item exit after some time or out of range of goose
+\end{DoxyItemize}
+\item seeking source of sound
+\begin{DoxyItemize}
+\item entered when hearing a sound
+\item go to location of sound
+\item if goose is seen
+\begin{DoxyItemize}
+\item enter \textquotesingle{}seen goose\textquotesingle{} state
+\item after a short time return to idle
+\end{DoxyItemize}
+\item upon getting to location of sound (without seeing goose)
+\begin{DoxyItemize}
+\item enter confused state
+\item after a short time, return to idle
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item seeking stolen item
+\begin{DoxyItemize}
+\item entered when seeing a stolen owned item (in visual area)
+\item move towards location (if in view) or last seen location
+\item when in range, pickup item
+\item go to item home location
+\item drop item
+\item return to idle
+\end{DoxyItemize}
+\item default activity
+\begin{DoxyItemize}
+\item go to location of default activity
+\item when in range, do default activity
+\item should rotate between activities in different places to create opportunities to see goose
+\end{DoxyItemize}
+\item idle state
+\begin{DoxyItemize}
+\item enter eligable state of highest priority 
+\end{DoxyItemize}
+\end{DoxyItemize}

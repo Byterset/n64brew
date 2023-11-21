@@ -1,0 +1,10 @@
+\hypertarget{md_docs_AUDIO_autotoc_md9}{}\doxysection{credit}\label{md_docs_AUDIO_autotoc_md9}
+This engine is using the {\ttfamily sfz2n64} tool by James Lambert (\href{https://github.com/lambertjamesd/sfz2n64}{\texttt{ https\+://github.\+com/lambertjamesd/sfz2n64}} -\/ Huge credit to him!) to convert .wav .ins \& .aif$\vert$.aifc$\vert$.aiff files into a sound bank and an accompanying sound table for use with the integrated soundplayer. This removes the need for outdated unstable win98 sound-\/tools and other shenanigans.\hypertarget{md_docs_AUDIO_autotoc_md10}{}\doxysection{to export sound effects and music}\label{md_docs_AUDIO_autotoc_md10}
+
+\begin{DoxyItemize}
+\item convert audio to WAV, AIF or INS Format -\/$>$ 22050hz
+\item loops that are embedded in the .wav format will be processed by the soundplayer(!)
+\item save the file in one of assets/sounds or assets/music both will automatically be searched for matching file types when building.
+\item running {\ttfamily make} will execute the {\ttfamily sfzn64} tool and create both a {\ttfamily sounds.\+sounds} and a {\ttfamily sounds.\+sounds.\+tbl} file. These are referenced by the specfile and built into the final rom.
+\item the build will also run the {\ttfamily generate\+\_\+sound\+\_\+ids.\+js} script which is used in the MAKEFILE to create a {\ttfamily clips.\+h} header file. This header can be included in the code to reference the sound-\/clip you want to play. 
+\end{DoxyItemize}
