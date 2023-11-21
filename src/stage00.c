@@ -1,8 +1,10 @@
-/*
-   stage00.c
-
-  the main game file
-*/
+/**
+ * @file stage00.c
+ * @author Kevin Reier
+ * @brief Stage 00, the Main stage that runs when the ROM starts
+ * @date 2023-11-21
+ * 
+ */
 
 #include <assert.h>
 
@@ -38,9 +40,9 @@
 #include "segments.h"
 
 // map
-#include "../assets/levels/garden_map.h"
-#include "../assets/levels/garden_map_collision.h"
-#include "pathfinding/garden/garden_map_graph.h"
+#include "../assets/levels/garden/garden_map.h"
+#include "../assets/levels/garden/garden_map_collision.h"
+#include "../assets/levels/garden/garden_map_graph.h"
 // anim data
 #include "actors/gardener/character_anim.h"
 #include "goose_anim.h"
@@ -57,13 +59,11 @@
 #include "actors/catherine/catherineMdl.h"
 
 /*********************************
-        Function Prototypes for 
+        Function Prototypes for catherine Sausage64 Model
 *********************************/
 
 void catherine_predraw(u16 part);
 void catherine_animcallback(u16 anim);
-
-void matrix_inverse(float mat[4][4], float dest[4][4]);
 
 // Catherine
 Mtx catherineMtx[MESHCOUNT_Catherine];

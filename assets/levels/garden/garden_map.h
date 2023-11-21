@@ -1,8 +1,8 @@
 
 #ifndef GARDEN_MAP_H
 #define GARDEN_MAP_H 1
-#include "../../src/constants.h"
-#include "../../src/gameobject.h"
+#include "../../../src/constants.h"
+#include "../../../src/gameobject.h"
 
 
 AABB garden_map_bounds[] = {
