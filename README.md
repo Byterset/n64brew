@@ -29,6 +29,8 @@ I am using the modern n64 homebrew sdk (crashsdk) and have based the build proce
 
 macOS/linux instructions: https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html
 
+It is important that the instructions on the crashsdk site are followed and all necessary tools are installed.
+
 
 ### building the game
 
@@ -36,7 +38,7 @@ all commands should be run in the `root` directory of this repo
 
 make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.
 
-this repo contains a custom build of trhodeos' (https://github.com/trhodeos) `spicy` (https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy) which is an open source replacement for nintendo's `mild` to create ROMs. The only difference with this included `spicy` binary (tools/spicy/spicy) is that this version allows for custom rom headers so you can set the region, name etc of your rom.
+this repo contains a custom build of trhodeos' (https://github.com/trhodeos) `spicy` (https://github.com/Byterset/spicy) which is an open source replacement for nintendo's `mild` to create ROMs. The only difference with this included `spicy` binary (tools/spicy/spicy) is that this version allows for custom rom headers so you can set the region, name etc of your rom.
 
 run `make` to build 
 
