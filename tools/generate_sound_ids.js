@@ -36,7 +36,16 @@ function formatSoundName(soundFilename, index) {
 
 function formatFile(outputFilename, soundFilenames) {
     const defineName = outputFilename.replace(invalidCharactersRegex, '_').toUpperCase();
-    return `#ifndef ${defineName}
+    let descSoundfiles = soundFilenames.slice();
+    descSoundfiles.pop();
+    return `/**
+* @file ${path.basename(outputFilename)}
+* @brief auto generated header containing the IDs 
+* of audio files:
+* ${descSoundfiles.join('\n* ')}
+* for reference when using the audio player
+*/
+#ifndef ${defineName}
 #define ${defineName}
 
 ${soundFilenames.map(formatSoundName).join('\n')}

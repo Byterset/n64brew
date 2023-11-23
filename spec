@@ -107,7 +107,7 @@ beginseg
 endseg
 
 beginwave
-	name	"goose"
+	name	"build/game" /* will be used by spicy as filepath of the blinked binary (not rom)*/
   include "code"
   include "models"
   include "sprites"

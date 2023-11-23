@@ -78,6 +78,7 @@ HFILES += 	src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/r
 HFILES += 	src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h src/math/matrix.h src/font/font.h src/font/font_ext.h src/font/letters_img.h src/util/debug_console.h
 HFILES +=	src/sausage64/sausage64.h
 HFILES += 	assets/levels/garden/garden_map_graph.h assets/levels/garden/garden_map_collision.h
+
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
 LEVEL_MAP_COLLISION_HEADERS = $(LEVELS:%.blend=%_map_collision.h)
@@ -87,8 +88,8 @@ LEVELS_DATA = $(LEVEL_MAP_HEADERS) $(LEVEL_MAP_COLLISION_C_FILES) $(LEVEL_MAP_CO
 MODEL_OBJS = $(wildcard assets/models/**/**/*.obj) $(wildcard assets/models/**/*.obj) $(wildcard assets/models/*.obj)
 SPRITE_IMGS = $(wildcard assets/sprites/*.png) $(wildcard assets/sprites/**/*.png) $(wildcard assets/sprites/*.bmp) $(wildcard assets/sprites/**/*.bmp) 
 
-MODEL_HEADERS = $(MODEL_OBJS:assets/models/%.obj=$(BUILDDIR)/assets/models/%.h)
-SPRITE_HEADERS = $(patsubst assets/sprites/%.png,$(BUILDDIR)/assets/sprites/%.h,$(patsubst assets/sprites/%.bmp,$(BUILDDIR)/assets/sprites/%.h,$(SPRITE_IMGS)))
+MODEL_HEADERS = $(MODEL_OBJS:assets/models/%.obj=assets/models/%.h)
+SPRITE_HEADERS = $(patsubst assets/sprites/%.png,assets/sprites/%.h,$(patsubst assets/sprites/%.bmp,assets/sprites/%.h,$(SPRITE_IMGS)))
 
 # Code Files regarding Everdrive
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
@@ -112,15 +113,14 @@ CODEOBJECTS =	$(CODEFILES:%.c=$(BUILDDIR)/%.o) $(NUSYSLIBDIR)/nusys.o
 DATA_SRC_FILES   = src/util/mem_heap.c src/util/trace.c src/models.c src/sprite_data.c
 DATA_SRC_ASSETS = assets/levels/garden/garden_map_collision.c
 DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:assets/%.c=$(BUILDDIR)/assets/%.o)
-
 CODESEGMENT =	$(BUILDDIR)/codesegment.o
 
 MUSIC_CLIPS = $(shell find assets/music/ -type f -name '*.wav')
 SOUND_CLIPS = $(shell find assets/sounds/ -type f -name '*.wav') #$(shell find assets/sounds -type f -name '*.aif') $(shell find assets/sounds_ins -type f -name '*.ins')
-
+SOUNDS_FILES = build/assets/sounds/sounds.sounds
 ALL_SOUND_WAV = $(MUSIC_CLIPS) $(SOUND_CLIPS)
 
-
+# All necessary .o Files for the build
 OBJECTS =	$(CODESEGMENT) $(MODELSSEGMENT) $(DATAOBJECTS)
 
 CFLAGS = $(LCDEFS) $(LCINCS) $(LCOPTS) $(OPTIMIZER) 
@@ -128,13 +128,9 @@ CFLAGS = $(LCDEFS) $(LCINCS) $(LCOPTS) $(OPTIMIZER)
 # the order of $(NUAUDIOLIB) and -lgultra_d (CORELIBS) matter :|
 LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) $(CORELIBS) -L$(GCCLIBDIR) -lgcc
 
-
 default: $(TARGETS)
 
-# $(MODEL_OBJS):
-# 	# empty rule for object files
-
-$(BUILDDIR)/src/%.o: src/%.c $(HFILES) | $(BUILDDIR) build/src/audio/clips.h
+$(BUILDDIR)/src/%.o: src/%.c $(HFILES) | $(BUILDDIR) src/audio/clips.h
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -142,37 +138,41 @@ $(BUILDDIR)/assets/%.o: assets/%.c | $(BUILDDIR) $(HFILES)
 # to print resolved include paths, add -M flag
 	$(CC) $(CFLAGS) -o $@ $<
 
-
-build/assets/sounds/sounds.sounds build/assets/sounds/sounds.sounds.tbl: $(ALL_SOUND_WAV)
+# build the sounds file and the sounds table, both will be included as raw data in the ROM and referenced via the sound player
+build/assets/sounds/%.sounds build/assets/sounds/%.sounds.tbl: $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
 	$(SFZ2N64) --compress -o $@ $^
 
-build/src/audio/clips.h: tools/generate_sound_ids.js $(ALL_SOUND_WAV)
+#generate the header containing the sound/song ids for use with the sound player
+src/audio/clips.h: tools/generate_sound_ids.js $(ALL_SOUND_WAV)
 	@mkdir -p $(@D)
 	node tools/generate_sound_ids.js -o $@ -p SOUNDS_ $(ALL_SOUND_WAV)
 
-build/src/stage00.o: build/src/audio/clips.h
+#create the level data for a level in .blend format (AABBs, Object Transforms, etc)
 assets/levels/%_map.h: assets/levels/%.blend 
 	$(BLENDER) -b $< -P tools/export_positions.py
 
+#create the collision data for a level in .blend format (Collision Meshes, Spatial Hash Buckets, etc)
 assets/levels/%_map_collision.h assets/levels/%_map_collision.c: assets/levels/%.blend 
 	$(BLENDER) -b $< -P tools/export_collision_mesh.py
 
-
-$(BUILDDIR)/assets/models/%.h: assets/models/%.obj | $(BUILDDIR)
+#convert from wavefront .obj to n64 compatible header
+assets/models/%.h: assets/models/%.obj
 	lua tools/wavefront64/wavefront64.lua obj $< $@
 
-$(BUILDDIR)/assets/sprites/%.h: assets/sprites/%.png | $(BUILDDIR)
+#convert from PNG to n64 compatible header
+assets/sprites/%.h: assets/sprites/%.png
 	python3 tools/ultratex.py $< $@
 
-$(BUILDDIR)/assets/sprites/%.h: assets/sprites/%.bmp | $(BUILDDIR)
+#convert from Bitmap to n64 compatible header
+assets/sprites/%.h: assets/sprites/%.bmp
 	python3 tools/ultratex.py $< $@
 	
+#create the build directory and mirror the assets and src directory structure inside
 $(BUILDDIR):
 	mkdir -p $@
 	rsync -a --exclude='*.*' assets/ build/assets
-	# cp -pR assets build/assets
-	cp -pR src build/src
+	rsync -a --exclude='*.*' src/ build/src
 
 clean: 
 	rm -f $(BUILDDIR)/*.o src/*.o *.o $(BUILDDIR)/*.out src/*.out *.out 
@@ -182,10 +182,12 @@ clobber:
 	rm -f src/*.o *.o *.n64 *.out
 	rm -r -f $(BUILDDIR)
 
-$(CODESEGMENT): $(CODEOBJECTS) Makefile $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEADERS) $(LEVELS_DATA)
+# the object containing the linked code objects
+$(CODESEGMENT): $(CODEOBJECTS) $(HFILES) $(MODEL_HEADERS) $(SPRITE_HEADERS) $(LEVELS_DATA)
 # use -M to print memory map from ld
 	$(LD) -o $(CODESEGMENT) -r $(CODEOBJECTS) $(LDFLAGS) 
 
-$(TARGETS):	$(OBJECTS) $(SPECFILE) $(CODESEGMENT) build/assets/sounds/sounds.sounds
+# building the target rom
+$(TARGETS):	$(OBJECTS) $(SPECFILE) $(SOUNDS_FILES)
 	$(MAKEROM) -I$(NUSYSINCDIR) -r $(TARGETS) -s 0 -e $(APP) -h $(ROMHEADER)  --ld_command=mips-n64-ld --as_command=mips-n64-as --cpp_command=mips-n64-gcc --objcopy_command=mips-n64-objcopy  $(SPECFILE) # --verbose=true  --verbose_linking=true
-	makemask $(TARGETS)
+	$(MAKEMASK) $(TARGETS)

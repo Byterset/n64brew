@@ -11,15 +11,15 @@ This ist based off of https://github.com/jsdf/goose64. This aims to transform th
 - completely overhauled the structure of the project to scale better
 - changed audio player to support wav, aiff & ins (done by migrating to the existing solution by the amazing https://github.com/lambertjamesd/)
 - added modified version of https://github.com/trhodeos/spicy to tools to support custom rom headers (romheaders for PAL & NTSC included in the root)
+- implemented sausage64 Sausage Link library (https://github.com/buu342/N64-Sausage64) to make general animated models easy to import and use
 
-## todos
+## TODO
 
 - improve model handling, right now I feel it is too much manual work to define the model properties
 - support more collider shapes
 - optimize collision solver (right now there is some funky behaviour with the collision solver)
-- change skeletal animation to work for generalized meshes
 - switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)
-
+- remove old animation code and replace with sausage64 instances
 
 ## build for emulator/console
 
@@ -43,18 +43,17 @@ macOS/linux instructions: https://crashoveride95.github.io/n64hbrew/modernsdk/st
 
 It is important that the instructions on the crashsdk site are followed and all necessary tools are installed.
 
-
 ### Building the game
 
-all commands should be run in the `root` directory of this repo
+All commands should be run in the `root` directory of this repo
 
-make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.
+Make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.
 
 run `make` to build 
 
 run `make clean` or `make clobber` to clean up the build directory and any build-byproducts
 
-this produces the rom file `game.z64` which you can then run with your favorite emulator or flashcart
+this produces the rom file `game.z64` (configurable via Makefile) which you can then run with your favorite emulator or flashcart
 
 
 environment variables which affect the build:

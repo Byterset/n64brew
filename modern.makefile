@@ -16,6 +16,7 @@ LIB = $(ROOT)/usr/lib
 EXEGCC_INC = $(ROOT)/GCC/MIPSE/INCLUDE
 
 MAKEROM = tools/spicy/spicy
+MAKEMASK = makemask
 
 N64_CC ?= mips-n64-gcc
 N64_CFLAGS ?= -c -D_MIPS_SZLONG=32 -D_MIPS_SZINT=32 -D_LANGUAGE_C -D_ULTRA64 -D__EXTENSIONS__ -mabi=32  -march=vr4300 -mtune=vr4300 -mfix4300 

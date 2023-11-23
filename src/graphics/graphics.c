@@ -4,7 +4,7 @@
 #include "../util/time.h"
 #include "../controls/controller.h"
 #include "../audio/soundplayer.h"
-#include "../../build/src/audio/clips.h"
+#include "../audio/clips.h"
 // #include "../font/font_ext.h"
 struct GraphicsTask gGraphicsTasks[2];
 Dynamic gfx_dynamic[2];

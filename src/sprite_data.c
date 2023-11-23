@@ -1,9 +1,9 @@
 #include "sprite.h"
 
-#include "build/assets/sprites/honk1spr.h"
-#include "build/assets/sprites/honk2spr.h"
-#include "build/assets/sprites/honk3spr.h"
-#include "build/assets/sprites/testspr.h"
+#include "assets/sprites/honk1spr.h"
+#include "assets/sprites/honk2spr.h"
+#include "assets/sprites/honk3spr.h"
+#include "assets/sprites/testspr.h"
 
 unsigned short *HonkSpriteAnimFrames[] = {
 	Sprite_honk1spr,

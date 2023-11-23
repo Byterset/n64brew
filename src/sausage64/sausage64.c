@@ -1,6 +1,6 @@
 /**
  * @file sausage64.c
- * @author original code by buu342 (https://github.com/buu342/Blender-Sausage64) modified by byterset (https://github.com/byterset)
+ * @author original code by buu342 (https://github.com/buu342/N64-Sausage64) modified by byterset (https://github.com/byterset)
  * @brief A very simple library that handles Sausage64 models exported by Arabiki64.
  * @date 2023-11-21
  * 

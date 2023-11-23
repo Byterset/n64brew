@@ -17,7 +17,7 @@
 #include "util/trace.h"
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
-#include "../build/src/audio/clips.h"
+#include "audio/clips.h"
 
 // #define DEBUGSTARTUP
 

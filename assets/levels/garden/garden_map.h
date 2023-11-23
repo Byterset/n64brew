@@ -47,7 +47,7 @@ AABB garden_map_bounds[] = {
 {{-112.304764, -3.202901, -520.496155}, {409.274353, 0.000000, 170.604523}}, // (Water.003) 
 {{0.000000, 0.000000, -520.496155}, {649.044373, 0.000000, 60.936470}}, // (Water.004) 
 {{-236.518539, -54.389256, -15.605621}, {236.913010, 18.310425, 15.605621}}, // (Wall.inst.001) 
-
+{{-32.452812, 0.000000, -15.666389}, {28.539619, 69.391663, 15.363922}}, // (Catherine) 
 };
 
 GameObject garden_map_data[] = {
@@ -297,9 +297,15 @@ WaterModel, // modelType
 WallModel, // modelType
 0, // subtype
 },
+{41, // object id (Catherine)
+{-1320.555664, -62.705948, -1328.402832}, // position
+{0.000000, 0.000000, 0.000000}, // rotation
+CatherineModel, // modelType
+0, // subtype
+},
 
 };
 
-#define GARDEN_MAP_COUNT 41
+#define GARDEN_MAP_COUNT 42
 
 #endif /* GARDEN_MAP_H */

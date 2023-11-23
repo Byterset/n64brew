@@ -27,6 +27,7 @@ typedef enum ModelType
 	WatergrassModel,
 	ReedModel,
 	LilypadModel,
+	CatherineModel,
 	MAX_MODEL_TYPE
 } ModelType;
 

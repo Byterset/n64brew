@@ -8,7 +8,7 @@
 
 #include <assert.h>
 
-#include "../build/src/audio/clips.h"
+#include "audio/clips.h"
 
 #include <math.h>
 #include "util/rom.h"
