@@ -28,6 +28,7 @@ This ist based off of https://github.com/jsdf/goose64. This aims to transform th
 - `crashsdk` (see below)
 - `sfz2n64` (https://github.com/lambertjamesd/sfz2n64)
 - `blender` (level creation, model creation, character animation)
+- `node` (used to create the headerfile referencing the audio clips)
 - `python` (animation export, collision export, level export) via `blender`
 - `pillow` pip install pillow (if textures are changed)
 - `wavefront64` (https://github.com/tffdev/Wavefront64) Lua script that converts textured .obj Files and .bmp Sprites to N64 compatible .h Header Files. **lua script and dependencies are included under ./tools/wavefront64**
