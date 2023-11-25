@@ -212,3 +212,73 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 
 	osSendMesg(schedulerCommandQueue, (OSMesg)scTask, OS_MESG_BLOCK);
 }
+
+/**
+ * @brief Setup Render Pipeline by clearing the previous GeometryMode, setting RenderMode as zBuffered, aliased, opaque Triangles
+ * 
+ * @param renderState 
+ * @param dynamicp 
+ */
+void graphicsSetupPipeline(struct RenderState *renderState, Dynamic *dynamicp){
+	gSPClearGeometryMode(renderState->dl++, 0xFFFFFFFF);
+	gDPSetCycleType(renderState->dl++, G_CYC_1CYCLE);
+	// z-buffered, antialiased triangles
+	gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	// gSPSetGeometryMode(renderState->dl++, G_ZBUFFER); //is this needed?	
+
+	// setup view
+	gSPMatrix(renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->projection)),
+			  G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+	gSPMatrix(renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->camera)),
+			  G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+}
+
+void graphicsApplyRenderMode(struct RenderState *renderState, RenderMode renderMode, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly)
+{
+	switch (gRenderMode)
+	{
+	case ToonFlatShadingRenderMode:
+		gSPSetGeometryMode(renderState->dl++, G_CULL_BACK);
+		gDPSetCombineMode(renderState->dl++, G_CC_DECALRGB, G_CC_DECALRGB);
+		break;
+	case TextureNoLightingRenderMode:
+	case WireframeRenderMode:
+		gSPSetGeometryMode(renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK);
+		gDPSetCombineMode(renderState->dl++, G_CC_DECALRGB, G_CC_DECALRGB);
+		break;
+	case TextureAndLightingRenderMode:
+		
+		if (ambientOnly == TRUE)
+		{
+			gSPSetLights0(renderState->dl++, (*amb_light));
+		}
+		else
+		{
+			
+			gSPSetLights1(renderState->dl++, (*sun_light));
+		}
+		gSPSetGeometryMode(
+			renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
+		gDPSetCombineMode(renderState->dl++, G_CC_MODULATERGB, G_CC_MODULATERGB);
+		break;
+	case LightingNoTextureRenderMode:
+		
+		if (ambientOnly == TRUE)
+		{
+			gSPSetLights0(renderState->dl++, (*amb_light));
+		}
+		else
+		{
+			gSPSetLights1(renderState->dl++, (*sun_light));
+		}
+		gSPSetGeometryMode(
+			renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
+		gDPSetCombineMode(renderState->dl++, G_CC_SHADE, G_CC_SHADE);
+		break;
+	default: // NoTextureNoLightingRenderMode
+		gDPSetPrimColor(renderState->dl++, 0, 0, /*r*/ 180, /*g*/ 180, /*b*/ 180,
+						/*a*/ 255);
+		gSPSetGeometryMode(renderState->dl++, G_CULL_BACK);
+		gDPSetCombineMode(renderState->dl++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+	}
+}

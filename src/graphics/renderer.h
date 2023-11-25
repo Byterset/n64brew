@@ -14,7 +14,16 @@ typedef struct RendererSortDistance
 	AABB worldAABB;
 } RendererSortDistance;
 
+typedef enum LightingType
+{
+	SunLighting,
+	OnlyAmbientLighting,
+	MAX_LIGHTING_TYPE
+} LightingType;
+
 int Renderer_isDynamicObject(GameObject *obj);
+
+LightingType Renderer_getLightingType(GameObject *obj);
 int Renderer_isZBufferedGameObject(GameObject *obj);
 int Renderer_isZWriteGameObject(GameObject *obj);
 int Renderer_isBackgroundGameObject(GameObject *obj);

@@ -83,7 +83,7 @@ then, to rebuild sprites
 ## export map object data
 
 - open blender (or use `./blender.sh` to see console output)
-- in the blender text editor editor, open and run export_positions.py then open and run export_collision_mesh.py
+- in the blender text editor editor, open and run export_level.py then open and run export_collision_mesh.py
 - see header files are created
 - this script is run automatically when running `make`. So after updating a .blend file the headers should be rebuilt automatically. (given the .blend file for the level is in `./assets/levels/*`)
 

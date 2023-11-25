@@ -122,8 +122,6 @@ static UsbLoggerState usbLoggerState;
 
 static int logTraceStartOffset = 0;
 static int loggingTrace = FALSE;
-
-static int twoCycleMode;
 // static RenderMode renderModeSetting;
 PhysWorldData physWorldData;
 
@@ -189,7 +187,6 @@ void initStage00()
 
 	loggingTrace = FALSE;
 
-	twoCycleMode = FALSE;
 	gRenderMode = TextureNoLightingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
@@ -428,23 +425,6 @@ void updateGame00(void)
 
 }
 
-typedef enum LightingType
-{
-	SunLighting,
-	OnlyAmbientLighting,
-	MAX_LIGHTING_TYPE
-} LightingType;
-
-LightingType getLightingType(GameObject *obj)
-{
-	switch (obj->modelType)
-	{
-	case UniFloorModel:
-		return OnlyAmbientLighting;
-	default:
-		return SunLighting;
-	}
-}
 
 int getAnimationNumModelMeshParts(ModelType modelType)
 {
@@ -550,21 +530,11 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 							  visibleObjDistance, garden_map_bounds);
 #if DRAW_OBJECTS
 {
-	gSPClearGeometryMode(renderState->dl++, 0xFFFFFFFF);
-	gDPSetCycleType(renderState->dl++, twoCycleMode ? G_CYC_2CYCLE : G_CYC_1CYCLE);
-
-	// z-buffered, antialiased triangles
-	gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-	gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
-
-
+	//setup Pipeline for 3D rendering
+	//TODO: add settings to scene that get handled here?
+	graphicsSetupPipeline(renderState, dynamicp);
+	//set ambient light
 	gSPSetLights0(renderState->dl++, amb_light);
-
-	// setup view
-	gSPMatrix(renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->projection)),
-			  G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
-	gSPMatrix(renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->camera)),
-			  G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
 
 	//   profStartIter = CUR_TIME_MS();
 	// render world objects
@@ -577,23 +547,6 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		gSPTexture(renderState->dl++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON);
 		gDPSetTextureFilter(renderState->dl++, G_TF_BILERP);
 		gDPSetTexturePersp(renderState->dl++, G_TP_PERSP);
-
-		switch (gRenderMode)
-		{
-		case TextureAndLightingRenderMode:
-		case LightingNoTextureRenderMode:
-			if (getLightingType(obj) == OnlyAmbientLighting)
-			{
-				gSPSetLights0(renderState->dl++, amb_light);
-			}
-			else
-			{
-				gSPSetLights1(renderState->dl++, sun_light);
-			}
-			break;
-		default:
-			break;
-		}
 
 		gSPClearGeometryMode(renderState->dl++, 0xFFFFFFFF);
 		invariant(i < visibleObjectsCount);
@@ -609,33 +562,9 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		}
 		gSPSetGeometryMode(renderState->dl++, G_ZBUFFER);
 
-		switch (gRenderMode)
-		{
-		case ToonFlatShadingRenderMode:
-			gSPSetGeometryMode(renderState->dl++, G_CULL_BACK);
-			gDPSetCombineMode(renderState->dl++, G_CC_DECALRGB, G_CC_DECALRGB);
-			break;
-		case TextureNoLightingRenderMode:
-		case WireframeRenderMode:
-			gSPSetGeometryMode(renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK);
-			gDPSetCombineMode(renderState->dl++, G_CC_DECALRGB, G_CC_DECALRGB);
-			break;
-		case TextureAndLightingRenderMode:
-			gSPSetGeometryMode(
-				renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
-			gDPSetCombineMode(renderState->dl++, G_CC_MODULATERGB, G_CC_MODULATERGB);
-			break;
-		case LightingNoTextureRenderMode:
-			gSPSetGeometryMode(
-				renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
-			gDPSetCombineMode(renderState->dl++, G_CC_SHADE, G_CC_SHADE);
-			break;
-		default: // NoTextureNoLightingRenderMode
-			gDPSetPrimColor(renderState->dl++, 0, 0, /*r*/ 180, /*g*/ 180, /*b*/ 180,
-							/*a*/ 255);
-			gSPSetGeometryMode(renderState->dl++, G_CULL_BACK);
-			gDPSetCombineMode(renderState->dl++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-		}
+		int ambientOnly = Renderer_getLightingType(obj) == OnlyAmbientLighting;
+
+		graphicsApplyRenderMode(renderState, gRenderMode, &amb_light, &sun_light, ambientOnly);
 
 		// set the transform in world space for the gameobject to render
 		guPosition(&dynamicp->objTransforms[i],

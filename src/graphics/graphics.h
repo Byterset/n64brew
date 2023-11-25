@@ -59,7 +59,7 @@ typedef enum RenderMode
 	ToonFlatShadingRenderMode,
 	TextureAndLightingRenderMode,
 	TextureNoLightingRenderMode,
-	NoTextureNoLightingRenderMode,
+	// NoTextureNoLightingRenderMode,
 	LightingNoTextureRenderMode,
 	WireframeRenderMode,
 	MAX_RENDER_MODE
@@ -97,5 +97,9 @@ typedef void (*GraphicsCallback)(void *data, struct RenderState *renderState, st
 
 u16 *graphicsLayoutScreenBuffers(u16 *memoryEnd);
 void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callback, void *data);
+
+void graphicsSetupPipeline(struct RenderState *renderState, Dynamic *dynamicp);
+
+void graphicsApplyRenderMode(struct RenderState *renderState, RenderMode renderMode, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly);
 
 #endif

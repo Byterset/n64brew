@@ -150,7 +150,7 @@ src/audio/clips.h: tools/generate_sound_ids.js $(ALL_SOUND_WAV)
 
 #create the level data for a level in .blend format (AABBs, Object Transforms, etc)
 assets/levels/%_map.h: assets/levels/%.blend 
-	$(BLENDER) -b $< -P tools/export_positions.py
+	$(BLENDER) -b $< -P tools/export_level.py
 
 #create the collision data for a level in .blend format (Collision Meshes, Spatial Hash Buckets, etc)
 assets/levels/%_map_collision.h assets/levels/%_map_collision.c: assets/levels/%.blend 

@@ -28,6 +28,17 @@ int Renderer_isDynamicObject(GameObject *obj)
 	return obj->physBody != NULL;
 }
 
+LightingType Renderer_getLightingType(GameObject *obj)
+{
+	switch (obj->modelType)
+	{
+	case UniFloorModel:
+		return OnlyAmbientLighting;
+	default:
+		return SunLighting;
+	}
+}
+
 int Renderer_isZBufferedGameObject(GameObject *obj)
 {
 	if (Renderer_isDynamicObject(obj))
