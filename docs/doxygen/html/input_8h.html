@@ -76,13 +76,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="vector2_8h_source.html">../math/vector2.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="controller_8h_source.html">controller.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for input.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="input_8h__incl.png" border="0" usemap="#asrc_2controls_2input_8h" alt=""/></div>
 <map name="asrc_2controls_2input_8h" id="asrc_2controls_2input_8h">
-<area shape="rect" title=" " alt="" coords="5,5,152,32"/>
-<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="12,80,145,107"/>
+<area shape="rect" title=" " alt="" coords="68,5,215,32"/>
+<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="5,80,139,107"/>
+<area shape="rect" href="controller_8h.html" title=" " alt="" coords="163,80,258,107"/>
+<area shape="rect" title=" " alt="" coords="171,155,251,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -90,17 +93,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="input_8h__dep__incl.png" border="0" usemap="#asrc_2controls_2input_8hdep" alt=""/></div>
 <map name="asrc_2controls_2input_8hdep" id="asrc_2controls_2input_8hdep">
-<area shape="rect" title=" " alt="" coords="269,5,416,32"/>
-<area shape="rect" href="input_8c.html" title=" " alt="" coords="65,80,210,107"/>
-<area shape="rect" href="game_8h.html" title=" " alt="" coords="362,80,457,107"/>
-<area shape="rect" href="stage00_8c.html" title="Stage 00, the Main stage that runs when the ROM starts." alt="" coords="807,155,915,181"/>
-<area shape="rect" href="player_8h.html" title=" " alt="" coords="234,80,331,107"/>
+<area shape="rect" title=" " alt="" coords="152,5,299,32"/>
+<area shape="rect" href="input_8c.html" title=" " alt="" coords="7,80,153,107"/>
+<area shape="rect" href="game_8h.html" title=" " alt="" coords="317,80,411,107"/>
+<area shape="rect" href="player_8h.html" title=" " alt="" coords="177,80,274,107"/>
 <area shape="rect" href="game_8c.html" title=" " alt="" coords="5,155,99,181"/>
-<area shape="rect" href="gameutils_8c.html" title=" " alt="" coords="355,155,477,181"/>
-<area shape="rect" href="renderer_8c.html" title=" " alt="" coords="501,155,670,181"/>
+<area shape="rect" href="gameutils_8c.html" title=" " alt="" coords="839,155,961,181"/>
+<area shape="rect" href="renderer_8c.html" title=" " alt="" coords="355,155,525,181"/>
 <area shape="rect" href="item_8c.html" title=" " alt="" coords="123,155,210,181"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="694,155,783,181"/>
 <area shape="rect" href="player_8c.html" title=" " alt="" coords="235,155,331,181"/>
+<area shape="rect" href="stage_8h.html" title=" " alt="" coords="549,155,683,181"/>
+<area shape="rect" href="stage00_8c.html" title="Stage 00, the Main stage that runs when the ROM starts." alt="" coords="707,155,815,181"/>
 </map>
 </div>
 </div>
@@ -120,6 +123,8 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ad9b2113b7b5a7ad713dc22a0969169a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#ad9b2113b7b5a7ad713dc22a0969169a3">Input_init</a> (<a class="el" href="input_8h.html#structInput">Input</a> *self)</td></tr>
 <tr class="separator:ad9b2113b7b5a7ad713dc22a0969169a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44b20a83014d0eb5acab78991bb9a918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#a44b20a83014d0eb5acab78991bb9a918">Input_update</a> (<a class="el" href="input_8h.html#structInput">Input</a> *self, int controller_id)</td></tr>
+<tr class="separator:a44b20a83014d0eb5acab78991bb9a918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structInput" id="structInput"></a>
@@ -145,6 +150,12 @@ Collaboration diagram for Input:</div>
 <table class="fieldtable">
 <tr><th colspan="3">Data Fields</th></tr>
 <tr><td class="fieldtype">
+<a id="a686e0e87ab2769cabcfe5da083df673a"></a>int</td>
+<td class="fieldname">
+advanceRenderMode</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
 <a id="a2215e176feccf7d29c12199222578e1a"></a>struct <a class="el" href="vector2_8h.html#structVector2">Vector2</a></td>
 <td class="fieldname">
 direction</td>
@@ -154,6 +165,18 @@ direction</td>
 <a id="ab2fa2930d343eed00c9e630a1b668df1"></a>int</td>
 <td class="fieldname">
 pickup</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8a3225346bd3dc88aee2f21f27758a79"></a>int</td>
+<td class="fieldname">
+playHonk</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5b6fe5ff5418c762886eb9f1d86f66f1"></a>int</td>
+<td class="fieldname">
+playMusic</td>
 <td class="fielddoc">
 </td></tr>
 <tr><td class="fieldtype">
@@ -206,6 +229,34 @@ zoomOut</td>
           <td class="paramtype"><a class="el" href="input_8h.html#structInput">Input</a> *&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44b20a83014d0eb5acab78991bb9a918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44b20a83014d0eb5acab78991bb9a918">&#9670;&nbsp;</a></span>Input_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="input_8h.html#structInput">Input</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>controller_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

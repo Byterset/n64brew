@@ -1,6 +1,5 @@
 \hypertarget{graphics_8h}{}\doxysection{src/graphics/graphics.h File Reference}
 \label{graphics_8h}\index{src/graphics/graphics.h@{src/graphics/graphics.h}}
-{\ttfamily \#include $<$ultra64.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../constants.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$sched.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}renderstate.\+h\char`\"{}}\newline
@@ -77,10 +76,9 @@ enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mod
 \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335}{Toon\+Flat\+Shading\+Render\+Mode}}
 , \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac}{Texture\+And\+Lighting\+Render\+Mode}}
 , \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849}{Texture\+No\+Lighting\+Render\+Mode}}
-, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}{No\+Texture\+No\+Lighting\+Render\+Mode}}
+, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}{Lighting\+No\+Texture\+Render\+Mode}}
 , \newline
-\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}{Lighting\+No\+Texture\+Render\+Mode}}
-, \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935}{Wireframe\+Render\+Mode}}
+\mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935}{Wireframe\+Render\+Mode}}
 , \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697}{MAX\+\_\+\+RENDER\+\_\+\+MODE}}
  \}
 \end{DoxyCompactItemize}
@@ -90,6 +88,10 @@ enum \mbox{\hyperlink{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88}{Render\+Mod
 \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$ \mbox{\hyperlink{graphics_8h_ad33ad9954af6d7af39bfb766eeec387a}{graphics\+Layout\+Screen\+Buffers}} (\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$memory\+End)
 \item 
 void \mbox{\hyperlink{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}{graphics\+Create\+Task}} (struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$target\+Task, \mbox{\hyperlink{graphics_8h_a8a91f82651d93f79b931f6be7a520ea4}{Graphics\+Callback}} callback, void $\ast$data)
+\item 
+void \mbox{\hyperlink{graphics_8h_a5e7c8d80ab196d7709513866cc0e36c6}{graphics\+Setup\+Pipeline}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, \mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} $\ast$dynamicp)
+\begin{DoxyCompactList}\small\item\em Setup Render Pipeline by clearing the previous Geometry\+Mode, setting Render\+Mode as z\+Buffered, aliased, opaque Triangles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{graphics_8h_af779315665d07868ffc74514e9df3241}{graphics\+Apply\+Render\+Mode}} (struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, Lights0 $\ast$\mbox{\hyperlink{stage00_8c_a99994da3e0f2498ee09f83abf761fc8b}{amb\+\_\+light}}, Lights1 $\ast$\mbox{\hyperlink{stage00_8c_aa93a9d4ffce372fde21d53863400915b}{sun\+\_\+light}}, int ambient\+Only)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -345,10 +347,6 @@ Texture\+And\+Lighting\+Render\+Mode&\\
 Texture\+No\+Lighting\+Render\+Mode&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NoTextureNoLightingRenderMode@{NoTextureNoLightingRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!NoTextureNoLightingRenderMode@{NoTextureNoLightingRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27}} 
-No\+Texture\+No\+Lighting\+Render\+Mode&\\
-\hline
-
 \raisebox{\heightof{T}}[0pt][0pt]{\index{LightingNoTextureRenderMode@{LightingNoTextureRenderMode}!graphics.h@{graphics.h}}\index{graphics.h@{graphics.h}!LightingNoTextureRenderMode@{LightingNoTextureRenderMode}}}\mbox{\Hypertarget{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}\label{graphics_8h_ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db}} 
 Lighting\+No\+Texture\+Render\+Mode&\\
 \hline
@@ -365,6 +363,12 @@ MAX\+\_\+\+RENDER\+\_\+\+MODE&\\
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{graphics_8h_af779315665d07868ffc74514e9df3241}\label{graphics_8h_af779315665d07868ffc74514e9df3241}} 
+\index{graphics.h@{graphics.h}!graphicsApplyRenderMode@{graphicsApplyRenderMode}}
+\index{graphicsApplyRenderMode@{graphicsApplyRenderMode}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{graphicsApplyRenderMode()}{graphicsApplyRenderMode()}}
+{\footnotesize\ttfamily void graphics\+Apply\+Render\+Mode (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{Lights0 $\ast$}]{amb\+\_\+light,  }\item[{Lights1 $\ast$}]{sun\+\_\+light,  }\item[{int}]{ambient\+Only }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}\label{graphics_8h_a52e0183ec88ae230f73f3d36acb729ca}} 
 \index{graphics.h@{graphics.h}!graphicsCreateTask@{graphicsCreateTask}}
 \index{graphicsCreateTask@{graphicsCreateTask}!graphics.h@{graphics.h}}
@@ -377,6 +381,23 @@ MAX\+\_\+\+RENDER\+\_\+\+MODE&\\
 \doxysubsubsection{\texorpdfstring{graphicsLayoutScreenBuffers()}{graphicsLayoutScreenBuffers()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}$\ast$ graphics\+Layout\+Screen\+Buffers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} $\ast$}]{memory\+End }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{graphics_8h_a5e7c8d80ab196d7709513866cc0e36c6}\label{graphics_8h_a5e7c8d80ab196d7709513866cc0e36c6}} 
+\index{graphics.h@{graphics.h}!graphicsSetupPipeline@{graphicsSetupPipeline}}
+\index{graphicsSetupPipeline@{graphicsSetupPipeline}!graphics.h@{graphics.h}}
+\doxysubsubsection{\texorpdfstring{graphicsSetupPipeline()}{graphicsSetupPipeline()}}
+{\footnotesize\ttfamily void graphics\+Setup\+Pipeline (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$}]{render\+State,  }\item[{\mbox{\hyperlink{graphics_8h_structDynamic}{Dynamic}} $\ast$}]{dynamicp }\end{DoxyParamCaption})}
+
+
+
+Setup Render Pipeline by clearing the previous Geometry\+Mode, setting Render\+Mode as z\+Buffered, aliased, opaque Triangles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em render\+State} & \\
+\hline
+{\em dynamicp} & \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Variable Documentation}

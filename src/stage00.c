@@ -12,25 +12,11 @@
 
 #include <math.h>
 #include "util/rom.h"
-#include "util/memory.h"
 // game
 #include "controls/controller.h"
-#include "animation/animation.h"
-#include "constants.h"
-#include "math/frustum.h"
-#include "math/vector2.h"
-#include "math/vector3.h"
-#include "math/matrix.h"
 #include "game.h"
-#include "gameobject.h"
-#include "controls/input.h"
 #include "main.h"
-#include "modeltype.h"
-#include "pathfinding/pathfinding.h"
-#include "physics/physics.h"
-#include "graphics/graphics.h"
 #include "graphics/renderer.h"
-#include "sprite.h"
 #include "util/trace.h"
 
 #include "audio/audio.h"
@@ -39,24 +25,13 @@
 #include "models.h"
 #include "segments.h"
 
-// map
-#include "../assets/levels/garden/garden_map.h"
-#include "../assets/levels/garden/garden_map_collision.h"
-#include "../assets/levels/garden/garden_map_graph.h"
-// anim data
-#include "actors/gardener/character_anim.h"
-#include "goose_anim.h"
+// include animation lib
+#include "sausage64/sausage64.h"
+
 
 #include "ed64/ed64io.h"
 
-#include "util/debug_console.h"
-
-// include animation lib single file
-#include "sausage64/sausage64.h"
-
-// include sample data for model data (anim/verts/textures)
-#include "actors/catherine/catherineTex.h"
-#include "actors/catherine/catherineMdl.h"
+#include "stage_asset_defs/stage00_assets.h"
 
 /*********************************
         Function Prototypes for catherine Sausage64 Model
@@ -161,11 +136,11 @@ void initStage00()
 	Game *game;
 
 	// load in the models segment into higher memory
-	romCopy(_models_level_gardenSegmentRomStart, _models_level_gardenSegmentStart, (_models_level_gardenSegmentRomEnd - _models_level_gardenSegmentRomStart));
+	Rom_copy(_models_level_gardenSegmentRomStart, _models_level_gardenSegmentStart, (_models_level_gardenSegmentRomEnd - _models_level_gardenSegmentRomStart));
 	// load in the sprites segment into higher memory
-	romCopy(_spritesSegmentRomStart, _spritesSegmentStart, (_spritesSegmentRomEnd - _spritesSegmentRomStart));
+	Rom_copy(_spritesSegmentRomStart, _spritesSegmentStart, (_spritesSegmentRomEnd - _spritesSegmentRomStart));
 	// load in the collision segment into higher memory
-	romCopy(_collision_level_gardenSegmentRomStart, _collision_level_gardenSegmentStart, (_collision_level_gardenSegmentRomEnd - _collision_level_gardenSegmentRomStart));
+	Rom_copy(_collision_level_gardenSegmentRomStart, _collision_level_gardenSegmentStart, (_collision_level_gardenSegmentRomEnd - _collision_level_gardenSegmentRomStart));
 
 	physWorldData = (PhysWorldData){garden_map_collision_collision_mesh,
 									GARDEN_MAP_COLLISION_LENGTH,
@@ -187,7 +162,7 @@ void initStage00()
 
 	loggingTrace = FALSE;
 
-	gRenderMode = TextureNoLightingRenderMode;
+	gRenderMode = ToonFlatShadingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
 	vector3Init(&viewPos, 0.0F, 0.0F, -400.0F);
@@ -334,7 +309,6 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	// case for simple gameobjects with no moving sub-parts
 	// Gfx *modelDisplayList;
 	// gSPDisplayList(renderState->dl++, modelDisplayList);
-	graphicsApplyRenderMode(renderState, gRenderMode, &amb_light, &sun_light, 0);
 
 	sausage64_drawmodel(&renderState->dl, &catherine);
 }
@@ -346,13 +320,10 @@ void updateGame00(void)
 	// Advance Catherine's animation
     sausage64_advance_anim(&catherine, catherine_animspeed);
 
-	Input_init(&input);
-	/* Data reading of controller 1 */
-	OSContPad *controller_input = controllersGetControllerData(0);
+	Input_update(&input, 0);
 
-	if (controllerGetButtonUp(0, START_BUTTON))
+	if (input.advanceRenderMode)
 	{
-		controller_input->button;
 		gRenderMode++;
 		if (gRenderMode >= MAX_RENDER_MODE)
 		{
@@ -360,30 +331,8 @@ void updateGame00(void)
 		}
 	}
 
-	if (controllerGetButton(0, A_BUTTON))
+	if (input.playHonk)
 	{
-		input.run = TRUE;
-	}
-	if (controllerGetButtonDown(0, B_BUTTON))
-	{
-		input.pickup = TRUE;
-	}
-	if (controllerGetButton(0, Z_TRIG))
-	{
-		input.zoomIn = TRUE;
-	}
-	if (controllerGetButton(0, L_TRIG))
-	{
-		input.zoomIn = TRUE;
-	}
-	if (controllerGetButton(0, R_TRIG))
-	{
-		input.zoomOut = TRUE;
-	}
-
-	if (controllerGetButtonDown(0, L_CBUTTONS))
-	{
-
 		soundPlayerPlay(SOUNDS_HONK_1, 1.0f, 1.0f, NULL);
 	}
 
@@ -391,7 +340,7 @@ void updateGame00(void)
 	{
 		seqPlaying = FALSE;
 	}
-	if (controllerGetButtonDown(0, R_CBUTTONS))
+	if (input.playMusic)
 	{
 		if (seqPlaying)
 		{
@@ -411,8 +360,6 @@ void updateGame00(void)
 		}
 	}
 
-	input.direction.x = -controller_input->stick_x / 61.0F;
-	input.direction.y = controller_input->stick_y / 61.0F;
 	if (fabsf(input.direction.x) < CONTROLLER_DEAD_ZONE)
 		input.direction.x = 0;
 	if (fabsf(input.direction.y) < CONTROLLER_DEAD_ZONE)
@@ -537,6 +484,8 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	//set ambient light
 	gSPSetLights0(renderState->dl++, amb_light);
 
+
+	
 	//   profStartIter = CUR_TIME_MS();
 	// render world objects
 	for (i = 0; i < visibleObjectsCount; i++)
@@ -565,7 +514,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 		int ambientOnly = Renderer_getLightingType(obj) == OnlyAmbientLighting;
 
-		graphicsApplyRenderMode(renderState, gRenderMode, &amb_light, &sun_light, ambientOnly);
+		graphicsApplyRenderMode(renderState, &amb_light, &sun_light, ambientOnly);
 
 		// set the transform in world space for the gameobject to render
 		guPosition(&dynamicp->objTransforms[i],

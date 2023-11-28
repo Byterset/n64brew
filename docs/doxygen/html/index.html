@@ -78,42 +78,50 @@ what has been done so far</h1>
 <li>completely overhauled the structure of the project to scale better</li>
 <li>changed audio player to support wav, aiff &amp; ins (done by migrating to the existing solution by the amazing <a href="https://github.com/lambertjamesd/">https://github.com/lambertjamesd/</a>)</li>
 <li>added modified version of <a href="https://github.com/trhodeos/spicy">https://github.com/trhodeos/spicy</a> to tools to support custom rom headers (romheaders for PAL &amp; NTSC included in the root)</li>
+<li>implemented sausage64 Sausage Link library (<a href="https://github.com/buu342/N64-Sausage64">https://github.com/buu342/N64-Sausage64</a>) to make general animated models easy to import and use</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md23"></a>
-todos</h1>
+TODO</h1>
 <ul>
 <li>improve model handling, right now I feel it is too much manual work to define the model properties</li>
 <li>support more collider shapes</li>
 <li>optimize collision solver (right now there is some funky behaviour with the collision solver)</li>
-<li>change skeletal animation to work for generalized meshes</li>
 <li>switch from obj to fbx file format (likely to go hand in hand with the skeletal animation update)</li>
+<li>remove old animation code and replace with sausage64 instances</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md24"></a>
 build for emulator/console</h1>
 <h2><a class="anchor" id="autotoc_md25"></a>
-install the n64 sdk</h2>
+dependencies for building</h2>
+<ul>
+<li><code>crashsdk</code> (see below)</li>
+<li><code>sfz2n64</code> (<a href="https://github.com/lambertjamesd/sfz2n64">https://github.com/lambertjamesd/sfz2n64</a>)</li>
+<li><code>blender</code> (level creation, model creation, character animation)</li>
+<li><code>node</code> (used to create the headerfile referencing the audio clips)</li>
+<li><code>python</code> (animation export, collision export, level export) via <code>blender</code></li>
+<li><code>pillow</code> pip install pillow (if textures are changed)</li>
+<li><code>wavefront64</code> (<a href="https://github.com/tffdev/Wavefront64">https://github.com/tffdev/Wavefront64</a>) Lua script that converts textured .obj Files and .bmp Sprites to N64 compatible .h Header Files. <b>lua script and dependencies are included under ./tools/wavefront64</b></li>
+<li><code>spicy</code> (<a href="https://github.com/Byterset/spicy">https://github.com/Byterset/spicy</a>) forked from (<a href="https://github.com/trhodeos">https://github.com/trhodeos</a>) open source replacement for nintendos <code>mild.exe</code> <b>binary is included under ./tools/spicy</b></li>
+</ul>
+<p>The version of <code>spicy</code> contained in this repo is a custom Build that allows the use of custom ROM Headers. If you want to use the original build of <code>spicy</code> or even the original <code>mild</code> binary you should be able to do so by changing the <b>MAKEROM</b> variable in the modern.makefile</p>
+<h2><a class="anchor" id="autotoc_md26"></a>
+Installing the n64 sdk</h2>
 <p>I am using the modern n64 homebrew sdk (crashsdk) and have based the build process around that.</p>
 <p>macOS/linux instructions: <a href="https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html">https://crashoveride95.github.io/n64hbrew/modernsdk/startoff.html</a></p>
-<h2><a class="anchor" id="autotoc_md26"></a>
-building the game</h2>
-<p>all commands should be run in the <code>root</code> directory of this repo</p>
-<p>make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.</p>
-<p>this repo contains a custom build of trhodeos' (<a href="https://github.com/trhodeos">https://github.com/trhodeos</a>) <code>spicy</code> (<a href="https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy">https://github.com/Byterset/spicyhttps://github.com/Byterset/spicy</a>) which is an open source replacement for nintendo's <code>mild</code> to create ROMs. The only difference with this included <code>spicy</code> binary (tools/spicy/spicy) is that this version allows for custom rom headers so you can set the region, name etc of your rom.</p>
+<p>It is important that the instructions on the crashsdk site are followed and all necessary tools are installed.</p>
+<h2><a class="anchor" id="autotoc_md27"></a>
+Building the game</h2>
+<p>All commands should be run in the <code>root</code> directory of this repo</p>
+<p>Make sure your Makefile and modern.makefile are set up correctly to reflect the location of the sdk on your machine and the names of the compiler, linker etc binaries.</p>
 <p>run <code>make</code> to build</p>
 <p>run <code>make clean</code> or <code>make clobber</code> to clean up the build directory and any build-byproducts</p>
-<p>this produces the rom file <code>game.z64</code> which you can then run with your favorite emulator or flashcart</p>
+<p>this produces the rom file <code>game.z64</code> (configurable via Makefile) which you can then run with your favorite emulator or flashcart</p>
 <p>environment variables which affect the build:</p>
 <ul>
 <li><code>OPTIMIZE=1</code>: enable gcc optimization and use non-debug versions of sdk libraries</li>
 <li><code>ED64=1</code>: build with everdrive64 logging support (see <a href="https://github.com/jsdf/ed64log">ed64log</a>). don't use unless running on an everdrive64</li>
 </ul>
 <p>you can also create a file called <code>localdefs.makefile</code> containing any variables to override in the build, and it will be automatically included by the makefile.</p>
-<h1><a class="anchor" id="autotoc_md27"></a>
-dependencies</h1>
-<ul>
-<li>lua (mesh export)</li>
-<li>python (animation export, collision export, level export)</li>
-</ul>
 <h1><a class="anchor" id="autotoc_md28"></a>
 regenerate n64 header files for sprites</h1>
 <p>if you update any texture files:</p>

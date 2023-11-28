@@ -1,11 +1,12 @@
 \hypertarget{input_8h}{}\doxysection{src/controls/input.h File Reference}
 \label{input_8h}\index{src/controls/input.h@{src/controls/input.h}}
 {\ttfamily \#include \char`\"{}../math/vector2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controller.\+h\char`\"{}}\newline
 Include dependency graph for input.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=190pt]{input_8h__incl}
+\includegraphics[width=270pt]{input_8h__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
@@ -29,6 +30,8 @@ typedef struct \mbox{\hyperlink{input_8h_structInput}{Input}} \mbox{\hyperlink{i
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{input_8h_ad9b2113b7b5a7ad713dc22a0969169a3}{Input\+\_\+init}} (\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$self)
+\item 
+void \mbox{\hyperlink{input_8h_a44b20a83014d0eb5acab78991bb9a918}{Input\+\_\+update}} (\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$self, int controller\+\_\+id)
 \end{DoxyCompactItemize}
 
 
@@ -46,6 +49,12 @@ Collaboration diagram for Input\+:\nopagebreak
 \end{center}
 \end{figure}
 \begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{input_8h_a686e0e87ab2769cabcfe5da083df673a}\label{input_8h_a686e0e87ab2769cabcfe5da083df673a}} 
+int&
+advanceRenderMode&
+\\
+\hline
+
 \mbox{\Hypertarget{input_8h_a2215e176feccf7d29c12199222578e1a}\label{input_8h_a2215e176feccf7d29c12199222578e1a}} 
 struct \mbox{\hyperlink{vector2_8h_structVector2}{Vector2}}&
 direction&
@@ -55,6 +64,18 @@ direction&
 \mbox{\Hypertarget{input_8h_ab2fa2930d343eed00c9e630a1b668df1}\label{input_8h_ab2fa2930d343eed00c9e630a1b668df1}} 
 int&
 pickup&
+\\
+\hline
+
+\mbox{\Hypertarget{input_8h_a8a3225346bd3dc88aee2f21f27758a79}\label{input_8h_a8a3225346bd3dc88aee2f21f27758a79}} 
+int&
+playHonk&
+\\
+\hline
+
+\mbox{\Hypertarget{input_8h_a5b6fe5ff5418c762886eb9f1d86f66f1}\label{input_8h_a5b6fe5ff5418c762886eb9f1d86f66f1}} 
+int&
+playMusic&
 \\
 \hline
 
@@ -94,4 +115,10 @@ zoomOut&
 \index{Input\_init@{Input\_init}!input.h@{input.h}}
 \doxysubsubsection{\texorpdfstring{Input\_init()}{Input\_init()}}
 {\footnotesize\ttfamily void Input\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{input_8h_a44b20a83014d0eb5acab78991bb9a918}\label{input_8h_a44b20a83014d0eb5acab78991bb9a918}} 
+\index{input.h@{input.h}!Input\_update@{Input\_update}}
+\index{Input\_update@{Input\_update}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{Input\_update()}{Input\_update()}}
+{\footnotesize\ttfamily void Input\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{input_8h_structInput}{Input}} $\ast$}]{self,  }\item[{int}]{controller\+\_\+id }\end{DoxyParamCaption})}
 

@@ -1,7 +1,6 @@
 
 #include "frustum.h"
 #include <math.h>
-#include "../physics/collision.h"
 #include "../constants.h"
 
 char *FrustumTestResultStrings[MAX_FRUSTUM_TEST_RESULT] = {

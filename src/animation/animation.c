@@ -12,7 +12,6 @@
 
 #include "animation.h"
 #include "../constants.h"
-#include "../math/rotation.h"
 
 void AnimationState_init(AnimationState *self)
 {

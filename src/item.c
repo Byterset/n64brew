@@ -3,7 +3,6 @@
 
 #include "src/actors/gardener/character.h"
 #include "game.h"
-#include "modeltype.h"
 #include "player.h"
 #include "math/vector3.h"
 

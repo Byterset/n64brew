@@ -1,11 +1,12 @@
 \hypertarget{memory_8c}{}\doxysection{src/util/memory.c File Reference}
 \label{memory_8c}\index{src/util/memory.c@{src/util/memory.c}}
 {\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$ultratypes.\+h$>$}\newline
 Include dependency graph for memory.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=181pt]{memory_8c__incl}
+\includegraphics[width=238pt]{memory_8c__incl}
 \end{center}
 \end{figure}
 \doxysubsection*{Macros}
@@ -19,27 +20,27 @@ Include dependency graph for memory.\+c\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{memory_8c_a6727756e18a8a7cd3b6a0871fa7a318a}{heap\+Init\+Block}} (struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$segment, void $\ast$end, int type)
-\item 
+\begin{DoxyCompactList}\small\item\em Initializes a heap memory segment. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_aa907f50b4132168d751785806bcbd100}{heap\+Init}} (void $\ast$heap\+Start, void $\ast$heap\+End)
-\item 
+\begin{DoxyCompactList}\small\item\em initializes the heap given a start end end pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_a0f5c523a6de6d53e689d25c35e34a438}{heap\+Reset}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Will reset the entire heap. \end{DoxyCompactList}\item 
 void $\ast$ \mbox{\hyperlink{memory_8c_ae054763213e99725646ce0e4a761b507}{cache\+Free\+Pointer}} (void $\ast$target)
-\item 
+\begin{DoxyCompactList}\small\item\em creates a cache free pointer for the target. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_acb886410fae83b38eeb0a3bc214cc1a8}{remove\+Heap\+Segment}} (struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$segment)
-\item 
+\begin{DoxyCompactList}\small\item\em Removes a segment from the linked list of free segments. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_a74f9f93bd0fd675aa51dd753d22ad568}{insert\+Heap\+Segment}} (struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$at, struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$segment)
-\item 
+\begin{DoxyCompactList}\small\item\em Inserts a segment into the linked list of free segments. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$ \mbox{\hyperlink{memory_8c_a99d99095dcc026c2593d4118189dcbd7}{get\+Prev\+Block}} (struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$at, int type)
 \item 
 struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$ \mbox{\hyperlink{memory_8c_a9692a27eeea1383ae7cf6d88e3dbca29}{get\+Next\+Block}} (struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$at, int type)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the Next Block object after the given adress. \end{DoxyCompactList}\item 
 void $\ast$ \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc}} (unsigned int size)
 \item 
 void $\ast$ \mbox{\hyperlink{memory_8c_adaf8910abb922b24d0b085e8a6c6a269}{realloc}} (void $\ast$target, unsigned int size)
-\item 
+\begin{DoxyCompactList}\small\item\em the given memory block to a new size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_a60f5516345fd73917286398679b0d911}{free}} (void $\ast$target)
-\item 
+\begin{DoxyCompactList}\small\item\em release memory allocated by \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc()}} \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{memory_8c_a5571c5db0602104833d57fa97d8179de}{calculate\+Heap\+Size}} ()
 \item 
 int \mbox{\hyperlink{memory_8c_a0c95f50af9af96902e480ed340db0978}{calculate\+Bytes\+Free}} ()
@@ -49,7 +50,7 @@ int \mbox{\hyperlink{memory_8c_a55b08bf0df84dfc90cb09e27962f98b8}{calculate\+Lar
 void \mbox{\hyperlink{memory_8c_ade3b4edbfcd79e5ed12e0227e780a59e}{zero\+Memory}} (void $\ast$memory, int size)
 \item 
 void \mbox{\hyperlink{memory_8c_af4ed8187db74bae721b4bfa986ac2912}{mem\+Copy}} (void $\ast$target, const void $\ast$src, int size)
-\item 
+\begin{DoxyCompactList}\small\item\em copy the memory of specific size to another location \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{memory_8c_aa501bfa237d73fb01f96610623d25426}{stack\+Malloc\+Reset}} ()
 \item 
 void \mbox{\hyperlink{memory_8c_ad6a69ad824cfe1fa329ed2a6732682b1}{stack\+Malloc\+Free}} (void $\ast$ptr)
@@ -93,6 +94,18 @@ long long \mbox{\hyperlink{memory_8c_a87ad4abb77a7359b1ab0c759c1f87937}{g\+Stack
 \doxysubsubsection{\texorpdfstring{cacheFreePointer()}{cacheFreePointer()}}
 {\footnotesize\ttfamily void$\ast$ cache\+Free\+Pointer (\begin{DoxyParamCaption}\item[{void $\ast$}]{target }\end{DoxyParamCaption})}
 
+
+
+creates a cache free pointer for the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
 \mbox{\Hypertarget{memory_8c_a0c95f50af9af96902e480ed340db0978}\label{memory_8c_a0c95f50af9af96902e480ed340db0978}} 
 \index{memory.c@{memory.c}!calculateBytesFree@{calculateBytesFree}}
 \index{calculateBytesFree@{calculateBytesFree}!memory.c@{memory.c}}
@@ -117,12 +130,35 @@ long long \mbox{\hyperlink{memory_8c_a87ad4abb77a7359b1ab0c759c1f87937}{g\+Stack
 \doxysubsubsection{\texorpdfstring{free()}{free()}}
 {\footnotesize\ttfamily void free (\begin{DoxyParamCaption}\item[{void $\ast$}]{target }\end{DoxyParamCaption})}
 
+
+
+release memory allocated by \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc()}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & pointer to the memory block to be freed \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_a9692a27eeea1383ae7cf6d88e3dbca29}\label{memory_8c_a9692a27eeea1383ae7cf6d88e3dbca29}} 
 \index{memory.c@{memory.c}!getNextBlock@{getNextBlock}}
 \index{getNextBlock@{getNextBlock}!memory.c@{memory.c}}
 \doxysubsubsection{\texorpdfstring{getNextBlock()}{getNextBlock()}}
 {\footnotesize\ttfamily struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}}$\ast$ get\+Next\+Block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$}]{at,  }\item[{int}]{type }\end{DoxyParamCaption})}
 
+
+
+Get the Next Block object after the given adress. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em at} & The adress representing the current block \\
+\hline
+{\em type} & The type of the block to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+struct Heap\+Segment$\ast$ 
+\end{DoxyReturn}
 \mbox{\Hypertarget{memory_8c_a99d99095dcc026c2593d4118189dcbd7}\label{memory_8c_a99d99095dcc026c2593d4118189dcbd7}} 
 \index{memory.c@{memory.c}!getPrevBlock@{getPrevBlock}}
 \index{getPrevBlock@{getPrevBlock}!memory.c@{memory.c}}
@@ -135,17 +171,45 @@ long long \mbox{\hyperlink{memory_8c_a87ad4abb77a7359b1ab0c759c1f87937}{g\+Stack
 \doxysubsubsection{\texorpdfstring{heapInit()}{heapInit()}}
 {\footnotesize\ttfamily void heap\+Init (\begin{DoxyParamCaption}\item[{void $\ast$}]{heap\+Start,  }\item[{void $\ast$}]{heap\+End }\end{DoxyParamCaption})}
 
+
+
+initializes the heap given a start end end pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em heap\+Start} & \\
+\hline
+{\em heap\+End} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_a6727756e18a8a7cd3b6a0871fa7a318a}\label{memory_8c_a6727756e18a8a7cd3b6a0871fa7a318a}} 
 \index{memory.c@{memory.c}!heapInitBlock@{heapInitBlock}}
 \index{heapInitBlock@{heapInitBlock}!memory.c@{memory.c}}
 \doxysubsubsection{\texorpdfstring{heapInitBlock()}{heapInitBlock()}}
 {\footnotesize\ttfamily void heap\+Init\+Block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$}]{segment,  }\item[{void $\ast$}]{end,  }\item[{int}]{type }\end{DoxyParamCaption})}
 
+
+
+Initializes a heap memory segment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} struct pointer \\
+\hline
+{\em end} & pointer to the end of the segment \\
+\hline
+{\em type} & indication of the type of segment (used or free) \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_a0f5c523a6de6d53e689d25c35e34a438}\label{memory_8c_a0f5c523a6de6d53e689d25c35e34a438}} 
 \index{memory.c@{memory.c}!heapReset@{heapReset}}
 \index{heapReset@{heapReset}!memory.c@{memory.c}}
 \doxysubsubsection{\texorpdfstring{heapReset()}{heapReset()}}
 {\footnotesize\ttfamily void heap\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Will reset the entire heap. 
 
 \mbox{\Hypertarget{memory_8c_a74f9f93bd0fd675aa51dd753d22ad568}\label{memory_8c_a74f9f93bd0fd675aa51dd753d22ad568}} 
 \index{memory.c@{memory.c}!insertHeapSegment@{insertHeapSegment}}
@@ -153,6 +217,17 @@ long long \mbox{\hyperlink{memory_8c_a87ad4abb77a7359b1ab0c759c1f87937}{g\+Stack
 \doxysubsubsection{\texorpdfstring{insertHeapSegment()}{insertHeapSegment()}}
 {\footnotesize\ttfamily void insert\+Heap\+Segment (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$}]{at,  }\item[{struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$}]{segment }\end{DoxyParamCaption})}
 
+
+
+Inserts a segment into the linked list of free segments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em at} & where to insert the segment \\
+\hline
+{\em segment} & the segment to insert \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}\label{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}} 
 \index{memory.c@{memory.c}!malloc@{malloc}}
 \index{malloc@{malloc}!memory.c@{memory.c}}
@@ -165,18 +240,58 @@ long long \mbox{\hyperlink{memory_8c_a87ad4abb77a7359b1ab0c759c1f87937}{g\+Stack
 \doxysubsubsection{\texorpdfstring{memCopy()}{memCopy()}}
 {\footnotesize\ttfamily void mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{target,  }\item[{const void $\ast$}]{src,  }\item[{int}]{size }\end{DoxyParamCaption})}
 
+
+
+copy the memory of specific size to another location 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & the target adress \\
+\hline
+{\em src} & the source adress \\
+\hline
+{\em size} & the size \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_adaf8910abb922b24d0b085e8a6c6a269}\label{memory_8c_adaf8910abb922b24d0b085e8a6c6a269}} 
 \index{memory.c@{memory.c}!realloc@{realloc}}
 \index{realloc@{realloc}!memory.c@{memory.c}}
 \doxysubsubsection{\texorpdfstring{realloc()}{realloc()}}
 {\footnotesize\ttfamily void$\ast$ realloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{target,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
 
+
+
+the given memory block to a new size. 
+
+If target is NULL, this simply calls \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc()}} to allocate a new block. Otherwise, it will attempt to resize the existing block in-\/place if possible. If the new size is larger, it may claim additional free space after the block if available. ~\newline
+ If insufficient space is available, we try to allocate a new block and copy the data over as last resort.
+
+Returns the reallocated block pointer (unchanged if no resizing was possible).
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & the memory block to resize \\
+\hline
+{\em size} & the new size of the block \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_acb886410fae83b38eeb0a3bc214cc1a8}\label{memory_8c_acb886410fae83b38eeb0a3bc214cc1a8}} 
 \index{memory.c@{memory.c}!removeHeapSegment@{removeHeapSegment}}
 \index{removeHeapSegment@{removeHeapSegment}!memory.c@{memory.c}}
 \doxysubsubsection{\texorpdfstring{removeHeapSegment()}{removeHeapSegment()}}
 {\footnotesize\ttfamily void remove\+Heap\+Segment (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{memory_8h_structHeapSegment}{Heap\+Segment}} $\ast$}]{segment }\end{DoxyParamCaption})}
 
+
+
+Removes a segment from the linked list of free segments. 
+
+Finds the next and previous segments relative to the input segment. It updates their pointers to remove the input segment from the linked list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & the segment to remove \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{memory_8c_a3eee27199ddc46e71ea582c4ebfc66a6}\label{memory_8c_a3eee27199ddc46e71ea582c4ebfc66a6}} 
 \index{memory.c@{memory.c}!stackMalloc@{stackMalloc}}
 \index{stackMalloc@{stackMalloc}!memory.c@{memory.c}}

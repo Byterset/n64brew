@@ -6,7 +6,6 @@
 #include "modeltype.h"
 #include "physics/physics.h"
 #include "math/rotation.h"
-#include "math/vector3.h"
 
 typedef struct GameObject
 {

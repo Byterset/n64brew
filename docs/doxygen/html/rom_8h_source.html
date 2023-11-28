@@ -76,12 +76,12 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="memory_8h.html">memory.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rom_8h.html#add73510c983e7b64bb524a9167f63eb3">romInit</a>();</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rom_8h.html#a09209b781e943978d62aea56d50ee0e0">romCopy</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *src, <span class="keyword">const</span> <span class="keywordtype">char</span> *dest, <span class="keyword">const</span> <span class="keywordtype">int</span> len);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rom_8h.html#a5cd748d61bf32b616a96e100df21ce56">Rom_init</a>();</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rom_8h.html#a1d3e10d869011f7f88e87dadee0df60b">Rom_copy</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *src, <span class="keyword">const</span> <span class="keywordtype">char</span> *dest, <span class="keyword">const</span> <span class="keywordtype">int</span> len);</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="rom_8h.html#a81f75b7f5fe624243af549e8b010f6e2">    9</a></span>&#160;<span class="preprocessor">#define LOAD_SEGMENT(segmentName, dest)                                                    \</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">    dest = malloc((u32)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart)); \</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    romCopy(_##segmentName##SegmentRomStart, dest, (u32)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart));</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    Rom_copy(_##segmentName##SegmentRomStart, dest, (u32)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart));</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="rom_8h.html#ae3bf84533766f8b5446a492fcb80d402">   13</a></span>&#160;<span class="preprocessor">#define CALC_ROM_POINTER(segmentName, addr) ((void *)(((unsigned)addr) - (unsigned)_##segmentName##SegmentStart + (unsigned)_##segmentName##SegmentRomStart))</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="rom_8h.html#a4eb279ffa1f2bc5099b64653c261f1f2">   14</a></span>&#160;<span class="preprocessor">#define CALC_RAM_POINTER(addr, ramStart) (void *)(((unsigned)(addr)&amp;0xFFFFFF) + (unsigned)(ramStart))</span></div>
@@ -92,8 +92,8 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="amemory_8h_html"><div class="ttname"><a href="memory_8h.html">memory.h</a></div></div>
-<div class="ttc" id="arom_8h_html_a09209b781e943978d62aea56d50ee0e0"><div class="ttname"><a href="rom_8h.html#a09209b781e943978d62aea56d50ee0e0">romCopy</a></div><div class="ttdeci">void romCopy(const char *src, const char *dest, const int len)</div><div class="ttdef"><b>Definition:</b> rom.c:16</div></div>
-<div class="ttc" id="arom_8h_html_add73510c983e7b64bb524a9167f63eb3"><div class="ttname"><a href="rom_8h.html#add73510c983e7b64bb524a9167f63eb3">romInit</a></div><div class="ttdeci">void romInit()</div><div class="ttdef"><b>Definition:</b> rom.c:11</div></div>
+<div class="ttc" id="arom_8h_html_a1d3e10d869011f7f88e87dadee0df60b"><div class="ttname"><a href="rom_8h.html#a1d3e10d869011f7f88e87dadee0df60b">Rom_copy</a></div><div class="ttdeci">void Rom_copy(const char *src, const char *dest, const int len)</div><div class="ttdef"><b>Definition:</b> rom.c:16</div></div>
+<div class="ttc" id="arom_8h_html_a5cd748d61bf32b616a96e100df21ce56"><div class="ttname"><a href="rom_8h.html#a5cd748d61bf32b616a96e100df21ce56">Rom_init</a></div><div class="ttdeci">void Rom_init()</div><div class="ttdef"><b>Definition:</b> rom.c:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

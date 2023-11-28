@@ -21,7 +21,7 @@ extern OSMesgQueue gfxFrameMsgQ;
 #define REMAP_PLAYER_INDEX(index) (index)
 // #define REMAP_PLAYER_INDEX(index)   0
 
-void controllersClearState()
+void Controller_clearStateAll()
 {
 	zeroMemory(gControllerData, sizeof(gControllerData));
 	zeroMemory(gControllerLastButton, sizeof(gControllerLastButton));
@@ -30,12 +30,12 @@ void controllersClearState()
 	gControllerDeadFrames = 30;
 }
 
-int controllerIsConnected(int index)
+int Controller_isConnected(int index)
 {
 	return !gControllerStatus[index].errno;
 }
 
-void controllersInit(void)
+void Controller_init(void)
 {
 	OSMesgQueue serialMsgQ;
 	OSMesg serialMsg;
@@ -52,12 +52,12 @@ void controllersInit(void)
 	osSetEventMesg(OS_EVENT_SI, &gfxFrameMsgQ, (OSMesg)&gControllerMessage);
 }
 
-void controllersUpdate(void)
+void Controller_update(void)
 {
 	unsigned i;
 	for (i = 0; i < MAX_PLAYERS; ++i)
 	{
-		gControllerLastDirection[i] = controllerGetDirection(i);
+		gControllerLastDirection[i] = Controller_getDirection(i);
 		gControllerLastButton[i] = gControllerData[i].button;
 	}
 
@@ -79,14 +79,14 @@ void controllersUpdate(void)
 	}
 }
 
-int controllerHasPendingMessage()
+int Controller_hasPendingMsg()
 {
 	return cntrlReadInProg;
 }
 
 #define CONTROLLER_READ_SKIP_NUMBER 10
 
-void controllersTriggerRead(void)
+void Controller_triggerRead(void)
 {
 	if (validcontrollers && !cntrlReadInProg)
 	{
@@ -99,32 +99,32 @@ void controllersTriggerRead(void)
 	}
 }
 
-OSContPad *controllersGetControllerData(int index)
+OSContPad *Controller_getControllerData(int index)
 {
 	return &gControllerData[REMAP_PLAYER_INDEX(index)];
 }
 
-u16 controllerGetLastButton(int index)
+u16 Controller_getLastButton(int index)
 {
 	return gControllerLastButton[REMAP_PLAYER_INDEX(index)];
 }
 
-u16 controllerGetButton(int index, u16 button)
+u16 Controller_getButton(int index, u16 button)
 {
 	return gControllerData[REMAP_PLAYER_INDEX(index)].button & button;
 }
 
-u16 controllerGetButtonDown(int index, u16 button)
+u16 Controller_getButtonDown(int index, u16 button)
 {
 	return gControllerData[REMAP_PLAYER_INDEX(index)].button & ~gControllerLastButton[REMAP_PLAYER_INDEX(index)] & button;
 }
 
-u16 controllerGetButtonUp(int index, u16 button)
+u16 Controller_getButtonUp(int index, u16 button)
 {
 	return ~gControllerData[REMAP_PLAYER_INDEX(index)].button & gControllerLastButton[REMAP_PLAYER_INDEX(index)] & button;
 }
 
-enum ControllerDirection controllerGetDirection(int index)
+enum ControllerDirection Controller_getDirection(int index)
 {
 	enum ControllerDirection result = 0;
 
@@ -151,7 +151,7 @@ enum ControllerDirection controllerGetDirection(int index)
 	return result;
 }
 
-enum ControllerDirection controllerGetDirectionDown(int index)
+enum ControllerDirection Controller_getDirectionDown(int index)
 {
-	return controllerGetDirection(REMAP_PLAYER_INDEX(index)) & ~gControllerLastDirection[REMAP_PLAYER_INDEX(index)];
+	return Controller_getDirection(REMAP_PLAYER_INDEX(index)) & ~gControllerLastDirection[REMAP_PLAYER_INDEX(index)];
 }

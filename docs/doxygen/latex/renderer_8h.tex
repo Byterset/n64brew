@@ -27,11 +27,23 @@ struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} \mbox{\hyperlink{renderer_8h_a59726ccdf410e1a72313f8d870deec54}{Renderer\+Sort\+Distance}}
+\item 
+typedef enum \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{renderer_8h_a46ae048f275985d6b0ce68f9025d5507}{Lighting\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \{ \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}{Sun\+Lighting}}
+, \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}{Only\+Ambient\+Lighting}}
+, \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}{MAX\+\_\+\+LIGHTING\+\_\+\+TYPE}}
+ \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{renderer_8h_ab45fd2a31ce052c56a5148c901dee46e}{Renderer\+\_\+is\+Dynamic\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+\mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{renderer_8h_a9f906d10f93ffe73b4c5482c8d5a83fc}{Renderer\+\_\+get\+Lighting\+Type}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
 \item 
 int \mbox{\hyperlink{renderer_8h_a03a569d38c2a3e77d9ed4a5d566c7d27}{Renderer\+\_\+is\+ZBuffered\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
 \item 
@@ -97,12 +109,41 @@ worldAABB&
 
 
 \doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{renderer_8h_a46ae048f275985d6b0ce68f9025d5507}\label{renderer_8h_a46ae048f275985d6b0ce68f9025d5507}} 
+\index{renderer.h@{renderer.h}!LightingType@{LightingType}}
+\index{LightingType@{LightingType}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
+
 \mbox{\Hypertarget{renderer_8h_a59726ccdf410e1a72313f8d870deec54}\label{renderer_8h_a59726ccdf410e1a72313f8d870deec54}} 
 \index{renderer.h@{renderer.h}!RendererSortDistance@{RendererSortDistance}}
 \index{RendererSortDistance@{RendererSortDistance}!renderer.h@{renderer.h}}
 \doxysubsubsection{\texorpdfstring{RendererSortDistance}{RendererSortDistance}}
 {\footnotesize\ttfamily typedef struct \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}} \mbox{\hyperlink{renderer_8h_structRendererSortDistance}{Renderer\+Sort\+Distance}}}
 
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}\label{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}} 
+\index{renderer.h@{renderer.h}!LightingType@{LightingType}}
+\index{LightingType@{LightingType}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SunLighting@{SunLighting}!renderer.h@{renderer.h}}\index{renderer.h@{renderer.h}!SunLighting@{SunLighting}}}\mbox{\Hypertarget{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}\label{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}} 
+Sun\+Lighting&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OnlyAmbientLighting@{OnlyAmbientLighting}!renderer.h@{renderer.h}}\index{renderer.h@{renderer.h}!OnlyAmbientLighting@{OnlyAmbientLighting}}}\mbox{\Hypertarget{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}\label{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}} 
+Only\+Ambient\+Lighting&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}!renderer.h@{renderer.h}}\index{renderer.h@{renderer.h}!MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}}}\mbox{\Hypertarget{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}\label{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}} 
+MAX\+\_\+\+LIGHTING\+\_\+\+TYPE&\\
+\hline
+
+\end{DoxyEnumFields}
 
 
 \doxysubsection{Function Documentation}
@@ -123,6 +164,12 @@ worldAABB&
 \index{Renderer\_frustumCull@{Renderer\_frustumCull}!renderer.h@{renderer.h}}
 \doxysubsubsection{\texorpdfstring{Renderer\_frustumCull()}{Renderer\_frustumCull()}}
 {\footnotesize\ttfamily int Renderer\+\_\+frustum\+Cull (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{world\+Objects,  }\item[{int}]{world\+Objects\+Count,  }\item[{int $\ast$}]{world\+Objects\+Visibility,  }\item[{\mbox{\hyperlink{frustum_8h_structFrustum}{Frustum}} $\ast$}]{frustum,  }\item[{\mbox{\hyperlink{collision_8h_structAABB}{AABB}} $\ast$}]{local\+AABBs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8h_a9f906d10f93ffe73b4c5482c8d5a83fc}\label{renderer_8h_a9f906d10f93ffe73b4c5482c8d5a83fc}} 
+\index{renderer.h@{renderer.h}!Renderer\_getLightingType@{Renderer\_getLightingType}}
+\index{Renderer\_getLightingType@{Renderer\_getLightingType}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{Renderer\_getLightingType()}{Renderer\_getLightingType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} Renderer\+\_\+get\+Lighting\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{renderer_8h_a934594fcfdb9c1007ddfe09fe6106fc3}\label{renderer_8h_a934594fcfdb9c1007ddfe09fe6106fc3}} 
 \index{renderer.h@{renderer.h}!Renderer\_getSeparatingPlane@{Renderer\_getSeparatingPlane}}

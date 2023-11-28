@@ -2,10 +2,8 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#include "gameobject.h"
 #include "gametypes.h"
 #include "controls/input.h"
-#include "physics/physics.h"
 
 void Game_init(GameObject *worldObjects,
 			   int worldObjectsCount,

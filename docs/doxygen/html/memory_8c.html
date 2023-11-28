@@ -76,14 +76,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="memory_8h_source.html">memory.h</a>&quot;</code><br />
+<code>#include &lt;ultratypes.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for memory.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="memory_8c__incl.png" border="0" usemap="#asrc_2util_2memory_8c" alt=""/></div>
 <map name="asrc_2util_2memory_8c" id="asrc_2util_2memory_8c">
-<area shape="rect" title=" " alt="" coords="5,5,140,32"/>
-<area shape="rect" href="memory_8h.html" title=" " alt="" coords="29,80,116,107"/>
-<area shape="rect" title=" " alt="" coords="35,155,110,181"/>
+<area shape="rect" title=" " alt="" coords="40,5,175,32"/>
+<area shape="rect" href="memory_8h.html" title=" " alt="" coords="5,80,92,107"/>
+<area shape="rect" title=" " alt="" coords="116,80,216,107"/>
+<area shape="rect" title=" " alt="" coords="11,155,86,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -97,26 +99,35 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6727756e18a8a7cd3b6a0871fa7a318a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a6727756e18a8a7cd3b6a0871fa7a318a">heapInitBlock</a> (struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *segment, void *end, int type)</td></tr>
+<tr class="memdesc:a6727756e18a8a7cd3b6a0871fa7a318a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a heap memory segment.  <a href="memory_8c.html#a6727756e18a8a7cd3b6a0871fa7a318a">More...</a><br /></td></tr>
 <tr class="separator:a6727756e18a8a7cd3b6a0871fa7a318a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa907f50b4132168d751785806bcbd100"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#aa907f50b4132168d751785806bcbd100">heapInit</a> (void *heapStart, void *heapEnd)</td></tr>
+<tr class="memdesc:aa907f50b4132168d751785806bcbd100"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the heap given a start end end pointer.  <a href="memory_8c.html#aa907f50b4132168d751785806bcbd100">More...</a><br /></td></tr>
 <tr class="separator:aa907f50b4132168d751785806bcbd100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f5c523a6de6d53e689d25c35e34a438"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a0f5c523a6de6d53e689d25c35e34a438">heapReset</a> ()</td></tr>
+<tr class="memdesc:a0f5c523a6de6d53e689d25c35e34a438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Will reset the entire heap.  <a href="memory_8c.html#a0f5c523a6de6d53e689d25c35e34a438">More...</a><br /></td></tr>
 <tr class="separator:a0f5c523a6de6d53e689d25c35e34a438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae054763213e99725646ce0e4a761b507"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#ae054763213e99725646ce0e4a761b507">cacheFreePointer</a> (void *target)</td></tr>
+<tr class="memdesc:ae054763213e99725646ce0e4a761b507"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates a cache free pointer for the target.  <a href="memory_8c.html#ae054763213e99725646ce0e4a761b507">More...</a><br /></td></tr>
 <tr class="separator:ae054763213e99725646ce0e4a761b507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb886410fae83b38eeb0a3bc214cc1a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#acb886410fae83b38eeb0a3bc214cc1a8">removeHeapSegment</a> (struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *segment)</td></tr>
+<tr class="memdesc:acb886410fae83b38eeb0a3bc214cc1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a segment from the linked list of free segments.  <a href="memory_8c.html#acb886410fae83b38eeb0a3bc214cc1a8">More...</a><br /></td></tr>
 <tr class="separator:acb886410fae83b38eeb0a3bc214cc1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74f9f93bd0fd675aa51dd753d22ad568"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a74f9f93bd0fd675aa51dd753d22ad568">insertHeapSegment</a> (struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *at, struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *segment)</td></tr>
+<tr class="memdesc:a74f9f93bd0fd675aa51dd753d22ad568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a segment into the linked list of free segments.  <a href="memory_8c.html#a74f9f93bd0fd675aa51dd753d22ad568">More...</a><br /></td></tr>
 <tr class="separator:a74f9f93bd0fd675aa51dd753d22ad568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d99095dcc026c2593d4118189dcbd7"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a99d99095dcc026c2593d4118189dcbd7">getPrevBlock</a> (struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *at, int type)</td></tr>
 <tr class="separator:a99d99095dcc026c2593d4118189dcbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9692a27eeea1383ae7cf6d88e3dbca29"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a9692a27eeea1383ae7cf6d88e3dbca29">getNextBlock</a> (struct <a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> *at, int type)</td></tr>
+<tr class="memdesc:a9692a27eeea1383ae7cf6d88e3dbca29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Next Block object after the given adress.  <a href="memory_8c.html#a9692a27eeea1383ae7cf6d88e3dbca29">More...</a><br /></td></tr>
 <tr class="separator:a9692a27eeea1383ae7cf6d88e3dbca29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a811fd8b7a378500f100a2d9a1f1a2"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc</a> (unsigned int size)</td></tr>
 <tr class="separator:ac0a811fd8b7a378500f100a2d9a1f1a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaf8910abb922b24d0b085e8a6c6a269"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#adaf8910abb922b24d0b085e8a6c6a269">realloc</a> (void *target, unsigned int size)</td></tr>
+<tr class="memdesc:adaf8910abb922b24d0b085e8a6c6a269"><td class="mdescLeft">&#160;</td><td class="mdescRight">the given memory block to a new size.  <a href="memory_8c.html#adaf8910abb922b24d0b085e8a6c6a269">More...</a><br /></td></tr>
 <tr class="separator:adaf8910abb922b24d0b085e8a6c6a269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60f5516345fd73917286398679b0d911"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a60f5516345fd73917286398679b0d911">free</a> (void *target)</td></tr>
+<tr class="memdesc:a60f5516345fd73917286398679b0d911"><td class="mdescLeft">&#160;</td><td class="mdescRight">release memory allocated by <a class="el" href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc()</a>  <a href="memory_8c.html#a60f5516345fd73917286398679b0d911">More...</a><br /></td></tr>
 <tr class="separator:a60f5516345fd73917286398679b0d911"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5571c5db0602104833d57fa97d8179de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#a5571c5db0602104833d57fa97d8179de">calculateHeapSize</a> ()</td></tr>
 <tr class="separator:a5571c5db0602104833d57fa97d8179de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +138,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ade3b4edbfcd79e5ed12e0227e780a59e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#ade3b4edbfcd79e5ed12e0227e780a59e">zeroMemory</a> (void *memory, int size)</td></tr>
 <tr class="separator:ade3b4edbfcd79e5ed12e0227e780a59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ed8187db74bae721b4bfa986ac2912"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#af4ed8187db74bae721b4bfa986ac2912">memCopy</a> (void *target, const void *src, int size)</td></tr>
+<tr class="memdesc:af4ed8187db74bae721b4bfa986ac2912"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy the memory of specific size to another location  <a href="memory_8c.html#af4ed8187db74bae721b4bfa986ac2912">More...</a><br /></td></tr>
 <tr class="separator:af4ed8187db74bae721b4bfa986ac2912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa501bfa237d73fb01f96610623d25426"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memory_8c.html#aa501bfa237d73fb01f96610623d25426">stackMallocReset</a> ()</td></tr>
 <tr class="separator:aa501bfa237d73fb01f96610623d25426"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,6 +205,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>creates a cache free pointer for the target. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* </dd></dl>
 
 </div>
 </div>
@@ -263,6 +284,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>release memory allocated by <a class="el" href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc()</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>pointer to the memory block to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a9692a27eeea1383ae7cf6d88e3dbca29"></a>
@@ -290,6 +319,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the Next Block object after the given adress. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">at</td><td>The adress representing the current block </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the block to get </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>struct HeapSegment* </dd></dl>
 
 </div>
 </div>
@@ -347,6 +386,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>initializes the heap given a start end end pointer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heapStart</td><td></td></tr>
+    <tr><td class="paramname">heapEnd</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a6727756e18a8a7cd3b6a0871fa7a318a"></a>
@@ -381,6 +429,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a heap memory segment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">segment</td><td><a class="el" href="memory_8h.html#structHeapSegment">HeapSegment</a> struct pointer </td></tr>
+    <tr><td class="paramname">end</td><td>pointer to the end of the segment </td></tr>
+    <tr><td class="paramname">type</td><td>indication of the type of segment (used or free) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0f5c523a6de6d53e689d25c35e34a438"></a>
@@ -397,6 +455,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Will reset the entire heap. </p>
 
 </div>
 </div>
@@ -425,6 +485,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Inserts a segment into the linked list of free segments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">at</td><td>where to insert the segment </td></tr>
+    <tr><td class="paramname">segment</td><td>the segment to insert </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -478,6 +547,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>copy the memory of specific size to another location </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>the target adress </td></tr>
+    <tr><td class="paramname">src</td><td>the source adress </td></tr>
+    <tr><td class="paramname">size</td><td>the size </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="adaf8910abb922b24d0b085e8a6c6a269"></a>
@@ -506,6 +585,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>the given memory block to a new size. </p>
+<p>If target is NULL, this simply calls <a class="el" href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc()</a> to allocate a new block. Otherwise, it will attempt to resize the existing block in-place if possible. If the new size is larger, it may claim additional free space after the block if available. <br  />
+ If insufficient space is available, we try to allocate a new block and copy the data over as last resort.</p>
+<p>Returns the reallocated block pointer (unchanged if no resizing was possible).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>the memory block to resize </td></tr>
+    <tr><td class="paramname">size</td><td>the new size of the block </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="acb886410fae83b38eeb0a3bc214cc1a8"></a>
@@ -523,6 +614,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Removes a segment from the linked list of free segments. </p>
+<p>Finds the next and previous segments relative to the input segment. It updates their pointers to remove the input segment from the linked list.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">segment</td><td>the segment to remove </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

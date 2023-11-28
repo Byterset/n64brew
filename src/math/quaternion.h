@@ -12,8 +12,8 @@
 #include "vector2.h"
 
 /**
+ * @struct Quaternion
  * @brief The Quaternion struct.
- * 
  */
 typedef struct Quaternion
 {

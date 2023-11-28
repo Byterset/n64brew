@@ -2,7 +2,6 @@
 #define _SOUND_PLAYER_H
 
 #include <ultra64.h>
-#include "../math/vector3.h"
 #include "../math/quaternion.h"
 
 #define MAX_SOUNDS 128

@@ -2,12 +2,8 @@
 	Example of FONTS
 */
 
-#include <PR/mbi.h>
-#include <PR/sp.h>
 #include "font.h"
-#include "font_ext.h"
 
-#include "letters_img.h"
 
 static char letters_string[] = "abcdefhiuvsnorm.klxz4321567890`!gjpqytw,EFGHKLNOPRSUVXZ@JM:WIYABCD'T\"+-=Q_/?()[]";
 

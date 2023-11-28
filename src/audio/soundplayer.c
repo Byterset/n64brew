@@ -99,7 +99,7 @@ void soundPlayerDetermine3DSound(struct Vector3 *at, float *volumeIn, float *vol
 void soundPlayerInit()
 {
 	gSoundClipArray = alHeapAlloc(&gAudioHeap, 1, _soundsSegmentRomEnd - _soundsSegmentRomStart);
-	romCopy(_soundsSegmentRomStart, (char *)gSoundClipArray, _soundsSegmentRomEnd - _soundsSegmentRomStart);
+	Rom_copy(_soundsSegmentRomStart, (char *)gSoundClipArray, _soundsSegmentRomEnd - _soundsSegmentRomStart);
 	soundArrayInit(gSoundClipArray, _soundsTblSegmentRomStart);
 
 	ALSndpConfig sndConfig;

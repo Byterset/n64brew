@@ -31,9 +31,9 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{rom_8h_add73510c983e7b64bb524a9167f63eb3}{rom\+Init}} ()
+void \mbox{\hyperlink{rom_8h_a5cd748d61bf32b616a96e100df21ce56}{Rom\+\_\+init}} ()
 \item 
-void \mbox{\hyperlink{rom_8h_a09209b781e943978d62aea56d50ee0e0}{rom\+Copy}} (const char $\ast$src, const char $\ast$dest, const int len)
+void \mbox{\hyperlink{rom_8h_a1d3e10d869011f7f88e87dadee0df60b}{Rom\+\_\+copy}} (const char $\ast$src, const char $\ast$dest, const int len)
 \end{DoxyCompactItemize}
 
 
@@ -71,21 +71,21 @@ void \mbox{\hyperlink{rom_8h_a09209b781e943978d62aea56d50ee0e0}{rom\+Copy}} (con
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    dest = \mbox{\hyperlink{memory_8c_ac0a811fd8b7a378500f100a2d9a1f1a2}{malloc}}((\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}})(\_\#\#segmentName\#\#SegmentRomEnd -\/ \_\#\#segmentName\#\#SegmentRomStart)); \(\backslash\)}
-\DoxyCodeLine{    romCopy(\_\#\#segmentName\#\#SegmentRomStart, dest, (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}})(\_\#\#segmentName\#\#SegmentRomEnd -\/ \_\#\#segmentName\#\#SegmentRomStart));}
+\DoxyCodeLine{    Rom\_copy(\_\#\#segmentName\#\#SegmentRomStart, dest, (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}})(\_\#\#segmentName\#\#SegmentRomEnd -\/ \_\#\#segmentName\#\#SegmentRomStart));}
 
 \end{DoxyCode}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{rom_8h_a09209b781e943978d62aea56d50ee0e0}\label{rom_8h_a09209b781e943978d62aea56d50ee0e0}} 
-\index{rom.h@{rom.h}!romCopy@{romCopy}}
-\index{romCopy@{romCopy}!rom.h@{rom.h}}
-\doxysubsubsection{\texorpdfstring{romCopy()}{romCopy()}}
-{\footnotesize\ttfamily void rom\+Copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{src,  }\item[{const char $\ast$}]{dest,  }\item[{const int}]{len }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{rom_8h_a1d3e10d869011f7f88e87dadee0df60b}\label{rom_8h_a1d3e10d869011f7f88e87dadee0df60b}} 
+\index{rom.h@{rom.h}!Rom\_copy@{Rom\_copy}}
+\index{Rom\_copy@{Rom\_copy}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{Rom\_copy()}{Rom\_copy()}}
+{\footnotesize\ttfamily void Rom\+\_\+copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{src,  }\item[{const char $\ast$}]{dest,  }\item[{const int}]{len }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{rom_8h_add73510c983e7b64bb524a9167f63eb3}\label{rom_8h_add73510c983e7b64bb524a9167f63eb3}} 
-\index{rom.h@{rom.h}!romInit@{romInit}}
-\index{romInit@{romInit}!rom.h@{rom.h}}
-\doxysubsubsection{\texorpdfstring{romInit()}{romInit()}}
-{\footnotesize\ttfamily void rom\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{rom_8h_a5cd748d61bf32b616a96e100df21ce56}\label{rom_8h_a5cd748d61bf32b616a96e100df21ce56}} 
+\index{rom.h@{rom.h}!Rom\_init@{Rom\_init}}
+\index{Rom\_init@{Rom\_init}!rom.h@{rom.h}}
+\doxysubsubsection{\texorpdfstring{Rom\_init()}{Rom\_init()}}
+{\footnotesize\ttfamily void Rom\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 

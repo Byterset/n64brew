@@ -116,10 +116,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:add73510c983e7b64bb524a9167f63eb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rom_8h.html#add73510c983e7b64bb524a9167f63eb3">romInit</a> ()</td></tr>
-<tr class="separator:add73510c983e7b64bb524a9167f63eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09209b781e943978d62aea56d50ee0e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rom_8h.html#a09209b781e943978d62aea56d50ee0e0">romCopy</a> (const char *src, const char *dest, const int len)</td></tr>
-<tr class="separator:a09209b781e943978d62aea56d50ee0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd748d61bf32b616a96e100df21ce56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rom_8h.html#a5cd748d61bf32b616a96e100df21ce56">Rom_init</a> ()</td></tr>
+<tr class="separator:a5cd748d61bf32b616a96e100df21ce56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3e10d869011f7f88e87dadee0df60b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rom_8h.html#a1d3e10d869011f7f88e87dadee0df60b">Rom_copy</a> (const char *src, const char *dest, const int len)</td></tr>
+<tr class="separator:a1d3e10d869011f7f88e87dadee0df60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a4686c9e9fa3ff6f46be53a8d35e54909"></a>
@@ -266,21 +266,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    dest = <a class="code" href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc</a>((<a class="code" href="ed64io__types_8h.html#a332ccd83dfe2973e6cb2b61e4f3ab7e6">u32</a>)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart)); \</div>
-<div class="line">    romCopy(_##segmentName##SegmentRomStart, dest, (<a class="code" href="ed64io__types_8h.html#a332ccd83dfe2973e6cb2b61e4f3ab7e6">u32</a>)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart));</div>
+<div class="line">    Rom_copy(_##segmentName##SegmentRomStart, dest, (<a class="code" href="ed64io__types_8h.html#a332ccd83dfe2973e6cb2b61e4f3ab7e6">u32</a>)(_##segmentName##SegmentRomEnd - _##segmentName##SegmentRomStart));</div>
 <div class="ttc" id="aed64io__types_8h_html_a332ccd83dfe2973e6cb2b61e4f3ab7e6"><div class="ttname"><a href="ed64io__types_8h.html#a332ccd83dfe2973e6cb2b61e4f3ab7e6">u32</a></div><div class="ttdeci">#define u32</div><div class="ttdef"><b>Definition:</b> ed64io_types.h:13</div></div>
-<div class="ttc" id="amemory_8c_html_ac0a811fd8b7a378500f100a2d9a1f1a2"><div class="ttname"><a href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc</a></div><div class="ttdeci">void * malloc(unsigned int size)</div><div class="ttdef"><b>Definition:</b> memory.c:130</div></div>
+<div class="ttc" id="amemory_8c_html_ac0a811fd8b7a378500f100a2d9a1f1a2"><div class="ttname"><a href="memory_8c.html#ac0a811fd8b7a378500f100a2d9a1f1a2">malloc</a></div><div class="ttdeci">void * malloc(unsigned int size)</div><div class="ttdef"><b>Definition:</b> memory.c:185</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a09209b781e943978d62aea56d50ee0e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09209b781e943978d62aea56d50ee0e0">&#9670;&nbsp;</a></span>romCopy()</h2>
+<a id="a1d3e10d869011f7f88e87dadee0df60b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3e10d869011f7f88e87dadee0df60b">&#9670;&nbsp;</a></span>Rom_copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void romCopy </td>
+          <td class="memname">void Rom_copy </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
@@ -307,14 +307,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="add73510c983e7b64bb524a9167f63eb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add73510c983e7b64bb524a9167f63eb3">&#9670;&nbsp;</a></span>romInit()</h2>
+<a id="a5cd748d61bf32b616a96e100df21ce56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cd748d61bf32b616a96e100df21ce56">&#9670;&nbsp;</a></span>Rom_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void romInit </td>
+          <td class="memname">void Rom_init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

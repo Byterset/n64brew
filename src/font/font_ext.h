@@ -10,7 +10,7 @@ void font_set_pos( int, int );
 
 void font_set_transparent( int );
 
-#define SHOWFONT(glp,str,x,y)   {           \
-                font_set_color( 0,0,0,255); \
+#define SHOWFONT(glp,str,x,y, r, g, b)   {           \
+                font_set_color( r,g,b,255); \
                 font_set_pos( x, y );       \
                 font_show_string( glp, str );}

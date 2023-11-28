@@ -1,4 +1,3 @@
-#include "../constants.h"
 #include "../math/vector3.h"
 
 #ifndef _PATHFINDING_H_

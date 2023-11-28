@@ -2,7 +2,6 @@
 #ifndef _GAMETYPES_H_
 #define _GAMETYPES_H_
 
-#include "animation/animation.h"
 #include "actors/gardener/characterstate.h"
 #include "gameobject.h"
 #include "pathfinding/pathfinding.h"

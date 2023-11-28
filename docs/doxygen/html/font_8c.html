@@ -75,29 +75,23 @@ $(function() {
 <div class="title">font.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;PR/mbi.h&gt;</code><br />
-<code>#include &lt;PR/sp.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="font_8h_source.html">font.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="font__ext_8h_source.html">font_ext.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="letters__img_8h_source.html">letters_img.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="font_8h_source.html">font.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for font.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="font_8c__incl.png" border="0" usemap="#asrc_2font_2font_8c" alt=""/></div>
 <map name="asrc_2font_2font_8c" id="asrc_2font_2font_8c">
-<area shape="rect" title=" " alt="" coords="135,5,247,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,85,107"/>
-<area shape="rect" title=" " alt="" coords="121,155,191,181"/>
-<area shape="rect" href="font_8h.html" title=" " alt="" coords="161,80,221,107"/>
-<area shape="rect" href="font__ext_8h.html" title=" " alt="" coords="245,80,333,107"/>
-<area shape="rect" href="letters__img_8h.html" title=" " alt="" coords="358,80,466,107"/>
+<area shape="rect" title=" " alt="" coords="138,5,250,32"/>
+<area shape="rect" href="font_8h.html" title=" " alt="" coords="164,80,224,107"/>
+<area shape="rect" title=" " alt="" coords="5,155,76,181"/>
+<area shape="rect" title=" " alt="" coords="101,155,181,181"/>
+<area shape="rect" href="font__ext_8h.html" title=" " alt="" coords="205,155,293,181"/>
+<area shape="rect" href="letters__img_8h.html" title=" " alt="" coords="317,155,425,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac672c6f1e51cfbb459764d2ffb3a313b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#ac672c6f1e51cfbb459764d2ffb3a313b">SHOWFONT</a>(glp,  str,  x,  y)</td></tr>
-<tr class="separator:ac672c6f1e51cfbb459764d2ffb3a313b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea30527c46f41e368052e1e602f1e59"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a9ea30527c46f41e368052e1e602f1e59">DYN_SPRITE_HACK</a></td></tr>
 <tr class="separator:a9ea30527c46f41e368052e1e602f1e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cc99b88a9fefefc45f2048ff1807c19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a2cc99b88a9fefefc45f2048ff1807c19">NUM_template_BMS</a>&#160;&#160;&#160;(24*40)</td></tr>
@@ -188,50 +182,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="ac672c6f1e51cfbb459764d2ffb3a313b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac672c6f1e51cfbb459764d2ffb3a313b">&#9670;&nbsp;</a></span>SHOWFONT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SHOWFONT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">glp, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">str, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">y&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">                {           \</div>
-<div class="line">                font_set_color( 0,0,0,255); \</div>
-<div class="line">                font_set_pos( x, y );       \</div>
-<div class="line">                font_show_string( glp, str );}</div>
-</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>

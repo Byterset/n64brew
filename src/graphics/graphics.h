@@ -1,7 +1,6 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
 
-#include <ultra64.h>
 #include "../constants.h"
 #include <sched.h>
 #include "renderstate.h"
@@ -59,7 +58,6 @@ typedef enum RenderMode
 	ToonFlatShadingRenderMode,
 	TextureAndLightingRenderMode,
 	TextureNoLightingRenderMode,
-	// NoTextureNoLightingRenderMode,
 	LightingNoTextureRenderMode,
 	WireframeRenderMode,
 	MAX_RENDER_MODE
@@ -100,6 +98,6 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 
 void graphicsSetupPipeline(struct RenderState *renderState, Dynamic *dynamicp);
 
-void graphicsApplyRenderMode(struct RenderState *renderState, RenderMode renderMode, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly);
+void graphicsApplyRenderMode(struct RenderState *renderState, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly);
 
 #endif

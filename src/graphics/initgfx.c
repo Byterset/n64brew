@@ -62,7 +62,7 @@ Gfx setup_rdpstate[] = {
 	gsSPEndDisplayList(),
 };
 
-Lights1 gInitialLights = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0x7f, 0);
+Lights1 gInitialLights = gdSPDefLights1(255, 100, 100, 0, 0, 0, 0, 0x7f, 0);
 
 /* intialize the RSP state: */
 Gfx setup_rspstate[] = {

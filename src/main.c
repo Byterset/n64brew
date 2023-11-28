@@ -1,15 +1,7 @@
-#include <ultra64.h>
-#include <sched.h>
-#include "defs.h"
 #include "main.h"
 #include "controls/controller.h"
-#include "util/memory.h"
 #include "util/rom.h"
 #include "util/time.h"
-#include "font/font_ext.h"
-
-#include "graphics/graphics.h"
-#include "game.h"
 #ifdef ED64
 #include "ed64/ed64io.h"
 #endif
@@ -17,7 +9,6 @@
 #include "util/trace.h"
 #include "audio/audio.h"
 #include "audio/soundplayer.h"
-#include "audio/clips.h"
 
 // #define DEBUGSTARTUP
 
@@ -53,8 +44,15 @@ OSSched scheduler;
 u64 scheduleStack[OS_SC_STACKSIZE / 8];
 OSMesgQueue *schedulerCommandQueue;
 
+void (*updateCallback)(void);
+
 void initProc(void *arg);
 void gameProc(void *arg);
+
+void updateGame()
+{
+	updateCallback();
+}
 
 EXTERN_SEGMENT_WITH_BSS(memheap);
 EXTERN_SEGMENT_WITH_BSS(trace);
@@ -65,7 +63,7 @@ void traceInit(void)
 	if (osGetMemSize() == 0x00800000)
 	{
 		// debugPrintfSync("have expansion pack\n");
-		romCopy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
+		Rom_copy(_traceSegmentRomStart, _traceSegmentStart, (u32)_traceSegmentRomEnd - (u32)_traceSegmentRomStart);
 		bzero(_traceSegmentBssStart, _traceSegmentBssEnd - _traceSegmentBssStart);
 
 		// debugPrintfSync("init trace buffer at %p\n", _traceSegmentStart);
@@ -226,13 +224,14 @@ void gameProc(void *arg)
 	zeroMemory(gAudioHeapBuffer, AUDIO_HEAP_SIZE);
 	memoryEnd = (u16 *)gAudioHeapBuffer;
 	heapInit(_memheapSegmentStart, memoryEnd);
-	romInit();
+	Rom_init();
 
-	controllersInit();
-	controllersClearState();
+	Controller_init();
+	Controller_clearStateAll();
 	initAudio(framerate);
 	soundPlayerInit();
 	initStage00();
+	updateCallback = &updateGame00;
 	double lastHonkTime = 0;
 	/* MAIN GAME LOOP */
 
@@ -269,13 +268,13 @@ void gameProc(void *arg)
 			}
 
 			//read controller Input
-			controllersTriggerRead();
+			Controller_triggerRead();
 
 			//update the soundplayer logic and the active sounds (actual playing is handled in seperate thread!)
 			soundPlayerUpdate();
 
 			//Update Input, Positions, Gamelogic and Physics
-			updateGame00();
+			updateGame();
 			
 			timeUpdateDelta();
 
@@ -287,15 +286,11 @@ void gameProc(void *arg)
 			pendingGFX += 2;
 			break;
 		case SIMPLE_CONTROLLER_MSG:
-			controllersUpdate();
+			Controller_update();
 			break;
 		default:
 
 			break;
 		}
 	}
-
-	// int materialChunkSize = _material_dataSegmentRomEnd - _material_dataSegmentRomStart;
-
-	// memoryEnd -= materialChunkSize / sizeof(u16);
-}
+};

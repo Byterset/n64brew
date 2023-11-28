@@ -2,7 +2,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "gameobject.h"
 #include "gametypes.h"
 #include "controls/input.h"
 

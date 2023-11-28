@@ -1,10 +1,6 @@
 \hypertarget{font_8c}{}\doxysection{src/font/font.c File Reference}
 \label{font_8c}\index{src/font/font.c@{src/font/font.c}}
-{\ttfamily \#include $<$PR/mbi.\+h$>$}\newline
-{\ttfamily \#include $<$PR/sp.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}font.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}font\+\_\+ext.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}letters\+\_\+img.\+h\char`\"{}}\newline
 Include dependency graph for font.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -14,8 +10,6 @@ Include dependency graph for font.\+c\+:\nopagebreak
 \end{figure}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}{SHOWFONT}}(glp,  str,  x,  y)
 \item 
 \#define \mbox{\hyperlink{font_8c_a9ea30527c46f41e368052e1e602f1e59}{DYN\+\_\+\+SPRITE\+\_\+\+HACK}}
 \item 
@@ -94,20 +88,6 @@ static double \mbox{\hyperlink{font_8c_aae57c2927109f7c892b1a79cebd3c228}{font\+
 \doxysubsubsection{\texorpdfstring{NUM\_template\_BMS}{NUM\_template\_BMS}}
 {\footnotesize\ttfamily \#define NUM\+\_\+template\+\_\+\+BMS~(24$\ast$40)}
 
-\mbox{\Hypertarget{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}\label{font_8c_ac672c6f1e51cfbb459764d2ffb3a313b}} 
-\index{font.c@{font.c}!SHOWFONT@{SHOWFONT}}
-\index{SHOWFONT@{SHOWFONT}!font.c@{font.c}}
-\doxysubsubsection{\texorpdfstring{SHOWFONT}{SHOWFONT}}
-{\footnotesize\ttfamily \#define SHOWFONT(\begin{DoxyParamCaption}\item[{}]{glp,  }\item[{}]{str,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
-
-{\bfseries Value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{                \{           \(\backslash\)}
-\DoxyCodeLine{                font\_set\_color( 0,0,0,255); \(\backslash\)}
-\DoxyCodeLine{                font\_set\_pos( x, y );       \(\backslash\)}
-\DoxyCodeLine{                font\_show\_string( glp, str );\}}
-
-\end{DoxyCode}
 
 
 \doxysubsection{Function Documentation}

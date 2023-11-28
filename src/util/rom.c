@@ -8,12 +8,12 @@ OSMesgQueue dmaMessageQ;
 OSMesg dmaMessages[DMA_MESSAGE_SIZE];
 extern OSPiHandle *gPiHandle;
 
-void romInit()
+void Rom_init()
 {
 	osCreateMesgQueue(&dmaMessageQ, dmaMessages, DMA_MESSAGE_SIZE);
 }
 
-void romCopy(const char *src, const char *dest, const int len)
+void Rom_copy(const char *src, const char *dest, const int len)
 {
 	OSIoMesg dmaIoMesgBuf;
 	OSMesg dummyMesg;

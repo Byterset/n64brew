@@ -17,3 +17,5 @@ void initStage00(void);
 void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTask *task);
 // void makeDL00(struct RenderState *renderState);
 void updateGame00(void);
+
+void updateGame(void);

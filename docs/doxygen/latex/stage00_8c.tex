@@ -2,46 +2,25 @@
 \label{stage00_8c}\index{src/stage00.c@{src/stage00.c}}
 
 
-Stage 00, the Main stage that runs when the ROM starts.  
+\mbox{\hyperlink{structStage}{Stage}} 00, the Main stage that runs when the ROM starts.  
 
 
 {\ttfamily \#include $<$assert.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}../build/src/audio/clips.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}audio/clips.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$math.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}util/rom.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}util/memory.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}controls/controller.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}animation/animation.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}math/frustum.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}math/vector2.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}math/matrix.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}controls/input.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}pathfinding/pathfinding.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}physics/physics.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}graphics/graphics.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}graphics/renderer.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}util/trace.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}audio/audio.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}audio/soundplayer.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}models.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}segments.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../assets/levels/garden/garden\+\_\+map.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../assets/levels/garden/garden\+\_\+map\+\_\+collision.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../assets/levels/garden/garden\+\_\+map\+\_\+graph.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}actors/gardener/character\+\_\+anim.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}goose\+\_\+anim.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}ed64/ed64io.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}util/debug\+\_\+console.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}sausage64/sausage64.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}actors/catherine/catherine\+Tex.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}actors/catherine/catherine\+Mdl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ed64/ed64io.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stage\+\_\+asset\+\_\+defs/stage00\+\_\+assets.\+h\char`\"{}}\newline
 Include dependency graph for stage00.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -76,19 +55,6 @@ Include dependency graph for stage00.\+c\+:\nopagebreak
 \item 
 \#define \mbox{\hyperlink{stage00_8c_a4804af898127a2547250e117102399a0}{OBJ\+\_\+\+START\+\_\+\+VAL}}~1000
 \end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}{Lighting\+Type}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \{ \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}{Sun\+Lighting}}
-, \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}{Only\+Ambient\+Lighting}}
-, \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}{MAX\+\_\+\+LIGHTING\+\_\+\+TYPE}}
- \}
-\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -105,8 +71,6 @@ void \mbox{\hyperlink{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}{init\+Stage0
 void \mbox{\hyperlink{stage00_8c_a2c7357fa6d77c01378ac0065e71bc0b9}{stage00\+Render}} (\mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} $\ast$data, struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$render\+State, struct \mbox{\hyperlink{graphics_8h_structGraphicsTask}{Graphics\+Task}} $\ast$task)
 \item 
 void \mbox{\hyperlink{stage00_8c_aa3fc22916cf89580dc261e887d5cd9f2}{update\+Game00}} (void)
-\item 
-\mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}{get\+Lighting\+Type}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
 \item 
 int \mbox{\hyperlink{stage00_8c_acac82efc4cd6b1f10ef2ae0443ab1551}{get\+Animation\+Num\+Model\+Mesh\+Parts}} (\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{Model\+Type}} model\+Type)
 \item 
@@ -173,8 +137,6 @@ static int \mbox{\hyperlink{stage00_8c_a77339925289d0c0fd78105b8c212604e}{log\+T
 \item 
 static int \mbox{\hyperlink{stage00_8c_a5fc3ab41e0396622499e9d49e3d03a9f}{logging\+Trace}} = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}
 \item 
-static int \mbox{\hyperlink{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}{two\+Cycle\+Mode}}
-\item 
 \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} \mbox{\hyperlink{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}{phys\+World\+Data}}
 \item 
 Lights1 \mbox{\hyperlink{stage00_8c_aa93a9d4ffce372fde21d53863400915b}{sun\+\_\+light}}
@@ -192,7 +154,7 @@ static int \mbox{\hyperlink{stage00_8c_a91f145bea20e1dc90f0782e771713455}{seq\+P
 
 
 \doxysubsection{Detailed Description}
-Stage 00, the Main stage that runs when the ROM starts. 
+\mbox{\hyperlink{structStage}{Stage}} 00, the Main stage that runs when the ROM starts. 
 
 \begin{DoxyAuthor}{Author}
 Kevin Reier 
@@ -277,38 +239,6 @@ Kevin Reier
 
 
 
-\doxysubsection{Typedef Documentation}
-\mbox{\Hypertarget{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}\label{stage00_8c_a46ae048f275985d6b0ce68f9025d5507}} 
-\index{stage00.c@{stage00.c}!LightingType@{LightingType}}
-\index{LightingType@{LightingType}!stage00.c@{stage00.c}}
-\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
-{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
-
-
-
-\doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}} 
-\index{stage00.c@{stage00.c}!LightingType@{LightingType}}
-\index{LightingType@{LightingType}!stage00.c@{stage00.c}}
-\doxysubsubsection{\texorpdfstring{LightingType}{LightingType}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SunLighting@{SunLighting}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!SunLighting@{SunLighting}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba536c02ee476dc6dab6e9534dafdfaa07}} 
-Sun\+Lighting&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{OnlyAmbientLighting@{OnlyAmbientLighting}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!OnlyAmbientLighting@{OnlyAmbientLighting}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62ba8a121d92e41f1427c26cd681ee1887d4}} 
-Only\+Ambient\+Lighting&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}!stage00.c@{stage00.c}}\index{stage00.c@{stage00.c}!MAX\_LIGHTING\_TYPE@{MAX\_LIGHTING\_TYPE}}}\mbox{\Hypertarget{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}\label{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62baf1f4bea4b6c3efb4e5ab38f047fbaa3e}} 
-MAX\+\_\+\+LIGHTING\+\_\+\+TYPE&\\
-\hline
-
-\end{DoxyEnumFields}
-
-
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{stage00_8c_a43e0e9490beba227b32fd15844feef5d}\label{stage00_8c_a43e0e9490beba227b32fd15844feef5d}} 
 \index{stage00.c@{stage00.c}!catherine\_animcallback@{catherine\_animcallback}}
@@ -351,12 +281,6 @@ MAX\+\_\+\+LIGHTING\+\_\+\+TYPE&\\
 \index{getCurrentAnimationRange@{getCurrentAnimationRange}!stage00.c@{stage00.c}}
 \doxysubsubsection{\texorpdfstring{getCurrentAnimationRange()}{getCurrentAnimationRange()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{animation_8h_structAnimationRange}{Animation\+Range}}$\ast$ get\+Current\+Animation\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}\label{stage00_8c_a8b0a302c761bcb25485c491d8f12849e}} 
-\index{stage00.c@{stage00.c}!getLightingType@{getLightingType}}
-\index{getLightingType@{getLightingType}!stage00.c@{stage00.c}}
-\doxysubsubsection{\texorpdfstring{getLightingType()}{getLightingType()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{stage00_8c_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} get\+Lighting\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}\label{stage00_8c_a2f84f297d56c43b855087c37ac8ff8f5}} 
 \index{stage00.c@{stage00.c}!initStage00@{initStage00}}
@@ -565,12 +489,6 @@ MAX\+\_\+\+LIGHTING\+\_\+\+TYPE&\\
 \index{totalUpdates@{totalUpdates}!stage00.c@{stage00.c}}
 \doxysubsubsection{\texorpdfstring{totalUpdates}{totalUpdates}}
 {\footnotesize\ttfamily int total\+Updates}
-
-\mbox{\Hypertarget{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}\label{stage00_8c_ad28e1ae03b5ecdc84fe2c1ac99214dab}} 
-\index{stage00.c@{stage00.c}!twoCycleMode@{twoCycleMode}}
-\index{twoCycleMode@{twoCycleMode}!stage00.c@{stage00.c}}
-\doxysubsubsection{\texorpdfstring{twoCycleMode}{twoCycleMode}}
-{\footnotesize\ttfamily int two\+Cycle\+Mode\hspace{0.3cm}{\ttfamily [static]}}
 
 \mbox{\Hypertarget{stage00_8c_a245716fdd6f6f161eb0cd68af0299285}\label{stage00_8c_a245716fdd6f6f161eb0cd68af0299285}} 
 \index{stage00.c@{stage00.c}!upVector@{upVector}}

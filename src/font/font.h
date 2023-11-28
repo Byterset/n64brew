@@ -3,7 +3,9 @@
 */
 
 #include <PR/sp.h>
-
+#include <PR/mbi.h>
+#include "font_ext.h"
+#include "letters_img.h"
 
 
 typedef struct sp2d_font_struct {

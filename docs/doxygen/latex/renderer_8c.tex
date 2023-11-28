@@ -7,12 +7,10 @@
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../util/memory.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../ed64/ed64io\+\_\+usb.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../math/frustum.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../math/vector2.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../math/vector3.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../math/vector4.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../game.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../gameobject.\+h\char`\"{}}\newline
 Include dependency graph for renderer.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -39,6 +37,8 @@ typedef struct \mbox{\hyperlink{renderer_8c_structGameObjectAABB}{Game\+Object\+
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{renderer_8c_ab45fd2a31ce052c56a5148c901dee46e}{Renderer\+\_\+is\+Dynamic\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
+\item 
+\mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} \mbox{\hyperlink{renderer_8c_a9f906d10f93ffe73b4c5482c8d5a83fc}{Renderer\+\_\+get\+Lighting\+Type}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
 \item 
 int \mbox{\hyperlink{renderer_8c_a03a569d38c2a3e77d9ed4a5d566c7d27}{Renderer\+\_\+is\+ZBuffered\+Game\+Object}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$obj)
 \item 
@@ -143,6 +143,12 @@ index&
 \index{Renderer\_gameobjectSortDist@{Renderer\_gameobjectSortDist}!renderer.c@{renderer.c}}
 \doxysubsubsection{\texorpdfstring{Renderer\_gameobjectSortDist()}{Renderer\_gameobjectSortDist()}}
 {\footnotesize\ttfamily float Renderer\+\_\+gameobject\+Sort\+Dist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{view\+Pos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{renderer_8c_a9f906d10f93ffe73b4c5482c8d5a83fc}\label{renderer_8c_a9f906d10f93ffe73b4c5482c8d5a83fc}} 
+\index{renderer.c@{renderer.c}!Renderer\_getLightingType@{Renderer\_getLightingType}}
+\index{Renderer\_getLightingType@{Renderer\_getLightingType}!renderer.c@{renderer.c}}
+\doxysubsubsection{\texorpdfstring{Renderer\_getLightingType()}{Renderer\_getLightingType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{renderer_8h_a7f8bea2ec71a08ca2a951c9204aad62b}{Lighting\+Type}} Renderer\+\_\+get\+Lighting\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{obj }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{renderer_8c_a934594fcfdb9c1007ddfe09fe6106fc3}\label{renderer_8c_a934594fcfdb9c1007ddfe09fe6106fc3}} 
 \index{renderer.c@{renderer.c}!Renderer\_getSeparatingPlane@{Renderer\_getSeparatingPlane}}

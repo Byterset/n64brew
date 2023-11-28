@@ -18,10 +18,8 @@
 #include "actors/gardener/character.h"
 #include "constants.h"
 #include "game.h"
-#include "gameobject.h"
 #include "gameutils.h"
 #include "item.h"
-#include "modeltype.h"
 #include "player.h"
 #include "util/trace.h"
 #include "math/vector3.h"
@@ -338,9 +336,6 @@ void Game_update(Input *input)
 		//   game->profTimePhysics += profEndPhysics - profStartPhysics;
 		//   game->profTimeCharacters += profEndCharacters - profStartCharacters;
 	}
-
-	// reset inputs
-	Input_init(input);
 }
 
 #ifndef __N64__

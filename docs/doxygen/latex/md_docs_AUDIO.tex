@@ -6,5 +6,5 @@ This engine is using the {\ttfamily sfz2n64} tool by James Lambert (\href{https:
 \item loops that are embedded in the .wav format will be processed by the soundplayer(!)
 \item save the file in one of assets/sounds or assets/music both will automatically be searched for matching file types when building.
 \item running {\ttfamily make} will execute the {\ttfamily sfzn64} tool and create both a {\ttfamily sounds.\+sounds} and a {\ttfamily sounds.\+sounds.\+tbl} file. These are referenced by the specfile and built into the final rom.
-\item the build will also run the {\ttfamily generate\+\_\+sound\+\_\+ids.\+js} script which is used in the MAKEFILE to create a {\ttfamily clips.\+h} header file. This header can be included in the code to reference the sound-\/clip you want to play. 
+\item the build will also run the {\ttfamily generate\+\_\+sound\+\_\+ids.\+js} script which is used in the MAKEFILE to create a {\ttfamily \mbox{\hyperlink{clips_8h}{clips.\+h}}} header file. This header can be included in the code to reference the sound-\/clip you want to play. 
 \end{DoxyItemize}

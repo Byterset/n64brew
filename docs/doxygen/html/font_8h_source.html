@@ -76,27 +76,31 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;PR/sp.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="font_8h.html">    9</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="font_8h.html#structsp2d__font__struct">sp2d_font_struct</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">   10</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">index_string</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">   11</a></span>&#160;    Bitmap *<a class="code" href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">bitmaps</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">   12</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">img</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="font_8h.html#afe10d185b692bb386b3771a1ae382c75">   13</a></span>&#160;} <a class="code" href="font_8h.html#afe10d185b692bb386b3771a1ae382c75">Font</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">extern</span> <a class="code" href="font_8h.html#structsp2d__font__struct">Font</a> <a class="code" href="font_8h.html#ac360779a17fd52e838cbf12441ffa5b7">lcase_font</a>;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;PR/mbi.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="font__ext_8h.html">font_ext.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="letters__img_8h.html">letters_img.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="font_8h.html">   11</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="font_8h.html#structsp2d__font__struct">sp2d_font_struct</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">   12</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">index_string</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">   13</a></span>&#160;    Bitmap *<a class="code" href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">bitmaps</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">   14</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">img</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="font_8h.html#afe10d185b692bb386b3771a1ae382c75">   15</a></span>&#160;} <a class="code" href="font_8h.html#afe10d185b692bb386b3771a1ae382c75">Font</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="font_8h.html#a295ad2ed26a8c2d909fa81e94d086091">text_sprite</a>( Sprite *, <span class="keywordtype">char</span> *, <a class="code" href="font_8h.html#structsp2d__font__struct">Font</a> *, <span class="keywordtype">int</span> , <span class="keywordtype">int</span> );</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">extern</span> <a class="code" href="font_8h.html#structsp2d__font__struct">Font</a> <a class="code" href="font_8h.html#ac360779a17fd52e838cbf12441ffa5b7">lcase_font</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="ttc" id="afont_8h_html_a13cccf53288f67e1ef5be963dd09142b"><div class="ttname"><a href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">sp2d_font_struct::img</a></div><div class="ttdeci">char * img</div><div class="ttdef"><b>Definition:</b> font.h:12</div></div>
-<div class="ttc" id="afont_8h_html_a295ad2ed26a8c2d909fa81e94d086091"><div class="ttname"><a href="font_8h.html#a295ad2ed26a8c2d909fa81e94d086091">text_sprite</a></div><div class="ttdeci">void text_sprite(Sprite *, char *, Font *, int, int)</div><div class="ttdef"><b>Definition:</b> font.c:114</div></div>
-<div class="ttc" id="afont_8h_html_a2ee86b7aa0936f77b3c08de852a878cd"><div class="ttname"><a href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">sp2d_font_struct::bitmaps</a></div><div class="ttdeci">Bitmap * bitmaps</div><div class="ttdef"><b>Definition:</b> font.h:11</div></div>
-<div class="ttc" id="afont_8h_html_a9f759f445ba805e0de793f3bc1caeef4"><div class="ttname"><a href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">sp2d_font_struct::index_string</a></div><div class="ttdeci">char * index_string</div><div class="ttdef"><b>Definition:</b> font.h:10</div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="font_8h.html#a295ad2ed26a8c2d909fa81e94d086091">text_sprite</a>( Sprite *, <span class="keywordtype">char</span> *, <a class="code" href="font_8h.html#structsp2d__font__struct">Font</a> *, <span class="keywordtype">int</span> , <span class="keywordtype">int</span> );</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="ttc" id="afont_8h_html_a13cccf53288f67e1ef5be963dd09142b"><div class="ttname"><a href="font_8h.html#a13cccf53288f67e1ef5be963dd09142b">sp2d_font_struct::img</a></div><div class="ttdeci">char * img</div><div class="ttdef"><b>Definition:</b> font.h:14</div></div>
+<div class="ttc" id="afont_8h_html_a295ad2ed26a8c2d909fa81e94d086091"><div class="ttname"><a href="font_8h.html#a295ad2ed26a8c2d909fa81e94d086091">text_sprite</a></div><div class="ttdeci">void text_sprite(Sprite *, char *, Font *, int, int)</div><div class="ttdef"><b>Definition:</b> font.c:110</div></div>
+<div class="ttc" id="afont_8h_html_a2ee86b7aa0936f77b3c08de852a878cd"><div class="ttname"><a href="font_8h.html#a2ee86b7aa0936f77b3c08de852a878cd">sp2d_font_struct::bitmaps</a></div><div class="ttdeci">Bitmap * bitmaps</div><div class="ttdef"><b>Definition:</b> font.h:13</div></div>
+<div class="ttc" id="afont_8h_html_a9f759f445ba805e0de793f3bc1caeef4"><div class="ttname"><a href="font_8h.html#a9f759f445ba805e0de793f3bc1caeef4">sp2d_font_struct::index_string</a></div><div class="ttdeci">char * index_string</div><div class="ttdef"><b>Definition:</b> font.h:12</div></div>
 <div class="ttc" id="afont_8h_html_ac360779a17fd52e838cbf12441ffa5b7"><div class="ttname"><a href="font_8h.html#ac360779a17fd52e838cbf12441ffa5b7">lcase_font</a></div><div class="ttdeci">Font lcase_font</div></div>
 <div class="ttc" id="afont_8h_html_afe10d185b692bb386b3771a1ae382c75"><div class="ttname"><a href="font_8h.html#afe10d185b692bb386b3771a1ae382c75">Font</a></div><div class="ttdeci">struct sp2d_font_struct Font</div></div>
-<div class="ttc" id="afont_8h_html_structsp2d__font__struct"><div class="ttname"><a href="font_8h.html#structsp2d__font__struct">sp2d_font_struct</a></div><div class="ttdef"><b>Definition:</b> font.h:9</div></div>
+<div class="ttc" id="afont_8h_html_structsp2d__font__struct"><div class="ttname"><a href="font_8h.html#structsp2d__font__struct">sp2d_font_struct</a></div><div class="ttdef"><b>Definition:</b> font.h:11</div></div>
+<div class="ttc" id="afont__ext_8h_html"><div class="ttname"><a href="font__ext_8h.html">font_ext.h</a></div></div>
+<div class="ttc" id="aletters__img_8h_html"><div class="ttname"><a href="letters__img_8h.html">letters_img.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

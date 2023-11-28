@@ -31,7 +31,7 @@ void console_print_all(struct RenderState *renderState){
     int i;
 
     for(i = 0; i < MAX_STRINGS; i++){
-        SHOWFONT(&renderState->dl, console_msgs[i], x, y);
+        SHOWFONT(&renderState->dl, console_msgs[i], x, y, 50, 50, 50);
         y += 15;
     }
     

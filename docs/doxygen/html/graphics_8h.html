@@ -78,8 +78,7 @@ $(function() {
 <div class="title">graphics.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;ultra64.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="constants_8h_source.html">../constants.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="constants_8h_source.html">../constants.h</a>&quot;</code><br />
 <code>#include &lt;sched.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="renderstate_8h_source.html">renderstate.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="defs_8h_source.html">../defs.h</a>&quot;</code><br />
@@ -90,16 +89,16 @@ Include dependency graph for graphics.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="graphics_8h__incl.png" border="0" usemap="#asrc_2graphics_2graphics_8h" alt=""/></div>
 <map name="asrc_2graphics_2graphics_8h" id="asrc_2graphics_2graphics_8h">
-<area shape="rect" title=" " alt="" coords="187,5,357,32"/>
-<area shape="rect" title=" " alt="" coords="44,229,124,256"/>
-<area shape="rect" href="constants_8h.html" title=" " alt="" coords="29,80,139,107"/>
-<area shape="rect" title=" " alt="" coords="163,80,235,107"/>
-<area shape="rect" href="renderstate_8h.html" title=" " alt="" coords="217,155,327,181"/>
-<area shape="rect" href="defs_8h.html" title=" " alt="" coords="309,80,384,107"/>
-<area shape="rect" href="font__ext_8h.html" title=" " alt="" coords="408,80,539,107"/>
-<area shape="rect" href="debug__console_8h.html" title=" " alt="" coords="563,80,731,107"/>
-<area shape="rect" title=" " alt="" coords="51,155,117,181"/>
-<area shape="rect" href="color_8h.html" title=" " alt="" coords="239,229,305,256"/>
+<area shape="rect" title=" " alt="" coords="200,5,371,32"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="5,80,115,107"/>
+<area shape="rect" title=" " alt="" coords="139,80,211,107"/>
+<area shape="rect" href="renderstate_8h.html" title=" " alt="" coords="380,155,489,181"/>
+<area shape="rect" href="defs_8h.html" title=" " alt="" coords="285,80,360,107"/>
+<area shape="rect" href="font__ext_8h.html" title=" " alt="" coords="384,80,515,107"/>
+<area shape="rect" href="debug__console_8h.html" title=" " alt="" coords="539,80,707,107"/>
+<area shape="rect" title=" " alt="" coords="27,155,93,181"/>
+<area shape="rect" title=" " alt="" coords="347,229,427,256"/>
+<area shape="rect" href="color_8h.html" title=" " alt="" coords="451,229,517,256"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -107,13 +106,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="graphics_8h__dep__incl.png" border="0" usemap="#asrc_2graphics_2graphics_8hdep" alt=""/></div>
 <map name="asrc_2graphics_2graphics_8hdep" id="asrc_2graphics_2graphics_8hdep">
-<area shape="rect" title=" " alt="" coords="381,5,552,32"/>
+<area shape="rect" title=" " alt="" coords="193,5,364,32"/>
 <area shape="rect" href="graphics_8c.html" title=" " alt="" coords="5,80,176,107"/>
 <area shape="rect" href="initgfx_8c.html" title=" " alt="" coords="200,80,357,107"/>
 <area shape="rect" href="renderer_8h.html" title=" " alt="" coords="381,80,552,107"/>
-<area shape="rect" href="stage00_8c.html" title="Stage 00, the Main stage that runs when the ROM starts." alt="" coords="535,155,643,181"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="627,80,717,107"/>
-<area shape="rect" href="renderer_8c.html" title=" " alt="" coords="342,155,511,181"/>
+<area shape="rect" href="renderer_8c.html" title=" " alt="" coords="301,155,470,181"/>
+<area shape="rect" href="stage00_8c.html" title="Stage 00, the Main stage that runs when the ROM starts." alt="" coords="494,155,602,181"/>
 </map>
 </div>
 </div>
@@ -174,10 +172,9 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335">ToonFlatShadingRenderMode</a>
 , <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac">TextureAndLightingRenderMode</a>
 , <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849">TextureNoLightingRenderMode</a>
-, <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27">NoTextureNoLightingRenderMode</a>
+, <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db">LightingNoTextureRenderMode</a>
 , <br />
-&#160;&#160;<a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db">LightingNoTextureRenderMode</a>
-, <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935">WireframeRenderMode</a>
+&#160;&#160;<a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935">WireframeRenderMode</a>
 , <a class="el" href="graphics_8h.html#ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697">MAX_RENDER_MODE</a>
 <br />
  }</td></tr>
@@ -189,6 +186,11 @@ Functions</h2></td></tr>
 <tr class="separator:ad33ad9954af6d7af39bfb766eeec387a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e0183ec88ae230f73f3d36acb729ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a52e0183ec88ae230f73f3d36acb729ca">graphicsCreateTask</a> (struct <a class="el" href="graphics_8h.html#structGraphicsTask">GraphicsTask</a> *targetTask, <a class="el" href="graphics_8h.html#a8a91f82651d93f79b931f6be7a520ea4">GraphicsCallback</a> callback, void *data)</td></tr>
 <tr class="separator:a52e0183ec88ae230f73f3d36acb729ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7c8d80ab196d7709513866cc0e36c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a5e7c8d80ab196d7709513866cc0e36c6">graphicsSetupPipeline</a> (struct <a class="el" href="renderstate_8h.html#structRenderState">RenderState</a> *renderState, <a class="el" href="graphics_8h.html#structDynamic">Dynamic</a> *dynamicp)</td></tr>
+<tr class="memdesc:a5e7c8d80ab196d7709513866cc0e36c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup Render Pipeline by clearing the previous GeometryMode, setting RenderMode as zBuffered, aliased, opaque Triangles.  <a href="graphics_8h.html#a5e7c8d80ab196d7709513866cc0e36c6">More...</a><br /></td></tr>
+<tr class="separator:a5e7c8d80ab196d7709513866cc0e36c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af779315665d07868ffc74514e9df3241"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#af779315665d07868ffc74514e9df3241">graphicsApplyRenderMode</a> (struct <a class="el" href="renderstate_8h.html#structRenderState">RenderState</a> *renderState, Lights0 *<a class="el" href="stage00_8c.html#a99994da3e0f2498ee09f83abf761fc8b">amb_light</a>, Lights1 *<a class="el" href="stage00_8c.html#aa93a9d4ffce372fde21d53863400915b">sun_light</a>, int ambientOnly)</td></tr>
+<tr class="separator:af779315665d07868ffc74514e9df3241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -614,7 +616,6 @@ zUpToYUpCoordinatesRotation</td>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88a26c4b272a3b55ddcd570fdad258f1335"></a>ToonFlatShadingRenderMode&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88abe0be04543dc39a243d13fe6b99b70ac"></a>TextureAndLightingRenderMode&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88a40e260b89dda1c053ade7f38290be849"></a>TextureNoLightingRenderMode&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88aff9cadef066f4db3badf2b9670d1be27"></a>NoTextureNoLightingRenderMode&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88aed3c681e1f11ebc693dcaf5d946cf1db"></a>LightingNoTextureRenderMode&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88a9296061786a36275a288125503d4a935"></a>WireframeRenderMode&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac9e546db27bb4f76f47d7e25f24abb88aae8a2eef5e063514d542131aa65e2697"></a>MAX_RENDER_MODE&#160;</td><td class="fielddoc"></td></tr>
@@ -623,6 +624,46 @@ zUpToYUpCoordinatesRotation</td>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="af779315665d07868ffc74514e9df3241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af779315665d07868ffc74514e9df3241">&#9670;&nbsp;</a></span>graphicsApplyRenderMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void graphicsApplyRenderMode </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="renderstate_8h.html#structRenderState">RenderState</a> *&#160;</td>
+          <td class="paramname"><em>renderState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Lights0 *&#160;</td>
+          <td class="paramname"><em>amb_light</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Lights1 *&#160;</td>
+          <td class="paramname"><em>sun_light</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ambientOnly</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a52e0183ec88ae230f73f3d36acb729ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52e0183ec88ae230f73f3d36acb729ca">&#9670;&nbsp;</a></span>graphicsCreateTask()</h2>
 
@@ -672,6 +713,43 @@ zUpToYUpCoordinatesRotation</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e7c8d80ab196d7709513866cc0e36c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7c8d80ab196d7709513866cc0e36c6">&#9670;&nbsp;</a></span>graphicsSetupPipeline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void graphicsSetupPipeline </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="renderstate_8h.html#structRenderState">RenderState</a> *&#160;</td>
+          <td class="paramname"><em>renderState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#structDynamic">Dynamic</a> *&#160;</td>
+          <td class="paramname"><em>dynamicp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup Render Pipeline by clearing the previous GeometryMode, setting RenderMode as zBuffered, aliased, opaque Triangles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderState</td><td></td></tr>
+    <tr><td class="paramname">dynamicp</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -3,6 +3,7 @@
 #define INPUT_H
 
 #include "../math/vector2.h"
+#include "controller.h"
 
 typedef struct Input
 {
@@ -11,8 +12,13 @@ typedef struct Input
 	int pickup;
 	int zoomIn;
 	int zoomOut;
+	int advanceRenderMode;
+	int playMusic;
+	int playHonk;
 } Input;
 
 void Input_init(Input *self);
+
+void Input_update(Input *self, int controller_id);
 
 #endif /* !INPUT_H */

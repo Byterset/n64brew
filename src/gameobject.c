@@ -3,9 +3,7 @@
 #include <stdlib.h>
 
 #include "util/memory.h"
-#include "constants.h"
 #include "gameobject.h"
-#include "math/rotation.h"
 #include "math/vector3.h"
 
 GameObject *GameObject_alloc()

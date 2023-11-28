@@ -1,6 +1,5 @@
 #include <math.h>
 
-#include "animation/animation.h"
 #include "game.h"
 #include "gameutils.h"
 #include "gooseanimtypes.h"

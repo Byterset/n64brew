@@ -1,6 +1,4 @@
 #include "matrix.h"
-
-#include <ultra64.h>
 #include "../defs.h"
 #include "../constants.h"
 

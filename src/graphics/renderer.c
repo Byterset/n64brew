@@ -13,12 +13,10 @@
 
 #include "../util/memory.h"
 #include "../ed64/ed64io_usb.h"
-#include "../math/frustum.h"
 #include "../math/vector2.h"
 #include "../math/vector3.h"
 #include "../math/vector4.h"
 #include "../game.h"
-#include "../gameobject.h"
 
 
 #define RENDERER_FRUSTUM_CULLING 1

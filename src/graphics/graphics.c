@@ -130,10 +130,30 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 	// 	sprintf(heapfree, "free heap:%d", calculateBytesFree());
 	// 	console_add_msg(heapfree);
 	// }
+	char *renderMode_str[20];
+	switch (gRenderMode){
+	case ToonFlatShadingRenderMode:
+		sprintf(renderMode_str, "Mode: Toon");
+		break;
+	case TextureAndLightingRenderMode:
+		sprintf(renderMode_str, "Mode: TexAndLight");
+		break;
+	case TextureNoLightingRenderMode:
+		sprintf(renderMode_str, "Mode: TexNoLight");
+		break;
+	case LightingNoTextureRenderMode:
+		sprintf(renderMode_str, "Mode: LightNoTex");
+		break;
+	case WireframeRenderMode:
+		sprintf(renderMode_str, "Mode: Wireframe");
+		break;
+	};
+	
 
 	char *fps_str[7];
 	sprintf(fps_str, "fps:%d", fps);
-	SHOWFONT(&renderState->dl, fps_str, SCREEN_WD-60, 10);
+	SHOWFONT(&renderState->dl, fps_str, SCREEN_WD-60, 10, 50,50,50);
+	SHOWFONT(&renderState->dl, renderMode_str, SCREEN_WD-300, SCREEN_HT - 20, 50, 50, 50);
 	console_print_all(renderState);
 
 	font_finish(&renderState->dl);
@@ -233,7 +253,7 @@ void graphicsSetupPipeline(struct RenderState *renderState, Dynamic *dynamicp){
 			  G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
 }
 
-void graphicsApplyRenderMode(struct RenderState *renderState, RenderMode renderMode, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly)
+void graphicsApplyRenderMode(struct RenderState *renderState, Lights0 *amb_light, Lights1 *sun_light, int ambientOnly)
 {
 	switch (gRenderMode)
 	{
@@ -254,7 +274,6 @@ void graphicsApplyRenderMode(struct RenderState *renderState, RenderMode renderM
 		}
 		else
 		{
-			
 			gSPSetLights1(renderState->dl++, (*sun_light));
 		}
 		gSPSetGeometryMode(

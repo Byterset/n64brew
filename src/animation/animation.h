@@ -12,7 +12,6 @@
 #include "../n64compat.h"
 #include "../math/rotation.h"
 #include "../sprite.h"
-#include "../math/vector3.h"
 
 // max num bones per character
 // on n64 we allocate this many transform matrices per character
