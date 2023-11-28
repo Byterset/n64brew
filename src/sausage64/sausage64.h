@@ -116,8 +116,8 @@ extern void sausage64_set_camera(Mtx *view, Mtx *projection);
 
 /*==============================
     sausage64_set_anim
-    Sets an animation on the model. Does not perform
-    error checking if an invalid animation is given.
+    Sets an animation on the model. 
+    Performs a small sanity check if there are any animations in the mdlData and if the given anim is in the range of anims in the model
     @param The model helper pointer
     @param The ANIMATION_* macro to set
 ==============================*/

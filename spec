@@ -30,9 +30,8 @@ beginseg
         stack   NU_SPEC_BOOT_STACK
 
   /* maxsize 0xDA400  keep inside first mb of RDRAM */
-
 	include "build/codesegment.o"
-  include "$(ROOT)/usr/lib/PR/rspboot.o"   
+  include "$(ROOT)/usr/lib/PR/rspboot.o"
 
   /*
   gfx microcodes should match the order of these defines:
@@ -55,7 +54,7 @@ beginseg
 endseg
 
 beginseg
-  name  "models"
+  name  "models_level_garden"
   flags OBJECT
   after "code"
   include "build/src/models.o"
@@ -64,12 +63,12 @@ endseg
 beginseg
   name  "sprites"
   flags OBJECT
-  after "models"
+  after "models_level_garden"
   include "build/src/sprite_data.o"
 endseg
 
 beginseg
-  name  "collision"
+  name  "collision_level_garden"
   flags OBJECT
   after "sprites"
   include "build/assets/levels/garden/garden_map_collision.o"
@@ -78,7 +77,7 @@ endseg
 beginseg
   name  "memheap"
   flags OBJECT
-  after "collision"
+  after "collision_level_garden"
   include "build/src/util/mem_heap.o"
 endseg
 
@@ -108,10 +107,11 @@ endseg
 
 beginwave
 	name	"build/game" /* will be used by spicy as filepath of the blinked binary (not rom)*/
+  // include "boot"
   include "code"
-  include "models"
+  include "models_level_garden"
   include "sprites"
-  include "collision" 
+  include "collision_level_garden" 
   include "memheap"
   include "sounds"
   include "soundsTbl"

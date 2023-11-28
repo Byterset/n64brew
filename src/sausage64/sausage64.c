@@ -282,15 +282,18 @@ void sausage64_advance_anim(s64ModelHelper* mdl, float tickamount)
  * @param anim The ANIMATION_* macro to set
  */
 
-void sausage64_set_anim(s64ModelHelper* mdl, u16 anim)
+void sausage64_set_anim(s64ModelHelper *mdl, u16 anim)
 {
-    s64Animation* animdata = &mdl->mdldata->anims[anim];
-    mdl->curanim = animdata;
-    mdl->curanimlen = animdata->keyframes[animdata->keyframecount-1].framenumber;
-    mdl->curkeyframe = 0;
-    mdl->animtick = 0;
-    if (animdata->keyframecount > 0)
-        sausage64_update_anim(mdl);
+    if (mdl->mdldata->animcount > 0 && anim < mdl->mdldata->animcount)
+    {
+        s64Animation *animdata = &mdl->mdldata->anims[anim];
+        mdl->curanim = animdata;
+        mdl->curanimlen = animdata->keyframes[animdata->keyframecount - 1].framenumber;
+        mdl->curkeyframe = 0;
+        mdl->animtick = 0;
+        if (animdata->keyframecount > 0)
+            sausage64_update_anim(mdl);
+    }
 }
 
 /**

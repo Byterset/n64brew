@@ -161,11 +161,11 @@ void initStage00()
 	Game *game;
 
 	// load in the models segment into higher memory
-	romCopy(_modelsSegmentRomStart, _modelsSegmentStart, (_modelsSegmentRomEnd - _modelsSegmentRomStart));
+	romCopy(_models_level_gardenSegmentRomStart, _models_level_gardenSegmentStart, (_models_level_gardenSegmentRomEnd - _models_level_gardenSegmentRomStart));
 	// load in the sprites segment into higher memory
 	romCopy(_spritesSegmentRomStart, _spritesSegmentStart, (_spritesSegmentRomEnd - _spritesSegmentRomStart));
 	// load in the collision segment into higher memory
-	romCopy(_collisionSegmentRomStart, _collisionSegmentStart, (_collisionSegmentRomEnd - _collisionSegmentRomStart));
+	romCopy(_collision_level_gardenSegmentRomStart, _collision_level_gardenSegmentStart, (_collision_level_gardenSegmentRomEnd - _collision_level_gardenSegmentRomStart));
 
 	physWorldData = (PhysWorldData){garden_map_collision_collision_mesh,
 									GARDEN_MAP_COLLISION_LENGTH,
@@ -237,45 +237,45 @@ void initStage00()
 
 
 
-#ifdef NU_DEBUG
-void traceRCP()
-{
-	int i;
-	float longestTaskTime = 0;
-	// s64 retraceTime;
+// #ifdef NU_DEBUG
+// void traceRCP()
+// {
+// 	int i;
+// 	float longestTaskTime = 0;
+// 	// s64 retraceTime;
 
-	// retraceTime = nuDebTaskPerfPtr->retraceTime;
-	// debugPrintf("rt=%f ", retraceTime / (1000000.0));
-	for (i = 0; i < nuDebTaskPerfPtr->gfxTaskCnt; i++)
-	{
-		// debugPrintf(
-		//     "[t%d: st=%f rsp=%f,rdp=%f] ", i,
-		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rspStart ) / 1000.0,
-		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rspEnd -
-		//      nuDebTaskPerfPtr->gfxTaskTime[i].rspStart) /
-		//         1000.0,
-		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rdpEnd -
-		//      nuDebTaskPerfPtr->gfxTaskTime[i].rspStart) /
-		//         1000.0);
+// 	// retraceTime = nuDebTaskPerfPtr->retraceTime;
+// 	// debugPrintf("rt=%f ", retraceTime / (1000000.0));
+// 	for (i = 0; i < nuDebTaskPerfPtr->gfxTaskCnt; i++)
+// 	{
+// 		// debugPrintf(
+// 		//     "[t%d: st=%f rsp=%f,rdp=%f] ", i,
+// 		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rspStart ) / 1000.0,
+// 		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rspEnd -
+// 		//      nuDebTaskPerfPtr->gfxTaskTime[i].rspStart) /
+// 		//         1000.0,
+// 		//     (nuDebTaskPerfPtr->gfxTaskTime[i].rdpEnd -
+// 		//      nuDebTaskPerfPtr->gfxTaskTime[i].rspStart) /
+// 		//         1000.0);
 
-		// pulled out to a variable so the modern compiler doesn't
-		// generate broken code
-		NUDebTaskTime gfxTaskTime = nuDebTaskPerfPtr->gfxTaskTime[i];
+// 		// pulled out to a variable so the modern compiler doesn't
+// 		// generate broken code
+// 		NUDebTaskTime gfxTaskTime = nuDebTaskPerfPtr->gfxTaskTime[i];
 
-		Trace_addEvent(RSPTaskTraceEvent, gfxTaskTime.rspStart / 1000.0f,
-					   gfxTaskTime.rspEnd / 1000.0f);
+// 		Trace_addEvent(RSPTaskTraceEvent, gfxTaskTime.rspStart / 1000.0f,
+// 					   gfxTaskTime.rspEnd / 1000.0f);
 
-		Trace_addEvent(RDPTaskTraceEvent, gfxTaskTime.rspStart / 1000.0f,
-					   gfxTaskTime.rdpEnd / 1000.0f);
+// 		Trace_addEvent(RDPTaskTraceEvent, gfxTaskTime.rspStart / 1000.0f,
+// 					   gfxTaskTime.rdpEnd / 1000.0f);
 
-		longestTaskTime = MAX(longestTaskTime, ((gfxTaskTime.rdpEnd) / 1000.0f -
-												(gfxTaskTime.rspStart / 1000.0f)));
-	}
-	// debugPrintf("\n");
-	profilingAccumulated[RDPTaskTraceEvent] += longestTaskTime;
-	profilingCounts[RDPTaskTraceEvent]++;
-}
-#endif
+// 		longestTaskTime = MAX(longestTaskTime, ((gfxTaskTime.rdpEnd) / 1000.0f -
+// 												(gfxTaskTime.rspStart / 1000.0f)));
+// 	}
+// 	// debugPrintf("\n");
+// 	profilingAccumulated[RDPTaskTraceEvent] += longestTaskTime;
+// 	profilingCounts[RDPTaskTraceEvent]++;
+// }
+// #endif
 
 /* Make the display list and activate the task */
 void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTask *task)
@@ -334,6 +334,7 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	// case for simple gameobjects with no moving sub-parts
 	// Gfx *modelDisplayList;
 	// gSPDisplayList(renderState->dl++, modelDisplayList);
+	graphicsApplyRenderMode(renderState, gRenderMode, &amb_light, &sun_light, 0);
 
 	sausage64_drawmodel(&renderState->dl, &catherine);
 }
