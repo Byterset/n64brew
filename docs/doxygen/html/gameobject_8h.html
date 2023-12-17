@@ -127,11 +127,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:structGameObject"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#structGameObject">GameObject</a></td></tr>
+<tr class="memdesc:structGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a game object in the game world.  <a href="gameobject_8h.html#structGameObject">More...</a><br /></td></tr>
 <tr class="separator:structGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ab0fb707a835e2853e4ab457d743d9640"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="gameobject_8h.html#structGameObject">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#ab0fb707a835e2853e4ab457d743d9640">GameObject</a></td></tr>
+<tr class="memdesc:ab0fb707a835e2853e4ab457d743d9640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a game object in the game world.  <a href="gameobject_8h.html#ab0fb707a835e2853e4ab457d743d9640">More...</a><br /></td></tr>
 <tr class="separator:ab0fb707a835e2853e4ab457d743d9640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -153,12 +155,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"></div><div class="dynheader">
+<div class="textblock"><p>Represents a game object in the game world. </p>
+</div><div class="dynheader">
 Collaboration diagram for GameObject:</div>
 <div class="dyncontent">
 <div class="center"><img src="structGameObject__coll__graph.png" border="0" usemap="#aGameObject_coll__map" alt="Collaboration graph"/></div>
 <map name="aGameObject_coll__map" id="aGameObject_coll__map">
-<area shape="rect" title=" " alt="" coords="180,391,283,417"/>
+<area shape="rect" title="Represents a game object in the game world." alt="" coords="180,391,283,417"/>
 <area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="142,5,212,32"/>
 <area shape="rect" href="physics_8h.html#structPhysBody" title=" " alt="" coords="108,242,195,269"/>
 <area shape="rect" href="animation_8h.html#structAnimationBoneSpriteAttachment" title=" " alt="" coords="120,183,356,209"/>
@@ -175,54 +178,63 @@ Collaboration diagram for GameObject:</div>
 <td class="fieldname">
 animState</td>
 <td class="fielddoc">
+<p>The animation state of the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a98291c60da12d9036e1ad24cfebcf6b3"></a>int</td>
 <td class="fieldname">
 id</td>
 <td class="fielddoc">
+<p>The identifier of the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a7ea970ecda2698767cc70fa269f1c25c"></a><a class="el" href="modeltype_8h.html#a9f27db0468ce0ce2994eb68dc919b15d">ModelType</a></td>
 <td class="fieldname">
 modelType</td>
 <td class="fielddoc">
+<p>The type of model used for rendering the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a3c05520bfb3afeeea99a34c8817da166"></a><a class="el" href="physics_8h.html#structPhysBody">PhysBody</a> *</td>
 <td class="fieldname">
 physBody</td>
 <td class="fielddoc">
+<p>The physical body of the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a7ee07f15ea5b54eb4bedbdeb92bf2eca"></a>struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a></td>
 <td class="fieldname">
 position</td>
 <td class="fielddoc">
+<p>The position of the game object in 3D space. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a0a000ed454032143e8b600cfb4f07b03"></a><a class="el" href="rotation_8h.html#structEulerDegrees">EulerDegrees</a></td>
 <td class="fieldname">
 rotation</td>
 <td class="fielddoc">
+<p>The rotation of the game object in <a class="el" href="rotation_8h.html#structEuler">Euler</a> angles. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="ace860ff40546bbe3e1a09f774d715a5b"></a>int</td>
 <td class="fieldname">
 solid</td>
 <td class="fielddoc">
+<p>Flag indicating if the game object is solid. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a23fac7e8944428807b74b0edc3bc6dec"></a>int</td>
 <td class="fieldname">
 subtype</td>
 <td class="fielddoc">
+<p>The subtype of the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
 <a id="a3f6d5ce1244f12d405af551253752502"></a>int</td>
 <td class="fieldname">
 visible</td>
 <td class="fielddoc">
+<p>Flag indicating if the game object is visible. </p>
 </td></tr>
 </table>
 
@@ -240,6 +252,8 @@ visible</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Represents a game object in the game world. </p>
 
 </div>
 </div>
@@ -292,6 +306,16 @@ visible</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initializes a <a class="el" href="gameobject_8h.html#structGameObject" title="Represents a game object in the game world.">GameObject</a> with the given ID and initial position.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>Pointer to the <a class="el" href="gameobject_8h.html#structGameObject" title="Represents a game object in the game world.">GameObject</a> instance. </td></tr>
+    <tr><td class="paramname">id</td><td>The ID of the <a class="el" href="gameobject_8h.html#structGameObject" title="Represents a game object in the game world.">GameObject</a>. </td></tr>
+    <tr><td class="paramname">initPos</td><td>Pointer to the initial position of the <a class="el" href="gameobject_8h.html#structGameObject" title="Represents a game object in the game world.">GameObject</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the initialized <a class="el" href="gameobject_8h.html#structGameObject" title="Represents a game object in the game world.">GameObject</a>. </dd></dl>
 
 </div>
 </div>

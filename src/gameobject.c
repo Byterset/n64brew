@@ -12,6 +12,14 @@ GameObject *GameObject_alloc()
 	return obj;
 }
 
+/**
+ * Initializes a GameObject with the given ID and initial position.
+ *
+ * @param self      Pointer to the GameObject instance.
+ * @param id        The ID of the GameObject.
+ * @param initPos   Pointer to the initial position of the GameObject.
+ * @return          Pointer to the initialized GameObject.
+ */
 GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos)
 {
 	self->id = id;
@@ -31,9 +39,14 @@ GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos)
 
 #ifndef __N64__
 #include <stdio.h>
+
+/**
+ * Prints the GameObject's information.
+ *
+ * @param self The GameObject instance to print.
+ */
 void GameObject_print(GameObject *self)
 {
 	printf("%s pos=", ModelTypeStrings[self->modelType]);
-	// Vec3d_print(&self->position);
 }
 #endif

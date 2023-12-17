@@ -96,6 +96,23 @@ beginseg
   include "build/assets/sounds/sounds.sounds.tbl"
 endseg
 
+beginseg
+	name "bank"
+	flags RAW
+	include "build/assets/soundbank/ins/Bank.ctl"
+endseg
+
+beginseg
+	name "table"
+	flags RAW
+	include "build/assets/soundbank/ins/Bank.tbl"
+endseg
+
+beginseg
+	name "auroraBorealis"
+	flags RAW
+	include "build/assets/music/AuroraBorealis.mid"
+endseg
 
 beginseg
   name  "trace"
@@ -113,6 +130,9 @@ beginwave
   include "sprites"
   include "collision_level_garden" 
   include "memheap"
+  include "table"
+	include "bank"
+  include "auroraBorealis"
   include "sounds"
   include "soundsTbl"
   include "trace"

@@ -5,11 +5,23 @@ include ./modern.makefile
 
 BLENDER= blender
 
-SFZ2N64 = tools/sfz2n64
+SFZ2N64 = tools/sfz2n64/sfz2n64
+
+ROMHEADER = romheader_ntsc
+
+BUILDDIR = build
+
+APP =		$(BUILDDIR)/game.out
+
+TARGETS =	$(BUILDDIR)/game.z64
+
+SPECFILE = spec
 
 
 LCINCS = -I. -I./include -I$(GCCINCDIR) -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR -I$(INC) -I$(EXEGCC_INC)
 LCOPTS =	-G 0 -std=gnu90 -nostdinc -Wno-comment -Werror-implicit-function-declaration 
+# the order of $(NUAUDIOLIB) and -lgultra_d (CORELIBS) matter :|
+LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) $(CORELIBS) -L$(GCCLIBDIR) -lgcc
 
 # include overrides file from local repo
 ifndef RELEASE
@@ -31,8 +43,12 @@ endif
 
 ifdef OPTIMIZE
 NUAUDIOLIB = -lnualstl_n -ln_mus -ln_audio_sc
+CORELIBS = -lnusys -lnustd -lultra
+OPTIMIZER =	-O2
 else
 NUAUDIOLIB = -lnualstl_n_d -ln_mus_d -ln_audio_sc
+CORELIBS = -lnusys_d -lnustd_d -lultra_d
+OPTIMIZER =	-g
 endif
 
 LCDEFS = -DN_AUDIO -DF3DEX_GBI_2 -D__N64__
@@ -55,29 +71,56 @@ else
 CORELIBS = -lnusys_d -lnustd_d -lultra_d 
 endif
 
-ifdef OPTIMIZE
-OPTIMIZER =	-O2
-else
-OPTIMIZER =	-g
-endif
+# Flags for the C Compiler
+CFLAGS = $(LCDEFS) $(LCINCS) $(LCOPTS) $(OPTIMIZER) 
 
-BUILDDIR = build
+HFILES =	src/actors/gardener/character.h \
+	src/animation/animation.h \
+	src/audio/audio.h \
+	src/audio/soundarray.h \
+	src/audio/soundplayer.h \
+	src/constants.h \
+	src/controls/controller.h \
+	src/controls/input.h \
+	src/font/font.h \
+	src/font/font_ext.h \
+	src/font/letters_img.h \
+	src/game.h \
+	src/gameobject.h \
+	src/gameutils.h \
+	src/gametypes.h \
+	src/graphics/color.h \
+	src/graphics/graphics.h \
+	src/graphics/initgfx.h \
+	src/graphics/renderer.h \
+	src/graphics/renderstate.h \
+	src/item.h \
+	src/main.h \
+	src/math/frustum.h \
+	src/math/matrix.h \
+	src/math/quaternion.h \
+	src/math/rotation.h \
+	src/math/vector2.h \
+	src/math/vector2s16.h \
+	src/math/vector3.h \
+	src/math/vector4.h \
+	src/modeltype.h \
+	src/pathfinding/pathfinding.h \
+	src/physics/collision.h \
+	src/physics/physics.h \
+	src/player.h \
+	src/segments.h \
+	src/sausage64/sausage64.h \
+	src/util/debug_console.h \
+	src/util/memory.h \
+	src/util/rom.h \
+	src/util/time.h \
+	src/util/trace.h
 
-ROMHEADER = romheader_ntsc
+HFILE_ASSETS =	assets/levels/garden/garden_map_graph.h \
+		assets/levels/garden/garden_map_collision.h
 
-APP =		$(BUILDDIR)/game.out
-
-TARGETS =	$(BUILDDIR)/game.z64
-
-SPECFILE = spec
-
-HFILES =	src/main.h src/gameobject.h src/game.h src/modeltype.h src/graphics/renderer.h src/controls/input.h src/actors/gardener/character.h src/player.h src/gameutils.h src/gametypes.h src/item.h src/animation/animation.h src/physics/physics.h src/math/rotation.h src/physics/collision.h src/pathfinding/pathfinding.h src/util/trace.h src/math/frustum.h src/segments.h
-HFILES += 	src/math/vector2.h src/math/vector3.h src/math/quaternion.h src/math/vector4.h src/math/vector2s16.h src/util/rom.h src/constants.h
-HFILES += 	src/audio/audio.h src/audio/soundplayer.h src/audio/soundarray.h
-HFILES += 	src/util/memory.h src/util/time.h src/graphics/color.h src/graphics/renderstate.h src/defs.h
-HFILES += 	src/graphics/graphics.h src/graphics/initgfx.h src/controls/controller.h src/math/matrix.h src/font/font.h src/font/font_ext.h src/font/letters_img.h src/util/debug_console.h
-HFILES +=	src/sausage64/sausage64.h
-HFILES += 	assets/levels/garden/garden_map_graph.h assets/levels/garden/garden_map_collision.h
+HFILES += $(HFILE_ASSETS)
 
 LEVELS = $(wildcard assets/levels/**/**/*.blend) $(wildcard assets/levels/**/*.blend) $(wildcard assets/levels/*.blend)
 LEVEL_MAP_HEADERS = $(LEVELS:%.blend=%_map.h)
@@ -94,16 +137,51 @@ SPRITE_HEADERS = $(patsubst assets/sprites/%.png,assets/sprites/%.h,$(patsubst a
 # Code Files regarding Everdrive
 ED64CODEFILES = src/ed64/ed64io_usb.c src/ed64/ed64io_sys.c src/ed64/ed64io_everdrive.c src/ed64/ed64io_fault.c src/ed64/ed64io_os_error.c src/ed64/ed64io_watchdog.c
 
-# Code Files
-CODEFILES =  src/main.c src/stage00.c src/gameobject.c src/game.c src/modeltype.c src/graphics/renderer.c src/controls/input.c src/actors/gardener/character.c 
-CODEFILES += src/actors/gardener/characterstate.c src/player.c src/gameutils.c src/item.c src/animation/animation.c src/physics/physics.c src/math/rotation.c 
-CODEFILES += src/physics/collision.c  src/pathfinding/pathfinding.c src/math/frustum.c src/sprite.c
-CODEFILES += src/math/mathf.c src/math/vector2.c src/math/vector3.c src/math/vector2s16.c src/math/vector4.c src/util/rom.c src/math/quaternion.c
-CODEFILES += src/audio/audiomgr.c src/audio/audio.c src/audio/soundarray.c src/audio/soundplayer.c
-CODEFILES += src/util/memory.c src/util/time.c src/graphics/color.c src/graphics/renderstate.c 
-CODEFILES += src/graphics/graphics.c src/graphics/initgfx.c src/controls/controller.c src/math/matrix.c src/font/font.c src/util/debug_console.c
-CODEFILES += src/sausage64/sausage64.c
-CODEFILES += assets/levels/garden/garden_map_graph.c
+CODEFILES = \
+	src/main.c \
+	src/stage00.c \
+	src/gameobject.c \
+	src/game.c \
+	src/modeltype.c \
+	src/graphics/renderer.c \
+	src/controls/input.c \
+	src/actors/gardener/character.c \
+	src/actors/gardener/characterstate.c \
+	src/player.c \
+	src/gameutils.c \
+	src/item.c \
+	src/animation/animation.c \
+	src/physics/physics.c \
+	src/math/rotation.c \
+	src/physics/collision.c \
+	src/pathfinding/pathfinding.c \
+	src/math/frustum.c \
+	src/sprite.c \
+	src/math/mathf.c \
+	src/math/vector2.c \
+	src/math/vector3.c \
+	src/math/vector2s16.c \
+	src/math/vector4.c \
+	src/util/rom.c \
+	src/math/quaternion.c \
+	src/audio/audiomgr.c \
+	src/audio/audio.c \
+	src/audio/soundarray.c \
+	src/audio/soundplayer.c \
+	src/util/memory.c \
+	src/util/time.c \
+	src/graphics/color.c \
+	src/graphics/renderstate.c \
+	src/graphics/graphics.c \
+	src/graphics/initgfx.c \
+	src/controls/controller.c \
+	src/math/matrix.c \
+	src/font/font.c \
+	src/util/debug_console.c \
+	src/sausage64/sausage64.c \
+	assets/levels/garden/garden_map_graph.c
+
+
 ifdef ED64
 CODEFILES  += $(ED64CODEFILES)
 endif
@@ -116,6 +194,9 @@ DATAOBJECTS =	$(DATA_SRC_FILES:src/%.c=$(BUILDDIR)/src/%.o) $(DATA_SRC_ASSETS:as
 CODESEGMENT =	$(BUILDDIR)/codesegment.o
 
 MUSIC_CLIPS = $(shell find assets/music/ -type f -name '*.wav')
+
+SONG_FILES = build/assets/music/AuroraBorealis.mid
+
 SOUND_CLIPS = $(shell find assets/sounds/ -type f -name '*.wav') #$(shell find assets/sounds -type f -name '*.aif') $(shell find assets/sounds_ins -type f -name '*.ins')
 SOUNDS_FILES = build/assets/sounds/sounds.sounds
 ALL_SOUND_WAV = $(MUSIC_CLIPS) $(SOUND_CLIPS)
@@ -123,12 +204,10 @@ ALL_SOUND_WAV = $(MUSIC_CLIPS) $(SOUND_CLIPS)
 # All necessary .o Files for the build
 OBJECTS =	$(CODESEGMENT) $(MODELSSEGMENT) $(DATAOBJECTS)
 
-CFLAGS = $(LCDEFS) $(LCINCS) $(LCOPTS) $(OPTIMIZER) 
-
-# the order of $(NUAUDIOLIB) and -lgultra_d (CORELIBS) matter :|
-LDFLAGS = $(MKDEPOPT) -L$(LIB)  -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) $(NUAUDIOLIB) $(CORELIBS) -L$(GCCLIBDIR) -lgcc
-
 default: $(TARGETS)
+
+spec: $(SONG_FILES) build/assets/soundbank/ins/Bank.ctl build/assets/soundbank/ins/Bank.tbl
+	touch spec
 
 $(BUILDDIR)/src/%.o: src/%.c $(HFILES) | $(BUILDDIR) src/audio/clips.h
 # to print resolved include paths, add -M flag
@@ -167,7 +246,16 @@ assets/sprites/%.h: assets/sprites/%.png
 #convert from Bitmap to n64 compatible header
 assets/sprites/%.h: assets/sprites/%.bmp
 	python3 tools/ultratex.py $< $@
-	
+
+build/assets/music/%.mid: assets/music/%.mid assets/music/%.meta
+	@mkdir -p $(@D)
+	midicomp $< | grep -q PrCh > $@.instruments || true
+	tools/midicvt/midicvt $< $@ --metadata $(word 2,$^)
+
+build/assets/soundbank/ins/Bank.ctl build/assets/soundbank/ins/Bank.tbl: assets/soundbank/ins/Bank.ins
+	@mkdir -p $(@D)
+	$(SFZ2N64) -o build/assets/soundbank/ins/Bank.ctl assets/soundbank/ins/Bank.ins 
+
 #create the build directory and mirror the assets and src directory structure inside
 $(BUILDDIR):
 	mkdir -p $@
