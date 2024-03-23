@@ -5,8 +5,7 @@
 #include "math/vector3.h"
 
 // when updating this, also update ModelTypeStrings[] and modelTypesProperties[]
-// and add new meshes to getModelDisplayList() in stage00.c and add a
-// loadModel() call in glgoose.cpp
+// and add new meshes to getModelDisplayList() in stage00.c
 typedef enum ModelType
 {
 	NoneModel,

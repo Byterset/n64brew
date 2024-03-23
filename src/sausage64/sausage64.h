@@ -1,7 +1,7 @@
 #ifndef SAUSAGE64_H
 #define SAUSAGE64_H
 
-#include "../math/rotation.h"
+#include "../math/transform.h"
 
 #ifndef _ULTRA64_H_
 #include <ultra64.h>
@@ -85,9 +85,7 @@ typedef struct
     void (*postdraw)(u16);
     void (*animcallback)(u16);
     s64ModelData *mdldata;
-    struct Vector3 *position;
-    struct Vector3 *scale;
-    Quaternion *rotation;
+    Transform transform;
 } s64ModelHelper;
 
 /*********************************
@@ -103,7 +101,7 @@ typedef struct
            part
 ==============================*/
 
-extern void sausage64_initmodel(s64ModelHelper *mdl, s64ModelData *mdldata, Mtx *matrices, struct Vector3 *position, struct Vector3 *scale, struct Quaternion *rotation);
+extern void sausage64_initmodel(s64ModelHelper *mdl, s64ModelData *mdldata, Mtx *matrices, struct Vector3 position, struct Vector3 scale, struct Quaternion rotation);
 
 /*==============================
     sausage64_set_camera
@@ -150,16 +148,6 @@ extern void sausage64_set_predrawfunc(s64ModelHelper *mdl, void (*predraw)(u16))
 ==============================*/
 
 extern void sausage64_set_postdrawfunc(s64ModelHelper *mdl, void (*postdraw)(u16));
-
-/*==============================
-    sausage64_set_transform
-    Set the position and rotation of a model
-    @param The model helper pointer
-    @param The position vector
-    @param The rotation quaternion
-    @param The scale vector
-==============================*/
-extern void sausage64_set_transform(s64ModelHelper *mdl, struct Vector3 *position, struct Quaternion *rotation, struct Vector3 *scale);
 
 /*==============================
     sausage64_advance_anim

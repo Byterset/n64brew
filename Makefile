@@ -104,6 +104,7 @@ HFILES =	src/actors/gardener/character.h \
 	src/math/vector2s16.h \
 	src/math/vector3.h \
 	src/math/vector4.h \
+	src/math/transform.h \
 	src/modeltype.h \
 	src/pathfinding/pathfinding.h \
 	src/physics/collision.h \
@@ -162,6 +163,7 @@ CODEFILES = \
 	src/math/vector3.c \
 	src/math/vector2s16.c \
 	src/math/vector4.c \
+	src/math/transform.c \
 	src/util/rom.c \
 	src/math/quaternion.c \
 	src/audio/audiomgr.c \

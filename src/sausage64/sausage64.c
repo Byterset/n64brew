@@ -59,19 +59,19 @@ static inline f32 s64lerp(f32 startValue, f32 endValue, f32 fraction)
  * @param mdl The model helper to initialize
  * @param mdldata The model data 
  * @param matrices The array of matrices for each mesh part
- * @param position The position of the model
- * @param scale The scale of the model
- * @param rotation The rotation of the model
+ * @param position The initial position of the model
+ * @param scale The initial scale of the model
+ * @param rotation The initial rotation of the model
  */
-void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, struct Vector3* position, struct Vector3* scale, struct Quaternion* rotation)
+void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, struct Vector3 position, struct Vector3 scale, struct Quaternion rotation)
 {
     mdl->interpolate = TRUE;
     mdl->loop = TRUE;
     mdl->curkeyframe = 0;
-    mdl->position = position;
-    mdl->scale = scale;
-    mdl->rotation = rotation;
-
+    mdl->transform.position = position;
+    mdl->transform.scale = scale;
+    mdl->transform.rotation = rotation;
+    
     // Set the the first animation if it exists, otherwise set the animation to NULL
     if (mdldata->animcount > 0)
     {
@@ -317,12 +317,13 @@ void sausage64_set_anim(s64ModelHelper *mdl, u16 anim)
  * @param interpolate Whether to interpolate between the current and next frame data
  * @param l The interpolation amount
  * @param matrix The matrix to store the mesh's transformation
+ * @param transform_global The global transformation matrix
  */
-static inline void sausage64_drawpart(Gfx **glistp, s64Mesh *mesh, const s64FrameData *cfdata, const s64FrameData *nfdata, const u8 interpolate, const f32 l, Mtx *matrix)
+static inline void sausage64_drawpart(Gfx **glistp, s64Mesh *mesh, const s64FrameData *cfdata, const s64FrameData *nfdata, const u8 interpolate, const f32 l, Mtx *matrix, const float transform_global[4][4])
 {
     float helper1[4][4];
     float helper2[4][4];
-    float test[4][4];
+    // float test[4][4];
     Quaternion q;
     q.w = cfdata->rot[0];
     q.x = cfdata->rot[1];
@@ -348,15 +349,6 @@ static inline void sausage64_drawpart(Gfx **glistp, s64Mesh *mesh, const s64Fram
                      s64lerp(cfdata->pos[0], nfdata->pos[0], l),
                      s64lerp(cfdata->pos[1], nfdata->pos[1], l),
                      s64lerp(cfdata->pos[2], nfdata->pos[2], l));
-        // Reposition Catherine to the starting position of the player (temporary)
-        // TODO: Big Todo!! include pos, rot, scale from s64ModelHelper in these calculations
-        // only calculate the translation matrix of worldtransform once in the drawmodel function
-        // then pass it to the drawpart function!
-        guTranslateF(test,
-                     -1500,
-                     125,
-                     -1550);
-        guMtxCatF(helper1, test, helper1);
         guScaleF(helper2,
                  s64lerp(cfdata->scale[0], nfdata->scale[0], l),
                  s64lerp(cfdata->scale[1], nfdata->scale[1], l),
@@ -403,7 +395,8 @@ static inline void sausage64_drawpart(Gfx **glistp, s64Mesh *mesh, const s64Fram
         helper2[3][3] = 1;
         guMtxCatF(helper2, helper1, helper1);
     }
-
+    //apply the global transformation matrix
+    guMtxCatF(helper1, transform_global, helper1);
     guMtxF2L(helper1, matrix);
 
     // Draw the body part
@@ -424,6 +417,24 @@ void sausage64_drawmodel(Gfx **glistp, s64ModelHelper *mdl)
     const s64ModelData *mdata = mdl->mdldata;
     const u16 mcount = mdata->meshcount;
     const s64Animation *anim = mdl->curanim;
+    float helper1[4][4];
+    float helper2[4][4];
+
+    // calculate global transformation matrix
+    // apply global positon
+    guTranslateF(helper1,
+                 mdl->transform.position.x,
+                 mdl->transform.position.y,
+                 mdl->transform.position.z);
+    // apply global scale
+    guScaleF(helper2,
+             mdl->transform.scale.x,
+             mdl->transform.scale.y,
+             mdl->transform.scale.z);
+    guMtxCatF(helper2, helper1, helper1);
+    //apply global rotation
+    quatToMatrix(&(mdl->transform.rotation), &helper2);
+    guMtxCatF(helper2, helper1, helper1);
 
     // If we have a valid animation
     if (anim != NULL)
@@ -447,8 +458,8 @@ void sausage64_drawmodel(Gfx **glistp, s64ModelHelper *mdl)
                 mdl->predraw(i);
 
             // Draw this part of the model with animations
-            sausage64_drawpart(glistp, &mdata->meshes[i], cfdata, nfdata, mdl->interpolate, l, &mdl->matrix[i]);
-
+            sausage64_drawpart(glistp, &mdata->meshes[i], cfdata, nfdata, mdl->interpolate, l, &mdl->matrix[i], helper1);
+        	
             // Call the post draw function
             if (mdl->postdraw != NULL)
                 mdl->postdraw(i);

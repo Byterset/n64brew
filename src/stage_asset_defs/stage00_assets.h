@@ -8,4 +8,4 @@
 
 // include sample data for model data (anim/verts/textures)
 #include "../actors/catherine/catherineTex.h"
-#include "../actors/catherine/catherineMdl.h"
+#include "../actors/catherine/catherineMDL.h"

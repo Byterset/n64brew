@@ -45,6 +45,11 @@ Mtx catherineMtx[MESHCOUNT_Catherine];
 s64ModelHelper catherine;
 float catherine_animspeed;
 
+// Face animation
+static u16 faceindex;
+static u32 facetick;
+static OSTime facetime;
+static FaceAnim* faceanim;
 
 
 //-----------------------------------------------
@@ -99,6 +104,7 @@ static int logTraceStartOffset = 0;
 static int loggingTrace = FALSE;
 // static RenderMode renderModeSetting;
 PhysWorldData physWorldData;
+struct RenderState *rState;
 
 void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState);
 void drawSprite(unsigned short *sprData,
@@ -129,6 +135,21 @@ static float sndPitch = 10.5; // i don't fucking know :((
 static int sndNumber = 0;
 static int seqPlaying = FALSE;
 s16 seqId = -1;
+
+
+
+void catherine_predraw(u16 part)
+{
+	
+    // Handle face drawing
+    switch (part)
+    {
+        case MESH_Catherine_Head:
+            gDPLoadTextureBlock(rState->dl++, faceanim->faces[faceindex], G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            break;
+    }
+}
+
 
 /* The initialization of stage 0 */
 void initStage00()
@@ -177,12 +198,24 @@ void initStage00()
 
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
-	struct Vector3 catherine_pos = {0.0F, 0.0F, 0.0F};
-	struct Vector3 catherine_scale = {1.0F, 1.0F, 1.0F};
-	Quaternion catherine_rot = {0.0F, 0.0F, 0.0F, 1.0F};
+	struct Vector3 catherine_pos = {-1500.0F, 125.0F, -1550.0F};
+	struct Vector3 catherine_scale = {0.5F, 0.5F, 0.5F};
+	Quaternion catherine_rot;
+	struct Vector3 catherine_rot_euler = {0, 0, 0};
+	quatEulerAngles(&catherine_rot_euler, &catherine_rot);
 	// Initialize Catherine
-    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx, &catherine_pos, &catherine_scale, &catherine_rot);
+
+	// Initialize the face animation
+    facetick = 60;
+    faceindex = 0;
+    facetime = osGetTime() + OS_USEC_TO_CYCLES(22222);
+    faceanim = &catherine_faces[2];
+
+	// Initialize the model and animation
+    sausage64_initmodel(&catherine, MODEL_Catherine, catherineMtx, catherine_pos, catherine_scale, catherine_rot);
 	sausage64_set_anim(&catherine, ANIMATION_Catherine_Walk);
+	sausage64_set_predrawfunc(&catherine, catherine_predraw);
+    // sausage64_set_animcallback(&catherine, catherine_animcallback);
 
     // Set catherine's animation speed based on region
     #if TV_TYPE == PAL
@@ -255,6 +288,7 @@ void initStage00()
 /* Make the display list and activate the task */
 void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTask *task)
 {
+	rState = renderState;
 	Dynamic *dynamicp;
 	Game *game;
 	// int consoleOffset;
@@ -310,6 +344,8 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	// Gfx *modelDisplayList;
 	// gSPDisplayList(renderState->dl++, modelDisplayList);
 
+	transform_rotate_euler(&(catherine.transform), (struct Vector3){0,0.05,0});
+
 	sausage64_drawmodel(&renderState->dl, &catherine);
 }
 
@@ -319,6 +355,36 @@ void updateGame00(void)
 {
 	// Advance Catherine's animation
     sausage64_advance_anim(&catherine, catherine_animspeed);
+	/* -------- Catherine Face Animation -------- */
+    
+    // If the frame time has elapsed
+    if (facetime < osGetTime())
+    {
+        // Advance the face animation tick
+        facetick--;
+        facetime = osGetTime() + OS_USEC_TO_CYCLES(22222);
+        
+        // Face animation blinking
+        if (faceanim->hasblink)
+        {
+            switch (facetick)
+            {
+                case 3:
+                case 1:
+                    faceindex = 1;
+                    break;
+                case 2:
+                    faceindex = 2;
+                    break;
+                case 0:
+                    faceindex = 0;
+                    facetick = 60 + guRandom()%80;
+                    break;
+            }
+        }
+    }
+//-----------------------
+
 
 	Input_update(&input, 0);
 
@@ -370,6 +436,8 @@ void updateGame00(void)
 	}
 
 	Game_update(&input);
+
+
 
 }
 
@@ -718,5 +786,3 @@ void drawSprite(unsigned short *sprData,
 
 	gDPPipeSync(renderState->dl++);
 }
-
-// like gluProject()
