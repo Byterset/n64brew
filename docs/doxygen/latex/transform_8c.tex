@@ -1,0 +1,80 @@
+\hypertarget{transform_8c}{}\doxysection{src/math/transform.c File Reference}
+\label{transform_8c}\index{src/math/transform.c@{src/math/transform.c}}
+{\ttfamily \#include \char`\"{}transform.\+h\char`\"{}}\newline
+Include dependency graph for transform.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{transform_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{transform_8c_ad91f6fc1e79d4e3ec59c5442d66b39be}{transform\+\_\+set\+\_\+position}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} position)
+\item 
+void \mbox{\hyperlink{transform_8c_a6fc5bb37969e0ab965ead940b2e69723}{transform\+\_\+translate}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} translation)
+\item 
+void \mbox{\hyperlink{transform_8c_a51dc1cb78df5e7383bcb200caa8e8815}{transform\+\_\+set\+\_\+rotation}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} rotation)
+\item 
+void \mbox{\hyperlink{transform_8c_ae8f7d1b811d34fa022dd386057964124}{transform\+\_\+look\+\_\+at}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} target, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} up)
+\item 
+void \mbox{\hyperlink{transform_8c_a167ab32679457699345441c5986fb172}{transform\+\_\+rotate}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} rotation)
+\item 
+void \mbox{\hyperlink{transform_8c_a36afe312f96ea0dafa13cc6e16205914}{transform\+\_\+rotate\+\_\+euler}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} rotation)
+\item 
+void \mbox{\hyperlink{transform_8c_ab960fc2c1f541dd06ae00ca040c1e2c9}{transform\+\_\+set\+\_\+scale}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} scale)
+\item 
+void \mbox{\hyperlink{transform_8c_ad2e18aafa669db7efc3292c78b880a11}{transform\+\_\+scale}} (\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$transform, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} scale)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{transform_8c_ae8f7d1b811d34fa022dd386057964124}\label{transform_8c_ae8f7d1b811d34fa022dd386057964124}} 
+\index{transform.c@{transform.c}!transform\_look\_at@{transform\_look\_at}}
+\index{transform\_look\_at@{transform\_look\_at}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_look\_at()}{transform\_look\_at()}}
+{\footnotesize\ttfamily void transform\+\_\+look\+\_\+at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{target,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{up }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_a167ab32679457699345441c5986fb172}\label{transform_8c_a167ab32679457699345441c5986fb172}} 
+\index{transform.c@{transform.c}!transform\_rotate@{transform\_rotate}}
+\index{transform\_rotate@{transform\_rotate}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_rotate()}{transform\_rotate()}}
+{\footnotesize\ttfamily void transform\+\_\+rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}}}]{rotation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_a36afe312f96ea0dafa13cc6e16205914}\label{transform_8c_a36afe312f96ea0dafa13cc6e16205914}} 
+\index{transform.c@{transform.c}!transform\_rotate\_euler@{transform\_rotate\_euler}}
+\index{transform\_rotate\_euler@{transform\_rotate\_euler}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_rotate\_euler()}{transform\_rotate\_euler()}}
+{\footnotesize\ttfamily void transform\+\_\+rotate\+\_\+euler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{rotation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_ad2e18aafa669db7efc3292c78b880a11}\label{transform_8c_ad2e18aafa669db7efc3292c78b880a11}} 
+\index{transform.c@{transform.c}!transform\_scale@{transform\_scale}}
+\index{transform\_scale@{transform\_scale}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_scale()}{transform\_scale()}}
+{\footnotesize\ttfamily void transform\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{scale }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_ad91f6fc1e79d4e3ec59c5442d66b39be}\label{transform_8c_ad91f6fc1e79d4e3ec59c5442d66b39be}} 
+\index{transform.c@{transform.c}!transform\_set\_position@{transform\_set\_position}}
+\index{transform\_set\_position@{transform\_set\_position}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_set\_position()}{transform\_set\_position()}}
+{\footnotesize\ttfamily void transform\+\_\+set\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_a51dc1cb78df5e7383bcb200caa8e8815}\label{transform_8c_a51dc1cb78df5e7383bcb200caa8e8815}} 
+\index{transform.c@{transform.c}!transform\_set\_rotation@{transform\_set\_rotation}}
+\index{transform\_set\_rotation@{transform\_set\_rotation}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_set\_rotation()}{transform\_set\_rotation()}}
+{\footnotesize\ttfamily void transform\+\_\+set\+\_\+rotation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}}}]{rotation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_ab960fc2c1f541dd06ae00ca040c1e2c9}\label{transform_8c_ab960fc2c1f541dd06ae00ca040c1e2c9}} 
+\index{transform.c@{transform.c}!transform\_set\_scale@{transform\_set\_scale}}
+\index{transform\_set\_scale@{transform\_set\_scale}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_set\_scale()}{transform\_set\_scale()}}
+{\footnotesize\ttfamily void transform\+\_\+set\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{scale }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{transform_8c_a6fc5bb37969e0ab965ead940b2e69723}\label{transform_8c_a6fc5bb37969e0ab965ead940b2e69723}} 
+\index{transform.c@{transform.c}!transform\_translate@{transform\_translate}}
+\index{transform\_translate@{transform\_translate}!transform.c@{transform.c}}
+\doxysubsubsection{\texorpdfstring{transform\_translate()}{transform\_translate()}}
+{\footnotesize\ttfamily void transform\+\_\+translate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transform_8h_structTransform}{Transform}} $\ast$}]{transform,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{translation }\end{DoxyParamCaption})}
+

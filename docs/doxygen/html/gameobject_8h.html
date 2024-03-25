@@ -79,24 +79,26 @@ $(function() {
 <code>#include &quot;<a class="el" href="modeltype_8h_source.html">modeltype.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="physics_8h_source.html">physics/physics.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="rotation_8h_source.html">math/rotation.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="transform_8h_source.html">math/transform.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for gameobject.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="gameobject_8h__incl.png" border="0" usemap="#asrc_2gameobject_8h" alt=""/></div>
 <map name="asrc_2gameobject_8h" id="asrc_2gameobject_8h">
-<area shape="rect" title=" " alt="" coords="341,5,476,32"/>
-<area shape="rect" href="animation_8h.html" title="Animation Headerfile." alt="" coords="262,80,433,107"/>
-<area shape="rect" href="modeltype_8h.html" title=" " alt="" coords="413,155,529,181"/>
+<area shape="rect" title=" " alt="" coords="216,5,351,32"/>
+<area shape="rect" href="animation_8h.html" title="Animation Headerfile." alt="" coords="321,80,491,107"/>
+<area shape="rect" href="modeltype_8h.html" title=" " alt="" coords="216,155,332,181"/>
 <area shape="rect" href="rotation_8h.html" title=" " alt="" coords="5,155,140,181"/>
-<area shape="rect" href="physics_8h.html" title=" " alt="" coords="554,155,690,181"/>
-<area shape="rect" href="n64compat_8h.html" title=" " alt="" coords="164,155,283,181"/>
-<area shape="rect" href="sprite_8h.html" title=" " alt="" coords="306,155,389,181"/>
-<area shape="rect" href="vector3_8h.html" title=" " alt="" coords="423,304,544,331"/>
-<area shape="rect" href="quaternion_8h.html" title="Quaternion math functions Headerfile." alt="" coords="175,229,279,256"/>
-<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="186,304,269,331"/>
-<area shape="rect" href="collision_8h.html" title=" " alt="" coords="527,229,615,256"/>
-<area shape="rect" href="constants_8h.html" title=" " alt="" coords="690,229,799,256"/>
-<area shape="rect" title=" " alt="" coords="665,304,731,331"/>
+<area shape="rect" href="physics_8h.html" title=" " alt="" coords="605,155,741,181"/>
+<area shape="rect" href="transform_8h.html" title=" " alt="" coords="110,80,246,107"/>
+<area shape="rect" href="n64compat_8h.html" title=" " alt="" coords="356,155,475,181"/>
+<area shape="rect" href="sprite_8h.html" title=" " alt="" coords="498,155,581,181"/>
+<area shape="rect" href="vector3_8h.html" title=" " alt="" coords="213,304,335,331"/>
+<area shape="rect" href="quaternion_8h.html" title="Quaternion math functions Headerfile." alt="" coords="29,229,133,256"/>
+<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="39,304,122,331"/>
+<area shape="rect" href="collision_8h.html" title=" " alt="" coords="381,229,469,256"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="663,229,773,256"/>
+<area shape="rect" title=" " alt="" coords="638,304,705,331"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -129,19 +131,23 @@ Data Structures</h2></td></tr>
 <tr class="memitem:structGameObject"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#structGameObject">GameObject</a></td></tr>
 <tr class="memdesc:structGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a game object in the game world.  <a href="gameobject_8h.html#structGameObject">More...</a><br /></td></tr>
 <tr class="separator:structGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structLevelData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#structLevelData">LevelData</a></td></tr>
+<tr class="separator:structLevelData"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ab0fb707a835e2853e4ab457d743d9640"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="gameobject_8h.html#structGameObject">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#ab0fb707a835e2853e4ab457d743d9640">GameObject</a></td></tr>
 <tr class="memdesc:ab0fb707a835e2853e4ab457d743d9640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a game object in the game world.  <a href="gameobject_8h.html#ab0fb707a835e2853e4ab457d743d9640">More...</a><br /></td></tr>
 <tr class="separator:ab0fb707a835e2853e4ab457d743d9640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18231b1acfb99b8347970c5c76ac2c0c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="gameobject_8h.html#structLevelData">LevelData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#a18231b1acfb99b8347970c5c76ac2c0c">LevelData</a></td></tr>
+<tr class="separator:a18231b1acfb99b8347970c5c76ac2c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0ac79196efb421f3e0628ab715a7763c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gameobject_8h.html#structGameObject">GameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#a0ac79196efb421f3e0628ab715a7763c">GameObject_alloc</a> ()</td></tr>
 <tr class="separator:a0ac79196efb421f3e0628ab715a7763c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd52ecab4cf675a8610e39767b80e433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gameobject_8h.html#structGameObject">GameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#acd52ecab4cf675a8610e39767b80e433">GameObject_init</a> (<a class="el" href="gameobject_8h.html#structGameObject">GameObject</a> *self, int id, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *initPos)</td></tr>
-<tr class="separator:acd52ecab4cf675a8610e39767b80e433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a193cd69ea10dfa4f13304b266aa52be5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gameobject_8h.html#structGameObject">GameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gameobject_8h.html#a193cd69ea10dfa4f13304b266aa52be5">GameObject_init</a> (<a class="el" href="gameobject_8h.html#structGameObject">GameObject</a> *self, int id, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *initPos, <a class="el" href="rotation_8h.html#structEuler">Euler</a> *initRot)</td></tr>
+<tr class="separator:a193cd69ea10dfa4f13304b266aa52be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="structGameObject" id="structGameObject"></a>
@@ -161,14 +167,16 @@ Collaboration diagram for GameObject:</div>
 <div class="dyncontent">
 <div class="center"><img src="structGameObject__coll__graph.png" border="0" usemap="#aGameObject_coll__map" alt="Collaboration graph"/></div>
 <map name="aGameObject_coll__map" id="aGameObject_coll__map">
-<area shape="rect" title="Represents a game object in the game world." alt="" coords="180,391,283,417"/>
-<area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="142,5,212,32"/>
-<area shape="rect" href="physics_8h.html#structPhysBody" title=" " alt="" coords="108,242,195,269"/>
-<area shape="rect" href="animation_8h.html#structAnimationBoneSpriteAttachment" title=" " alt="" coords="120,183,356,209"/>
-<area shape="rect" href="animation_8h.html#structAnimationBoneAttachment" title=" " alt="" coords="380,183,579,209"/>
-<area shape="rect" href="animation_8h.html#structAnimationState" title=" " alt="" coords="285,301,408,328"/>
-<area shape="rect" href="n64compat_8h.html#unionMtx" title=" " alt="" coords="603,183,650,209"/>
-<area shape="rect" href="rotation_8h.html#structEulerDegrees" title=" " alt="" coords="564,5,673,32"/>
+<area shape="rect" title="Represents a game object in the game world." alt="" coords="448,391,551,417"/>
+<area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="336,5,407,32"/>
+<area shape="rect" href="transform_8h.html#structTransform" title=" " alt="" coords="67,183,153,209"/>
+<area shape="rect" href="physics_8h.html#structPhysBody" title=" " alt="" coords="796,242,883,269"/>
+<area shape="rect" href="animation_8h.html#structAnimationBoneSpriteAttachment" title=" " alt="" coords="253,183,489,209"/>
+<area shape="rect" href="animation_8h.html#structAnimationBoneAttachment" title=" " alt="" coords="584,183,783,209"/>
+<area shape="rect" href="quaternion_8h.html#structQuaternion" title="The Quaternion struct." alt="" coords="5,5,100,32"/>
+<area shape="rect" href="animation_8h.html#structAnimationState" title=" " alt="" coords="438,301,561,328"/>
+<area shape="rect" href="n64compat_8h.html#unionMtx" title=" " alt="" coords="513,183,560,209"/>
+<area shape="rect" href="rotation_8h.html#structEulerDegrees" title=" " alt="" coords="989,5,1098,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="fieldtable">
@@ -230,11 +238,80 @@ subtype</td>
 <p>The subtype of the game object. </p>
 </td></tr>
 <tr><td class="fieldtype">
+<a id="a35cbaedaaa285f0512ad59cce67593ce"></a>struct <a class="el" href="transform_8h.html#structTransform">Transform</a></td>
+<td class="fieldname">
+transform</td>
+<td class="fielddoc">
+<p>The transform of the game object. </p>
+</td></tr>
+<tr><td class="fieldtype">
 <a id="a3f6d5ce1244f12d405af551253752502"></a>int</td>
 <td class="fieldname">
 visible</td>
 <td class="fielddoc">
 <p>Flag indicating if the game object is visible. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structLevelData" id="structLevelData"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structLevelData">&#9670;&nbsp;</a></span>LevelData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct LevelData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"></div><div class="dynheader">
+Collaboration diagram for LevelData:</div>
+<div class="dyncontent">
+<div class="center"><img src="structLevelData__coll__graph.png" border="0" usemap="#aLevelData_coll__map" alt="Collaboration graph"/></div>
+<map name="aLevelData_coll__map" id="aLevelData_coll__map">
+<area shape="rect" title=" " alt="" coords="54,95,142,121"/>
+<area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="5,5,76,32"/>
+<area shape="rect" href="rotation_8h.html#structEulerDegrees" title=" " alt="" coords="101,5,210,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="fieldtable">
+<tr><th colspan="3">Data Fields</th></tr>
+<tr><td class="fieldtype">
+<a id="a2604f79156106255c377ef0cde7beab2"></a>int</td>
+<td class="fieldname">
+id</td>
+<td class="fielddoc">
+<p>The identifier of the game object. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="af3e50589cc7fca186127dbb7f806ee5e"></a><a class="el" href="modeltype_8h.html#a9f27db0468ce0ce2994eb68dc919b15d">ModelType</a></td>
+<td class="fieldname">
+modelType</td>
+<td class="fielddoc">
+<p>The type of model used for rendering the game object. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ae3523b959a6389fb81503e6a806b2b17"></a>struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a></td>
+<td class="fieldname">
+position</td>
+<td class="fielddoc">
+<p>The position of the game object in 3D space. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a9d7470e995dc8a5ec4eb6a2d46ffce41"></a><a class="el" href="rotation_8h.html#structEulerDegrees">EulerDegrees</a></td>
+<td class="fieldname">
+rotation</td>
+<td class="fielddoc">
+<p>The rotation of the game object in <a class="el" href="rotation_8h.html#structEuler">Euler</a> angles. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="acccaa7e27a3a060a80e2303f84db8bea"></a>int</td>
+<td class="fieldname">
+subtype</td>
+<td class="fielddoc">
+<p>The subtype of the game object. </p>
 </td></tr>
 </table>
 
@@ -257,6 +334,20 @@ visible</td>
 
 </div>
 </div>
+<a id="a18231b1acfb99b8347970c5c76ac2c0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18231b1acfb99b8347970c5c76ac2c0c">&#9670;&nbsp;</a></span>LevelData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="gameobject_8h.html#structLevelData">LevelData</a> <a class="el" href="gameobject_8h.html#structLevelData">LevelData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a0ac79196efb421f3e0628ab715a7763c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ac79196efb421f3e0628ab715a7763c">&#9670;&nbsp;</a></span>GameObject_alloc()</h2>
@@ -275,8 +366,8 @@ visible</td>
 
 </div>
 </div>
-<a id="acd52ecab4cf675a8610e39767b80e433"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd52ecab4cf675a8610e39767b80e433">&#9670;&nbsp;</a></span>GameObject_init()</h2>
+<a id="a193cd69ea10dfa4f13304b266aa52be5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a193cd69ea10dfa4f13304b266aa52be5">&#9670;&nbsp;</a></span>GameObject_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +388,13 @@ visible</td>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *&#160;</td>
-          <td class="paramname"><em>initPos</em>&#160;</td>
+          <td class="paramname"><em>initPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="rotation_8h.html#structEuler">Euler</a> *&#160;</td>
+          <td class="paramname"><em>initRot</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

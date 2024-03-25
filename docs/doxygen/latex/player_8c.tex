@@ -9,7 +9,8 @@
 {\ttfamily \#include \char`\"{}util/time.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-Include dependency graph for player.\+c\+:\nopagebreak
+Include dependency graph for player.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -19,13 +20,13 @@ Include dependency graph for player.\+c\+:\nopagebreak
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}{GOOSE\+\_\+\+SPEED}}~3.\+0F
+\#define \mbox{\hyperlink{player_8c_af49bad41acef45feb40939c0cf9d5d35}{PLAYER\+\_\+\+SPEED}}~3.\+0F
 \item 
-\#define \mbox{\hyperlink{player_8c_aa36df0187ef7891852f1f7c82db09695}{GOOSE\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO}}~0.\+5
+\#define \mbox{\hyperlink{player_8c_a937af2a52bdde5d586142c32cd6b6721}{PLAYER\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO}}~0.\+5
 \item 
-\#define \mbox{\hyperlink{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}{GOOSE\+\_\+\+FORCE}}~5000.\+0F
+\#define \mbox{\hyperlink{player_8c_a16d473782f77e7521f72ca0b3a3839f1}{PLAYER\+\_\+\+FORCE}}~5000.\+0F
 \item 
-\#define \mbox{\hyperlink{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}{GOOSE\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED}}~15.\+0f
+\#define \mbox{\hyperlink{player_8c_a8094e3a6d91be7a332124115e16f78dd}{PLAYER\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED}}~15.\+0f
 \item 
 \#define \mbox{\hyperlink{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}{PLAYER\+\_\+\+NEAR\+\_\+\+OBJ\+\_\+\+DIST}}~100.\+0f
 \item 
@@ -62,29 +63,17 @@ static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperl
 
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}\label{player_8c_ab80a4cbe7465581ebd83f0322c094cc6}} 
-\index{player.c@{player.c}!GOOSE\_FORCE@{GOOSE\_FORCE}}
-\index{GOOSE\_FORCE@{GOOSE\_FORCE}!player.c@{player.c}}
-\doxysubsubsection{\texorpdfstring{GOOSE\_FORCE}{GOOSE\_FORCE}}
-{\footnotesize\ttfamily \#define GOOSE\+\_\+\+FORCE~5000.\+0F}
+\mbox{\Hypertarget{player_8c_a16d473782f77e7521f72ca0b3a3839f1}\label{player_8c_a16d473782f77e7521f72ca0b3a3839f1}} 
+\index{player.c@{player.c}!PLAYER\_FORCE@{PLAYER\_FORCE}}
+\index{PLAYER\_FORCE@{PLAYER\_FORCE}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_FORCE}{PLAYER\_FORCE}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+FORCE~5000.\+0F}
 
-\mbox{\Hypertarget{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}\label{player_8c_a2e45f26ba12ab2c5bfa3066b2adfd3a1}} 
-\index{player.c@{player.c}!GOOSE\_MAX\_TURN\_SPEED@{GOOSE\_MAX\_TURN\_SPEED}}
-\index{GOOSE\_MAX\_TURN\_SPEED@{GOOSE\_MAX\_TURN\_SPEED}!player.c@{player.c}}
-\doxysubsubsection{\texorpdfstring{GOOSE\_MAX\_TURN\_SPEED}{GOOSE\_MAX\_TURN\_SPEED}}
-{\footnotesize\ttfamily \#define GOOSE\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED~15.\+0f}
-
-\mbox{\Hypertarget{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}\label{player_8c_a880399c3ef2c8537497ca1ef21e5f7cb}} 
-\index{player.c@{player.c}!GOOSE\_SPEED@{GOOSE\_SPEED}}
-\index{GOOSE\_SPEED@{GOOSE\_SPEED}!player.c@{player.c}}
-\doxysubsubsection{\texorpdfstring{GOOSE\_SPEED}{GOOSE\_SPEED}}
-{\footnotesize\ttfamily \#define GOOSE\+\_\+\+SPEED~3.\+0F}
-
-\mbox{\Hypertarget{player_8c_aa36df0187ef7891852f1f7c82db09695}\label{player_8c_aa36df0187ef7891852f1f7c82db09695}} 
-\index{player.c@{player.c}!GOOSE\_WALK\_SPEED\_RATIO@{GOOSE\_WALK\_SPEED\_RATIO}}
-\index{GOOSE\_WALK\_SPEED\_RATIO@{GOOSE\_WALK\_SPEED\_RATIO}!player.c@{player.c}}
-\doxysubsubsection{\texorpdfstring{GOOSE\_WALK\_SPEED\_RATIO}{GOOSE\_WALK\_SPEED\_RATIO}}
-{\footnotesize\ttfamily \#define GOOSE\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO~0.\+5}
+\mbox{\Hypertarget{player_8c_a8094e3a6d91be7a332124115e16f78dd}\label{player_8c_a8094e3a6d91be7a332124115e16f78dd}} 
+\index{player.c@{player.c}!PLAYER\_MAX\_TURN\_SPEED@{PLAYER\_MAX\_TURN\_SPEED}}
+\index{PLAYER\_MAX\_TURN\_SPEED@{PLAYER\_MAX\_TURN\_SPEED}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_MAX\_TURN\_SPEED}{PLAYER\_MAX\_TURN\_SPEED}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+MAX\+\_\+\+TURN\+\_\+\+SPEED~15.\+0f}
 
 \mbox{\Hypertarget{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}\label{player_8c_afbd4e6864a54dce9c6beea15a0e7a784}} 
 \index{player.c@{player.c}!PLAYER\_NEAR\_OBJ\_DIST@{PLAYER\_NEAR\_OBJ\_DIST}}
@@ -104,11 +93,23 @@ static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperl
 \doxysubsubsection{\texorpdfstring{PLAYER\_PICKUP\_COOLDOWN}{PLAYER\_PICKUP\_COOLDOWN}}
 {\footnotesize\ttfamily \#define PLAYER\+\_\+\+PICKUP\+\_\+\+COOLDOWN~10}
 
+\mbox{\Hypertarget{player_8c_af49bad41acef45feb40939c0cf9d5d35}\label{player_8c_af49bad41acef45feb40939c0cf9d5d35}} 
+\index{player.c@{player.c}!PLAYER\_SPEED@{PLAYER\_SPEED}}
+\index{PLAYER\_SPEED@{PLAYER\_SPEED}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_SPEED}{PLAYER\_SPEED}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+SPEED~3.\+0F}
+
 \mbox{\Hypertarget{player_8c_a507e3aa28738ac69afb28ee36f6eaac1}\label{player_8c_a507e3aa28738ac69afb28ee36f6eaac1}} 
 \index{player.c@{player.c}!PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
 \index{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR@{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}!player.c@{player.c}}
 \doxysubsubsection{\texorpdfstring{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}{PLAYER\_WALK\_ANIM\_MOVEMENT\_DIVISOR}}
 {\footnotesize\ttfamily \#define PLAYER\+\_\+\+WALK\+\_\+\+ANIM\+\_\+\+MOVEMENT\+\_\+\+DIVISOR~100.\+0}
+
+\mbox{\Hypertarget{player_8c_a937af2a52bdde5d586142c32cd6b6721}\label{player_8c_a937af2a52bdde5d586142c32cd6b6721}} 
+\index{player.c@{player.c}!PLAYER\_WALK\_SPEED\_RATIO@{PLAYER\_WALK\_SPEED\_RATIO}}
+\index{PLAYER\_WALK\_SPEED\_RATIO@{PLAYER\_WALK\_SPEED\_RATIO}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_WALK\_SPEED\_RATIO}{PLAYER\_WALK\_SPEED\_RATIO}}
+{\footnotesize\ttfamily \#define PLAYER\+\_\+\+WALK\+\_\+\+SPEED\+\_\+\+RATIO~0.\+5}
 
 
 

@@ -1,12 +1,12 @@
 \hypertarget{sausage64_8h}{}\doxysection{src/sausage64/sausage64.h File Reference}
 \label{sausage64_8h}\index{src/sausage64/sausage64.h@{src/sausage64/sausage64.h}}
-{\ttfamily \#include \char`\"{}../math/rotation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../math/transform.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$ultra64.\+h$>$}\newline
 Include dependency graph for sausage64.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=280pt]{sausage64_8h__incl}
+\includegraphics[width=275pt]{sausage64_8h__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
@@ -39,7 +39,7 @@ struct \mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{sausage64_8h_a479f260a40fd5782e68e76d97f4c22a1}{sausage64\+\_\+initmodel}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, \mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$mdldata, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$matrices, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$scale, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$rotation)
+void \mbox{\hyperlink{sausage64_8h_ab36b3e3138544b6331a36d3f5b9eba64}{sausage64\+\_\+initmodel}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, \mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$mdldata, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$matrices, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} position, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} scale, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} rotation)
 \begin{DoxyCompactList}\small\item\em Initialize a model helper struct. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sausage64_8h_a8068a3ee1d3f07d703b6eebcf94a8d54}{sausage64\+\_\+set\+\_\+camera}} (\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$view, \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$projection)
 \begin{DoxyCompactList}\small\item\em Sets the camera for Sausage64 to use for billboarding. \end{DoxyCompactList}\item 
@@ -51,8 +51,6 @@ void \mbox{\hyperlink{sausage64_8h_a550c30e1db3c40ee683927e6bca056a8}{sausage64\
 \begin{DoxyCompactList}\small\item\em Set a function that gets called before any model is rendered. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sausage64_8h_a5be4201206c30a4618dca19efe4a77d6}{sausage64\+\_\+set\+\_\+postdrawfunc}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, void($\ast$postdraw)(\mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}}))
 \begin{DoxyCompactList}\small\item\em Set a function that gets called after any model is rendered. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{sausage64_8h_a37994b79c6920be4eb27dde048dec393}{sausage64\+\_\+set\+\_\+transform}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$position, struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$rotation, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$scale)
-\item 
 void \mbox{\hyperlink{sausage64_8h_a48b963121eeaadd6daa05ce65647e4f5}{sausage64\+\_\+advance\+\_\+anim}} (\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl, float tickamount)
 \begin{DoxyCompactList}\small\item\em Advances the animation tick by the given amount. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sausage64_8h_a1e736dc5aff6424321c3ee208b5b80bc}{sausage64\+\_\+drawmodel}} (Gfx $\ast$$\ast$glistp, \mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$mdl)
@@ -253,11 +251,11 @@ Renders a Sausage64 model.
 {\em mdl} & The model helper data \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{sausage64_8h_a479f260a40fd5782e68e76d97f4c22a1}\label{sausage64_8h_a479f260a40fd5782e68e76d97f4c22a1}} 
+\mbox{\Hypertarget{sausage64_8h_ab36b3e3138544b6331a36d3f5b9eba64}\label{sausage64_8h_ab36b3e3138544b6331a36d3f5b9eba64}} 
 \index{sausage64.h@{sausage64.h}!sausage64\_initmodel@{sausage64\_initmodel}}
 \index{sausage64\_initmodel@{sausage64\_initmodel}!sausage64.h@{sausage64.h}}
 \doxysubsubsection{\texorpdfstring{sausage64\_initmodel()}{sausage64\_initmodel()}}
-{\footnotesize\ttfamily void sausage64\+\_\+initmodel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{\mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$}]{mdldata,  }\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{matrices,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{scale,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{rotation }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void sausage64\+\_\+initmodel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{\mbox{\hyperlink{sausage64_8h_structs64ModelData}{s64\+Model\+Data}} $\ast$}]{mdldata,  }\item[{\mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} $\ast$}]{matrices,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{position,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}}]{scale,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}}}]{rotation }\end{DoxyParamCaption})}
 
 
 
@@ -271,11 +269,11 @@ Initialize a model helper struct.
 \hline
 {\em matrices} & The array of matrices for each mesh part \\
 \hline
-{\em position} & The position of the model \\
+{\em position} & The initial position of the model \\
 \hline
-{\em scale} & The scale of the model \\
+{\em scale} & The initial scale of the model \\
 \hline
-{\em rotation} & The rotation of the model \\
+{\em rotation} & The initial rotation of the model \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{sausage64_8h_a735acedae57f0790d886987751f35bbf}\label{sausage64_8h_a735acedae57f0790d886987751f35bbf}} 
@@ -363,9 +361,3 @@ Set a function that gets called before any model is rendered.
 {\em predraw} & The pre draw function \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{sausage64_8h_a37994b79c6920be4eb27dde048dec393}\label{sausage64_8h_a37994b79c6920be4eb27dde048dec393}} 
-\index{sausage64.h@{sausage64.h}!sausage64\_set\_transform@{sausage64\_set\_transform}}
-\index{sausage64\_set\_transform@{sausage64\_set\_transform}!sausage64.h@{sausage64.h}}
-\doxysubsubsection{\texorpdfstring{sausage64\_set\_transform()}{sausage64\_set\_transform()}}
-{\footnotesize\ttfamily void sausage64\+\_\+set\+\_\+transform (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structs64ModelHelper}{s64\+Model\+Helper}} $\ast$}]{mdl,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{position,  }\item[{struct \mbox{\hyperlink{quaternion_8h_structQuaternion}{Quaternion}} $\ast$}]{rotation,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{scale }\end{DoxyParamCaption})}
-

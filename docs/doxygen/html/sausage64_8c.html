@@ -83,13 +83,14 @@ Include dependency graph for sausage64.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="sausage64_8c__incl.png" border="0" usemap="#asrc_2sausage64_2sausage64_8c" alt=""/></div>
 <map name="asrc_2sausage64_2sausage64_8c" id="asrc_2sausage64_2sausage64_8c">
-<area shape="rect" title="A very simple library that handles Sausage64 models exported by Arabiki64." alt="" coords="65,5,265,32"/>
-<area shape="rect" href="sausage64_8h.html" title=" " alt="" coords="113,80,217,107"/>
-<area shape="rect" href="rotation_8h.html" title=" " alt="" coords="33,155,167,181"/>
-<area shape="rect" title=" " alt="" coords="192,155,272,181"/>
-<area shape="rect" href="quaternion_8h.html" title="Quaternion math functions Headerfile." alt="" coords="48,229,152,256"/>
-<area shape="rect" href="vector3_8h.html" title=" " alt="" coords="5,304,88,331"/>
-<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="112,304,195,331"/>
+<area shape="rect" title="A very simple library that handles Sausage64 models exported by Arabiki64." alt="" coords="56,5,256,32"/>
+<area shape="rect" href="sausage64_8h.html" title=" " alt="" coords="104,80,208,107"/>
+<area shape="rect" href="transform_8h.html" title=" " alt="" coords="13,155,161,181"/>
+<area shape="rect" title=" " alt="" coords="185,155,265,181"/>
+<area shape="rect" href="vector3_8h.html" title=" " alt="" coords="5,379,88,405"/>
+<area shape="rect" href="rotation_8h.html" title=" " alt="" coords="88,229,173,256"/>
+<area shape="rect" href="quaternion_8h.html" title="Quaternion math functions Headerfile." alt="" coords="84,304,188,331"/>
+<area shape="rect" href="vector2_8h.html" title=" " alt="" coords="112,379,195,405"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -101,9 +102,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a468c0a8de5d43b1b79d648e5c5a9b5ec"><td class="memItemLeft" align="right" valign="top">static f32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a468c0a8de5d43b1b79d648e5c5a9b5ec">s64lerp</a> (f32 startValue, f32 endValue, f32 fraction)</td></tr>
 <tr class="memdesc:a468c0a8de5d43b1b79d648e5c5a9b5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the linear interpolation of two values given a fraction.  <a href="sausage64_8c.html#a468c0a8de5d43b1b79d648e5c5a9b5ec">More...</a><br /></td></tr>
 <tr class="separator:a468c0a8de5d43b1b79d648e5c5a9b5ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a479f260a40fd5782e68e76d97f4c22a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a479f260a40fd5782e68e76d97f4c22a1">sausage64_initmodel</a> (<a class="el" href="structs64ModelHelper.html">s64ModelHelper</a> *mdl, <a class="el" href="sausage64_8h.html#structs64ModelData">s64ModelData</a> *mdldata, <a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *matrices, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *position, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *scale, struct <a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a> *rotation)</td></tr>
-<tr class="memdesc:a479f260a40fd5782e68e76d97f4c22a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a model helper struct.  <a href="sausage64_8c.html#a479f260a40fd5782e68e76d97f4c22a1">More...</a><br /></td></tr>
-<tr class="separator:a479f260a40fd5782e68e76d97f4c22a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36b3e3138544b6331a36d3f5b9eba64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#ab36b3e3138544b6331a36d3f5b9eba64">sausage64_initmodel</a> (<a class="el" href="structs64ModelHelper.html">s64ModelHelper</a> *mdl, <a class="el" href="sausage64_8h.html#structs64ModelData">s64ModelData</a> *mdldata, <a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *matrices, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> position, struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> scale, struct <a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a> rotation)</td></tr>
+<tr class="memdesc:ab36b3e3138544b6331a36d3f5b9eba64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a model helper struct.  <a href="sausage64_8c.html#ab36b3e3138544b6331a36d3f5b9eba64">More...</a><br /></td></tr>
+<tr class="separator:ab36b3e3138544b6331a36d3f5b9eba64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8068a3ee1d3f07d703b6eebcf94a8d54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a8068a3ee1d3f07d703b6eebcf94a8d54">sausage64_set_camera</a> (<a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *view, <a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *projection)</td></tr>
 <tr class="memdesc:a8068a3ee1d3f07d703b6eebcf94a8d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the camera for Sausage64 to use for billboarding.  <a href="sausage64_8c.html#a8068a3ee1d3f07d703b6eebcf94a8d54">More...</a><br /></td></tr>
 <tr class="separator:a8068a3ee1d3f07d703b6eebcf94a8d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,9 +126,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a735acedae57f0790d886987751f35bbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a735acedae57f0790d886987751f35bbf">sausage64_set_anim</a> (<a class="el" href="structs64ModelHelper.html">s64ModelHelper</a> *mdl, <a class="el" href="ed64io__types_8h.html#a2b19d553290a8d4a083d3c03280ea800">u16</a> anim)</td></tr>
 <tr class="memdesc:a735acedae57f0790d886987751f35bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets an animation on the model. Does not perform error checking if an invalid animation is given.  <a href="sausage64_8c.html#a735acedae57f0790d886987751f35bbf">More...</a><br /></td></tr>
 <tr class="separator:a735acedae57f0790d886987751f35bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b62f7e042cb599ed6feb75216fc7ebb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a0b62f7e042cb599ed6feb75216fc7ebb">sausage64_drawpart</a> (Gfx **glistp, <a class="el" href="sausage64_8h.html#structs64Mesh">s64Mesh</a> *mesh, const <a class="el" href="sausage64_8h.html#structs64FrameData">s64FrameData</a> *cfdata, const <a class="el" href="sausage64_8h.html#structs64FrameData">s64FrameData</a> *nfdata, const <a class="el" href="ed64io__types_8h.html#af3b86d961da0a3575b4f99c9ffaf01fd">u8</a> interpolate, const f32 l, <a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *matrix)</td></tr>
-<tr class="memdesc:a0b62f7e042cb599ed6feb75216fc7ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders a part of a Sausage64 model. Calculates the model-view transformation matrix for the part based on position, rotation, and scale in the frame data. Handles interpolation between current and next frame data if enabled.  <a href="sausage64_8c.html#a0b62f7e042cb599ed6feb75216fc7ebb">More...</a><br /></td></tr>
-<tr class="separator:a0b62f7e042cb599ed6feb75216fc7ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62268d07705af4f2e366f02ea399cca"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#ad62268d07705af4f2e366f02ea399cca">sausage64_drawpart</a> (Gfx **glistp, <a class="el" href="sausage64_8h.html#structs64Mesh">s64Mesh</a> *mesh, const <a class="el" href="sausage64_8h.html#structs64FrameData">s64FrameData</a> *cfdata, const <a class="el" href="sausage64_8h.html#structs64FrameData">s64FrameData</a> *nfdata, const <a class="el" href="ed64io__types_8h.html#af3b86d961da0a3575b4f99c9ffaf01fd">u8</a> interpolate, const f32 l, <a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *matrix, const float transform_global[4][4])</td></tr>
+<tr class="memdesc:ad62268d07705af4f2e366f02ea399cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders a part of a Sausage64 model. Calculates the model-view transformation matrix for the part based on position, rotation, and scale in the frame data. Handles interpolation between current and next frame data if enabled.  <a href="sausage64_8c.html#ad62268d07705af4f2e366f02ea399cca">More...</a><br /></td></tr>
+<tr class="separator:ad62268d07705af4f2e366f02ea399cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e736dc5aff6424321c3ee208b5b80bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sausage64_8c.html#a1e736dc5aff6424321c3ee208b5b80bc">sausage64_drawmodel</a> (Gfx **glistp, <a class="el" href="structs64ModelHelper.html">s64ModelHelper</a> *mdl)</td></tr>
 <tr class="memdesc:a1e736dc5aff6424321c3ee208b5b80bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders a Sausage64 model.  <a href="sausage64_8c.html#a1e736dc5aff6424321c3ee208b5b80bc">More...</a><br /></td></tr>
 <tr class="separator:a1e736dc5aff6424321c3ee208b5b80bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -324,8 +325,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0b62f7e042cb599ed6feb75216fc7ebb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b62f7e042cb599ed6feb75216fc7ebb">&#9670;&nbsp;</a></span>sausage64_drawpart()</h2>
+<a id="ad62268d07705af4f2e366f02ea399cca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad62268d07705af4f2e366f02ea399cca">&#9670;&nbsp;</a></span>sausage64_drawpart()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,7 +374,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="n64compat_8h.html#unionMtx">Mtx</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em>&#160;</td>
+          <td class="paramname"><em>matrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>transform_global</em>[4][4]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -400,14 +407,15 @@ Variables</h2></td></tr>
     <tr><td class="paramname">interpolate</td><td>Whether to interpolate between the current and next frame data </td></tr>
     <tr><td class="paramname">l</td><td>The interpolation amount </td></tr>
     <tr><td class="paramname">matrix</td><td>The matrix to store the mesh's transformation </td></tr>
+    <tr><td class="paramname">transform_global</td><td>The global transformation matrix </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a479f260a40fd5782e68e76d97f4c22a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a479f260a40fd5782e68e76d97f4c22a1">&#9670;&nbsp;</a></span>sausage64_initmodel()</h2>
+<a id="ab36b3e3138544b6331a36d3f5b9eba64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36b3e3138544b6331a36d3f5b9eba64">&#9670;&nbsp;</a></span>sausage64_initmodel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,19 +441,19 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a>&#160;</td>
           <td class="paramname"><em>position</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a>&#160;</td>
           <td class="paramname"><em>scale</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a> *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a>&#160;</td>
           <td class="paramname"><em>rotation</em>&#160;</td>
         </tr>
         <tr>
@@ -462,9 +470,9 @@ Variables</h2></td></tr>
     <tr><td class="paramname">mdl</td><td>The model helper to initialize </td></tr>
     <tr><td class="paramname">mdldata</td><td>The model data </td></tr>
     <tr><td class="paramname">matrices</td><td>The array of matrices for each mesh part </td></tr>
-    <tr><td class="paramname">position</td><td>The position of the model </td></tr>
-    <tr><td class="paramname">scale</td><td>The scale of the model </td></tr>
-    <tr><td class="paramname">rotation</td><td>The rotation of the model </td></tr>
+    <tr><td class="paramname">position</td><td>The initial position of the model </td></tr>
+    <tr><td class="paramname">scale</td><td>The initial scale of the model </td></tr>
+    <tr><td class="paramname">rotation</td><td>The initial rotation of the model </td></tr>
   </table>
   </dd>
 </dl>

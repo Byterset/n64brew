@@ -6,7 +6,8 @@
 {\ttfamily \#include \char`\"{}gameobject.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}math/vector3.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-Include dependency graph for gameobject.\+c\+:\nopagebreak
+Include dependency graph for gameobject.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -18,7 +19,7 @@ Include dependency graph for gameobject.\+c\+:\nopagebreak
 \item 
 \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8c_a0ac79196efb421f3e0628ab715a7763c}{Game\+Object\+\_\+alloc}} ()
 \item 
-\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8c_acd52ecab4cf675a8610e39767b80e433}{Game\+Object\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self, int id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$init\+Pos)
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8c_a193cd69ea10dfa4f13304b266aa52be5}{Game\+Object\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self, int id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$init\+Pos, \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$init\+Rot)
 \item 
 void \mbox{\hyperlink{gameobject_8c_a54a3812758b82ec7b9d29d1983ccdf2b}{Game\+Object\+\_\+print}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self)
 \end{DoxyCompactItemize}
@@ -31,11 +32,11 @@ void \mbox{\hyperlink{gameobject_8c_a54a3812758b82ec7b9d29d1983ccdf2b}{Game\+Obj
 \doxysubsubsection{\texorpdfstring{GameObject\_alloc()}{GameObject\_alloc()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+alloc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{gameobject_8c_acd52ecab4cf675a8610e39767b80e433}\label{gameobject_8c_acd52ecab4cf675a8610e39767b80e433}} 
+\mbox{\Hypertarget{gameobject_8c_a193cd69ea10dfa4f13304b266aa52be5}\label{gameobject_8c_a193cd69ea10dfa4f13304b266aa52be5}} 
 \index{gameobject.c@{gameobject.c}!GameObject\_init@{GameObject\_init}}
 \index{GameObject\_init@{GameObject\_init}!gameobject.c@{gameobject.c}}
 \doxysubsubsection{\texorpdfstring{GameObject\_init()}{GameObject\_init()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{self,  }\item[{int}]{id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{init\+Pos }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{self,  }\item[{int}]{id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{init\+Pos,  }\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{init\+Rot }\end{DoxyParamCaption})}
 
 Initializes a \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} with the given ID and initial position.
 

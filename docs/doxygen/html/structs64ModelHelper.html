@@ -79,15 +79,16 @@ Collaboration diagram for s64ModelHelper:</div>
 <div class="dyncontent">
 <div class="center"><img src="structs64ModelHelper__coll__graph.png" border="0" usemap="#as64ModelHelper_coll__map" alt="Collaboration graph"/></div>
 <map name="as64ModelHelper_coll__map" id="as64ModelHelper_coll__map">
-<area shape="rect" title="S64 Model Helper. Holds the model data, the current animation, the current keyframe,..." alt="" coords="259,377,387,404"/>
-<area shape="rect" href="sausage64_8h.html#structs64ModelData" title="Sausage64 Model Data. Holds the number of Meshes and the number of Animations, a pointer to the Meshe..." alt="" coords="135,273,251,300"/>
+<area shape="rect" title="S64 Model Helper. Holds the model data, the current animation, the current keyframe,..." alt="" coords="193,377,321,404"/>
+<area shape="rect" href="sausage64_8h.html#structs64ModelData" title="Sausage64 Model Data. Holds the number of Meshes and the number of Animations, a pointer to the Meshe..." alt="" coords="135,288,251,315"/>
 <area shape="rect" href="sausage64_8h.html#structs64Animation" title="A Sausage64 Animation. Holds a list of KeyFrames, the number of KeyFrames and the name of the Animati..." alt="" coords="8,184,120,211"/>
 <area shape="rect" href="sausage64_8h.html#structs64KeyFrame" title="A single keyframe of a Sausage64 Animation in a Model holding the Framedata of all Meshes in the Mode..." alt="" coords="9,95,119,121"/>
 <area shape="rect" href="sausage64_8h.html#structs64FrameData" title="The data for a single frame of a single mesh." alt="" coords="5,5,123,32"/>
 <area shape="rect" href="sausage64_8h.html#structs64Mesh" title="A Sausage64 Mesh. Holds the name of the Mesh, the Display List of the Mesh and if it is a Billboard o..." alt="" coords="153,184,233,211"/>
-<area shape="rect" href="quaternion_8h.html#structQuaternion" title="The Quaternion struct." alt="" coords="275,273,370,300"/>
-<area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="394,273,465,300"/>
-<area shape="rect" href="n64compat_8h.html#unionMtx" title=" " alt="" coords="491,273,538,300"/>
+<area shape="rect" href="transform_8h.html#structTransform" title=" " alt="" coords="275,288,362,315"/>
+<area shape="rect" href="quaternion_8h.html#structQuaternion" title="The Quaternion struct." alt="" coords="265,184,359,211"/>
+<area shape="rect" href="vector3_8h.html#structVector3" title=" " alt="" coords="383,184,454,211"/>
+<area shape="rect" href="n64compat_8h.html#unionMtx" title=" " alt="" coords="386,288,433,315"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -115,12 +116,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:acafe57c6afdbd0fbab172448f842d94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78be8fab40dbb6cc3a62605b7aa45c09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sausage64_8h.html#structs64ModelData">s64ModelData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs64ModelHelper.html#a78be8fab40dbb6cc3a62605b7aa45c09">mdldata</a></td></tr>
 <tr class="separator:a78be8fab40dbb6cc3a62605b7aa45c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac3270b95beac4abe80be99c6786866"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs64ModelHelper.html#a4ac3270b95beac4abe80be99c6786866">position</a></td></tr>
-<tr class="separator:a4ac3270b95beac4abe80be99c6786866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1f61550cc95be08468168d024c04d91"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs64ModelHelper.html#ae1f61550cc95be08468168d024c04d91">scale</a></td></tr>
-<tr class="separator:ae1f61550cc95be08468168d024c04d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b9e81b74d000d6570d5a6665784cd7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs64ModelHelper.html#a5b9e81b74d000d6570d5a6665784cd7d">rotation</a></td></tr>
-<tr class="separator:a5b9e81b74d000d6570d5a6665784cd7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78bc13de4eab491a2efc49fbab266324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="transform_8h.html#structTransform">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs64ModelHelper.html#a78bc13de4eab491a2efc49fbab266324">transform</a></td></tr>
+<tr class="separator:a78bc13de4eab491a2efc49fbab266324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>S64 Model Helper. Holds the model data, the current animation, the current keyframe, the current animation tick, the current matrix, the pre draw and post draw functions and the model data. </p>
@@ -252,20 +249,6 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a4ac3270b95beac4abe80be99c6786866"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ac3270b95beac4abe80be99c6786866">&#9670;&nbsp;</a></span>position</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a>* s64ModelHelper::position</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a8e7232ee2959034b6087a819016248e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e7232ee2959034b6087a819016248e2">&#9670;&nbsp;</a></span>postdraw</h2>
 
@@ -294,28 +277,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a5b9e81b74d000d6570d5a6665784cd7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b9e81b74d000d6570d5a6665784cd7d">&#9670;&nbsp;</a></span>rotation</h2>
+<a id="a78bc13de4eab491a2efc49fbab266324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78bc13de4eab491a2efc49fbab266324">&#9670;&nbsp;</a></span>transform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="quaternion_8h.html#structQuaternion">Quaternion</a>* s64ModelHelper::rotation</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae1f61550cc95be08468168d024c04d91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1f61550cc95be08468168d024c04d91">&#9670;&nbsp;</a></span>scale</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="vector3_8h.html#structVector3">Vector3</a>* s64ModelHelper::scale</td>
+          <td class="memname"><a class="el" href="transform_8h.html#structTransform">Transform</a> s64ModelHelper::transform</td>
         </tr>
       </table>
 </div><div class="memdoc">

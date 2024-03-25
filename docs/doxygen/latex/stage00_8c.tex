@@ -21,7 +21,8 @@
 {\ttfamily \#include \char`\"{}sausage64/sausage64.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}ed64/ed64io.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}stage\+\_\+asset\+\_\+defs/stage00\+\_\+assets.\+h\char`\"{}}\newline
-Include dependency graph for stage00.\+c\+:\nopagebreak
+Include dependency graph for stage00.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -89,6 +90,14 @@ int \mbox{\hyperlink{stage00_8c_a987279f8ba392388e2702be73c563080}{should\+Lerp\
 \item 
 float \mbox{\hyperlink{stage00_8c_a0d3bb31f3ff05190ddcd2be1cf18d9ce}{catherine\+\_\+animspeed}}
 \item 
+static \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} \mbox{\hyperlink{stage00_8c_a1f21ca0d37e7dedc817e6028bdb9fa52}{faceindex}}
+\item 
+static \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} \mbox{\hyperlink{stage00_8c_a05332b2ce76f69604b6b4c70ae22a28c}{facetick}}
+\item 
+static OSTime \mbox{\hyperlink{stage00_8c_ac489fc50a035ea2e3ffe852dc751bc0f}{facetime}}
+\item 
+static Face\+Anim $\ast$ \mbox{\hyperlink{stage00_8c_a2cc6dc2d7b3dcd7c47587c416e71d74b}{faceanim}}
+\item 
 static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{stage00_8c_ad9e201418dfff0831f4b3fa189c52233}{view\+Pos}}
 \item 
 static struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} \mbox{\hyperlink{stage00_8c_a315474b2c14b00d4de12f251f9d34c46}{view\+Rot}}
@@ -138,6 +147,8 @@ static int \mbox{\hyperlink{stage00_8c_a77339925289d0c0fd78105b8c212604e}{log\+T
 static int \mbox{\hyperlink{stage00_8c_a5fc3ab41e0396622499e9d49e3d03a9f}{logging\+Trace}} = \mbox{\hyperlink{constants_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}}
 \item 
 \mbox{\hyperlink{physics_8h_structPhysWorldData}{Phys\+World\+Data}} \mbox{\hyperlink{stage00_8c_a84ff1df8b44d0b28081d109095d9f91b}{phys\+World\+Data}}
+\item 
+struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}} $\ast$ \mbox{\hyperlink{stage00_8c_a8b71a8cdaa84cb50b17e1a27e3e06f69}{r\+State}}
 \item 
 Lights1 \mbox{\hyperlink{stage00_8c_aa93a9d4ffce372fde21d53863400915b}{sun\+\_\+light}}
 \item 
@@ -339,6 +350,30 @@ Kevin Reier
 \doxysubsubsection{\texorpdfstring{catherineMtx}{catherineMtx}}
 {\footnotesize\ttfamily \mbox{\hyperlink{n64compat_8h_unionMtx}{Mtx}} catherine\+Mtx\mbox{[}MESHCOUNT\+\_\+\+Catherine\mbox{]}}
 
+\mbox{\Hypertarget{stage00_8c_a2cc6dc2d7b3dcd7c47587c416e71d74b}\label{stage00_8c_a2cc6dc2d7b3dcd7c47587c416e71d74b}} 
+\index{stage00.c@{stage00.c}!faceanim@{faceanim}}
+\index{faceanim@{faceanim}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{faceanim}{faceanim}}
+{\footnotesize\ttfamily Face\+Anim$\ast$ faceanim\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a1f21ca0d37e7dedc817e6028bdb9fa52}\label{stage00_8c_a1f21ca0d37e7dedc817e6028bdb9fa52}} 
+\index{stage00.c@{stage00.c}!faceindex@{faceindex}}
+\index{faceindex@{faceindex}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{faceindex}{faceindex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a2b19d553290a8d4a083d3c03280ea800}{u16}} faceindex\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_a05332b2ce76f69604b6b4c70ae22a28c}\label{stage00_8c_a05332b2ce76f69604b6b4c70ae22a28c}} 
+\index{stage00.c@{stage00.c}!facetick@{facetick}}
+\index{facetick@{facetick}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{facetick}{facetick}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ed64io__types_8h_a332ccd83dfe2973e6cb2b61e4f3ab7e6}{u32}} facetick\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{stage00_8c_ac489fc50a035ea2e3ffe852dc751bc0f}\label{stage00_8c_ac489fc50a035ea2e3ffe852dc751bc0f}} 
+\index{stage00.c@{stage00.c}!facetime@{facetime}}
+\index{facetime@{facetime}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{facetime}{facetime}}
+{\footnotesize\ttfamily OSTime facetime\hspace{0.3cm}{\ttfamily [static]}}
+
 \mbox{\Hypertarget{stage00_8c_acc6f24b6c977bf3b0d86ded833fb6429}\label{stage00_8c_acc6f24b6c977bf3b0d86ded833fb6429}} 
 \index{stage00.c@{stage00.c}!farPlane@{farPlane}}
 \index{farPlane@{farPlane}!stage00.c@{stage00.c}}
@@ -440,6 +475,12 @@ Kevin Reier
 \index{profilingAverages@{profilingAverages}!stage00.c@{stage00.c}}
 \doxysubsubsection{\texorpdfstring{profilingAverages}{profilingAverages}}
 {\footnotesize\ttfamily float profiling\+Averages\mbox{[}\mbox{\hyperlink{trace_8h_ae7ef765fd8277803539ff9cef8db93f2af74767bdeebb0726a24b6f0ac6ff0fe2}{MAX\+\_\+\+TRACE\+\_\+\+EVENT\+\_\+\+TYPE}}\mbox{]}}
+
+\mbox{\Hypertarget{stage00_8c_a8b71a8cdaa84cb50b17e1a27e3e06f69}\label{stage00_8c_a8b71a8cdaa84cb50b17e1a27e3e06f69}} 
+\index{stage00.c@{stage00.c}!rState@{rState}}
+\index{rState@{rState}!stage00.c@{stage00.c}}
+\doxysubsubsection{\texorpdfstring{rState}{rState}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{renderstate_8h_structRenderState}{Render\+State}}$\ast$ r\+State}
 
 \mbox{\Hypertarget{stage00_8c_a3085ce80e9d4018947a085587df9a3ab}\label{stage00_8c_a3085ce80e9d4018947a085587df9a3ab}} 
 \index{stage00.c@{stage00.c}!seqId@{seqId}}

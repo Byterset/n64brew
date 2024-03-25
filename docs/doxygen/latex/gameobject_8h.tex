@@ -4,7 +4,9 @@
 {\ttfamily \#include \char`\"{}modeltype.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}physics/physics.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}math/rotation.\+h\char`\"{}}\newline
-Include dependency graph for gameobject.\+h\+:\nopagebreak
+{\ttfamily \#include \char`\"{}math/transform.\+h\char`\"{}}\newline
+Include dependency graph for gameobject.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,18 +24,22 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}
-\begin{DoxyCompactList}\small\item\em Represents a game object in the game world.  \mbox{\hyperlink{gameobject_8h_structGameObject}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Represents a game object in the game world.  \mbox{\hyperlink{gameobject_8h_structGameObject}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{gameobject_8h_structLevelData}{Level\+Data}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} \mbox{\hyperlink{gameobject_8h_ab0fb707a835e2853e4ab457d743d9640}{Game\+Object}}
-\begin{DoxyCompactList}\small\item\em Represents a game object in the game world. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Represents a game object in the game world. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{gameobject_8h_structLevelData}{Level\+Data}} \mbox{\hyperlink{gameobject_8h_a18231b1acfb99b8347970c5c76ac2c0c}{Level\+Data}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8h_a0ac79196efb421f3e0628ab715a7763c}{Game\+Object\+\_\+alloc}} ()
 \item 
-\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}{Game\+Object\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self, int id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$init\+Pos)
+\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$ \mbox{\hyperlink{gameobject_8h_a193cd69ea10dfa4f13304b266aa52be5}{Game\+Object\+\_\+init}} (\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$self, int id, struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$init\+Pos, \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$init\+Rot)
 \end{DoxyCompactItemize}
 
 
@@ -43,7 +49,8 @@ typedef struct \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} \
 \doxysubsubsection{struct Game\+Object}
 Represents a game object in the game world. 
 
-Collaboration diagram for Game\+Object\+:\nopagebreak
+Collaboration diagram for Game\+Object\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -99,10 +106,61 @@ subtype&
 The subtype of the game object. \\
 \hline
 
+\mbox{\Hypertarget{gameobject_8h_a35cbaedaaa285f0512ad59cce67593ce}\label{gameobject_8h_a35cbaedaaa285f0512ad59cce67593ce}} 
+struct \mbox{\hyperlink{transform_8h_structTransform}{Transform}}&
+transform&
+The transform of the game object. \\
+\hline
+
 \mbox{\Hypertarget{gameobject_8h_a3f6d5ce1244f12d405af551253752502}\label{gameobject_8h_a3f6d5ce1244f12d405af551253752502}} 
 int&
 visible&
 Flag indicating if the game object is visible. \\
+\hline
+
+\end{DoxyFields}
+\index{LevelData@{LevelData}}\label{structLevelData}
+\Hypertarget{gameobject_8h_structLevelData}
+\doxysubsubsection{struct Level\+Data}
+
+
+Collaboration diagram for Level\+Data\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{structLevelData__coll__graph}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Data Fields}
+\mbox{\Hypertarget{gameobject_8h_a2604f79156106255c377ef0cde7beab2}\label{gameobject_8h_a2604f79156106255c377ef0cde7beab2}} 
+int&
+id&
+The identifier of the game object. \\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_af3e50589cc7fca186127dbb7f806ee5e}\label{gameobject_8h_af3e50589cc7fca186127dbb7f806ee5e}} 
+\mbox{\hyperlink{modeltype_8h_a9f27db0468ce0ce2994eb68dc919b15d}{ModelType}}&
+modelType&
+The type of model used for rendering the game object. \\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_ae3523b959a6389fb81503e6a806b2b17}\label{gameobject_8h_ae3523b959a6389fb81503e6a806b2b17}} 
+struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}}&
+position&
+The position of the game object in 3D space. \\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_a9d7470e995dc8a5ec4eb6a2d46ffce41}\label{gameobject_8h_a9d7470e995dc8a5ec4eb6a2d46ffce41}} 
+\mbox{\hyperlink{rotation_8h_structEulerDegrees}{EulerDegrees}}&
+rotation&
+The rotation of the game object in \mbox{\hyperlink{rotation_8h_structEuler}{Euler}} angles. \\
+\hline
+
+\mbox{\Hypertarget{gameobject_8h_acccaa7e27a3a060a80e2303f84db8bea}\label{gameobject_8h_acccaa7e27a3a060a80e2303f84db8bea}} 
+int&
+subtype&
+The subtype of the game object. \\
 \hline
 
 \end{DoxyFields}
@@ -119,6 +177,12 @@ Flag indicating if the game object is visible. \\
 
 Represents a game object in the game world. 
 
+\mbox{\Hypertarget{gameobject_8h_a18231b1acfb99b8347970c5c76ac2c0c}\label{gameobject_8h_a18231b1acfb99b8347970c5c76ac2c0c}} 
+\index{gameobject.h@{gameobject.h}!LevelData@{LevelData}}
+\index{LevelData@{LevelData}!gameobject.h@{gameobject.h}}
+\doxysubsubsection{\texorpdfstring{LevelData}{LevelData}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{gameobject_8h_structLevelData}{Level\+Data}} \mbox{\hyperlink{gameobject_8h_structLevelData}{Level\+Data}}}
+
 
 
 \doxysubsection{Function Documentation}
@@ -128,11 +192,11 @@ Represents a game object in the game world.
 \doxysubsubsection{\texorpdfstring{GameObject\_alloc()}{GameObject\_alloc()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+alloc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}\label{gameobject_8h_acd52ecab4cf675a8610e39767b80e433}} 
+\mbox{\Hypertarget{gameobject_8h_a193cd69ea10dfa4f13304b266aa52be5}\label{gameobject_8h_a193cd69ea10dfa4f13304b266aa52be5}} 
 \index{gameobject.h@{gameobject.h}!GameObject\_init@{GameObject\_init}}
 \index{GameObject\_init@{GameObject\_init}!gameobject.h@{gameobject.h}}
 \doxysubsubsection{\texorpdfstring{GameObject\_init()}{GameObject\_init()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{self,  }\item[{int}]{id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{init\+Pos }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}}$\ast$ Game\+Object\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} $\ast$}]{self,  }\item[{int}]{id,  }\item[{struct \mbox{\hyperlink{vector3_8h_structVector3}{Vector3}} $\ast$}]{init\+Pos,  }\item[{\mbox{\hyperlink{rotation_8h_structEuler}{Euler}} $\ast$}]{init\+Rot }\end{DoxyParamCaption})}
 
 Initializes a \mbox{\hyperlink{gameobject_8h_structGameObject}{Game\+Object}} with the given ID and initial position.
 
