@@ -142,7 +142,7 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 		break;
 	case LightingNoTextureRenderMode:
 		sprintf(renderMode_str, "Mode: LightNoTex");
-		break;
+		break; 
 	case WireframeRenderMode:
 		sprintf(renderMode_str, "Mode: Wireframe");
 		break;
@@ -243,7 +243,7 @@ void graphicsSetupPipeline(struct RenderState *renderState, Dynamic *dynamicp){
 	gDPSetCycleType(renderState->dl++, G_CYC_1CYCLE);
 	// z-buffered, antialiased triangles
 	gDPSetRenderMode(renderState->dl++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-	// gSPSetGeometryMode(renderState->dl++, G_ZBUFFER); //is this needed?	
+	gSPSetGeometryMode(renderState->dl++, G_ZBUFFER); //is this needed?
 
 	// setup view
 	gSPMatrix(renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->projection)),
@@ -273,11 +273,12 @@ void graphicsApplyRenderMode(struct RenderState *renderState, Lights0 *amb_light
 		}
 		else
 		{
+			gSPSetLights0(renderState->dl++, (*amb_light));
 			gSPSetLights1(renderState->dl++, (*sun_light));
 		}
-		gSPSetGeometryMode(
-			renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
+		gSPSetGeometryMode(renderState->dl++, G_SHADE | G_SHADING_SMOOTH | G_LIGHTING | G_CULL_BACK);
 		gDPSetCombineMode(renderState->dl++, G_CC_MODULATERGB, G_CC_MODULATERGB);
+		
 		break;
 	case LightingNoTextureRenderMode:
 		

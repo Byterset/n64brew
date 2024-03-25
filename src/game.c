@@ -40,20 +40,29 @@ void Game_initGameObjectPhysBody(PhysBody *body, GameObject *obj)
 	obj->physBody = body;
 }
 
-void Game_init(GameObject *worldObjects,
+void Game_init(LevelData *worldObjects,
 			   int worldObjectsCount,
 			   PhysWorldData *physWorldData)
 {
 	int i, initIndex, itemsCount, physicsBodiesCount, charactersCount;
-	GameObject *goose;
+	GameObject *player_object;
 	GameObject *obj;
-
+	// GameObject *catherine;
 	Character *characters;
 	Item *items;
 	PhysBody *physicsBodies;
+	GameObject *temp;
+	game.worldObjects = (GameObject *)malloc(worldObjectsCount * sizeof(GameObject));
+
+	for (i = 0; i < worldObjectsCount; i++)
+	{
+		GameObject_init(game.worldObjects + i, worldObjects[i].id, &worldObjects[i].position, &worldObjects[i].rotation);
+		game.worldObjects[i].modelType = worldObjects[i].modelType;
+		game.worldObjects[i].subtype = worldObjects[i].subtype;
+	}
 
 	game.paused = FALSE;
-	game.worldObjects = worldObjects;
+	// game.worldObjects = temp;
 	game.worldObjectsCount = worldObjectsCount;
 
 	// init world objects loaded from map data
@@ -70,14 +79,17 @@ void Game_init(GameObject *worldObjects,
 	game.viewZoom = 2.0f;
 	game.freeView = 0;
 
-	goose = Game_findObjectByType(GooseModel);
-	invariant(goose != NULL);
+	player_object = Game_findObjectByType(GooseModel);
+	// catherine = Game_findObjectByType(CatherineModel);
+	invariant(player_object != NULL);
+	// invariant(catherine != NULL);
 
-	Player_init(&game.player, goose);
+	Player_init(&game.player, player_object);
+	// Player_init(&game.player, catherine);
 	PhysState_init(&game.physicsState, physWorldData);
 
 	// setup camera
-	vector3Copy(&game.viewTarget, &game.player.goose->position);
+	vector3Copy(&game.viewTarget, &game.player.player_object->position);
 
 	// TODO: move these to be statically allocated per map?
 	itemsCount = Game_countObjectsInCategory(ItemModelType);
@@ -260,11 +272,11 @@ void Game_updateCamera(Game *game, Input *input)
 	cameraDist = 2500.0f / game->viewZoom; // 15deg fov
 	vector3ScaleSelf(&cameraOffset, cameraDist);
 
-	vector3Copy(&game->viewPos, &game->player.goose->position);
+	vector3Copy(&game->viewPos, &game->player.player_object->position);
 	vector3AddToSelf(&game->viewPos, &cameraOffset);
 
 	// look at goose
-	vector3Copy(&game->viewTarget, &game->player.goose->position);
+	vector3Copy(&game->viewTarget, &game->player.player_object->position);
 }
 
 void Game_updatePhysics(Game *game)

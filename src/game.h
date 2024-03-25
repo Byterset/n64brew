@@ -5,7 +5,7 @@
 #include "gametypes.h"
 #include "controls/input.h"
 
-void Game_init(GameObject *worldObjects,
+void Game_init(LevelData *worldObjects,
 			   int worldObjectsCount,
 			   PhysWorldData *physWorldData);
 Game *Game_get();

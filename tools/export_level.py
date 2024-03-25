@@ -122,17 +122,19 @@ def get_subtype(name):
 
 
 out += """
-GameObject %s_data[] = {
+LevelData %s_data[] = {
 """ % (
     filename
 )
 print("Loop Through Objects and writing Object Data")
 for index, obj in enumerate(world_objects):
     pos = obj.location
+    scale = obj.scale
     rot = obj.rotation_euler
-
+    rot_quat = obj.rotation_quaternion
     out += "{"
     out += "%d, // object id (%s)\n" % (index, obj.name)
+
     # we rotate the position and rotation from z-up (blender) to y-up (opengl)
     out += "%s, // position\n" % (print_pos(pos_from_blender(pos)))
     out += "{%f, %f, %f}, // rotation\n" % (

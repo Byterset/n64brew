@@ -104,6 +104,17 @@ int Renderer_isAnimatedGameObject(GameObject *obj)
 	}
 }
 
+int Renderer_isSausage64GameObject(GameObject *obj)
+{
+	switch (obj->modelType)
+	{
+	case CatherineModel:
+		return TRUE;
+	default:
+		return FALSE;
+	}
+}
+
 float Renderer_gameobjectSortDist(GameObject *obj, struct Vector3 *viewPos)
 {
 	if (Renderer_isBackgroundGameObject(obj))

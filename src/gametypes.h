@@ -34,7 +34,7 @@ typedef struct Player
 {
 	ItemHolder itemHolder;
 
-	GameObject *goose;
+	GameObject *player_object;
 	AnimationState animState;
 
 	unsigned int lastPickupTick;

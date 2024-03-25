@@ -102,7 +102,7 @@ static UsbLoggerState usbLoggerState;
 
 static int logTraceStartOffset = 0;
 static int loggingTrace = FALSE;
-// static RenderMode renderModeSetting;
+
 PhysWorldData physWorldData;
 struct RenderState *rState;
 
@@ -183,7 +183,7 @@ void initStage00()
 
 	loggingTrace = FALSE;
 
-	gRenderMode = ToonFlatShadingRenderMode;
+	gRenderMode = TextureAndLightingRenderMode;
 	nearPlane = DEFAULT_NEARPLANE;
 	farPlane = DEFAULT_FARPLANE;
 	vector3Init(&viewPos, 0.0F, 0.0F, -400.0F);
@@ -585,14 +585,24 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 		graphicsApplyRenderMode(renderState, &amb_light, &sun_light, ambientOnly);
 
 		// set the transform in world space for the gameobject to render
+		// guPosition(&dynamicp->objTransforms[i],
+		// 		   obj_rotation.x,									   // rot x
+		// 		   obj_rotation.y,							   // rot y
+		// 		   obj_rotation.z,								   // rot z
+		// 		   modelTypesProperties[obj->modelType].scale, // scale
+		// 		   obj->transform.position.x,							   // pos x
+		// 		   obj->transform.position.y,							   // pos y
+		// 		   obj->transform.position.z							   // pos z
+		// );
+
 		guPosition(&dynamicp->objTransforms[i],
-				   obj->rotation.x,									   // rot x
+				   obj->rotation.x,							   // rot x
 				   obj->rotation.y,							   // rot y
-				   obj->rotation.z,								   // rot z
+				   obj->rotation.z,							   // rot z
 				   modelTypesProperties[obj->modelType].scale, // scale
-				   obj->position.x,							   // pos x
-				   obj->position.y,							   // pos y
-				   obj->position.z							   // pos z
+				   obj->position.x,				   // pos x
+				   obj->position.y,				   // pos y
+				   obj->position.z				   // pos z
 		);
 		gSPMatrix(
 			renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->objTransforms[i])),

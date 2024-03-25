@@ -64,7 +64,7 @@ void Character_toString(Character *self, char *buffer)
 	float angleToPlayer;
 
 	angleToPlayer =
-			Character_topDownAngleMagToObj(self, Game_get()->player.goose);
+			Character_topDownAngleMagToObj(self, Game_get()->player.player_object);
 
 	vector3toString(&self->obj->position, pos);
 	vector3toString((struct Vector3 *)&self->obj->rotation, rot);
@@ -213,13 +213,13 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 int Character_canSeePlayer(Character *self, Game *game)
 {
 	// check whether player is in view arc of character
-	if (!Character_posIsInViewArc(self, &game->player.goose->position))
+	if (!Character_posIsInViewArc(self, &game->player.player_object->position))
 	{
 		return FALSE;
 	}
 	// check line of sight by raycasting
 	return Game_canSeeOtherObject(
-			self->obj, game->player.goose,
+			self->obj, game->player.player_object,
 			/*viewer eye pos y offset*/ CHARACTER_EYE_OFFSET_Y, game->worldObjects,
 			game->worldObjectsCount);
 }
@@ -563,7 +563,7 @@ void Character_update(Character *self, Game *game)
 	}
 
 #if CHARACTER_FOLLOW_PLAYER
-	self->targetLocation = game->player.goose->position;
+	self->targetLocation = game->player.player_object->position;
 	Character_goToTarget(self, game, &self->targetLocation,
 											 CHARACTER_SPEED_MULTIPLIER_WALK,
 											 /*  shouldStopAtTarget  */ FALSE);
@@ -743,7 +743,7 @@ void Character_haveItemTaken(Character *self, Item *item)
 	self->targetType = ItemCharacterTarget;
 	self->targetItem = item;
 	game = Game_get();
-	self->targetLocation = game->player.goose->position;
+	self->targetLocation = game->player.player_object->position;
 
 	Character_transitionToState(self, SeekingItemState);
 }
@@ -875,10 +875,10 @@ void Character_updateSeekingTargetState(Character *self, Game *game)
 void Character_updateFleeingState(Character *self, Game *game)
 {
 	struct Vector3 movement;
-	vector3DirectionTo(&game->player.goose->position, &self->obj->position,	&movement);
+	vector3DirectionTo(&game->player.player_object->position, &self->obj->position,	&movement);
 	vector3AddToSelf(&self->obj->position, &movement);
 
-	if (vector3Dist(&game->player.goose->position, &self->obj->position) <
+	if (vector3Dist(&game->player.player_object->position, &self->obj->position) <
 			CHARACTER_FLEE_DIST)
 	{
 		Character_transitionToState(self, IdleState);

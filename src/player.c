@@ -9,10 +9,10 @@
 #include "constants.h"
 
 // max speed, slightly slower than character speed
-#define GOOSE_SPEED 3.0F
-#define GOOSE_WALK_SPEED_RATIO 0.5
-#define GOOSE_FORCE 5000.0F
-#define GOOSE_MAX_TURN_SPEED 15.0f
+#define PLAYER_SPEED 3.0F
+#define PLAYER_WALK_SPEED_RATIO 0.5
+#define PLAYER_FORCE 5000.0F
+#define PLAYER_MAX_TURN_SPEED 15.0f
 #define PLAYER_NEAR_OBJ_DIST 100.0f
 #define PLAYER_PICKUP_COOLDOWN 10
 #define PLAYER_WALK_ANIM_MOVEMENT_DIVISOR 100.0
@@ -24,7 +24,7 @@ void Player_init(Player *self, GameObject *obj)
 {
 	ItemHolder_init(&self->itemHolder, PlayerItemHolder, (void *)self);
 	AnimationState_init(&self->animState);
-	self->goose = obj;
+	self->player_object = obj;
 	obj->animState = &self->animState;
 	// setup picked-up object attachment point
 	self->animState.attachment.boneIndex = (int)goosehead_gooseheadmesh;
@@ -55,11 +55,11 @@ float Player_move(Player *self, Input *input, Game *game)
 	struct Vector3 inputDirection, updatedHeading, playerMovement;
 	float destAngle, movementMagnitude, movementSpeedRatio,
 		resultantMovementSpeed;
-	GameObject *goose;
+	GameObject *player_object;
 
-	goose = self->goose;
+	player_object = self->player_object;
 
-	movementSpeedRatio = (input->run ? 1.3 : GOOSE_WALK_SPEED_RATIO);
+	movementSpeedRatio = (input->run ? 1.3 : PLAYER_WALK_SPEED_RATIO);
 
 	vector3Init(&inputDirection, input->direction.x, 0.0F, input->direction.y);
 	movementMagnitude = vector3Mag(&inputDirection);
@@ -70,12 +70,12 @@ float Player_move(Player *self, Input *input, Game *game)
 	{
 		destAngle = 360.0F - radToDeg(vector2Angle(&input->direction));
 		// rotate towards dest, but with a speed limit
-		goose->rotation.y = GameUtils_rotateTowardsClamped(
-			goose->rotation.y, destAngle,
-			(input->run ? 0.1 : 1.0) * GOOSE_MAX_TURN_SPEED);
+		player_object->rotation.y = GameUtils_rotateTowardsClamped(
+			player_object->rotation.y, destAngle,
+			(input->run ? 0.1 : 1.0) * PLAYER_MAX_TURN_SPEED);
 	}
 
-	GameUtils_directionFromTopDownAngle(degToRad(goose->rotation.y),
+	GameUtils_directionFromTopDownAngle(degToRad(player_object->rotation.y),
 										&updatedHeading);
 
 	// move based on heading
@@ -85,9 +85,9 @@ float Player_move(Player *self, Input *input, Game *game)
 
 	// movement
 	vector3ScaleSelf(&playerMovement,
-					movementMagnitude * GOOSE_SPEED * movementSpeedRatio * (60 * gDeltaTimeSec));
+					movementMagnitude * PLAYER_SPEED * movementSpeedRatio * (60 * gDeltaTimeSec));
 
-	vector3AddToSelf(&goose->position, &playerMovement);
+	vector3AddToSelf(&player_object->position, &playerMovement);
 	resultantMovementSpeed = vector3Mag(&playerMovement);
 	resultantMovementSpeed /= PLAYER_WALK_ANIM_MOVEMENT_DIVISOR;
 
@@ -97,10 +97,10 @@ float Player_move(Player *self, Input *input, Game *game)
 void Player_update(Player *self, Input *input, Game *game)
 {
 	float resultantMovementSpeed;
-	GameObject *goose;
+	GameObject *player_object;
 	int i;
 	Item *item;
-	goose = self->goose;
+	player_object = self->player_object;
 	resultantMovementSpeed = Player_move(self, input, game);
 
 	// update animation
@@ -116,7 +116,7 @@ void Player_update(Player *self, Input *input, Game *game)
 			// advance walk anim
 			self->animState.progress = fmodf(
 				self->animState.progress +
-					resultantMovementSpeed * (GameUtils_inWater(goose)
+					resultantMovementSpeed * (GameUtils_inWater(player_object)
 												  ? 0.5
 												  : 1.0), // slower anim in water
 				1.0);
@@ -143,7 +143,7 @@ void Player_update(Player *self, Input *input, Game *game)
 	if (self->itemHolder.heldItem)
 	{
 		// bring item with you
-		self->itemHolder.heldItem->obj->position = self->goose->position;
+		self->itemHolder.heldItem->obj->position = self->player_object->position;
 		vector3AddToSelf(&self->itemHolder.heldItem->obj->position, &playerItemOffset);
 	}
 
@@ -162,7 +162,7 @@ void Player_update(Player *self, Input *input, Game *game)
 			// pickup
 			for (i = 0, item = game->items; i < game->itemsCount; i++, item++)
 			{
-				if (vector3Dist(&self->goose->position, &item->obj->position) <
+				if (vector3Dist(&self->player_object->position, &item->obj->position) <
 					PLAYER_NEAR_OBJ_DIST)
 				{
 					// yes, pick up
@@ -192,16 +192,16 @@ void Player_print(Player *self)
 		   self->itemHolder.heldItem
 			   ? ModelTypeStrings[self->itemHolder.heldItem->obj->modelType]
 			   : "none");
-	// Vec3d_print(&self->goose->position);
+	// Vec3d_print(&self->player_object->position);
 }
 
 void Player_toString(Player *self, char *buffer)
 {
 	char pos[60];
 	char vel[60];
-	vector3toString(&self->goose->position, pos);
-	vector3toString(&self->goose->physBody->nonIntegralVelocity, vel);
-	sprintf(buffer, "Player id=%d pos=%s vel=%s heldItem=%s", self->goose->id,
+	vector3toString(&self->player_object->position, pos);
+	vector3toString(&self->player_object->physBody->nonIntegralVelocity, vel);
+	sprintf(buffer, "Player id=%d pos=%s vel=%s heldItem=%s", self->player_object->id,
 			pos, vel,
 			self->itemHolder.heldItem
 				? ModelTypeStrings[self->itemHolder.heldItem->obj->modelType]

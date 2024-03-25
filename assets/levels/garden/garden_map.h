@@ -50,7 +50,7 @@ AABB garden_map_bounds[] = {
 {{-32.452812, 0.000000, -15.666389}, {28.539619, 69.391663, 15.363922}}, // (Catherine) 
 };
 
-GameObject garden_map_data[] = {
+LevelData garden_map_data[] = {
 {0, // object id (Bush.inst)
 {-1107.730835, 11.748462, -64.801270}, // position
 {0.000000, 0.000000, -0.000000}, // rotation
