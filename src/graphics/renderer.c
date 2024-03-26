@@ -123,7 +123,7 @@ float Renderer_gameobjectSortDist(GameObject *obj, struct Vector3 *viewPos)
 		return 10000.0F - obj->id; // add object id to achieve stable sorting
 	}
 
-	return vector3Dist(&obj->position, viewPos);
+	return vector3Dist(&obj->transform.position, viewPos);
 }
 
 void Renderer_closestPointOnAABB(AABB *b,
@@ -264,8 +264,8 @@ AABB Renderer_getWorldAABB(AABB *localAABBs, GameObject *obj)
 	AABB *localAABB = localAABBs + obj->id;
 	AABB worldAABB = *localAABB;
 
-	vector3AddToSelf(&worldAABB.min, &obj->position);
-	vector3AddToSelf(&worldAABB.max, &obj->position);
+	vector3AddToSelf(&worldAABB.min, &obj->transform.position);
+	vector3AddToSelf(&worldAABB.max, &obj->transform.position);
 	return worldAABB;
 }
 
@@ -318,8 +318,8 @@ int Renderer_frustumCull(GameObject *worldObjects,
 			// transform the local bounding box of the object into world space
 			AABB *localAABB = localAABBs + i;
 			AABB worldAABB = *localAABB;
-			vector3AddToSelf(&worldAABB.min, &obj->position);
-			vector3AddToSelf(&worldAABB.max, &obj->position);
+			vector3AddToSelf(&worldAABB.min, &obj->transform.position);
+			vector3AddToSelf(&worldAABB.max, &obj->transform.position);
 
 			// check if the box is inside the given frustum
 			frustumTestResult = Frustum_boxInFrustum(frustum, &worldAABB);

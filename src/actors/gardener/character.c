@@ -66,8 +66,8 @@ void Character_toString(Character *self, char *buffer)
 	angleToPlayer =
 			Character_topDownAngleMagToObj(self, Game_get()->player.player_object);
 
-	vector3toString(&self->obj->position, pos);
-	vector3toString((struct Vector3 *)&self->obj->rotation, rot);
+	vector3toString(&self->obj->transform.position, pos);
+	// vector3toString((struct Vector3 *)&self->obj->transform.rotationEuler, rot);
 	sprintf(buffer, "Character state=%s target=%s pos=%s rot=%s angleToPlayer=%f",
 					CharacterStateStrings[self->state],
 					self->targetItem ? ModelTypeStrings[self->targetItem->obj->modelType]
@@ -107,7 +107,7 @@ void Character_init(Character *self,
 	self->targetItem = NULL;
 	self->defaultActivityItem = defaultActivityItem;
 
-	self->defaultActivityLocation = obj->position;
+	self->defaultActivityLocation = obj->transform.position;
 	self->state = IdleState;
 
 	self->enteredStateTick = 0;
@@ -129,21 +129,24 @@ float Character_topDownAngleDeltaToPos(Character *self, struct Vector3 *position
 {
 	struct Vector3 toPos;
 	struct Vector2 toPos2d;
+	struct Vector3 characterEulerDeg;
 	float angleToPos;
 
-	vector3DirectionTo(&self->obj->position, position, &toPos);
+	vector3DirectionTo(&self->obj->transform.position, position, &toPos);
 	toPos2d.x = toPos.x;
 	toPos2d.y = -toPos.z;
 	angleToPos = radToDeg(vector2Angle(&toPos2d));
 
-	return Character_angleDeltaMag(self->obj->rotation.y, angleToPos);
+	quatToEulerDegrees(&self->obj->transform.rotation, &characterEulerDeg);
+
+	return Character_angleDeltaMag(characterEulerDeg.y, angleToPos);
 }
 
 float Character_topDownAngleMagToObj(Character *self, GameObject *obj)
 {
 	float angleFromHeadingToPos;
 	angleFromHeadingToPos =
-			Character_topDownAngleDeltaToPos(self, &obj->position);
+			Character_topDownAngleDeltaToPos(self, &obj->transform.position);
 	return fabsf(fmodf(angleFromHeadingToPos, 360.0f));
 }
 
@@ -152,7 +155,7 @@ int Character_posIsInViewArc(Character *self, struct Vector3 *position)
 	float angleFromHeadingToPos;
 
 	// within range
-	if (vector3Dist(position, &self->obj->position) >
+	if (vector3Dist(position, &self->obj->transform.position) >
 			CHARACTER_SIGHT_RANGE)
 	{
 		return FALSE;
@@ -176,7 +179,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 	struct Vector3 vecToObject;
 	GameObject *obj;
 
-	if (!Character_posIsInViewArc(self, &item->obj->position))
+	if (!Character_posIsInViewArc(self, &item->obj->transform.position))
 	{
 		return FALSE;
 	}
@@ -197,7 +200,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 		default:
 			break;
 		}
-		vector3DirectionTo(&self->obj->position, &obj->position, &vecToObject);
+		vector3DirectionTo(&self->obj->transform.position, &obj->transform.position, &vecToObject);
 
 		visibilityCheckObjects[visibilityCheckObjectsCount] = *obj;
 		visibilityCheckObjectsCount++;
@@ -213,7 +216,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 int Character_canSeePlayer(Character *self, Game *game)
 {
 	// check whether player is in view arc of character
-	if (!Character_posIsInViewArc(self, &game->player.player_object->position))
+	if (!Character_posIsInViewArc(self, &game->player.player_object->transform.position))
 	{
 		return FALSE;
 	}
@@ -241,15 +244,15 @@ void Character_moveTowards(Character *self,
 	struct Vector2 targetDirection2d;
 	struct Vector3 headingDirection;
 	struct Vector3 movement;
-	float targetAngle;
+	float targetAngle, angleRad;
 	float derivedSpeed;
 	float framesToDesiredArrival;
 	float speedForDesiredArrival;
 
 	float distToTarget =
-			Character_getDistanceTopDown(&self->obj->position, target);
+			Character_getDistanceTopDown(&self->obj->transform.position, target);
 
-	vector3DirectionTo(&self->obj->position, target, &targetDirection);
+	vector3DirectionTo(&self->obj->transform.position, target, &targetDirection);
 
 	targetDirection.y = 0;  // remove vertical component to stop character trying to fly
 	vector3NormalizeSelf(&targetDirection); // renormalize with y=0
@@ -257,20 +260,54 @@ void Character_moveTowards(Character *self,
 	// rotate towards target, but with a speed limit
 	vector2Init(&targetDirection2d, targetDirection.x, targetDirection.z);
 	targetAngle = 360.0 - radToDeg(vector2Angle(&targetDirection2d));
+	// Convert the angle from degrees to radians
+	angleRad = -vector2Angle(&targetDirection);
 
-	self->turningSpeedScaleForHeading =
-			(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5)));
-	self->obj->rotation.y = GameUtils_rotateTowardsClamped(
-			self->obj->rotation.y, targetAngle,
-			CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading);
+	//-------------------------------------------------------------------------
+	// Calculate the rotation quaternion
+	Quaternion rotationQuat;
+	quatAxisAngle(&(struct Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
+
+	self->turningSpeedScaleForHeading =	(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5))) * CHARACTER_MAX_TURN_SPEED;
+
+	// Get the current rotation quaternion of the player object's transform
+	Quaternion currentRotationQuat = self->obj->transform.rotation;
+
+	// Interpolate between the current rotation and the target rotation
+	Quaternion targetRotationQuat;
+	quatLerp(&currentRotationQuat, &rotationQuat, self->turningSpeedScaleForHeading * gDeltaTimeSec, &targetRotationQuat);
+
+	// Set the y rotation of the player object's transform
+	transform_set_rotation(&self->obj->transform, rotationQuat);
+//-------------------------------------------------------------------------
+
+
+	
+
+	// struct Vector3 dest = {0, GameUtils_rotateTowardsClamped(
+	// 		self->obj->transform.rotationEuler.y, targetAngle,
+	// 		CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading), 0};
+	// transform_rotate_euler(&self->obj->transform, dest);
+
+
+	// self->obj->rotation.y = GameUtils_rotateTowardsClamped(
+	// 		self->obj->transform.rotationEuler.y, targetAngle,
+	// 		CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading);
 
 	// resulting heading
 	self->speedScaleForHeading =
 			MIN(1.0, 1.0 - MAX(0.0f, (Character_topDownAngleDeltaToPos(self, target) -
 																CHARACTER_FACING_MOVEMENT_TARGET_ANGLE)) /
 												 90.0f);
-	GameUtils_directionFromTopDownAngle(degToRad(self->obj->rotation.y),
-																			&headingDirection);
+	// GameUtils_directionFromTopDownAngle(degToRad(self->obj->transform.rotationEuler.y),
+	// 																		&headingDirection);
+
+	// Calculate the heading vector based on the resulting quaternion rotation
+	struct Vector3 forward = {0.0F, 0.0F, -1.0F};
+	vector3Init(&headingDirection, 0.0F, 0.0F, 0.0F);
+	quatRotateVector(&self->obj->transform.rotation, &forward, &forward);
+	headingDirection.z = forward.x;
+	headingDirection.x = -forward.z;
 
 	self->speedScaleForArrival = 1.0f;
 	self->speedMultiplier = speedMultiplier; // for debugging
@@ -286,7 +323,7 @@ void Character_moveTowards(Character *self,
 	}
 	vector3Copy(&movement, &headingDirection);
 	vector3ScaleSelf(&movement, derivedSpeed);
-	vector3AddToSelf(&self->obj->position, &movement);
+	vector3AddToSelf(&self->obj->transform.position, &movement);
 }
 
 void Character_setVisibleItemAttachment(Character *self, ModelType modelType)
@@ -355,7 +392,7 @@ void Character_goToTarget(Character *self,
 	{
 		// profStartPathfinding = CUR_TIME_MS();
 
-		from = Path_quantizePosition(pathfindingGraph, &self->obj->position);
+		from = Path_quantizePosition(pathfindingGraph, &self->obj->transform.position);
 
 		Path_initState(pathfindingGraph,                         // graph
 									 pathfindingState,                         // state
@@ -523,7 +560,7 @@ void Character_goToTarget(Character *self,
 			self->pathProgress++;
 		}
 		else if (self->pathProgress < self->pathfindingResult->resultSize - 1 &&
-						 Character_getDistanceTopDown(&self->obj->position, nextNodePos) <
+						 Character_getDistanceTopDown(&self->obj->transform.position, nextNodePos) <
 								 CHARACTER_NEAR_PATH_WAYPOINT_DIST)
 		{
 			// printf("advancing due to near enough to waypoint pathProgress=%d\n",
@@ -537,18 +574,18 @@ void Character_goToTarget(Character *self,
 void Character_update(Character *self, Game *game)
 {
 	struct Vector3 startPos;
-	float startRot;
+	Quaternion startRot;
 	float animationMovementSpeed;
 	int isTurning;
 	int isWalking;
 
-	vector3Copy(&startPos, &self->obj->position);
-	startRot = self->obj->rotation.y;
+	vector3Copy(&startPos, &self->obj->transform.position);
+	startRot = self->obj->transform.rotation;
 	if (self->itemHolder.heldItem)
 	{
 		// bring item with you
-		self->itemHolder.heldItem->obj->position = self->obj->position;
-		vector3AddToSelf(&self->itemHolder.heldItem->obj->position, &characterItemOffset);
+		self->itemHolder.heldItem->obj->transform.position = self->obj->transform.position;
+		vector3AddToSelf(&self->itemHolder.heldItem->obj->transform.position, &characterItemOffset);
 	}
 
 	// update held item visual attachment
@@ -563,7 +600,7 @@ void Character_update(Character *self, Game *game)
 	}
 
 #if CHARACTER_FOLLOW_PLAYER
-	self->targetLocation = game->player.player_object->position;
+	self->targetLocation = game->player.player_object->transform.position;
 	Character_goToTarget(self, game, &self->targetLocation,
 											 CHARACTER_SPEED_MULTIPLIER_WALK,
 											 /*  shouldStopAtTarget  */ FALSE);
@@ -571,9 +608,14 @@ void Character_update(Character *self, Game *game)
 	Character_updateState(self, game);
 #endif
 
-	isTurning = fabsf(self->obj->rotation.y - startRot) > 0.001;
+	struct Vector3 startRotEulerDeg, currRotEulerDeg;
+	quatToEulerDegrees(&startRot, &startRotEulerDeg);
+	quatToEulerDegrees(&self->obj->transform.rotation, &currRotEulerDeg);
+	float startYRot = startRotEulerDeg.y;
+	
+	isTurning = fabsf(currRotEulerDeg.y - startRotEulerDeg.y) > 0.001;
 	animationMovementSpeed =
-			vector3Dist(&startPos, &self->obj->position) / 100.0f;
+			vector3Dist(&startPos, &self->obj->transform.position) / 100.0f;
 	isWalking = animationMovementSpeed > 0.0001;
 	if (!isWalking && isTurning)
 	{
@@ -649,7 +691,7 @@ void Character_maybeTransitionToHigherPriorityState(Character *self,
 	if (self->state < SeekingItemState)
 	{
 		// has item been stolen?
-		if (Character_getDistanceTopDown(&possibleTarget->obj->position,
+		if (Character_getDistanceTopDown(&possibleTarget->obj->transform.position,
 																		 &possibleTarget->initialLocation) >
 				CHARACTER_ITEM_NEAR_HOME_DIST)
 		{
@@ -688,7 +730,7 @@ int Character_isCloseToAndFacing(Character *self,
 {
 	return !(
 			// not close enough
-			Character_getDistanceTopDown(&self->obj->position, target) > targetDist ||
+			Character_getDistanceTopDown(&self->obj->transform.position, target) > targetDist ||
 			// not facing towards enough
 			Character_topDownAngleDeltaToPos(self, target) >
 					CHARACTER_FACING_OBJECT_ANGLE);
@@ -743,7 +785,7 @@ void Character_haveItemTaken(Character *self, Item *item)
 	self->targetType = ItemCharacterTarget;
 	self->targetItem = item;
 	game = Game_get();
-	self->targetLocation = game->player.player_object->position;
+	self->targetLocation = game->player.player_object->transform.position;
 
 	Character_transitionToState(self, SeekingItemState);
 }
@@ -761,12 +803,12 @@ void Character_updateSeekingItemState(Character *self, Game *game)
 	if (self->itemHolder.heldItem)
 	{
 		// are we near enough to drop item?
-		if (vector3Dist(&self->obj->position, &self->targetItem->initialLocation) <
+		if (vector3Dist(&self->obj->transform.position, &self->targetItem->initialLocation) <
 				CHARACTER_NEAR_OBJ_DROP_DIST)
 		{
 			// close enough to return item
 
-			vector3Copy(&self->itemHolder.heldItem->obj->position, &self->targetItem->initialLocation);
+			vector3Copy(&self->itemHolder.heldItem->obj->transform.position, &self->targetItem->initialLocation);
 
 			Item_drop(self->itemHolder.heldItem);
 			self->targetItem = NULL;
@@ -796,11 +838,11 @@ void Character_updateSeekingItemState(Character *self, Game *game)
 
 		// keep last seen location in case it goes out of view
 		self->targetType = ItemCharacterTarget;
-		self->targetLocation = self->targetItem->obj->position;
+		self->targetLocation = self->targetItem->obj->transform.position;
 
 		// are we near enough to pick up item?
-		if (Character_getDistanceTopDown(&self->obj->position,
-																		 &self->targetItem->obj->position) <
+		if (Character_getDistanceTopDown(&self->obj->transform.position,
+																		 &self->targetItem->obj->transform.position) <
 				(Character_isSomeoneElseIsHoldingItem(self)
 						 ? CHARACTER_NEAR_OBJ_STEAL_DIST
 						 : CHARACTER_NEAR_OBJ_PICKUP_DIST))
@@ -818,7 +860,7 @@ void Character_updateSeekingItemState(Character *self, Game *game)
 		{
 			// no, move towards
 			Character_goToTarget(
-					self, game, &self->targetItem->obj->position,
+					self, game, &self->targetItem->obj->transform.position,
 					Character_isSomeoneElseIsHoldingItem(self)
 							? CHARACTER_SPEED_MULTIPLIER_RUN
 							: CHARACTER_SPEED_MULTIPLIER_WALK,
@@ -875,10 +917,10 @@ void Character_updateSeekingTargetState(Character *self, Game *game)
 void Character_updateFleeingState(Character *self, Game *game)
 {
 	struct Vector3 movement;
-	vector3DirectionTo(&game->player.player_object->position, &self->obj->position,	&movement);
-	vector3AddToSelf(&self->obj->position, &movement);
+	vector3DirectionTo(&game->player.player_object->transform.position, &self->obj->transform.position,	&movement);
+	vector3AddToSelf(&self->obj->transform.position, &movement);
 
-	if (vector3Dist(&game->player.player_object->position, &self->obj->position) <
+	if (vector3Dist(&game->player.player_object->transform.position, &self->obj->transform.position) <
 			CHARACTER_FLEE_DIST)
 	{
 		Character_transitionToState(self, IdleState);

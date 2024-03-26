@@ -26,7 +26,7 @@ void AnimationBoneAttachment_init(AnimationBoneAttachment *self)
 	self->boneIndex = 0;
 	self->modelType = NoneModel;
 	vector3Init(&self->offset, 0.0f, 0.0f, 0.0f);
-	EulerDegrees_origin(&self->rotation);
+	vector3Init(&self->rotation, 0.0f, 0.0f, 0.0f);
 }
 
 void AnimationBoneSpriteAttachment_init(AnimationBoneSpriteAttachment *self)
@@ -89,7 +89,7 @@ void AnimationFrame_lerp(
 )
 {
 	Quaternion quaternionA, quaternionB;
-	Euler radiansA, radiansB, radiansResult;
+	struct Vector3 radiansA, radiansB, radiansResult;
 	int frameDataOffsetA, frameDataOffsetB;
 	AnimationFrame *a, *b;
 
@@ -112,14 +112,12 @@ void AnimationFrame_lerp(
 	*result = *a;
 	vector3Lerp(&result->position, &b->position, interp->t, &result->position);
 
-	Euler_fromEulerDegrees(&radiansA, &a->rotation);
-	Euler_fromEulerDegrees(&radiansB, &b->rotation);
+	quatFromEulerDegrees(&a->rotation, &quaternionA);
+	quatFromEulerDegrees(&b->rotation, &quaternionB);
 
-	Quaternion_fromEuler(&quaternionA, &radiansA);
-	Quaternion_fromEuler(&quaternionB, &radiansB);
+	quatLerp(&quaternionA, &quaternionB, interp->t, &quaternionA);
 
-	Quaternion_slerp(&quaternionA, &quaternionB, interp->t);
+	quatToEulerDegrees(&quaternionA, &result->rotation);
 
-	Euler_setFromQuaternion(&radiansResult, &quaternionA);
-	EulerDegrees_fromEuler(&result->rotation, &radiansResult);
+
 }

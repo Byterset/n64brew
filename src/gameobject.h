@@ -5,18 +5,17 @@
 #include "animation/animation.h"
 #include "modeltype.h"
 #include "physics/physics.h"
-#include "math/rotation.h"
+#include "math/quaternion.h"
 #include "math/transform.h"
 
 
 /**
  * @brief Represents a game object in the game world.
  */
+//TODO: Remove legacy pos & rot and replace usage everywhere with SPMatrix Push and Transform info
 typedef struct GameObject
 {
 	int id; /**< The identifier of the game object. */
-	struct Vector3 position; /**< The position of the game object in 3D space. */
-	EulerDegrees rotation; /**< The rotation of the game object in Euler angles. */
 	ModelType modelType; /**< The type of model used for rendering the game object. */
 	int subtype; /**< The subtype of the game object. */
 	AnimationState *animState; /**< The animation state of the game object. */
@@ -30,13 +29,13 @@ typedef struct LevelData
 {
 	int id; /**< The identifier of the game object. */
 	struct Vector3 position; /**< The position of the game object in 3D space. */
-	EulerDegrees rotation; /**< The rotation of the game object in Euler angles. */
+	struct Vector3 rotation; /**< The rotation of the game object in Euler angles. */
 	ModelType modelType; /**< The type of model used for rendering the game object. */
 	int subtype; /**< The subtype of the game object. */
 } LevelData;
 
 
 GameObject *GameObject_alloc();
-GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos, Euler *initRot);
+GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos, struct Vector3 *initRot);
 
 #endif /* !GAMEOBJECT_H */

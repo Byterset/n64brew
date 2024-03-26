@@ -2,7 +2,7 @@
 #define TRANSFORM_H
 
 #include "vector3.h"
-#include "rotation.h"
+#include "quaternion.h"
 
 typedef struct Transform
 {
@@ -16,6 +16,8 @@ extern void transform_set_position (Transform *transform, struct Vector3 positio
 extern void transform_translate (Transform *transform, struct Vector3 translation);
 
 extern void transform_set_rotation (Transform *transform, struct Quaternion rotation);
+
+extern void transform_set_rotation_euler_degrees(Transform *transform, struct Vector3 *angles);
 
 extern void transform_look_at (Transform *transform, struct Vector3 target, struct Vector3 up);
 

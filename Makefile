@@ -99,7 +99,6 @@ HFILES =	src/actors/gardener/character.h \
 	src/math/frustum.h \
 	src/math/matrix.h \
 	src/math/quaternion.h \
-	src/math/rotation.h \
 	src/math/vector2.h \
 	src/math/vector2s16.h \
 	src/math/vector3.h \
@@ -153,7 +152,6 @@ CODEFILES = \
 	src/item.c \
 	src/animation/animation.c \
 	src/physics/physics.c \
-	src/math/rotation.c \
 	src/physics/collision.c \
 	src/pathfinding/pathfinding.c \
 	src/math/frustum.c \

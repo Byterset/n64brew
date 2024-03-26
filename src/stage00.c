@@ -202,7 +202,7 @@ void initStage00()
 	struct Vector3 catherine_scale = {0.5F, 0.5F, 0.5F};
 	Quaternion catherine_rot;
 	struct Vector3 catherine_rot_euler = {0, 0, 0};
-	quatEulerAngles(&catherine_rot_euler, &catherine_rot);
+	quatFromEulerRad(&catherine_rot_euler, &catherine_rot);
 	// Initialize Catherine
 
 	// Initialize the face animation
@@ -584,26 +584,21 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 		graphicsApplyRenderMode(renderState, &amb_light, &sun_light, ambientOnly);
 
-		// set the transform in world space for the gameobject to render
-		// guPosition(&dynamicp->objTransforms[i],
-		// 		   obj_rotation.x,									   // rot x
-		// 		   obj_rotation.y,							   // rot y
-		// 		   obj_rotation.z,								   // rot z
-		// 		   modelTypesProperties[obj->modelType].scale, // scale
-		// 		   obj->transform.position.x,							   // pos x
-		// 		   obj->transform.position.y,							   // pos y
-		// 		   obj->transform.position.z							   // pos z
-		// );
+		struct Vector3 eulerdegs;
+		quatToEulerDegrees(&obj->transform.rotation, &eulerdegs);
+
 
 		guPosition(&dynamicp->objTransforms[i],
-				   obj->rotation.x,							   // rot x
-				   obj->rotation.y,							   // rot y
-				   obj->rotation.z,							   // rot z
+				   eulerdegs.x,							   // rot x
+				   eulerdegs.y,							   // rot y
+				   eulerdegs.z,							   // rot z
 				   modelTypesProperties[obj->modelType].scale, // scale
-				   obj->position.x,				   // pos x
-				   obj->position.y,				   // pos y
-				   obj->position.z				   // pos z
+				   obj->transform.position.x,				   // pos x
+				   obj->transform.position.y,				   // pos y
+				   obj->transform.position.z				   // pos z
 		);
+
+		// Push the matrix
 		gSPMatrix(
 			renderState->dl++, OS_K0_TO_PHYSICAL(&(dynamicp->objTransforms[i])),
 			G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH); // gameobject mtx start

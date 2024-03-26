@@ -15,6 +15,7 @@ float mathfRandomFloat();
 float mathfMod(float input, float divisor);
 float clampf(float input, float min, float max);
 float signf(float input);
+float copysignf(float input, float sign);
 
 int sign(int input);
 int abs(int input);

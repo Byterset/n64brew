@@ -9,7 +9,9 @@
 #include "quaternion.h"
 #include <ultra64.h>
 #include <assert.h>
+#include <math.h>
 #include "mathf.h"
+#include "../constants.h"
 
 /**
  * @brief The identity quaternion.
@@ -45,10 +47,10 @@ void quatAxisAngle(struct Vector3 *axis, float angle, struct Quaternion *out)
 /**
  * @brief Creates a quaternion from a Vector of angles
  * 
- * @param angles 
+ * @param angles in radians
  * @param out 
  */
-void quatEulerAngles(struct Vector3 *angles, struct Quaternion *out)
+void quatFromEulerRad(struct Vector3 *angles, struct Quaternion *out)
 {
 	struct Quaternion angle;
 	struct Quaternion tmp;
@@ -58,6 +60,82 @@ void quatEulerAngles(struct Vector3 *angles, struct Quaternion *out)
 	quatMultiply(out, &angle, &tmp);
 	quatAxisAngle(&gForward, angles->z, &angle);
 	quatMultiply(&angle, &tmp, out);
+}
+
+
+/**
+ * @brief Creates a quaternion from a Vector of angles
+ * 
+ * @param angles in degrees
+ * @param out 
+ */
+void quatFromEulerDegrees(struct Vector3 *angles, struct Quaternion *out)
+{
+	struct Vector3 anglesRad;
+	anglesRad.x = degToRad(angles->x);
+	anglesRad.y = degToRad(angles->y);
+	anglesRad.z = degToRad(angles->z);
+	quatFromEulerRad(&anglesRad, out);
+}
+
+
+/**
+ * @brief 
+ * 
+ * @param q The input quaternion.
+ * @param out The output euler degrees.
+ */
+void quatToEulerDegrees(struct Quaternion *q, struct Vector3 *out)
+{
+	Quaternion q_norm;
+	quatNormalize(q, &q_norm);
+
+	    // Conversion to Euler angles (in radians)
+    float sinr_cosp = 2.0f * (q_norm.w * q_norm.x + q_norm.y * q_norm.z);
+    float cosr_cosp = 1.0f - 2.0f * (q_norm.x * q_norm.x + q_norm.y * q_norm.y);
+	out->x = atan2f(sinr_cosp, cosr_cosp);
+
+	float sinp = 2.0f * (q_norm.w * q_norm.y - q_norm.z * q_norm.x);
+	if (fabsf(sinp) >= 1)
+		out->y = copysignf(M_PI / 2.0f, sinp); // use 90 degrees if out of range
+	else
+		out->y = asinf(sinp);
+
+	float siny_cosp = 2.0f * (q_norm.w * q_norm.z + q_norm.x * q_norm.y);
+	float cosy_cosp = 1.0f - 2.0f * (q_norm.y * q_norm.y + q_norm.z * q_norm.z);
+	out->z = atan2f(siny_cosp, cosy_cosp);
+
+	out->x = radToDeg(out->x);
+	out->y = radToDeg(out->y);
+	out->z = radToDeg(out->z);
+
+}
+
+/**
+ * @brief 
+ * 
+ * @param q The input quaternion.
+ * @param out The output euler angles (radians).
+ */
+void quatToEulerRad(struct Quaternion *q, struct Vector3 *out)
+{
+	Quaternion q_norm;
+	quatNormalize(q, &q_norm);
+
+	    // Conversion to Euler angles (in radians)
+    float sinr_cosp = 2.0f * (q_norm.w * q_norm.x + q_norm.y * q_norm.z);
+    float cosr_cosp = 1.0f - 2.0f * (q_norm.x * q_norm.x + q_norm.y * q_norm.y);
+	out->x = atan2f(sinr_cosp, cosr_cosp);
+
+	float sinp = 2.0f * (q_norm.w * q_norm.y - q_norm.z * q_norm.x);
+	if (fabsf(sinp) >= 1)
+		out->y = copysignf(M_PI / 2.0f, sinp); // use 90 degrees if out of range
+	else
+		out->y = asinf(sinp);
+
+	float siny_cosp = 2.0f * (q_norm.w * q_norm.z + q_norm.x * q_norm.y);
+	float cosy_cosp = 1.0f - 2.0f * (q_norm.y * q_norm.y + q_norm.z * q_norm.z);
+	out->z = atan2f(siny_cosp, cosy_cosp);
 }
 
 /**

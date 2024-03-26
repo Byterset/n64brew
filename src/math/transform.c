@@ -14,6 +14,12 @@ void transform_set_rotation(Transform *transform, struct Quaternion rotation) {
     transform->rotation = rotation;
 }
 
+void transform_set_rotation_euler_degrees(Transform *transform, struct Vector3 *angles){
+    Quaternion quat;
+    quatFromEulerRad(angles, &quat);
+    transform_set_rotation(transform, quat);
+}
+
 void transform_look_at(Transform *transform, struct Vector3 target, struct Vector3 up) {
     struct Vector3 forward;
     Quaternion temp;
@@ -33,7 +39,7 @@ void transform_rotate_euler(Transform *transform, struct Vector3 rotation) {
     Quaternion quat_rotation;
     Quaternion temp;
     struct Vector3 angles = rotation;
-    quatEulerAngles(&angles, &quat_rotation);
+    quatFromEulerRad(&angles, &quat_rotation);
     quatMultiply(&transform->rotation, &quat_rotation, &temp);
     transform_set_rotation(transform, temp);
 }

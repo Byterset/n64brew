@@ -137,6 +137,18 @@ float signf(float input)
 	}
 }
 
+float copysignf(float input, float sign)
+{
+	if (sign < 0.0f)
+	{
+		return -fabsf(input);
+	}
+	else
+	{
+		return fabsf(input);
+	}
+}
+
 int sign(int input)
 {
 	if (input > 0)

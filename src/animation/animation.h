@@ -10,7 +10,7 @@
 
 #include "../modeltype.h"
 #include "../n64compat.h"
-#include "../math/rotation.h"
+#include "../math/quaternion.h"
 #include "../sprite.h"
 
 // max num bones per character
@@ -24,7 +24,7 @@ typedef struct AnimationFrame
 	int frame;
 	int object;
 	struct Vector3 position;
-	EulerDegrees rotation;
+	struct Vector3 rotation;
 
 } AnimationFrame;
 
@@ -39,7 +39,7 @@ typedef struct AnimationBoneAttachment
 	int boneIndex;
 	ModelType modelType;
 	struct Vector3 offset;
-	EulerDegrees rotation;
+	struct Vector3 rotation;
 } AnimationBoneAttachment;
 
 typedef struct AnimationBoneSpriteAttachment

@@ -89,7 +89,7 @@ void Game_init(LevelData *worldObjects,
 	PhysState_init(&game.physicsState, physWorldData);
 
 	// setup camera
-	vector3Copy(&game.viewTarget, &game.player.player_object->position);
+	vector3Copy(&game.viewTarget, &game.player.player_object->transform.position);
 
 	// TODO: move these to be statically allocated per map?
 	itemsCount = Game_countObjectsInCategory(ItemModelType);
@@ -272,11 +272,11 @@ void Game_updateCamera(Game *game, Input *input)
 	cameraDist = 2500.0f / game->viewZoom; // 15deg fov
 	vector3ScaleSelf(&cameraOffset, cameraDist);
 
-	vector3Copy(&game->viewPos, &game->player.player_object->position);
+	vector3Copy(&game->viewPos, &game->player.player_object->transform.position);
 	vector3AddToSelf(&game->viewPos, &cameraOffset);
 
 	// look at goose
-	vector3Copy(&game->viewTarget, &game->player.player_object->position);
+	vector3Copy(&game->viewTarget, &game->player.player_object->transform.position);
 }
 
 void Game_updatePhysics(Game *game)
@@ -306,11 +306,11 @@ void Game_updatePhysics(Game *game)
 		 ++i, body++)
 	{
 		obj = Game_getObjectByID(body->id);
-		obj->position = body->position;
+		obj->transform.position = body->position;
 
 		vector3Copy(&physUpdatedPosition, &body->position);
 		vector3SubFromSelf(&physUpdatedPosition, &modelTypesProperties[obj->modelType].centroidOffset);
-		vector3Copy(&obj->position, &physUpdatedPosition);
+		vector3Copy(&obj->transform.position, &physUpdatedPosition);
 	}
 }
 
@@ -425,7 +425,7 @@ int Game_rayIntersectsSphere(struct Vector3 *origin,
 
 void Game_getObjCenter(GameObject *obj, struct Vector3 *result)
 {
-	vector3Copy(result, &obj->position);
+	vector3Copy(result, &obj->transform.position);
 	vector3AddToSelf(result, &modelTypesProperties[obj->modelType].centroidOffset);
 }
 
@@ -510,9 +510,9 @@ int Game_canSeeOtherObject(GameObject *viewer,
 	GameObject *obj;
 
 	canSee = TRUE;
-	eye = viewer->position;
+	eye = viewer->transform.position;
 	eye.y += viewerEyeOffset; // eye offset
-	vector3DirectionTo(&eye, &target->position, &rayDirection);
+	vector3DirectionTo(&eye, &target->transform.position, &rayDirection);
 
 	targetDistance = Game_distanceToGameObject(&eye, target);
 

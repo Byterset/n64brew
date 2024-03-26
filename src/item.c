@@ -24,7 +24,7 @@ void Item_init(Item *self, GameObject *obj, Game *game)
 	self->obj = obj;
 	self->holder = NULL;
 	self->lastPickedUpTick = 0;
-	self->initialLocation = obj->position;
+	self->initialLocation = obj->transform.position;
 }
 
 void Item_take(Item *self, ItemHolder *newHolder)
@@ -100,7 +100,7 @@ void Item_drop(Item *self)
 	// no longer held
 	self->holder = NULL;
 	// put it back on the ground
-	self->obj->position.y = 0;
+	self->obj->transform.position.y = 0;
 
 	// re-enable rendering and physics
 	self->obj->visible = TRUE;
@@ -127,7 +127,7 @@ void ItemHolder_init(ItemHolder *self,
 void Item_print(Item *self)
 {
 	printf("Item type=%s pos=", ModelTypeStrings[self->obj->modelType]);
-	// Vec3d_print(&self->obj->position);
+	// Vec3d_print(&self->obj->transform.position);
 }
 
 #endif

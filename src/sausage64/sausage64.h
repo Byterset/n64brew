@@ -2,6 +2,7 @@
 #define SAUSAGE64_H
 
 #include "../math/transform.h"
+#include "../util/time.h"
 
 #ifndef _ULTRA64_H_
 #include <ultra64.h>

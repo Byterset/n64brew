@@ -120,15 +120,15 @@ void graphicsCreateTask(struct GraphicsTask *targetTask, GraphicsCallback callba
 		fps = (int)(1000.0f/gDeltaTimeMS);
 	}
 	//uncomment to track free heap in on-screen debug console
-	// if(heapCheckCounter < 200){
-	// 	heapCheckCounter++;
-	// }
-	// else{
-	// 	heapCheckCounter = 0;
-	// 	char *heapfree[20];
-	// 	sprintf(heapfree, "free heap:%d", calculateBytesFree());
-	// 	console_add_msg(heapfree);
-	// }
+	if(heapCheckCounter < 200){
+		heapCheckCounter++;
+	}
+	else{
+		heapCheckCounter = 0;
+		char *heapfree[20];
+		sprintf(heapfree, "free heap:%d", calculateBytesFree());
+		console_add_msg(heapfree);
+	}
 	char *renderMode_str[20];
 	switch (gRenderMode){
 	case ToonFlatShadingRenderMode:
