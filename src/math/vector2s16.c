@@ -53,7 +53,7 @@ int vector2s16FallsBetween(struct Vector2s16 *from, struct Vector2s16 *towards, 
 	}
 }
 
-void vector2s16Barycentric(struct Vector2s16 *a, struct Vector2s16 *b, struct Vector2s16 *c, struct Vector2s16 *point, struct Vector3 *output)
+void vector2s16Barycentric(struct Vector2s16 *a, struct Vector2s16 *b, struct Vector2s16 *c, struct Vector2s16 *point, Vector3 *output)
 {
 	struct Vector2s16 v0;
 	struct Vector2s16 v1;

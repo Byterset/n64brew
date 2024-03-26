@@ -89,7 +89,7 @@ void AnimationFrame_lerp(
 )
 {
 	Quaternion quaternionA, quaternionB;
-	struct Vector3 radiansA, radiansB, radiansResult;
+	Vector3 radiansA, radiansB, radiansResult;
 	int frameDataOffsetA, frameDataOffsetB;
 	AnimationFrame *a, *b;
 

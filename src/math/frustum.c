@@ -18,7 +18,7 @@ char *FrustumPlanesStrings[NUM_FRUSTUM_PLANES] = {
 	"RightFrustumPlane",  //
 };
 
-void Plane_setNormalAndPoint(Plane *self, struct Vector3 *normal, struct Vector3 *point)
+void Plane_setNormalAndPoint(Plane *self, Vector3 *normal, Vector3 *point)
 {
 	self->normal = *normal;
 	vector3NormalizeSelf(&self->normal);
@@ -27,9 +27,9 @@ void Plane_setNormalAndPoint(Plane *self, struct Vector3 *normal, struct Vector3
 	self->d = -(vector3Dot(&self->normal, &self->point));
 }
 
-void Plane_set3Points(Plane *self, struct Vector3 *v1, struct Vector3 *v2, struct Vector3 *v3)
+void Plane_set3Points(Plane *self, Vector3 *v1, Vector3 *v2, Vector3 *v3)
 {
-	struct Vector3 aux1, aux2;
+	Vector3 aux1, aux2;
 
 	aux1 = *v1;
 	vector3SubFromSelf(&aux1, v2);
@@ -43,17 +43,17 @@ void Plane_set3Points(Plane *self, struct Vector3 *v1, struct Vector3 *v2, struc
 	self->d = -(vector3Dot(&self->normal, &self->point));
 }
 
-float Plane_distance(Plane *self, struct Vector3 *p)
+float Plane_distance(Plane *self, Vector3 *p)
 {
 	return (self->d + vector3Dot(&self->normal, p));
 }
 
-void Plane_pointClosestPoint(Plane *p, struct Vector3 *q, struct Vector3 *result)
+void Plane_pointClosestPoint(Plane *p, Vector3 *q, Vector3 *result)
 {
 	// float t = Dot(p.n, q) - p.d;
 	// return q - t * p.n;
 
-	struct Vector3 tmp;
+	Vector3 tmp;
 	float t = vector3Dot(&p->normal, q) + p->d;
 
 	*result = *q;
@@ -62,7 +62,7 @@ void Plane_pointClosestPoint(Plane *p, struct Vector3 *q, struct Vector3 *result
 	vector3SubFromSelf(result, &tmp);
 }
 
-float Plane_distPointToPlane(Plane *p, struct Vector3 *q)
+float Plane_distPointToPlane(Plane *p, Vector3 *q)
 {
 	// return Dot(q, p.n) - p.d; if plane equation normalized (||p.n||==1)
 	return (vector3Dot(&p->normal, q) + p->d) / vector3Dot(&p->normal, &p->normal);
@@ -97,9 +97,9 @@ void Frustum_setCamInternals(Frustum *self,
 // guLookAt/gluLookAt function: the position of the camera (p), a point to where
 // the camera is pointing (l) and the up vector (u). Each time the camera
 // position or orientation changes, this function should be called as well.
-void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, struct Vector3 *u)
+void Frustum_setCamDef(Frustum *self, Vector3 *p, Vector3 *l, Vector3 *u)
 {
-	struct Vector3 nc, fc, X, Y, Z;
+	Vector3 nc, fc, X, Y, Z;
 	// compute the Z axis of camera
 	// this axis points in the opposite direction from
 	// the looking direction
@@ -120,7 +120,7 @@ void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, stru
 	// compute the centers of the near and far planes
 	{
 		// nc = p - Z * nearD;
-		struct Vector3 ZNearD;
+		Vector3 ZNearD;
 		ZNearD = Z;
 		vector3ScaleSelf(&ZNearD, self->nearD);
 		nc = *p;
@@ -129,7 +129,7 @@ void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, stru
 
 	{
 		// fc = p - Z * farD;
-		struct Vector3 ZFarD;
+		Vector3 ZFarD;
 		ZFarD = Z;
 		vector3ScaleSelf(&ZFarD, self->farD);
 		fc = *p;
@@ -137,7 +137,7 @@ void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, stru
 	}
 
 	{
-		struct Vector3 Ynh, Xnw, Yfh, Xfw;
+		Vector3 Ynh, Xnw, Yfh, Xfw;
 
 		Ynh = Y;
 		vector3ScaleSelf(&Ynh, self->nh);
@@ -203,11 +203,11 @@ void Frustum_setCamDef(Frustum *self, struct Vector3 *p, struct Vector3 *l, stru
 					 &self->fbl);
 }
 
-void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, struct Vector3 *u)
+void Frustum_setCamDef2(Frustum *self, Vector3 *p, Vector3 *l, Vector3 *u)
 {
-	struct Vector3 aux, normal;
+	Vector3 aux, normal;
 
-	struct Vector3 nc, fc, X, Y, Z;
+	Vector3 nc, fc, X, Y, Z;
 	// compute the Z axis of camera
 	// this axis points in the opposite direction from
 	// the looking direction
@@ -228,7 +228,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 	// compute the centers of the near and far planes
 	{
 		// nc = p - Z * nearD;
-		struct Vector3 tempZ;
+		Vector3 tempZ;
 		tempZ = Z;
 		vector3ScaleSelf(&tempZ, self->nearD);
 		nc = *p;
@@ -237,7 +237,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 
 	{
 		// fc = p - Z * farD;
-		struct Vector3 tempZ;
+		Vector3 tempZ;
 		tempZ = Z;
 		vector3ScaleSelf(&tempZ, self->farD);
 		fc = *p;
@@ -246,7 +246,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 
 	// near
 	{
-		struct Vector3 negZ;
+		Vector3 negZ;
 		vector3Copy(&Z, &negZ);
 		// negZ = Z;
 		vector3ScaleSelf(&negZ, -1.0);
@@ -256,13 +256,13 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 	Plane_setNormalAndPoint(&self->planes[FarFrustumPlane], &Z, &fc);
 
 	{
-		struct Vector3 Ynh;
+		Vector3 Ynh;
 		Ynh = Y;
 		vector3ScaleSelf(&Ynh, self->nh);
 		// top
 		{
 			// aux = (nc + Y * nh) - p;
-			struct Vector3 nsAddYnh;
+			Vector3 nsAddYnh;
 			nsAddYnh = nc;
 			vector3AddToSelf(&nsAddYnh, &Ynh);
 			aux = nsAddYnh;
@@ -276,7 +276,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 		// bottom
 		{
 			// aux = (nc - Y * nh) - p;
-			struct Vector3 ncSubYnh;
+			Vector3 ncSubYnh;
 			ncSubYnh = nc;
 			vector3SubFromSelf(&ncSubYnh, &Ynh);
 			aux = ncSubYnh;
@@ -289,13 +289,13 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 		}
 	}
 	{
-		struct Vector3 Xnw;
+		Vector3 Xnw;
 		Xnw = X;
 		vector3ScaleSelf(&Xnw, self->nw);
 		// left
 		{
 			// aux = (nc - X * nw) - p;
-			struct Vector3 ncSubXnw;
+			Vector3 ncSubXnw;
 			ncSubXnw = nc;
 			vector3SubFromSelf(&ncSubXnw, &Xnw);
 
@@ -309,7 +309,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 		// right
 		{
 			// aux = (nc + X * nw) - p;
-			struct Vector3 ncAddXnw;
+			Vector3 ncAddXnw;
 			ncAddXnw = nc;
 			vector3AddToSelf(&ncAddXnw, &Xnw);
 			aux = ncAddXnw;
@@ -322,7 +322,7 @@ void Frustum_setCamDef2(Frustum *self, struct Vector3 *p, struct Vector3 *l, str
 	}
 }
 
-void Frustum_getAABBVertexP(AABB *self, struct Vector3 *normal, struct Vector3 *result)
+void Frustum_getAABBVertexP(AABB *self, Vector3 *normal, Vector3 *result)
 {
 	*result = self->min;
 
@@ -336,7 +336,7 @@ void Frustum_getAABBVertexP(AABB *self, struct Vector3 *normal, struct Vector3 *
 		result->z = self->max.z;
 }
 
-void Frustum_getAABBVertexN(AABB *self, struct Vector3 *normal, struct Vector3 *result)
+void Frustum_getAABBVertexN(AABB *self, Vector3 *normal, Vector3 *result)
 {
 	*result = self->max;
 
@@ -353,7 +353,7 @@ void Frustum_getAABBVertexN(AABB *self, struct Vector3 *normal, struct Vector3 *
 // FrustumTestResult Frustum_boxInFrustum(Frustum* frustum, AABB* aabb) {
 //   int i;
 //   float r, s;
-//   struct Vector3 center, positiveExtents;
+//   Vector3 center, positiveExtents;
 //   Plane* plane;
 //   FrustumTestResult result;
 //   result = InsideFrustum;
@@ -395,7 +395,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestRTCD(Frustum *frustum,
 												  int planeIdx)
 {
 	float r, s;
-	struct Vector3 center, positiveExtents;
+	Vector3 center, positiveExtents;
 	Plane *plane;
 	FrustumTestResult result = InsideFrustum;
 	// for each plane do ...
@@ -441,7 +441,7 @@ FrustumTestResult Frustum_boxFrustumPlaneTestPN(Frustum *frustum,
 												AABB *aabb,
 												int planeIdx)
 {
-	struct Vector3 vertexP, vertexN;
+	Vector3 vertexP, vertexN;
 	FrustumTestResult result = InsideFrustum;
 	Frustum_getAABBVertexP(aabb, &frustum->planes[planeIdx].normal, &vertexP);
 	Frustum_getAABBVertexN(aabb, &frustum->planes[planeIdx].normal, &vertexN);
@@ -480,33 +480,33 @@ FrustumTestResult Frustum_boxInFrustum(Frustum *frustum, AABB *aabb)
 	return result;
 }
 
-void Frustum_getAABBVertex(AABB *aabb, int vertex, struct Vector3 *result)
+void Frustum_getAABBVertex(AABB *aabb, int vertex, Vector3 *result)
 {
 	switch (vertex)
 	{
 	case 0:
-		*result = (struct Vector3){aabb->min.x, aabb->min.y, aabb->min.z};
+		*result = (Vector3){aabb->min.x, aabb->min.y, aabb->min.z};
 		return;
 	case 1:
-		*result = (struct Vector3){aabb->max.x, aabb->min.y, aabb->min.z};
+		*result = (Vector3){aabb->max.x, aabb->min.y, aabb->min.z};
 		return;
 	case 2:
-		*result = (struct Vector3){aabb->min.x, aabb->max.y, aabb->min.z};
+		*result = (Vector3){aabb->min.x, aabb->max.y, aabb->min.z};
 		return;
 	case 3:
-		*result = (struct Vector3){aabb->min.x, aabb->min.y, aabb->max.z};
+		*result = (Vector3){aabb->min.x, aabb->min.y, aabb->max.z};
 		return;
 	case 4:
-		*result = (struct Vector3){aabb->max.x, aabb->max.y, aabb->max.z};
+		*result = (Vector3){aabb->max.x, aabb->max.y, aabb->max.z};
 		return;
 	case 5:
-		*result = (struct Vector3){aabb->min.x, aabb->max.y, aabb->max.z};
+		*result = (Vector3){aabb->min.x, aabb->max.y, aabb->max.z};
 		return;
 	case 6:
-		*result = (struct Vector3){aabb->max.x, aabb->min.y, aabb->max.z};
+		*result = (Vector3){aabb->max.x, aabb->min.y, aabb->max.z};
 		return;
 	case 7:
-		*result = (struct Vector3){aabb->max.x, aabb->max.y, aabb->min.z};
+		*result = (Vector3){aabb->max.x, aabb->max.y, aabb->min.z};
 		return;
 	}
 }
@@ -517,7 +517,7 @@ FrustumTestResult Frustum_boxInFrustumNaive(Frustum *frustum, AABB *aabb)
 	int out;
 	int in;
 	FrustumTestResult result = InsideFrustum;
-	struct Vector3 vertex;
+	Vector3 vertex;
 
 	// for each plane do ...
 	for (i = 0; i < NUM_FRUSTUM_PLANES; i++)

@@ -115,7 +115,7 @@ int Renderer_isSausage64GameObject(GameObject *obj)
 	}
 }
 
-float Renderer_gameobjectSortDist(GameObject *obj, struct Vector3 *viewPos)
+float Renderer_gameobjectSortDist(GameObject *obj, Vector3 *viewPos)
 {
 	if (Renderer_isBackgroundGameObject(obj))
 	{
@@ -127,8 +127,8 @@ float Renderer_gameobjectSortDist(GameObject *obj, struct Vector3 *viewPos)
 }
 
 void Renderer_closestPointOnAABB(AABB *b,
-								 /* sourcePoint*/ struct Vector3 *p,
-								 /* result */ struct Vector3 *q)
+								 /* sourcePoint*/ Vector3 *p,
+								 /* result */ Vector3 *q)
 {
 	float v;
 	v = p->x;
@@ -151,9 +151,9 @@ void Renderer_closestPointOnAABB(AABB *b,
 	q->z = v;
 }
 
-void Renderer_getSeparatingPlane(struct Vector3 *a, struct Vector3 *b, Plane *separatingPlane)
+void Renderer_getSeparatingPlane(Vector3 *a, Vector3 *b, Plane *separatingPlane)
 {
-	struct Vector3 halfwayPoint, aToBDirection;
+	Vector3 halfwayPoint, aToBDirection;
 	halfwayPoint = *a;
 	vector3AddToSelf(&halfwayPoint, b);
 	vector3DivScalar(&halfwayPoint, 2);
@@ -175,10 +175,10 @@ void Renderer_getSeparatingPlane(struct Vector3 *a, struct Vector3 *b, Plane *se
 // currently this somehow causes the game to crash when touching a BushModel ??
 int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 									   RendererSortDistance *b,
-									   struct Vector3 *viewPos)
+									   Vector3 *viewPos)
 {
 	Plane separatingPlane;
-	struct Vector3 aCenter, bCenter, aClosestPoint, bClosestPoint, aReallyClosestPoint,
+	Vector3 aCenter, bCenter, aClosestPoint, bClosestPoint, aReallyClosestPoint,
 		bReallyClosestPoint;
 	float planeToADist, planeToBDist, planeToViewDist;
 	invariant(a->obj != NULL);
@@ -340,11 +340,11 @@ int Renderer_frustumCull(GameObject *worldObjects,
 	return visibilityCulled;
 }
 
-int Renderer_screenProject(struct Vector3 *obj,
+int Renderer_screenProject(Vector3 *obj,
 				  MtxF modelMatrix,
 				  MtxF projMatrix,
 				  ViewportF viewport,
-				  struct Vector3 *win)
+				  Vector3 *win)
 {
 	float in[4];
 	float out[4];
@@ -382,7 +382,7 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 int *worldObjectsVisibility,
 								 int visibleObjectsCount,
 								 RendererSortDistance *result,
-								 struct Vector3 *viewPos,
+								 Vector3 *viewPos,
 								 AABB *localAABBs)
 {
 	int i;

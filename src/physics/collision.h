@@ -6,22 +6,22 @@
 
 typedef struct Triangle
 {
-	struct Vector3 a;
-	struct Vector3 b;
-	struct Vector3 c;
+	Vector3 a;
+	Vector3 b;
+	Vector3 c;
 } Triangle;
 
 typedef struct AABB
 {
-	struct Vector3 min;
-	struct Vector3 max;
+	Vector3 min;
+	Vector3 max;
 } AABB;
 
 typedef struct SphereTriangleCollision
 {
 	int index;
 	float distance;
-	struct Vector3 posInTriangle;
+	Vector3 posInTriangle;
 	Triangle *triangle;
 	AABB triangleAABB;
 } SphereTriangleCollision;
@@ -52,30 +52,30 @@ extern std::map<int, SphereTriangleCollision> testCollisionResults;
 #endif
 #endif
 
-void Triangle_getCentroid(Triangle *triangle, struct Vector3 *result);
-void Triangle_getNormal(Triangle *triangle, struct Vector3 *result);
-float Triangle_comparePoint(Triangle *triangle, struct Vector3 *point);
+void Triangle_getCentroid(Triangle *triangle, Vector3 *result);
+void Triangle_getNormal(Triangle *triangle, Vector3 *result);
+float Triangle_comparePoint(Triangle *triangle, Vector3 *point);
 
 void AABB_fromTriangle(Triangle *triangle, AABB *result);
 
 int Collision_intersectAABBAABB(AABB *a, AABB *b);
 
 int Collision_sphereTriangleIsSeparated(Triangle *triangle,
-										struct Vector3 *sphereCenter,
+										Vector3 *sphereCenter,
 										double sphereRadius);
 
-void Collision_distancePointTriangleExact(struct Vector3 *point,
+void Collision_distancePointTriangleExact(Vector3 *point,
 										  Triangle *triangle,
-										  struct Vector3 *closest);
+										  Vector3 *closest);
 
 int Collision_testMeshSphereCollision(Triangle *triangles,
 									  int trianglesLength,
-									  struct Vector3 *objCenter,
+									  Vector3 *objCenter,
 									  float objRadius,
 									  SpatialHash *spatialHash,
 									  SphereTriangleCollision *result);
 
-int Collision_testSegmentAABBCollision(struct Vector3 *p0, struct Vector3 *p1, AABB *b);
+int Collision_testSegmentAABBCollision(Vector3 *p0, Vector3 *p1, AABB *b);
 
 int SpatialHash_unitsToGridForDimension(float unitsPos,
 										SpatialHash *spatialHash);
@@ -98,14 +98,14 @@ void SpatialHash_raycast(float x0,
 						 SpatialHashRaycastCallback traversalVisitor,
 						 void *traversalState);
 
-int SpatialHash_getTriangles(struct Vector3 *position,
+int SpatialHash_getTriangles(Vector3 *position,
 							 float radius,
 							 SpatialHash *spatialHash,
 							 int *results,
 							 int maxResults);
 
-int SpatialHash_getTrianglesForRaycast(struct Vector3 *rayStart,
-									   struct Vector3 *rayEnd,
+int SpatialHash_getTrianglesForRaycast(Vector3 *rayStart,
+									   Vector3 *rayEnd,
 									   SpatialHash *spatialHash,
 									   int *results,
 									   int maxResults);

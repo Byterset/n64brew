@@ -36,7 +36,7 @@ void Renderer_sortVisibleObjects(GameObject *worldObjects,
 								 int *worldObjectsVisibility,
 								 int visibleObjectsCount,
 								 RendererSortDistance *result,
-								 struct Vector3 *viewPos,
+								 Vector3 *viewPos,
 								 AABB *localAABBs);
 
 int Renderer_frustumCull(GameObject *worldObjects,
@@ -50,17 +50,17 @@ void Renderer_calcIntersecting(int *objectsIntersecting,
 							   RendererSortDistance *sortedObjects,
 							   AABB *localAABBs);
 
-void Renderer_getSeparatingPlane(struct Vector3 *a, struct Vector3 *b, Plane *separatingPlane);
+void Renderer_getSeparatingPlane(Vector3 *a, Vector3 *b, Plane *separatingPlane);
 
 int Renderer_isCloserBySeparatingPlane(RendererSortDistance *a,
 									   RendererSortDistance *b,
-									   struct Vector3 *viewPos);
+									   Vector3 *viewPos);
 
-int Renderer_screenProject(struct Vector3 *obj,  MtxF modelMatrix,  MtxF projMatrix,  ViewportF viewport,  struct Vector3 *win);
+int Renderer_screenProject(Vector3 *obj,  MtxF modelMatrix,  MtxF projMatrix,  ViewportF viewport,  Vector3 *win);
 
 void Renderer_closestPointOnAABB(AABB *b,
-								 /* sourcePoint*/ struct Vector3 *p,
-								 /* result */ struct Vector3 *q);
+								 /* sourcePoint*/ Vector3 *p,
+								 /* result */ Vector3 *q);
 
 AABB Renderer_getWorldAABB(AABB *localAABBs, GameObject *obj);
 #endif /* !RENDERER_H_ */

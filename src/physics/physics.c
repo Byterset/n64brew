@@ -28,7 +28,7 @@ void PhysState_init(PhysState *self, PhysWorldData *worldData)
 void PhysBody_init(PhysBody *self,
 				   float mass,
 				   float radius,
-				   struct Vector3 *position,
+				   Vector3 *position,
 				   int id)
 {
 	self->id = id;
@@ -51,7 +51,7 @@ void PhysBody_init(PhysBody *self,
 void PhysBehavior_floorBounce(PhysBody *body, float floorHeight)
 {
 	float opposite;
-	struct Vector3 response;
+	Vector3 response;
 
 	opposite = (-1.0) * body->mass;
 	if (body->position.y - body->radius < floorHeight)
@@ -72,9 +72,9 @@ void PhysBehavior_floorClamp(PhysBody *body, float floorHeight)
 
 void PhysBehavior_waterBuoyancy(PhysBody *body,
 								float waterHeight,
-								struct Vector3 *gravity)
+								Vector3 *gravity)
 {
-	struct Vector3 response;
+	Vector3 response;
 	// float maxDepth = -58.0;
 
 	if (body->position.y < waterHeight)
@@ -96,7 +96,7 @@ int PhysBehavior_worldCollisionResponseStep(PhysBody *body,
 	int hasCollision;
 	float distanceToIntersect, responseDistance, bodyInFrontOfTriangle;
 	SphereTriangleCollision collision;
-	struct Vector3 response, beforePos;
+	Vector3 response, beforePos;
 
 	hasCollision = Collision_testMeshSphereCollision(
 		world->worldMeshTris, world->worldMeshTrisLength, &body->position,
@@ -175,8 +175,8 @@ int PhysBehavior_worldCollisionResponseStep(PhysBody *body,
 	return TRUE;
 }
 
-void PhysBehavior_collisionSeparationOffset(struct Vector3 *result,
-											struct Vector3 *pos,
+void PhysBehavior_collisionSeparationOffset(Vector3 *result,
+											Vector3 *pos,
 											float overlap,
 											float separationForce)
 {
@@ -189,7 +189,7 @@ int PhysBehavior_bodyBodyCollisionResponse(PhysBody *body,
 										   PhysBody *pool,
 										   int numInPool)
 {
-	struct Vector3 delta, direction, collisionSeparationOffset;
+	Vector3 delta, direction, collisionSeparationOffset;
 	int i, hasCollision;
 	float distanceSquared, radii, distance, overlap, mt, bodySeparationForce,
 		otherBodySeparationForce;
@@ -321,18 +321,18 @@ void PhysBody_setEnabled(PhysBody *body, int enabled)
 	}
 }
 
-void PhysBehavior_constantForce(PhysBody *body, struct Vector3 force)
+void PhysBehavior_constantForce(PhysBody *body, Vector3 force)
 {
 	vector3AddToSelf(&body->acceleration, &force);
 }
 
-void PhysBody_applyForce(PhysBody *body, struct Vector3 *force)
+void PhysBody_applyForce(PhysBody *body, Vector3 *force)
 {
 	vector3AddToSelf(&body->acceleration, force);
 }
 
 // move but don't affect velocity
-void PhysBody_translateWithoutForce(PhysBody *body, struct Vector3 *translation)
+void PhysBody_translateWithoutForce(PhysBody *body, Vector3 *translation)
 {
 	vector3AddToSelf(&body->position, translation);
 	vector3AddToSelf(&body->prevPosition, translation);
@@ -345,7 +345,7 @@ void PhysBody_update(PhysBody *self,
 					 int numInPool,
 					 PhysState *physics)
 {
-	struct Vector3 gravity;
+	Vector3 gravity;
 	vector3Init(&gravity, 0, physics->worldData->gravity * self->mass, 0);
 	// do behaviours
 	PhysBehavior_constantForce(self, gravity); // apply gravity
@@ -369,7 +369,7 @@ void PhysBody_dampenSmallMovements(PhysBody *body)
 
 void PhysBody_integrateMotionVerlet(PhysBody *body, float dt, float drag)
 {
-	struct Vector3 newPosition;
+	Vector3 newPosition;
 	vector3Init(&newPosition, 0.0f, 0.0f, 0.0f);
 	/* Scale force to mass. */
 	vector3ScaleSelf(&body->acceleration, body->massInverse);
@@ -411,7 +411,7 @@ void PhysBody_integrateMotionSemiImplicitEuler(PhysBody *body,
 	// velocityForDT = velocity * dt
 	// position = position + velocityForDT
 
-	struct Vector3 newPosition;
+	Vector3 newPosition;
 	/* Scale force by mass to calculate actual acceleration */
 	// acceleration = ( force / mass )
 	vector3ScaleSelf(&body->acceleration, body->massInverse);

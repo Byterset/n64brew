@@ -32,7 +32,7 @@ static Game game;
 
 void Game_initGameObjectPhysBody(PhysBody *body, GameObject *obj)
 {
-	struct Vector3 objCenter;
+	Vector3 objCenter;
 	Game_getObjCenter(obj, &objCenter);
 	PhysBody_init(body, modelTypesProperties[obj->modelType].mass,
 				  modelTypesProperties[obj->modelType].radius, &objCenter,
@@ -251,7 +251,7 @@ GameObject *Game_findObjectNByType(ModelType modelType, int n)
 void Game_updateCamera(Game *game, Input *input)
 {
 	float cameraDist;
-	struct Vector3 cameraOffset;
+	Vector3 cameraOffset;
 	float desiredZoom, desiredZoomDist;
 
 	// spring to desired zoom level
@@ -282,7 +282,7 @@ void Game_updateCamera(Game *game, Input *input)
 void Game_updatePhysics(Game *game)
 {
 	int i;
-	struct Vector3 positionDelta, physUpdatedPosition;
+	Vector3 positionDelta, physUpdatedPosition;
 	PhysBody *body;
 	GameObject *obj;
 	// for now we need to copy the object's pos to the
@@ -367,12 +367,12 @@ void Game_traceRaycast(RaycastTraceEvent event)
 #endif
 #endif
 
-float Game_rayIntersectsSphereDist(struct Vector3 *origin,
-								   struct Vector3 *rayDirection,
-								   struct Vector3 *objCenter,
+float Game_rayIntersectsSphereDist(Vector3 *origin,
+								   Vector3 *rayDirection,
+								   Vector3 *objCenter,
 								   float objRadius)
 {
-	struct Vector3 l;
+	Vector3 l;
 	float tca, d2, radius2, thc, t0, t1;
 	// l = objCenter - origin;
 	vector3Copy(&l, objCenter);
@@ -409,9 +409,9 @@ float Game_rayIntersectsSphereDist(struct Vector3 *origin,
 	return t0;
 }
 
-int Game_rayIntersectsSphere(struct Vector3 *origin,
-							 struct Vector3 *rayDirection,
-							 struct Vector3 *objCenter,
+int Game_rayIntersectsSphere(Vector3 *origin,
+							 Vector3 *rayDirection,
+							 Vector3 *objCenter,
 							 float objRadius)
 {
 	float dist =
@@ -423,7 +423,7 @@ int Game_rayIntersectsSphere(struct Vector3 *origin,
 	return TRUE;
 }
 
-void Game_getObjCenter(GameObject *obj, struct Vector3 *result)
+void Game_getObjCenter(GameObject *obj, Vector3 *result)
 {
 	vector3Copy(result, &obj->transform.position);
 	vector3AddToSelf(result, &modelTypesProperties[obj->modelType].centroidOffset);
@@ -434,9 +434,9 @@ float Game_getObjRadius(GameObject *obj)
 	return modelTypesProperties[obj->modelType].radius;
 }
 
-float Game_distanceToGameObject(struct Vector3 *from, GameObject *to)
+float Game_distanceToGameObject(Vector3 *from, GameObject *to)
 {
-	struct Vector3 toObjCenter;
+	Vector3 toObjCenter;
 
 	Game_getObjCenter(to, &toObjCenter);
 
@@ -450,13 +450,13 @@ check if intersection distance is less than previously found intersection (if
 any).
 Crappy code for debug use only
  */
-GameObject *Game_getIntersectingObject(struct Vector3 *raySource, struct Vector3 *rayDirection)
+GameObject *Game_getIntersectingObject(Vector3 *raySource, Vector3 *rayDirection)
 {
 	int i, hit;
 	float closestObjHitDist, intersectDist;
 	GameObject *obj;
 	GameObject *closestObjHit;
-	struct Vector3 objCenter;
+	Vector3 objCenter;
 
 	closestObjHitDist = FLT_MAX;
 	closestObjHit = NULL;
@@ -504,7 +504,7 @@ int Game_canSeeOtherObject(GameObject *viewer,
 						   GameObject *occuludingObjects,
 						   int occuludingObjectsCount)
 {
-	struct Vector3 eye, rayDirection, objCenter;
+	Vector3 eye, rayDirection, objCenter;
 	int i, canSee;
 	float targetDistance, objDistance;
 	GameObject *obj;
@@ -546,8 +546,8 @@ int Game_canSeeOtherObject(GameObject *viewer,
 #ifdef __cplusplus
 
 	Game_traceRaycast({/*int result;*/ canSee,
-					   /*struct Vector3 origin;*/ eye,
-					   /*struct Vector3 direction;*/ rayDirection,
+					   /*Vector3 origin;*/ eye,
+					   /*Vector3 direction;*/ rayDirection,
 					   /*GameObject* hit;*/ canSee ? NULL : obj});
 #endif
 	return canSee;

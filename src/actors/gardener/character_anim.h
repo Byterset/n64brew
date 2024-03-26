@@ -5,7 +5,7 @@
 #include "characteranimtypes.h"
 
 
-struct Vector3 character_anim_bone_origins[] = {
+Vector3 character_anim_bone_origins[] = {
 {-0.0671890145, 10.7239884138, 119.3862104416},
 {-1.0773408785, -10.6779196858, 119.2540240288},
 {-3.4750565886, 12.8510025144, 8.0133247375},

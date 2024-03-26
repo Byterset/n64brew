@@ -19,15 +19,15 @@ struct ActiveSound
 	u16 flags;
 	u16 newSoundTicks;
 	float estimatedTimeLeft;
-	struct Vector3 pos3D;
+	Vector3 pos3D;
 	float volume;
 	short soundClipId;
 };
 
 struct SoundListener
 {
-	struct Vector3 worldPos;
-	struct Vector3 rightVector;
+	Vector3 worldPos;
+	Vector3 rightVector;
 };
 
 struct ActiveSound gActiveSounds[MAX_ACTIVE_SOUNDS];
@@ -36,7 +36,7 @@ int gActiveSoundCount = 0;
 struct SoundListener gSoundListeners[MAX_SOUND_LISTENERS];
 int gActiveListenerCount = 0;
 
-void soundPlayerDetermine3DSound(struct Vector3 *at, float *volumeIn, float *volumeOut, int *panOut)
+void soundPlayerDetermine3DSound(Vector3 *at, float *volumeIn, float *volumeOut, int *panOut)
 {
 	if (!gActiveListenerCount)
 	{
@@ -75,7 +75,7 @@ void soundPlayerDetermine3DSound(struct Vector3 *at, float *volumeIn, float *vol
 		*volumeOut = 1.0f;
 	}
 
-	struct Vector3 offset;
+	Vector3 offset;
 	vector3Copy(at, &offset);
 	vector3SubFromSelf(&offset, &nearestListener->worldPos);
 
@@ -168,7 +168,7 @@ float soundClipLength(int soundClipId, float speed)
 	return soundPlayerEstimateLength(alSound, speed);
 }
 
-ALSndId soundPlayerPlay(int soundClipId, float volume, float pitch, struct Vector3 *at)
+ALSndId soundPlayerPlay(int soundClipId, float volume, float pitch, Vector3 *at)
 {
 	if (gActiveSoundCount == MAX_ACTIVE_SOUNDS || soundClipId < 0 || soundClipId >= gSoundClipArray->soundCount)
 	{
@@ -309,7 +309,7 @@ void soundPlayerStopAll()
 	}
 }
 
-void soundPlayerUpdatePosition(ALSndId soundId, struct Vector3 *at)
+void soundPlayerUpdatePosition(ALSndId soundId, Vector3 *at)
 {
 	struct ActiveSound *activeSound = soundPlayerFindActiveSound(soundId);
 
@@ -377,7 +377,7 @@ short soundPlayerSoundClipId(ALSndId soundId)
 	return activeSound->soundClipId;
 }
 
-void soundListenerUpdate(struct Vector3 *position, struct Quaternion *rotation, int listenerIndex)
+void soundListenerUpdate(Vector3 *position, struct Quaternion *rotation, int listenerIndex)
 {
 	gSoundListeners[listenerIndex].worldPos = *position;
 	quatRotateVector(rotation, &gRight, &gSoundListeners[listenerIndex].rightVector);

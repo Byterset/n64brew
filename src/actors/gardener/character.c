@@ -45,7 +45,7 @@
 #define CHARACTER_TARGET_PATH_PARAM 0
 #define DEBUG_CHARACTER_PATH_SMOOTHING 0
 
-static struct Vector3 characterItemOffset = {0.0F, 60.0F, 0.0F};
+static Vector3 characterItemOffset = {0.0F, 60.0F, 0.0F};
 
 #ifndef __N64__
 #include <stdio.h>
@@ -67,7 +67,7 @@ void Character_toString(Character *self, char *buffer)
 			Character_topDownAngleMagToObj(self, Game_get()->player.player_object);
 
 	vector3toString(&self->obj->transform.position, pos);
-	// vector3toString((struct Vector3 *)&self->obj->transform.rotationEuler, rot);
+	// vector3toString((Vector3 *)&self->obj->transform.rotationEuler, rot);
 	sprintf(buffer, "Character state=%s target=%s pos=%s rot=%s angleToPlayer=%f",
 					CharacterStateStrings[self->state],
 					self->targetItem ? ModelTypeStrings[self->targetItem->obj->modelType]
@@ -125,11 +125,11 @@ float Character_angleDeltaMag(float a1, float a2)
 	return fabsf(180.0F - fabsf(fabsf(fmodf(a1 - a2, 360.0f)) - 180.0F));
 }
 
-float Character_topDownAngleDeltaToPos(Character *self, struct Vector3 *position)
+float Character_topDownAngleDeltaToPos(Character *self, Vector3 *position)
 {
-	struct Vector3 toPos;
-	struct Vector2 toPos2d;
-	struct Vector3 characterEulerDeg;
+	Vector3 toPos;
+	Vector2 toPos2d;
+	Vector3 characterEulerDeg;
 	float angleToPos;
 
 	vector3DirectionTo(&self->obj->transform.position, position, &toPos);
@@ -150,7 +150,7 @@ float Character_topDownAngleMagToObj(Character *self, GameObject *obj)
 	return fabsf(fmodf(angleFromHeadingToPos, 360.0f));
 }
 
-int Character_posIsInViewArc(Character *self, struct Vector3 *position)
+int Character_posIsInViewArc(Character *self, Vector3 *position)
 {
 	float angleFromHeadingToPos;
 
@@ -176,7 +176,7 @@ int Character_canSeeItem(Character *self, Item *item, Game *game)
 	GameObject visibilityCheckObjects[MAX_WORLD_OBJECTS];
 	int visibilityCheckObjectsCount = 0;
 	int i;
-	struct Vector3 vecToObject;
+	Vector3 vecToObject;
 	GameObject *obj;
 
 	if (!Character_posIsInViewArc(self, &item->obj->transform.position))
@@ -227,23 +227,23 @@ int Character_canSeePlayer(Character *self, Game *game)
 			game->worldObjectsCount);
 }
 
-float Character_getDistanceTopDown(struct Vector3 *from, struct Vector3 *to)
+float Character_getDistanceTopDown(Vector3 *from, Vector3 *to)
 {
-	struct Vector2 from2d = {from->x, -from->z};
-	struct Vector2 to2d = {to->x, -to->z};
+	Vector2 from2d = {from->x, -from->z};
+	Vector2 to2d = {to->x, -to->z};
 
 	return vector2Dist(&from2d, &to2d);
 }
 
 void Character_moveTowards(Character *self,
-													 struct Vector3 *target,
+													 Vector3 *target,
 													 float speedMultiplier,
 													 int shouldStopAtLocation)
 {
-	struct Vector3 targetDirection;
-	struct Vector2 targetDirection2d;
-	struct Vector3 headingDirection;
-	struct Vector3 movement;
+	Vector3 targetDirection;
+	Vector2 targetDirection2d;
+	Vector3 headingDirection;
+	Vector3 movement;
 	float targetAngle, angleRad;
 	float derivedSpeed;
 	float framesToDesiredArrival;
@@ -266,7 +266,7 @@ void Character_moveTowards(Character *self,
 	//-------------------------------------------------------------------------
 	// Calculate the rotation quaternion
 	Quaternion rotationQuat;
-	quatAxisAngle(&(struct Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
+	quatAxisAngle(&(Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
 
 	self->turningSpeedScaleForHeading =	(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5))) * CHARACTER_MAX_TURN_SPEED;
 
@@ -284,7 +284,7 @@ void Character_moveTowards(Character *self,
 
 	
 
-	// struct Vector3 dest = {0, GameUtils_rotateTowardsClamped(
+	// Vector3 dest = {0, GameUtils_rotateTowardsClamped(
 	// 		self->obj->transform.rotationEuler.y, targetAngle,
 	// 		CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading), 0};
 	// transform_rotate_euler(&self->obj->transform, dest);
@@ -303,7 +303,7 @@ void Character_moveTowards(Character *self,
 	// 																		&headingDirection);
 
 	// Calculate the heading vector based on the resulting quaternion rotation
-	struct Vector3 forward = {0.0F, 0.0F, -1.0F};
+	Vector3 forward = {0.0F, 0.0F, -1.0F};
 	vector3Init(&headingDirection, 0.0F, 0.0F, 0.0F);
 	quatRotateVector(&self->obj->transform.rotation, &forward, &forward);
 	headingDirection.z = forward.x;
@@ -345,7 +345,7 @@ Node *Character_getPathNode(Character *self, Game *game, int pathNodeIndex)
 
 void Character_goToTarget(Character *self,
 													Game *game,
-													struct Vector3 *target,
+													Vector3 *target,
 													float speedMultiplier,
 													int shouldStopAtTarget)
 {
@@ -354,13 +354,13 @@ void Character_goToTarget(Character *self,
 	// float profStartPathfinding;
 	Graph *pathfindingGraph;
 	PathfindingState *pathfindingState;
-	struct Vector3 *nextNodePos;
+	Vector3 *nextNodePos;
 #if CHARACTER_TARGET_PATH_PARAM
-	struct Vector3 *pathSegmentP0;
-	struct Vector3 *pathSegmentP1;
+	Vector3 *pathSegmentP0;
+	Vector3 *pathSegmentP1;
 #endif
-	struct Vector3 movementTarget;
-	struct Vector3 objCenter;
+	Vector3 movementTarget;
+	Vector3 objCenter;
 	float objRadius;
 
 	int spatialHashResults[100];
@@ -573,7 +573,7 @@ void Character_goToTarget(Character *self,
 
 void Character_update(Character *self, Game *game)
 {
-	struct Vector3 startPos;
+	Vector3 startPos;
 	Quaternion startRot;
 	float animationMovementSpeed;
 	int isTurning;
@@ -608,7 +608,7 @@ void Character_update(Character *self, Game *game)
 	Character_updateState(self, game);
 #endif
 
-	struct Vector3 startRotEulerDeg, currRotEulerDeg;
+	Vector3 startRotEulerDeg, currRotEulerDeg;
 	quatToEulerDegrees(&startRot, &startRotEulerDeg);
 	quatToEulerDegrees(&self->obj->transform.rotation, &currRotEulerDeg);
 	float startYRot = startRotEulerDeg.y;
@@ -725,7 +725,7 @@ void Character_updateConfusionState(Character *self, Game *game)
 }
 
 int Character_isCloseToAndFacing(Character *self,
-																 struct Vector3 *target,
+																 Vector3 *target,
 																 float targetDist)
 {
 	return !(
@@ -916,7 +916,7 @@ void Character_updateSeekingTargetState(Character *self, Game *game)
 }
 void Character_updateFleeingState(Character *self, Game *game)
 {
-	struct Vector3 movement;
+	Vector3 movement;
 	vector3DirectionTo(&game->player.player_object->transform.position, &self->obj->transform.position,	&movement);
 	vector3AddToSelf(&self->obj->transform.position, &movement);
 

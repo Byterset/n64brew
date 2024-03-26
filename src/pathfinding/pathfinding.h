@@ -14,7 +14,7 @@ typedef enum NodeStateCategory
 typedef struct Node
 {
 	int id;
-	struct Vector3 position;
+	Vector3 position;
 } Node;
 
 typedef struct EdgeList
@@ -57,7 +57,7 @@ EdgeList *Path_getNodeEdgesByID(Graph *graph, int nodeID);
 
 Node *Path_getNodeByID(Graph *graph, int nodeID);
 
-int Path_quantizePosition(Graph *graph, struct Vector3 *position);
+int Path_quantizePosition(Graph *graph, Vector3 *position);
 
 int Path_findAStar(Graph *graph, PathfindingState *state);
 
@@ -69,8 +69,8 @@ void Path_initState(Graph *graph,
 					int nodeStateSize,
 					int *result);
 
-float Path_getClosestPointParameter(struct Vector3 *segmentPoint0,
-									struct Vector3 *segmentPoint1,
-									struct Vector3 *point);
+float Path_getClosestPointParameter(Vector3 *segmentPoint0,
+									Vector3 *segmentPoint1,
+									Vector3 *point);
 
 #endif /* !_PATHFINDING_H_ */

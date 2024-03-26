@@ -28,9 +28,9 @@ float GameUtils_rotateTowardsClamped(float from,
 		   fmodf(GameUtils_fclamp(shortestAngle, -maxSpeed, maxSpeed), 360.0F);
 }
 
-void GameUtils_directionFromTopDownAngle(float angle, struct Vector3 *result)
+void GameUtils_directionFromTopDownAngle(float angle, Vector3 *result)
 {
-	struct Vector2 direction2d;
+	Vector2 direction2d;
 
 	vector2ComplexFromAngle(angle, &direction2d);
 
@@ -41,7 +41,7 @@ void GameUtils_directionFromTopDownAngle(float angle, struct Vector3 *result)
 
 int GameUtils_inWater(GameObject *obj)
 {
-	struct Vector3 center;
+	Vector3 center;
 	Game_getObjCenter(obj, &center);
 
 	if (center.y < WATER_HEIGHT)

@@ -101,7 +101,7 @@ NodeState *Path_getNodeState(PathfindingState *state, int nodeID)
 	return state->nodeStates + nodeID; // offset into edges
 }
 
-int Path_quantizePosition(Graph *graph, struct Vector3 *position)
+int Path_quantizePosition(Graph *graph, Vector3 *position)
 {
 	int closestNode = 0;
 	float closestNodeDist = FLT_MAX;
@@ -141,15 +141,15 @@ void Path_reverse(PathfindingState *state)
 }
 
 // based on https://www.geometrictools.com/GTE/Mathematics/DistPointSegment.h
-float Path_getClosestPointParameter(struct Vector3 *segmentPoint0,
-									struct Vector3 *segmentPoint1,
-									struct Vector3 *point)
+float Path_getClosestPointParameter(Vector3 *segmentPoint0,
+									Vector3 *segmentPoint1,
+									Vector3 *point)
 {
 	float resultSegmentParameter;
 	float sqrLength;
 	float t;
-	struct Vector3 diff;
-	struct Vector3 direction;
+	Vector3 diff;
+	Vector3 direction;
 
 	// The direction vector is not unit length.  The normalization is
 	// deferred until it is needed.

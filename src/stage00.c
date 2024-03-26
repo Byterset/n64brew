@@ -66,8 +66,8 @@ static FaceAnim* faceanim;
 #define DRAW_SPRITES 1
 #define DRAW_OBJECTS 1
 
-static struct Vector3 viewPos;
-static struct Vector3 viewRot;
+static Vector3 viewPos;
+static Vector3 viewRot;
 static Input input;
 
 static u16 perspNorm;
@@ -80,7 +80,7 @@ static float aspect = (f32)SCREEN_WD / (f32)(SCREEN_HT * 2);
 static float aspect = (f32)SCREEN_WD / (f32)SCREEN_HT;
 #endif
 static float fovy = DEFAULT_FOVY;
-static struct Vector3 upVector = {0.0f, 1.0f, 0.0f};
+static Vector3 upVector = {0.0f, 1.0f, 0.0f};
 
 /* frame counter */
 float frameCounterLastTime;
@@ -198,10 +198,10 @@ void initStage00()
 
 	game->pathfindingGraph = &garden_map_graph;
 	game->pathfindingState = &garden_map_graph_pathfinding_state;
-	struct Vector3 catherine_pos = {-1500.0F, 125.0F, -1550.0F};
-	struct Vector3 catherine_scale = {0.5F, 0.5F, 0.5F};
+	Vector3 catherine_pos = {-1500.0F, 125.0F, -1550.0F};
+	Vector3 catherine_scale = {0.5F, 0.5F, 0.5F};
 	Quaternion catherine_rot;
-	struct Vector3 catherine_rot_euler = {0, 0, 0};
+	Vector3 catherine_rot_euler = {0, 0, 0};
 	quatFromEulerRad(&catherine_rot_euler, &catherine_rot);
 	// Initialize Catherine
 
@@ -344,7 +344,7 @@ void stage00Render(u32 *data, struct RenderState *renderState, struct GraphicsTa
 	// Gfx *modelDisplayList;
 	// gSPDisplayList(renderState->dl++, modelDisplayList);
 
-	transform_rotate_euler(&(catherine.transform), (struct Vector3){0,0.05,0});
+	transform_rotate_euler(&(catherine.transform), (Vector3){0,0.05,0});
 
 	sausage64_drawmodel(&renderState->dl, &catherine);
 }
@@ -584,7 +584,7 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 
 		graphicsApplyRenderMode(renderState, &amb_light, &sun_light, ambientOnly);
 
-		struct Vector3 eulerdegs;
+		Vector3 eulerdegs;
 		quatToEulerDegrees(&obj->transform.rotation, &eulerdegs);
 
 
@@ -713,8 +713,8 @@ void drawWorldObjects(Dynamic *dynamicp, struct RenderState *renderState)
 	{		
 		float width = 64;
 		float height = 64;
-		struct Vector3 center;
-		struct Vector3 projected;
+		Vector3 center;
+		Vector3 projected;
 		
 		
 		for (i = 0; i < visibleObjectsCount; i++)

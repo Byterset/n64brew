@@ -28,14 +28,14 @@ typedef struct GameObject
 typedef struct LevelData
 {
 	int id; /**< The identifier of the game object. */
-	struct Vector3 position; /**< The position of the game object in 3D space. */
-	struct Vector3 rotation; /**< The rotation of the game object in Euler angles. */
+	Vector3 position; /**< The position of the game object in 3D space. */
+	Vector3 rotation; /**< The rotation of the game object in Euler angles. */
 	ModelType modelType; /**< The type of model used for rendering the game object. */
 	int subtype; /**< The subtype of the game object. */
 } LevelData;
 
 
 GameObject *GameObject_alloc();
-GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos, struct Vector3 *initRot);
+GameObject *GameObject_init(GameObject *self, int id, Vector3 *initPos, Vector3 *initRot);
 
 #endif /* !GAMEOBJECT_H */

@@ -19,7 +19,7 @@
 #define PLAYER_WALK_ANIM_MOVEMENT_DIVISOR 100.0
 #define PLAYER_PHYS_WALK_ANIM_MOVEMENT_DIVISOR 5200.0
 
-static struct Vector3 playerItemOffset = {0.0F, 80.0F, 0.0F};
+static Vector3 playerItemOffset = {0.0F, 80.0F, 0.0F};
 
 void Player_init(Player *self, GameObject *obj)
 {
@@ -53,7 +53,7 @@ void Player_setVisibleItemAttachment(Player *self, ModelType modelType)
 
 float Player_move(Player *self, Input *input, Game *game)
 {
-	struct Vector3 inputDirection, updatedHeading, playerMovement;
+	Vector3 inputDirection, updatedHeading, playerMovement;
 	float destAngle, movementMagnitude, movementSpeedRatio,
 		resultantMovementSpeed, angleRad;
 	GameObject *player_object;
@@ -78,7 +78,7 @@ float Player_move(Player *self, Input *input, Game *game)
 
 		// Calculate the rotation quaternion
 		Quaternion rotationQuat;
-		quatAxisAngle(&(struct Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
+		quatAxisAngle(&(Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
 
 		// Calculate the rotation speed based on PLAYER_MAX_TURN_SPEED
 		float rotationSpeed = (input->run ? 0.1 : 1.0) * PLAYER_MAX_TURN_SPEED;
@@ -97,7 +97,7 @@ float Player_move(Player *self, Input *input, Game *game)
 	}
 
 	// Calculate the heading vector based on the resulting quaternion rotation
-	struct Vector3 forward = {0.0F, 0.0F, -1.0F};
+	Vector3 forward = {0.0F, 0.0F, -1.0F};
 	vector3Init(&updatedHeading, 0.0F, 0.0F, 0.0F);
 	quatRotateVector(&player_object->transform.rotation, &forward, &forward);
 	updatedHeading.z = forward.x;

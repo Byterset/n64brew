@@ -20,7 +20,7 @@ GameObject *GameObject_alloc()
  * @param initPos   Pointer to the initial position of the GameObject.
  * @return          Pointer to the initialized GameObject.
  */
-GameObject *GameObject_init(GameObject *self, int id, struct Vector3 *initPos, struct Vector3 *initRot)
+GameObject *GameObject_init(GameObject *self, int id, Vector3 *initPos, Vector3 *initRot)
 {
 	self->id = id;
 	vector3Init(&self->transform.position, 0.0f, 0.0f, 0.0f);

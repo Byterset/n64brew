@@ -63,7 +63,7 @@ static inline f32 s64lerp(f32 startValue, f32 endValue, f32 fraction)
  * @param scale The initial scale of the model
  * @param rotation The initial rotation of the model
  */
-void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, struct Vector3 position, struct Vector3 scale, struct Quaternion rotation)
+void sausage64_initmodel(s64ModelHelper* mdl, s64ModelData* mdldata, Mtx* matrices, Vector3 position, Vector3 scale, struct Quaternion rotation)
 {
     mdl->interpolate = TRUE;
     mdl->loop = TRUE;

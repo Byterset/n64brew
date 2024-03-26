@@ -1,38 +1,38 @@
 #ifndef _MATH_VECTOR2_H
 #define _MATH_VECTOR2_H
 
-struct Vector2
+typedef struct Vector2
 {
 	float x, y;
-};
+} Vector2;
 
-extern struct Vector2 gRight2;
-extern struct Vector2 gUp2;
-extern struct Vector2 gZeroVec2;
-extern struct Vector2 gOneVec2;
+extern Vector2 gRight2;
+extern Vector2 gUp2;
+extern Vector2 gZeroVec2;
+extern Vector2 gOneVec2;
 
-void vector2Init(struct Vector2 *a, float x, float y);
-void vector2ComplexMul(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out);
-void vector2ComplexConj(struct Vector2 *a, struct Vector2 *out);
-int vector2RotateTowards(struct Vector2 *from, struct Vector2 *towards, struct Vector2 *max, struct Vector2 *out);
-void vector2ComplexFromAngle(float radians, struct Vector2 *out);
-void vector2Rotate90(struct Vector2 *input, struct Vector2 *out);
-float vector2Cross(struct Vector2 *a, struct Vector2 *b);
-float vector2Dot(struct Vector2 *a, struct Vector2 *b);
-float vector2MagSqr(struct Vector2 *a);
-float vector2Mag(struct Vector2 *a);
-float vector2DistSqr(struct Vector2 *a, struct Vector2 *b);
-float vector2Dist(struct Vector2 *a, struct Vector2 *b);
-void vector2Add(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out);
-void vector2Scale(struct Vector2 *a, float scale, struct Vector2 *out);
-int vector2Normalize(struct Vector2 *a, struct Vector2 *out);
-void vector2Sub(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out);
-void vector2Negate(struct Vector2 *a, struct Vector2 *out);
-float vector2Angle(struct Vector2 *a);
+void vector2Init(Vector2 *a, float x, float y);
+void vector2ComplexMul(Vector2 *a, Vector2 *b, Vector2 *out);
+void vector2ComplexConj(Vector2 *a, Vector2 *out);
+int vector2RotateTowards(Vector2 *from, Vector2 *towards, Vector2 *max, Vector2 *out);
+void vector2ComplexFromAngle(float radians, Vector2 *out);
+void vector2Rotate90(Vector2 *input, Vector2 *out);
+float vector2Cross(Vector2 *a, Vector2 *b);
+float vector2Dot(Vector2 *a, Vector2 *b);
+float vector2MagSqr(Vector2 *a);
+float vector2Mag(Vector2 *a);
+float vector2DistSqr(Vector2 *a, Vector2 *b);
+float vector2Dist(Vector2 *a, Vector2 *b);
+void vector2Add(Vector2 *a, Vector2 *b, Vector2 *out);
+void vector2Scale(Vector2 *a, float scale, Vector2 *out);
+int vector2Normalize(Vector2 *a, Vector2 *out);
+void vector2Sub(Vector2 *a, Vector2 *b, Vector2 *out);
+void vector2Negate(Vector2 *a, Vector2 *out);
+float vector2Angle(Vector2 *a);
 
-void vector2Min(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out);
-void vector2Max(struct Vector2 *a, struct Vector2 *b, struct Vector2 *out);
+void vector2Min(Vector2 *a, Vector2 *b, Vector2 *out);
+void vector2Max(Vector2 *a, Vector2 *b, Vector2 *out);
 
-void vector2Lerp(struct Vector2 *a, struct Vector2 *b, float lerp, struct Vector2 *out);
+void vector2Lerp(Vector2 *a, Vector2 *b, float lerp, Vector2 *out);
 
 #endif

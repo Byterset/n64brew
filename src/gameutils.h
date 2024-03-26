@@ -12,7 +12,7 @@ float GameUtils_rotateTowardsClamped(float from,
 									 float maxSpeed // must be positive
 );
 
-void GameUtils_directionFromTopDownAngle(float angle, struct Vector3 *result);
+void GameUtils_directionFromTopDownAngle(float angle, Vector3 *result);
 
 int GameUtils_inWater(GameObject *obj);
 

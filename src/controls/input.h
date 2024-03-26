@@ -7,7 +7,7 @@
 
 typedef struct Input
 {
-	struct Vector2 direction;
+	Vector2 direction;
 	int run;
 	int pickup;
 	int zoomIn;

@@ -5,7 +5,7 @@
 #include "gooseanimtypes.h"
 
 
-struct Vector3 goose_anim_bone_origins[] = {
+Vector3 goose_anim_bone_origins[] = {
 {-13.5586890578, 0.0000000577, 37.4157428741},
 {16.9241166115, -0.0000000908, 84.9635696411},
 {-17.9128968716, 14.0675121546, 13.0800443888},

@@ -33,7 +33,7 @@ void quatIdent(struct Quaternion *q)
  * @param angle 
  * @param out 
  */
-void quatAxisAngle(struct Vector3 *axis, float angle, struct Quaternion *out)
+void quatAxisAngle(Vector3 *axis, float angle, struct Quaternion *out)
 {
 	float sinTheta = sinf(angle * 0.5f);
 	float cosTheta = cosf(angle * 0.5f);
@@ -50,7 +50,7 @@ void quatAxisAngle(struct Vector3 *axis, float angle, struct Quaternion *out)
  * @param angles in radians
  * @param out 
  */
-void quatFromEulerRad(struct Vector3 *angles, struct Quaternion *out)
+void quatFromEulerRad(Vector3 *angles, struct Quaternion *out)
 {
 	struct Quaternion angle;
 	struct Quaternion tmp;
@@ -69,9 +69,9 @@ void quatFromEulerRad(struct Vector3 *angles, struct Quaternion *out)
  * @param angles in degrees
  * @param out 
  */
-void quatFromEulerDegrees(struct Vector3 *angles, struct Quaternion *out)
+void quatFromEulerDegrees(Vector3 *angles, struct Quaternion *out)
 {
-	struct Vector3 anglesRad;
+	Vector3 anglesRad;
 	anglesRad.x = degToRad(angles->x);
 	anglesRad.y = degToRad(angles->y);
 	anglesRad.z = degToRad(angles->z);
@@ -85,7 +85,7 @@ void quatFromEulerDegrees(struct Vector3 *angles, struct Quaternion *out)
  * @param q The input quaternion.
  * @param out The output euler degrees.
  */
-void quatToEulerDegrees(struct Quaternion *q, struct Vector3 *out)
+void quatToEulerDegrees(struct Quaternion *q, Vector3 *out)
 {
 	Quaternion q_norm;
 	quatNormalize(q, &q_norm);
@@ -117,7 +117,7 @@ void quatToEulerDegrees(struct Quaternion *q, struct Vector3 *out)
  * @param q The input quaternion.
  * @param out The output euler angles (radians).
  */
-void quatToEulerRad(struct Quaternion *q, struct Vector3 *out)
+void quatToEulerRad(struct Quaternion *q, Vector3 *out)
 {
 	Quaternion q_norm;
 	quatNormalize(q, &q_norm);
@@ -145,7 +145,7 @@ void quatToEulerRad(struct Quaternion *q, struct Vector3 *out)
  * @param complex 
  * @param out 
  */
-void quatAxisComplex(struct Vector3 *axis, struct Vector2 *complex, struct Quaternion *out)
+void quatAxisComplex(Vector3 *axis, Vector2 *complex, struct Quaternion *out)
 {
 	float sinTheta = 0.5f - complex->x * 0.5f;
 
@@ -215,7 +215,7 @@ void quatNegate(struct Quaternion *in, struct Quaternion *out)
  * @param vector The Vector3 to multiply
  * @param out The output Vector3
  */
-void quatRotateVector(struct Quaternion *rotation, struct Vector3 *vector, struct Vector3 *out)
+void quatRotateVector(struct Quaternion *rotation, Vector3 *vector, Vector3 *out)
 {
 	struct Quaternion temporaryResult;
 	struct Quaternion vectorAsQuaternion;
@@ -241,7 +241,7 @@ void quatRotateVector(struct Quaternion *rotation, struct Vector3 *vector, struc
  * @param halfBoxSize
  * @param out
  */
-void quatRotatedBoundingBoxSize(struct Quaternion *q, struct Vector3 *halfBoxSize, struct Vector3 *out)
+void quatRotatedBoundingBoxSize(struct Quaternion *q, Vector3 *halfBoxSize, Vector3 *out)
 {
 	float xx = q->x * q->x;
 	float yy = q->y * q->y;
@@ -363,19 +363,19 @@ void quatRandom(struct Quaternion *q)
 	quatNormalize(q, q);
 }
 
-void quatLook(struct Vector3 *lookDir, struct Vector3 *up, struct Quaternion *out)
+void quatLook(Vector3 *lookDir, Vector3 *up, struct Quaternion *out)
 {
 	// calculate orthonormal basis
-	struct Vector3 zDir;
+	Vector3 zDir;
 	vector3Copy(&zDir, lookDir);
 	vector3NormalizeSelf(&zDir);
 	vector3Negate(&zDir, &zDir);
 
-	struct Vector3 yDir;
+	Vector3 yDir;
 	vector3AddScaled(up, &zDir, -vector3Dot(&zDir, up), &yDir);
 	vector3NormalizeSelf(&yDir);
 
-	struct Vector3 xDir;
+	Vector3 xDir;
 	vector3Cross(&yDir, &zDir, &xDir);
 
 	// convert orthonormal basis to a quaternion
@@ -435,7 +435,7 @@ void quatLerp(struct Quaternion *a, struct Quaternion *b, float t, struct Quater
 	quatNormalize(out, out);
 }
 
-void quatApplyAngularVelocity(struct Quaternion *input, struct Vector3 *w, float timeStep, struct Quaternion *output)
+void quatApplyAngularVelocity(struct Quaternion *input, Vector3 *w, float timeStep, struct Quaternion *output)
 {
 	struct Quaternion velocityAsQuat;
 	velocityAsQuat.w = 0.0f;
@@ -457,7 +457,7 @@ void quatApplyAngularVelocity(struct Quaternion *input, struct Vector3 *w, float
  * @param axis 
  * @param angle 
  */
-void quatDecompose(struct Quaternion *input, struct Vector3 *axis, float *angle)
+void quatDecompose(struct Quaternion *input, Vector3 *axis, float *angle)
 {
 	float axisMag = sqrtf(input->x * input->x + input->y * input->y + input->z * input->z);
 

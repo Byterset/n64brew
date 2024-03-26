@@ -102,7 +102,7 @@ typedef struct
            part
 ==============================*/
 
-extern void sausage64_initmodel(s64ModelHelper *mdl, s64ModelData *mdldata, Mtx *matrices, struct Vector3 position, struct Vector3 scale, struct Quaternion rotation);
+extern void sausage64_initmodel(s64ModelHelper *mdl, s64ModelData *mdldata, Mtx *matrices, Vector3 position, Vector3 scale, struct Quaternion rotation);
 
 /*==============================
     sausage64_set_camera

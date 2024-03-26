@@ -28,6 +28,6 @@ int vector2s16DistSqr(struct Vector2s16 *a, struct Vector2s16 *b);
 
 int vector2s16FallsBetween(struct Vector2s16 *from, struct Vector2s16 *towards, struct Vector2s16 *check);
 
-void vector2s16Barycentric(struct Vector2s16 *a, struct Vector2s16 *b, struct Vector2s16 *c, struct Vector2s16 *point, struct Vector3 *output);
+void vector2s16Barycentric(struct Vector2s16 *a, struct Vector2s16 *b, struct Vector2s16 *c, struct Vector2s16 *point, Vector3 *output);
 
 #endif

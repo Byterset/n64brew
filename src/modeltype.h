@@ -43,7 +43,7 @@ typedef struct ModelProperties
 {
 	float mass;
 	float radius;
-	struct Vector3 centroidOffset;
+	Vector3 centroidOffset;
 	float scale;
 	ModelTypeCategory category;
 } ModelProperties;

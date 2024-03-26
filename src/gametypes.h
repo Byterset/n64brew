@@ -49,9 +49,9 @@ typedef struct Character
 
 	struct ItemStruct *targetItem;
 	struct ItemStruct *defaultActivityItem;
-	struct Vector3 defaultActivityLocation;
-	struct Vector3 movementTarget; // immediate goal for local movement/steering
-	struct Vector3 targetLocation; // high level movement goal (eg. last seen/heard loc)
+	Vector3 defaultActivityLocation;
+	Vector3 movementTarget; // immediate goal for local movement/steering
+	Vector3 targetLocation; // high level movement goal (eg. last seen/heard loc)
 	CharacterTarget targetType;
 	CharacterState state;
 	PathfindingState *pathfindingResult;
@@ -72,7 +72,7 @@ typedef struct ItemStruct
 	GameObject *obj;
 	ItemHolder *holder;
 	unsigned int lastPickedUpTick;
-	struct Vector3 initialLocation;
+	Vector3 initialLocation;
 } Item;
 
 // this is here because of mutual dependency between game methods and objects
@@ -81,9 +81,9 @@ typedef struct Game
 {
 	unsigned int tick; // gets incremented every frame, with 60fps this will overflow if you run the game for 829 days straight
 	int paused;
-	struct Vector3 viewPos;
-	struct Vector3 viewRot;
-	struct Vector3 viewTarget;
+	Vector3 viewPos;
+	Vector3 viewRot;
+	Vector3 viewTarget;
 	float viewZoom;
 	int freeView;
 	GameObject *worldObjects;

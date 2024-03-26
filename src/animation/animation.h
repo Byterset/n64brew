@@ -23,8 +23,8 @@ typedef struct AnimationFrame
 {
 	int frame;
 	int object;
-	struct Vector3 position;
-	struct Vector3 rotation;
+	Vector3 position;
+	Vector3 rotation;
 
 } AnimationFrame;
 
@@ -38,8 +38,8 @@ typedef struct AnimationBoneAttachment
 {
 	int boneIndex;
 	ModelType modelType;
-	struct Vector3 offset;
-	struct Vector3 rotation;
+	Vector3 offset;
+	Vector3 rotation;
 } AnimationBoneAttachment;
 
 typedef struct AnimationBoneSpriteAttachment
@@ -47,7 +47,7 @@ typedef struct AnimationBoneSpriteAttachment
 	int boneIndex;
 	SpriteType spriteType;
 	int startTick;
-	struct Vector3 offset;
+	Vector3 offset;
 } AnimationBoneSpriteAttachment;
 
 typedef struct AnimationState

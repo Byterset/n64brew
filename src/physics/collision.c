@@ -13,7 +13,7 @@
 // otherwise this stuff is in constants.h
 #endif
 
-void Triangle_getCentroid(Triangle *triangle, struct Vector3 *result)
+void Triangle_getCentroid(Triangle *triangle, Vector3 *result)
 {
 	*result = triangle->a;
 	vector3AddToSelf(result, &triangle->b);
@@ -21,9 +21,9 @@ void Triangle_getCentroid(Triangle *triangle, struct Vector3 *result)
 	vector3DivScalar(result, 3.0);
 }
 
-void Triangle_getNormal(Triangle *triangle, struct Vector3 *result)
+void Triangle_getNormal(Triangle *triangle, Vector3 *result)
 {
-	struct Vector3 edgeAB, edgeAC;
+	Vector3 edgeAB, edgeAC;
 	edgeAB = triangle->b;
 	vector3SubFromSelf(&edgeAB, &triangle->a);
 	edgeAC = triangle->c;
@@ -36,9 +36,9 @@ void Triangle_getNormal(Triangle *triangle, struct Vector3 *result)
 // if result > 0: point is in front of triangle
 // if result = 0: point is coplanar with triangle
 // if result < 0: point is behind triangle
-float Triangle_comparePoint(Triangle *triangle, struct Vector3 *point)
+float Triangle_comparePoint(Triangle *triangle, Vector3 *point)
 {
-	struct Vector3 normal, toPoint;
+	Vector3 normal, toPoint;
 
 	// normal . (point - triangleVert)
 	Triangle_getNormal(triangle, &normal);
@@ -47,7 +47,7 @@ float Triangle_comparePoint(Triangle *triangle, struct Vector3 *point)
 	return vector3Dot(&normal, &toPoint);
 }
 
-void AABB_fromSphere(struct Vector3 *sphereCenter, float sphereRadius, AABB *result)
+void AABB_fromSphere(Vector3 *sphereCenter, float sphereRadius, AABB *result)
 {
 	result->min = *sphereCenter;
 	result->min.x -= sphereRadius;
@@ -79,7 +79,7 @@ void AABB_fromTriangle(Triangle *triangle, AABB *result)
 	result->max.z = MAX(result->max.z, triangle->c.z);
 }
 
-void AABB_expandByPoint(AABB *self, struct Vector3 *point)
+void AABB_expandByPoint(AABB *self, Vector3 *point)
 {
 	self->min.x = MIN(self->min.x, point->x);
 	self->min.y = MIN(self->min.y, point->y);
@@ -103,12 +103,12 @@ int Collision_intersectAABBAABB(AABB *a, AABB *b)
 }
 
 // not tested
-int Collision_intersectRayTriangle(struct Vector3 *pt,
-								   struct Vector3 *dir,
+int Collision_intersectRayTriangle(Vector3 *pt,
+								   Vector3 *dir,
 								   Triangle *tri,
-								   struct Vector3 *out)
+								   Vector3 *out)
 {
-	struct Vector3 edge1, edge2, tvec, pvec, qvec;
+	Vector3 edge1, edge2, tvec, pvec, qvec;
 	float det, u, v, t;
 
 	edge1 = tri->b;
@@ -143,20 +143,20 @@ int Collision_intersectRayTriangle(struct Vector3 *pt,
 
 // http://realtimecollisiondetection.net/blog/?p=103
 int Collision_sphereTriangleIsSeparated(Triangle *triangle,
-										struct Vector3 *P,
+										Vector3 *P,
 										double r)
 {
 	double rr, d, e, aa, ab, ac, bb, bc, cc, d1, e1, d2, e2, d3, e3;
 	int sep1, sep2, sep3, sep4, sep5, sep6, sep7;
-	struct Vector3 A, B, C;
-	struct Vector3 V, BSubA, CSubA;
-	struct Vector3 AB, BC, CA;
-	struct Vector3 Q1, ABd1;
-	struct Vector3 QC;
-	struct Vector3 Q2, BCd2;
-	struct Vector3 QA;
-	struct Vector3 Q3, CAd3;
-	struct Vector3 QB;
+	Vector3 A, B, C;
+	Vector3 V, BSubA, CSubA;
+	Vector3 AB, BC, CA;
+	Vector3 Q1, ABd1;
+	Vector3 QC;
+	Vector3 Q2, BCd2;
+	Vector3 QA;
+	Vector3 Q3, CAd3;
+	Vector3 QB;
 	// Translate problem so sphere is centered at origin
 	// A = A - P
 	A = triangle->a;
@@ -305,11 +305,11 @@ int Collision_sphereTriangleIsSeparated(Triangle *triangle,
 	return FALSE;
 }
 
-void Collision_distancePointTriangleExact(struct Vector3 *point,
+void Collision_distancePointTriangleExact(Vector3 *point,
 										  Triangle *triangle,
-										  struct Vector3 *closest)
+										  Vector3 *closest)
 {
-	struct Vector3 diff, edge0, edge1, t0edge0, t1edge1;
+	Vector3 diff, edge0, edge1, t0edge0, t1edge1;
 	double a00, a01, a11, b0, b1, zero, one, det, t0, t1;
 	double invDet;
 	double tmp0, tmp1, numer, denom;
@@ -549,7 +549,7 @@ std::map<int, SphereTriangleCollision> testCollisionResults;
 #define COLLISION_SPATIAL_HASH_MAX_RESULTS 100
 #define COLLISION_SPATIAL_HASH_PRUNING_ENABLED 1
 
-float Collision_sqDistancePointAABB(struct Vector3 *p, AABB *b)
+float Collision_sqDistancePointAABB(Vector3 *p, AABB *b)
 {
 	float v, dist;
 	float sqDist = 0.0f;
@@ -593,7 +593,7 @@ float Collision_sqDistancePointAABB(struct Vector3 *p, AABB *b)
 }
 
 // Returns true if sphere intersects AABB, false otherwise
-int Collision_testSphereAABBCollision(struct Vector3 *sphereCenter,
+int Collision_testSphereAABBCollision(Vector3 *sphereCenter,
 									  float sphereRadius,
 									  AABB *aabb)
 {
@@ -607,14 +607,14 @@ int Collision_testSphereAABBCollision(struct Vector3 *sphereCenter,
 
 int Collision_testMeshSphereCollision(Triangle *triangles,
 									  int trianglesLength,
-									  struct Vector3 *objCenter,
+									  Vector3 *objCenter,
 									  float objRadius,
 									  SpatialHash *spatialHash,
 									  SphereTriangleCollision *result)
 {
 	int i, k;
 	Triangle *tri;
-	struct Vector3 closestPointOnTriangle;
+	Vector3 closestPointOnTriangle;
 
 	float closestHitDistSq;
 	float hitDistSq;
@@ -721,12 +721,12 @@ int Collision_testMeshSphereCollision(Triangle *triangles,
 
 // Test if segment specified by points p0 and p1 intersects AABB b
 // from Real Time Collision Detection ch5.3
-int Collision_testSegmentAABBCollision(struct Vector3 *p0, struct Vector3 *p1, AABB *b)
+int Collision_testSegmentAABBCollision(Vector3 *p0, Vector3 *p1, AABB *b)
 {
-	struct Vector3 c;
-	struct Vector3 e;
-	struct Vector3 m;
-	struct Vector3 d;
+	Vector3 c;
+	Vector3 e;
+	Vector3 m;
+	Vector3 d;
 	float adx;
 	float ady;
 	float adz;
@@ -968,8 +968,8 @@ void SpatialHash_getTrianglesVisitBucket(int cellX,
 	}
 }
 
-int SpatialHash_getTrianglesForRaycast(struct Vector3 *rayStart,
-									   struct Vector3 *rayEnd,
+int SpatialHash_getTrianglesForRaycast(Vector3 *rayStart,
+									   Vector3 *rayEnd,
 									   SpatialHash *spatialHash,
 									   int *results,
 									   int maxResults)
@@ -997,7 +997,7 @@ int SpatialHash_getTrianglesForRaycast(struct Vector3 *rayStart,
 	return traversalState.resultsFound;
 }
 
-int SpatialHash_getTriangles(struct Vector3 *position,
+int SpatialHash_getTriangles(Vector3 *position,
 							 float radius,
 							 SpatialHash *spatialHash,
 							 int *results,
