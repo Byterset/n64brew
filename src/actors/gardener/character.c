@@ -67,7 +67,7 @@ void Character_toString(Character *self, char *buffer)
 			Character_topDownAngleMagToObj(self, Game_get()->player.player_object);
 
 	vector3toString(&self->obj->transform.position, pos);
-	// vector3toString((Vector3 *)&self->obj->transform.rotationEuler, rot);
+	// vector3toString((Vector3 *)&self->obj->rotation, rot);
 	sprintf(buffer, "Character state=%s target=%s pos=%s rot=%s angleToPlayer=%f",
 					CharacterStateStrings[self->state],
 					self->targetItem ? ModelTypeStrings[self->targetItem->obj->modelType]
@@ -129,7 +129,6 @@ float Character_topDownAngleDeltaToPos(Character *self, Vector3 *position)
 {
 	Vector3 toPos;
 	Vector2 toPos2d;
-	Vector3 characterEulerDeg;
 	float angleToPos;
 
 	vector3DirectionTo(&self->obj->transform.position, position, &toPos);
@@ -137,9 +136,10 @@ float Character_topDownAngleDeltaToPos(Character *self, Vector3 *position)
 	toPos2d.y = -toPos.z;
 	angleToPos = radToDeg(vector2Angle(&toPos2d));
 
-	quatToEulerDegrees(&self->obj->transform.rotation, &characterEulerDeg);
+	Vector3 eulerDegRot;
+	quatToEulerDegrees(&self->obj->transform.rotation, &eulerDegRot);
 
-	return Character_angleDeltaMag(characterEulerDeg.y, angleToPos);
+	return Character_angleDeltaMag(eulerDegRot.y, angleToPos);
 }
 
 float Character_topDownAngleMagToObj(Character *self, GameObject *obj)
@@ -244,7 +244,10 @@ void Character_moveTowards(Character *self,
 	Vector2 targetDirection2d;
 	Vector3 headingDirection;
 	Vector3 movement;
-	float targetAngle, angleRad;
+	Vector3 eulerDegRot;
+
+	float targetAngle;
+	float targetAngleRad;
 	float derivedSpeed;
 	float framesToDesiredArrival;
 	float speedForDesiredArrival;
@@ -260,54 +263,40 @@ void Character_moveTowards(Character *self,
 	// rotate towards target, but with a speed limit
 	vector2Init(&targetDirection2d, targetDirection.x, targetDirection.z);
 	targetAngle = 360.0 - radToDeg(vector2Angle(&targetDirection2d));
-	// Convert the angle from degrees to radians
-	angleRad = -vector2Angle(&targetDirection);
+	targetAngleRad = -vector2Angle(&targetDirection2d);
+	
 
-	//-------------------------------------------------------------------------
-	// Calculate the rotation quaternion
+	self->turningSpeedScaleForHeading =
+			(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5)));
+
 	Quaternion rotationQuat;
-	quatAxisAngle(&(Vector3){0.0F, 1.0F, 0.0F}, angleRad, &rotationQuat);
+	quatAxisAngle(&(Vector3){0.0F, 1.0F, 0.0F}, targetAngleRad, &rotationQuat);
 
-	self->turningSpeedScaleForHeading =	(1.0f - (CLAMP((speedMultiplier - 0.5f), 0.0, 0.5))) * CHARACTER_MAX_TURN_SPEED;
+	float rotationSpeed = CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading;
 
 	// Get the current rotation quaternion of the player object's transform
 	Quaternion currentRotationQuat = self->obj->transform.rotation;
 
 	// Interpolate between the current rotation and the target rotation
 	Quaternion targetRotationQuat;
-	quatLerp(&currentRotationQuat, &rotationQuat, self->turningSpeedScaleForHeading * gDeltaTimeSec, &targetRotationQuat);
+	quatLerp(&currentRotationQuat, &rotationQuat, rotationSpeed * gDeltaTimeSec, &targetRotationQuat);
 
 	// Set the y rotation of the player object's transform
-	transform_set_rotation(&self->obj->transform, rotationQuat);
-//-------------------------------------------------------------------------
-
-
-	
-
-	// Vector3 dest = {0, GameUtils_rotateTowardsClamped(
-	// 		self->obj->transform.rotationEuler.y, targetAngle,
-	// 		CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading), 0};
-	// transform_rotate_euler(&self->obj->transform, dest);
-
+	transform_set_rotation(&(self->obj->transform), targetRotationQuat);
 
 	// self->obj->rotation.y = GameUtils_rotateTowardsClamped(
-	// 		self->obj->transform.rotationEuler.y, targetAngle,
+	// 		self->obj->rotation.y, targetAngle,
 	// 		CHARACTER_MAX_TURN_SPEED * self->turningSpeedScaleForHeading);
+
+	quatToEulerDegrees(&self->obj->transform.rotation, &eulerDegRot);
 
 	// resulting heading
 	self->speedScaleForHeading =
 			MIN(1.0, 1.0 - MAX(0.0f, (Character_topDownAngleDeltaToPos(self, target) -
 																CHARACTER_FACING_MOVEMENT_TARGET_ANGLE)) /
 												 90.0f);
-	// GameUtils_directionFromTopDownAngle(degToRad(self->obj->transform.rotationEuler.y),
-	// 																		&headingDirection);
-
-	// Calculate the heading vector based on the resulting quaternion rotation
-	Vector3 forward = {0.0F, 0.0F, -1.0F};
-	vector3Init(&headingDirection, 0.0F, 0.0F, 0.0F);
-	quatRotateVector(&self->obj->transform.rotation, &forward, &forward);
-	headingDirection.z = forward.x;
-	headingDirection.x = -forward.z;
+	GameUtils_directionFromTopDownAngle(degToRad(eulerDegRot.y),
+																			&headingDirection);
 
 	self->speedScaleForArrival = 1.0f;
 	self->speedMultiplier = speedMultiplier; // for debugging
@@ -574,13 +563,15 @@ void Character_goToTarget(Character *self,
 void Character_update(Character *self, Game *game)
 {
 	Vector3 startPos;
-	Quaternion startRot;
+	float startRot;
 	float animationMovementSpeed;
 	int isTurning;
 	int isWalking;
+	Quaternion eulerDegRot;
+	quatToEulerDegrees(&self->obj->transform.rotation, &eulerDegRot);
 
 	vector3Copy(&startPos, &self->obj->transform.position);
-	startRot = self->obj->transform.rotation;
+	startRot = eulerDegRot.y;
 	if (self->itemHolder.heldItem)
 	{
 		// bring item with you
@@ -600,20 +591,15 @@ void Character_update(Character *self, Game *game)
 	}
 
 #if CHARACTER_FOLLOW_PLAYER
-	self->targetLocation = game->player.player_object->transform.position;
+	self->targetLocation = game->player.player_object->position;
 	Character_goToTarget(self, game, &self->targetLocation,
 											 CHARACTER_SPEED_MULTIPLIER_WALK,
 											 /*  shouldStopAtTarget  */ FALSE);
 #elif CHARACTER_ENABLED
 	Character_updateState(self, game);
 #endif
-
-	Vector3 startRotEulerDeg, currRotEulerDeg;
-	quatToEulerDegrees(&startRot, &startRotEulerDeg);
-	quatToEulerDegrees(&self->obj->transform.rotation, &currRotEulerDeg);
-	float startYRot = startRotEulerDeg.y;
-	
-	isTurning = fabsf(currRotEulerDeg.y - startRotEulerDeg.y) > 0.001;
+	quatToEulerDegrees(&self->obj->transform.rotation, &eulerDegRot);
+	isTurning = fabsf(eulerDegRot.y - startRot) > 0.001;
 	animationMovementSpeed =
 			vector3Dist(&startPos, &self->obj->transform.position) / 100.0f;
 	isWalking = animationMovementSpeed > 0.0001;
