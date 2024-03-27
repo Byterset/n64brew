@@ -54,7 +54,7 @@ void Player_setVisibleItemAttachment(Player *self, ModelType modelType)
 float Player_move(Player *self, Input *input, Game *game)
 {
 	Vector3 inputDirection, updatedHeading, playerMovement;
-	float destAngle, movementMagnitude, movementSpeedRatio,
+	float movementMagnitude, movementSpeedRatio,
 		resultantMovementSpeed, angleRad;
 	GameObject *player_object;
 
@@ -70,11 +70,9 @@ float Player_move(Player *self, Input *input, Game *game)
 
 	if (vector2MagSqr(&input->direction) > 0)
 	{
-	
-		destAngle = 360.0F - radToDeg(vector2Angle(&input->direction));
 
-		// Convert the angle from degrees to radians
-		angleRad = - vector2Angle(&input->direction);
+		// Get the Angle in Rad of the input direction and flip it to get the correct angle
+		angleRad = -vector2Angle(&input->direction);
 
 		// Calculate the rotation quaternion
 		Quaternion rotationQuat;
@@ -97,12 +95,9 @@ float Player_move(Player *self, Input *input, Game *game)
 	}
 
 	// Calculate the heading vector based on the resulting quaternion rotation
-	Vector3 forward = {0.0F, 0.0F, -1.0F};
+	Vector3 forward = {1.0F, 0.0F,0.0F};
 	vector3Init(&updatedHeading, 0.0F, 0.0F, 0.0F);
-	quatRotateVector(&player_object->transform.rotation, &forward, &forward);
-	updatedHeading.z = forward.x;
-	updatedHeading.x = -forward.z;
-
+	quatGetHeadingDir(&player_object->transform.rotation, &forward, &updatedHeading);
 
 	// move based on heading
 	playerMovement = updatedHeading;
