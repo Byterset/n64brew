@@ -33,6 +33,7 @@ void quatToMatrix(struct Quaternion *q, float out[4][4]);
 void quatNormalize(struct Quaternion *q, struct Quaternion *out);
 void quatRandom(struct Quaternion *q);
 void quatLook(Vector3 *lookDir, Vector3 *up, struct Quaternion *out);
+void quatGetHeadingDir(struct Quaternion *input, Vector3 *forward, Vector3 *headingDirOut );
 void quatFromEulerRad(Vector3 *angles, struct Quaternion *out);
 void quatFromEulerDegrees(Vector3 *angles, struct Quaternion *out);
 void quatToEulerDegrees(struct Quaternion *q, Vector3 *out);

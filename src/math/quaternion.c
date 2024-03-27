@@ -418,6 +418,13 @@ void quatLook(Vector3 *lookDir, Vector3 *up, struct Quaternion *out)
 	}
 }
 
+
+void quatGetHeadingDir(struct Quaternion *input, Vector3 *forward, Vector3 *headingDirOut ){
+	quatRotateVector(input, forward, forward);
+	headingDirOut->x = forward->x;
+	headingDirOut->z = forward->z;
+}
+
 void quatLerp(struct Quaternion *a, struct Quaternion *b, float t, struct Quaternion *out)
 {
 	if (quatDotProduct(a, b) < 0)
